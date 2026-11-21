@@ -234,7 +234,7 @@ class _ChatColorSettingsState extends State<ChatColorSettings> {
                         subtitle: Text(
                           set
                               ? '#${color.toARGB32().toRadixString(16).padLeft(8, '0').substring(2).toUpperCase()}'
-                              : 'Default',
+                              : context.interfaceText('Default'),
                         ),
                         trailing: set
                             ? IconButton(
@@ -260,7 +260,7 @@ class _ChatColorSettingsState extends State<ChatColorSettings> {
                         ),
                         trailing: TextButton(
                           onPressed: () => _set(slot, ChatPlayerColor.blackOrWhite(bubble)),
-                          child: Text(ChatPlayerColor.blackOrWhite(bubble) == Colors.white ? 'Use white' : 'Use black'),
+                          child: Text(ChatPlayerColor.blackOrWhite(bubble) == Colors.white ? context.interfaceText('Use white') : context.interfaceText('Use black')),
                         ),
                       ),
                     ),

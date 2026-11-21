@@ -56,7 +56,7 @@ class CityWidgetState extends State<CityWidget> {
                 visualDensity: VisualDensity.compact,
                 iconSize: 20,
                 color: Colors.orange,
-                tooltip: _itemsHiddenOnMap ? 'Show items on map' : 'Hide items from map',
+                tooltip: _itemsHiddenOnMap ? context.interfaceText('Show items on map') : context.interfaceText('Hide items from map'),
                 icon: Icon(_itemsHiddenOnMap ? Icons.visibility_off : Icons.visibility),
                 onPressed: _toggleItemsOnMap,
               ),

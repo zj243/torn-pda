@@ -134,7 +134,7 @@ class JailWidgetState extends State<JailWidget> {
                           style: TextStyle(color: Colors.orange, fontSize: 9),
                         ),
                         Text(
-                          _jailModel.filtersEnabled ? '' : 'FILTERS DISABLED',
+                          _jailModel.filtersEnabled ? '' : context.interfaceText('FILTERS DISABLED'),
                           style: const TextStyle(color: Colors.red, fontSize: 9),
                         ),
                       ],

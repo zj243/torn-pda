@@ -83,7 +83,7 @@ class ScriptsGuidePageState extends State<ScriptsGuidePage> {
       actions: [
         IconButton(
           icon: Icon(_expanded.isEmpty ? Icons.unfold_more : Icons.unfold_less, size: 22),
-          tooltip: _expanded.isEmpty ? "Expand all" : "Collapse all",
+          tooltip: _expanded.isEmpty ? context.interfaceText("Expand all") : context.interfaceText("Collapse all"),
           onPressed: () => setState(() {
             if (_expanded.isEmpty) {
               _expanded.addAll(_sections.map((s) => s.title));

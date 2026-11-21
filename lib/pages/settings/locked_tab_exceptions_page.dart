@@ -111,7 +111,7 @@ class LockedTabsNavigationExceptionsPageState extends State<LockedTabsNavigation
                         _urlController2.clear();
                       });
                     },
-                    child: Text(_editingIndex == null ? 'Add Exception' : 'Update Exception'),
+                    child: Text(_editingIndex == null ? context.interfaceText('Add Exception') : context.interfaceText('Update Exception')),
                   ),
                   if (_editingIndex != null) ...[
                     const SizedBox(width: 10),

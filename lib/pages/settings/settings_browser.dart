@@ -683,7 +683,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                             child: SizedBox(
                               width: 130,
                               child: Text(
-                                from == 0 ? "Off" : "From $from tabs",
+                                from == 0 ? context.interfaceText("Off") : context.interfaceText("From {0} tabs", [from]),
                                 textAlign: TextAlign.right,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(fontSize: 12),
@@ -2306,7 +2306,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                         Text(
                           _settingsProvider.travelEnergyRangeWarningThreshold.end >= 110
                               ? "> ${_settingsProvider.travelEnergyRangeWarningThreshold.start.round()}%"
-                              : "${_settingsProvider.travelEnergyRangeWarningThreshold.start.round()}% to ${_settingsProvider.travelEnergyRangeWarningThreshold.end.round()}%",
+                              : context.interfaceText("{0}% to {1}%", [_settingsProvider.travelEnergyRangeWarningThreshold.start.round(), _settingsProvider.travelEnergyRangeWarningThreshold.end.round()]),
                           style: const TextStyle(fontSize: 12),
                         ),
                         RangeSlider(
@@ -2390,7 +2390,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   children: [
                     Text(
                       _settingsProvider.travelNerveExcessWarningThreshold >= 110
-                          ? "> max"
+                          ? context.interfaceText("> max")
                           : "${(_settingsProvider.travelNerveExcessWarningThreshold ~/ 10 * 10)}%",
                       style: const TextStyle(fontSize: 12),
                     ),
@@ -2462,7 +2462,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   children: [
                     Text(
                       _settingsProvider.travelLifeExcessWarningThreshold >= 110
-                          ? "> max"
+                          ? context.interfaceText("> max")
                           : "${(_settingsProvider.travelLifeExcessWarningThreshold ~/ 10 * 10)}%",
                       style: const TextStyle(fontSize: 12),
                     ),
@@ -3774,9 +3774,9 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   padding: const EdgeInsets.only(top: 4.0),
                   child: Text(
                     _webViewProvider.webViewHardwareLayerForced
-                        ? "Set to ${_webViewProvider.webViewHardwareLayerDefaultRC ? "on" : "off"} by Torn PDA for now"
-                        : "Draws each page into an extra graphics layer before showing it. Turning it off uses "
-                              "less graphics memory. Restart the app completely to apply.",
+                        ? context.interfaceText("Set to {0} by Torn PDA for now", [_webViewProvider.webViewHardwareLayerDefaultRC ? "on" : "off"])
+                        : context.interfaceText("Draws each page into an extra graphics layer before showing it. Turning it off uses "
+                              "less graphics memory. Restart the app completely to apply."),
                     style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                   ),
                 ),
@@ -3803,13 +3803,13 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 padding: const EdgeInsets.only(top: 4.0),
                 child: Text(
                   _webViewProvider.tornChatCacheLimitRC < 0
-                      ? "This option is temporarily disabled from Torn PDA and can't be changed right now"
+                      ? context.interfaceText("This option is temporarily disabled from Torn PDA and can't be changed right now")
                       : _webViewProvider.tornChatCacheLimitRC > 0
-                      ? "Set to ${_webViewProvider.tornChatCacheLimitActiveMb} MB by Torn PDA for now"
-                      : "EXPERIMENTAL: all Torn pages share a small storage space (about 5 MB) with Torn's chat "
+                      ? context.interfaceText("Set to {0} MB by Torn PDA for now", [_webViewProvider.tornChatCacheLimitActiveMb])
+                      : context.interfaceText("EXPERIMENTAL: all Torn pages share a small storage space (about 5 MB) with Torn's chat "
                             "and your userscripts. When it fills up, pages can load blank. If Torn's storage goes "
                             "over this size, Torn PDA clears the chat's cached messages when a page loads (the "
-                            "chat loads them again, your chat settings are kept). Restart the app completely to apply.",
+                            "chat loads them again, your chat settings are kept). Restart the app completely to apply."),
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 ),
               ),
@@ -3871,7 +3871,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
             value: mb,
             child: SizedBox(
               width: 90,
-              child: Text(mb == 0 ? "Off" : "$mb MB", textAlign: TextAlign.right, style: const TextStyle(fontSize: 12)),
+              child: Text(mb == 0 ? context.interfaceText("Off") : context.interfaceText("{0} MB", [mb]), textAlign: TextAlign.right, style: const TextStyle(fontSize: 12)),
             ),
           ),
       ],

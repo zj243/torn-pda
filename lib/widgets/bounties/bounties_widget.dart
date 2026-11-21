@@ -219,7 +219,7 @@ class BountiesWidgetState extends State<BountiesWidget> {
               },
             ),
             Text(
-              _bountiesModel.removeRed ? "Hide" : "Show",
+              _bountiesModel.removeRed ? context.interfaceText("Hide") : context.interfaceText("Show"),
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 12,

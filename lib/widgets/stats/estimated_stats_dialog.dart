@@ -146,12 +146,12 @@ class EstimatedStatsDialog extends StatelessWidget {
             ),
             Text(
               !estimatedStatsPayload.sslProb
-                  ? "none"
+                  ? context.interfaceText("none")
                   : estimatedStatsPayload.sslColor == Colors.green
-                      ? "low"
+                      ? context.interfaceText("low")
                       : estimatedStatsPayload.sslColor == Colors.orange
-                          ? "med"
-                          : "high",
+                          ? context.interfaceText("med")
+                          : context.interfaceText("high"),
               style: TextStyle(
                 color: estimatedStatsPayload.sslColor,
                 fontSize: 14,

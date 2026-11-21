@@ -554,8 +554,8 @@ class _FFScouterInfoPageState extends State<FFScouterInfoPage> {
                           Expanded(
                             child: Text(
                               _keyRegisteredJustNow
-                                  ? "Key registered successfully with FFScouter!"
-                                  : "This key is already registered with FFScouter. You're all set!",
+                                  ? context.interfaceText("Key registered successfully with FFScouter!")
+                                  : context.interfaceText("This key is already registered with FFScouter. You're all set!"),
                               style: TextStyle(fontSize: 12, color: Colors.green[700], fontWeight: FontWeight.bold),
                             ),
                           ),

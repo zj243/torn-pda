@@ -116,14 +116,14 @@ class PipSelectionAppBar extends StatelessWidget implements PreferredSizeWidget 
           iconTheme: const IconThemeData(color: Colors.white),
           leading: IconButton(icon: const Icon(Icons.close), tooltip: context.interfaceText('Cancel'), onPressed: selection.cancel),
           title: Text(
-            count == 0 ? 'Tap up to ${PipController.maxPlayers}' : '$count selected',
+            count == 0 ? context.interfaceText("Tap up to {0}", [PipController.maxPlayers]) : context.interfaceText("{0} selected", [count]),
             style: const TextStyle(color: Colors.white),
           ),
           actions: [
             TextButton(
               style: TextButton.styleFrom(foregroundColor: Colors.white, disabledForegroundColor: Colors.white38),
               onPressed: count == 0 ? null : selection.watch,
-              child: Text(count == 1 ? 'Watch 1 player' : 'Watch ${count == 0 ? '' : '$count '}players'),
+              child: Text(count == 1 ? context.interfaceText('Watch 1 player') : context.interfaceText("Watch {0}players", [count == 0 ? '' : '$count '])),
             ),
             const SizedBox(width: 6),
           ],

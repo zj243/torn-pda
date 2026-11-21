@@ -146,10 +146,10 @@ class RankedWarsPageState extends State<RankedWarsPage> with SingleTickerProvide
                                   Expanded(child: Container()),
                                   TabBar(
                                     controller: _tabController,
-                                    tabs: const [
-                                      Tab(text: "Active"),
-                                      Tab(text: "Upcoming"),
-                                      Tab(text: "Finished"),
+                                    tabs: [
+                                      Tab(text: context.interfaceText("Active")),
+                                      Tab(text: context.interfaceText("Upcoming")),
+                                      Tab(text: context.interfaceText("Finished")),
                                     ],
                                   ),
                                 ],
@@ -384,7 +384,7 @@ class RankedWarsPageState extends State<RankedWarsPage> with SingleTickerProvide
               // Note: depending on the tab, we'll change the popupmenu options
               PopupMenuButton<RankedWarSortType>(
                 icon: const Icon(Icons.sort),
-                tooltip: "Sort wars",
+                tooltip: context.interfaceText("Sort wars"),
                 onSelected: (RankedWarSortType result) {
                   setState(() {
                     _sortTypePerTab[currentTabStatus] = result;
@@ -429,10 +429,10 @@ class RankedWarsPageState extends State<RankedWarsPage> with SingleTickerProvide
       bottom: _settingsProvider!.appBarTop && !_isSearching
           ? TabBar(
               controller: _tabController,
-              tabs: const [
-                Tab(text: "Active"),
-                Tab(text: "Upcoming"),
-                Tab(text: "Finished"),
+              tabs: [
+                Tab(text: context.interfaceText("Active")),
+                Tab(text: context.interfaceText("Upcoming")),
+                Tab(text: context.interfaceText("Finished")),
               ],
             )
           : null,

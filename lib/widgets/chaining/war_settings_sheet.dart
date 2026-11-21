@@ -129,11 +129,11 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
             unselectedLabelColor: Colors.grey,
             indicatorColor: Colors.pink[700],
             tabs: [
-              const Tab(text: "Sorting"),
+              Tab(text: context.interfaceText("Sorting")),
               const Tab(
                 child: FittedBox(fit: BoxFit.scaleDown, child: PdaText("Smart Score")),
               ),
-              const Tab(text: "Filters"),
+              Tab(text: context.interfaceText("Filters")),
             ],
           ),
           Expanded(
@@ -355,8 +355,8 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
                     Expanded(
                       child: Text(
                         isSecondarySort
-                            ? "Smart Score is active as Secondary Sort for 'Okay' targets."
-                            : "Smart Score sorting is NOT active",
+                            ? context.interfaceText("Smart Score is active as Secondary Sort for 'Okay' targets.")
+                            : context.interfaceText("Smart Score sorting is NOT active"),
                       ),
                     ),
                   ],
@@ -1311,7 +1311,7 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
           Padding(
             padding: const EdgeInsets.only(left: 0.0, bottom: 10.0),
             child: Text(
-              subtitle != null ? "$subtitle \u00b7 no spy data" : "No spy info available (max: N/A)",
+              subtitle != null ? context.interfaceText("{0} · no spy data", [subtitle]) : context.interfaceText("No spy info available (max: N/A)"),
               style: const TextStyle(fontSize: 12, color: Colors.grey),
             ),
           ),
@@ -1341,7 +1341,7 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
                 children: [
                   Row(
                     children: [
-                      Flexible(child: Text(subtitle != null ? label : "$label (max: ${formatLabel(max)})")),
+                      Flexible(child: Text(subtitle != null ? label : context.interfaceText("{0} (max: {1})", [label, formatLabel(max)]))),
                       if (showCalculator)
                         SizedBox(
                           width: 32,

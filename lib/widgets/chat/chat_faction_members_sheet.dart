@@ -198,7 +198,7 @@ class _ChatFactionMembersSheetState extends State<ChatFactionMembersSheet> {
             ),
           ),
           PopupMenuButton<String>(
-            tooltip: 'Sort by',
+            tooltip: context.interfaceText('Sort by'),
             initialValue: _prefs.rosterSort,
             onSelected: (value) => setState(() => _prefs.setRosterSort(value)),
             itemBuilder: (_) => [

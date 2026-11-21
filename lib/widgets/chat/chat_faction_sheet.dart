@@ -113,9 +113,9 @@ class _FactionSheetState extends State<_FactionSheet> {
                       title: Text(facts?.title ?? widget.link.title),
                       subtitle: Text(
                         loading
-                            ? 'Loading'
+                            ? context.interfaceText('Loading')
                             : facts == null
-                            ? "Couldn't load the faction"
+                            ? context.interfaceText("Couldn't load the faction")
                             : '[$id]',
                       ),
                       trailing: loading

@@ -123,22 +123,22 @@ class _DevToolsMainPageState extends State<DevToolsMainPage> with SingleTickerPr
           FocusScope.of(context).unfocus();
           if (inSlot) context.read<WebViewProvider>().splitDevToolsTabIndex = value;
         },
-        tabs: const [
+        tabs: [
           Tab(
             icon: Icon(Icons.code),
-            text: "Terminal",
+            text: context.interfaceText("Terminal"),
           ),
           Tab(
             icon: Icon(Icons.network_check),
-            text: "Network",
+            text: context.interfaceText("Network"),
           ),
           Tab(
             icon: Icon(Icons.storage),
-            text: "Storage",
+            text: context.interfaceText("Storage"),
           ),
           Tab(
             icon: Icon(Icons.javascript),
-            text: "Scripts",
+            text: context.interfaceText("Scripts"),
           ),
         ],
       ),
@@ -146,7 +146,7 @@ class _DevToolsMainPageState extends State<DevToolsMainPage> with SingleTickerPr
         if (!inSlot)
           PopupMenuButton<int>(
             icon: const Icon(Icons.timer_outlined),
-            tooltip: "Interact with WebView",
+            tooltip: context.interfaceText("Interact with WebView"),
             onSelected: (int seconds) async {
               final currentIndex = _tabController.index;
 

@@ -116,7 +116,7 @@ class _ReportWaiting extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        failed ? "Couldn't load the report" : 'Report not ready yet',
+                        failed ? context.interfaceText("Couldn't load the report") : context.interfaceText('Report not ready yet'),
                         style: theme.textTheme.titleSmall?.copyWith(
                           color: failed ? chatChainColor(context, ChatChainLevel.danger) : null,
                         ),
@@ -133,7 +133,7 @@ class _ReportWaiting extends StatelessWidget {
                   if (view.checking) return PdaText('Checking', style: muted);
                   if (next == null) return const SizedBox.shrink();
                   final left = chatClock(next.difference(DateTime.now()));
-                  return Text(failed ? 'Retry in $left' : 'Next check $left', style: muted);
+                  return Text(failed ? context.interfaceText("Retry in {0}", [left]) : context.interfaceText("Next check {0}", [left]), style: muted);
                 },
               ),
             ],
@@ -149,7 +149,7 @@ class _ReportWaiting extends StatelessWidget {
                 return OutlinedButton(
                   style: chatSecondaryButton(theme.colorScheme),
                   onPressed: view.checking || soon ? null : () => NativeChat.factionOps.checkChainReport(),
-                  child: Text(failed ? 'Retry' : 'Check now'),
+                  child: Text(failed ? context.interfaceText('Retry') : context.interfaceText('Check now')),
                 );
               },
             ),
@@ -330,7 +330,7 @@ class _ChatChainReportBodyState extends State<ChatChainReportBody> {
                 TextSpan(text: context.interfaceText('You  '), style: TextStyle(fontWeight: FontWeight.w700)),
                 TextSpan(
                   text: you == null
-                      ? "Didn't attack"
+                      ? context.interfaceText("Didn't attack")
                       : [
                           '#${rank + 1} of ${attackers.length} by respect',
                           _hitsText(you.hits.won),

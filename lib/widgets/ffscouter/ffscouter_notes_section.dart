@@ -304,7 +304,7 @@ class _FFScouterNotesSectionState extends State<FFScouterNotesSection> {
             children: [
               Expanded(
                 child: Text(
-                  ctrl.info != null ? "Personal notes: ${ctrl.info!.personalUsed}/${ctrl.info!.personalLimit}" : "",
+                  ctrl.info != null ? context.interfaceText("Personal notes: {0}/{1}", [ctrl.info!.personalUsed, ctrl.info!.personalLimit]) : "",
                   style: TextStyle(fontSize: 11, color: Colors.grey[600]),
                 ),
               ),
@@ -398,7 +398,7 @@ class _FFScouterNotesSectionState extends State<FFScouterNotesSection> {
       builder: (ctx) => AlertDialog(
         title: const PdaText("Delete note", style: TextStyle(fontSize: 16)),
         content: Text(
-          note.isFaction ? "This removes the note for your whole faction." : "Delete this note?",
+          note.isFaction ? context.interfaceText("This removes the note for your whole faction.") : context.interfaceText("Delete this note?"),
           style: const TextStyle(fontSize: 13),
         ),
         actions: [

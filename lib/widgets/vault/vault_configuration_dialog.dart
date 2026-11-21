@@ -143,7 +143,7 @@ class VaultConfigurationDialogState extends State<VaultConfigurationDialog> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 3),
                       child: Text(
-                        UserHelper.spouseId == 0 ? "Spouse's share" : "${UserHelper.spouseName}'s share",
+                        UserHelper.spouseId == 0 ? context.interfaceText("Spouse's share") : context.interfaceText("{0}'s share", [UserHelper.spouseName]),
                         style: const TextStyle(fontSize: 13),
                       ),
                     ),

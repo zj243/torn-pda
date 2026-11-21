@@ -283,7 +283,7 @@ class ForeignStockPageState extends State<ForeignStockPage> {
                         bottom: _isFilterSheetOpen ? 215.0 : 25.0,
                         child: FloatingActionButton.extended(
                           icon: Icon(_isFilterSheetOpen ? Icons.close : Icons.filter_list),
-                          label: Text(_isFilterSheetOpen ? "Close" : "Filter"),
+                          label: Text(_isFilterSheetOpen ? context.interfaceText("Close") : context.interfaceText("Filter")),
                           elevation: 4,
                           onPressed: _toggleFilterSheet,
                           backgroundColor: Colors.orange,
@@ -784,13 +784,13 @@ class ForeignStockPageState extends State<ForeignStockPage> {
       child: Row(
         children: <Widget>[
           Text(
-            _temporaryDestinationFilterActive ? 'Travel destination: ' : 'Countries: ',
+            _temporaryDestinationFilterActive ? context.interfaceText('Travel destination: ') : context.interfaceText('Countries: '),
             style: const TextStyle(fontSize: 11),
           ),
           const SizedBox(width: 2),
           Flexible(
             child: Text(
-              _temporaryDestinationFilterActive ? '$_effectiveDestinationCountry only' : _countriesFilteredText,
+              _temporaryDestinationFilterActive ? context.interfaceText("{0} only", [_effectiveDestinationCountry]) : _countriesFilteredText,
               style: const TextStyle(fontSize: 11),
             ),
           ),

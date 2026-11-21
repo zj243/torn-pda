@@ -49,7 +49,7 @@ class ChatUploadSetupNotice extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          blocked ? 'Could not upload the image' : 'Images need an upload service',
+          blocked ? context.interfaceText('Could not upload the image') : context.interfaceText('Images need an upload service'),
           style: theme.textTheme.labelLarge,
         ),
         const SizedBox(height: 2),

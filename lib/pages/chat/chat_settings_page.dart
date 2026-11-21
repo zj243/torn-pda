@@ -151,7 +151,7 @@ class ChatSettingsPage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 ChatExportMenu(
-                  tooltip: 'Export chat settings',
+                  tooltip: context.interfaceText('Export chat settings'),
                   text: () => ChatBackup.export(
                     prefs,
                     DateTime.now(),

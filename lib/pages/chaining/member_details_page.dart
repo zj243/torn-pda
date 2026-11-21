@@ -265,7 +265,7 @@ class MemberDetailsPageState extends State<MemberDetailsPage> {
           'Last action: ',
         ),
         Text(
-          _member!.lastAction!.relative == "0 minutes ago" ? 'now' : _member!.lastAction!.relative!,
+          _member!.lastAction!.relative == "0 minutes ago" ? context.interfaceText('now') : _member!.lastAction!.relative!,
         ),
         Padding(
           padding: const EdgeInsets.only(left: 8.0),

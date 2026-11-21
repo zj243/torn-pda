@@ -147,7 +147,7 @@ class ChatInboxViewState extends State<ChatInboxView> {
               ),
               ListTile(
                 leading: Icon(pinned ? Icons.push_pin_outlined : Icons.push_pin_rounded),
-                title: Text(pinned ? 'Unpin' : 'Pin to the top'),
+                title: Text(pinned ? context.interfaceText('Unpin') : context.interfaceText('Pin to the top')),
                 onTap: () => Navigator.pop(context, 'pin'),
               ),
               if (room.isDm)
@@ -444,7 +444,7 @@ class ChatInboxViewState extends State<ChatInboxView> {
       children: [
         FilterChip(
           avatar: unreadOnly ? null : const Icon(Icons.mark_chat_unread_outlined, size: 18),
-          label: Text(unread > 0 ? 'Unread $unread' : 'Unread'),
+          label: Text(unread > 0 ? context.interfaceText("Unread {0}", [unread]) : context.interfaceText('Unread')),
           selected: unreadOnly,
           onSelected: (value) => setState(() {
             _replying.clear();

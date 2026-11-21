@@ -1105,8 +1105,8 @@ Future<void> showChatPlayerActions(BuildContext context, ChatUser user, {String?
                   title: const PdaText('Player note'),
                   subtitle: Text(
                     notes.getNoteForPlayer('$id')?.note.trim().isNotEmpty == true
-                        ? 'Edit your note, visible everywhere in Torn PDA'
-                        : 'Add a note, visible everywhere in Torn PDA',
+                        ? context.interfaceText('Edit your note, visible everywhere in Torn PDA')
+                        : context.interfaceText('Add a note, visible everywhere in Torn PDA'),
                   ),
                   onTap: () => Navigator.of(context).pop(('notes', false)),
                 ),
@@ -1118,7 +1118,7 @@ Future<void> showChatPlayerActions(BuildContext context, ChatUser user, {String?
               ),
               ListTile(
                 leading: Icon(friend ? Icons.person_remove_outlined : Icons.person_add_alt_outlined),
-                title: Text(friend ? 'Remove from chat friends' : 'Add to chat friends'),
+                title: Text(friend ? context.interfaceText('Remove from chat friends') : context.interfaceText('Add to chat friends')),
                 subtitle: const PdaText('Your Chat list in Friends'),
                 onTap: () => Navigator.of(context).pop(('chatfriend', false)),
               ),
@@ -1145,15 +1145,15 @@ Future<void> showChatPlayerActions(BuildContext context, ChatUser user, {String?
               ),
               ListTile(
                 leading: Icon(ignored ? Icons.visibility_rounded : Icons.visibility_off_rounded),
-                title: Text(ignored ? 'Unignore' : 'Ignore'),
-                subtitle: Text(ignored ? 'Show their messages again' : 'Hide their messages, only in Torn PDA'),
+                title: Text(ignored ? context.interfaceText('Unignore') : context.interfaceText('Ignore')),
+                subtitle: Text(ignored ? context.interfaceText('Show their messages again') : context.interfaceText('Hide their messages, only in Torn PDA')),
                 onTap: () => Navigator.of(context).pop(('ignore', false)),
               ),
               if (!me) ...[
                 ListTile(
                   leading: const Icon(Icons.block_rounded),
-                  title: Text(blocked ? 'Unblock in Torn' : 'Block in Torn'),
-                  subtitle: Text(blocked ? 'They can message and mail you again' : 'Torn stops their messages and mail'),
+                  title: Text(blocked ? context.interfaceText('Unblock in Torn') : context.interfaceText('Block in Torn')),
+                  subtitle: Text(blocked ? context.interfaceText('They can message and mail you again') : context.interfaceText('Torn stops their messages and mail')),
                   onTap: () => Navigator.of(context).pop(('block', false)),
                 ),
                 ListTile(

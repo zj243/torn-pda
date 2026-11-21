@@ -193,7 +193,7 @@ class ChainWidgetState extends State<ChainWidget> {
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           children: <Widget>[
                                             Text(
-                                              chainP.chainModel!.chain!.cooldown! > 0 ? 'Cooldown ' : 'Chain ',
+                                              chainP.chainModel!.chain!.cooldown! > 0 ? context.interfaceText('Cooldown ') : context.interfaceText('Chain '),
                                               style: TextStyle(color: titleColor),
                                             ),
                                             Text(
@@ -227,7 +227,7 @@ class ChainWidgetState extends State<ChainWidget> {
                                             : Colors.blue[200],
                                         center: Text(
                                           chainP.chainModel!.chain!.cooldown! > 0
-                                              ? '${chainP.chainModel!.chain!.current} hits'
+                                              ? context.interfaceText("{0} hits", [chainP.chainModel!.chain!.current])
                                               : '${chainP.chainModel!.chain!.current}/${chainP.chainModel!.chain!.max}',
                                           style: const TextStyle(color: Colors.black),
                                         ),
@@ -448,8 +448,8 @@ class ChainWidgetState extends State<ChainWidget> {
     if (!hidden) return;
     BotToast.showText(
       text: _chainStatusProvider.miniWindowOpen.value
-          ? 'Live view opens when you leave the browser'
-          : 'Live view closed',
+          ? context.interfaceText('Live view opens when you leave the browser')
+          : context.interfaceText('Live view closed'),
       textStyle: const TextStyle(fontSize: 14, color: Colors.white),
       contentColor: Colors.blue[700]!,
       duration: const Duration(seconds: 3),

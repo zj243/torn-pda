@@ -517,8 +517,8 @@ class WebviewUrlDialogState extends State<WebviewUrlDialog> {
                               Flexible(
                                 child: Text(
                                   _webviewProvider.splitScreenPosition == WebViewSplitPosition.off
-                                      ? 'Split with app'
-                                      : 'Close split',
+                                      ? context.interfaceText('Split with app')
+                                      : context.interfaceText('Close split'),
                                   style: const TextStyle(fontSize: 12),
                                   textAlign: TextAlign.center,
                                 ),

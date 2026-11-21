@@ -114,7 +114,7 @@ class PdaUpdateDialogState extends State<PdaUpdateDialog> {
                           const SizedBox(width: 8),
                           Expanded(
                             child: Text(
-                              Platform.isIOS ? 'A new iOS update is available!' : 'A new Android update is available!',
+                              Platform.isIOS ? context.interfaceText('A new iOS update is available!') : context.interfaceText('A new Android update is available!'),
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
@@ -316,7 +316,7 @@ class PdaUpdateDialogState extends State<PdaUpdateDialog> {
                         elevation: 2,
                       ),
                       child: Text(
-                        Platform.isIOS ? 'Open App Store' : 'Open Play Store',
+                        Platform.isIOS ? context.interfaceText('Open App Store') : context.interfaceText('Open Play Store'),
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,

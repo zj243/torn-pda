@@ -210,7 +210,7 @@ class TargetDetailsPageState extends State<TargetDetailsPage> {
           'Last action: ',
         ),
         Text(
-          widget.target!.lastAction!.relative == "0 minutes ago" ? 'now' : widget.target!.lastAction!.relative!,
+          widget.target!.lastAction!.relative == "0 minutes ago" ? context.interfaceText('now') : widget.target!.lastAction!.relative!,
         ),
         Padding(
           padding: const EdgeInsets.only(left: 8.0),

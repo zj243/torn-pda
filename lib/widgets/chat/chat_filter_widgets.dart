@@ -39,7 +39,7 @@ class ChatFilterStrip extends StatelessWidget {
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
-                          revealed ? 'Filter paused - tap to apply' : '$hidden hidden by the filter - tap to show all',
+                          revealed ? context.interfaceText('Filter paused - tap to apply') : context.interfaceText("{0} hidden by the filter - tap to show all", [hidden]),
                           style: style,
                           overflow: TextOverflow.ellipsis,
                         ),

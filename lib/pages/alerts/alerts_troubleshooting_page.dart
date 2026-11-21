@@ -206,10 +206,10 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
         appBar: AppBar(
           iconTheme: const IconThemeData(color: Colors.white),
           title: const PdaText("Troubleshooting", style: TextStyle(color: Colors.white)),
-          bottom: const TabBar(
+          bottom: TabBar(
             tabs: [
-              Tab(text: "Automatic Notifications"),
-              Tab(text: "Live Updates"),
+              Tab(text: context.interfaceText("Automatic Notifications")),
+              Tab(text: context.interfaceText("Live Updates")),
             ],
             labelColor: Colors.white,
             unselectedLabelColor: Colors.white60,
@@ -373,8 +373,8 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
       children: [
         Text(
           Platform.isAndroid
-              ? "Use this tester to confirm Travel and Racing Live Updates are working on this device."
-              : "Use this tester to confirm Travel and Racing Live Activities are working on this device.",
+              ? context.interfaceText("Use this tester to confirm Travel and Racing Live Updates are working on this device.")
+              : context.interfaceText("Use this tester to confirm Travel and Racing Live Activities are working on this device."),
           style: const TextStyle(fontSize: 14),
         ),
         const SizedBox(height: 16),
@@ -523,7 +523,7 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
                         ),
                       )
                     : const Icon(Icons.play_arrow),
-                label: Text(_sendingMockLiveUpdate ? "Starting..." : "Start"),
+                label: Text(_sendingMockLiveUpdate ? context.interfaceText("Starting...") : context.interfaceText("Start")),
               ),
             ),
             const SizedBox(width: 12),
@@ -599,7 +599,7 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
                         ),
                       )
                     : const Icon(Icons.play_arrow),
-                label: Text(_sendingMockRacingLiveUpdate ? "Starting..." : "Start"),
+                label: Text(_sendingMockRacingLiveUpdate ? context.interfaceText("Starting...") : context.interfaceText("Start")),
               ),
             ),
             const SizedBox(width: 12),

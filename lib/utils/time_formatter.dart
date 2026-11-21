@@ -9,7 +9,12 @@ class TimeFormatter {
   final TimeFormatSetting timeFormatSetting;
   final TimeZoneSetting timeZoneSetting;
 
-  TimeFormatter({required this.inputTime, required this.timeFormatSetting, required this.timeZoneSetting});
+  /// ZJ：界面可传入 [locale] 格式化日期；后台调用沿用原有格式。
+  final String? locale;
+
+  TimeFormatter({required this.inputTime, required this.timeFormatSetting, required this.timeZoneSetting, this.locale});
+
+  bool get _chinese => locale == 'zh';
 
   /// Returns the formatted hour with timezone identifier
   ///
@@ -33,10 +38,10 @@ class TimeFormatter {
 
     switch (timeFormatSetting) {
       case TimeFormatSetting.h24:
-        final formatter = DateFormat('HH:mm');
+        final formatter = DateFormat('HH:mm', locale);
         hourFormatted = '${formatter.format(timeZonedTime)} $zoneId';
       case TimeFormatSetting.h12:
-        final formatter = DateFormat('hh:mm a');
+        final formatter = DateFormat('hh:mm a', locale);
         hourFormatted = '${formatter.format(timeZonedTime)} $zoneId';
     }
 
@@ -59,7 +64,7 @@ class TimeFormatter {
     }
 
     final formatPattern = timeFormatSetting == TimeFormatSetting.h24 ? 'HH:mm:ss' : 'hh:mm:ss a';
-    final formatter = DateFormat(formatPattern);
+    final formatter = DateFormat(formatPattern, locale);
     return '${formatter.format(timeZonedTime)} $zoneId';
   }
 
@@ -112,11 +117,11 @@ class TimeFormatter {
     // Format the hour according to the specified time format settings
     switch (timeFormatSetting) {
       case TimeFormatSetting.h24:
-        final formatter = DateFormat('HH:mm');
+        final formatter = DateFormat('HH:mm', locale);
         hourFormatted = '${formatter.format(timeZonedTime)} $zoneId';
         break;
       case TimeFormatSetting.h12:
-        final formatter = DateFormat('hh:mm a');
+        final formatter = DateFormat('hh:mm a', locale);
         hourFormatted = '${formatter.format(timeZonedTime)} $zoneId';
         break;
     }
@@ -126,16 +131,16 @@ class TimeFormatter {
     // Determine the appropriate suffix based on the difference in days
     if (differenceInDays == 0) {
       // If the event is today, optionally append "today"
-      suffix = includeToday ? ' today' : '';
+      suffix = includeToday ? (_chinese ? ' 今天' : ' today') : '';
     } else if (differenceInDays == 1) {
       // If the event is tomorrow
-      suffix = ' tomorrow';
+      suffix = _chinese ? ' 明天' : ' tomorrow';
     } else if (differenceInDays > 1) {
       // If the event is in multiple days
-      suffix = ' in $differenceInDays days';
+      suffix = _chinese ? '（$differenceInDays 天后）' : ' in $differenceInDays days';
     } else {
       // If the event is in the past, indicate "yesterday"
-      suffix = includeYesterday ? ' yesterday' : '';
+      suffix = includeYesterday ? (_chinese ? ' 昨天' : ' yesterday') : '';
     }
 
     return '$hourFormatted$suffix';
@@ -158,8 +163,8 @@ class TimeFormatter {
         timeZonedTime = inputTime!.toUtc();
     }
 
-    final formatter = DateFormat('EEEE');
-    _dayWeekFormatted = 'on ${formatter.format(timeZonedTime)}';
+    final formatter = DateFormat('EEEE', locale);
+    _dayWeekFormatted = _chinese ? formatter.format(timeZonedTime) : 'on ${formatter.format(timeZonedTime)}';
 
     return _dayWeekFormatted;
   }
@@ -181,7 +186,7 @@ class TimeFormatter {
         timeZonedTime = inputTime!.toUtc();
     }
 
-    final formatter = DateFormat('MMM dd');
+    final formatter = DateFormat(_chinese ? 'M月d日' : 'MMM dd', locale);
     _monthDayFormatted = formatter.format(timeZonedTime);
 
     return _monthDayFormatted;
@@ -212,11 +217,11 @@ class TimeFormatter {
 
     switch (timeFormatSetting) {
       case TimeFormatSetting.h24:
-        final formatter = DateFormat('HH:mm');
+        final formatter = DateFormat('HH:mm', locale);
         hourFormatted = '${formatter.format(timeZonedTime)} $zoneId';
         break;
       case TimeFormatSetting.h12:
-        final formatter = DateFormat('hh:mm a');
+        final formatter = DateFormat('hh:mm a', locale);
         hourFormatted = '${formatter.format(timeZonedTime)} $zoneId';
         break;
     }
@@ -238,7 +243,7 @@ class TimeFormatter {
         timeZonedTime = inputTime!.toUtc();
     }
 
-    final formatter = DateFormat('dd MMM');
+    final formatter = DateFormat(_chinese ? 'M月d日' : 'dd MMM', locale);
     return formatter.format(timeZonedTime);
   }
 
@@ -285,7 +290,7 @@ class TimeFormatter {
     final Duration difference = now.difference(timeToCompare);
 
     if (difference.inSeconds < 60) {
-      return "seconds";
+      return _chinese ? "几秒" : "seconds";
     }
 
     List<String> parts = [];
@@ -294,15 +299,15 @@ class TimeFormatter {
     int minutes = difference.inMinutes % 60;
 
     if (days > 0) {
-      parts.add("$days ${days == 1 ? 'day' : 'days'}");
+      parts.add(_chinese ? "$days 天" : "$days ${days == 1 ? 'day' : 'days'}");
     }
     if (hours > 0) {
-      parts.add("$hours ${hours == 1 ? 'hour' : 'hours'}");
+      parts.add(_chinese ? "$hours 小时" : "$hours ${hours == 1 ? 'hour' : 'hours'}");
     }
     if (minutes > 0) {
-      parts.add("$minutes ${minutes == 1 ? 'minute' : 'minutes'}");
+      parts.add(_chinese ? "$minutes 分钟" : "$minutes ${minutes == 1 ? 'minute' : 'minutes'}");
     }
 
-    return parts.isEmpty ? "seconds" : parts.join(", ");
+    return parts.join(_chinese ? " " : ", ");
   }
 }

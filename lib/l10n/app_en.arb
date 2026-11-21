@@ -359,5 +359,49 @@
   "apiPrivacy": "Note: if you are curious about Torn PDA's own privacy policy, you can access it in the Abour section of the app",
   "apiInstructions": "\nYou can get your API key in the Torn website by tapping your profile picture (upper right corner) and going to Settings, API Keys. Torn PDA only needs a Limited Access key.\n",
   "apiProtect": "\nIn any case, please make sure to follow Torn's staff recommendations on how to protect your key from any malicious use.",
-  "apiRemove": "\nYou can always remove it from the app or reset it in your Torn preferences page."
+  "apiRemove": "\nYou can always remove it from the app or reset it in your Torn preferences page.",
+  "energyBar": "Energy bar",
+  "energyReady": "Here is your energy reminder!",
+  "nerveBar": "Nerve bar",
+  "nerveReady": "Here is your nerve reminder!",
+  "lifeBar": "Life bar",
+  "lifeReady": "Here is your life reminder!",
+  "drugCooldown": "Drug Cooldown",
+  "drugReady": "Here is your drugs cooldown reminder!",
+  "medicalCooldown": "Medical Cooldown",
+  "medicalReady": "Here is your medical cooldown reminder!",
+  "boosterCooldown": "Booster Cooldown",
+  "boosterReady": "Here is your booster cooldown reminder!",
+  "hospitalRelease": "Hospital release",
+  "hospitalReady": "You are about to be released from hospital!",
+  "jailRelease": "Jail release",
+  "jailReady": "You are about to be released from jail!",
+  "warAlert": "Ranked War",
+  "warStarts": "Ranked war is about to start!",
+  "raceStart": "Race Start",
+  "raceReady": "Lights out and here we go!",
+  "educationComplete": "Education Complete",
+  "educationReady": "Your education course has finished!",
+  "virusCoded": "Virus Coded",
+  "virusReady": "Your virus has finished coding!",
+  "boardingTitle": "Your flight to {country} is ready for boarding!",
+  "boardingBody": "Remember to bring your {item} import papers!",
+  "boardingScheduled": "Scheduled",
+  "boardingDeparture": "Departure",
+  "@boardingTitle": {
+    "placeholders": {
+      "country": {
+        "type": "String"
+      }
+    }
+  },
+  "@boardingBody": {
+    "placeholders": {
+      "item": {
+        "type": "String"
+      }
+    }
+  },
+  "boardingTitleUnknown": "Your flight is ready for boarding!",
+  "boardingBodyUnknown": "Remember to bring your import papers!"
 }

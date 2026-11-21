@@ -391,7 +391,7 @@ class _FFScouterBountyBoardViewState extends State<FFScouterBountyBoardView> wit
                     Padding(
                       padding: const EdgeInsets.only(top: 4),
                       child: Text(
-                        target.disabledReason == "buyer" ? "You placed this bounty" : "This bounty is on you",
+                        target.disabledReason == "buyer" ? context.interfaceText("You placed this bounty") : context.interfaceText("This bounty is on you"),
                         style: TextStyle(fontSize: 11, color: muted, fontStyle: FontStyle.italic),
                       ),
                     ),

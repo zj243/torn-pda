@@ -128,10 +128,8 @@ class FriendsPageState extends State<FriendsPage> {
                   if (updateResult.success) {
                     BotToast.showText(
                       text: updateResult.numberSuccessful > 0
-                          ? 'Successfully updated '
-                                '${updateResult.numberSuccessful} '
-                                'friends!'
-                          : 'No friends to update!',
+                          ? context.interfaceText("Successfully updated {0} friends!", [updateResult.numberSuccessful])
+                          : context.interfaceText('No friends to update!'),
                       textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                       contentColor: updateResult.numberSuccessful > 0 ? Colors.green : Colors.red,
                       duration: const Duration(seconds: 3),
@@ -337,7 +335,7 @@ class FriendsPageState extends State<FriendsPage> {
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             Text(
-                              addingFactionActive ? 'Importing friends' : 'Add to Friends',
+                              addingFactionActive ? context.interfaceText('Importing friends') : context.interfaceText('Add to Friends'),
                               style: const TextStyle(fontSize: 13),
                             ),
                             const SizedBox(height: 10),
@@ -516,7 +514,7 @@ class FriendsPageState extends State<FriendsPage> {
                                           Text(
                                             importingName.startsWith('API Limit')
                                                 ? importingName
-                                                : 'Imported: $importingName',
+                                                : context.interfaceText("Imported: {0}", [importingName]),
                                             style: const TextStyle(fontSize: 12),
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
@@ -532,7 +530,7 @@ class FriendsPageState extends State<FriendsPage> {
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: <Widget>[
                                       TextButton(
-                                        child: Text(addingFactionActive ? 'Cancel' : 'Import'),
+                                        child: Text(addingFactionActive ? context.interfaceText('Cancel') : context.interfaceText('Import')),
                                         onPressed: () async {
                                           if (addingFactionActive) {
                                             friendsProvider.cancelImport();

@@ -169,7 +169,7 @@ Future<String?> _askModeName(BuildContext context, UserScriptsProvider provider,
       builder: (_, setState) => AlertDialog(
         backgroundColor: theme.secondBackground,
         title: Text(
-          existing == null ? "New mode" : "Rename mode",
+          existing == null ? context.interfaceText("New mode") : context.interfaceText("Rename mode"),
           style: TextStyle(color: theme.mainText, fontSize: 16),
         ),
         content: TextField(

@@ -789,10 +789,10 @@ class ChatTranslationText extends StatelessWidget {
                   Flexible(
                     child: Text(
                       translation.isLoading
-                          ? 'Translating…'
+                          ? context.interfaceText('Translating…')
                           : translation.failed
-                          ? 'Could not translate, tap to try again'
-                          : '${from == null ? 'Translated' : 'Translated from ${from.toUpperCase()}'}, tap to hide',
+                          ? context.interfaceText('Could not translate, tap to try again')
+                          : context.interfaceText("{0}, tap to hide", [from == null ? 'Translated' : 'Translated from ${from.toUpperCase()}']),
                       style: note,
                     ),
                   ),
@@ -1400,7 +1400,7 @@ class _ChatPausedGateState extends State<ChatPausedGate> {
                                 builder: (context, exists, _) => FilledButton(
                                   style: _pausedButton,
                                   onPressed: NativeChat.goToTornTab,
-                                  child: Text(exists ? 'Go to Torn tab' : 'Open Torn tab'),
+                                  child: Text(exists ? context.interfaceText('Go to Torn tab') : context.interfaceText('Open Torn tab')),
                                 ),
                               ),
                               const SizedBox(height: 8),
@@ -2136,7 +2136,7 @@ class ChatConversationTile extends StatelessWidget {
           container: true,
           expanded: expanded,
           child: IconButton(
-            tooltip: expanded ? 'Close quick reply to $name' : 'Quick reply to $name',
+            tooltip: expanded ? context.interfaceText("Close quick reply to {0}", [name]) : context.interfaceText("Quick reply to {0}", [name]),
             onPressed: onExpand,
             color: expanded ? scheme.primary : scheme.onSurfaceVariant,
             icon: AnimatedRotation(
@@ -2188,7 +2188,7 @@ class ChatPinnedBar extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      pin.author.isEmpty ? 'Pinned message' : pin.author,
+                      pin.author.isEmpty ? context.interfaceText('Pinned message') : pin.author,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: theme.textTheme.labelMedium?.copyWith(color: scheme.primary, fontWeight: FontWeight.w700),

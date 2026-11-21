@@ -182,9 +182,9 @@ class FFScouterPageState extends State<FFScouterPage> with SingleTickerProviderS
                     controller: _tabController,
                     labelColor: _themeProvider.mainText,
                     unselectedLabelColor: Colors.grey[500],
-                    tabs: const [
-                      Tab(height: 36, text: "Target Finder"),
-                      Tab(height: 36, text: "Bounty Board"),
+                    tabs: [
+                      Tab(height: 36, text: context.interfaceText("Target Finder")),
+                      Tab(height: 36, text: context.interfaceText("Bounty Board")),
                     ],
                   ),
                   Expanded(
@@ -446,8 +446,8 @@ class FFScouterPageState extends State<FFScouterPage> with SingleTickerProviderS
             padding: const EdgeInsets.only(top: 4),
             child: Text(
               _preset == "respect"
-                  ? "Server selects targets optimized for best respect gain"
-                  : "Server selects targets matched to your level",
+                  ? context.interfaceText("Server selects targets optimized for best respect gain")
+                  : context.interfaceText("Server selects targets matched to your level"),
               style: TextStyle(fontSize: 11, color: Colors.grey[500], fontStyle: FontStyle.italic),
             ),
           ),
@@ -652,7 +652,7 @@ class FFScouterPageState extends State<FFScouterPage> with SingleTickerProviderS
         icon: _isLoading
             ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2))
             : const Icon(Icons.search, size: 18),
-        label: Text(_isLoading ? "Searching..." : "Find Targets"),
+        label: Text(_isLoading ? context.interfaceText("Searching...") : context.interfaceText("Find Targets")),
         style: ElevatedButton.styleFrom(
           visualDensity: const VisualDensity(vertical: -2),
           textStyle: const TextStyle(fontSize: 13),

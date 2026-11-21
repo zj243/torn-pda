@@ -128,7 +128,7 @@ class OrganizedCrimeWidgetState extends State<OrganizedCrimeWidget> {
                   style: TextStyle(fontSize: 14, color: Colors.red),
                 ),
               TextSpan(
-                text: missingSlots > 0 ? 'earliest possible start at ' : 'planned to start at ',
+                text: missingSlots > 0 ? context.interfaceText('earliest possible start at ') : context.interfaceText('planned to start at '),
                 style: TextStyle(fontSize: 14, color: themeProvider.mainText),
               ),
               TextSpan(

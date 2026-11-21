@@ -16,6 +16,30 @@ extension PdaInterfaceLanguage on BuildContext {
   }
 }
 
+/// ZJ：仅对 API 的旅行目的地 [destination] 使用地名译表；未知目的地保留原名。
+extension TravelDestinationLanguage on BuildContext {
+  String destinationName(String? destination) {
+    final name = destination ?? 'Unknown';
+    if (Localizations.maybeLocaleOf(this)?.languageCode != 'zh') return name;
+    return const <String, String>{
+      'Argentina': '阿根廷',
+      'Canada': '加拿大',
+      'Cayman Islands': '开曼群岛',
+      'China': '中国',
+      'Hawaii': '夏威夷',
+      'Japan': '日本',
+      'Mexico': '墨西哥',
+      'South Africa': '南非',
+      'Switzerland': '瑞士',
+      'UAE': '阿联酋',
+      'United Arab Emirates': '阿拉伯联合酋长国',
+      'United Kingdom': '英国',
+      'Torn': 'Torn 城',
+      'Unknown': '未知',
+    }[name] ?? name;
+  }
+}
+
 final _placeholder = RegExp(r'\{(\d+)\}');
 
 /// ZJ：在构建时取得界面语言，使常量按钮、菜单等也能响应语言切换。

@@ -29,7 +29,7 @@ class _ChatItemNicknamesPageState extends State<ChatItemNicknamesPage> {
         title: const PdaText('Item nicknames'),
         actions: [
           ChatExportMenu(
-            tooltip: 'Export nicknames',
+            tooltip: context.interfaceText('Export nicknames'),
             text: () => ChatItemAliases.export(prefs.itemAliases),
             copied: 'Nicknames copied',
           ),
@@ -90,7 +90,7 @@ class _ChatItemNicknamesPageState extends State<ChatItemNicknamesPage> {
                 Padding(
                   padding: const EdgeInsets.all(16),
                   child: Text(
-                    query.isEmpty ? 'No nicknames yet' : 'Nothing matches',
+                    query.isEmpty ? context.interfaceText('No nicknames yet') : context.interfaceText('Nothing matches'),
                     style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant),
                   ),
                 ),

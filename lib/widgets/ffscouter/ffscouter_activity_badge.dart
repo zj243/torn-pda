@@ -93,7 +93,7 @@ class _FFScouterActivityBadgeState extends State<FFScouterActivityBadge> {
       builder: (ctx) {
         return AlertDialog(
           title: Text(
-            widget.playerName == null ? "Activity (TCT)" : "${widget.playerName} activity (TCT)",
+            widget.playerName == null ? context.interfaceText("Activity (TCT)") : context.interfaceText("{0} activity (TCT)", [widget.playerName]),
             style: const TextStyle(fontSize: 16),
           ),
           content: Column(

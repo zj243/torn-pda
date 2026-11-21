@@ -112,8 +112,8 @@ class _ChatSearchPageState extends State<ChatSearchPage> {
             unselectedLabelColor: scheme.onSurfaceVariant,
             indicatorColor: scheme.primary,
             tabs: [
-              Tab(text: 'Players (${players.length})'),
-              Tab(text: 'Messages ($hits)'),
+              Tab(text: context.interfaceText("Players ({0})", [players.length])),
+              Tab(text: context.interfaceText("Messages ({0})", [hits])),
             ],
           ),
           Expanded(child: TabBarView(children: [_players(players), _messages(groups)])),
@@ -130,7 +130,7 @@ class _ChatSearchPageState extends State<ChatSearchPage> {
           ListTile(
             leading: room.isDm ? ChatRoomAvatar(room: room, size: 40) : ChatAvatar(user: user, size: 40),
             title: Text(user.name, maxLines: 1, overflow: TextOverflow.ellipsis),
-            subtitle: Text(room.isDm ? 'Private chat' : 'Seen in ${room.name}', maxLines: 1),
+            subtitle: Text(room.isDm ? context.interfaceText('Private chat') : context.interfaceText("Seen in {0}", [room.name]), maxLines: 1),
             trailing: IconButton(
               tooltip: context.interfaceText('Player actions'),
               icon: const Icon(Icons.more_vert_rounded),

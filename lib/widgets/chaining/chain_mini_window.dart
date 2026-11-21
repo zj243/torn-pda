@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:collection';
 import 'dart:io';
@@ -306,7 +307,7 @@ class _ChainMiniFrameState extends State<_ChainMiniFrame> with WidgetsBindingObs
                       child: Padding(
                         padding: const EdgeInsets.only(left: 6, top: 2),
                         child: Text(
-                          _tornTab ? 'Live browser view' : 'Live chain paused',
+                          _tornTab ? context.interfaceText('Live browser view') : context.interfaceText('Live chain paused'),
                           style: const TextStyle(color: Colors.white38, fontSize: 8, height: 1),
                         ),
                       ),
@@ -322,10 +323,10 @@ class _ChainMiniFrameState extends State<_ChainMiniFrame> with WidgetsBindingObs
                               child: Center(
                                 child: Text(
                                   !_tornTab
-                                      ? 'Back on a Torn tab to resume'
+                                      ? context.interfaceText('Back on a Torn tab to resume')
                                       : _state == _MiniState.loading
-                                      ? 'Loading...'
-                                      : 'Tap to reload',
+                                      ? context.interfaceText('Loading...')
+                                      : context.interfaceText('Tap to reload'),
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(color: Colors.white70, fontSize: 11),
                                 ),

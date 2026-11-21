@@ -597,6 +597,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                       );
 
                       final timeFormatter = TimeFormatter(
+                        locale: context.l10n.localeName,
                         inputTime: lastActionTime,
                         timeFormatSetting: _settingsProvider!.currentTimeFormat,
                         timeZoneSetting: _settingsProvider!.currentTimeZone,
@@ -1697,7 +1698,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
               children: [
                 Row(
                   children: <Widget>[
-                    Flexible(child: PdaText("Arriving in {0} at {1}", values: [_user!.travel!.destination, formattedTime])),
+                    Flexible(child: PdaText("Arriving in {0} at {1}", values: [context.destinationName(_user!.travel!.destination), formattedTime])),
                   ],
                 ),
                 TravelReturnWidget(
@@ -2306,6 +2307,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         } else {
           final time = _serverTime.add(Duration(seconds: _user!.energy!.fulltime!));
           final timeFormatted = TimeFormatter(
+            locale: context.l10n.localeName,
             inputTime: time,
             timeFormatSetting: _settingsProvider!.currentTimeFormat,
             timeZoneSetting: _settingsProvider!.currentTimeZone,
@@ -2321,6 +2323,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         } else {
           final time = _serverTime.add(Duration(seconds: _user!.nerve!.fulltime!));
           final timeFormatted = TimeFormatter(
+            locale: context.l10n.localeName,
             inputTime: time,
             timeFormatSetting: _settingsProvider!.currentTimeFormat,
             timeZoneSetting: _settingsProvider!.currentTimeZone,
@@ -2336,6 +2339,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         } else {
           final time = _serverTime.add(Duration(seconds: _user!.happy!.fulltime!));
           final timeFormatted = TimeFormatter(
+            locale: context.l10n.localeName,
             inputTime: time,
             timeFormatSetting: _settingsProvider!.currentTimeFormat,
             timeZoneSetting: _settingsProvider!.currentTimeZone,
@@ -2351,6 +2355,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         } else {
           final time = _serverTime.add(Duration(seconds: _user!.life!.fulltime!));
           final timeFormatted = TimeFormatter(
+            locale: context.l10n.localeName,
             inputTime: time,
             timeFormatSetting: _settingsProvider!.currentTimeFormat,
             timeZoneSetting: _settingsProvider!.currentTimeZone,
@@ -3330,8 +3335,8 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         child: Center(
           child: Text(
             showingAllAvailable
-                ? "(Showing all $maxToShow events from the last month)"
-                : "(Showing last $maxToShow events)",
+                ? context.interfaceText("(Showing all {0} events from the last month)", [maxToShow])
+                : context.interfaceText("(Showing last {0} events)", [maxToShow]),
             style: const TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
           ),
         ),
@@ -4059,7 +4064,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                 SelectionArea(
                                   child: Text(
                                     strengthString.contains("error")
-                                        ? '(error)'
+                                        ? context.interfaceText('(error)')
                                         : decimalFormat.format(strengthModifiedTotal),
                                   ),
                                 ),
@@ -4075,7 +4080,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                 SelectionArea(
                                   child: Text(
                                     defenseString.contains("error")
-                                        ? '(error)'
+                                        ? context.interfaceText('(error)')
                                         : decimalFormat.format(defenseModifiedTotal),
                                   ),
                                 ),
@@ -4091,7 +4096,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                 SelectionArea(
                                   child: Text(
                                     speedString.contains("error")
-                                        ? '(error)'
+                                        ? context.interfaceText('(error)')
                                         : decimalFormat.format(speedModifiedTotal),
                                   ),
                                 ),
@@ -4106,7 +4111,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                 const SizedBox(width: 80, child: PdaText('Dexterity: ')),
                                 SelectionArea(
                                   child: Text(
-                                    dexString.contains("error") ? '(error)' : decimalFormat.format(dexModifiedTotal),
+                                    dexString.contains("error") ? context.interfaceText('(error)') : decimalFormat.format(dexModifiedTotal),
                                   ),
                                 ),
                                 if (dexModified)
@@ -4947,7 +4952,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                       style: DefaultTextStyle.of(context).style,
                       children: <TextSpan>[
                         TextSpan(
-                          text: bankAmount != null ? "\$${moneyFormat.format(bankAmount)}" : "(error)",
+                          text: bankAmount != null ? "\$${moneyFormat.format(bankAmount)}" : context.interfaceText("(error)"),
                           style: TextStyle(
                             color: bankAmount != null
                                 ? _themeProvider?.getTextColor(Colors.green)
@@ -5376,7 +5381,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
             child: const Icon(MdiIcons.cityVariantOutline, color: Colors.black),
           ),
           backgroundColor: Colors.purple[500],
-          label: 'CITY',
+          label: context.interfaceText('CITY'),
           labelStyle: const TextStyle(fontWeight: FontWeight.w500, color: Colors.black),
           labelBackgroundColor: Colors.purple[500],
         ),
@@ -5396,7 +5401,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
             child: const Icon(MdiIcons.accountSwitchOutline, color: Colors.black),
           ),
           backgroundColor: Colors.yellow[800],
-          label: 'TRADES',
+          label: context.interfaceText('TRADES'),
           labelStyle: const TextStyle(fontWeight: FontWeight.w500, color: Colors.black),
           labelBackgroundColor: Colors.yellow[800],
         ),
@@ -5416,7 +5421,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
             child: const Icon(Icons.card_giftcard, color: Colors.black),
           ),
           backgroundColor: Colors.blue[400],
-          label: 'ITEMS',
+          label: context.interfaceText('ITEMS'),
           labelStyle: const TextStyle(fontWeight: FontWeight.w500, color: Colors.black),
           labelBackgroundColor: Colors.blue[400],
         ),
@@ -5438,7 +5443,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
             ),
           ),
           backgroundColor: Colors.deepOrange[400],
-          label: 'CRIMES',
+          label: context.interfaceText('CRIMES'),
           labelStyle: const TextStyle(fontWeight: FontWeight.w500, color: Colors.black),
           labelBackgroundColor: Colors.deepOrange[400],
         ),
@@ -5458,7 +5463,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
             child: const Icon(Icons.fitness_center, color: Colors.black),
           ),
           backgroundColor: Colors.green[400],
-          label: 'GYM',
+          label: context.interfaceText('GYM'),
           labelStyle: const TextStyle(fontWeight: FontWeight.w500, color: Colors.black),
           labelBackgroundColor: Colors.green[400],
         ),
@@ -5478,7 +5483,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
             child: const Icon(Icons.home_outlined, color: Colors.black),
           ),
           backgroundColor: Colors.grey[400],
-          label: 'HOME',
+          label: context.interfaceText('HOME'),
           labelStyle: const TextStyle(fontWeight: FontWeight.w500, color: Colors.black),
           labelBackgroundColor: Colors.grey[400],
         ),
@@ -5559,8 +5564,8 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         channelTitle = 'Manual energy';
         channelSubtitle = 'Manual energy';
         channelDescription = 'Manual notifications for energy';
-        notificationTitle = discreet() ? "E" : 'Energy bar';
-        notificationSubtitle = discreet() ? "Full" : 'Here is your energy reminder!';
+        notificationTitle = discreet() ? "E" : strings.energyBar;
+        notificationSubtitle = discreet() ? "Full" : strings.energyReady;
         final myTimeStamp = (_energyNotificationTime!.millisecondsSinceEpoch / 1000).floor();
         notificationPayload += '${profileNotification.string}-$myTimeStamp';
         notificationIconAndroid = "notification_energy";
@@ -5571,8 +5576,8 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         channelTitle = 'Manual nerve';
         channelSubtitle = 'Manual nerve';
         channelDescription = 'Manual notifications for nerve';
-        notificationTitle = discreet() ? "N" : 'Nerve bar';
-        notificationSubtitle = discreet() ? "Full" : 'Here is your nerve reminder!';
+        notificationTitle = discreet() ? "N" : strings.nerveBar;
+        notificationSubtitle = discreet() ? "Full" : strings.nerveReady;
         final myTimeStamp = (_nerveNotificationTime!.millisecondsSinceEpoch / 1000).floor();
         notificationPayload += '${profileNotification.string}-$myTimeStamp';
         notificationIconAndroid = "notification_nerve";
@@ -5583,8 +5588,8 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         channelTitle = 'Manual life';
         channelSubtitle = 'Manual life';
         channelDescription = 'Manual notifications for life';
-        notificationTitle = discreet() ? "Lf" : 'Life bar';
-        notificationSubtitle = discreet() ? "Full" : 'Here is your life reminder!';
+        notificationTitle = discreet() ? "Lf" : strings.lifeBar;
+        notificationSubtitle = discreet() ? "Full" : strings.lifeReady;
         final myTimeStamp = (DateTime.now().millisecondsSinceEpoch / 1000).floor() + _user!.life!.fulltime!;
         notificationPayload += '${profileNotification.string}-$myTimeStamp';
         notificationIconAndroid = "notification_life";
@@ -5595,10 +5600,10 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         channelTitle = 'Manual drugs';
         channelSubtitle = 'Manual drugs';
         channelDescription = 'Manual notifications for drugs';
-        notificationTitle = discreet() ? "D" : 'Drug Cooldown';
+        notificationTitle = discreet() ? "D" : strings.drugCooldown;
         notificationSubtitle = discreet()
             ? "Exp"
-            : 'Here is your drugs cooldown reminder!';
+            : strings.drugReady;
         final myTimeStamp = (DateTime.now().millisecondsSinceEpoch / 1000).floor() + _user!.cooldowns!.drug!;
         notificationPayload += '${profileNotification.string}-$myTimeStamp';
         notificationIconAndroid = "notification_drugs";
@@ -5609,10 +5614,10 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         channelTitle = 'Manual medical';
         channelSubtitle = 'Manual medical';
         channelDescription = 'Manual notifications for medical';
-        notificationTitle = discreet() ? "Med" : 'Medical Cooldown';
+        notificationTitle = discreet() ? "Med" : strings.medicalCooldown;
         notificationSubtitle = discreet()
             ? "Exp"
-            : 'Here is your medical cooldown reminder!';
+            : strings.medicalReady;
         final myTimeStamp = (DateTime.now().millisecondsSinceEpoch / 1000).floor() + _user!.cooldowns!.medical!;
         notificationPayload += '${profileNotification.string}-$myTimeStamp';
         notificationIconAndroid = "notification_medical";
@@ -5623,10 +5628,10 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         channelTitle = 'Manual booster';
         channelSubtitle = 'Manual booster';
         channelDescription = 'Manual notifications for booster';
-        notificationTitle = discreet() ? "B" : 'Booster Cooldown';
+        notificationTitle = discreet() ? "B" : strings.boosterCooldown;
         notificationSubtitle = discreet()
             ? "Exp"
-            : 'Here is your booster cooldown reminder!';
+            : strings.boosterReady;
         final myTimeStamp = (DateTime.now().millisecondsSinceEpoch / 1000).floor() + _user!.cooldowns!.booster!;
         notificationPayload += '${profileNotification.string}-$myTimeStamp';
         notificationIconAndroid = "notification_booster";
@@ -5637,10 +5642,10 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         channelTitle = 'Manual hospital';
         channelSubtitle = 'Manual hospital';
         channelDescription = 'Manual notifications for hospital';
-        notificationTitle = discreet() ? "H" : 'Hospital release';
+        notificationTitle = discreet() ? "H" : strings.hospitalRelease;
         notificationSubtitle = discreet()
             ? "App"
-            : 'You are about to be released from hospital!';
+            : strings.hospitalReady;
         final myTimeStamp = (_hospitalReleaseTime.millisecondsSinceEpoch / 1000).floor() - _hospitalNotificationAhead;
         notificationPayload += 'hospital-$myTimeStamp';
         notificationIconAndroid = "notification_hospital";
@@ -5651,10 +5656,10 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         channelTitle = 'Manual jail';
         channelSubtitle = 'Manual jail';
         channelDescription = 'Manual notifications for jail';
-        notificationTitle = discreet() ? "J" : 'Jail release';
+        notificationTitle = discreet() ? "J" : strings.jailRelease;
         notificationSubtitle = discreet()
             ? "App"
-            : 'You are about to be released from jail!';
+            : strings.jailReady;
         final myTimeStamp = (_jailReleaseTime.millisecondsSinceEpoch / 1000).floor() - _jailNotificationAhead;
         notificationPayload += 'jail-$myTimeStamp';
         notificationIconAndroid = "notification_events";
@@ -5665,8 +5670,8 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         channelTitle = 'Manual war';
         channelSubtitle = 'Manual war';
         channelDescription = 'Manual notifications for war';
-        notificationTitle = discreet() ? "W" : 'Ranked War';
-        notificationSubtitle = discreet() ? "App" : 'Ranked war is about to start!';
+        notificationTitle = discreet() ? "W" : strings.warAlert;
+        notificationSubtitle = discreet() ? "App" : strings.warStarts;
         notificationPayload += 'war';
         notificationIconAndroid = "notification_assists";
         notificationIconColor = Colors.red;
@@ -5676,8 +5681,8 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         channelTitle = 'Manual race start';
         channelSubtitle = 'Manual race start';
         channelDescription = 'Manual notifications for race start';
-        notificationTitle = discreet() ? "R" : 'Race Start';
-        notificationSubtitle = discreet() ? "Start" : 'Lights out and here we go!';
+        notificationTitle = discreet() ? "R" : strings.raceStart;
+        notificationSubtitle = discreet() ? "Start" : strings.raceReady;
         notificationPayload += 'raceStart';
         notificationIconAndroid = "notification_racing";
         notificationIconColor = Colors.blue;
@@ -5693,10 +5698,10 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         channelTitle = 'Manual education';
         channelSubtitle = 'Manual education';
         channelDescription = 'Manual notifications for education';
-        notificationTitle = discreet() ? "Edu" : 'Education Complete';
+        notificationTitle = discreet() ? "Edu" : strings.educationComplete;
         notificationSubtitle = discreet()
             ? "Done"
-            : 'Your education course has finished!';
+            : strings.educationReady;
         notificationIconAndroid = "notification_items";
         notificationIconColor = Colors.blueGrey;
       case ProfileNotification.virus:
@@ -5711,8 +5716,8 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         channelTitle = 'Manual virus';
         channelSubtitle = 'Manual virus';
         channelDescription = 'Manual notifications for virus coding';
-        notificationTitle = discreet() ? "Vir" : 'Virus Coded';
-        notificationSubtitle = discreet() ? "Done" : 'Your virus has finished coding!';
+        notificationTitle = discreet() ? "Vir" : strings.virusCoded;
+        notificationSubtitle = discreet() ? "Done" : strings.virusReady;
         notificationIconAndroid = "notification_items";
         notificationIconColor = Colors.deepPurple;
     }

@@ -295,7 +295,7 @@ class _TickerCaptionState extends State<_TickerCaption> with SingleTickerProvide
             ),
           ),
         TextSpan(
-          text: room.isDm ? m.sender.name : '${m.sender.name} in ${room.name}',
+          text: room.isDm ? m.sender.name : context.interfaceText("{0} in {1}", [m.sender.name, room.name]),
           style: const TextStyle(fontWeight: FontWeight.w700),
         ),
       ],

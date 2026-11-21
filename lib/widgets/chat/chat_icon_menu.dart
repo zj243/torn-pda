@@ -282,7 +282,7 @@ Future<void> _showChatIconMenu(BuildContext context, ChatIconButton icon) {
             ),
             ListTile(
               leading: Icon(icon.hiddenInTab ? Icons.visibility_rounded : Icons.visibility_off_rounded),
-              title: Text(icon.hiddenInTab ? 'Show chat in this tab' : 'Hide chat in this tab'),
+              title: Text(icon.hiddenInTab ? context.interfaceText('Show chat in this tab') : context.interfaceText('Hide chat in this tab')),
               onTap: () {
                 Navigator.pop(context);
                 icon.onHideInTab(!icon.hiddenInTab);
@@ -290,7 +290,7 @@ Future<void> _showChatIconMenu(BuildContext context, ChatIconButton icon) {
             ),
             ListTile(
               leading: Icon(icon.hiddenEverywhere ? Icons.layers_rounded : Icons.layers_clear_rounded),
-              title: Text(icon.hiddenEverywhere ? 'Show chat in every tab' : 'Hide chat in every tab'),
+              title: Text(icon.hiddenEverywhere ? context.interfaceText('Show chat in every tab') : context.interfaceText('Hide chat in every tab')),
               subtitle: const PdaText('Torn\'s chat is not loaded at all while hidden'),
               onTap: () {
                 Navigator.pop(context);

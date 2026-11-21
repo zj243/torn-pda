@@ -212,7 +212,7 @@ class _ChatHitPickerState extends State<ChatHitPicker> {
                                 ),
                           icon: const Icon(Icons.chat_bubble_outline_rounded),
                           label: Text(
-                            seconds == null ? 'Hitting' : 'Hitting in ${seconds}s',
+                            seconds == null ? context.interfaceText('Hitting') : context.interfaceText("Hitting in {0}s", [seconds]),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -224,7 +224,7 @@ class _ChatHitPickerState extends State<ChatHitPicker> {
                           onPressed: target == null ? null : () => widget.onAttack(target),
                           icon: const Icon(MaterialCommunityIcons.sword_cross),
                           label: Text(
-                            target == null ? 'Attack' : 'Attack ${target.name}',
+                            target == null ? context.interfaceText('Attack') : context.interfaceText("Attack {0}", [target.name]),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),

@@ -86,9 +86,9 @@ class _TargetsSortSheetState extends State<TargetsSortSheet> with SingleTickerPr
             labelColor: themeProvider.mainText,
             unselectedLabelColor: Colors.grey,
             indicatorColor: Colors.pink[700],
-            tabs: const [
-              Tab(text: 'Sorting'),
-              Tab(text: 'Filters'),
+            tabs: [
+              Tab(text: context.interfaceText('Sorting')),
+              Tab(text: context.interfaceText('Filters')),
             ],
           ),
           Expanded(

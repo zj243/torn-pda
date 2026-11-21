@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/app_language.dart';
 import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:io';
 
@@ -327,13 +328,13 @@ class DelayedTravelDialogState extends State<DelayedTravelDialog> {
     const String channelTitle = 'Manual flight departure';
     const String channelSubtitle = 'Manual flight departure';
     const String channelDescription = 'Manual notifications for delayed flight departure';
-    String notificationTitle = "Your flight to ${widget.country} is ready for boarding!";
-    String notificationSubtitle = "Remember to bring your ${widget.stockName} import papers!";
+    String notificationTitle = widget.country == null ? context.l10n.boardingTitleUnknown : context.l10n.boardingTitle(context.destinationName(widget.country));
+    String notificationSubtitle = widget.stockName == null ? context.l10n.boardingBodyUnknown : context.l10n.boardingBody(widget.stockName!);
     final int notificationId = _notificationId;
 
     if (_settingsProvider.discreetAt(_targetTime)) {
-      notificationTitle = "Scheduled";
-      notificationSubtitle = "Departure";
+      notificationTitle = context.l10n.boardingScheduled;
+      notificationSubtitle = context.l10n.boardingDeparture;
     }
 
     final modifier = await getNotificationChannelsModifiers();
@@ -379,12 +380,12 @@ class DelayedTravelDialogState extends State<DelayedTravelDialog> {
 
   // Used when the target is beyond what the system clock can hold
   Future<void> _scheduleInAppAlarm() async {
-    String notificationTitle = "Your flight to ${widget.country} is ready for boarding!";
-    String notificationSubtitle = "Remember to bring your ${widget.stockName} import papers!";
+    String notificationTitle = widget.country == null ? context.l10n.boardingTitleUnknown : context.l10n.boardingTitle(context.destinationName(widget.country));
+    String notificationSubtitle = widget.stockName == null ? context.l10n.boardingBodyUnknown : context.l10n.boardingBody(widget.stockName!);
 
     if (_settingsProvider.discreetAt(_targetTime)) {
-      notificationTitle = "Scheduled";
-      notificationSubtitle = "Departure";
+      notificationTitle = context.l10n.boardingScheduled;
+      notificationSubtitle = context.l10n.boardingDeparture;
     }
 
     await assessExactAlarmsPermissionsAndroid(context, _settingsProvider);

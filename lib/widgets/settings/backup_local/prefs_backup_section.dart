@@ -105,7 +105,7 @@ class PrefsBackupWidgetState extends State<PrefsBackupWidget> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(encrypt ? 'Enter encryption key' : 'Enter decryption key'),
+            Text(encrypt ? context.interfaceText('Enter encryption key') : context.interfaceText('Enter decryption key')),
             if (encrypt)
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),

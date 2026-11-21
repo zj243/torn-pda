@@ -160,8 +160,8 @@ class ImportedScriptsWarning extends StatelessWidget {
               padding: const EdgeInsets.only(top: 6),
               child: Text(
                 backup.scriptsDisabled
-                    ? 'These scripts use your API key: ${backup.apiKeyScripts.join(', ')}'
-                    : 'These active scripts use your API key: ${backup.apiKeyScripts.join(', ')}',
+                    ? context.interfaceText("These scripts use your API key: {0}", [backup.apiKeyScripts.join(', ')])
+                    : context.interfaceText("These active scripts use your API key: {0}", [backup.apiKeyScripts.join(', ')]),
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,

@@ -338,8 +338,8 @@ class StakeoutsPageState extends State<StakeoutsPage> {
 
                                     BotToast.showText(
                                       text: tryAddStakeout.success
-                                          ? 'Added ${tryAddStakeout.name} [${tryAddStakeout.id}]'
-                                          : 'Error adding $inputId: ${tryAddStakeout.error}',
+                                          ? context.interfaceText("Added {0} [{1}]", [tryAddStakeout.name, tryAddStakeout.id])
+                                          : context.interfaceText("Error adding {0}: {1}", [inputId, tryAddStakeout.error]),
                                       textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                                       contentColor: tryAddStakeout.success ? Colors.green : Colors.orange[700]!,
                                       duration: const Duration(seconds: 3),

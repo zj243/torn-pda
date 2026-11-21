@@ -291,7 +291,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
     final dials = <SpeedDialChild>[];
 
     final dialStocks = SpeedDialChild(
-      label: 'STOCKS',
+      label: context.interfaceText('STOCKS'),
       labelStyle: const TextStyle(
         fontWeight: FontWeight.w500,
         color: Colors.black,
@@ -343,7 +343,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
           );
         });
       },
-      label: 'Set notification',
+      label: context.interfaceText('Set notification'),
       labelStyle: const TextStyle(
         fontWeight: FontWeight.w500,
         color: Colors.black,
@@ -370,7 +370,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
           contentPadding: const EdgeInsets.all(10),
         );
       },
-      label: 'Cancel notification',
+      label: context.interfaceText('Cancel notification'),
       labelStyle: const TextStyle(
         fontWeight: FontWeight.w500,
         color: Colors.black,
@@ -399,7 +399,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
           );
         });
       },
-      label: 'Set alarm',
+      label: context.interfaceText('Set alarm'),
       labelStyle: const TextStyle(
         fontWeight: FontWeight.w500,
         color: Colors.black,
@@ -428,7 +428,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
           );
         });
       },
-      label: 'Set alarm',
+      label: context.interfaceText('Set alarm'),
       labelStyle: const TextStyle(
         fontWeight: FontWeight.w500,
         color: Colors.black,
@@ -455,7 +455,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
           contentPadding: const EdgeInsets.all(10),
         );
       },
-      label: 'Cancel alarm',
+      label: context.interfaceText('Cancel alarm'),
       labelStyle: const TextStyle(
         fontWeight: FontWeight.w500,
         color: Colors.black,
@@ -484,7 +484,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
           );
         });
       },
-      label: 'Set timer',
+      label: context.interfaceText('Set timer'),
       labelStyle: const TextStyle(
         fontWeight: FontWeight.w500,
         color: Colors.black,
@@ -615,7 +615,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
           Padding(
             padding: const EdgeInsetsDirectional.only(bottom: 10),
             child: PdaText(
-              "Arrived in {0}!", values: [_travelModel.destination],
+              "Arrived in {0}!", values: [context.destinationName(_travelModel.destination)],
               style: const TextStyle(
                 color: Colors.orange,
                 fontSize: 20,
@@ -664,7 +664,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
             ),
           ),
           PdaText(
-            "Approaching {0}!", values: [_travelModel.destination],
+            "Approaching {0}!", values: [context.destinationName(_travelModel.destination)],
             style: const TextStyle(
               color: Colors.orange,
               fontSize: 20,
@@ -740,7 +740,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
             ),
           ),
           PdaText(
-            "Arriving in {0} at:", values: [_travelModel.destination],
+            "Arriving in {0} at:", values: [context.destinationName(_travelModel.destination)],
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),

@@ -202,7 +202,7 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
               children: [
                 const Icon(Icons.code),
                 const SizedBox(width: 6),
-                Text(widget.editingExistingScript ? "Edit existing script" : "Add new script"),
+                Text(widget.editingExistingScript ? context.interfaceText("Edit existing script") : context.interfaceText("Add new script")),
               ],
             ),
           ),
@@ -360,7 +360,7 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     ElevatedButton(
-                      child: Text(widget.editingExistingScript ? "Save" : "Add"),
+                      child: Text(widget.editingExistingScript ? context.interfaceText("Save") : context.interfaceText("Add")),
                       onPressed: () async {
                         await _addPressedInManualEditTab(context);
                       },
@@ -496,7 +496,7 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
                   children: [
                     const Icon(MdiIcons.earth),
                     const SizedBox(width: 6),
-                    Text(widget.editingExistingScript ? "Remote script update" : "Remote script load"),
+                    Text(widget.editingExistingScript ? context.interfaceText("Remote script update") : context.interfaceText("Remote script load")),
                   ],
                 ),
                 const SizedBox(width: 20),
@@ -534,7 +534,7 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  child: Text(widget.editingExistingScript ? "Check for Update" : "Fetch"),
+                  child: Text(widget.editingExistingScript ? context.interfaceText("Check for Update") : context.interfaceText("Fetch")),
                   onPressed: () async {
                     if (!_remoteUrlKey.currentState!.validate()) {
                       return;
@@ -726,7 +726,7 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     ElevatedButton(
-                      child: Text(widget.editingExistingScript ? "Update" : "Load"),
+                      child: Text(widget.editingExistingScript ? context.interfaceText("Update") : context.interfaceText("Load")),
                       onPressed:
                           _remoteNameController.text.isEmpty ||
                               _remoteSourceController.text.isEmpty ||
@@ -780,8 +780,8 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
                                   align: const Alignment(0, 0),
                                   clickClose: true,
                                   text: couldParseHeader
-                                      ? "Script successfully updated!"
-                                      : "Could not parse the header, the script will inject on all pages.",
+                                      ? context.interfaceText("Script successfully updated!")
+                                      : context.interfaceText("Could not parse the header, the script will inject on all pages."),
                                   textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                                   contentColor: couldParseHeader ? Colors.green : Colors.orange[800]!,
                                   duration: const Duration(seconds: 4),
@@ -999,7 +999,7 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
               foregroundColor: Colors.black,
             ),
             onPressed: _showCustomApiKeyDialog,
-            child: Text(_customApiKey.isEmpty ? "Set API Key" : "Edit API Key"),
+            child: Text(_customApiKey.isEmpty ? context.interfaceText("Set API Key") : context.interfaceText("Edit API Key")),
           ),
         ),
         const SizedBox(width: 8),

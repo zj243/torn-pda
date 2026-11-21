@@ -96,7 +96,7 @@ class _ChatItemAliasAddDialogState extends State<ChatItemAliasAddDialog> {
     final results = catalog == null ? const <ChatItemPrice>[] : ChatItemPrice.search(catalog, _search.text);
     final ready = ChatItemAliases.cleanAlias(_alias.text) != null && _item != null;
     return AlertDialog(
-      title: Text(widget.editing == null ? 'Add nickname' : 'Edit nickname'),
+      title: Text(widget.editing == null ? context.interfaceText('Add nickname') : context.interfaceText('Edit nickname')),
       content: SizedBox(
         width: 360,
         child: SingleChildScrollView(

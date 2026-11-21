@@ -201,7 +201,7 @@ class _ChatSlotSheetState extends State<ChatSlotSheet> {
                       dense: true,
                       contentPadding: const EdgeInsets.symmetric(horizontal: 12),
                       title: Text(
-                        alias == item.name.toLowerCase() ? '${item.name} (alias: ${query.toLowerCase()})' : item.name,
+                        alias == item.name.toLowerCase() ? context.interfaceText("{0} (alias: {1})", [item.name, query.toLowerCase()]) : item.name,
                       ),
                       trailing: item.price.isEmpty
                           ? null

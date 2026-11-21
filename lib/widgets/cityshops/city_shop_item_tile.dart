@@ -127,8 +127,8 @@ class CityShopItemTile extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 10),
                     child: Text(
                       item.reason == CityShopReason.neverStocked
-                          ? "Never seen in stock."
-                          : "Not enough restocks seen yet. Check back in a few days.",
+                          ? context.interfaceText("Never seen in stock.")
+                          : context.interfaceText("Not enough restocks seen yet. Check back in a few days."),
                       style: TextStyle(fontSize: 13, color: themeProvider.mainText),
                     ),
                   ),

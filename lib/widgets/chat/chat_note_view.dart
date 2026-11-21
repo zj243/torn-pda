@@ -301,7 +301,7 @@ class _ChatNoteViewState extends State<ChatNoteView> {
                       decoration: const InputDecoration.collapsed(hintText: 'Title'),
                     )
                   : Text(
-                      current.title.isEmpty ? 'Untitled' : current.title,
+                      current.title.isEmpty ? context.interfaceText('Untitled') : current.title,
                       style: theme.textTheme.titleMedium,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -315,7 +315,7 @@ class _ChatNoteViewState extends State<ChatNoteView> {
               ),
             if (previews && !readOnly)
               IconButton(
-                tooltip: editing ? 'Done' : 'Edit',
+                tooltip: editing ? context.interfaceText('Done') : context.interfaceText('Edit'),
                 icon: Icon(editing ? Icons.check_rounded : Icons.edit_outlined),
                 onPressed: () => _edit(!editing),
               ),
@@ -336,7 +336,7 @@ class _ChatNoteViewState extends State<ChatNoteView> {
                   )
                 else
                   PopupMenuButton<bool>(
-                    tooltip: 'Add an image',
+                    tooltip: context.interfaceText('Add an image'),
                     icon: const Icon(Icons.add_photo_alternate_outlined),
                     onSelected: (fromFiles) => _addImage(fromFiles: fromFiles),
                     itemBuilder: (_) => const [
@@ -437,6 +437,6 @@ class _ChatNoteViewState extends State<ChatNoteView> {
         ],
       );
     }
-    return Text(_notepad.dirty ? 'Saving…' : 'Saved', style: style);
+    return Text(_notepad.dirty ? context.interfaceText('Saving…') : context.interfaceText('Saved'), style: style);
   }
 }

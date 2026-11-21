@@ -1033,10 +1033,10 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
                             Expanded(
                               child: Text(
                                 isRestricted
-                                    ? "Background baterry restrictions in place:\n\n"
+                                    ? context.interfaceText("Background baterry restrictions in place:\n\n"
                                         "It's recommended to change the background batery restrictions for Torn PDA "
-                                        "to 'unrestricted' for optimal performance"
-                                    : "Battery optimization is properly configured",
+                                        "to 'unrestricted' for optimal performance")
+                                    : context.interfaceText("Battery optimization is properly configured"),
                                 style: TextStyle(
                                   fontSize: 13,
                                   color: isRestricted ? Colors.red : Colors.green,

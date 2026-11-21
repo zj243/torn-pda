@@ -88,8 +88,8 @@ class ChatLauncherSettingsPage extends StatelessWidget {
             title: const PdaText('Chat icon on Torn profiles'),
             subtitle: Text(
               prefs.profileIcon == ChatProfileIcon.pda
-                  ? 'Opens a private chat window in Torn PDA'
-                  : 'Opens the chat on Torn\'s own page',
+                  ? context.interfaceText('Opens a private chat window in Torn PDA')
+                  : context.interfaceText('Opens the chat on Torn\'s own page'),
             ),
           ),
           Padding(

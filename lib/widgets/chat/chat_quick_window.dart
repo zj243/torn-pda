@@ -255,7 +255,7 @@ class ChatWindowBox extends StatelessWidget {
                   if (onMinimize != null) _headerButton('Minimize', const Icon(Icons.minimize_rounded), onMinimize),
                   if (expandShown) _headerButton('Open the full chat', const Icon(Icons.open_in_new_rounded), onExpand),
                   PopupMenuButton<VoidCallback>(
-                    tooltip: 'More',
+                    tooltip: context.interfaceText('More'),
                     icon: const Icon(Icons.more_vert_rounded),
                     iconSize: 20,
                     padding: EdgeInsets.zero,
@@ -265,7 +265,7 @@ class ChatWindowBox extends StatelessWidget {
                       if (onFullscreen != null)
                         PopupMenuItem(
                           value: onFullscreen,
-                          child: Text(fullscreen ? 'Restore window size' : 'Maximize window'),
+                          child: Text(fullscreen ? context.interfaceText('Restore window size') : context.interfaceText('Maximize window')),
                         ),
                       if (onCycleSize != null)
                         PopupMenuItem(value: onCycleSize, child: PdaText("Window size: {0}", values: [sizeLabel ?? 'custom'])),

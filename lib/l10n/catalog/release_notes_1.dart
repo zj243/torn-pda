@@ -231,7 +231,7 @@ const messagesReleaseNotes1 = <String, String>{
   "Faster and more reliable browser startup": "更快捷和更可靠的浏览器启动",
   "Fix for browser not initializing correctly on some devices": "某些设备上浏览器未正确初始化的设置",
   "Fixed": "固定",
-  "Fixed API key not working when pasted in certain devices": "粘贴到某些设备时固定 API 键不工作",
+  "Fixed API key not working when pasted in certain devices": "粘贴到某些设备时固定 API 密钥不工作",
   "Fixed API usage in Loot": "Looot使用固定API",
   "Fixed Awards images": "固定奖章图像",
   "Fixed Calendar not taking user-selected event start time into account": "不考虑用户选择的事件启动时间的固定日历",

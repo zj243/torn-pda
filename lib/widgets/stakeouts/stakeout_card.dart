@@ -208,7 +208,7 @@ class StakeoutCardState extends State<StakeoutCard> {
                                 padding: const EdgeInsets.only(left: 13),
                                 child: Text(
                                   _stakeout!.lastAction!.relative == "0 minutes ago"
-                                      ? 'now'
+                                      ? context.interfaceText('now')
                                       : _stakeout!.lastAction!.relative!.replaceAll(' ago', ''),
                                 ),
                               ),

@@ -92,7 +92,7 @@ class FullScreenHeaderDoubleTapWarningDialogState extends State<FullScreenHeader
                         const SizedBox(width: 8),
                         TextButton(
                           child: Text(
-                            _countdown > 0 ? "Disable ($_countdown)" : "Disable",
+                            _countdown > 0 ? context.interfaceText("Disable ({0})", [_countdown]) : context.interfaceText("Disable"),
                             style: TextStyle(
                               color: _countdown > 0 ? Colors.grey : Colors.orange[700],
                             ),

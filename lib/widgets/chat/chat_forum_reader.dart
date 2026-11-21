@@ -351,7 +351,7 @@ class _ChatForumReaderState extends State<ChatForumReader> {
         }
 
         return AlertDialog(
-          title: Text(last == null ? 'Go to page' : 'Go to page (1 to $last)'),
+          title: Text(last == null ? context.interfaceText('Go to page') : context.interfaceText("Go to page (1 to {0})", [last])),
           content: TextFormField(
             initialValue: typed,
             autofocus: true,
@@ -439,7 +439,7 @@ class _ChatForumReaderState extends State<ChatForumReader> {
                       message: context.interfaceText('Go to page'),
                       child: TextButton(
                         onPressed: _pickPage,
-                        child: Text(last == null ? 'Page $page' : 'Page $page of $last'),
+                        child: Text(last == null ? context.interfaceText("Page {0}", [page]) : context.interfaceText("Page {0} of {1}", [page, last])),
                       ),
                     ),
                     IconButton(
@@ -508,7 +508,7 @@ class _ChatForumReaderState extends State<ChatForumReader> {
         ],
       );
     } else if (!_more) {
-      child = Text(_numbers.isEmpty ? 'No posts' : 'End of the thread', style: theme.textTheme.bodySmall);
+      child = Text(_numbers.isEmpty ? context.interfaceText('No posts') : context.interfaceText('End of the thread'), style: theme.textTheme.bodySmall);
     } else {
       child = const SizedBox.shrink();
     }
@@ -690,10 +690,10 @@ class _ForumPostViewState extends State<_ForumPostView> {
                     : const Icon(Icons.reply_rounded, size: 16),
                 label: Text(
                   widget.seeking
-                      ? 'Finding the quoted post'
+                      ? context.interfaceText('Finding the quoted post')
                       : widget.replyTo == null
-                      ? 'Reply to an earlier post'
-                      : 'Reply to #${widget.replyTo}',
+                      ? context.interfaceText('Reply to an earlier post')
+                      : context.interfaceText("Reply to #{0}", [widget.replyTo]),
                 ),
               ),
             ),

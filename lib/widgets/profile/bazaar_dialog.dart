@@ -74,7 +74,7 @@ class BazaarDialog extends StatelessWidget {
                   style: const TextStyle(fontSize: 13),
                 ),
                 Text(
-                  bazaarModel!.length == 1 ? "" : " (${bazaarModel!.length} stacks)",
+                  bazaarModel!.length == 1 ? "" : context.interfaceText(" ({0} stacks)", [bazaarModel!.length]),
                   style: const TextStyle(fontSize: 13),
                 ),
               ],

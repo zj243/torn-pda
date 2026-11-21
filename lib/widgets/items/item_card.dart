@@ -367,7 +367,7 @@ class ItemCardState extends State<ItemCard> {
       // Market
       final marketAge = dataAgeText(_marketItem.cacheTimestamp);
       final Widget marketHeader = Text(
-        marketAge == null ? "Market" : "Market ($marketAge)",
+        marketAge == null ? context.interfaceText("Market") : context.interfaceText("Market ({0})", [marketAge]),
         style: const TextStyle(
           fontSize: 12,
         ),

@@ -241,7 +241,7 @@ class FriendCardState extends State<FriendCard> {
                         ),
                         Text(
                           _friend!.lastAction!.relative == "0 minutes ago"
-                              ? 'now'
+                              ? context.interfaceText('now')
                               : _friend!.lastAction!.relative!.replaceAll(' ago', ''),
                         ),
                       ],

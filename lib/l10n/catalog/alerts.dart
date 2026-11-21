@@ -2,7 +2,7 @@
 const messagesAlerts = <String, String>{
   "\nError!\n\nThere was a problem retrieving your current configuration from the database. \n\nPlease check your internet connection or use the hammer icon at the top to reset your alert preferences.": "\n错误!\n\n从数据库获取您当前配置时出现问题。 \n\n请检查您的互联网连接, 或者使用顶端的锤子图标重置您的警告偏好。",
   "(blank body)": "(空体)",
-  "1) In case this could be due a misconfiguration at server level, please tap the Soft Reset button below. Torn PDA will try to reconfigure your user. If you get a success message, please retry the test notification. Otherwise, keep reading.": "(1) 如果这可能是服务器级别配置错误所致,请按下软重置按钮。 撕破 PDA 会尝试重新配置您的用户。 如果您收到成功的消息, 请重试测试通知。 否则,继续读。",
+  "1) In case this could be due a misconfiguration at server level, please tap the Soft Reset button below. Torn PDA will try to reconfigure your user. If you get a success message, please retry the test notification. Otherwise, keep reading.": "(1) 如果这可能是服务器级别配置错误所致,请按下软重置按钮。 撕Torn PDA 会尝试重新配置您的用户。 如果您收到成功的消息, 请重试测试通知。 否则,继续读。",
   "2) You can manually force a user reconfiguration in the server by going to Settings in Torn PDA.": "2) 您可以手动在服务器上强制用户重新配置, 方法是前往 Torn PDA 的设置。",
   "2) You can manually force a user reconfiguration in the server by going to Settings in Torn PDA. ": "2) 您可以手动在服务器上强制用户重新配置, 方法是前往 Torn PDA 的设置。 ",
   "3) Lastly, make sure your device or network configuration (router) is not blocking the Google Cloud or Google Services, since the Alerts server is hosted there. Some users might use a firewall to block Google or even download the app from a alternative app store; if that's your case, be aware that you might be unable to receive Alerts.": "最后,请确保您的设备或网络配置(路由)不会阻挡谷歌云或谷歌服务, 因为警告服务器是那里托管的。 有些用户可能会使用防火墙阻挡Google, 甚至从替代应用程序商店下载应用程序; 如果这是你的情况, 请注意您可能无法接收警告。",
@@ -98,7 +98,7 @@ const messagesAlerts = <String, String>{
   "Saved {0}!": "已保存{0}!",
   "Scenario": "假设情景",
   "Soft Reset": "软重设",
-  "Start by reloading your API Key (expand the API section at the top and tap 'Reload'). If that does not solve the problem (check once again the Test Notification here), remove your API Key (tap the bin icon) and insert it once again.": "开始重新装入您的 API 键( 在顶部展开 API 部分, 并点击“ 重新装入 ” ) 。 如果这无法解决问题( 在此再次检查测试通知), 请删除您的 API 密钥( 绘制文件夹图标) 并重新插入它。",
+  "Start by reloading your API Key (expand the API section at the top and tap 'Reload'). If that does not solve the problem (check once again the Test Notification here), remove your API Key (tap the bin icon) and insert it once again.": "开始重新装入您的 API 密钥( 在顶部展开 API 部分, 并点击“ 重新装入 ” ) 。 如果这无法解决问题( 在此再次检查测试通知), 请删除您的 API 密钥( 绘制文件夹图标) 并重新插入它。",
   "Stock Market notification": "股票市场通知",
   "Stock market": "股市",
   "Stock market alerts": "股票市场市场警报",

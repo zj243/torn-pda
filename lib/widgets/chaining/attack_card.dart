@@ -86,7 +86,7 @@ class AttackCardState extends State<AttackCard> {
                       SizedBox(
                         width: _attack.targetName!.isNotEmpty ? 70 : 175,
                         child: Text(
-                          _attack.targetName!.isNotEmpty ? '${_attack.targetName}' : "anonymous",
+                          _attack.targetName!.isNotEmpty ? '${_attack.targetName}' : context.interfaceText("anonymous"),
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontWeight: _attack.targetName!.isNotEmpty ? FontWeight.bold : FontWeight.normal,

@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -265,13 +266,13 @@ class _ChatFriendsSheetState extends State<ChatFriendsSheet> with SingleTickerPr
                 children: [
                   Expanded(
                     child: Text(
-                      shown.isEmpty ? 'Friends' : 'Friends - $online online',
+                      shown.isEmpty ? context.interfaceText('Friends') : context.interfaceText("Friends - {0} online", [online]),
                       style: theme.textTheme.titleMedium,
                     ),
                   ),
                   if (_tab.index >= 3)
                     PopupMenuButton<String>(
-                      tooltip: 'Sort by',
+                      tooltip: context.interfaceText('Sort by'),
                       initialValue: sort,
                       onSelected: (value) => setState(() => NativeChat.prefs.setFriendsSort(value)),
                       itemBuilder: (_) => [
@@ -311,12 +312,12 @@ class _ChatFriendsSheetState extends State<ChatFriendsSheet> with SingleTickerPr
             isScrollable: true,
             tabAlignment: TabAlignment.start,
             labelPadding: const EdgeInsets.symmetric(horizontal: 14),
-            tabs: const [
+            tabs: [
               Tab(text: 'Torn', height: 40),
               Tab(text: 'Torn PDA', height: 40),
-              Tab(text: 'Chat', height: 40),
-              Tab(text: 'Faction', height: 40),
-              Tab(text: 'Company', height: 40),
+              Tab(text: context.interfaceText('Chat'), height: 40),
+              Tab(text: context.interfaceText('Faction'), height: 40),
+              Tab(text: context.interfaceText('Company'), height: 40),
             ],
           ),
           SizedBox(

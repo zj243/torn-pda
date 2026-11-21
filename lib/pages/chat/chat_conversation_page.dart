@@ -593,7 +593,7 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
                         onPressed: chat.available ? _forwardSelected : null,
                       ),
                       PopupMenuButton<VoidCallback>(
-                        tooltip: 'More actions',
+                        tooltip: context.interfaceText('More actions'),
                         onSelected: (action) => action(),
                         itemBuilder: (_) {
                           PopupMenuItem<VoidCallback> item(IconData icon, String label, VoidCallback action) =>
@@ -774,7 +774,7 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
                     ),
                 ],
                 PopupMenuButton<VoidCallback>(
-                  tooltip: 'More',
+                  tooltip: context.interfaceText('More'),
                   onSelected: (action) => action(),
                   itemBuilder: (_) => [
                     if ((compact || narrow) && chat.unreadQueue.isNotEmpty)
@@ -800,8 +800,8 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
                         value: () => showChatRoomAlerts(context, room),
                         child: Text(
                           NativeChat.prefs.mutedUntilOf(room.id) == null
-                              ? 'Alerts and mute'
-                              : 'Muted until ${clock.stamp(NativeChat.prefs.mutedUntilOf(room.id)!)}',
+                              ? context.interfaceText('Alerts and mute')
+                              : context.interfaceText("Muted until {0}", [clock.stamp(NativeChat.prefs.mutedUntilOf(room.id)!)]),
                         ),
                       ),
                     if (chat.canMarkUnread(room.id))
@@ -1028,7 +1028,7 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
                     heroTag: null,
                     onPressed: _jumpToBottom,
                     icon: const Icon(Icons.keyboard_double_arrow_down_rounded),
-                    label: Text(waiting == 1 ? '1 new message' : '$waiting new messages'),
+                    label: Text(waiting == 1 ? context.interfaceText('1 new message') : context.interfaceText("{0} new messages", [waiting])),
                   )
                 : FloatingActionButton.small(
                     heroTag: null,

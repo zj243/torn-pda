@@ -143,8 +143,8 @@ class BackupReminderDialogState extends State<BackupReminderDialog> {
               // Message
               Text(
                 widget.daysSinceLastBackup > 0
-                    ? 'It has been ${widget.daysSinceLastBackup} days since your last local backup.\n\nWe recommend creating a backup of your settings to avoid losing your data if you need to reinstall the app for some reason.\n\nYou can also manage backups anytime in Settings → Local Backup.'
-                    : 'We recommend creating a backup of your settings to avoid losing your data.\n\nThis ensures you can restore your preferences if needed.\n\nYou can also manage backups anytime in Settings → Local Backup.',
+                    ? context.interfaceText("It has been {0} days since your last local backup.\n\nWe recommend creating a backup of your settings to avoid losing your data if you need to reinstall the app for some reason.\n\nYou can also manage backups anytime in Settings → Local Backup.", [widget.daysSinceLastBackup])
+                    : context.interfaceText('We recommend creating a backup of your settings to avoid losing your data.\n\nThis ensures you can restore your preferences if needed.\n\nYou can also manage backups anytime in Settings → Local Backup.'),
                 style: TextStyle(
                   fontSize: 14,
                   color: themeProvider.mainText,
@@ -197,7 +197,7 @@ class BackupReminderDialogState extends State<BackupReminderDialog> {
                               child: CircularProgressIndicator(strokeWidth: 2),
                             )
                           : const Icon(Icons.save),
-                      label: Text(_isCreatingBackup ? 'Creating Backup...' : 'Create Backup Now'),
+                      label: Text(_isCreatingBackup ? context.interfaceText('Creating Backup...') : context.interfaceText('Create Backup Now')),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
                         foregroundColor: Colors.white,

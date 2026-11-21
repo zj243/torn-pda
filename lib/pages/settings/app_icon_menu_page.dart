@@ -59,7 +59,7 @@ class AppIconMenuPage extends StatelessWidget {
       child: ListTile(
         leading: CircleAvatar(radius: 14, child: Text('${index + 1}')),
         title: Text(title ?? (chat ? 'Chat not available' : 'Empty')),
-        subtitle: chat ? Text(title == null ? 'Tap to pick another one' : 'Chat') : null,
+        subtitle: chat ? Text(title == null ? context.interfaceText('Tap to pick another one') : context.interfaceText('Chat')) : null,
         trailing: const Icon(Icons.chevron_right_rounded),
         onTap: () => _pick(context, index),
       ),

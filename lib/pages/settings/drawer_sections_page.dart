@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:torn_pda/l10n/app_language.dart';
 import 'package:flutter/material.dart';
 // Package imports:
@@ -175,7 +176,7 @@ class DrawerSectionsPageState extends State<DrawerSectionsPage> {
                           isVisible ? Icons.visibility : Icons.visibility_off,
                           color: isVisible ? null : Colors.grey,
                         ),
-                        tooltip: isVisible ? 'Hide' : 'Show',
+                        tooltip: isVisible ? context.interfaceText('Hide') : context.interfaceText('Show'),
                         onPressed: () => _toggleVisibility(section),
                       ),
                     const Icon(Icons.drag_handle),

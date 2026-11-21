@@ -354,7 +354,7 @@ class QuickItemsWidgetState extends State<QuickItemsWidget> {
               )
             : item.isEnergyPoints! || item.isNervePoints!
                 ? Text(
-                    item.isEnergyPoints! ? "E Refill" : "N Refill",
+                    item.isEnergyPoints! ? context.interfaceText("E Refill") : context.interfaceText("N Refill"),
                     style: const TextStyle(fontSize: 11),
                   )
                 : item.name!.split(' ').length > 1
@@ -624,8 +624,8 @@ class QuickItemsWidgetState extends State<QuickItemsWidget> {
         final useLongPress = !widget.faction && _itemsProvider.longPressToAdd;
         BotToast.showText(
           text: useLongPress
-              ? 'Choose items from your list, then tap or long-press anywhere to exit'
-              : 'Choose the items you want to add from your items list',
+              ? context.interfaceText('Choose items from your list, then tap or long-press anywhere to exit')
+              : context.interfaceText('Choose the items you want to add from your items list'),
           textStyle: const TextStyle(fontSize: 14, color: Colors.white),
           contentColor: Colors.blue[800]!,
           duration: const Duration(seconds: 3),

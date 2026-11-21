@@ -185,7 +185,7 @@ class _NotepadSheetState extends State<_NotepadSheet> {
     final tile = ListTile(
       leading: pinned ? const Icon(Icons.push_pin_rounded, size: 18, semanticLabel: 'Pinned') : null,
       minLeadingWidth: 18,
-      title: Text(note.title.isEmpty ? 'Untitled' : note.title, maxLines: 2, overflow: TextOverflow.ellipsis),
+      title: Text(note.title.isEmpty ? context.interfaceText('Untitled') : note.title, maxLines: 2, overflow: TextOverflow.ellipsis),
       subtitle: detail.isEmpty ? null : Text(detail, maxLines: 1, overflow: TextOverflow.ellipsis),
       trailing: drag != null
           ? ReorderableDragStartListener(
@@ -250,7 +250,7 @@ class _NotepadSheetState extends State<_NotepadSheet> {
           children: [
             ListTile(
               leading: Icon(pinned ? Icons.push_pin_outlined : Icons.push_pin_rounded),
-              title: Text(pinned ? 'Unpin' : 'Pin to the top'),
+              title: Text(pinned ? context.interfaceText('Unpin') : context.interfaceText('Pin to the top')),
               onTap: () => Navigator.pop(context, 'pin'),
             ),
             ListTile(
@@ -406,7 +406,7 @@ class _NotepadSheetState extends State<_NotepadSheet> {
               if (_notepad.loading && _notepad.notes.isNotEmpty)
                 const SizedBox.square(dimension: 16, child: CircularProgressIndicator(strokeWidth: 2)),
               PopupMenuButton<ChatNoteSort>(
-                tooltip: 'Sort',
+                tooltip: context.interfaceText('Sort'),
                 icon: const Icon(Icons.sort_rounded),
                 initialValue: prefs.noteSort,
                 onSelected: prefs.setNoteSort,
@@ -418,7 +418,7 @@ class _NotepadSheetState extends State<_NotepadSheet> {
                 ],
               ),
               PopupMenuButton<bool>(
-                tooltip: 'New note or folder',
+                tooltip: context.interfaceText('New note or folder'),
                 enabled: canCreate,
                 onSelected: (folder) => folder ? _createFolder() : _create(),
                 itemBuilder: (_) => [
@@ -532,7 +532,7 @@ class _AddToNoteSheet extends StatelessWidget {
                         ListTile(
                           leading: const Icon(Icons.sticky_note_2_outlined),
                           title: Text(
-                            note.title.isEmpty ? 'Untitled' : note.title,
+                            note.title.isEmpty ? context.interfaceText('Untitled') : note.title,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),

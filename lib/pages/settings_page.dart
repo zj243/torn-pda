@@ -2019,8 +2019,8 @@ class SettingsPageState extends State<SettingsPage> {
                       Expanded(
                         child: Text(
                           _settingsProvider.ffsOverrideSpyMonths == 0
-                              ? "Override old spies: Off"
-                              : "Override spies older than ${_settingsProvider.ffsOverrideSpyMonths} month${_settingsProvider.ffsOverrideSpyMonths == 1 ? '' : 's'}",
+                              ? context.interfaceText("Override old spies: Off")
+                              : context.interfaceText("Override spies older than {0} month{1}", [_settingsProvider.ffsOverrideSpyMonths, _settingsProvider.ffsOverrideSpyMonths == 1 ? '' : 's']),
                           style: const TextStyle(fontSize: 13),
                         ),
                       ),

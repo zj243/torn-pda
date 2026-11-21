@@ -753,8 +753,8 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
                             Expanded(
                               child: Text(
                                 model.customApiKey.isEmpty
-                                    ? "Running with your Torn PDA API key"
-                                    : "Running with a custom API key",
+                                    ? context.interfaceText("Running with your Torn PDA API key")
+                                    : context.interfaceText("Running with a custom API key"),
                                 style: const TextStyle(fontSize: 12.5, height: 1.3),
                               ),
                             ),
@@ -822,7 +822,7 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
                             paused && stillBlocked == null ? Colors.green[800]! : Colors.orange[800]!,
                           );
                         },
-                        child: Text(paused ? "RESUME" : "PAUSE", style: TextStyle(color: amber)),
+                        child: Text(paused ? context.interfaceText("RESUME") : context.interfaceText("PAUSE"), style: TextStyle(color: amber)),
                       ),
                       TextButton(
                         onPressed: () => Navigator.of(dialogContext).pop(),
@@ -878,7 +878,7 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      global ? "TornTools API key" : scriptName,
+                      global ? context.interfaceText("TornTools API key") : scriptName,
                       style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                     ),
                   ),
@@ -906,10 +906,10 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
                         ),
                         child: Text(
                           global
-                              ? "Scripts that are already running might not pick this up until you kill and restart "
-                                    "the app."
-                              : "The script is already running, so this might not take effect until you kill and "
-                                    "restart the app.",
+                              ? context.interfaceText("Scripts that are already running might not pick this up until you kill and restart "
+                                    "the app.")
+                              : context.interfaceText("The script is already running, so this might not take effect until you kill and "
+                                    "restart the app."),
                           style: TextStyle(fontSize: 12.5, height: 1.3, color: amber),
                         ),
                       ),
@@ -1069,10 +1069,10 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
                         )
                       : Text(
                           global
-                              ? "APPLY"
+                              ? context.interfaceText("APPLY")
                               : alreadyInstalled
-                              ? "SAVE"
-                              : "INSTALL",
+                              ? context.interfaceText("SAVE")
+                              : context.interfaceText("INSTALL"),
                           style: TextStyle(color: _accent, fontWeight: FontWeight.w700),
                         ),
                 ),

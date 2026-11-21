@@ -74,7 +74,7 @@ class MarketDialog extends StatelessWidget {
                   style: const TextStyle(fontSize: 13),
                 ),
                 Text(
-                  market.length == 1 ? "" : " (${market.length} stacks)",
+                  market.length == 1 ? "" : context.interfaceText(" ({0} stacks)", [market.length]),
                   style: const TextStyle(fontSize: 13),
                 ),
               ],

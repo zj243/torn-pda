@@ -123,10 +123,10 @@ class _AppwidgetExplanationDialogState extends State<AppwidgetExplanationDialog>
                       Expanded(
                         child: Text(
                           isRestricted
-                              ? "Background batery restrictions in place:\n\n"
+                              ? context.interfaceText("Background batery restrictions in place:\n\n"
                                   "It's recommended to change the background batery restrictions for Torn PDA "
-                                  "to 'unrestricted' for optimal home widget performance"
-                              : "Battery optimization is properly configured",
+                                  "to 'unrestricted' for optimal home widget performance")
+                              : context.interfaceText("Battery optimization is properly configured"),
                           style: TextStyle(
                             fontSize: 13,
                             color: isRestricted ? Colors.red : Colors.green,

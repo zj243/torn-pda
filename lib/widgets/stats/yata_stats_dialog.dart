@@ -96,14 +96,14 @@ class _YataStatsDialogState extends State<YataStatsDialog> {
             Row(
               children: [
                 const PdaText("Total: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                Text(statsData.total != null ? formatBigNumbers(statsData.total!) : 'unknown'),
+                Text(statsData.total != null ? formatBigNumbers(statsData.total!) : context.interfaceText('unknown')),
               ],
             ),
             const SizedBox(height: 10),
             Row(
               children: [
                 const PdaText("Score: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                Text(statsData.score != null ? formatBigNumbers(statsData.score!) : 'unknown'),
+                Text(statsData.score != null ? formatBigNumbers(statsData.score!) : context.interfaceText('unknown')),
               ],
             ),
             const SizedBox(height: 10),

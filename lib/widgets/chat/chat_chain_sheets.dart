@@ -232,7 +232,7 @@ class _FactionOpsSheetState extends State<_FactionOpsSheet> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(_tab == _Tab.war ? 'Open War page' : 'Open Chaining'),
+                Text(_tab == _Tab.war ? context.interfaceText('Open War page') : context.interfaceText('Open Chaining')),
                 const Icon(Icons.chevron_right_rounded, size: 18),
               ],
             ),

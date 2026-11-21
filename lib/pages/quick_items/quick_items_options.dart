@@ -317,8 +317,8 @@ class QuickItemsOptionsState extends State<QuickItemsOptions> {
                             padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                             child: Text(
                               widget.isFaction
-                                  ? 'No quick items active, add some below!'
-                                  : 'No quick items yet. Add them from Items with the "+" button, or pick loadouts below.',
+                                  ? context.interfaceText('No quick items active, add some below!')
+                                  : context.interfaceText('No quick items yet. Add them from Items with the "+" button, or pick loadouts below.'),
                               style: TextStyle(color: Colors.orange[800], fontStyle: FontStyle.italic, fontSize: 13),
                             ),
                           )
@@ -327,7 +327,7 @@ class QuickItemsOptionsState extends State<QuickItemsOptions> {
                         const SizedBox(height: 40),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: Text(widget.isFaction ? "ALL AVAILABLE ITEMS" : "LOADOUTS"),
+                          child: Text(widget.isFaction ? context.interfaceText("ALL AVAILABLE ITEMS") : context.interfaceText("LOADOUTS")),
                         ),
                         const SizedBox(height: 10),
                         if ((!widget.isFaction && _itemsProvider!.fullQuickItems.isEmpty) ||
@@ -1052,7 +1052,7 @@ class _LongPressConfirmationDialogState extends State<_LongPressConfirmationDial
                       ),
                       alignment: Alignment.center,
                       child: Text(
-                        _holding ? 'Keep holding...' : 'Hold to confirm',
+                        _holding ? context.interfaceText('Keep holding...') : context.interfaceText('Hold to confirm'),
                         style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
                       ),
                     ),

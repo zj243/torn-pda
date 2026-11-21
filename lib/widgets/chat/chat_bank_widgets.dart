@@ -97,7 +97,7 @@ class ChatBankInsert extends StatelessWidget {
           onPressed: () => _giveAgain(context, entry, paidName),
         ),
         Icon(Icons.check_circle_outline_rounded, size: 16, color: theme.hintColor),
-        Text(paidBy == null ? 'Paid' : 'Paid by $paidName', style: muted),
+        Text(paidBy == null ? context.interfaceText('Paid') : context.interfaceText("Paid by {0}", [paidName]), style: muted),
       ],
       _ => [Icon(Icons.block_rounded, size: 16, color: theme.hintColor), PdaText('Cancelled', style: muted)],
     };

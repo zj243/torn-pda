@@ -84,7 +84,7 @@ class ChatHitCard extends StatelessWidget {
                   onPressed: ops.attackNow,
                   style: _buttonStyle(theme, color),
                   icon: Icon(armed ? Icons.alarm_on_rounded : MaterialCommunityIcons.sword_cross, size: 16),
-                  label: Text(armed ? 'Armed - opens at ${_seconds(chatClockOf(context), join.opens)}' : 'Attack'),
+                  label: Text(armed ? context.interfaceText("Armed - opens at {0}", [_seconds(chatClockOf(context), join.opens)]) : context.interfaceText('Attack')),
                 ),
               ),
               if (armed)
@@ -125,13 +125,13 @@ class ChatHitCard extends StatelessWidget {
                   ChatHitPhase.counting => Text.rich(
                     TextSpan(children: [clock, TextSpan(text: context.interfaceText(' to go'), style: small)]),
                   ),
-                  ChatHitPhase.now => Text(missed ? 'missed' : 'now', style: big),
+                  ChatHitPhase.now => Text(missed ? context.interfaceText('missed') : context.interfaceText('now'), style: big),
                   ChatHitPhase.done => Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(missed ? Icons.close_rounded : Icons.done_rounded, size: 14, color: small?.color),
                       const SizedBox(width: 4),
-                      Text(missed ? 'missed' : 'at ${chatClockOf(context).clock(call.at)}', style: small),
+                      Text(missed ? context.interfaceText('missed') : context.interfaceText("at {0}", [chatClockOf(context).clock(call.at)]), style: small),
                     ],
                   ),
                 },
@@ -395,7 +395,7 @@ class _RetalLine extends StatelessWidget {
                     onPressed: sent ? null : () => ops.shareRetal(message.roomId, message.id),
                     style: ChatHitCard._buttonStyle(theme, color),
                     icon: Icon(sent ? Icons.done_rounded : Icons.campaign_outlined, size: 16),
-                    label: Text(sent ? 'Shared' : 'Share'),
+                    label: Text(sent ? context.interfaceText('Shared') : context.interfaceText('Share')),
                   ),
                 ],
               ),
@@ -531,10 +531,10 @@ class ChatWatchCard extends StatelessWidget {
           const SizedBox(height: 2),
           Text(
             state.cooldown
-                ? 'Cooldown - no watch needed'
+                ? context.interfaceText('Cooldown - no watch needed')
                 : watchers.isEmpty
-                ? 'No one on watch'
-                : '${watchers.length} on watch',
+                ? context.interfaceText('No one on watch')
+                : context.interfaceText("{0} on watch", [watchers.length]),
             style: small,
           ),
           for (final w in watchers)

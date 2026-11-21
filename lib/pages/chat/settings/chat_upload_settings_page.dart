@@ -102,10 +102,10 @@ class ChatUploadSettingsPage extends StatelessWidget {
             title: Text('${host.label} ${host.credentialName}${host.needsCredential ? '' : ' (optional)'}'),
             subtitle: Text(
               prefs.credentialFor(host).isNotEmpty
-                  ? 'Set'
+                  ? context.interfaceText('Set')
                   : host.needsCredential
-                  ? 'Not set, image upload is off'
-                  : 'Not set, uploads are anonymous',
+                  ? context.interfaceText('Not set, image upload is off')
+                  : context.interfaceText('Not set, uploads are anonymous'),
             ),
             trailing: const Icon(Icons.edit_rounded),
             onTap: () => editCredential(context, host),
@@ -118,7 +118,7 @@ class ChatUploadSettingsPage extends StatelessWidget {
                 onPressed: () => openRegister(host),
                 icon: const Icon(Icons.open_in_new_rounded, size: 18),
                 label: Text(
-                  host.needsCredential ? 'Get your ${host.credentialName} at ${host.label}' : 'Open ${host.label}',
+                  host.needsCredential ? context.interfaceText("Get your {0} at {1}", [host.credentialName, host.label]) : context.interfaceText("Open {0}", [host.label]),
                 ),
               ),
             ),

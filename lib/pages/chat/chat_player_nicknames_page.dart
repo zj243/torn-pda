@@ -27,8 +27,8 @@ class ChatPlayerNicknamesPage extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
                 child: Text(
                   people.isEmpty
-                      ? 'None yet. Tap a player\'s name in the chat, then Customize'
-                      : 'Players with a nickname, a name color or a highlight. Only you can see these',
+                      ? context.interfaceText('None yet. Tap a player\'s name in the chat, then Customize')
+                      : context.interfaceText('Players with a nickname, a name color or a highlight. Only you can see these'),
                   style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
                 ),
               ),

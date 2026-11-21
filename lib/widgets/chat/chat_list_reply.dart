@@ -320,7 +320,7 @@ class _ChatListReplyState extends State<ChatListReply>
                 ? failed
                       ? null
                       : Text(
-                          loading ? 'Loading messages' : 'No messages yet',
+                          loading ? context.interfaceText('Loading messages') : context.interfaceText('No messages yet'),
                           style: small?.copyWith(color: scheme.onSurfaceVariant),
                         )
                 : Stack(

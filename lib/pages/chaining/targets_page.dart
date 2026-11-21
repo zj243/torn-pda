@@ -185,9 +185,8 @@ class TargetsPageState extends State<TargetsPage> {
                       _targetsProvider.sortTargets(_targetsProvider.currentSort);
                       BotToast.showText(
                         text: updateResult.numberSuccessful > 0
-                            ? 'Successfully updated and sorted '
-                                  '${updateResult.numberSuccessful} targets!'
-                            : 'No targets to update!',
+                            ? context.interfaceText("Successfully updated and sorted {0} targets!", [updateResult.numberSuccessful])
+                            : context.interfaceText('No targets to update!'),
                         textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                         contentColor: updateResult.numberSuccessful > 0 ? Colors.green : Colors.red,
                         duration: const Duration(seconds: 3),
@@ -432,8 +431,8 @@ class TargetsPageState extends State<TargetsPage> {
 
                                     BotToast.showText(
                                       text: tryAddTarget.success
-                                          ? 'Added ${tryAddTarget.targetName} [${tryAddTarget.targetId}]'
-                                          : 'Error adding $inputId. ${tryAddTarget.errorReason}',
+                                          ? context.interfaceText("Added {0} [{1}]", [tryAddTarget.targetName, tryAddTarget.targetId])
+                                          : context.interfaceText("Error adding {0}. {1}", [inputId, tryAddTarget.errorReason]),
                                       textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                                       contentColor: tryAddTarget.success ? Colors.green : Colors.orange[700]!,
                                       duration: const Duration(seconds: 3),

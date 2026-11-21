@@ -6919,7 +6919,7 @@ class WebViewFullState extends State<WebViewFull>
 
       if (!_settingsProvider.downloadActionShare) {
         BotToast.showText(
-          text: Platform.isIOS ? "Downloaded in app folder as $fileName" : "Downloaded as $fileSavePath",
+          text: Platform.isIOS ? context.interfaceText("Downloaded in app folder as {0}", [fileName]) : context.interfaceText("Downloaded as {0}", [fileSavePath]),
           clickClose: true,
           textStyle: const TextStyle(fontSize: 14, color: Colors.white),
           duration: const Duration(seconds: 5),
@@ -6993,7 +6993,7 @@ class WebViewFullState extends State<WebViewFull>
         await SharePlus.instance.share(shareParams);
       } else {
         BotToast.showText(
-          text: Platform.isIOS ? "Downloaded in app folder as $fileName" : "Downloaded as $downloadPath",
+          text: Platform.isIOS ? context.interfaceText("Downloaded in app folder as {0}", [fileName]) : context.interfaceText("Downloaded as {0}", [downloadPath]),
           clickClose: true,
           textStyle: const TextStyle(fontSize: 14, color: Colors.white),
           duration: const Duration(seconds: 5),

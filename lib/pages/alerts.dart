@@ -240,7 +240,7 @@ class AlertsSettingsState extends State<AlertsSettings> {
                   text: "$on",
                   style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
                 ),
-                TextSpan(text: on == 1 ? " alert on" : " alerts on", style: const TextStyle(fontSize: 16)),
+                TextSpan(text: on == 1 ? context.interfaceText(" alert on") : context.interfaceText(" alerts on"), style: const TextStyle(fontSize: 16)),
                 TextSpan(
                   text: context.interfaceText("  of {0}", [all.length]),
                   style: TextStyle(fontSize: 13, color: muted),
@@ -747,8 +747,8 @@ class AlertsSettingsState extends State<AlertsSettings> {
     BotToast.showText(
       clickClose: true,
       text: ok
-          ? "Alerts were resynced, please try again"
-          : "Could not resync alerts. If this persists, remove and add your API key again",
+          ? context.interfaceText("Alerts were resynced, please try again")
+          : context.interfaceText("Could not resync alerts. If this persists, remove and add your API key again"),
       textStyle: const TextStyle(fontSize: 14, color: Colors.white),
       contentColor: ok ? Colors.green[800]! : Colors.orange[900]!,
       duration: const Duration(seconds: 5),
@@ -825,7 +825,7 @@ class AlertsSettingsState extends State<AlertsSettings> {
       subtitle: muted
           ? "No city shop alerts until the daily purchase limit resets"
           : "Pause all city shop alerts until the 100 items limit resets at 00:00 TCT",
-      trailing: TextButton(onPressed: () => _setCityShopMuted(!muted), child: Text(muted ? "Resume" : "Pause")),
+      trailing: TextButton(onPressed: () => _setCityShopMuted(!muted), child: Text(muted ? context.interfaceText("Resume") : context.interfaceText("Pause"))),
     );
   }
 

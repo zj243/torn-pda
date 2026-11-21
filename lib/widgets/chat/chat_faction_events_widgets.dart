@@ -100,8 +100,8 @@ class ChatFactionEventsSetting extends StatelessWidget {
       title: const PdaText('Faction events in chat'),
       subtitle: Text(
         prefs.factionEventsDenied
-            ? 'Your API key cannot read faction news. Give it faction access, then turn this on again'
-            : 'Joins, leaves, chain and war news in the faction chat, grouped in one line. Needs faction API access',
+            ? context.interfaceText('Your API key cannot read faction news. Give it faction access, then turn this on again')
+            : context.interfaceText('Joins, leaves, chain and war news in the faction chat, grouped in one line. Needs faction API access'),
       ),
       value: prefs.factionEvents,
       onChanged: prefs.setFactionEvents,

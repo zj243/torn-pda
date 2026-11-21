@@ -95,7 +95,7 @@ class _FFScouterFlightInfoState extends State<FFScouterFlightInfo> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          remaining > 0 ? _fmtRemaining(remaining) : "now",
+          remaining > 0 ? _fmtRemaining(remaining) : context.interfaceText("now"),
           style: TextStyle(color: Colors.blue[600], fontSize: 11, fontWeight: FontWeight.bold),
         ),
         const SizedBox(width: 2),

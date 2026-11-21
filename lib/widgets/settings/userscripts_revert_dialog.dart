@@ -69,8 +69,8 @@ class UserScriptsRevertDialogState extends State<UserScriptsRevertDialog> {
                     Flexible(
                       child: Text(
                         _overwrite
-                            ? "This will REMOVE all example scripts and re-download fresh copies.\n\nLocal modifications will be lost!"
-                            : "This will re-add any of the example userscripts that you may have deleted.\n\nExisting scripts will be kept.",
+                            ? context.interfaceText("This will REMOVE all example scripts and re-download fresh copies.\n\nLocal modifications will be lost!")
+                            : context.interfaceText("This will re-add any of the example userscripts that you may have deleted.\n\nExisting scripts will be kept."),
                         style: TextStyle(
                           fontSize: 12,
                           color: _overwrite ? Colors.orange[800] : _themeProvider.mainText,
@@ -104,7 +104,7 @@ class UserScriptsRevertDialogState extends State<UserScriptsRevertDialog> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         TextButton(
-                          child: Text(_overwrite ? "Reset!" : "Do it!"),
+                          child: Text(_overwrite ? context.interfaceText("Reset!") : context.interfaceText("Do it!")),
                           onPressed: _loading
                               ? null
                               : () {

@@ -471,7 +471,7 @@ class _ChatItemSheetState extends State<_ChatItemSheet> {
                             tapTargetSize: MaterialTapTargetSize.padded,
                           ),
                           onPressed: () => setState(() => _unfolded = !_unfolded),
-                          child: Text(_unfolded ? 'Less' : 'More'),
+                          child: Text(_unfolded ? context.interfaceText('Less') : context.interfaceText('More')),
                         ),
                     ],
                   );

@@ -169,7 +169,7 @@ class VaultWidgetState extends State<VaultWidget> {
                   child: Column(
                     children: [
                       Text(
-                        UserHelper.spouseId == 0 ? "Spouse" : UserHelper.spouseName,
+                        UserHelper.spouseId == 0 ? context.interfaceText("Spouse") : UserHelper.spouseName,
                         style: const TextStyle(color: Colors.orange, fontSize: 12),
                       ),
                       Text(

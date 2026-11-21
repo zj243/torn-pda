@@ -190,7 +190,7 @@ class FriendDetailsPageState extends State<FriendDetailsPage> {
           'Last action: ',
         ),
         Text(
-          widget.friend!.lastAction!.relative == "0 minutes ago" ? 'now' : widget.friend!.lastAction!.relative!,
+          widget.friend!.lastAction!.relative == "0 minutes ago" ? context.interfaceText('now') : widget.friend!.lastAction!.relative!,
         ),
         Padding(
           padding: const EdgeInsets.only(left: 8.0),

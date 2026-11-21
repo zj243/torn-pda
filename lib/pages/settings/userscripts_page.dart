@@ -193,8 +193,8 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                               _userScriptsProvider.resetBulkUpdateBannerDismiss();
                               BotToast.showText(
                                 text: i > 0
-                                    ? "$i script${i == 1 ? " is" : "s are"} ready to update"
-                                    : "No updates found",
+                                    ? context.interfaceText("{0} script{1} ready to update", [i, i == 1 ? " is" : "s are"])
+                                    : context.interfaceText("No updates found"),
                                 textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                                 contentColor: i > 0 ? Colors.green[800]! : Colors.grey[800]!,
                                 contentPadding: const EdgeInsets.all(10),
@@ -376,8 +376,8 @@ class UserScriptsPageState extends State<UserScriptsPage> {
               Expanded(
                 child: Text(
                   mode != null
-                      ? "${mode.name} is on: the switches below select which scripts run in it"
-                      : "All scripts are temporarily disabled",
+                      ? context.interfaceText("{0} is on: the switches below select which scripts run in it", [mode.name])
+                      : context.interfaceText("All scripts are temporarily disabled"),
                   style: const TextStyle(fontSize: 12),
                 ),
               ),
@@ -461,8 +461,8 @@ class UserScriptsPageState extends State<UserScriptsPage> {
               children: [
                 Text(
                   inSource
-                      ? "No script name or code contains '${_searchText.trim()}'"
-                      : "No script name contains '${_searchText.trim()}'",
+                      ? context.interfaceText("No script name or code contains '{0}'", [_searchText.trim()])
+                      : context.interfaceText("No script name contains '{0}'", [_searchText.trim()]),
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.grey[600], fontSize: 13, fontStyle: FontStyle.italic),
                 ),
@@ -679,8 +679,8 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                         _userScriptsProvider.changeUserScriptAlwaysActive(script, !script.alwaysActive);
                         BotToast.showText(
                           text: script.alwaysActive
-                              ? "Always active: this script runs in every mode"
-                              : "No longer always active: this script only runs in the modes you select",
+                              ? context.interfaceText("Always active: this script runs in every mode")
+                              : context.interfaceText("No longer always active: this script only runs in the modes you select"),
                           textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                           contentColor: Colors.grey[800]!,
                           contentPadding: const EdgeInsets.all(10),
@@ -815,8 +815,8 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                       const SizedBox(width: 10),
                       Text(
                         _userScriptsProvider.activeMode != null
-                            ? 'Mode: ${_userScriptsProvider.activeMode!.name}'
-                            : 'Select a mode',
+                            ? context.interfaceText("Mode: {0}", [_userScriptsProvider.activeMode!.name])
+                            : context.interfaceText('Select a mode'),
                       ),
                     ],
                   ),
@@ -922,7 +922,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                     ),
                     const SizedBox(width: 10),
                     Text(
-                      _userScriptsProvider.scriptCatalogEnabled ? 'Hide TornTools section' : 'Show TornTools section',
+                      _userScriptsProvider.scriptCatalogEnabled ? context.interfaceText('Hide TornTools section') : context.interfaceText('Show TornTools section'),
                     ),
                   ],
                 ),
@@ -936,7 +936,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                       color: Colors.grey,
                     ),
                     const SizedBox(width: 10),
-                    Text(_userScriptsProvider.warShortcutsEnabled ? 'Hide mode shortcuts' : 'Show mode shortcuts'),
+                    Text(_userScriptsProvider.warShortcutsEnabled ? context.interfaceText('Hide mode shortcuts') : context.interfaceText('Show mode shortcuts')),
                   ],
                 ),
               ),
@@ -1297,7 +1297,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                         const PdaText("Mode: "),
                         const Spacer(),
                         Text(
-                          overwriteMode ? "Overwrite" : "Append",
+                          overwriteMode ? context.interfaceText("Overwrite") : context.interfaceText("Append"),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: overwriteMode ? Colors.red : Colors.green,
@@ -1362,8 +1362,8 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                             subtitle: nameConflict
                                 ? Text(
                                     overwriteMode
-                                        ? "Already installed: will be replaced"
-                                        : "Name conflict: will be renamed",
+                                        ? context.interfaceText("Already installed: will be replaced")
+                                        : context.interfaceText("Name conflict: will be renamed"),
                                     style: TextStyle(color: overwriteMode ? Colors.red : Colors.orange, fontSize: 12),
                                   )
                                 : null,
@@ -1401,7 +1401,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                           Navigator.of(context).pop();
                           _performImport(selectedScripts.toList(), overwriteMode);
                         },
-                  child: Text(overwriteMode ? "Overwrite" : "Import"),
+                  child: Text(overwriteMode ? context.interfaceText("Overwrite") : context.interfaceText("Import")),
                 ),
               ],
             );

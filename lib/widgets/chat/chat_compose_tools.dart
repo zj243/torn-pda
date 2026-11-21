@@ -357,7 +357,7 @@ class _ChatComposeToolsState extends State<ChatComposeTools> {
       ActionChip(
         avatar: Icon(emojis.isEmpty ? Icons.add_rounded : Icons.add_reaction_outlined, size: 18),
         tooltip: context.interfaceText('Edit favorite emojis'),
-        label: Text(emojis.isEmpty ? 'Add emoji' : 'Emojis'),
+        label: Text(emojis.isEmpty ? context.interfaceText('Add emoji') : context.interfaceText('Emojis')),
         visualDensity: VisualDensity.compact,
         onPressed: () async {
           await showModalBottomSheet<void>(
@@ -449,12 +449,12 @@ class _ChatComposeToolsState extends State<ChatComposeTools> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        _header(child: Text(tabs ? 'Share a browser tab' : 'Share a script', style: theme.textTheme.titleSmall)),
+        _header(child: Text(tabs ? context.interfaceText('Share a browser tab') : context.interfaceText('Share a script'), style: theme.textTheme.titleSmall)),
         if (items.isEmpty)
           Padding(
             padding: const EdgeInsets.all(8),
             child: Text(
-              tabs ? 'No open tabs' : 'No scripts with a source URL',
+              tabs ? context.interfaceText('No open tabs') : context.interfaceText('No scripts with a source URL'),
               style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
             ),
           )

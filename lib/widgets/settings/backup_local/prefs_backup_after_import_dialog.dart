@@ -118,7 +118,7 @@ class PrefsLocalAfterImportDialogState extends State<PrefsLocalAfterImportDialog
                     foregroundColor: _isCloseButtonEnabled ? null : Colors.grey.shade500,
                   ),
                   child: Text(
-                    _isCloseButtonEnabled ? 'Great!' : 'Great! ($_countdownSeconds)',
+                    _isCloseButtonEnabled ? context.interfaceText('Great!') : context.interfaceText("Great! ({0})", [_countdownSeconds]),
                     style: const TextStyle(
                       fontSize: 15,
                     ),

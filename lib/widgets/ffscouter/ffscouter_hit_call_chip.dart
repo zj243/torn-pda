@@ -164,7 +164,7 @@ class FFScouterHitCallChip extends StatelessWidget {
                     Navigator.of(ctx).pop();
                     _toast(await ctrl.claim(targetId));
                   },
-                  child: Text(claims.isEmpty ? "Call" : "Call too"),
+                  child: Text(claims.isEmpty ? context.interfaceText("Call") : context.interfaceText("Call too")),
                 ),
               TextButton(onPressed: () => Navigator.of(ctx).pop(), child: const PdaText("Close")),
             ],

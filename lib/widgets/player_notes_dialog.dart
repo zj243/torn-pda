@@ -95,7 +95,7 @@ class PlayerNotesDialogState extends State<PlayerNotesDialog> with SingleTickerP
       children: <Widget>[
         // Title
         Text(
-          widget.playerName != null ? "${widget.playerName} [${widget.playerId}]" : "Player [${widget.playerId}]",
+          widget.playerName != null ? "${widget.playerName} [${widget.playerId}]" : context.interfaceText("Player [{0}]", [widget.playerId]),
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: _themeProvider.mainText),
           textAlign: TextAlign.center,
         ),
@@ -109,7 +109,7 @@ class PlayerNotesDialogState extends State<PlayerNotesDialog> with SingleTickerP
                 unselectedLabelColor: Colors.grey[500],
                 tabs: [
                   Tab(height: 36, text: _hasChanges ? "Torn PDA *" : "Torn PDA"),
-                  Tab(height: 36, text: count > 0 ? "FFScouter ($count)" : "FFScouter"),
+                  Tab(height: 36, text: count > 0 ? context.interfaceText("FFScouter ({0})", [count]) : "FFScouter"),
                 ],
               );
             },

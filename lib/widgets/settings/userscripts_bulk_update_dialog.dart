@@ -299,8 +299,8 @@ class UserScriptsBulkUpdateDialogState extends State<UserScriptsBulkUpdateDialog
 
     BotToast.showText(
       text: result.failed == 0
-          ? "${result.updated} script${result.updated == 1 ? "" : "s"} updated!"
-          : "${result.updated} updated, ${result.failed} failed",
+          ? context.interfaceText("{0} script{1} updated!", [result.updated, result.updated == 1 ? "" : "s"])
+          : context.interfaceText("{0} updated, {1} failed", [result.updated, result.failed]),
       textStyle: const TextStyle(fontSize: 14, color: Colors.white),
       contentColor: result.failed == 0 ? Colors.green : Colors.orange[800]!,
       duration: const Duration(seconds: 4),

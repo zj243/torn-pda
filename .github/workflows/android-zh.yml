@@ -21,10 +21,12 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+          cache: gradle
       - name: 准备公开版配置
         run: bash .github/ci_stubs.sh --android
       - run: flutter pub get
       - run: flutter gen-l10n
+      - run: flutter analyze --no-fatal-infos --no-fatal-warnings
       - run: flutter test
       - name: 构建安卓测试包
         run: flutter build apk --debug

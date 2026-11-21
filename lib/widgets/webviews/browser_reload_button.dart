@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 
 class BrowserReloadButton extends StatelessWidget {
@@ -11,7 +12,7 @@ class BrowserReloadButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       constraints: const BoxConstraints.tightFor(width: 48, height: 48),
-      tooltip: isReloading ? 'Reloading page' : 'Reload page',
+      tooltip: isReloading ? context.interfaceText('Reloading page') : context.interfaceText('Reload page'),
       // Stays tappable while reloading: hammering refresh is how users get an
       // unresponsive page moving again, so the spinner is feedback, not a lock
       onPressed: onPressed,

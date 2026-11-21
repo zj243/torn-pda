@@ -222,7 +222,7 @@ class TargetCardState extends State<TargetCard> {
                             padding: const EdgeInsets.only(left: 13),
                             child: Text(
                               _target!.lastAction!.relative == "0 minutes ago"
-                                  ? 'now'
+                                  ? context.interfaceText('now')
                                   : _target!.lastAction!.relative!.replaceAll(' ago', ''),
                             ),
                           ),

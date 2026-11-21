@@ -96,7 +96,7 @@ class _ChatTestingSettingsPageState extends State<ChatTestingSettingsPage> {
             title: const PdaText('Test faction room'),
             subtitle: Text(
               room == null
-                  ? 'Off - pick a private chat to act as a second faction room'
+                  ? context.interfaceText('Off - pick a private chat to act as a second faction room')
                   : NativeChat.controller.roomById(room).name,
             ),
             trailing: const Icon(Icons.chevron_right_rounded),

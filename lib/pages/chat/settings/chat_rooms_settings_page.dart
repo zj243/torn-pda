@@ -112,7 +112,7 @@ class ChatRoomsSettingsPage extends StatelessWidget {
               underline: const SizedBox.shrink(),
               items: [
                 for (final h in _waitingChoices)
-                  DropdownMenuItem(value: h, child: Text(h == 0 ? 'Off' : 'After ${h}h')),
+                  DropdownMenuItem(value: h, child: Text(h == 0 ? context.interfaceText('Off') : context.interfaceText("After {0}h", [h]))),
               ],
               onChanged: (v) => prefs.setWaitingHours(v ?? 3),
             ),

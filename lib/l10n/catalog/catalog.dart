@@ -1,3 +1,4 @@
+import 'actions.dart';
 import 'release_notes_3.dart';
 import 'release_notes_2.dart';
 import 'release_notes_1.dart';
@@ -20,6 +21,7 @@ import 'webviews.dart';
 
 /// ZJ：合并各功能的简体中文文案，供应用显示文字时查找。
 const chineseInterfaceMessages = <String, String>{
+  ...messagesActions,
   ...messagesAlerts,
   ...messagesChaining,
   ...messagesChat1,

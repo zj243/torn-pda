@@ -489,7 +489,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
                                 children: [
                                   const PdaText("Expires Date", style: TextStyle(fontSize: 12)),
                                   Text(
-                                    expiresDate != null ? expiresDate!.toIso8601String().substring(0, 10) : "Session",
+                                    expiresDate != null ? expiresDate!.toIso8601String().substring(0, 10) : context.interfaceText("Session"),
                                     style: const TextStyle(fontSize: 16),
                                   ),
                                 ],
@@ -749,7 +749,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
               s.selected.clear();
               if (!allSelected) s.selected.addAll(selectable.map((r) => r.id));
             }),
-            child: Text(allSelected ? "NONE" : "ALL"),
+            child: Text(allSelected ? context.interfaceText("NONE") : context.interfaceText("ALL")),
           ),
           IconButton(
             tooltip: context.interfaceText("Delete selected"),
@@ -773,7 +773,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
     return SizedBox(
       width: 48,
       child: Center(
-        child: Text(_sec(sectionId).selecting ? "Sel" : "Del", style: const TextStyle(fontWeight: FontWeight.bold)),
+        child: Text(_sec(sectionId).selecting ? context.interfaceText("Sel") : context.interfaceText("Del"), style: const TextStyle(fontWeight: FontWeight.bold)),
       ),
     );
   }
@@ -1383,7 +1383,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
                                 Text(
                                   _newCookieExpiresDate != null
                                       ? _newCookieExpiresDate!.toIso8601String().substring(0, 10)
-                                      : "Session",
+                                      : context.interfaceText("Session"),
                                   style: const TextStyle(fontSize: 16),
                                 ),
                               ],
@@ -1518,7 +1518,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
                         subtitle: FutureBuilder<int?>(
                           future: _webStorageManager?.getQuotaForOrigin(origin: origin),
                           builder: (context, snapshot) =>
-                              Text(snapshot.hasData ? snapshot.data.toString() : "Loading..."),
+                              Text(snapshot.hasData ? snapshot.data.toString() : context.interfaceText("Loading...")),
                         ),
                       ),
                       ListTile(
@@ -1526,7 +1526,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
                         subtitle: FutureBuilder<int?>(
                           future: _webStorageManager?.getUsageForOrigin(origin: origin),
                           builder: (context, snapshot) =>
-                              Text(snapshot.hasData ? snapshot.data.toString() : "Loading..."),
+                              Text(snapshot.hasData ? snapshot.data.toString() : context.interfaceText("Loading...")),
                         ),
                         trailing: IconButton(
                           icon: const Icon(Icons.clear),

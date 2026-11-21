@@ -133,7 +133,7 @@ class _TargetsSyncDialogState extends State<TargetsSyncDialog> {
                     child: CircularProgressIndicator(strokeWidth: 2, strokeCap: StrokeCap.round),
                   )
                 : const Icon(Icons.download_rounded, size: 18),
-            label: Text(_isLoading ? 'Importing...' : 'Import from Torn'),
+            label: Text(_isLoading ? context.interfaceText('Importing...') : context.interfaceText('Import from Torn')),
           ),
         ),
         const SizedBox(height: 18),
@@ -156,7 +156,7 @@ class _TargetsSyncDialogState extends State<TargetsSyncDialog> {
                     child: CircularProgressIndicator(strokeWidth: 2, strokeCap: StrokeCap.round),
                   )
                 : const Icon(Icons.sync_alt, size: 18),
-            label: Text(_yataLoading ? 'Connecting...' : 'Sync with YATA'),
+            label: Text(_yataLoading ? context.interfaceText('Connecting...') : context.interfaceText('Sync with YATA')),
           ),
         ),
         const SizedBox(height: 8),
@@ -284,7 +284,7 @@ class _TargetsSyncDialogState extends State<TargetsSyncDialog> {
           LinearProgressIndicator(value: _yataImportPercentage),
           const SizedBox(height: 8),
           Text(
-            _yataImportTarget.isEmpty ? 'Preparing import...' : _yataImportTarget,
+            _yataImportTarget.isEmpty ? context.interfaceText('Preparing import...') : _yataImportTarget,
             style: const TextStyle(fontSize: 12),
           ),
           const SizedBox(height: 10),

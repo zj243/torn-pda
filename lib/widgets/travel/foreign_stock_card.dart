@@ -634,7 +634,7 @@ class ForeignStockCardState extends State<ForeignStockCard> {
                           ),
                         ),
                         subtitle: PdaText(
-                          "Get notified whenever {0} is restocked in {1}", values: [widget.foreignStock.name, widget.foreignStock.countryFullName],
+                          "Get notified whenever {0} is restocked in {1}", values: [widget.foreignStock.name, context.destinationName(widget.foreignStock.countryFullName)],
                           style: const TextStyle(
                             fontSize: 11,
                             fontStyle: FontStyle.italic,

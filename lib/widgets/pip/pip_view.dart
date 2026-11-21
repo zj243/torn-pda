@@ -165,7 +165,7 @@ class _PipViewState extends State<PipView> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                cooldown ? 'COOLDOWN' : 'CHAIN ${model.current}/${model.max}',
+                cooldown ? context.interfaceText('COOLDOWN') : context.interfaceText("CHAIN {0}/{1}", [model.current, model.max]),
                 style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
               ),
               FittedBox(
@@ -271,7 +271,7 @@ class _PipViewState extends State<PipView> {
             ),
           ),
           Text(
-            player.error ? 'API error' : player.description,
+            player.error ? context.interfaceText('API error') : player.description,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(color: Colors.white70, fontSize: 14),
@@ -316,7 +316,7 @@ class _PipViewState extends State<PipView> {
               ),
             ),
             Text(
-              pip.stakeoutCount > 1 ? '${pip.stakeoutCount} alerts, $age' : 'Stakeout, $age',
+              pip.stakeoutCount > 1 ? context.interfaceText("{0} alerts, {1}", [pip.stakeoutCount, age]) : context.interfaceText("Stakeout, {0}", [age]),
               style: const TextStyle(color: Colors.white70, fontSize: 14),
             ),
           ],
@@ -343,7 +343,7 @@ class _PipViewState extends State<PipView> {
             ),
           ),
           Text(
-            pip.stakeoutAt == null ? 'No alerts yet' : 'Last: ${pip.stakeoutLines.join(', ')}',
+            pip.stakeoutAt == null ? context.interfaceText('No alerts yet') : context.interfaceText("Last: {0}", [pip.stakeoutLines.join(', ')]),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(color: Colors.white70, fontSize: 14),

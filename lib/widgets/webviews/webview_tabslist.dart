@@ -80,7 +80,7 @@ class TabDropZoneState extends State<TabDropZone> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                 child: Text(
-                  _drag.mainTabGhost.value != null ? "Copy here" : widget.label,
+                  _drag.mainTabGhost.value != null ? context.interfaceText("Copy here") : widget.label,
                   style: const TextStyle(color: Colors.white, fontSize: 15),
                 ),
               ),
@@ -303,7 +303,7 @@ class TabsListState extends State<TabsList> with TickerProviderStateMixin, Widge
                       Icon(Icons.lock, color: _webViewProvider!.tabList[i].isLockFull ? Colors.orange : Colors.red),
                       const SizedBox(height: 10),
                       Text(
-                        _webViewProvider!.tabList[i].isLockFull ? "Positional Lock" : "Full Lock",
+                        _webViewProvider!.tabList[i].isLockFull ? context.interfaceText("Positional Lock") : context.interfaceText("Full Lock"),
                         style: TextStyle(color: _themeProvider.mainText),
                       ),
                     ],
@@ -414,7 +414,7 @@ class TabsListState extends State<TabsList> with TickerProviderStateMixin, Widge
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: Tooltip(
-              message: bothBrowsersShown ? "Move to other panel" : "Open in split panel",
+              message: bothBrowsersShown ? context.interfaceText("Move to other panel") : context.interfaceText("Open in split panel"),
               child: CircularMenuItem(
                 icon: bothBrowsersShown ? MdiIcons.swapHorizontal : MdiIcons.viewSplitVertical,
                 onTap: () {

@@ -30,7 +30,7 @@ class ChatAlertsButton extends StatelessWidget {
     final chat = context.watch<ChatController>();
     final unseen = chat.unseenAlerts;
     return IconButton(
-      tooltip: unseen > 0 ? 'Mentions and highlight words, $unseen new' : 'Mentions and highlight words',
+      tooltip: unseen > 0 ? context.interfaceText("Mentions and highlight words, {0} new", [unseen]) : context.interfaceText('Mentions and highlight words'),
       icon: Badge(
         isLabelVisible: unseen > 0,
         label: ExcludeSemantics(child: Text(unseen > 99 ? '99+' : '$unseen')),
@@ -108,7 +108,7 @@ class _ChatAlertsSheet extends StatelessWidget {
     return ListTile(
       leading: ChatRoomAvatar(room: room, size: 40),
       title: Text(
-        room.isDm ? m.sender.name : '${m.sender.name} in ${room.name}',
+        room.isDm ? m.sender.name : context.interfaceText("{0} in {1}", [m.sender.name, room.name]),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(fontWeight: alert.seen ? null : FontWeight.w700),
@@ -283,7 +283,7 @@ Future<void> showChatRoomAlerts(BuildContext context, ChatRoom room) {
                           value: s,
                           child: Text(
                             s == ChatSound.standard
-                                ? 'Default (${ChatTone.standard.resolve(prefs.allSound, room.id).sound.label})'
+                                ? context.interfaceText("Default ({0})", [ChatTone.standard.resolve(prefs.allSound, room.id).sound.label])
                                 : s.label,
                           ),
                         ),
@@ -349,8 +349,8 @@ class ChatAlertSettings extends StatelessWidget {
           SwitchListTile(
             title: Text(
               NativeChat.controller.myName == null
-                  ? 'Mentions of your name'
-                  : 'Mentions of ${NativeChat.controller.myName}',
+                  ? context.interfaceText('Mentions of your name')
+                  : context.interfaceText("Mentions of {0}", [NativeChat.controller.myName]),
             ),
             subtitle: const PdaText('@name or the name alone, as a whole word'),
             value: prefs.mentions,
@@ -493,7 +493,7 @@ class _ChatHighlightWordsState extends State<ChatHighlightWords> {
               dense: true,
               title: Text(word),
               leading: IconButton(
-                tooltip: prefs.alertWords.contains(word) ? 'Stop alerting for $word' : 'Alert for $word',
+                tooltip: prefs.alertWords.contains(word) ? context.interfaceText("Stop alerting for {0}", [word]) : context.interfaceText("Alert for {0}", [word]),
                 icon: Icon(
                   prefs.alertWords.contains(word)
                       ? Icons.notifications_active_rounded
@@ -596,7 +596,7 @@ class ChatTickerSettings extends StatelessWidget {
                 underline: const SizedBox.shrink(),
                 items: [
                   for (final s in ChatPrefs.tickerSecondsOptions)
-                    DropdownMenuItem(value: s, child: Text(s == 0 ? 'Until dismissed' : '$s s')),
+                    DropdownMenuItem(value: s, child: Text(s == 0 ? context.interfaceText('Until dismissed') : '$s s')),
                 ],
                 onChanged: (v) => prefs.setTickerSeconds(v ?? 6),
               ),

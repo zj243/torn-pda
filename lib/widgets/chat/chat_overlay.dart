@@ -413,7 +413,7 @@ class _ChatOverlayState extends State<ChatOverlay> with TickerProviderStateMixin
                   valueListenable: NativeChat.tornTabExists,
                   builder: (context, exists, _) => FilledButton.tonal(
                     onPressed: () => NativeChat.openTornBrowser(keepChat: true),
-                    child: Text(exists ? 'Go to Torn' : 'Open Torn'),
+                    child: Text(exists ? context.interfaceText('Go to Torn') : context.interfaceText('Open Torn')),
                   ),
                 ),
                 Semantics(

@@ -77,7 +77,7 @@ class TabsHideReminderDialogState extends State<TabsHideReminderDialog> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         TextButton(
-                          child: Text(_countdown > 0 ? "Close ($_countdown)" : "Close"),
+                          child: Text(_countdown > 0 ? context.interfaceText("Close ({0})", [_countdown]) : context.interfaceText("Close")),
                           onPressed: _countdown > 0
                               ? null
                               : () {

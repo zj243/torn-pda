@@ -174,7 +174,7 @@ class _StatsDialogState extends State<StatsDialog> with TickerProviderStateMixin
                 ),
                 title: Text((widget.estimatedStatsPayload.otherName).isNotEmpty
                     ? widget.estimatedStatsPayload.otherName
-                    : "Stats"),
+                    : context.interfaceText("Stats")),
                 bottom: TabBar(
                   controller: _tabController,
                   onTap: (int index) {

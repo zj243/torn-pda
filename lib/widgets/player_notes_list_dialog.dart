@@ -259,7 +259,7 @@ class PlayerNotesListDialogState extends State<PlayerNotesListDialog> {
                 child: _filteredNotes.isEmpty
                     ? Center(
                         child: Text(
-                          _searchQuery.isEmpty ? 'No notes available' : 'No notes found',
+                          _searchQuery.isEmpty ? context.interfaceText('No notes available') : context.interfaceText('No notes found'),
                           style: TextStyle(
                             color: _themeProvider.mainText,
                             fontSize: 16,
@@ -445,7 +445,7 @@ class PlayerNotesListDialogState extends State<PlayerNotesListDialog> {
                     children: [
                       Expanded(
                         child: Text(
-                          (note.note.isEmpty && !PlayerNoteColor.isNone(note.color)) ? 'blank' : note.note,
+                          (note.note.isEmpty && !PlayerNoteColor.isNone(note.color)) ? context.interfaceText('blank') : note.note,
                           style: TextStyle(
                             fontStyle: note.note.isEmpty && !PlayerNoteColor.isNone(note.color)
                                 ? FontStyle.italic
