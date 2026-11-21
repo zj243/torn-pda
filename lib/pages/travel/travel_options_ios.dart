@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/app_language.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -419,8 +420,9 @@ class TravelOptionsIOSState extends State<TravelOptionsIOS> {
   }
 
   Future _showNotificationTextDialog() async {
-    final title = await Prefs().getTravelNotificationTitle();
-    final body = await Prefs().getTravelNotificationBody();
+    final strings = context.l10n;
+    final title = await Prefs().getTravelNotificationTitle(defaultText: strings.travelNotificationTitle);
+    final body = await Prefs().getTravelNotificationBody(defaultText: strings.travelNotificationBody);
 
     showDialog<void>(
       context: context,

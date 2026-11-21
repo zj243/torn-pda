@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/app_language.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
@@ -150,8 +151,8 @@ class PrefsBackupWidgetState extends State<PrefsBackupWidget> {
         ),
         content: TextField(controller: ctl, autofocus: true, maxLength: 20),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(dialogCtx, null), child: const Text('Cancel')),
-          TextButton(onPressed: () => Navigator.pop(dialogCtx, ctl.text), child: const Text('OK')),
+          TextButton(onPressed: () => Navigator.pop(dialogCtx, null), child: Text(context.l10n.labelCancel)),
+          TextButton(onPressed: () => Navigator.pop(dialogCtx, ctl.text), child: Text(context.l10n.labelOk)),
         ],
       ),
     );
@@ -247,7 +248,7 @@ class PrefsBackupWidgetState extends State<PrefsBackupWidget> {
               ),
             ),
             actions: [
-              TextButton(onPressed: () => Navigator.pop(dialogCtx, null), child: const Text('Cancel')),
+              TextButton(onPressed: () => Navigator.pop(dialogCtx, null), child: Text(context.l10n.labelCancel)),
               ElevatedButton.icon(
                 onPressed: () => Navigator.pop(dialogCtx, 'local'),
                 icon: const Icon(Icons.save),
@@ -411,8 +412,8 @@ class PrefsBackupWidgetState extends State<PrefsBackupWidget> {
             ],
           ),
           actions: [
-            TextButton(onPressed: () => Navigator.pop(dialogCtx, false), child: const Text('Cancel')),
-            TextButton(onPressed: () => Navigator.pop(dialogCtx, true), child: const Text('OK')),
+            TextButton(onPressed: () => Navigator.pop(dialogCtx, false), child: Text(context.l10n.labelCancel)),
+            TextButton(onPressed: () => Navigator.pop(dialogCtx, true), child: Text(context.l10n.labelOk)),
           ],
         ),
       );
@@ -441,10 +442,10 @@ class PrefsBackupWidgetState extends State<PrefsBackupWidget> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Flexible(child: Text('Save settings')),
+            Flexible(child: Text(context.l10n.labelSaveSettings)),
             ElevatedButton.icon(
               icon: const Icon(Icons.save),
-              label: const Text('Save'),
+              label: Text(context.l10n.labelSave),
               onPressed: () => _save(context),
             ),
           ],
@@ -452,10 +453,10 @@ class PrefsBackupWidgetState extends State<PrefsBackupWidget> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Flexible(child: Text('Restore settings')),
+            Flexible(child: Text(context.l10n.labelRestoreSettings)),
             ElevatedButton.icon(
               icon: const Icon(Icons.restore),
-              label: const Text('Restore'),
+              label: Text(context.l10n.labelRestore),
               onPressed: () => _load(context),
             ),
           ],
@@ -467,12 +468,12 @@ class PrefsBackupWidgetState extends State<PrefsBackupWidget> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Expanded(
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Backup reminders'),
-                  Text('Remind to create backups every 90 days', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                  Text(context.l10n.labelBackupReminders),
+                  Text(context.l10n.labelRemindToCreateBackupsEvery90Days, style: TextStyle(fontSize: 12, color: Colors.grey)),
                 ],
               ),
             ),

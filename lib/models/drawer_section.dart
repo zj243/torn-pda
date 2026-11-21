@@ -1,5 +1,7 @@
 import 'dart:math' as math;
 
+import 'package:torn_pda/l10n/generated/app_localizations.dart';
+
 // Package imports:
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
@@ -63,6 +65,45 @@ enum DrawerSection {
       case DrawerSection.divider1:
       case DrawerSection.divider2:
         return 'Divider';
+    }
+  }
+
+  /// ZJ：根据 [strings] 返回菜单文字；排序和启动页仍使用稳定的枚举名。
+  String localizedTitle(AppLocalizations strings) {
+    switch (this) {
+      case DrawerSection.profile:
+        return strings.profile;
+      case DrawerSection.travel:
+        return strings.travel;
+      case DrawerSection.chaining:
+        return strings.chaining;
+      case DrawerSection.loot:
+        return strings.loot;
+      case DrawerSection.friends:
+        return strings.friends;
+      case DrawerSection.stakeouts:
+        return strings.stakeouts;
+      case DrawerSection.awards:
+        return strings.awards;
+      case DrawerSection.items:
+        return strings.items;
+      case DrawerSection.rankedWars:
+        return strings.rankedWars;
+      case DrawerSection.stockMarket:
+        return strings.stockMarket;
+      case DrawerSection.wiki:
+        return strings.wiki;
+      case DrawerSection.alerts:
+        return strings.alerts;
+      case DrawerSection.settings:
+        return strings.settings;
+      case DrawerSection.about:
+        return strings.about;
+      case DrawerSection.tips:
+        return strings.tips;
+      case DrawerSection.divider1:
+      case DrawerSection.divider2:
+        return strings.divider;
     }
   }
 

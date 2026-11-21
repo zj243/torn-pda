@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/app_language.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/providers/theme_provider.dart';
@@ -43,8 +44,8 @@ class _WikiMenuState extends State<WikiMenu> {
           animationDuration: const Duration(milliseconds: 1),
         ),
         controller: _wikiExpController,
-        collapsed: const Text(
-          "Wiki",
+        collapsed: Text(
+          context.l10n.wiki,
           style: TextStyle(
             fontSize: 16,
           ),
@@ -52,12 +53,12 @@ class _WikiMenuState extends State<WikiMenu> {
         expanded: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Row(
+            Row(
               children: [
                 Padding(
                   padding: EdgeInsets.only(top: 14, bottom: 14),
                   child: Text(
-                    "Wiki",
+                    context.l10n.wiki,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -78,17 +79,17 @@ class _WikiMenuState extends State<WikiMenu> {
                   initUrl: url,
                 );
               },
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 counterText: "",
                 isDense: true,
                 border: OutlineInputBorder(),
-                labelText: 'Search',
+                labelText: context.l10n.search,
                 labelStyle: TextStyle(fontSize: 12),
               ),
               validator: (value) {
                 if (value == null) return null;
                 if (value.replaceAll(' ', '').isEmpty) {
-                  return "Cannot be empty!";
+                  return context.l10n.emptyField;
                 }
                 return null;
               },

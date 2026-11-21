@@ -46,6 +46,7 @@
 .pub-cache/
 .pub/
 /build/
+/lib/l10n/generated/
 /devtools_options.yaml
 
 # Firebase

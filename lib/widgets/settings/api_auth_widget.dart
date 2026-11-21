@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/app_language.dart';
 import 'dart:io';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:expandable/expandable.dart';
@@ -78,10 +79,10 @@ class _ApiKeySectionWidgetState extends State<ApiKeySectionWidget> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  const Row(
+                  Row(
                     children: <Widget>[
                       Text(
-                        "TORN API USER LOADED",
+                        context.l10n.labelTornApiUserLoaded,
                         style: TextStyle(
                           color: Colors.green,
                           fontWeight: FontWeight.bold,
@@ -119,8 +120,8 @@ class _ApiKeySectionWidgetState extends State<ApiKeySectionWidget> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               ElevatedButton(
-                                child: const Text(
-                                  "Copy",
+                                child: Text(
+                                  context.l10n.labelCopy,
                                   style: TextStyle(fontSize: 13),
                                 ),
                                 onPressed: () {
@@ -128,7 +129,7 @@ class _ApiKeySectionWidgetState extends State<ApiKeySectionWidget> {
                                     ClipboardData(text: widget.userProfile!.userApiKey.toString()),
                                   );
                                   BotToast.showText(
-                                    text: "API key copied to the clipboard, be careful!",
+                                    text: context.l10n.labelApiKeyCopiedToTheClipboardBe,
                                     textStyle: const TextStyle(
                                       fontSize: 14,
                                       color: Colors.white,
@@ -142,8 +143,8 @@ class _ApiKeySectionWidgetState extends State<ApiKeySectionWidget> {
                               Padding(
                                 padding: const EdgeInsets.only(left: 10),
                                 child: ElevatedButton(
-                                  child: const Text(
-                                    "Reload",
+                                  child: Text(
+                                    context.l10n.labelReload,
                                     style: TextStyle(fontSize: 13),
                                   ),
                                   onPressed: widget.apiKeyInputController.text.trim().isEmpty
@@ -205,7 +206,7 @@ class _ApiKeySectionWidgetState extends State<ApiKeySectionWidget> {
           child: ExpandablePanel(
             collapsed: Container(),
             controller: widget.expandableController,
-            header: const Padding(
+            header: Padding(
               padding: EdgeInsets.fromLTRB(20, 15, 20, 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -213,7 +214,7 @@ class _ApiKeySectionWidgetState extends State<ApiKeySectionWidget> {
                   Row(
                     children: <Widget>[
                       Text(
-                        "NO USER LOADED",
+                        context.l10n.labelNoUserLoaded,
                         style: TextStyle(
                           color: Colors.red,
                           fontWeight: FontWeight.bold,
@@ -225,7 +226,7 @@ class _ApiKeySectionWidgetState extends State<ApiKeySectionWidget> {
                   Padding(
                     padding: EdgeInsets.only(left: 10),
                     child: Text(
-                      "(expand for details)",
+                      context.l10n.labelExpandForDetails,
                       style: TextStyle(
                         fontStyle: FontStyle.italic,
                       ),
@@ -251,7 +252,7 @@ class _ApiKeySectionWidgetState extends State<ApiKeySectionWidget> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               ElevatedButton(
-                                child: const Text("Load"),
+                                child: Text(context.l10n.labelLoad),
                                 onPressed: widget.apiKeyInputController.text.trim().isEmpty
                                     ? null
                                     : () {
@@ -291,7 +292,7 @@ class _ApiKeySectionWidgetState extends State<ApiKeySectionWidget> {
           enabled: enabled,
           validator: (value) {
             if (value!.isEmpty) {
-              return "The API Key is empty!";
+              return context.l10n.labelTheApiKeyIsEmpty;
             }
             return null;
           },
@@ -299,7 +300,7 @@ class _ApiKeySectionWidgetState extends State<ApiKeySectionWidget> {
           maxLength: 30,
           style: const TextStyle(fontSize: 14),
           decoration: InputDecoration(
-            hintText: 'Please insert your Torn API Key',
+            hintText: context.l10n.labelPleaseInsertYourTornApiKey,
             hintStyle: const TextStyle(fontSize: 14),
             counterText: "",
             border: OutlineInputBorder(
@@ -333,10 +334,10 @@ class _ApiKeySectionWidgetState extends State<ApiKeySectionWidget> {
         padding: const EdgeInsets.only(top: 25),
         child: Column(
           children: <Widget>[
-            const Padding(
+            Padding(
               padding: EdgeInsetsDirectional.only(bottom: 15),
               child: Text(
-                "ERROR LOADING USER",
+                context.l10n.labelErrorLoadingUser,
                 style: TextStyle(
                   color: Colors.red,
                   fontWeight: FontWeight.bold,
@@ -364,10 +365,8 @@ class _ApiKeySectionWidgetState extends State<ApiKeySectionWidget> {
         padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
         child: Column(
           children: <Widget>[
-            const Text(
-              "Torn PDA needs your API Key to obtain your user's "
-              'information. The key is protected in the app and will not '
-              'be shared under any circumstances.',
+            Text(
+              context.l10n.apiUse,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
@@ -390,12 +389,12 @@ class _ApiKeySectionWidgetState extends State<ApiKeySectionWidget> {
                           child: ExpandablePanel(
                             theme: ExpandableThemeData(iconColor: context.read<ThemeProvider>().mainText),
                             controller: _tosExpandableController,
-                            header: const Text(
-                              "See how we comply with Torn's Terms of Service",
+                            header: Text(
+                              context.l10n.apiTerms,
                               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                             ),
-                            collapsed: const Text(
-                              "Expand the section below to see how Torn PDA complies with these guidelines.",
+                            collapsed: Text(
+                              context.l10n.apiTermsHint,
                             ),
                             expanded: Column(
                               children: [
@@ -411,7 +410,7 @@ class _ApiKeySectionWidgetState extends State<ApiKeySectionWidget> {
                                     },
                                     defaultVerticalAlignment: TableCellVerticalAlignment.middle,
                                     children: <TableRow>[
-                                      const TableRow(
+                                      TableRow(
                                         decoration: BoxDecoration(
                                           color: Colors.black12,
                                           borderRadius: BorderRadius.only(
@@ -420,28 +419,28 @@ class _ApiKeySectionWidgetState extends State<ApiKeySectionWidget> {
                                         children: <Widget>[
                                           Padding(
                                             padding: EdgeInsets.all(8.0),
-                                            child: Text('Category', style: TextStyle(fontWeight: FontWeight.bold)),
+                                            child: Text(context.l10n.labelCategory, style: TextStyle(fontWeight: FontWeight.bold)),
                                           ),
                                           Padding(
                                             padding: EdgeInsets.all(8.0),
-                                            child: Text('Description', style: TextStyle(fontWeight: FontWeight.bold)),
+                                            child: Text(context.l10n.labelDescription, style: TextStyle(fontWeight: FontWeight.bold)),
                                           ),
                                         ],
                                       ),
-                                      _buildTosTableRow('Data Storage',
-                                          'Persistent - until you remove the key from the app. This also applies to the Torn PDA server'),
-                                      _buildTosTableRow('Data Sharing',
-                                          'Your data is not shared. Only service owners may access data for maintenance and support purposes'),
-                                      _buildTosTableRow('Purpose of Use',
-                                          'To provide application features and display your Torn data within the app'),
-                                      _buildTosTableRow('Key Storage & Sharing',
-                                          'Stored remotely and securely. Used only for automated requests to the Torn API on your behalf'),
-                                      _buildTosTableRow('Key Access Level', 'Limited Access'),
+                                      _buildTosTableRow(context.l10n.labelDataStorage,
+                                          context.l10n.apiStorage),
+                                      _buildTosTableRow(context.l10n.labelDataSharing,
+                                          context.l10n.apiSharing),
+                                      _buildTosTableRow(context.l10n.labelPurposeOfUse,
+                                          context.l10n.apiPurpose),
+                                      _buildTosTableRow(context.l10n.labelKeyStorageSharing,
+                                          context.l10n.apiKeyStorage),
+                                      _buildTosTableRow(context.l10n.labelKeyAccessLevel, context.l10n.labelLimitedAccess),
                                     ],
                                   ),
                                 ),
-                                const Text(
-                                  "Note: if you are curious about Torn PDA's own privacy policy, you can access it in the Abour section of the app",
+                                Text(
+                                  context.l10n.apiPrivacy,
                                   style: TextStyle(fontSize: 12),
                                 ),
                               ],
@@ -449,9 +448,8 @@ class _ApiKeySectionWidgetState extends State<ApiKeySectionWidget> {
                           ),
                         ),
                       ),
-                      const Text(
-                        "\nYou can get your API key in the Torn website by tapping your profile picture (upper right corner)"
-                        " and going to Settings, API Keys. Torn PDA only needs a Limited Access key.\n",
+                      Text(
+                        context.l10n.apiInstructions,
                       ),
                       RichText(
                         text: TextSpan(
@@ -475,14 +473,14 @@ class _ApiKeySectionWidgetState extends State<ApiKeySectionWidget> {
                                         browserTapType: BrowserTapType.long,
                                       );
                                 },
-                                child: const Text(
-                                  'Tap here',
+                                child: Text(
+                                  context.l10n.labelTapHere,
                                   style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
                                 ),
                               ),
                             ),
                             TextSpan(
-                              text: ' to be redirected',
+                              text: context.l10n.labelToBeRedirected,
                               style: DefaultTextStyle.of(context).style,
                             ),
                           ],
@@ -493,11 +491,8 @@ class _ApiKeySectionWidgetState extends State<ApiKeySectionWidget> {
                 ),
               ],
             ),
-            const Text('\nIn any case, please make sure to '
-                "follow Torn's staff recommendations on how to protect your key "
-                'from any malicious use.'),
-            const Text('\nYou can always remove it from the '
-                'app or reset it in your Torn preferences page.'),
+            Text(context.l10n.apiProtect),
+            Text(context.l10n.apiRemove),
           ],
         ),
       );

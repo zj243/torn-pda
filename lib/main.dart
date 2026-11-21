@@ -1,4 +1,6 @@
 // Dart imports:
+import 'package:torn_pda/l10n/app_language.dart';
+import 'package:torn_pda/l10n/generated/app_localizations.dart';
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
@@ -269,9 +271,11 @@ Future<void> main() async {
   await _initializePlatformPlugins();
   await _initializeAudioAndConnectivity();
 
+  final appLanguage = await AppLanguageController.load();
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider.value(value: appLanguage),
         ChangeNotifierProvider<TargetsProvider>(create: (context) => TargetsProvider()),
         ChangeNotifierProvider<AttacksProvider>(create: (context) => AttacksProvider()),
         ChangeNotifierProvider<ThemeProvider>(create: (context) => ThemeProvider()),
@@ -434,6 +438,9 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
     return ToastificationWrapper(
       child: MaterialApp(
         title: 'Torn PDA',
+        locale: context.select((AppLanguageController language) => language.locale),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         navigatorKey: navigatorKey,
         theme: theme,
         debugShowCheckedModeBanner: false,

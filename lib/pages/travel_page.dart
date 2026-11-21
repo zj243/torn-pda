@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/app_language.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -956,6 +957,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
   }
 
   Future<DateTime> _scheduleNotification() async {
+    final strings = context.l10n;
     final scheduledNotificationDateTime =
         _travelModel.timeArrival!.subtract(Duration(seconds: _travelNotificationAhead));
 
@@ -983,8 +985,8 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
       iOS: iOSPlatformChannelSpecifics,
     );
 
-    var notificationTitle = await Prefs().getTravelNotificationTitle();
-    var notificationSubtitle = await Prefs().getTravelNotificationBody();
+    var notificationTitle = await Prefs().getTravelNotificationTitle(defaultText: strings.travelNotificationTitle);
+    var notificationSubtitle = await Prefs().getTravelNotificationBody(defaultText: strings.travelNotificationBody);
 
     if (_settingsProvider!.discreetAt(scheduledNotificationDateTime)) {
       notificationTitle = "T";

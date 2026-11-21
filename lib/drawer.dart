@@ -1,5 +1,6 @@
 // Dart imports:
 
+import 'package:torn_pda/l10n/app_language.dart';
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
@@ -2520,7 +2521,7 @@ class DrawerPageState extends State<DrawerPage> with WidgetsBindingObserver, Aut
             child: ListTile(
               leading: Icon(section.icon),
               title: Text(
-                section.title,
+                section.localizedTitle(context.l10n),
                 style: TextStyle(fontWeight: section == _selected ? FontWeight.bold : FontWeight.normal),
               ),
               selected: section == _selected,

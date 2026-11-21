@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/app_language.dart';
 import 'package:torn_pda/utils/live_activities/racing_live_activity_parser.dart';
 import 'package:torn_pda/widgets/profile/shortcut_paged_grid.dart';
 import 'package:torn_pda/widgets/profile/shortcut_icon_picker.dart';
@@ -526,11 +527,11 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                     );
                   }
                 } else {
-                  return const Center(
+                  return Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text('Fetching data...'),
+                        Text(context.l10n.labelFetchingData),
                         SizedBox(height: 30),
                         Padding(padding: EdgeInsets.all(8.0), child: CircularProgressIndicator()),
                       ],
@@ -773,7 +774,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                   ),
                 )
               else
-                const Text("Profile", style: TextStyle(color: Colors.white)),
+                Text(context.l10n.profile, style: TextStyle(color: Colors.white)),
             ],
           ),
         ],
@@ -1304,7 +1305,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
             padding: const EdgeInsets.only(top: 8),
             child: Row(
               children: <Widget>[
-                const SizedBox(width: 60, child: Text('Details: ')),
+                SizedBox(width: 60, child: Text(context.l10n.detailsLabel)),
                 Flexible(child: detailsWidget),
               ],
             ),
@@ -1389,7 +1390,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('STATUS', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                        Text(context.l10n.profileStatusTitle, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                         if (_factionRankedWar != null && _settingsProvider!.rankedWarsInProfile)
                           Row(
                             children: [
@@ -1434,8 +1435,8 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                               children: <Widget>[
                                 Row(
                                   children: [
-                                    const SizedBox(width: 60, child: Text('Status: ')),
-                                    Text(_user!.status!.state!),
+                                    SizedBox(width: 60, child: Text(context.l10n.statusLabel)),
+                                    Text(context.l10n.playerState(_user!.status!.state!)),
                                     stateBall(),
                                   ],
                                 ),
@@ -1457,8 +1458,8 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                   children: <Widget>[
                                     Row(
                                       children: [
-                                        const SizedBox(width: 60, child: Text('Status: ')),
-                                        Text(_user!.status!.state!),
+                                        SizedBox(width: 60, child: Text(context.l10n.statusLabel)),
+                                        Text(context.l10n.playerState(_user!.status!.state!)),
                                         stateBall(),
                                       ],
                                     ),
@@ -1475,7 +1476,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                   Row(
                                     children: [
                                       const SizedBox(width: 60),
-                                      const Text("Travel (repatriated)"),
+                                      Text(context.l10n.repatriated),
                                       stateBall(forceBlue: true),
                                     ],
                                   ),
@@ -1726,7 +1727,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 55),
-            child: Text("REPATRIATED", style: TextStyle(fontSize: 11, color: _themeProvider!.getTextColor(Colors.red))),
+            child: Text(context.l10n.labelRepatriated, style: TextStyle(fontSize: 11, color: _themeProvider!.getTextColor(Colors.red))),
           ),
           _travelWidget(repatriated: true),
         ],
@@ -1752,7 +1753,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                       const SizedBox(width: 6),
                       Column(
                         children: [
-                          Text("VISIT", style: TextStyle(fontSize: 8, color: _themeProvider!.mainText)),
+                          Text(context.l10n.labelVisit, style: TextStyle(fontSize: 8, color: _themeProvider!.mainText)),
                           Text(
                             _user!.travel!.destination!.toUpperCase(),
                             style: TextStyle(fontSize: 8, color: _themeProvider!.mainText),
@@ -2035,9 +2036,9 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(bottom: 15),
-              child: Text('BARS', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              child: Text(context.l10n.barsTitle, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 8),
@@ -2061,7 +2062,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                       Flexible(
                         child: Row(
                           children: <Widget>[
-                            const SizedBox(width: 60, child: Text('Energy')),
+                            SizedBox(width: 60, child: Text(context.l10n.energy)),
                             const SizedBox(width: 10),
                             Flexible(
                               child: ConstrainedBox(
@@ -2076,7 +2077,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                   },
                                   child: Showcase(
                                     key: _showcaseProfileBars,
-                                    title: 'Did you know?',
+                                    title: context.l10n.labelDidYouKnow,
                                     description:
                                         '\nTap any of the bars to launch a browser '
                                         'straight to the gym, crimes or items sections!',
@@ -2142,7 +2143,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                     children: <Widget>[
                       Row(
                         children: <Widget>[
-                          const SizedBox(width: 60, child: Text('Nerve')),
+                          SizedBox(width: 60, child: Text(context.l10n.nerve)),
                           const SizedBox(width: 10),
                           GestureDetector(
                             onLongPress: () {
@@ -2186,7 +2187,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      const SizedBox(width: 60, child: Text('Happy')),
+                      SizedBox(width: 60, child: Text(context.l10n.happy)),
                       const SizedBox(width: 10),
                       GestureDetector(
                         onLongPress: () {
@@ -2231,7 +2232,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          const SizedBox(width: 60, child: Text('Life')),
+                          SizedBox(width: 60, child: Text(context.l10n.life)),
                           const SizedBox(width: 10),
                           GestureDetector(
                             onLongPress: () {
@@ -2310,7 +2311,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
           ).formatHourWithDaysElapsed();
           return Padding(
             padding: const EdgeInsets.only(top: 2, left: 12),
-            child: Row(children: <Widget>[const SizedBox(width: 65), Text('Full at $timeFormatted')]),
+            child: Row(children: <Widget>[const SizedBox(width: 65), Text(context.l10n.fullAt(timeFormatted))]),
           );
         }
       case "nerve":
@@ -2325,7 +2326,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
           ).formatHourWithDaysElapsed();
           return Padding(
             padding: const EdgeInsets.only(top: 2, left: 12),
-            child: Row(children: <Widget>[const SizedBox(width: 65), Text('Full at $timeFormatted')]),
+            child: Row(children: <Widget>[const SizedBox(width: 65), Text(context.l10n.fullAt(timeFormatted))]),
           );
         }
       case "happy":
@@ -2340,7 +2341,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
           ).formatHourWithDaysElapsed();
           return Padding(
             padding: const EdgeInsets.only(top: 2, left: 12),
-            child: Row(children: <Widget>[const SizedBox(width: 65), Text('Full at $timeFormatted')]),
+            child: Row(children: <Widget>[const SizedBox(width: 65), Text(context.l10n.fullAt(timeFormatted))]),
           );
         }
       case "life":
@@ -2355,7 +2356,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
           ).formatHourWithDaysElapsed();
           return Padding(
             padding: const EdgeInsets.only(top: 2, left: 12),
-            child: Row(children: <Widget>[const SizedBox(width: 65), Text('Full at $timeFormatted')]),
+            child: Row(children: <Widget>[const SizedBox(width: 65), Text(context.l10n.fullAt(timeFormatted))]),
           );
         }
       default:
@@ -3051,8 +3052,8 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         ),
       );
     } else {
-      cooldownItems = const Row(
-        children: <Widget>[Padding(padding: EdgeInsets.only(left: 10), child: Text("Nothing to report, well done!"))],
+      cooldownItems = Row(
+        children: <Widget>[Padding(padding: EdgeInsets.only(left: 10), child: Text(context.l10n.labelNothingToReportWellDone))],
       );
     }
 
@@ -3062,9 +3063,9 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(bottom: 15),
-              child: Text('COOLDOWNS', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              child: Text(context.l10n.labelCooldowns, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             ),
             cooldownItems,
             const SizedBox(height: 10),
@@ -3237,7 +3238,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
     int? maxToShow = _eventsShowNumber;
 
     if (_events.isEmpty) {
-      return const Card(
+      return Card(
         child: Row(
           children: [
             Column(
@@ -3245,9 +3246,9 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
               children: [
                 Padding(
                   padding: EdgeInsets.all(15.0),
-                  child: Text('EVENTS', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  child: Text(context.l10n.labelEvents, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                 ),
-                Padding(padding: EdgeInsets.fromLTRB(25, 5, 20, 20), child: Text("Loading...")),
+                Padding(padding: EdgeInsets.fromLTRB(25, 5, 20, 20), child: Text(context.l10n.labelLoading)),
               ],
             ),
           ],
@@ -3353,7 +3354,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
           padding: const EdgeInsets.all(15.0),
           child: Row(
             children: [
-              const Text('EVENTS', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              Text(context.l10n.labelEvents, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               const SizedBox(width: 8),
               InkWell(
                 borderRadius: BorderRadius.circular(100),
@@ -3411,7 +3412,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         }
       });
     } else {
-      return const Card(
+      return Card(
         child: Row(
           children: [
             Column(
@@ -3419,11 +3420,11 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
               children: [
                 Padding(
                   padding: EdgeInsets.all(15.0),
-                  child: Text('MESSAGES', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  child: Text(context.l10n.labelMessages, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(25, 5, 20, 20),
-                  child: Text("You have no unread messages", style: TextStyle(color: Colors.green)),
+                  child: Text(context.l10n.labelYouHaveNoUnreadMessages, style: TextStyle(color: Colors.green)),
                 ),
               ],
             ),
@@ -3620,7 +3621,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
           padding: const EdgeInsets.all(15.0),
           child: Row(
             children: [
-              const Text('MESSAGES', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              Text(context.l10n.labelMessages, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               const SizedBox(width: 8),
               InkWell(
                 borderRadius: BorderRadius.circular(100),
@@ -3848,7 +3849,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                 padding: const EdgeInsets.all(15.0),
                 child: Row(
                   children: [
-                    const Text('BASIC INFO', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    Text(context.l10n.labelBasicInfo, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     const SizedBox(width: 5),
                     GestureDetector(
                       child: const Icon(Icons.copy, size: 14),
@@ -5153,10 +5154,10 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(bottom: 15),
                     child: Text(
-                      'MISC',
+                      context.l10n.miscGroup,
                       semanticsLabel: "",
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
@@ -5523,6 +5524,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
     late String channelTitle;
     String? channelSubtitle;
     String? channelDescription;
+    final strings = context.l10n;
     String? notificationTitle;
     String? notificationSubtitle;
     int? notificationId;
@@ -5543,10 +5545,10 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         channelTitle = 'Manual travel';
         channelSubtitle = 'Manual travel';
         channelDescription = 'Manual notifications for travel';
-        notificationTitle = discreet() ? "T" : await Prefs().getTravelNotificationTitle();
+        notificationTitle = discreet() ? "T" : await Prefs().getTravelNotificationTitle(defaultText: strings.travelNotificationTitle);
         notificationSubtitle = discreet()
             ? " "
-            : await Prefs().getTravelNotificationBody();
+            : await Prefs().getTravelNotificationBody(defaultText: strings.travelNotificationBody);
         notificationPayload += 'travel';
         notificationIconAndroid = "notification_travel";
         notificationIconColor = Colors.blue;
@@ -7329,7 +7331,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                         ),
                         const SizedBox(height: 10),
                         TextButton(
-                          child: const Text("Cancel"),
+                          child: Text(context.l10n.labelCancel),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
@@ -7422,7 +7424,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                         ),
                         const SizedBox(height: 10),
                         TextButton(
-                          child: const Text("Cancel"),
+                          child: Text(context.l10n.labelCancel),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },

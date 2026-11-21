@@ -152,14 +152,14 @@ FutureOr<void> onWidgetInteractivityCallback(Uri? data) async {
   if (data.host == 'reload_clicked' || data.path.contains('reload_clicked')) {
     log("onWidgetInteractivityCallback: BACKGROUND RELOAD - reload_clicked detected");
     HomeWidget.saveWidgetData<bool>('reloading', true);
-    HomeWidget.updateWidget(name: 'HomeWidgetTornPda', iOSName: 'HomeWidgetTornPda');
-    HomeWidget.updateWidget(name: 'HomeWidgetRankedWar', iOSName: 'HomeWidgetRankedWar');
+    HomeWidget.updateWidget(qualifiedAndroidName: 'com.manuito.tornpda.HomeWidgetTornPda', iOSName: 'HomeWidgetTornPda');
+    HomeWidget.updateWidget(qualifiedAndroidName: 'com.manuito.tornpda.HomeWidgetRankedWar', iOSName: 'HomeWidgetRankedWar');
 
     await fetchAndPersistWidgetData();
 
     HomeWidget.saveWidgetData<bool>('reloading', false);
-    HomeWidget.updateWidget(name: 'HomeWidgetTornPda', iOSName: 'HomeWidgetTornPda');
-    HomeWidget.updateWidget(name: 'HomeWidgetRankedWar', iOSName: 'HomeWidgetRankedWar');
+    HomeWidget.updateWidget(qualifiedAndroidName: 'com.manuito.tornpda.HomeWidgetTornPda', iOSName: 'HomeWidgetTornPda');
+    HomeWidget.updateWidget(qualifiedAndroidName: 'com.manuito.tornpda.HomeWidgetRankedWar', iOSName: 'HomeWidgetRankedWar');
   }
 }
 
@@ -236,8 +236,8 @@ Future<void> fetchAndPersistWidgetData() async {
     HomeWidget.saveWidgetData<bool>('reloading', false);
   }
 
-  HomeWidget.updateWidget(name: 'HomeWidgetTornPda', iOSName: 'HomeWidgetTornPda');
-  HomeWidget.updateWidget(name: 'HomeWidgetRankedWar', iOSName: 'HomeWidgetRankedWar');
+  HomeWidget.updateWidget(qualifiedAndroidName: 'com.manuito.tornpda.HomeWidgetTornPda', iOSName: 'HomeWidgetTornPda');
+  HomeWidget.updateWidget(qualifiedAndroidName: 'com.manuito.tornpda.HomeWidgetRankedWar', iOSName: 'HomeWidgetRankedWar');
 }
 
 /// Schedules periodic background refresh according to platform.
@@ -301,19 +301,19 @@ Future<void> syncBackgroundRefreshWithWidgetInstallation() async {
 
   if (installedWidgets.anyWidgetInstalled) {
     await HomeWidget.saveWidgetData<bool>('reloading', true);
-    await HomeWidget.updateWidget(name: 'HomeWidgetTornPda', iOSName: 'HomeWidgetTornPda');
-    await HomeWidget.updateWidget(name: 'HomeWidgetRankedWar', iOSName: 'HomeWidgetRankedWar');
+    await HomeWidget.updateWidget(qualifiedAndroidName: 'com.manuito.tornpda.HomeWidgetTornPda', iOSName: 'HomeWidgetTornPda');
+    await HomeWidget.updateWidget(qualifiedAndroidName: 'com.manuito.tornpda.HomeWidgetRankedWar', iOSName: 'HomeWidgetRankedWar');
 
     await fetchAndPersistWidgetData();
 
     await HomeWidget.saveWidgetData<bool>('reloading', false);
-    await HomeWidget.updateWidget(name: 'HomeWidgetTornPda', iOSName: 'HomeWidgetTornPda');
-    await HomeWidget.updateWidget(name: 'HomeWidgetRankedWar', iOSName: 'HomeWidgetRankedWar');
+    await HomeWidget.updateWidget(qualifiedAndroidName: 'com.manuito.tornpda.HomeWidgetTornPda', iOSName: 'HomeWidgetTornPda');
+    await HomeWidget.updateWidget(qualifiedAndroidName: 'com.manuito.tornpda.HomeWidgetRankedWar', iOSName: 'HomeWidgetRankedWar');
   } else {
     if (Platform.isIOS) await shareSetupWithIosWidget();
     await HomeWidget.saveWidgetData<bool>('reloading', false);
-    await HomeWidget.updateWidget(name: 'HomeWidgetTornPda', iOSName: 'HomeWidgetTornPda');
-    await HomeWidget.updateWidget(name: 'HomeWidgetRankedWar', iOSName: 'HomeWidgetRankedWar');
+    await HomeWidget.updateWidget(qualifiedAndroidName: 'com.manuito.tornpda.HomeWidgetTornPda', iOSName: 'HomeWidgetTornPda');
+    await HomeWidget.updateWidget(qualifiedAndroidName: 'com.manuito.tornpda.HomeWidgetRankedWar', iOSName: 'HomeWidgetRankedWar');
   }
 
   try {

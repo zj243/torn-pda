@@ -1,5 +1,6 @@
 // Flutter imports:
 // Package imports:
+import 'package:torn_pda/l10n/app_language.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -67,9 +68,9 @@ class TravelNotificationTextDialogState extends State<TravelNotificationTextDial
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(bottom: 3),
-                      child: Text('Notification title'),
+                      child: Text(context.l10n.labelNotificationTitle),
                     ),
                     TextFormField(
                       style: const TextStyle(fontSize: 14),
@@ -82,15 +83,15 @@ class TravelNotificationTextDialogState extends State<TravelNotificationTextDial
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Cannot be empty!";
+                          return context.l10n.emptyField;
                         }
                         return null;
                       },
                     ),
                     const SizedBox(height: 16.0),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(bottom: 3),
-                      child: Text('Notification description'),
+                      child: Text(context.l10n.labelNotificationDescription),
                     ),
                     TextFormField(
                       style: const TextStyle(fontSize: 14),
@@ -104,7 +105,7 @@ class TravelNotificationTextDialogState extends State<TravelNotificationTextDial
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Cannot be empty!";
+                          return context.l10n.emptyField;
                         }
                         return null;
                       },
@@ -114,7 +115,7 @@ class TravelNotificationTextDialogState extends State<TravelNotificationTextDial
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         TextButton(
-                          child: const Text("Change"),
+                          child: Text(context.l10n.labelChange),
                           onPressed: () async {
                             if (_notificationFormKey.currentState!.validate()) {
                               // Get rid of dialog first, so that it can't
@@ -127,7 +128,7 @@ class TravelNotificationTextDialogState extends State<TravelNotificationTextDial
                               Prefs().setTravelNotificationBody(_notificationBodyController.text);
 
                               BotToast.showText(
-                                text: "Notification details changed!",
+                                text: context.l10n.labelNotificationDetailsChanged,
                                 textStyle: const TextStyle(
                                   fontSize: 14,
                                   color: Colors.white,
@@ -141,7 +142,7 @@ class TravelNotificationTextDialogState extends State<TravelNotificationTextDial
                         ),
                         const SizedBox(width: 10),
                         TextButton(
-                          child: const Text("Cancel"),
+                          child: Text(context.l10n.labelCancel),
                           onPressed: () {
                             Navigator.of(context).pop();
                             _notificationTitleController.text = '';

@@ -1903,16 +1903,18 @@ class Prefs with ChatPrefsStorage {
   /// ----------------------------
   /// Methods for travel options
   /// ----------------------------
-  Future<String> getTravelNotificationTitle() async {
-    return await PrefsDatabase.getString(_kTravelNotificationTitle, 'TORN TRAVEL');
+  /// ZJ：优先返回自定义通知文字，未设置时使用当前语言的 [defaultText]。
+  Future<String> getTravelNotificationTitle({String defaultText = 'TORN TRAVEL'}) async {
+    return await PrefsDatabase.getString(_kTravelNotificationTitle, defaultText);
   }
 
   Future setTravelNotificationTitle(String value) async {
     return await PrefsDatabase.setString(_kTravelNotificationTitle, value);
   }
 
-  Future<String> getTravelNotificationBody() async {
-    return await PrefsDatabase.getString(_kTravelNotificationBody, 'Arriving at your destination!');
+  /// ZJ：优先返回自定义通知文字，未设置时使用当前语言的 [defaultText]。
+  Future<String> getTravelNotificationBody({String defaultText = 'Arriving at your destination!'}) async {
+    return await PrefsDatabase.getString(_kTravelNotificationBody, defaultText);
   }
 
   Future setTravelNotificationBody(String value) async {

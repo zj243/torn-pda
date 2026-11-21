@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/app_language.dart';
 import 'package:flutter/material.dart';
 // Package imports:
 import 'package:provider/provider.dart';
@@ -95,7 +96,7 @@ class DrawerSectionsPageState extends State<DrawerSectionsPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Drawer Sections'),
+          title: Text(context.l10n.labelDrawerSectionsSetting),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
@@ -109,22 +110,22 @@ class DrawerSectionsPageState extends State<DrawerSectionsPage> {
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                    title: const Text("Reset to default?"),
-                    content: const Text("This will restore the default order and visibility for all drawer sections."),
+                    title: Text(context.l10n.labelResetToDefault),
+                    content: Text(context.l10n.labelThisWillRestoreTheDefaultOrderAnd),
                     actions: [
-                      TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text("Cancel")),
+                      TextButton(onPressed: () => Navigator.of(context).pop(), child: Text(context.l10n.labelCancel)),
                       TextButton(
                         onPressed: () {
                           _resetToDefaults();
                           Navigator.of(context).pop();
                         },
-                        child: const Text("Reset"),
+                        child: Text(context.l10n.labelResetSetting),
                       ),
                     ],
                   ),
                 );
               },
-              child: const Text("RESET", style: TextStyle(color: Colors.white)),
+              child: Text(context.l10n.labelReset, style: TextStyle(color: Colors.white)),
             ),
           ],
         ),
@@ -148,8 +149,8 @@ class DrawerSectionsPageState extends State<DrawerSectionsPage> {
                 margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 child: ListTile(
                   leading: const Icon(Icons.forum_rounded),
-                  title: const Text('Chat'),
-                  subtitle: shown ? null : const Text('Shown with Menu bar in Chat settings'),
+                  title: Text(context.l10n.chat),
+                  subtitle: shown ? null : Text(context.l10n.labelShownWithMenuBarInChatSettings),
                   trailing: const Icon(Icons.drag_handle),
                   tileColor: shown ? null : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.08),
                 ),
@@ -164,7 +165,7 @@ class DrawerSectionsPageState extends State<DrawerSectionsPage> {
               margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
               child: ListTile(
                 leading: Icon(section.icon),
-                title: Text(section.title),
+                title: Text(section.localizedTitle(context.l10n)),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [

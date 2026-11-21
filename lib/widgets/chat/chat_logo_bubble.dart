@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/app_language.dart';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -199,7 +200,7 @@ class ChatMenuBar extends StatelessWidget {
                           Icon(Icons.forum_rounded, size: 18, color: scheme.onTertiaryContainer),
                           const SizedBox(width: 10),
                           Text(
-                            'Chat',
+                            context.l10n.chat,
                             style: TextStyle(color: scheme.onTertiaryContainer, fontWeight: FontWeight.w600),
                           ),
                           const Spacer(),

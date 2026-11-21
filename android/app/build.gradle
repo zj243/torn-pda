@@ -36,7 +36,8 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.manuito.tornpda"
+        // ZJ：自用版使用独立应用 ID，可与商店版同时安装。
+        applicationId "com.zj243.tornpda"
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion 36 // See android/build.gradle when updating as well, for packages bug fix (if still needed)
         multiDexEnabled true

@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/app_language.dart';
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
@@ -147,6 +148,17 @@ class SettingsPageState extends State<SettingsPage> {
 
   List<Widget> buildFilteredSections() {
     List<Widget> sections = [
+      buildSectionWithRows(
+        title: context.l10n.appLanguage,
+        searchText: _searchText,
+        rows: [
+          SearchableRow(
+            label: '${context.l10n.appLanguage} Language 简体中文 English',
+            searchText: _searchText,
+            child: const AppLanguageTile(),
+          ),
+        ],
+      ),
       _browserSection(),
       _chatSection(),
       _shortcutsSection(),
@@ -266,8 +278,8 @@ class SettingsPageState extends State<SettingsPage> {
               child: TextField(
                 controller: _searchController,
                 focusNode: _searchFocusNode,
-                decoration: const InputDecoration(
-                  hintText: 'Search settings...',
+                decoration: InputDecoration(
+                  hintText: context.l10n.searchSettings,
                   border: InputBorder.none,
                   hintStyle: TextStyle(color: Colors.white70),
                 ),
@@ -279,7 +291,7 @@ class SettingsPageState extends State<SettingsPage> {
                 },
               ),
             )
-          : const Text('Settings', style: TextStyle(color: Colors.white)),
+          : Text(context.l10n.settings, style: TextStyle(color: Colors.white)),
       actions: _isSearching
           ? [
               if (_searchController.text.isNotEmpty)
@@ -388,7 +400,7 @@ class SettingsPageState extends State<SettingsPage> {
   Widget _browserSection() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Web browser",
+        label: context.l10n.labelWebBrowser,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
@@ -398,7 +410,7 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Flexible(child: Text("Web browser")),
+                  Flexible(child: Text(context.l10n.labelWebBrowser)),
                   IconButton(
                     icon: const Icon(Icons.info_outline),
                     onPressed: () {
@@ -419,14 +431,14 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Advanced browser settings",
+        label: context.l10n.labelAdvancedBrowserSettings,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text("Advanced browser settings"),
+              Text(context.l10n.labelAdvancedBrowserSettings),
               IconButton(
                 icon: const Icon(MdiIcons.web),
                 onPressed: () {
@@ -444,7 +456,7 @@ class SettingsPageState extends State<SettingsPage> {
       ),
     ];
     return buildSectionWithRows(
-      title: "BROWSER",
+      title: context.l10n.browserGroup,
       rows: rows,
       searchText: _searchText,
     );
@@ -454,14 +466,14 @@ class SettingsPageState extends State<SettingsPage> {
     if (!NativeChat.compiled) return const SizedBox.shrink();
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Chat settings",
+        label: context.l10n.labelChatSettings,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text("Chat settings"),
+              Text(context.l10n.labelChatSettings),
               IconButton(
                 icon: const Icon(Icons.forum_rounded),
                 onPressed: () => showChatSettingsFrom(context),
@@ -472,7 +484,7 @@ class SettingsPageState extends State<SettingsPage> {
       ),
     ];
     return buildSectionWithRows(
-      title: "CHAT",
+      title: context.l10n.chatGroup,
       rows: rows,
       searchText: _searchText,
     );
@@ -481,14 +493,14 @@ class SettingsPageState extends State<SettingsPage> {
   Widget _shortcutsSection() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Configure shortcuts",
+        label: context.l10n.labelConfigureShortcuts,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text("Configure shortcuts"),
+              Text(context.l10n.labelConfigureShortcuts),
               IconButton(
                 icon: const Icon(Icons.switch_access_shortcut_outlined),
                 onPressed: () {
@@ -505,14 +517,14 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "App icon menu",
+        label: context.l10n.labelAppIconMenu,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text("App icon menu"),
+              Text(context.l10n.labelAppIconMenu),
               IconButton(
                 icon: const Icon(Icons.apps_rounded),
                 onPressed: () {
@@ -529,7 +541,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Use Profile section shortcuts",
+        label: context.l10n.labelUseProfileSectionShortcuts,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
@@ -538,7 +550,7 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Use Profile section shortcuts"),
+                  Text(context.l10n.labelUseProfileSectionShortcuts),
                   Switch(
                     value: _settingsProvider.shortcutsEnabledProfile,
                     onChanged: (value) {
@@ -552,7 +564,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                'Enable configurable shortcuts in the Profile section to quickly access your favorite sections in Torn',
+                context.l10n.shortcutDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -565,14 +577,14 @@ class SettingsPageState extends State<SettingsPage> {
       ),
       if (_settingsProvider.shortcutsEnabledProfile)
         SearchableRow(
-          label: "Profile shortcuts menu",
+          label: context.l10n.labelProfileShortcutsMenu,
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 30, right: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Flexible(child: Text("Profile shortcuts menu")),
+                Flexible(child: Text(context.l10n.labelProfileShortcutsMenu)),
                 Flexible(child: _shortcutMenuDropdown()),
               ],
             ),
@@ -580,14 +592,14 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       if (_settingsProvider.shortcutsEnabledProfile)
         SearchableRow(
-          label: "Profile tile type",
+          label: context.l10n.labelProfileTileType,
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 30, right: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Flexible(child: Text("Profile tile type")),
+                Flexible(child: Text(context.l10n.labelProfileTileType)),
                 Flexible(child: _shortcutTileDropdown()),
               ],
             ),
@@ -595,7 +607,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       if (_settingsProvider.shortcutsEnabledProfile)
         SearchableRow(
-          label: "Show shortcuts edit icon",
+          label: context.l10n.labelShowShortcutsEditIcon,
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 30, right: 20, top: 10),
@@ -605,7 +617,7 @@ class SettingsPageState extends State<SettingsPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Show shortcuts edit icon")),
+                    Flexible(child: Text(context.l10n.labelShowShortcutsEditIcon)),
                     Switch(
                       value: _settingsProvider.showShortcutEditIcon,
                       onChanged: (value) {
@@ -619,7 +631,7 @@ class SettingsPageState extends State<SettingsPage> {
                   ],
                 ),
                 Text(
-                  'Adds a dedicated icon at the end of the Profile shortcuts list to open the editor quickly.',
+                  context.l10n.shortcutEditDescription,
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: 12,
@@ -633,7 +645,7 @@ class SettingsPageState extends State<SettingsPage> {
     ];
 
     return buildSectionWithRows(
-      title: "SHORTCUTS",
+      title: context.l10n.shortcutsGroup,
       rows: rows,
       searchText: _searchText,
     );
@@ -642,35 +654,35 @@ class SettingsPageState extends State<SettingsPage> {
   Widget _timeSection() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Time format",
+        label: context.l10n.labelTimeFormat,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20, bottom: 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Flexible(child: Text("Time format")),
+              Flexible(child: Text(context.l10n.labelTimeFormat)),
               Flexible(child: _timeFormatDropdown()),
             ],
           ),
         ),
       ),
       SearchableRow(
-        label: "Time zone",
+        label: context.l10n.labelTimeZone,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Flexible(child: Text("Time zone")),
+              Flexible(child: Text(context.l10n.labelTimeZone)),
               Flexible(flex: 2, child: _timeZoneDropdown()),
             ],
           ),
         ),
       ),
       SearchableRow(
-        label: "Show date in clock",
+        label: context.l10n.labelShowDateInClock,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -679,12 +691,12 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Show date in clock")),
+                  Flexible(child: Text(context.l10n.labelShowDateInClock)),
                   Flexible(flex: 2, child: _dateInClockDropdown()),
                 ],
               ),
               Text(
-                'Add an extra row for the date wherever the TCT clock is shown. You can also specify the desired format (day/month or month/day)',
+                context.l10n.clockDateDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -696,21 +708,21 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Seconds in clock",
+        label: context.l10n.labelSecondsInClock,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Flexible(child: Text("Seconds in clock")),
+              Flexible(child: Text(context.l10n.labelSecondsInClock)),
               Flexible(flex: 2, child: _secondsInClockDropdown()),
             ],
           ),
         ),
       ),
       SearchableRow(
-        label: "Highlight events",
+        label: context.l10n.labelHighlightEvents,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
@@ -719,7 +731,7 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Highlight events")),
+                  Flexible(child: Text(context.l10n.labelHighlightEvents)),
                   Switch(
                     value: _settingsProvider.tctClockHighlightsEvents,
                     onChanged: (value) {
@@ -733,7 +745,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                'If enabled, the TCT Clock will be highlighted whenever there is an event or competition active in Torn',
+                context.l10n.clockEventDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -746,7 +758,7 @@ class SettingsPageState extends State<SettingsPage> {
       ),
     ];
     return buildSectionWithRows(
-      title: 'TIME',
+      title: context.l10n.timeGroup,
       rows: rows,
       searchText: _searchText,
     );
@@ -784,7 +796,7 @@ class SettingsPageState extends State<SettingsPage> {
   Widget _notificationsSection() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Discreet local notifications",
+        label: context.l10n.labelDiscreetLocalNotifications,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
@@ -794,7 +806,7 @@ class SettingsPageState extends State<SettingsPage> {
               Flexible(
                 child: Row(
                   children: [
-                    const Flexible(child: Text("Discreet local notifications")),
+                    Flexible(child: Text(context.l10n.labelDiscreetLocalNotifications)),
                     IconButton(
                       icon: const Icon(Icons.info_outline),
                       onPressed: () {
@@ -825,7 +837,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Discreet schedule",
+        label: context.l10n.labelDiscreetSchedule,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
@@ -834,7 +846,7 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Schedule")),
+                  Flexible(child: Text(context.l10n.labelSchedule)),
                   Switch(
                     value: _settingsProvider.discreetSchedule.enabled,
                     onChanged: (value) {
@@ -856,24 +868,22 @@ class SettingsPageState extends State<SettingsPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text("From"),
+                    Text(context.l10n.labelFrom),
                     TextButton(
                       onPressed: () => _pickDiscreetHour(from: true),
                       child: _discreetHourLabel(_settingsProvider.discreetSchedule.from),
                     ),
-                    const Text("To"),
+                    Text(context.l10n.labelTo),
                     TextButton(
                       onPressed: () => _pickDiscreetHour(from: false),
                       child: _discreetHourLabel(_settingsProvider.discreetSchedule.to),
                     ),
                   ],
                 ),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.only(bottom: 8),
                   child: Text(
-                    "Covers notifications created by Torn PDA on this phone and Torn PDA server alerts. "
-                    "Not covered: Torn private messages on iOS while the app is in the background or closed, "
-                    "other apps and the Torn website",
+                    context.l10n.discreetScope,
                     style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
                   ),
                 ),
@@ -884,7 +894,7 @@ class SettingsPageState extends State<SettingsPage> {
       ),
       if (Platform.isAndroid)
         SearchableRow(
-          label: "Remove notifications on launch",
+          label: context.l10n.labelRemoveNotificationsOnLaunch,
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 20, right: 20),
@@ -893,7 +903,7 @@ class SettingsPageState extends State<SettingsPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Remove notifications on launch")),
+                    Flexible(child: Text(context.l10n.labelRemoveNotificationsOnLaunch)),
                     Switch(
                       value: _removeNotificationsLaunch,
                       onChanged: (value) {
@@ -908,7 +918,7 @@ class SettingsPageState extends State<SettingsPage> {
                   ],
                 ),
                 Text(
-                  'This will remove all Torn PDA notifications from your notifications bar when you launch the app. Deactivate it if you prefer to clear them manually.',
+                  context.l10n.clearNotificationsDescription,
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 )
               ],
@@ -917,7 +927,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       if (Platform.isAndroid)
         SearchableRow(
-          label: "Alerts vibration",
+          label: context.l10n.labelAlertsVibration,
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
@@ -926,12 +936,12 @@ class SettingsPageState extends State<SettingsPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Alerts vibration")),
+                    Flexible(child: Text(context.l10n.labelAlertsVibration)),
                     Flexible(flex: 2, child: _vibrationDropdown()),
                   ],
                 ),
                 Text(
-                  'This vibration applies to automatic alerts while the app is active or in the background.',
+                  context.l10n.vibrationDescription,
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 ),
               ],
@@ -940,14 +950,14 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       if (Platform.isAndroid)
         SearchableRow(
-          label: "Manual alarm sound",
+          label: context.l10n.labelManualAlarmSound,
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text("Manual alarm sound"),
+                Text(context.l10n.labelManualAlarmSound),
                 Switch(
                   value: _manualAlarmSound,
                   onChanged: (value) {
@@ -965,7 +975,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       if (Platform.isAndroid)
         SearchableRow(
-          label: "Manual alarm vibration",
+          label: context.l10n.labelManualAlarmVibration,
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -974,7 +984,7 @@ class SettingsPageState extends State<SettingsPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text("Manual alarm vibration"),
+                    Text(context.l10n.labelManualAlarmVibration),
                     Switch(
                       value: _manualAlarmVibration,
                       onChanged: (value) {
@@ -991,11 +1001,11 @@ class SettingsPageState extends State<SettingsPage> {
                 RichText(
                   text: TextSpan(
                     text:
-                        'Applies to manually activated alarms in all sections (Travel, Loot, Profile, etc.). Some Android clock apps have issues with multiple timers or distinguishing between sound and vibration. If you experience issues, consider installing ',
+                        context.l10n.alarmClockDescription,
                     style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                     children: <TextSpan>[
                       TextSpan(
-                        text: "Google's Clock application",
+                        text: context.l10n.googleClock,
                         style: const TextStyle(color: Colors.blue),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () async {
@@ -1015,7 +1025,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       if (Platform.isIOS)
         SearchableRow(
-          label: "Active Alarms",
+          label: context.l10n.labelActiveAlarms,
           searchText: _searchText,
           child: FutureBuilder<bool>(
             future: AlarmKitServiceIos.isAvailable(),
@@ -1031,26 +1041,25 @@ class SettingsPageState extends State<SettingsPage> {
                   children: [
                     Row(
                       children: [
-                        const Text("Active Alarms", style: TextStyle(fontWeight: FontWeight.bold)),
+                        Text(context.l10n.labelActiveAlarms, style: TextStyle(fontWeight: FontWeight.bold)),
                         const SizedBox(width: 6),
                         IconButton(
                           icon: const Icon(Icons.info_outline, size: 18, color: Colors.grey),
                           padding: EdgeInsets.zero,
                           constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-                          tooltip: 'What is this?',
+                          tooltip: context.l10n.labelWhatIsThis,
                           onPressed: () {
                             showDialog(
                               context: context,
                               builder: (context) => AlertDialog(
-                                title: const Text('Active alarms'),
-                                content: const Text(
-                                  'These are the alarms scheduled by Torn PDA. On iOS they are handled directly by the app.'
-                                  '\n\nYou can clear them here if you no longer need them.',
+                                title: Text(context.l10n.labelActiveAlarmsSetting),
+                                content: Text(
+                                  context.l10n.alarmListDescription,
                                 ),
                                 actions: [
                                   TextButton(
                                     onPressed: () => Navigator.of(context).pop(),
-                                    child: const Text('Got it'),
+                                    child: Text(context.l10n.labelGotIt),
                                   ),
                                 ],
                               ),
@@ -1061,13 +1070,13 @@ class SettingsPageState extends State<SettingsPage> {
                         IconButton(
                           visualDensity: VisualDensity.compact,
                           icon: const Icon(Icons.refresh, size: 18),
-                          tooltip: 'Refresh',
+                          tooltip: context.l10n.labelRefresh,
                           onPressed: _refreshIosAlarms,
                         ),
                         IconButton(
                           visualDensity: VisualDensity.compact,
                           icon: const Icon(Icons.delete_sweep, size: 18),
-                          tooltip: 'Clear all',
+                          tooltip: context.l10n.labelClearAll,
                           onPressed: () async {
                             await _clearAllIosAlarms();
                           },
@@ -1082,7 +1091,7 @@ class SettingsPageState extends State<SettingsPage> {
                           return const Center(child: CircularProgressIndicator());
                         }
                         if (!alarmSnapshot.hasData || alarmSnapshot.data!.isEmpty) {
-                          return const Text("No active alarms");
+                          return Text(context.l10n.labelNoActiveAlarms);
                         }
                         return Column(
                           children: alarmSnapshot.data!.map((alarm) {
@@ -1163,7 +1172,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
     ];
     return buildSectionWithRows(
-      title: "NOTIFICATIONS",
+      title: context.l10n.notificationsGroup,
       rows: rows,
       searchText: _searchText,
     );
@@ -1171,24 +1180,24 @@ class SettingsPageState extends State<SettingsPage> {
 
   Widget _appWidgetSection() {
     final destinationRow = SearchableRow(
-      label: "Cooldown tap destination",
+      label: context.l10n.labelCooldownTapDestination,
       searchText: _searchText,
       child: _appWidgetCooldownTapDestinationSelector(),
     );
     if (Platform.isIOS) {
-      return buildSectionWithRows(title: "HOME SCREEN WIDGET", rows: [destinationRow], searchText: _searchText);
+      return buildSectionWithRows(title: context.l10n.homeWidgetGroup, rows: [destinationRow], searchText: _searchText);
     }
 
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Dark mode",
+        label: context.l10n.labelDarkMode,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Flexible(child: Text("Dark mode")),
+              Flexible(child: Text(context.l10n.labelDarkMode)),
               Switch(
                 value: _settingsProvider.appwidgetDarkMode,
                 onChanged: (value) {
@@ -1205,7 +1214,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Remove shortcuts from short layout",
+        label: context.l10n.labelRemoveShortcutsFromShortLayout,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
@@ -1214,7 +1223,7 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Remove shortcuts from short layout")),
+                  Flexible(child: Text(context.l10n.labelRemoveShortcutsFromShortLayout)),
                   Switch(
                     value: _settingsProvider.appwidgetRemoveShortcutsOneRowLayout,
                     onChanged: (value) {
@@ -1229,7 +1238,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                'By default, the short, one-row layout accommodates a couple of shortcuts by sacrificing chaining information and moving the reload icon to the top. Enabling this option removes shortcuts to free up space for the chaining bar',
+                context.l10n.compactWidgetDescription,
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               )
             ],
@@ -1237,7 +1246,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Show wallet money",
+        label: context.l10n.labelShowWalletMoney,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
@@ -1247,7 +1256,7 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Show wallet money")),
+                  Flexible(child: Text(context.l10n.labelShowWalletMoney)),
                   Switch(
                     value: _settingsProvider.appwidgetMoneyEnabled,
                     onChanged: (value) {
@@ -1270,7 +1279,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Cooldown tap launches browser",
+        label: context.l10n.labelCooldownTapLaunchesBrowser,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
@@ -1279,7 +1288,7 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Cooldown tap launches browser")),
+                  Flexible(child: Text(context.l10n.labelCooldownTapLaunchesBrowser)),
                   Switch(
                     value: _settingsProvider.appwidgetCooldownTapOpenBrowser,
                     onChanged: (value) {
@@ -1294,7 +1303,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                'If enabled, a tap on any cooldown icon will launch the app and browser to your personal or faction items. Otherwise, the remaining cooldown time is displayed. NOTE: you may need to try a couple of times after switching for the widget to update properly.',
+                context.l10n.cooldownWidgetDescription,
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
             ],
@@ -1303,7 +1312,7 @@ class SettingsPageState extends State<SettingsPage> {
       ),
       if (_settingsProvider.appwidgetCooldownTapOpenBrowser) destinationRow,
       SearchableRow(
-        label: "Racing tap opens browser",
+        label: context.l10n.labelRacingTapOpensBrowser,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
@@ -1312,7 +1321,7 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Racing tap opens browser")),
+                  Flexible(child: Text(context.l10n.labelRacingTapOpensBrowser)),
                   Switch(
                     value: _settingsProvider.appwidgetRacingTapOpenBrowser,
                     onChanged: (value) {
@@ -1327,7 +1336,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                'If enabled, tapping the racing icon will open the racing page in the browser. Otherwise, the racing status text is displayed.  NOTE: you may need to try a couple of times after switching for the widget to update properly.',
+                context.l10n.racingWidgetDescription,
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
             ],
@@ -1336,7 +1345,7 @@ class SettingsPageState extends State<SettingsPage> {
       ),
     ];
     return buildSectionWithRows(
-      title: "HOME SCREEN WIDGET",
+      title: context.l10n.homeWidgetGroup,
       rows: rows,
       searchText: _searchText,
     );
@@ -1380,42 +1389,42 @@ class SettingsPageState extends State<SettingsPage> {
     final enabled = _settingsProvider.pipEnabled;
     List<SearchableRow> rows = [
       row(
-        "Floating window",
-        "Off hides every floating window button",
+        context.l10n.labelFloatingWindow,
+        context.l10n.labelOffHidesEveryFloatingWindowButton,
         enabled,
         (value) => _settingsProvider.pipEnabled = value,
       ),
       row(
-        "Chain widget button",
+        context.l10n.labelChainWidgetButton,
         "",
         _settingsProvider.pipChainButton,
         enabled ? (value) => _settingsProvider.pipChainButton = value : null,
         indent: 40,
       ),
       row(
-        "Player lists button",
-        "Targets, war, retals, attacks, FFScouter",
+        context.l10n.labelPlayerListsButton,
+        context.l10n.labelTargetsWarRetalsAttacksFfscouter,
         _settingsProvider.pipPlayerButtons,
         enabled ? (value) => _settingsProvider.pipPlayerButtons = value : null,
         indent: 40,
       ),
       row(
-        "Stakeouts button",
+        context.l10n.labelStakeoutsButton,
         "",
         _settingsProvider.pipStakeoutsButton,
         enabled ? (value) => _settingsProvider.pipStakeoutsButton = value : null,
         indent: 40,
       ),
       row(
-        "Open when leaving the app with the chain watcher on",
-        "No button needed",
+        context.l10n.labelOpenWhenLeavingTheAppWithThe,
+        context.l10n.labelNoButtonNeeded,
         _settingsProvider.pipAutoEnter,
         enabled ? (value) => _settingsProvider.pipAutoEnter = value : null,
         indent: 40,
       ),
     ];
     return buildSectionWithRows(
-      title: "FLOATING WINDOW",
+      title: context.l10n.floatingGroup,
       rows: rows,
       searchText: _searchText,
     );
@@ -1424,7 +1433,7 @@ class SettingsPageState extends State<SettingsPage> {
   Widget _spiesSection() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Spies source",
+        label: context.l10n.labelSpiesSource,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
@@ -1433,12 +1442,12 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Spies source")),
+                  Flexible(child: Text(context.l10n.labelSpiesSource)),
                   Flexible(flex: 2, child: _spiesSourceDropdown()),
                 ],
               ),
               Text(
-                'Choose the source of spied stats. This affects the stats shown when you visit a profile in the browser, as well as those shown in the War section (Chaining)',
+                context.l10n.spiesDescription,
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               )
             ],
@@ -1446,7 +1455,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Spies",
+        label: context.l10n.labelSpies,
         searchText: _searchText,
         child: GetBuilder<SpiesController>(
           builder: (s) {
@@ -1504,14 +1513,14 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Manage spies",
+        label: context.l10n.labelManageSpies,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Flexible(child: Text("Manage spies")),
+              Flexible(child: Text(context.l10n.labelManageSpies)),
               IconButton(
                 icon: const Icon(MdiIcons.incognito),
                 onPressed: () {
@@ -1530,7 +1539,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Allow mixed sources",
+        label: context.l10n.labelAllowMixedSources,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
@@ -1539,7 +1548,7 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Allow mixed sources")),
+                  Flexible(child: Text(context.l10n.labelAllowMixedSources)),
                   Switch(
                     value: _spyController.allowMixedSpiesSources,
                     onChanged: (enabled) {
@@ -1553,7 +1562,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                "Whilst enabled, if a target's spy info cannot be found in the preferred source, it will also be taken from the other source if available. Switching sources preserves info unless the new source also contains a spy for the target.",
+                context.l10n.mixedSourcesDescription,
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               )
             ],
@@ -1561,7 +1570,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Delete spies",
+        label: context.l10n.labelDeleteSpies,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
@@ -1570,7 +1579,7 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Delete spies")),
+                  Flexible(child: Text(context.l10n.labelDeleteSpies)),
                   ElevatedButton(
                     child: const Icon(Icons.delete_outlined),
                     onPressed: () async {
@@ -1587,7 +1596,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                'Deletes all spies information from the local database if you prefer not to use spies info or if there is an issue with the downloaded stats.',
+                context.l10n.deleteSpiesDescription,
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               )
             ],
@@ -1596,7 +1605,7 @@ class SettingsPageState extends State<SettingsPage> {
       ),
     ];
     return buildSectionWithRows(
-      title: "SPIES",
+      title: context.l10n.spiesGroup,
       rows: rows,
       searchText: _searchText,
     );
@@ -1607,40 +1616,40 @@ class SettingsPageState extends State<SettingsPage> {
       context: context,
       builder: (ctx) {
         return AlertDialog(
-          title: const Text("FFScouter premium features", style: TextStyle(fontSize: 16)),
+          title: Text(context.l10n.labelFfscouterPremiumFeatures, style: TextStyle(fontSize: 16)),
           content: GetBuilder<FFScouterPremiumController>(
             builder: (p) => Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text("Stat distribution"),
+                  title: Text(context.l10n.labelStatDistribution),
                   value: p.distributionEnabled,
                   onChanged: (v) => p.distributionEnabled = v,
                 ),
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text("Travel / landing timers"),
+                  title: Text(context.l10n.labelTravelLandingTimers),
                   value: p.flightsEnabled,
                   onChanged: (v) => p.flightsEnabled = v,
                 ),
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text("Activity tracker"),
+                  title: Text(context.l10n.labelActivityTracker),
                   value: p.activityEnabled,
                   onChanged: (v) => p.activityEnabled = v,
                 ),
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text("Hit calling"),
-                  subtitle: const Text("Call war targets for your faction", style: TextStyle(fontSize: 12)),
+                  title: Text(context.l10n.labelHitCalling),
+                  subtitle: Text(context.l10n.labelCallWarTargetsForYourFaction, style: TextStyle(fontSize: 12)),
                   value: p.hitCallingEnabled,
                   onChanged: (v) => p.hitCallingEnabled = v,
                 ),
               ],
             ),
           ),
-          actions: [TextButton(onPressed: () => Navigator.of(ctx).pop(), child: const Text("Close"))],
+          actions: [TextButton(onPressed: () => Navigator.of(ctx).pop(), child: Text(context.l10n.labelClose))],
         );
       },
     );
@@ -1652,7 +1661,7 @@ class SettingsPageState extends State<SettingsPage> {
     // Player Notes Manager
     rows.add(
       SearchableRow(
-        label: "Player Notes",
+        label: context.l10n.labelPlayerNotes,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
@@ -1663,7 +1672,7 @@ class SettingsPageState extends State<SettingsPage> {
                 children: [
                   Expanded(
                     child: Text(
-                      'Player notes database',
+                      context.l10n.labelPlayerNotesDatabase,
                       style: TextStyle(
                         color: _themeProvider.mainText,
                       ),
@@ -1676,13 +1685,13 @@ class SettingsPageState extends State<SettingsPage> {
                         builder: (context) => const PlayerNotesListDialog(),
                       );
                     },
-                    child: const Text('Manage Notes'),
+                    child: Text(context.l10n.labelManageNotes),
                   ),
                 ],
               ),
               const SizedBox(height: 8),
               Text(
-                'View and edit all your player notes, including those from targets, friends, stakeouts, and war members.',
+                context.l10n.playerNotesDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -1696,7 +1705,7 @@ class SettingsPageState extends State<SettingsPage> {
     );
 
     return buildSectionWithRows(
-      title: "PLAYER NOTES",
+      title: context.l10n.playerNotesGroup,
       rows: rows,
       searchText: _searchText,
     );
@@ -1709,7 +1718,7 @@ class SettingsPageState extends State<SettingsPage> {
     if (_settingsProvider.ffScouterEnabledStatusRemoteConfig) {
       rows.add(
         SearchableRow(
-          label: "Use FFScouter",
+          label: context.l10n.labelUseFfscouter,
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
@@ -1722,7 +1731,7 @@ class SettingsPageState extends State<SettingsPage> {
                     Flexible(
                       child: Row(
                         children: [
-                          const Flexible(child: Text("Use FFScouter")),
+                          Flexible(child: Text(context.l10n.labelUseFfscouter)),
                           const SizedBox(width: 8),
                           GestureDetector(
                             child: const Icon(Icons.info_outline, size: 18),
@@ -1769,7 +1778,7 @@ class SettingsPageState extends State<SettingsPage> {
                   ],
                 ),
                 Text(
-                  'Enable FFScouter battle stats estimations in player profiles, war/retal cards and the FFScouter tab in the Chaining section',
+                  context.l10n.scouterDescription,
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: 12,
@@ -1788,12 +1797,12 @@ class SettingsPageState extends State<SettingsPage> {
     } else {
       rows.add(
         SearchableRow(
-          label: "Use FFScouter",
+          label: context.l10n.labelUseFfscouter,
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
             child: Text(
-              "FFScouter temporarily deactivated",
+              context.l10n.labelFfscouterTemporarilyDeactivated,
               style: TextStyle(
                 color: Colors.grey[600],
                 fontSize: 12,
@@ -1809,7 +1818,7 @@ class SettingsPageState extends State<SettingsPage> {
     if (_settingsProvider.ffScouterEnabledStatusRemoteConfig && _settingsProvider.ffScouterEnabledStatus == 1) {
       rows.add(
         SearchableRow(
-          label: "FFScouter premium features",
+          label: context.l10n.labelFfscouterPremiumFeatures,
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 32, top: 0, right: 20, bottom: 5),
@@ -1817,12 +1826,12 @@ class SettingsPageState extends State<SettingsPage> {
               builder: (ffsPremium) => Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Premium features")),
+                  Flexible(child: Text(context.l10n.labelPremiumFeatures)),
                   if (ffsPremium.isPremium)
                     OutlinedButton.icon(
                       onPressed: _showFFScouterPremiumFeaturesDialog,
                       icon: const Icon(Icons.tune, size: 16),
-                      label: const Text("Select"),
+                      label: Text(context.l10n.labelSelect),
                     )
                   else
                     ElevatedButton.icon(
@@ -1836,7 +1845,7 @@ class SettingsPageState extends State<SettingsPage> {
                         }
                       },
                       icon: const Icon(Icons.sync, size: 16),
-                      label: const Text("SYNC"),
+                      label: Text(context.l10n.labelSync),
                     ),
                 ],
               ),
@@ -1852,7 +1861,7 @@ class SettingsPageState extends State<SettingsPage> {
         Get.find<FFScouterNotesController>().remoteConfigEnabled) {
       rows.add(
         SearchableRow(
-          label: "FFScouter shared notes",
+          label: context.l10n.labelFfscouterSharedNotes,
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 32, top: 0, right: 20, bottom: 5),
@@ -1863,7 +1872,7 @@ class SettingsPageState extends State<SettingsPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Flexible(child: Text("Shared notes")),
+                      Flexible(child: Text(context.l10n.labelSharedNotes)),
                       Switch(
                         value: notes.enabled,
                         onChanged: (enabled) {
@@ -1876,8 +1885,7 @@ class SettingsPageState extends State<SettingsPage> {
                     ],
                   ),
                   Text(
-                    'Shows the personal and faction notes stored in FFScouter in the notes dialog, and a counter '
-                    'next to the notes of war, target and profile cards',
+                    context.l10n.scouterNotesDescription,
                     style: TextStyle(
                       color: Colors.grey[600],
                       fontSize: 12,
@@ -1888,7 +1896,7 @@ class SettingsPageState extends State<SettingsPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Flexible(child: Text("Note shown on cards")),
+                        Flexible(child: Text(context.l10n.labelNoteShownOnCards)),
                         DropdownButton<bool>(
                           value: notes.preferOnCards,
                           items: const [
@@ -1900,8 +1908,7 @@ class SettingsPageState extends State<SettingsPage> {
                       ],
                     ),
                     Text(
-                      'When a player has both a Torn PDA note and FFScouter notes, cards show this one. Tap the '
-                      'notebook icon to open your Torn PDA note, or the FFS counter to open the FFScouter ones',
+                      context.l10n.preferredNotesDescription,
                       style: TextStyle(
                         color: Colors.grey[600],
                         fontSize: 12,
@@ -1923,7 +1930,7 @@ class SettingsPageState extends State<SettingsPage> {
         _settingsProvider.ffScouterBountiesEnabledRemoteConfig) {
       rows.add(
         SearchableRow(
-          label: "FFScouter Bounty Board",
+          label: context.l10n.labelFfscouterBountyBoard,
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 32, top: 0, right: 20, bottom: 5),
@@ -1933,7 +1940,7 @@ class SettingsPageState extends State<SettingsPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Bounty Board")),
+                    Flexible(child: Text(context.l10n.labelBountyBoard)),
                     Switch(
                       value: _settingsProvider.ffScouterBountiesEnabled,
                       onChanged: (enabled) {
@@ -1947,8 +1954,7 @@ class SettingsPageState extends State<SettingsPage> {
                   ],
                 ),
                 Text(
-                  'Shows the Bounty Board tab in the FFScouter section of Chaining, where you can hit the players '
-                  'with a bounty on them and place your own',
+                  context.l10n.bountyBoardDescription,
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: 12,
@@ -1966,7 +1972,7 @@ class SettingsPageState extends State<SettingsPage> {
     if (_settingsProvider.ffScouterEnabledStatusRemoteConfig && _settingsProvider.ffScouterEnabledStatus == 1) {
       rows.add(
         SearchableRow(
-          label: "Prefer FFScouter battle score",
+          label: context.l10n.labelPreferFfscouterBattleScore,
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 32, top: 0, right: 20, bottom: 5),
@@ -1976,8 +1982,8 @@ class SettingsPageState extends State<SettingsPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(
-                      child: Text("Prefer FFScouter battle score"),
+                    Flexible(
+                      child: Text(context.l10n.labelPreferFfscouterBattleScore),
                     ),
                     Switch(
                       value: _settingsProvider.preferFFScouterOverEstimated,
@@ -1998,9 +2004,7 @@ class SettingsPageState extends State<SettingsPage> {
                   ],
                 ),
                 Text(
-                  'When enabled, war/retal cards and profile checks will show the FFScouter battle score '
-                  'estimate (~12.5M) instead of the vague range (2M-25M) for unspied targets. '
-                  'Disabling this clears the cache.',
+                  context.l10n.battleScoreDescription,
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: 12,
@@ -2027,7 +2031,7 @@ class SettingsPageState extends State<SettingsPage> {
                     max: 12,
                     divisions: 12,
                     label: _settingsProvider.ffsOverrideSpyMonths == 0
-                        ? "Off"
+                        ? context.l10n.labelOff
                         : "${_settingsProvider.ffsOverrideSpyMonths}m",
                     onChanged: (value) {
                       setState(() {
@@ -2039,9 +2043,7 @@ class SettingsPageState extends State<SettingsPage> {
                     },
                   ),
                   Text(
-                    'When set, FFS will replace spied stats on cards if the spy is older '
-                    'than the selected number of months. Sorting, filters, and SmartScore '
-                    'will also use FFS in that case.',
+                    context.l10n.staleSpiesDescription,
                     style: TextStyle(
                       color: Colors.grey[600],
                       fontSize: 12,
@@ -2070,8 +2072,8 @@ class SettingsPageState extends State<SettingsPage> {
         final keyProblem =
             Get.find<FFScouterCacheController>().keyNotRegistered || Get.find<FFScouterNotesController>().keyProblem;
         final status = [
-          dedicatedKey ? "Dedicated FFScouter key" : "Using your Torn PDA key",
-          if (premium.isPremium) "Premium",
+          dedicatedKey ? context.l10n.labelDedicatedFfscouterKey : context.l10n.labelUsingYourTornPdaKey,
+          if (premium.isPremium) context.l10n.labelPremium,
         ].join(" · ");
         return Padding(
           padding: const EdgeInsets.only(top: 6),
@@ -2085,7 +2087,7 @@ class SettingsPageState extends State<SettingsPage> {
               const SizedBox(width: 6),
               Flexible(
                 child: Text(
-                  keyProblem ? "Your key is not registered with FFScouter" : status,
+                  keyProblem ? context.l10n.labelYourKeyIsNotRegisteredWithFfscouter : status,
                   style: const TextStyle(fontSize: 12),
                 ),
               ),
@@ -2101,7 +2103,7 @@ class SettingsPageState extends State<SettingsPage> {
                       ),
                     ),
                   ),
-                  child: const Text("Register", style: TextStyle(fontSize: 12)),
+                  child: Text(context.l10n.labelRegister, style: TextStyle(fontSize: 12)),
                 ),
             ],
           ),
@@ -2117,7 +2119,7 @@ class SettingsPageState extends State<SettingsPage> {
     if (_settingsProvider.yataStatsEnabledStatusRemoteConfig) {
       rows.add(
         SearchableRow(
-          label: "Use YATA stats estimates",
+          label: context.l10n.labelUseYataStatsEstimates,
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
@@ -2127,10 +2129,10 @@ class SettingsPageState extends State<SettingsPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(
+                    Flexible(
                       child: Row(
                         children: [
-                          Flexible(child: Text("Use YATA stats estimates")),
+                          Flexible(child: Text(context.l10n.labelUseYataStatsEstimates)),
                         ],
                       ),
                     ),
@@ -2147,7 +2149,7 @@ class SettingsPageState extends State<SettingsPage> {
                   ],
                 ),
                 Text(
-                  'Enable YATA stats estimations in sections where spied or estimated stats are shown (e.g.: war targets cards, retal cards or profile widget)',
+                  context.l10n.yataEstimateDescription,
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: 12,
@@ -2162,12 +2164,12 @@ class SettingsPageState extends State<SettingsPage> {
     } else {
       rows.add(
         SearchableRow(
-          label: "Use YATA stats estimates",
+          label: context.l10n.labelUseYataStatsEstimates,
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
             child: Text(
-              "YATA stats temporarily deactivated",
+              context.l10n.labelYataStatsTemporarilyDeactivated,
               style: TextStyle(
                 color: Colors.grey[600],
                 fontSize: 12,
@@ -2189,7 +2191,7 @@ class SettingsPageState extends State<SettingsPage> {
   Widget _ocSection() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Nerve bar source",
+        label: context.l10n.labelNerveBarSource,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
@@ -2198,12 +2200,12 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Nerve bar source")),
+                  Flexible(child: Text(context.l10n.labelNerveBarSource)),
                   Flexible(flex: 2, child: _naturalNerveBarSourceDropdown()),
                 ],
               ),
               Text(
-                'Choose the source of the Natural Nerve Bar (NNB) that will be shown for each member of your faction available to plan an organized crime',
+                context.l10n.nerveSourceDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -2215,7 +2217,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Organized Crimes v2 in use",
+        label: context.l10n.labelOrganizedCrimesV2InUse,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
@@ -2224,9 +2226,9 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(
+                  Flexible(
                     child: Row(
-                      children: [Flexible(child: Text("Organized Crimes v2 in use"))],
+                      children: [Flexible(child: Text(context.l10n.labelOrganizedCrimesV2InUse))],
                     ),
                   ),
                   Switch(
@@ -2242,7 +2244,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                'Torn PDA will try to identify if your faction has changed to OC v2. If you would like to remain in OC v1 (e.g.: if you join an OC1 faction), revert back by using this toggle',
+                context.l10n.organizedCrimesDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -2256,7 +2258,7 @@ class SettingsPageState extends State<SettingsPage> {
     ];
 
     return buildSectionWithRows(
-      title: "ORGANIZED CRIMES",
+      title: context.l10n.crimesGroup,
       rows: rows,
       searchText: _searchText,
     );
@@ -2265,7 +2267,7 @@ class SettingsPageState extends State<SettingsPage> {
   Widget _revivingServicesSection() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Choose reviving providers",
+        label: context.l10n.labelChooseRevivingProviders,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -2274,7 +2276,7 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Choose reviving providers"),
+                  Text(context.l10n.labelChooseRevivingProviders),
                   IconButton(
                     icon: const Icon(MdiIcons.hospitalBoxOutline),
                     color: _themeProvider.getTextColor(Colors.red.shade600),
@@ -2291,7 +2293,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                "Choose which reviving services you might want to use. If enabled, when you are in hospital you'll have the option to call one of their revivers from several places (e.g., Profile and Chaining sections).",
+                context.l10n.revivingDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -2305,7 +2307,7 @@ class SettingsPageState extends State<SettingsPage> {
     ];
 
     return buildSectionWithRows(
-      title: "REVIVING SERVICES",
+      title: context.l10n.reviveGroup,
       rows: rows,
       searchText: _searchText,
     );
@@ -2314,7 +2316,7 @@ class SettingsPageState extends State<SettingsPage> {
   Widget _screenConfigurationSection() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Allow auto rotation",
+        label: context.l10n.labelAllowAutoRotation,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
@@ -2324,7 +2326,7 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Allow auto rotation")),
+                  Flexible(child: Text(context.l10n.labelAllowAutoRotation)),
                   Switch(
                     value: _settingsProvider.allowScreenRotation,
                     onChanged: (value) {
@@ -2338,7 +2340,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                'If enabled, the interface will rotate from portrait to landscape if the device is rotated. Be aware that landscape might not be comfortable on narrow mobile devices.',
+                context.l10n.rotationDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -2350,7 +2352,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Split screen",
+        label: context.l10n.labelSplitScreen,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
@@ -2360,12 +2362,12 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Split screen")),
+                  Flexible(child: Text(context.l10n.labelSplitScreen)),
                   Flexible(flex: 2, child: _splitScreenDropdown()),
                 ],
               ),
               Text(
-                'If enabled, the device screen will be split to show the main app and the browser simultaneously. A minimum width of 800 dpi is required.',
+                context.l10n.splitScreenDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -2375,7 +2377,7 @@ class SettingsPageState extends State<SettingsPage> {
               if (!_settingsProvider.allowScreenRotation &&
                   _webViewProvider.splitScreenPosition != WebViewSplitPosition.off)
                 Text(
-                  'Allow auto rotation to use split screen on phones and foldables',
+                  context.l10n.splitRotationDescription,
                   style: TextStyle(
                     color: Colors.orange[600],
                     fontSize: 12,
@@ -2387,7 +2389,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Split reverts to",
+        label: context.l10n.labelSplitRevertsTo,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
@@ -2397,12 +2399,12 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Split reverts to")),
+                  Flexible(child: Text(context.l10n.labelSplitRevertsTo)),
                   Flexible(flex: 2, child: _splitScreenRevertionDropdown()),
                 ],
               ),
               Text(
-                'When split screen is no longer active (e.g., device rotated to a width lower than 800 dpi), this option determines whether the webview or the app remains in the foreground.',
+                context.l10n.splitExitDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -2417,7 +2419,7 @@ class SettingsPageState extends State<SettingsPage> {
           _webViewProvider.splitBrowsersAllowedRC &&
           _webViewProvider.splitScreenPosition != WebViewSplitPosition.off)
         SearchableRow(
-          label: "Links from the app in split screen",
+          label: context.l10n.labelLinksFromTheAppInSplitScreen,
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -2427,15 +2429,15 @@ class SettingsPageState extends State<SettingsPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Links from the app in split screen")),
+                    Flexible(child: Text(context.l10n.labelLinksFromTheAppInSplitScreen)),
                     DropdownButton<SplitAppLinkTarget>(
                       value: _settingsProvider.splitAppLinkTarget,
                       items: [
                         for (final (target, label) in [
-                          (SplitAppLinkTarget.browserTab, "Current tab"),
-                          (SplitAppLinkTarget.browserNewTab, "New tab"),
-                          (SplitAppLinkTarget.appSideTab, "Tab behind app"),
-                          (SplitAppLinkTarget.appSideNewTab, "New tab, app side"),
+                          (SplitAppLinkTarget.browserTab, context.l10n.labelCurrentTab),
+                          (SplitAppLinkTarget.browserNewTab, context.l10n.labelNewTab),
+                          (SplitAppLinkTarget.appSideTab, context.l10n.labelTabBehindApp),
+                          (SplitAppLinkTarget.appSideNewTab, context.l10n.labelNewTabAppSide),
                         ])
                           DropdownMenuItem(
                             value: target,
@@ -2457,7 +2459,7 @@ class SettingsPageState extends State<SettingsPage> {
                 Padding(
                   padding: const EdgeInsets.only(top: 4.0),
                   child: Text(
-                    "When the app and a browser are side by side, links tapped in the app open in the current tab or a new tab of the browser next to it, or on the app's side, which then shows the tab it was covering or a new one",
+                    context.l10n.splitLinksDescription,
                     style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                   ),
                 ),
@@ -2465,7 +2467,7 @@ class SettingsPageState extends State<SettingsPage> {
                   alignment: Alignment.centerRight,
                   child: TextButton.icon(
                     icon: const Icon(Icons.play_circle_outline, size: 18),
-                    label: const Text("See examples"),
+                    label: Text(context.l10n.labelSeeExamples),
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(builder: (BuildContext context) => const SplitLinksExamplesPage()),
@@ -2478,7 +2480,7 @@ class SettingsPageState extends State<SettingsPage> {
           ),
         ),
       SearchableRow(
-        label: "High refresh rate",
+        label: context.l10n.labelHighRefreshRate,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
@@ -2492,7 +2494,7 @@ class SettingsPageState extends State<SettingsPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text("High refresh rate"),
+                        Text(context.l10n.labelHighRefreshRate),
                         if (_refreshRateInfo.isNotEmpty)
                           Text(
                             'Current: ${_refreshRateInfo['currentRefreshRate']?.round().toString() ?? 'Unknown'} Hz',
@@ -2542,9 +2544,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                'Enables the highest available refresh rate on supported devices (e.g., 90Hz, 120Hz). '
-                'May increase battery consumption and device heat but provides smoother animations.'
-                '\n\nNOTE: it might be necessary to restart the app after disabling this feature.',
+                context.l10n.refreshRateDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -2558,7 +2558,7 @@ class SettingsPageState extends State<SettingsPage> {
     ];
 
     return buildSectionWithRows(
-      title: "SCREEN CONFIGURATION",
+      title: context.l10n.screenGroup,
       rows: rows,
       searchText: _searchText,
     );
@@ -2567,13 +2567,13 @@ class SettingsPageState extends State<SettingsPage> {
   Widget _themeSection() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Theme description",
+        label: context.l10n.labelThemeDescription,
         searchText: _searchText,
         filterable: false,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
           child: Text(
-            "Please note that the main theme selector switch is located in the drawer menu of Torn PDA. Here you will be able to select other theming options",
+            context.l10n.themeDescription,
             style: TextStyle(
               color: Colors.grey[600],
               fontSize: 12,
@@ -2583,14 +2583,14 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Use Material theme",
+        label: context.l10n.labelUseMaterialTheme,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, top: 10, right: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Flexible(child: Text("Use Material theme")),
+              Flexible(child: Text(context.l10n.labelUseMaterialTheme)),
               Switch(
                 value: _themeProvider.useMaterial3,
                 onChanged: (enabled) async {
@@ -2604,14 +2604,14 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Sync app with device theme",
+        label: context.l10n.labelSyncAppWithDeviceTheme,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Flexible(child: Text("Sync app with device theme")),
+              Flexible(child: Text(context.l10n.labelSyncAppWithDeviceTheme)),
               Switch(
                 value: _settingsProvider.syncDeviceTheme,
                 onChanged: (enabled) async {
@@ -2635,14 +2635,14 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Sync app and web themes",
+        label: context.l10n.labelSyncAppAndWebThemes,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Flexible(child: Text("Sync app and web themes")),
+              Flexible(child: Text(context.l10n.labelSyncAppAndWebThemes)),
               Switch(
                 value: _settingsProvider.syncTornWebTheme,
                 onChanged: (enabled) async {
@@ -2659,7 +2659,7 @@ class SettingsPageState extends State<SettingsPage> {
       ),
       if (_settingsProvider.syncTornWebTheme)
         SearchableRow(
-          label: "Dark theme equivalent",
+          label: context.l10n.labelDarkThemeEquivalent,
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 20, right: 20),
@@ -2669,12 +2669,12 @@ class SettingsPageState extends State<SettingsPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Dark theme equivalent")),
+                    Flexible(child: Text(context.l10n.labelDarkThemeEquivalent)),
                     Flexible(flex: 2, child: _themeToSyncDropdown()),
                   ],
                 ),
                 Text(
-                  "Specifies which dark theme is activated when the web or device switches to dark mode",
+                  context.l10n.darkThemeDescription,
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: 12,
@@ -2686,7 +2686,7 @@ class SettingsPageState extends State<SettingsPage> {
           ),
         ),
       SearchableRow(
-        label: "Accesible text colors",
+        label: context.l10n.labelAccesibleTextColors,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
@@ -2696,7 +2696,7 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Accesible text colors")),
+                  Flexible(child: Text(context.l10n.labelAccesibleTextColors)),
                   Switch(
                     value: _themeProvider.accesibilityNoTextColors,
                     onChanged: (enabled) async {
@@ -2708,7 +2708,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                "Replaces colored texts with the default color for improved accessibility; applies only to the app, not the web.",
+                context.l10n.accessibleColorsDescription,
                 style: TextStyle(
                   color: _themeProvider.mainText,
                   fontSize: 12,
@@ -2721,7 +2721,7 @@ class SettingsPageState extends State<SettingsPage> {
     ];
 
     return buildSectionWithRows(
-      title: "THEME",
+      title: context.l10n.themeGroup,
       rows: rows,
       searchText: _searchText,
     );
@@ -2730,7 +2730,7 @@ class SettingsPageState extends State<SettingsPage> {
   Widget _appIconSection() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Dynamic app icons",
+        label: context.l10n.labelDynamicAppIcons,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
@@ -2740,7 +2740,7 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Dynamic app icons")),
+                  Flexible(child: Text(context.l10n.labelDynamicAppIcons)),
                   Switch(
                     value: !_settingsProvider.dynamicAppIconEnabledRemoteConfig
                         ? false
@@ -2767,7 +2767,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                "Allows Torn PDA to change the main app icon based on certain conditions",
+                context.l10n.dynamicIconDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -2776,7 +2776,7 @@ class SettingsPageState extends State<SettingsPage> {
               ),
               if (!_settingsProvider.dynamicAppIconEnabledRemoteConfig)
                 Text(
-                  "Deactivated remotely for the time being",
+                  context.l10n.labelDeactivatedRemotelyForTheTimeBeing,
                   style: TextStyle(
                     color: Colors.orange[600],
                     fontSize: 12,
@@ -2789,7 +2789,7 @@ class SettingsPageState extends State<SettingsPage> {
       ),
       if (_settingsProvider.dynamicAppIconEnabledRemoteConfig && _settingsProvider.dynamicAppIcons)
         SearchableRow(
-          label: "Override icon",
+          label: context.l10n.labelOverrideIcon,
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 20, right: 20),
@@ -2799,12 +2799,12 @@ class SettingsPageState extends State<SettingsPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text("Override icon"),
+                    Text(context.l10n.labelOverrideIcon),
                     Flexible(child: _manualAppIconDropdown()),
                   ],
                 ),
                 Text(
-                  "By using this option, you can manually trigger (some) app icons even if the conditions are not met",
+                  context.l10n.overrideIconDescription,
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: 12,
@@ -2813,7 +2813,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ),
                 if (!_settingsProvider.dynamicAppIconEnabledRemoteConfig)
                   Text(
-                    "Deactivated remotely for the time being",
+                    context.l10n.labelDeactivatedRemotelyForTheTimeBeing,
                     style: TextStyle(
                       color: Colors.orange[600],
                       fontSize: 12,
@@ -2827,7 +2827,7 @@ class SettingsPageState extends State<SettingsPage> {
     ];
 
     return buildSectionWithRows(
-      title: "APP ICON",
+      title: context.l10n.iconGroup,
       rows: rows,
       searchText: _searchText,
     );
@@ -2836,7 +2836,7 @@ class SettingsPageState extends State<SettingsPage> {
   Widget _miscSection() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Show status color counter",
+        label: context.l10n.labelShowStatusColorCounter,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
@@ -2845,7 +2845,7 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Show status color counter")),
+                  Flexible(child: Text(context.l10n.labelShowStatusColorCounter)),
                   Switch(
                     value: Get.find<ChainStatusController>().statusColorWidgetEnabled,
                     onChanged: (value) {
@@ -2859,7 +2859,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                'Shows a player status counter attached to the Torn PDA icon in the main app sections and in the browser three-dotted icon, whenever the player is hospitalised, jailed or traveling',
+                context.l10n.statusCounterDescription,
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               )
             ],
@@ -2867,7 +2867,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "App bar position",
+        label: context.l10n.labelAppBarPosition,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
@@ -2876,12 +2876,12 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("App bar position")),
+                  Flexible(child: Text(context.l10n.labelAppBarPosition)),
                   Flexible(flex: 2, child: _appBarPositionDropdown()),
                 ],
               ),
               Text(
-                'Note: this will affect other quick access items such as the quick crimes bar in the browser',
+                context.l10n.appBarDescription,
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               )
             ],
@@ -2889,28 +2889,28 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Default launch section",
+        label: context.l10n.labelDefaultLaunchSection,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Flexible(child: Text("Default launch section")),
+              Flexible(child: Text(context.l10n.labelDefaultLaunchSection)),
               Flexible(child: _openSectionDropdown()),
             ],
           ),
         ),
       ),
       SearchableRow(
-        label: "Drawer sections",
+        label: context.l10n.labelDrawerSections,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Flexible(child: Text("Drawer sections")),
+              Flexible(child: Text(context.l10n.labelDrawerSections)),
               Flexible(
                 child: ElevatedButton(
                   onPressed: () {
@@ -2920,7 +2920,7 @@ class SettingsPageState extends State<SettingsPage> {
                       ),
                     );
                   },
-                  child: const Text("Configure"),
+                  child: Text(context.l10n.labelConfigure),
                 ),
               ),
             ],
@@ -2928,7 +2928,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Back button exits app",
+        label: context.l10n.labelBackButtonExitsApp,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
@@ -2937,12 +2937,12 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Back button exits app")),
+                  Flexible(child: Text(context.l10n.labelBackButtonExitsApp)),
                   Flexible(child: _backButtonAppExitDropdown()),
                 ],
               ),
               Text(
-                "This will only have effect on certain devices, depending on your configuration. Dictates how to proceed when the app detects a back button press or swipe that would otherwise close the app. Note: in the browser, the back button always triggers backwards navigation",
+                context.l10n.backButtonDescription,
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               )
             ],
@@ -2950,7 +2950,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Disable update notification",
+        label: context.l10n.labelDisableUpdateNotification,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
@@ -2959,7 +2959,7 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Disable update notification")),
+                  Flexible(child: Text(context.l10n.labelDisableUpdateNotification)),
                   Switch(
                     value: _settingsProvider.disableUpdateDialog,
                     onChanged: (enabled) {
@@ -2973,7 +2973,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                "Disable the dialog that notifies you about new PDA versions and features when the app starts",
+                context.l10n.updateDialogDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -2987,7 +2987,7 @@ class SettingsPageState extends State<SettingsPage> {
     ];
 
     return buildSectionWithRows(
-      title: "MISC",
+      title: context.l10n.miscGroup,
       rows: rows,
       searchText: _searchText,
     );
@@ -2996,7 +2996,7 @@ class SettingsPageState extends State<SettingsPage> {
   Widget _externalPartnersSection() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Alternative API keys",
+        label: context.l10n.labelAlternativeApiKeys,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -3005,7 +3005,7 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Alternative API keys"),
+                  Text(context.l10n.labelAlternativeApiKeys),
                   IconButton(
                     icon: const Icon(Icons.keyboard_arrow_right_outlined),
                     onPressed: () {
@@ -3019,7 +3019,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                "Use this section to configure alternative API keys for the external partners that Torn PDA connects with. CAUTION: ensure these other keys are working correctly, as Torn PDA is unable to check for errors and certain sections may stop working",
+                context.l10n.alternativeKeyDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -3032,7 +3032,7 @@ class SettingsPageState extends State<SettingsPage> {
       ),
     ];
     return buildSectionWithRows(
-      title: "EXTERNAL PARTNERS",
+      title: context.l10n.partnerGroup,
       rows: rows,
       searchText: _searchText,
     );
@@ -3041,7 +3041,7 @@ class SettingsPageState extends State<SettingsPage> {
   Widget _apiRateSection() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Display API call rate",
+        label: context.l10n.labelDisplayApiCallRate,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
@@ -3051,7 +3051,7 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Display API call rate")),
+                  Flexible(child: Text(context.l10n.labelDisplayApiCallRate)),
                   Switch(
                     value: _apiController.showApiRateInDrawer.value,
                     onChanged: (enabled) async {
@@ -3065,7 +3065,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                "Enables a small progress bar on top of Torn PDA's logo in the main drawer menu, with real-time count of the number of API calls performed in the last minute",
+                context.l10n.apiRateDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -3077,7 +3077,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Warn max. call rate",
+        label: context.l10n.labelWarnMaxCallRate,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
@@ -3087,7 +3087,7 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Warn max. call rate")),
+                  Flexible(child: Text(context.l10n.labelWarnMaxCallRate)),
                   Switch(
                     value: _apiController.showApiMaxCallWarning,
                     onChanged: (enabled) async {
@@ -3101,7 +3101,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                "If enabled, a quick message will be shown when approaching (95 calls in 60 seconds) the maximum API call rate. This message will be then inhibited for 30 seconds",
+                context.l10n.apiRateWarningDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -3113,7 +3113,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Delay API calls",
+        label: context.l10n.labelDelayApiCalls,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
@@ -3123,7 +3123,7 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Delay API calls")),
+                  Flexible(child: Text(context.l10n.labelDelayApiCalls)),
                   Switch(
                     value: _apiController.delayCalls,
                     onChanged: (enabled) async {
@@ -3137,7 +3137,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                "Artificially delay API calls above 95 in 60 seconds to avoid hitting the max API rate. If enabled, the current queue information will be shown in the main drawer menu API bar. NOTE: this option cannot take into account API calls generated outside of Torn PDA",
+                context.l10n.apiDelayDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -3149,7 +3149,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Load inventory automatically",
+        label: context.l10n.labelLoadInventoryAutomatically,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
@@ -3159,7 +3159,7 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Load inventory automatically")),
+                  Flexible(child: Text(context.l10n.labelLoadInventoryAutomatically)),
                   Switch(
                     value: _inventoryAutoLoad,
                     onChanged: (enabled) {
@@ -3174,9 +3174,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                "If enabled, your inventory is loaded as soon as you open Items or Foreign Stocks. Torn serves inventory "
-                "by item category, one API call each (up to 25 in Items), cached for an hour. If disabled, inventory "
-                "is only loaded when you tap the box icon in those sections",
+                context.l10n.inventoryDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -3190,7 +3188,7 @@ class SettingsPageState extends State<SettingsPage> {
     ];
 
     return buildSectionWithRows(
-      title: "API CALL RATE",
+      title: context.l10n.apiGroup,
       rows: rows,
       searchText: _searchText,
     );
@@ -3200,7 +3198,7 @@ class SettingsPageState extends State<SettingsPage> {
     List<SearchableRow> rows = [
       if (!_settingsProvider.backupPrefsEnabledStatusRemoteConfig)
         SearchableRow(
-          label: "Backup",
+          label: context.l10n.labelBackup,
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
@@ -3211,7 +3209,7 @@ class SettingsPageState extends State<SettingsPage> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "Online backup is temporarily disabled, please check in game or Discord for more information",
+                      context.l10n.backupDisabled,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.red[600],
@@ -3227,7 +3225,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       if (_settingsProvider.backupPrefsEnabledStatusRemoteConfig) ...[
         SearchableRow(
-          label: "Upload settings",
+          label: context.l10n.labelUploadSettings,
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
@@ -3236,7 +3234,7 @@ class SettingsPageState extends State<SettingsPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Upload settings")),
+                    Flexible(child: Text(context.l10n.labelUploadSettings)),
                     ElevatedButton(
                       child: const Icon(Icons.upload),
                       onPressed: _userProfile == null
@@ -3254,7 +3252,7 @@ class SettingsPageState extends State<SettingsPage> {
                   ],
                 ),
                 Text(
-                  "This will allow you to backup your main app settings (e.g.: scripts, shortcuts, etc.) locally so that you can later restore them if needed or share them across different devices",
+                  context.l10n.backupSettingsDescription,
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: 12,
@@ -3266,7 +3264,7 @@ class SettingsPageState extends State<SettingsPage> {
           ),
         ),
         SearchableRow(
-          label: "Restore settings",
+          label: context.l10n.labelRestoreSettings,
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
@@ -3275,7 +3273,7 @@ class SettingsPageState extends State<SettingsPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Restore settings")),
+                    Flexible(child: Text(context.l10n.labelRestoreSettings)),
                     ElevatedButton(
                       child: const Icon(Icons.download),
                       onPressed: _userProfile == null
@@ -3293,7 +3291,7 @@ class SettingsPageState extends State<SettingsPage> {
                   ],
                 ),
                 Text(
-                  "This will download your saved settings and restore them in the app. Please be aware that this will overwrite your current preferences",
+                  context.l10n.restoreDescription,
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: 12,
@@ -3305,7 +3303,7 @@ class SettingsPageState extends State<SettingsPage> {
           ),
         ),
         SearchableRow(
-          label: "Share settings",
+          label: context.l10n.labelShareSettings,
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
@@ -3314,7 +3312,7 @@ class SettingsPageState extends State<SettingsPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Share settings")),
+                    Flexible(child: Text(context.l10n.labelShareSettings)),
                     ElevatedButton(
                       child: const Icon(Icons.share),
                       onPressed: _userProfile == null
@@ -3335,7 +3333,7 @@ class SettingsPageState extends State<SettingsPage> {
                   ],
                 ),
                 Text(
-                  "This will allow you to share your settings and receive settings from other players using the player ID and a password",
+                  context.l10n.shareDescription,
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: 12,
@@ -3347,7 +3345,7 @@ class SettingsPageState extends State<SettingsPage> {
           ),
         ),
         SearchableRow(
-          label: "Clear backup",
+          label: context.l10n.labelClearBackup,
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
@@ -3356,7 +3354,7 @@ class SettingsPageState extends State<SettingsPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Clear backup")),
+                    Flexible(child: Text(context.l10n.labelClearBackup)),
                     ElevatedButton(
                       child: const Icon(Icons.delete_outline),
                       onPressed: _userProfile == null
@@ -3374,7 +3372,7 @@ class SettingsPageState extends State<SettingsPage> {
                   ],
                 ),
                 Text(
-                  "In case there is an issue with your online backup when restoring or if you simply want to clear it, this will delete the online saved data",
+                  context.l10n.clearBackupDescription,
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: 12,
@@ -3388,7 +3386,7 @@ class SettingsPageState extends State<SettingsPage> {
       ],
     ];
     return buildSectionWithRows(
-      title: "ONLINE BACKUP",
+      title: context.l10n.cloudBackupGroup,
       rows: rows,
       searchText: _searchText,
     );
@@ -3397,7 +3395,7 @@ class SettingsPageState extends State<SettingsPage> {
   Widget _saveSettingsLocalSection() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Save settings locally",
+        label: context.l10n.labelSaveSettingsLocally,
         searchText: _searchText,
         child: const Padding(
           padding: EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
@@ -3407,7 +3405,7 @@ class SettingsPageState extends State<SettingsPage> {
     ];
 
     return buildSectionWithRows(
-      title: "LOCAL BACKUP",
+      title: context.l10n.localBackupGroup,
       rows: rows,
       searchText: _searchText,
     );
@@ -3416,7 +3414,7 @@ class SettingsPageState extends State<SettingsPage> {
   Widget _troubleshootingSection() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Memory menu",
+        label: context.l10n.labelMemoryMenu,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
@@ -3425,12 +3423,12 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(
+                  Flexible(
                     child: Row(
                       children: [
                         Icon(Icons.memory),
                         SizedBox(width: 5),
-                        Flexible(child: Text("Show memory in drawer menu")),
+                        Flexible(child: Text(context.l10n.labelShowMemoryInDrawerMenu)),
                       ],
                     ),
                   ),
@@ -3447,7 +3445,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                'This will show a small memory usage bar on below the Torn PDA\'s logo in the main drawer menu, with real-time count of the app\'s memory usage',
+                context.l10n.drawerMemoryDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -3459,7 +3457,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Memory browser",
+        label: context.l10n.labelMemoryBrowser,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
@@ -3468,12 +3466,12 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(
+                  Flexible(
                     child: Row(
                       children: [
                         Icon(Icons.memory),
                         SizedBox(width: 5),
-                        Flexible(child: Text("Show memory in browser")),
+                        Flexible(child: Text(context.l10n.labelShowMemoryInBrowser)),
                       ],
                     ),
                   ),
@@ -3490,7 +3488,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                "This will show an icon in the browser's appbar with which you can toggle real-time information of the app's memory usage where the page title normally goes",
+                context.l10n.browserMemoryDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -3501,7 +3499,7 @@ class SettingsPageState extends State<SettingsPage> {
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: Text(
-                    "NOTE: this option only works in the 'default' browser style. If have currently selected a different style!",
+                    context.l10n.defaultStyleOnly,
                     style: TextStyle(
                       color: _themeProvider.getTextColor(Colors.red),
                       fontSize: 12,
@@ -3514,7 +3512,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Test API",
+        label: context.l10n.labelTestApi,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
@@ -3523,9 +3521,9 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Test API")),
+                  Flexible(child: Text(context.l10n.labelTestApi)),
                   ElevatedButton(
-                    child: const Text("PING"),
+                    child: Text(context.l10n.labelPing),
                     onPressed: () async {
                       BotToast.showText(
                         text: "Please wait...",
@@ -3562,7 +3560,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                "In case you are facing connection problems, this will ping Torn's API and show whether it is reachable from your device. If it isn't, it might be due to your DNS servers (try switching from WiFi to mobile data).",
+                context.l10n.testApiDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -3574,7 +3572,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "API Error Log",
+        label: context.l10n.labelApiErrorLog,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -3584,9 +3582,9 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("API Error Log")),
+                  Flexible(child: Text(context.l10n.labelApiErrorLog)),
                   ElevatedButton.icon(
-                    label: const Text("View"),
+                    label: Text(context.l10n.labelView),
                     onPressed: () {
                       showDialog(
                         context: context,
@@ -3597,7 +3595,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                "If you ever need to inspect recent API failures (v1 or v2), open the error history here.",
+                context.l10n.errorLogDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -3609,7 +3607,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Enable debug messages",
+        label: context.l10n.labelEnableDebugMessages,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
@@ -3618,7 +3616,7 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Enable debug messages")),
+                  Flexible(child: Text(context.l10n.labelEnableDebugMessages)),
                   Switch(
                     value: _settingsProvider.debugMessages,
                     onChanged: (enabled) async {
@@ -3632,7 +3630,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                'Enable specific debug messages for app failure testing. This is an advanced feature that may generate extra error messages; do not use unless requested.',
+                context.l10n.debugMessagesDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -3644,7 +3642,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Reset tutorials",
+        label: context.l10n.labelResetTutorials,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
@@ -3653,9 +3651,9 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Reset tutorials")),
+                  Flexible(child: Text(context.l10n.labelResetTutorials)),
                   ElevatedButton(
-                    child: const Text("CLEAR"),
+                    child: Text(context.l10n.labelClear),
                     onPressed: () async {
                       _settingsProvider.clearShowCases();
                     },
@@ -3663,7 +3661,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                "This will clear all the app's tutorial pop-ups so you can review them again. Note that some tutorials (e.g., those in the browser) require an app restart to fully reset.",
+                context.l10n.resetTutorialDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -3675,7 +3673,7 @@ class SettingsPageState extends State<SettingsPage> {
         ),
       ),
       SearchableRow(
-        label: "Reset Chaining Settings",
+        label: context.l10n.labelResetChainingSettings,
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -3685,24 +3683,23 @@ class SettingsPageState extends State<SettingsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Reset Chaining Settings")),
+                  Flexible(child: Text(context.l10n.labelResetChainingSettings)),
                   ElevatedButton(
-                    child: const Text("RESET", style: TextStyle(color: Colors.white)),
+                    child: Text(context.l10n.labelReset, style: TextStyle(color: Colors.white)),
                     onPressed: () {
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: const Text("Reset Chaining Settings"),
-                            content: const Text("This will reset all your War/Chaining sorting preferences, "
-                                "smart score weights, and filters to their default values."),
+                            title: Text(context.l10n.labelResetChainingSettings),
+                            content: Text(context.l10n.resetChainingDescription),
                             actions: [
                               TextButton(
-                                child: const Text("Cancel"),
+                                child: Text(context.l10n.labelCancel),
                                 onPressed: () => Navigator.of(context).pop(),
                               ),
                               TextButton(
-                                child: const Text("Reset", style: TextStyle(color: Colors.red)),
+                                child: Text(context.l10n.labelResetSetting, style: TextStyle(color: Colors.red)),
                                 onPressed: () async {
                                   Navigator.of(context).pop();
                                   var defaultSettings = WarSettings();
@@ -3735,7 +3732,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ],
               ),
               Text(
-                "If you experience issues with sorting or filters in the War page, use this button to restore default values.",
+                context.l10n.chainingFiltersDescription,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 12,
@@ -3749,7 +3746,7 @@ class SettingsPageState extends State<SettingsPage> {
     ];
 
     return buildSectionWithRows(
-      title: "TROUBLESHOOTING",
+      title: context.l10n.troubleshootingGroup,
       rows: rows,
       searchText: _searchText,
     );
@@ -3758,13 +3755,13 @@ class SettingsPageState extends State<SettingsPage> {
   DropdownButton _splitScreenDropdown() {
     return DropdownButton<WebViewSplitPosition>(
       value: _webViewProvider.splitScreenPosition,
-      items: const [
+      items: [
         DropdownMenuItem(
           value: WebViewSplitPosition.off,
           child: SizedBox(
             width: 120,
             child: Text(
-              "Off",
+              context.l10n.labelOff,
               textAlign: TextAlign.right,
               style: TextStyle(fontSize: 14),
             ),
@@ -3775,7 +3772,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 120,
             child: Text(
-              "Browser left",
+              context.l10n.labelBrowserLeft,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -3788,7 +3785,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 120,
             child: Text(
-              "Browser right",
+              context.l10n.labelBrowserRight,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -3818,13 +3815,13 @@ class SettingsPageState extends State<SettingsPage> {
   DropdownButton _manualAppIconDropdown() {
     return DropdownButton<String>(
       value: _settingsProvider.dynamicAppIconsManual,
-      items: const [
+      items: [
         DropdownMenuItem(
           value: "off",
           child: SizedBox(
             width: 120,
             child: Text(
-              "Off",
+              context.l10n.labelOff,
               textAlign: TextAlign.right,
               style: TextStyle(fontSize: 14),
             ),
@@ -3835,7 +3832,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 120,
             child: Text(
-              "Awareness",
+              context.l10n.labelAwareness,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -3848,7 +3845,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 120,
             child: Text(
-              "Halloween",
+              context.l10n.labelHalloween,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -3861,7 +3858,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 120,
             child: Text(
-              "Christmas",
+              context.l10n.labelChristmas,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -3874,7 +3871,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 120,
             child: Text(
-              "Valentine's Day",
+              context.l10n.labelValentineSDay,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -3887,7 +3884,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 120,
             child: Text(
-              "St. Patrick's Day",
+              context.l10n.labelStPatrickSDay,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -3900,7 +3897,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 120,
             child: Text(
-              "Easter Egg Hunt",
+              context.l10n.labelEasterEggHunt,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -3922,13 +3919,13 @@ class SettingsPageState extends State<SettingsPage> {
   DropdownButton _splitScreenRevertionDropdown() {
     return DropdownButton<bool>(
       value: _webViewProvider.splitScreenRevertsToApp,
-      items: const [
+      items: [
         DropdownMenuItem(
           value: true,
           child: SizedBox(
             width: 80,
             child: Text(
-              "App",
+              context.l10n.labelApp,
               textAlign: TextAlign.right,
               style: TextStyle(fontSize: 14),
             ),
@@ -3939,7 +3936,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 80,
             child: Text(
-              "Browser",
+              context.l10n.labelBrowser,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -3960,23 +3957,23 @@ class SettingsPageState extends State<SettingsPage> {
     return DropdownButton<String>(
       value: _openSectionValue,
       items: [
-        const DropdownMenuItem(
+        DropdownMenuItem(
           value: "browser",
           child: SizedBox(
             width: 80,
             child: Text(
-              "Browser",
+              context.l10n.labelBrowser,
               textAlign: TextAlign.right,
               style: TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
             ),
           ),
         ),
-        const DropdownMenuItem(
+        DropdownMenuItem(
           value: "browser_full",
           child: SizedBox(
             width: 80,
             child: Text(
-              "Browser (full screen)",
+              context.l10n.labelBrowserFullScreen,
               textAlign: TextAlign.right,
               style: TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
             ),
@@ -3988,7 +3985,7 @@ class SettingsPageState extends State<SettingsPage> {
             child: SizedBox(
               width: 80,
               child: Text(
-                section.title,
+                section.localizedTitle(context.l10n),
                 textAlign: TextAlign.right,
                 style: const TextStyle(fontSize: 14),
               ),
@@ -4008,13 +4005,13 @@ class SettingsPageState extends State<SettingsPage> {
   DropdownButton _backButtonAppExitDropdown() {
     return DropdownButton<String>(
       value: _onAppExitValue,
-      items: const [
+      items: [
         DropdownMenuItem(
           value: "stay",
           child: SizedBox(
             width: 60,
             child: Text(
-              "Stay",
+              context.l10n.labelStay,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4027,7 +4024,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 60,
             child: Text(
-              "Exit",
+              context.l10n.labelExit,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4048,13 +4045,13 @@ class SettingsPageState extends State<SettingsPage> {
   DropdownButton _openBrowserDropdown() {
     return DropdownButton<String>(
       value: _openBrowserValue,
-      items: const [
+      items: [
         DropdownMenuItem(
           value: "0",
           child: SizedBox(
             width: 65,
             child: Text(
-              "In-App",
+              context.l10n.labelInApp,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4067,7 +4064,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 65,
             child: Text(
-              "External",
+              context.l10n.labelExternal,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4103,13 +4100,13 @@ class SettingsPageState extends State<SettingsPage> {
   DropdownButton _timeFormatDropdown() {
     return DropdownButton<String>(
       value: _timeFormatValue,
-      items: const [
+      items: [
         DropdownMenuItem(
           value: "0",
           child: SizedBox(
             width: 60,
             child: Text(
-              "24 hours",
+              context.l10n.label24Hours,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4122,7 +4119,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 60,
             child: Text(
-              "12 hours",
+              context.l10n.label12Hours,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4147,13 +4144,13 @@ class SettingsPageState extends State<SettingsPage> {
   DropdownButton _timeZoneDropdown() {
     return DropdownButton<String>(
       value: _timeZoneValue,
-      items: const [
+      items: [
         DropdownMenuItem(
           value: "0",
           child: SizedBox(
             width: 135,
             child: Text(
-              "Local Time (LT)",
+              context.l10n.labelLocalTimeLt,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4166,7 +4163,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 135,
             child: Text(
-              "Torn City Time (TCT)",
+              context.l10n.labelTornCityTimeTct,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4191,13 +4188,13 @@ class SettingsPageState extends State<SettingsPage> {
   DropdownButton _dateInClockDropdown() {
     return DropdownButton<String>(
       value: _settingsProvider.showDateInClock,
-      items: const [
+      items: [
         DropdownMenuItem(
           value: "off",
           child: SizedBox(
             width: 80,
             child: Text(
-              "Off",
+              context.l10n.labelOff,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4210,7 +4207,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 80,
             child: Text(
-              "On (d/m)",
+              context.l10n.labelOnDM,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4223,7 +4220,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 80,
             child: Text(
-              "On (m/d)",
+              context.l10n.labelOnMD,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4243,13 +4240,13 @@ class SettingsPageState extends State<SettingsPage> {
   DropdownButton _secondsInClockDropdown() {
     return DropdownButton<bool>(
       value: _settingsProvider.showSecondsInClock,
-      items: const [
+      items: [
         DropdownMenuItem(
           value: true,
           child: SizedBox(
             width: 60,
             child: Text(
-              "Show",
+              context.l10n.labelShow,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4262,7 +4259,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 60,
             child: Text(
-              "Hide",
+              context.l10n.labelHide,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4292,13 +4289,13 @@ class SettingsPageState extends State<SettingsPage> {
 
     return DropdownButton<String>(
       value: _vibrationValue,
-      items: const [
+      items: [
         DropdownMenuItem(
           value: "no-vib",
           child: SizedBox(
             width: 80,
             child: Text(
-              "Off",
+              context.l10n.labelOff,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4311,7 +4308,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 80,
             child: Text(
-              "Short",
+              context.l10n.labelShort,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4324,7 +4321,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 80,
             child: Text(
-              "Medium",
+              context.l10n.labelMedium,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4337,7 +4334,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 80,
             child: Text(
-              "Long",
+              context.l10n.labelLong,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4415,13 +4412,13 @@ class SettingsPageState extends State<SettingsPage> {
   DropdownButton _naturalNerveBarSourceDropdown() {
     return DropdownButton<NaturalNerveBarSource>(
       value: _settingsProvider.naturalNerveBarSource,
-      items: const [
+      items: [
         DropdownMenuItem(
           value: NaturalNerveBarSource.off,
           child: SizedBox(
             width: 85,
             child: Text(
-              "Disabled",
+              context.l10n.labelDisabled,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4473,13 +4470,13 @@ class SettingsPageState extends State<SettingsPage> {
   DropdownButton _themeToSyncDropdown() {
     return DropdownButton<String>(
       value: _settingsProvider.darkThemeToSyncFromWeb,
-      items: const [
+      items: [
         DropdownMenuItem(
           value: "dark",
           child: SizedBox(
             width: 100,
             child: Text(
-              "Dark",
+              context.l10n.labelDark,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4492,7 +4489,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 100,
             child: Text(
-              "Extra Dark",
+              context.l10n.labelExtraDark,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4513,13 +4510,13 @@ class SettingsPageState extends State<SettingsPage> {
   DropdownButton _appBarPositionDropdown() {
     return DropdownButton<String>(
       value: _appBarPosition,
-      items: const [
+      items: [
         DropdownMenuItem(
           value: "top",
           child: SizedBox(
             width: 58,
             child: Text(
-              "Top",
+              context.l10n.labelTop,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4532,7 +4529,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 58,
             child: Text(
-              "Bottom",
+              context.l10n.labelBottom,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4778,13 +4775,13 @@ class SettingsPageState extends State<SettingsPage> {
   DropdownButton _shortcutTileDropdown() {
     return DropdownButton<String>(
       value: _shortcutsProvider.shortcutTile,
-      items: const [
+      items: [
         DropdownMenuItem(
           value: "both",
           child: SizedBox(
             width: 90,
             child: Text(
-              "Icon and text",
+              context.l10n.labelIconAndText,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4797,7 +4794,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 90,
             child: Text(
-              "Only icon",
+              context.l10n.labelOnlyIcon,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4810,7 +4807,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 90,
             child: Text(
-              "Only text",
+              context.l10n.labelOnlyText,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4830,13 +4827,13 @@ class SettingsPageState extends State<SettingsPage> {
   DropdownButton _shortcutMenuDropdown() {
     return DropdownButton<String>(
       value: _shortcutsProvider.shortcutMenu,
-      items: const [
+      items: [
         DropdownMenuItem(
           value: "carousel",
           child: SizedBox(
             width: 67,
             child: Text(
-              "Carousel",
+              context.l10n.labelCarousel,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4849,7 +4846,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 67,
             child: Text(
-              "Grid",
+              context.l10n.labelGrid,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4862,7 +4859,7 @@ class SettingsPageState extends State<SettingsPage> {
           child: SizedBox(
             width: 100,
             child: Text(
-              "Grid carousel",
+              context.l10n.labelGridCarousel,
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
@@ -4885,7 +4882,7 @@ class SettingsPageState extends State<SettingsPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          const Flexible(
+          Flexible(
             child: Row(
               children: [
                 Icon(Icons.keyboard_arrow_right_outlined),
@@ -4893,7 +4890,7 @@ class SettingsPageState extends State<SettingsPage> {
                   child: Padding(
                     padding: EdgeInsets.only(left: 10),
                     child: Text(
-                      "Cooldown tap opens",
+                      context.l10n.labelCooldownTapOpens,
                       style: TextStyle(
                         fontStyle: FontStyle.italic,
                       ),
@@ -4905,13 +4902,13 @@ class SettingsPageState extends State<SettingsPage> {
           ),
           DropdownButton<String>(
             value: _settingsProvider.appwidgetCooldownTapOpenBrowserDestination,
-            items: const [
+            items: [
               DropdownMenuItem(
                 value: "own",
                 child: SizedBox(
                   width: 110,
                   child: Text(
-                    "Own items",
+                    context.l10n.labelOwnItems,
                     textAlign: TextAlign.right,
                     style: TextStyle(
                       fontSize: 14,
@@ -4924,7 +4921,7 @@ class SettingsPageState extends State<SettingsPage> {
                 child: SizedBox(
                   width: 110,
                   child: Text(
-                    "Faction items",
+                    context.l10n.labelFactionItems,
                     textAlign: TextAlign.right,
                     style: TextStyle(
                       fontSize: 14,

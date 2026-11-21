@@ -1,0 +1,35 @@
+name: 中文版 APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [zh-cn]
+
+permissions:
+  contents: read
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.8'
+          cache: true
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: 准备公开版配置
+        run: bash .github/ci_stubs.sh --android
+      - run: flutter pub get
+      - run: flutter gen-l10n
+      - run: flutter test
+      - name: 构建安卓测试包
+        run: flutter build apk --debug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: torn-pda-zh-apk
+          path: build/app/outputs/flutter-apk/app-debug.apk
+          if-no-files-found: error
