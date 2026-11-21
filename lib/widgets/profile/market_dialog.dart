@@ -89,7 +89,7 @@ class MarketDialog extends StatelessWidget {
             Flexible(
               child: ListView(
                 shrinkWrap: true,
-                children: _bazaarItems(),
+                children: _bazaarItems(context),
               ),
             ),
             Padding(
@@ -112,7 +112,8 @@ class MarketDialog extends StatelessWidget {
     );
   }
 
-  List<Widget> _bazaarItems() {
+  /// ZJ：用 [context] 的界面语言生成商品行，保留单价、总价及相对市价的差额。
+  List<Widget> _bazaarItems(BuildContext context) {
     final items = <Widget>[];
 
     // Currency configuration
@@ -123,10 +124,10 @@ class MarketDialog extends StatelessWidget {
       Color? marketColor = Colors.green;
       var marketString = "";
       if (marketDiff.isNegative) {
-        marketString = "\$${costCurrency.format(marketDiff.abs())} above market";
+        marketString = context.interfaceText(r"${0} above market", [costCurrency.format(marketDiff.abs())]);
       } else {
         marketColor = Colors.orange[800];
-        marketString = "\$${costCurrency.format(marketDiff.abs())} below market";
+        marketString = context.interfaceText(r"${0} below market", [costCurrency.format(marketDiff.abs())]);
       }
 
       items.add(
