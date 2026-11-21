@@ -57,4 +57,13 @@ const messagesFfscouter = <String, String>{
   "Your faction leaders can allow members to post faction notes on ffscouter.com": "你们的派系领袖可以允许成员在 ffscouter上张贴派别笔记。",
   "{0} hits on player {1} for {2} each. You will need to send {3} Xanax to pay for it.": "{0}播放播放器点击{1}用于{2}每个人。 您需要发送 {3} Xanax 支付它。",
   "{0} is an FFScouter premium feature": "{0}是一种FFScoulter溢价特性",
+  "Waiting for your Xanax": "等待你支付 Xanax",
+  "Expired without payment": "未付款，已过期",
+  "Being cancelled": "正在取消",
+  "Refund ready": "可领取退款",
+  "Completed": "已完成",
+  "Player {0}": "玩家 {0}",
+  "{0}/{1} hits": "已完成 {0}/{1} 次攻击",
+  "{0}/{1} Xanax received": "已收到 {0}/{1} 颗 Xanax",
+  "Error contacting FFScouter": "无法连接 FFScouter",
 };

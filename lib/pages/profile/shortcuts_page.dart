@@ -479,7 +479,7 @@ class ShortcutsPageState extends State<ShortcutsPage> {
                           mainAxisSize: MainAxisSize.min, // To make the card compact
                           children: <Widget>[
                             Flexible(
-                              child: Text(
+                              child: PdaText(
                                 "Add a name and URL for your custom shortcut. Note: "
                                 "ensure URL begins with 'https://'",
                                 style: TextStyle(fontSize: 12, color: _themeProvider.mainText),
@@ -690,7 +690,7 @@ class ShortcutsPageState extends State<ShortcutsPage> {
                           mainAxisSize: MainAxisSize.min, // To make the card compact
                           children: <Widget>[
                             Flexible(
-                              child: Text(
+                              child: PdaText(
                                 "Add a name and URL for your custom shortcut. Note: "
                                 "ensure URL begins with 'https://'",
                                 style: TextStyle(fontSize: 12, color: _themeProvider.mainText),

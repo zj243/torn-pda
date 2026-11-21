@@ -46,7 +46,7 @@ class TabsLockDialog extends StatelessWidget {
                 child: Column(
                   children: [
                     const PdaText("You locked your first tab!\n"),
-                    const Text(
+                    const PdaText(
                       "But how does it work...?\n\n"
                       //
                       "You can lock your tabs (except for the first one) by using the lock icon in the tab menu.\n\n"

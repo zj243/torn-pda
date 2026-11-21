@@ -273,7 +273,7 @@ class _FFScouterBountyBoardViewState extends State<FFScouterBountyBoardView> wit
     setState(() => _accepting = false);
     if (!result.success || result.data != true) {
       BotToast.showText(
-        text: result.errorMessage ?? "Error contacting FFScouter",
+        text: result.errorMessage ?? context.interfaceText("Error contacting FFScouter"),
         contentColor: Colors.red[800]!,
         textStyle: const TextStyle(fontSize: 13, color: Colors.white),
         duration: const Duration(seconds: 4),
@@ -430,6 +430,9 @@ class _FFScouterBountyBoardViewState extends State<FFScouterBountyBoardView> wit
 
   Widget _orderCard(FFScouterSavedBountyOrder order) {
     final status = _orderStatus[order.token];
+    final player = status?.targetName.isNotEmpty == true
+        ? status!.targetName
+        : context.interfaceText("Player {0}", [order.targetId]);
     final state = switch (status?.state) {
       "pending_payment" => "Waiting for your Xanax",
       "expired_unpaid" => "Expired without payment",
@@ -444,16 +447,15 @@ class _FFScouterBountyBoardViewState extends State<FFScouterBountyBoardView> wit
       child: ListTile(
         dense: true,
         title: Text(
-          "${status?.targetName.isNotEmpty == true ? status!.targetName : "Player ${order.targetId}"}  "
-          "(${order.reference})",
+          "$player  (${order.reference})",
           style: const TextStyle(fontSize: 14),
         ),
         subtitle: Text(
           [
-            state,
-            if (status != null) "${status.quantityCredited}/${status.quantity} hits",
+            context.interfaceText(state),
+            if (status != null) context.interfaceText("{0}/{1} hits", [status.quantityCredited, status.quantity]),
             if (status?.state == "pending_payment")
-              "${status!.payment.xanaxReceived}/${status.payment.xanaxExpected} Xanax received",
+              context.interfaceText("{0}/{1} Xanax received", [status!.payment.xanaxReceived, status.payment.xanaxExpected]),
           ].join("  ·  "),
           style: const TextStyle(fontSize: 12),
         ),
@@ -462,7 +464,7 @@ class _FFScouterBountyBoardViewState extends State<FFScouterBountyBoardView> wit
           if (status?.state == "pending_payment") {
             showFFScouterBountyPaymentDialog(context, order, status!.payment);
           } else {
-            openSimpleWebViewDialog(context: context, url: order.url, title: "Order ${order.reference}");
+            openSimpleWebViewDialog(context: context, url: order.url, title: context.interfaceText("Order {0}", [order.reference]));
           }
         },
       ),
@@ -508,7 +510,7 @@ class _FFScouterBountyBoardViewState extends State<FFScouterBountyBoardView> wit
 
     if (!result.success) {
       BotToast.showText(
-        text: result.errorMessage ?? "Error contacting FFScouter",
+        text: result.errorMessage ?? context.interfaceText("Error contacting FFScouter"),
         contentColor: Colors.red[800]!,
         textStyle: const TextStyle(fontSize: 13, color: Colors.white),
         duration: const Duration(seconds: 4),

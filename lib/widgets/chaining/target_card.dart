@@ -176,7 +176,7 @@ class TargetCardState extends State<TargetCard> {
                                 _factionIcon(),
                               ],
                             ),
-                            Text('Lvl ${_target!.level}'),
+                            Text(context.interfaceText('Lvl {0}', [_target!.level])),
                             Padding(
                               padding: const EdgeInsets.only(right: 3),
                               child: SizedBox(height: 22, width: 22, child: _refreshIcon()),

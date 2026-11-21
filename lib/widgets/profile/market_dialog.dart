@@ -159,8 +159,12 @@ class MarketDialog extends StatelessWidget {
                     children: [
                       const SizedBox(height: 5),
                       Text(
-                        "@ \$${costCurrency.format(element.price)}"
-                        "${element.amount > 1 ? " ea. (\$${costCurrency.format(element.price * element.amount)})" : ""}",
+                        element.amount > 1
+                            ? context.interfaceText(r"@ ${0} ea. (${1})", [
+                                costCurrency.format(element.price),
+                                costCurrency.format(element.price * element.amount),
+                              ])
+                            : context.interfaceText(r"@ ${0}", [costCurrency.format(element.price)]),
                         style: const TextStyle(
                           fontSize: 13,
                         ),

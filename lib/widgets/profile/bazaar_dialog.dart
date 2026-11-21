@@ -161,8 +161,12 @@ class BazaarDialog extends StatelessWidget {
                     children: [
                       const SizedBox(height: 5),
                       Text(
-                        "@ \$${costCurrency.format(price)}"
-                        "${quantity > 1 ? " ea. (\$${costCurrency.format(price * quantity)})" : ""}",
+                        quantity > 1
+                            ? context.interfaceText(r"@ ${0} ea. (${1})", [
+                                costCurrency.format(price),
+                                costCurrency.format(price * quantity),
+                              ])
+                            : context.interfaceText(r"@ ${0}", [costCurrency.format(price)]),
                         style: const TextStyle(
                           fontSize: 13,
                         ),

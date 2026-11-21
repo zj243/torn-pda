@@ -833,7 +833,7 @@ class CustomShortcutDialogState extends State<CustomShortcutDialog> {
                   mainAxisSize: MainAxisSize.min, // To make the card compact
                   children: <Widget>[
                     Flexible(
-                      child: Text(
+                      child: PdaText(
                         "Add a name and URL for your custom shortcut. Note: "
                         "ensure URL begins with 'https://'",
                         style: TextStyle(fontSize: 12, color: widget.themeProvider!.mainText),

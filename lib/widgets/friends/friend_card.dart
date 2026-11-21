@@ -172,7 +172,7 @@ class FriendCardState extends State<FriendCard> {
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           Text(
-                            'Lvl ${_friend!.level}',
+                            context.interfaceText('Lvl {0}', [_friend!.level]),
                           ),
                           if (_friend!.hasFaction!)
                             Flexible(

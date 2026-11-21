@@ -94,7 +94,7 @@ const messagesWebviews = <String, String>{
   "Open Dev Tools": "打开 Dev 工具",
   "Options menu": "选项菜单",
   "Origin: {0} - Size: {1}": "原产: {0} - 大小: {1}",
-  "Override!": "覆写!",
+  "Override!": "临时放行",
   "Password": "密码密码",
   "Please do not report PDA bugs here, as they will be closed by Torn staff. Any bugs caused by the app should be reported to the developers via one of the buttons atthe bottom.": "请不要在此报告 PDA 错误, 因为会被Torn 工作人员关闭。 应用程序造成的任何错误都应该通过底部的按钮之一向开发者报告。",
   "Please note:": "请注意:",
@@ -167,4 +167,6 @@ const messagesWebviews = <String, String>{
   "{0} running": "{0} 运行中",
   "{0} script(s) added or updated.": "{0} 脚本已添加或更新。",
   "{0} script(s) disabled/removed.": "{0} 脚本已禁用/删除。",
+  "But how does it work...?\n\nYou can lock your tabs (except for the first one) by using the lock icon in the tab menu.\n\nThere two ways in which you can lock your tabs.\n\nPOSITIONAL LOCK:\n\nActivated by a single tap in the lock icon: this will lock your tab so that it can't be moved (you can still exchange it's position with other locked tabs) or closed. The tab will move to the first position available in your tab list, and a small orange lock icon will appear.\n\nFULL LOCK:\n\nActivated by a long-press in the lock icon: on top of the behavior you get with the positional lock, your tab will be locked in the current website/section you are visiting and you will not be able to browse to other web sections. You will be able to reload the page and still be able to browse through the pages of multi-page sections (e.g.: forums, hospital, jail, items...) and such.\n\nWhen the full lock is active, a red lock will appear in your tab.\n\nNote: there are a couple of ways to override this behavior without unlocking the tab. You can either tap the 'override!' button in the warning dialog that shows if you try to browse with a full lock, or you can configure exceptions in Settings / Advanced Browser Settings, to allow navigation between specific pairs or URLs.": "标签页有两种锁定方式。除第一个标签页外，其他标签页都可以通过标签页菜单中的锁形图标锁定。\n\n位置锁定\n点按锁形图标，标签页会移到列表中第一个可用位置，并显示橙色锁。锁定后无法关闭或随意移动，但仍能与其他已锁定的标签页交换位置。\n\n完全锁定\n长按锁形图标。除了锁定位置，还会把标签页固定在当前网站或栏目，并显示红色锁。你仍可以刷新页面，也可以在论坛、医院、监狱或物品等栏目内翻页。\n\n如果临时需要离开当前栏目，可以在警告对话框中选择“临时放行”。也可以前往“设置 → 高级浏览器设置”，为允许相互跳转的网址添加例外。",
+  "Add a name and URL for your custom shortcut. Note: ensure URL begins with 'https://'": "输入快捷方式的名称和网址，网址必须以 https:// 开头。",
 };

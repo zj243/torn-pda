@@ -51,13 +51,13 @@ class GymWidgetState extends State<GymWidget> {
                   child: Wrap(
                     alignment: WrapAlignment.center,
                     children: [
-                      Text("STR ${_steadfastDetails!.strength}%, ",
+                      Text(context.interfaceText("STR {0}%, ", [_steadfastDetails!.strength]),
                           style: const TextStyle(color: Colors.white, fontSize: 11)),
-                      Text("DEF ${_steadfastDetails!.defense}%, ",
+                      Text(context.interfaceText("DEF {0}%, ", [_steadfastDetails!.defense]),
                           style: const TextStyle(color: Colors.white, fontSize: 11)),
-                      Text("SPD ${_steadfastDetails!.speed}%, ",
+                      Text(context.interfaceText("SPD {0}%, ", [_steadfastDetails!.speed]),
                           style: const TextStyle(color: Colors.white, fontSize: 11)),
-                      Text("DEX ${_steadfastDetails!.dexterity}%",
+                      Text(context.interfaceText("DEX {0}%", [_steadfastDetails!.dexterity]),
                           style: const TextStyle(color: Colors.white, fontSize: 11)),
                     ],
                   ),
