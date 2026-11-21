@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 // Package imports:
@@ -130,7 +131,7 @@ class ChainWidgetState extends State<ChainWidget> {
                       child: ValueListenableBuilder<bool>(
                         valueListenable: chainP.miniWindowOpen,
                         builder: (context, open, _) => Tooltip(
-                          message: 'Live browser view',
+                          message: context.interfaceText('Live browser view'),
                           child: GestureDetector(
                             onTap: () => _toggleMini(miniHidden),
                             child: Icon(
@@ -240,7 +241,7 @@ class ChainWidgetState extends State<ChainWidget> {
                                   if (chainP.watcherActive && chainP.chainWatcherDefcon == WatchDefcon.apiFail) {
                                     return Column(
                                       children: [
-                                        Text(
+                                        PdaText(
                                           'API FAILED UNDER WATCH!',
                                           style: TextStyle(
                                             fontStyle: FontStyle.italic,
@@ -249,8 +250,8 @@ class ChainWidgetState extends State<ChainWidget> {
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                        Text(
-                                          'Last check @${chainP.currentChainTimeString}',
+                                        PdaText(
+                                          "Last check @{0}", values: [chainP.currentChainTimeString],
                                           style: TextStyle(
                                             fontStyle: FontStyle.italic,
                                             color: Colors.purple[600],
@@ -261,7 +262,7 @@ class ChainWidgetState extends State<ChainWidget> {
                                       ],
                                     );
                                   }
-                                  return Text(
+                                  return PdaText(
                                     'Cannot retrieve chain details!',
                                     style: TextStyle(fontStyle: FontStyle.italic, color: Colors.orange[800]),
                                   );
@@ -370,16 +371,16 @@ class ChainWidgetState extends State<ChainWidget> {
                               }
                               return Showcase(
                                 key: _showcasePip,
-                                title: 'Floating window',
-                                description: '\nTap to keep the chain in a small window while you use other apps. '
-                                    'You can hide these buttons in Settings',
+                                title: context.interfaceText('Floating window'),
+                                description: context.interfaceText('\nTap to keep the chain in a small window while you use other apps. '
+                                    'You can hide these buttons in Settings'),
                                 disableMovingAnimation: true,
                                 textColor: _themeProvider.mainText,
                                 tooltipBackgroundColor: _themeProvider.secondBackground,
                                 descTextStyle: const TextStyle(fontSize: 13),
                                 tooltipPadding: const EdgeInsets.all(20),
                                 child: Tooltip(
-                                  message: 'Open the chain in a floating window',
+                                  message: context.interfaceText('Open the chain in a floating window'),
                                   child: GestureDetector(
                                     child: Icon(
                                       Icons.picture_in_picture_alt_outlined,

@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:math' as math;
 
@@ -119,12 +120,12 @@ class _ChatFactionMembersSheetState extends State<ChatFactionMembersSheet> {
               decoration: InputDecoration(
                 isDense: true,
                 filled: true,
-                hintText: 'Search name or ID',
+                hintText: context.interfaceText('Search name or ID'),
                 prefixIcon: const Icon(Icons.search_rounded, size: 20),
                 suffixIcon: _search.text.isEmpty
                     ? null
                     : IconButton(
-                        tooltip: 'Clear search',
+                        tooltip: context.interfaceText('Clear search'),
                         icon: const Icon(Icons.close_rounded, size: 18),
                         onPressed: _search.clear,
                       ),
@@ -141,7 +142,7 @@ class _ChatFactionMembersSheetState extends State<ChatFactionMembersSheet> {
             child: Row(
               children: [
                 Expanded(child: _counters(all)),
-                if (filtered) TextButton(onPressed: _clear, child: const Text('Clear filters')),
+                if (filtered) TextButton(onPressed: _clear, child: const PdaText('Clear filters')),
               ],
             ),
           ),
@@ -184,8 +185,8 @@ class _ChatFactionMembersSheetState extends State<ChatFactionMembersSheet> {
                 ),
                 if (at != null) ...[
                   const SizedBox(width: 8),
-                  Text(
-                    '${ChatStatus.duration(DateTime.now().difference(at).inSeconds)} ago',
+                  PdaText(
+                    "{0} ago", values: [ChatStatus.duration(DateTime.now().difference(at).inSeconds)],
                     maxLines: 1,
                     style: theme.textTheme.labelMedium?.copyWith(
                       color: roster.refreshFailed ? theme.colorScheme.error : theme.colorScheme.onSurfaceVariant,
@@ -222,13 +223,13 @@ class _ChatFactionMembersSheetState extends State<ChatFactionMembersSheet> {
           Semantics(
             toggled: _prefs.rosterReversed,
             child: IconButton(
-              tooltip: 'Reverse order',
+              tooltip: context.interfaceText('Reverse order'),
               icon: Icon(_prefs.rosterReversed ? Icons.arrow_upward_rounded : Icons.arrow_downward_rounded, size: 20),
               onPressed: () => setState(() => _prefs.setRosterReversed(!_prefs.rosterReversed)),
             ),
           ),
           IconButton(
-            tooltip: 'Refresh',
+            tooltip: context.interfaceText('Refresh'),
             icon: roster.refreshing
                 ? const SizedBox.square(dimension: 18, child: CircularProgressIndicator(strokeWidth: 2))
                 : const Icon(Icons.refresh_rounded, size: 22),

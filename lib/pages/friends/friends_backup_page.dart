@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 // Package imports:
@@ -83,7 +84,7 @@ class FriendsBackupPageState extends State<FriendsBackupPage> {
                   children: <Widget>[
                     const Padding(
                       padding: EdgeInsets.fromLTRB(15, 30, 20, 15),
-                      child: Text(
+                      child: PdaText(
                         "HOW TO EXPORT friends",
                         style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                       ),
@@ -104,12 +105,12 @@ class FriendsBackupPageState extends State<FriendsBackupPage> {
                           padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                           child: ElevatedButton.icon(
                             icon: const Icon(Icons.share),
-                            label: const Text("Export"),
+                            label: const PdaText("Export"),
                             onPressed: () async {
                               final export = _friendsProvider.exportFriends();
                               if (export == '') {
                                 BotToast.showText(
-                                  text: 'No friends to export!',
+                                  text: context.interfaceText('No friends to export!'),
                                   textStyle: const TextStyle(
                                     fontSize: 14,
                                     color: Colors.white,
@@ -138,12 +139,12 @@ class FriendsBackupPageState extends State<FriendsBackupPage> {
                           padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                           child: ElevatedButton.icon(
                             icon: const Icon(Icons.content_copy),
-                            label: const Text("Clipboard"),
+                            label: const PdaText("Clipboard"),
                             onPressed: () async {
                               final export = _friendsProvider.exportFriends();
                               if (export == '') {
                                 BotToast.showText(
-                                  text: 'No friends to export!',
+                                  text: context.interfaceText('No friends to export!'),
                                   textStyle: const TextStyle(
                                     fontSize: 14,
                                     color: Colors.white,
@@ -155,8 +156,7 @@ class FriendsBackupPageState extends State<FriendsBackupPage> {
                               } else {
                                 Clipboard.setData(ClipboardData(text: export));
                                 BotToast.showText(
-                                  text: "${_friendsProvider.getFriendNumber()} "
-                                      "Friends copied to clipboard!",
+                                  text: context.interfaceText("{0} Friends copied to clipboard!", [_friendsProvider.getFriendNumber()]),
                                   textStyle: const TextStyle(
                                     fontSize: 14,
                                     color: Colors.white,
@@ -177,7 +177,7 @@ class FriendsBackupPageState extends State<FriendsBackupPage> {
                     ),
                     const Padding(
                       padding: EdgeInsets.fromLTRB(15, 0, 20, 15),
-                      child: Text(
+                      child: PdaText(
                         "HOW TO IMPORT friends",
                         style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                       ),
@@ -222,14 +222,14 @@ class FriendsBackupPageState extends State<FriendsBackupPage> {
                               padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                               child: ElevatedButton.icon(
                                 icon: const Icon(Icons.file_download),
-                                label: const Text("Import"),
+                                label: const PdaText("Import"),
                                 onPressed: () {
                                   if (_importFormKey.currentState!.validate()) {
                                     final numberImported = _importChecker();
                                     if (numberImported == 0) {
                                       BotToast.showText(
-                                        text: 'No friends to import! '
-                                            'Is the file structure correct?',
+                                        text: context.interfaceText('No friends to import! '
+                                            'Is the file structure correct?'),
                                         textStyle: const TextStyle(
                                           fontSize: 14,
                                           color: Colors.white,
@@ -265,7 +265,7 @@ class FriendsBackupPageState extends State<FriendsBackupPage> {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
-      title: const Text("Import & Export", style: TextStyle(color: Colors.white)),
+      title: const PdaText("Import & Export", style: TextStyle(color: Colors.white)),
     );
   }
 
@@ -359,15 +359,15 @@ class FriendsBackupPageState extends State<FriendsBackupPage> {
                 children: <Widget>[
                   const Padding(
                     padding: EdgeInsets.fromLTRB(15, 30, 20, 15),
-                    child: Text(
+                    child: PdaText(
                       "How would you like to import?",
                       style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(30, 10, 30, 20),
-                    child: Text(
-                      "${_tentativeImportModel.friendBackup!.length} new friends were found, $_importChoiceString",
+                    child: PdaText(
+                      "{0} new friends were found, {1}", values: [_tentativeImportModel.friendBackup!.length, _importChoiceString],
                       style: const TextStyle(
                         fontSize: 12,
                       ),
@@ -377,7 +377,7 @@ class FriendsBackupPageState extends State<FriendsBackupPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       ElevatedButton(
-                        child: const Text("Add"),
+                        child: const PdaText("Add"),
                         onPressed: () async {
                           Navigator.of(context).pop();
                           onImportPressed(replace: false);
@@ -387,7 +387,7 @@ class FriendsBackupPageState extends State<FriendsBackupPage> {
                         padding: EdgeInsets.only(left: 5, right: 5),
                       ),
                       ElevatedButton(
-                        child: const Text("Replace"),
+                        child: const PdaText("Replace"),
                         onPressed: () {
                           Navigator.of(context).pop();
                           onImportPressed(replace: true);
@@ -404,7 +404,7 @@ class FriendsBackupPageState extends State<FriendsBackupPage> {
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: const Text("Cancel import"),
+                          child: const PdaText("Cancel import"),
                         ),
                       ],
                     ),

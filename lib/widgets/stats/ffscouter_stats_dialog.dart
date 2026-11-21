@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -54,7 +55,7 @@ class _FFScouterStatsDialogState extends State<FFScouterStatsDialog> {
               children: [
                 Padding(
                   padding: EdgeInsets.only(bottom: 20),
-                  child: Text("FFSCOUTER", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  child: PdaText("FFSCOUTER", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 ),
               ],
             ),
@@ -76,14 +77,14 @@ class _FFScouterStatsDialogState extends State<FFScouterStatsDialog> {
                   } else if (snapshot.data == null && _preEnabled) {
                     return _preEnabledWidget();
                   }
-                  return const Text("Error fetching from FFScouter");
+                  return const PdaText("Error fetching from FFScouter");
                 }
                 return const Padding(
                   padding: EdgeInsets.only(top: 100),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Text("Fetching from FFScouter"),
+                      PdaText("Fetching from FFScouter"),
                       Padding(
                         padding: EdgeInsets.only(top: 20),
                         child: Center(child: CircularProgressIndicator()),
@@ -114,7 +115,7 @@ class _FFScouterStatsDialogState extends State<FFScouterStatsDialog> {
             ),
             if (isKeyNotRegistered) ...[
               const SizedBox(height: 16),
-              Text(
+              PdaText(
                 "Your API key is not registered with FFScouter. "
                 "You can register it directly from Torn PDA.",
                 style: TextStyle(fontSize: 13, color: widget.themeProvider.mainText),
@@ -141,14 +142,14 @@ class _FFScouterStatsDialogState extends State<FFScouterStatsDialog> {
                   }
                 },
                 icon: const Icon(Icons.app_registration, size: 18),
-                label: const Text("Register Key"),
+                label: const PdaText("Register Key"),
               ),
             ] else ...[
               Padding(
                 padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
                 child: Column(
                   children: [
-                    Text(
+                    PdaText(
                       "Make sure you have registered your key with FFScouter.\n\n"
                       "If you have, make sure you are using the correct key or that an alternative key has been "
                       "provided in Torn PDA Settings.",
@@ -175,7 +176,7 @@ class _FFScouterStatsDialogState extends State<FFScouterStatsDialog> {
                         }
                       },
                       icon: const Icon(Icons.settings, size: 16),
-                      label: const Text("Open FFScouter Setup", style: TextStyle(fontSize: 12)),
+                      label: const PdaText("Open FFScouter Setup", style: TextStyle(fontSize: 12)),
                     ),
                   ],
                 ),
@@ -207,7 +208,7 @@ class _FFScouterStatsDialogState extends State<FFScouterStatsDialog> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          PdaText(
             "BATTLE SCORE ESTIMATE",
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.pink[700], fontSize: 16),
           ),
@@ -221,7 +222,7 @@ class _FFScouterStatsDialogState extends State<FFScouterStatsDialog> {
               padding: const EdgeInsets.only(left: 20, top: 10),
               child: Row(
                 children: [
-                  const Text("Fair Fight: ", style: TextStyle(fontSize: 15)),
+                  const PdaText("Fair Fight: ", style: TextStyle(fontSize: 15)),
                   Text(ffString, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
                 ],
               ),
@@ -232,7 +233,7 @@ class _FFScouterStatsDialogState extends State<FFScouterStatsDialog> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text("Last updated", style: TextStyle(fontSize: 15)),
+                  const PdaText("Last updated", style: TextStyle(fontSize: 15)),
                   const SizedBox(height: 2),
                   Builder(
                     builder: (context) {
@@ -249,7 +250,7 @@ class _FFScouterStatsDialogState extends State<FFScouterStatsDialog> {
                             dateFormatted,
                             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Colors.grey[600]),
                           ),
-                          Text("$daysAgo days ago", style: TextStyle(fontSize: 12, color: Colors.grey[500])),
+                          PdaText("{0} days ago", values: [daysAgo], style: TextStyle(fontSize: 12, color: Colors.grey[500])),
                         ],
                       );
                     },
@@ -284,7 +285,7 @@ class _FFScouterStatsDialogState extends State<FFScouterStatsDialog> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        PdaText(
           "ESTIMATES BY SOURCE",
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.pink[700], fontSize: 16),
         ),
@@ -305,7 +306,7 @@ class _FFScouterStatsDialogState extends State<FFScouterStatsDialog> {
                       style: const TextStyle(fontSize: 14),
                     ),
                     if (estimate.kind == stats.source)
-                      Text("  in use", style: TextStyle(fontSize: 12, color: Colors.pink[400])),
+                      PdaText("  in use", style: TextStyle(fontSize: 12, color: Colors.pink[400])),
                   ],
                 ),
                 Text(
@@ -327,7 +328,7 @@ class _FFScouterStatsDialogState extends State<FFScouterStatsDialog> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        PdaText(
           "SPIES",
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.pink[700], fontSize: 16),
         ),
@@ -337,8 +338,8 @@ class _FFScouterStatsDialogState extends State<FFScouterStatsDialog> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Total ${formatBigNumbers(spy.total ?? 0)}",
+                PdaText(
+                  "Total {0}", values: [formatBigNumbers(spy.total ?? 0)],
                   style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                 ),
                 Text(
@@ -381,7 +382,7 @@ class _FFScouterStatsDialogState extends State<FFScouterStatsDialog> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        PdaText(
           "STAT DISTRIBUTION",
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.pink[700], fontSize: 16),
         ),
@@ -452,13 +453,13 @@ class _FFScouterStatsDialogState extends State<FFScouterStatsDialog> {
       children: [
         Icon(Icons.shield_outlined, color: Colors.grey[400], size: 40),
         const SizedBox(height: 12),
-        Text(
+        PdaText(
           "FFScouter requires your consent before use",
           style: TextStyle(color: Colors.grey[600], fontSize: 14, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 8),
-        Text(
+        PdaText(
           "Please review the terms, data policy and conditions before enabling",
           style: TextStyle(color: Colors.grey[500], fontSize: 13),
           textAlign: TextAlign.center,
@@ -487,7 +488,7 @@ class _FFScouterStatsDialogState extends State<FFScouterStatsDialog> {
                 }
               },
               icon: const Icon(Icons.info_outline, size: 18),
-              label: const Text("Review & Enable"),
+              label: const PdaText("Review & Enable"),
             ),
             const SizedBox(width: 16),
             TextButton(
@@ -496,7 +497,7 @@ class _FFScouterStatsDialogState extends State<FFScouterStatsDialog> {
                 _preEnabled = false;
                 widget.callBackToDisableFFScouterTab();
               },
-              child: const Text("Disable"),
+              child: const PdaText("Disable"),
             ),
           ],
         ),

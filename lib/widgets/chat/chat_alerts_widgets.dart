@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -70,8 +71,8 @@ class _ChatAlertsSheet extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(16, 0, 8, 4),
                 child: Row(
                   children: [
-                    Expanded(child: Text('Mentions and highlight words', style: theme.textTheme.titleMedium)),
-                    if (alerts.isNotEmpty) TextButton(onPressed: chat.clearAlerts, child: const Text('Clear')),
+                    Expanded(child: PdaText('Mentions and highlight words', style: theme.textTheme.titleMedium)),
+                    if (alerts.isNotEmpty) TextButton(onPressed: chat.clearAlerts, child: const PdaText('Clear')),
                   ],
                 ),
               ),
@@ -183,7 +184,7 @@ Future<void> showChatRoomAlerts(BuildContext context, ChatRoom room) {
                         ? Icons.snooze_rounded
                         : (muted ? Icons.notifications_off_rounded : Icons.notifications_none_rounded),
                   ),
-                  title: const Text('Mute for'),
+                  title: const PdaText('Mute for'),
                   subtitle: Text(
                     !muted
                         ? effect
@@ -199,7 +200,7 @@ Future<void> showChatRoomAlerts(BuildContext context, ChatRoom room) {
                     children: [
                       if (muted)
                         ActionChip(
-                          label: const Text('Unmute'),
+                          label: const PdaText('Unmute'),
                           onPressed: () {
                             HapticFeedback.lightImpact();
                             prefs.setMuted(room.id, false);
@@ -218,7 +219,7 @@ Future<void> showChatRoomAlerts(BuildContext context, ChatRoom room) {
                         ),
                       if (landing != null)
                         ChoiceChip(
-                          label: const Text('Until I land'),
+                          label: const PdaText('Until I land'),
                           selected: muted && until == landing,
                           onSelected: (_) {
                             HapticFeedback.lightImpact();
@@ -232,7 +233,7 @@ Future<void> showChatRoomAlerts(BuildContext context, ChatRoom room) {
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Text('Alert on', style: theme.textTheme.titleSmall),
+                    child: PdaText('Alert on', style: theme.textTheme.titleSmall),
                   ),
                 ),
                 Padding(
@@ -240,9 +241,9 @@ Future<void> showChatRoomAlerts(BuildContext context, ChatRoom room) {
                   child: SegmentedButton<ChatAlertLevel>(
                     showSelectedIcon: false,
                     segments: const [
-                      ButtonSegment(value: ChatAlertLevel.all, label: Text('Everything')),
-                      ButtonSegment(value: ChatAlertLevel.mentions, label: Text('Mentions')),
-                      ButtonSegment(value: ChatAlertLevel.none, label: Text('Nothing')),
+                      ButtonSegment(value: ChatAlertLevel.all, label: PdaText('Everything')),
+                      ButtonSegment(value: ChatAlertLevel.mentions, label: PdaText('Mentions')),
+                      ButtonSegment(value: ChatAlertLevel.none, label: PdaText('Nothing')),
                     ],
                     selected: {level},
                     onSelectionChanged: (v) => prefs.setAlertLevel(room.id, v.first),
@@ -252,7 +253,7 @@ Future<void> showChatRoomAlerts(BuildContext context, ChatRoom room) {
                   padding: const EdgeInsets.fromLTRB(16, 6, 16, 0),
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Text(
+                    child: PdaText(
                       'Highlight words alert only with Everything',
                       style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
                     ),
@@ -263,7 +264,7 @@ Future<void> showChatRoomAlerts(BuildContext context, ChatRoom room) {
                     padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text(
+                      child: PdaText(
                         'Alerts from this room need the app open or just left',
                         style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
                       ),
@@ -351,19 +352,19 @@ class ChatAlertSettings extends StatelessWidget {
                   ? 'Mentions of your name'
                   : 'Mentions of ${NativeChat.controller.myName}',
             ),
-            subtitle: const Text('@name or the name alone, as a whole word'),
+            subtitle: const PdaText('@name or the name alone, as a whole word'),
             value: prefs.mentions,
             onChanged: prefs.setMentions,
           ),
           SwitchListTile(
-            title: const Text('Notify while the app is open'),
-            subtitle: const Text('Also just after leaving the app. When off, mentions only show in the @ list'),
+            title: const PdaText('Notify while the app is open'),
+            subtitle: const PdaText('Also just after leaving the app. When off, mentions only show in the @ list'),
             value: prefs.alertNotify,
             onChanged: prefs.setAlertNotify,
           ),
           SwitchListTile(
-            title: const Text('Vibrate on in-app chat alerts'),
-            subtitle: const Text('When the app is open'),
+            title: const PdaText('Vibrate on in-app chat alerts'),
+            subtitle: const PdaText('When the app is open'),
             value: prefs.alertVibrate,
             onChanged: prefs.setAlertVibrate,
           ),
@@ -380,12 +381,12 @@ class ChatAlertSettings extends StatelessWidget {
                   ButtonSegment(
                     value: ChatNotificationTap.window,
                     icon: Icon(Icons.picture_in_picture_alt_rounded),
-                    label: Text('Quick window'),
+                    label: PdaText('Quick window'),
                   ),
                   ButtonSegment(
                     value: ChatNotificationTap.inbox,
                     icon: Icon(Icons.forum_rounded),
-                    label: Text('Full chat'),
+                    label: PdaText('Full chat'),
                   ),
                 ],
                 selected: {prefs.notificationTap},
@@ -401,11 +402,9 @@ class ChatAlertSettings extends StatelessWidget {
               ),
             ),
             SwitchListTile(
-              title: const Text('Quiet hours'),
-              subtitle: Text(
-                'No chat notifications from ${chatClockOf(context).minutesClock(prefs.quietFrom)} '
-                'to ${chatClockOf(context).minutesClock(prefs.quietTo)}. '
-                'The ticker, the counts and the list of mentions keep working',
+              title: const PdaText('Quiet hours'),
+              subtitle: PdaText(
+                "No chat notifications from {0} to {1}. The ticker, the counts and the list of mentions keep working", values: [chatClockOf(context).minutesClock(prefs.quietFrom), chatClockOf(context).minutesClock(prefs.quietTo)],
               ),
               value: prefs.quietHours,
               onChanged: prefs.setQuietHours,
@@ -418,7 +417,7 @@ class ChatAlertSettings extends StatelessWidget {
                     Expanded(
                       child: OutlinedButton.icon(
                         icon: const Icon(Icons.bedtime_rounded, size: 18),
-                        label: Text('From ${chatClockOf(context).minutesClock(prefs.quietFrom)}'),
+                        label: PdaText("From {0}", values: [chatClockOf(context).minutesClock(prefs.quietFrom)]),
                         onPressed: () => _pickTime(context, prefs.quietFrom, (m) => prefs.setQuietRange(from: m)),
                       ),
                     ),
@@ -426,7 +425,7 @@ class ChatAlertSettings extends StatelessWidget {
                     Expanded(
                       child: OutlinedButton.icon(
                         icon: const Icon(Icons.wb_sunny_rounded, size: 18),
-                        label: Text('To ${chatClockOf(context).minutesClock(prefs.quietTo)}'),
+                        label: PdaText("To {0}", values: [chatClockOf(context).minutesClock(prefs.quietTo)]),
                         onPressed: () => _pickTime(context, prefs.quietTo, (m) => prefs.setQuietRange(to: m)),
                       ),
                     ),
@@ -435,8 +434,8 @@ class ChatAlertSettings extends StatelessWidget {
               ),
           ],
           SwitchListTile(
-            title: const Text('Sound for all chats'),
-            subtitle: const Text(
+            title: const PdaText('Sound for all chats'),
+            subtitle: const PdaText(
               'Off: private, faction and company chats use Keyboard, the rest are silent. Each chat can change it',
             ),
             value: prefs.soundForAll,
@@ -503,7 +502,7 @@ class _ChatHighlightWordsState extends State<ChatHighlightWords> {
                 onPressed: () => prefs.setWordAlert(word, !prefs.alertWords.contains(word)),
               ),
               trailing: IconButton(
-                tooltip: 'Remove $word',
+                tooltip: context.interfaceText("Remove {0}", [word]),
                 icon: const Icon(Icons.close_rounded),
                 onPressed: () => prefs.removeKeyword(word),
               ),
@@ -516,10 +515,10 @@ class _ChatHighlightWordsState extends State<ChatHighlightWords> {
               textInputAction: TextInputAction.done,
               onSubmitted: (_) => _add(),
               decoration: InputDecoration(
-                hintText: 'Add a word: an item, RW, a faction tag',
+                hintText: context.interfaceText('Add a word: an item, RW, a faction tag'),
                 counterText: '',
                 isDense: true,
-                suffixIcon: IconButton(tooltip: 'Add word', icon: const Icon(Icons.add_rounded), onPressed: _add),
+                suffixIcon: IconButton(tooltip: context.interfaceText('Add word'), icon: const Icon(Icons.add_rounded), onPressed: _add),
               ),
             ),
           ),
@@ -542,8 +541,8 @@ class ChatTickerSettings extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SwitchListTile(
-            title: const Text('Show the ticker'),
-            subtitle: const Text('A line for each new message, over the browser and the app'),
+            title: const PdaText('Show the ticker'),
+            subtitle: const PdaText('A line for each new message, over the browser and the app'),
             value: prefs.ticker,
             onChanged: prefs.setTicker,
           ),
@@ -553,8 +552,8 @@ class ChatTickerSettings extends StatelessWidget {
               child: SegmentedButton<bool>(
                 showSelectedIcon: false,
                 segments: const [
-                  ButtonSegment(value: true, icon: Icon(Icons.vertical_align_top_rounded), label: Text('Top')),
-                  ButtonSegment(value: false, icon: Icon(Icons.vertical_align_bottom_rounded), label: Text('Bottom')),
+                  ButtonSegment(value: true, icon: Icon(Icons.vertical_align_top_rounded), label: PdaText('Top')),
+                  ButtonSegment(value: false, icon: Icon(Icons.vertical_align_bottom_rounded), label: PdaText('Bottom')),
                 ],
                 selected: {prefs.tickerTop},
                 onSelectionChanged: (v) => prefs.setTickerTop(v.first),
@@ -565,7 +564,7 @@ class ChatTickerSettings extends StatelessWidget {
               child: Semantics(
                 container: true,
                 header: true,
-                child: Text('When tapped', style: theme.textTheme.titleSmall),
+                child: PdaText('When tapped', style: theme.textTheme.titleSmall),
               ),
             ),
             Padding(
@@ -575,8 +574,8 @@ class ChatTickerSettings extends StatelessWidget {
                 child: SegmentedButton<ChatTickerTap>(
                   showSelectedIcon: false,
                   segments: const [
-                    ButtonSegment(value: ChatTickerTap.window, label: Text('Open quick window')),
-                    ButtonSegment(value: ChatTickerTap.expand, label: Text('Expand in place')),
+                    ButtonSegment(value: ChatTickerTap.window, label: PdaText('Open quick window')),
+                    ButtonSegment(value: ChatTickerTap.expand, label: PdaText('Expand in place')),
                   ],
                   selected: {prefs.tickerTap},
                   onSelectionChanged: (v) => prefs.setTickerTap(v.first),
@@ -640,7 +639,7 @@ class ChatTickerSettings extends StatelessWidget {
                 child: OutlinedButton.icon(
                   onPressed: NativeChat.tickerDemo.launch,
                   icon: const Icon(Icons.play_arrow_rounded),
-                  label: const Text('Preview'),
+                  label: const PdaText('Preview'),
                 ),
               ),
             ),
@@ -697,9 +696,9 @@ class ChatGroupLevelRow extends StatelessWidget {
     final levels = SegmentedButton<ChatAlertLevel>(
       showSelectedIcon: false,
       segments: [
-        ButtonSegment(value: ChatAlertLevel.all, label: Text('All', semanticsLabel: '$room: all')),
+        ButtonSegment(value: ChatAlertLevel.all, label: PdaText('All', semanticsLabel: '$room: all')),
         ButtonSegment(value: ChatAlertLevel.mentions, label: Text('@', semanticsLabel: '$room: mentions only')),
-        ButtonSegment(value: ChatAlertLevel.none, label: Text('Off', semanticsLabel: '$room: off')),
+        ButtonSegment(value: ChatAlertLevel.none, label: PdaText('Off', semanticsLabel: '$room: off')),
       ],
       selected: {level},
       onSelectionChanged: (v) => onChanged(v.first),
@@ -726,8 +725,8 @@ class ChatGlowSettings extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
-            title: const Text('Glow on new messages'),
-            subtitle: Text(
+            title: const PdaText('Glow on new messages'),
+            subtitle: PdaText(
               'A short flash in the color of the room the message came from. Never for frozen or hidden rooms',
               style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
             ),
@@ -739,9 +738,9 @@ class ChatGlowSettings extends StatelessWidget {
               child: SegmentedButton<ChatGlowMode>(
                 showSelectedIcon: false,
                 segments: const [
-                  ButtonSegment(value: ChatGlowMode.ticker, label: Text('Same as ticker')),
-                  ButtonSegment(value: ChatGlowMode.custom, label: Text('Custom')),
-                  ButtonSegment(value: ChatGlowMode.off, label: Text('Off')),
+                  ButtonSegment(value: ChatGlowMode.ticker, label: PdaText('Same as ticker')),
+                  ButtonSegment(value: ChatGlowMode.custom, label: PdaText('Custom')),
+                  ButtonSegment(value: ChatGlowMode.off, label: PdaText('Off')),
                 ],
                 selected: {prefs.glowMode},
                 onSelectionChanged: (v) => prefs.setGlowMode(v.first),
@@ -788,9 +787,9 @@ class ChatRoomStatePicker extends StatelessWidget {
           child: SegmentedButton<ChatRoomState>(
             showSelectedIcon: false,
             segments: const [
-              ButtonSegment(value: ChatRoomState.live, label: Text('Live')),
-              ButtonSegment(value: ChatRoomState.frozen, icon: Icon(Icons.ac_unit_rounded), label: Text('Frozen')),
-              ButtonSegment(value: ChatRoomState.hidden, label: Text('Hidden')),
+              ButtonSegment(value: ChatRoomState.live, label: PdaText('Live')),
+              ButtonSegment(value: ChatRoomState.frozen, icon: Icon(Icons.ac_unit_rounded), label: PdaText('Frozen')),
+              ButtonSegment(value: ChatRoomState.hidden, label: PdaText('Hidden')),
             ],
             selected: {state},
             onSelectionChanged: (v) {

@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -65,12 +66,12 @@ class ChatYoutubeInline extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  tooltip: 'Open in YouTube',
+                  tooltip: context.interfaceText('Open in YouTube'),
                   icon: const Icon(Icons.open_in_new_rounded, size: 18),
                   onPressed: () => openInYoutube(url),
                 ),
                 IconButton(
-                  tooltip: 'Stop the video',
+                  tooltip: context.interfaceText('Stop the video'),
                   icon: const Icon(Icons.close_rounded, size: 18),
                   onPressed: () => NativeChat.playingVideo.value = null,
                 ),
@@ -178,11 +179,11 @@ class _ChatYoutubePlayerState extends State<ChatYoutubePlayer> with WidgetsBindi
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text("This video can't play here", style: theme.textTheme.bodyMedium?.copyWith(color: Colors.white)),
+            PdaText("This video can't play here", style: theme.textTheme.bodyMedium?.copyWith(color: Colors.white)),
             TextButton.icon(
               onPressed: () => openInYoutube(widget.url),
               icon: const Icon(Icons.open_in_new_rounded, size: 18),
-              label: const Text('Open in YouTube'),
+              label: const PdaText('Open in YouTube'),
               style: TextButton.styleFrom(foregroundColor: Colors.white),
             ),
           ],

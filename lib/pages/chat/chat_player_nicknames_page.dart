@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/models/chat/chat_models.dart';
 import 'package:torn_pda/models/chat/chat_person.dart';
@@ -13,7 +14,7 @@ class ChatPlayerNicknamesPage extends StatelessWidget {
     final theme = Theme.of(context);
     final prefs = NativeChat.prefs;
     return Scaffold(
-      appBar: AppBar(title: const Text('Player nicknames')),
+      appBar: AppBar(title: const PdaText('Player nicknames')),
       body: ListenableBuilder(
         listenable: prefs,
         builder: (context, _) {
@@ -44,7 +45,7 @@ class ChatPlayerNicknamesPage extends StatelessWidget {
                   subtitle: Text(style.nickname.isEmpty ? '[$id]' : '${style.name} [$id]'),
                   onTap: () => showChatPersonSettings(context, ChatUser(id: id, name: style.name)),
                   trailing: IconButton(
-                    tooltip: 'Remove ${style.name}',
+                    tooltip: context.interfaceText("Remove {0}", [style.name]),
                     icon: const Icon(Icons.delete_outline_rounded),
                     onPressed: () => prefs.setPerson(id, ChatPersonStyle.none),
                   ),

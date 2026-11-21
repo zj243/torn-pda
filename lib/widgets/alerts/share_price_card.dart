@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:io';
 
 import 'package:expandable/expandable.dart';
@@ -88,8 +89,8 @@ class SharePriceCardState extends State<SharePriceCard> {
               // Second Row
               Wrap(
                 children: [
-                  Text(
-                    "Price: \$${widget.stock.currentPrice}",
+                  PdaText(
+                    "Price: \${0}", values: [widget.stock.currentPrice],
                     style: const TextStyle(fontSize: 12),
                   ),
                   gain,
@@ -107,8 +108,8 @@ class SharePriceCardState extends State<SharePriceCard> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(right: 10),
-                        child: Text(
-                          "OWNED (x$ownedShares)",
+                        child: PdaText(
+                          "OWNED (x{0})", values: [ownedShares],
                           style: const TextStyle(color: Colors.green, fontSize: 10),
                         ),
                       ),
@@ -147,11 +148,11 @@ class SharePriceCardState extends State<SharePriceCard> {
             children: [
               Row(
                 children: [
-                  const Text("Gain alert: ", style: TextStyle(fontSize: 12)),
+                  const PdaText("Gain alert: ", style: TextStyle(fontSize: 12)),
                   if (widget.stock.alertGain == null)
                     const Row(
                       children: [
-                        Text("not set", style: TextStyle(fontSize: 12)),
+                        PdaText("not set", style: TextStyle(fontSize: 12)),
                         SizedBox(width: 10),
                       ],
                     )
@@ -167,11 +168,11 @@ class SharePriceCardState extends State<SharePriceCard> {
               const SizedBox(height: 10),
               Row(
                 children: [
-                  const Text("Loss alert: ", style: TextStyle(fontSize: 12)),
+                  const PdaText("Loss alert: ", style: TextStyle(fontSize: 12)),
                   if (widget.stock.alertLoss == null)
                     const Row(
                       children: [
-                        Text("not set", style: TextStyle(fontSize: 12)),
+                        PdaText("not set", style: TextStyle(fontSize: 12)),
                         SizedBox(width: 10),
                       ],
                     )

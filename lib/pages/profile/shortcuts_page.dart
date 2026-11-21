@@ -1,5 +1,6 @@
 // Flutter imports:
 // Package imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:bot_toast/bot_toast.dart';
@@ -71,7 +72,7 @@ class ShortcutsPageState extends State<ShortcutsPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text("ACTIVE SHORTCUTS"),
+                    PdaText("ACTIVE SHORTCUTS"),
                     Row(
                       children: [
                         Icon(Icons.info_outline, size: 16),
@@ -80,11 +81,11 @@ class ShortcutsPageState extends State<ShortcutsPage> {
                           children: [
                             Padding(
                               padding: EdgeInsets.only(left: 10),
-                              child: Text('SWIPE RIGHT TO REMOVE, LEFT TO EDIT', style: TextStyle(fontSize: 10)),
+                              child: PdaText('SWIPE RIGHT TO REMOVE, LEFT TO EDIT', style: TextStyle(fontSize: 10)),
                             ),
                             Padding(
                               padding: EdgeInsets.only(left: 10),
-                              child: Text('LONG-PRESS TO SORT', style: TextStyle(fontSize: 10)),
+                              child: PdaText('LONG-PRESS TO SORT', style: TextStyle(fontSize: 10)),
                             ),
                           ],
                         ),
@@ -97,7 +98,7 @@ class ShortcutsPageState extends State<ShortcutsPage> {
               if (_shortcutsProvider.activeShortcuts.isEmpty)
                 Padding(
                   padding: const EdgeInsets.fromLTRB(40, 10, 0, 10),
-                  child: Text(
+                  child: PdaText(
                     'No active shortcuts, add some below!',
                     style: TextStyle(color: Colors.orange[800], fontStyle: FontStyle.italic, fontSize: 13),
                   ),
@@ -105,7 +106,7 @@ class ShortcutsPageState extends State<ShortcutsPage> {
               else
                 _activeCardsList(),
               const SizedBox(height: 40),
-              const Padding(padding: EdgeInsets.symmetric(horizontal: 15), child: Text("ALL SHORTCUTS")),
+              const Padding(padding: EdgeInsets.symmetric(horizontal: 15), child: PdaText("ALL SHORTCUTS")),
               const SizedBox(height: 10),
               _customCard(),
               _allCardsList(),
@@ -242,12 +243,12 @@ class ShortcutsPageState extends State<ShortcutsPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Flexible(child: Text('Custom shortcut')),
+                      const Flexible(child: PdaText('Custom shortcut')),
                       TextButton(
                         onPressed: () {
                           _openCustomDialog();
                         },
-                        child: Text('ADD', style: TextStyle(color: Colors.green[500])),
+                        child: PdaText('ADD', style: TextStyle(color: Colors.green[500])),
                       ),
                     ],
                   ),
@@ -320,7 +321,7 @@ class ShortcutsPageState extends State<ShortcutsPage> {
                                                 // Reset visibility after animation
                                                 short.visible = true;
                                               },
-                                        child: Text('ADD', style: TextStyle(color: Colors.green[500])),
+                                        child: PdaText('ADD', style: TextStyle(color: Colors.green[500])),
                                       ),
                                     ],
                                   ),
@@ -344,7 +345,7 @@ class ShortcutsPageState extends State<ShortcutsPage> {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
-      title: const Text("Shortcuts", style: TextStyle(color: Colors.white)),
+      title: const PdaText("Shortcuts", style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
@@ -357,7 +358,7 @@ class ShortcutsPageState extends State<ShortcutsPage> {
           onPressed: () async {
             if (_shortcutsProvider.activeShortcuts.isEmpty) {
               BotToast.showText(
-                text: 'You have no active shortcuts, activate some!',
+                text: context.interfaceText('You have no active shortcuts, activate some!'),
                 textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                 contentColor: Colors.orange[800]!,
                 contentPadding: const EdgeInsets.all(10),
@@ -396,7 +397,7 @@ class ShortcutsPageState extends State<ShortcutsPage> {
                       mainAxisSize: MainAxisSize.min, // To make the card compact
                       children: <Widget>[
                         Flexible(
-                          child: Text(
+                          child: PdaText(
                             "This will reset all your active shortcuts and order, "
                             "are you sure?",
                             style: TextStyle(fontSize: 12, color: _themeProvider.mainText),
@@ -407,14 +408,14 @@ class ShortcutsPageState extends State<ShortcutsPage> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             TextButton(
-                              child: const Text("Reset!"),
+                              child: const PdaText("Reset!"),
                               onPressed: () {
                                 _shortcutsProvider.wipeAllShortcuts();
                                 Navigator.of(context).pop();
                               },
                             ),
                             TextButton(
-                              child: const Text("Oh no!"),
+                              child: const PdaText("Oh no!"),
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
@@ -495,11 +496,11 @@ class ShortcutsPageState extends State<ShortcutsPage> {
                                     textCapitalization: TextCapitalization.sentences,
                                     controller: _customNameController,
                                     maxLength: 30,
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       counterText: "",
                                       isDense: true,
                                       border: OutlineInputBorder(),
-                                      labelText: 'Name',
+                                      labelText: context.interfaceText('Name'),
                                     ),
                                     validator: (value) {
                                       if (value!.replaceAll(' ', '').isEmpty) {
@@ -557,7 +558,7 @@ class ShortcutsPageState extends State<ShortcutsPage> {
                             ),
                             const SizedBox(height: 8),
                             Flexible(
-                              child: Text(
+                              child: PdaText(
                                 "Tip: long-press the app bar in the browser to copy the "
                                 "current URL you are visiting. Then paste it here.",
                                 style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic, color: Colors.grey[600]),
@@ -589,7 +590,7 @@ class ShortcutsPageState extends State<ShortcutsPage> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
                                 TextButton(
-                                  child: const Text("Add"),
+                                  child: const PdaText("Add"),
                                   onPressed: () {
                                     if (!_customNameKey.currentState!.validate()) {
                                       return;
@@ -614,7 +615,7 @@ class ShortcutsPageState extends State<ShortcutsPage> {
                                   },
                                 ),
                                 TextButton(
-                                  child: const Text("Close"),
+                                  child: const PdaText("Close"),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                     _customNameController.text = '';
@@ -706,11 +707,11 @@ class ShortcutsPageState extends State<ShortcutsPage> {
                                     textCapitalization: TextCapitalization.sentences,
                                     controller: _customNameController,
                                     maxLength: 20,
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       counterText: "",
                                       isDense: true,
                                       border: OutlineInputBorder(),
-                                      labelText: 'Name',
+                                      labelText: context.interfaceText('Name'),
                                     ),
                                     validator: (value) {
                                       if (value!.replaceAll(' ', '').isEmpty) {
@@ -768,7 +769,7 @@ class ShortcutsPageState extends State<ShortcutsPage> {
                             ),
                             const SizedBox(height: 8),
                             Flexible(
-                              child: Text(
+                              child: PdaText(
                                 "Tip: long-press the app bar in the browser to copy the "
                                 "current URL you are visiting. Then paste it here.",
                                 style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic, color: Colors.grey[600]),
@@ -800,7 +801,7 @@ class ShortcutsPageState extends State<ShortcutsPage> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
                                 TextButton(
-                                  child: const Text("Save"),
+                                  child: const PdaText("Save"),
                                   onPressed: () {
                                     if (!_customNameKey.currentState!.validate()) {
                                       return;
@@ -823,7 +824,7 @@ class ShortcutsPageState extends State<ShortcutsPage> {
                                   },
                                 ),
                                 TextButton(
-                                  child: const Text("Close"),
+                                  child: const PdaText("Close"),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                     _customNameController.text = '';

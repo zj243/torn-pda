@@ -1,5 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:convert';
 import 'dart:math';
 import 'package:fl_chart/fl_chart.dart';
@@ -85,7 +86,7 @@ class _DevToolsNetworkTabState extends State<DevToolsNetworkTab> {
   @override
   Widget build(BuildContext context) {
     if (widget.webViewController == null) {
-      return const Center(child: Text("WebView not available."));
+      return const Center(child: PdaText("WebView not available."));
     }
 
     return FutureBuilder<List<dynamic>>(
@@ -99,11 +100,11 @@ class _DevToolsNetworkTabState extends State<DevToolsNetworkTab> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("No network activity recorded yet."),
+                const PdaText("No network activity recorded yet."),
                 const SizedBox(height: 8),
                 ElevatedButton.icon(
                   icon: const Icon(Icons.refresh),
-                  label: const Text("Refresh"),
+                  label: const PdaText("Refresh"),
                   onPressed: () => setState(() {
                     _entries = _fetchPerformanceEntries();
                   }),
@@ -473,7 +474,7 @@ class _DevToolsNetworkTabState extends State<DevToolsNetworkTab> {
                   );
 
             return AlertDialog(
-              title: const Text("Resource Details"),
+              title: const PdaText("Resource Details"),
               content: SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[
@@ -510,7 +511,7 @@ class _DevToolsNetworkTabState extends State<DevToolsNetworkTab> {
                     _buildDetailRow("Decoded Size:", formatBytes(decodedBodySize)),
                     if (hasTimingData) ...[
                       const Divider(height: 24),
-                      const Text("Timing Breakdown", style: TextStyle(fontWeight: FontWeight.bold)),
+                      const PdaText("Timing Breakdown", style: TextStyle(fontWeight: FontWeight.bold)),
                       _buildTimingBar("Redirect", redirectTime, duration.toDouble()),
                       _buildTimingBar("DNS Lookup", dnsTime, duration.toDouble()),
                       _buildTimingBar("Connection", connectTime, duration.toDouble()),
@@ -525,10 +526,10 @@ class _DevToolsNetworkTabState extends State<DevToolsNetworkTab> {
                     onPressed: () {
                       Clipboard.setData(ClipboardData(text: urlString));
                       ScaffoldMessenger.of(context)
-                          .showSnackBar(const SnackBar(content: Text('URL copied to clipboard')));
+                          .showSnackBar(const SnackBar(content: PdaText('URL copied to clipboard')));
                     },
-                    child: const Text("Copy URL")),
-                TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text("Close")),
+                    child: const PdaText("Copy URL")),
+                TextButton(onPressed: () => Navigator.of(context).pop(), child: const PdaText("Close")),
               ],
             );
           },

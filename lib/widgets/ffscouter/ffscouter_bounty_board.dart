@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -105,7 +106,7 @@ class _FFScouterBountyBoardViewState extends State<FFScouterBountyBoardView> wit
             if (targets.isEmpty)
               Padding(
                 padding: const EdgeInsets.all(12),
-                child: Text("There are no open bounties right now", style: TextStyle(color: Colors.grey[600])),
+                child: PdaText("There are no open bounties right now", style: TextStyle(color: Colors.grey[600])),
               ),
             for (final target in targets) _targetCard(target, themeProvider),
           ],
@@ -135,7 +136,7 @@ class _FFScouterBountyBoardViewState extends State<FFScouterBountyBoardView> wit
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            PdaText(
               "Players put bounties on other players through FFScouter. Hit a target from this list and FFScouter "
               "checks your attacks and pays you the reward. You can also place your own bounties.",
               style: TextStyle(fontSize: 12, color: themeProvider.mainText),
@@ -152,7 +153,7 @@ class _FFScouterBountyBoardViewState extends State<FFScouterBountyBoardView> wit
                     ),
                   OutlinedButton.icon(
                     icon: const Icon(Icons.add, size: 16),
-                    label: const Text("Place a bounty"),
+                    label: const PdaText("Place a bounty"),
                     onPressed: () async {
                       final placed = await showFFScouterBountyOrderDialog(context);
                       if (placed != null && mounted) _load();
@@ -175,12 +176,12 @@ class _FFScouterBountyBoardViewState extends State<FFScouterBountyBoardView> wit
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            PdaText(
               "To see and hit bounties you first need to accept the Bounty Board rules and data policy.",
               style: TextStyle(fontSize: 13, color: themeProvider.mainText),
             ),
             const SizedBox(height: 10),
-            Text(
+            PdaText(
               "RULES",
               style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.pink[600]),
             ),
@@ -205,7 +206,7 @@ class _FFScouterBountyBoardViewState extends State<FFScouterBountyBoardView> wit
                 ),
               ),
             const SizedBox(height: 8),
-            Text(
+            PdaText(
               "DATA POLICY",
               style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.pink[600]),
             ),
@@ -236,26 +237,26 @@ class _FFScouterBountyBoardViewState extends State<FFScouterBountyBoardView> wit
               controlAffinity: ListTileControlAffinity.leading,
               value: _policyRead,
               onChanged: (value) => setState(() => _policyRead = value ?? false),
-              title: Text("I have read the rules and the data policy", style: textStyle),
+              title: PdaText("I have read the rules and the data policy", style: textStyle),
             ),
             Wrap(
               alignment: WrapAlignment.end,
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
-                TextButton(onPressed: _disable, child: const Text("Disable")),
+                TextButton(onPressed: _disable, child: const PdaText("Disable")),
                 TextButton(
                   onPressed: () => openSimpleWebViewDialog(
                     context: context,
                     url: 'https://ffscouter.com/claim-bounties',
                     title: 'FFScouter bounties',
                   ),
-                  child: const Text("Full policy"),
+                  child: const PdaText("Full policy"),
                 ),
                 ElevatedButton(
                   onPressed: _policyRead && !_accepting ? _acceptPolicy : null,
                   child: _accepting
                       ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2))
-                      : const Text("Accept"),
+                      : const PdaText("Accept"),
                 ),
               ],
             ),
@@ -286,15 +287,15 @@ class _FFScouterBountyBoardViewState extends State<FFScouterBountyBoardView> wit
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text("Hide the Bounty Board", style: TextStyle(fontSize: 16)),
-        content: const Text(
+        title: const PdaText("Hide the Bounty Board", style: TextStyle(fontSize: 16)),
+        content: const PdaText(
           "The tab disappears from the FFScouter section. You can bring it back from Settings, under the "
           "FFScouter options.",
           style: TextStyle(fontSize: 13),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const Text("Cancel")),
-          TextButton(onPressed: () => Navigator.of(ctx).pop(true), child: const Text("Hide")),
+          TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const PdaText("Cancel")),
+          TextButton(onPressed: () => Navigator.of(ctx).pop(true), child: const PdaText("Hide")),
         ],
       ),
     );
@@ -403,7 +404,7 @@ class _FFScouterBountyBoardViewState extends State<FFScouterBountyBoardView> wit
                 children: [
                   OutlinedButton(
                     onPressed: () => _hit(target),
-                    child: Text("Hit ${_money.format(target.maxPricePerHit)}"),
+                    child: PdaText("Hit {0}", values: [_money.format(target.maxPricePerHit)]),
                   ),
                   if (_monitoring.containsKey(target.targetId))
                     Padding(
@@ -416,7 +417,7 @@ class _FFScouterBountyBoardViewState extends State<FFScouterBountyBoardView> wit
                         onPressed: _claiming.contains(target.targetId) ? null : () => _claim(target),
                         child: _claiming.contains(target.targetId)
                             ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2))
-                            : const Text("Claim hit"),
+                            : const PdaText("Claim hit"),
                       ),
                     ),
                 ],
@@ -472,16 +473,16 @@ class _FFScouterBountyBoardViewState extends State<FFScouterBountyBoardView> wit
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: Text("Hit ${target.targetName}", style: const TextStyle(fontSize: 16)),
-        content: const Text(
+        title: PdaText("Hit {0}", values: [target.targetName], style: const TextStyle(fontSize: 16)),
+        content: const PdaText(
           "You have to hospitalize the target, and only the hit that hospitalizes counts. Assists do not count "
           "either. Come back and claim the hit right after the attack, because bounties are paid first come, "
           "first served.",
           style: TextStyle(fontSize: 13),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const Text("Cancel")),
-          TextButton(onPressed: () => Navigator.of(ctx).pop(true), child: const Text("Attack")),
+          TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const PdaText("Cancel")),
+          TextButton(onPressed: () => Navigator.of(ctx).pop(true), child: const PdaText("Attack")),
         ],
       ),
     );
@@ -521,7 +522,7 @@ class _FFScouterBountyBoardViewState extends State<FFScouterBountyBoardView> wit
       _monitoring.remove(target.targetId);
     });
     BotToast.showText(
-      text: "Hit sent. FFScouter is checking your attack log",
+      text: context.interfaceText("Hit sent. FFScouter is checking your attack log"),
       contentColor: Colors.green[800]!,
       textStyle: const TextStyle(fontSize: 13, color: Colors.white),
       duration: const Duration(seconds: 3),

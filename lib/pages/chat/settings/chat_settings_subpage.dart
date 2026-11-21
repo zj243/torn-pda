@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/widgets/chat/chat_settings_widgets.dart';
 import 'package:torn_pda/widgets/chat/chat_theme.dart';
@@ -18,7 +19,7 @@ class ChatSettingsSubpage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(title: PdaText(title)),
       body: ListenableBuilder(
         listenable: Listenable.merge([NativeChat.prefs, NativeChat.controller]),
         builder: (context, _) => ListView(
@@ -44,8 +45,8 @@ class ChatSettingsLink extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: leading,
-      title: Text(title),
-      subtitle: subtitle == null ? null : Text(subtitle!),
+      title: PdaText(title),
+      subtitle: subtitle == null ? null : PdaText(subtitle!),
       trailing: const Icon(Icons.chevron_right_rounded),
       onTap: onTap ?? () => Navigator.of(context).push(ChatSettingsRoute(page!)),
     );
@@ -66,7 +67,7 @@ class ChatSettingsHeading extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Semantics(container: true, header: true, child: Text(title, style: theme.textTheme.titleSmall)),
+          Semantics(container: true, header: true, child: PdaText(title, style: theme.textTheme.titleSmall)),
           if (description != null)
             Padding(padding: const EdgeInsets.only(top: 2), child: ChatSettingsText.hint(description!)),
         ],

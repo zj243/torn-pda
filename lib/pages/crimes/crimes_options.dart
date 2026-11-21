@@ -1,5 +1,6 @@
 // Flutter imports:
 // Package imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
@@ -83,9 +84,8 @@ class CrimesOptionsState extends State<CrimesOptions> {
                           Padding(
                             padding: const EdgeInsets.all(20.0),
                             child: _titleCrimeString.isNotEmpty
-                                ? Text('Active crimes: '
-                                    '${_titleCrimeString.join(', ')}')
-                                : const Text('No active crimes'),
+                                ? PdaText("Active crimes: {0}", values: [_titleCrimeString.join(', ')])
+                                : const PdaText('No active crimes'),
                           ),
                           _crimesCards(),
                           const SizedBox(height: 50),
@@ -110,7 +110,7 @@ class CrimesOptionsState extends State<CrimesOptions> {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
-      title: const Text("Quick Crimes", style: TextStyle(color: Colors.white)),
+      title: const PdaText("Quick Crimes", style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
@@ -131,7 +131,7 @@ class CrimesOptionsState extends State<CrimesOptions> {
               }
             });
             BotToast.showText(
-              text: 'All crimes deactivated!',
+              text: context.interfaceText('All crimes deactivated!'),
               textStyle: const TextStyle(
                 fontSize: 14,
                 color: Colors.white,
@@ -209,7 +209,7 @@ class CrimesOptionsState extends State<CrimesOptions> {
                   const SizedBox(width: 10),
                   Flexible(child: Text('$catName')),
                   const SizedBox(width: 10),
-                  Text('(-$catNerve nerve)'),
+                  PdaText("(-{0} nerve)", values: [catNerve]),
                 ],
               ),
             ),

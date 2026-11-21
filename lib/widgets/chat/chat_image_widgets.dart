@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:collection';
 import 'dart:io';
 
@@ -56,7 +57,7 @@ class ChatUploadSetupNotice extends StatelessWidget {
           blockedMessage ?? '${host.label} needs its ${host.credentialName} first. Pick a service',
           style: small,
         ),
-        if (blocked) Text('Try another one:', style: small),
+        if (blocked) PdaText('Try another one:', style: small),
         for (final h in choices(excluded: blocked ? host : excluded))
           Semantics(
             container: true,
@@ -72,8 +73,8 @@ class ChatUploadSetupNotice extends StatelessWidget {
                   size: 20,
                 ),
                 title: Text(h.label),
-                subtitle: Text(
-                  '${h.note} - up to ${h.maxMegabytes} MB',
+                subtitle: PdaText(
+                  "{0} - up to {1} MB", values: [h.note, h.maxMegabytes],
                   style: small,
                 ),
                 onTap: () {
@@ -92,13 +93,13 @@ class ChatUploadSetupNotice extends StatelessWidget {
                   onPicked?.call();
                 },
                 icon: const Icon(Icons.key_rounded, size: 18),
-                label: Text('Paste the ${host.credentialName}'),
+                label: PdaText("Paste the {0}", values: [host.credentialName]),
               ),
             if (!blocked && host.needsCredential)
               TextButton.icon(
                 onPressed: () => ChatUploadSettingsPage.openRegister(host),
                 icon: const Icon(Icons.open_in_new_rounded, size: 18),
-                label: Text('Register at ${host.label}'),
+                label: PdaText("Register at {0}", values: [host.label]),
               ),
             TextButton.icon(
               onPressed: () {
@@ -107,7 +108,7 @@ class ChatUploadSetupNotice extends StatelessWidget {
                 showChatSettings(navigator, imageUpload: true);
               },
               icon: const Icon(Icons.tune_rounded, size: 18),
-              label: const Text('Image upload settings'),
+              label: const PdaText('Image upload settings'),
             ),
           ],
         ),
@@ -300,11 +301,11 @@ class _ChatImageCardState extends State<ChatImageCard> {
 
       return Semantics(
         image: true,
-        label: 'Image from ${widget.link.uri.host}, not loaded',
+        label: context.interfaceText("Image from {0}, not loaded", [widget.link.uri.host]),
         onTap: show,
-        onTapHint: 'show',
+        onTapHint: context.interfaceText('show'),
         onLongPress: _copy,
-        onLongPressHint: 'copy link',
+        onLongPressHint: context.interfaceText('copy link'),
         excludeSemantics: true,
         child: _card(
           title: top,
@@ -316,7 +317,7 @@ class _ChatImageCardState extends State<ChatImageCard> {
               visualDensity: VisualDensity.compact,
               backgroundColor: color.withValues(alpha: 0.1),
             ),
-            child: const Text('Show'),
+            child: const PdaText('Show'),
           ),
         ),
       );
@@ -332,7 +333,7 @@ class _ChatImageCardState extends State<ChatImageCard> {
                 : 'Could not load the image',
             onTap: () => NativeChat.openLink(widget.link.url),
             action: IconButton(
-              tooltip: 'Retry',
+              tooltip: context.interfaceText('Retry'),
               icon: Icon(Icons.refresh_rounded, size: 20, color: color.withValues(alpha: 0.8)),
               onPressed: () => setState(_show),
             ),
@@ -472,12 +473,12 @@ class _ChatImageViewerState extends State<ChatImageViewer> {
         title: Text(widget.link.uri.host, style: const TextStyle(fontSize: 16)),
         actions: [
           IconButton(
-            tooltip: 'Open link',
+            tooltip: context.interfaceText('Open link'),
             icon: const Icon(Icons.open_in_browser_rounded),
             onPressed: () => NativeChat.openLink(widget.link.url),
           ),
           IconButton(
-            tooltip: 'Download',
+            tooltip: context.interfaceText('Download'),
             icon: _saving
                 ? const SizedBox.square(
                     dimension: 20,
@@ -500,7 +501,7 @@ class _ChatImageViewerState extends State<ChatImageViewer> {
               fit: BoxFit.contain,
               semanticLabel: 'Image from ${widget.link.uri.host}',
               errorBuilder: (context, _, _) => const Center(
-                child: Text('Not a valid image', style: TextStyle(color: Colors.white70)),
+                child: PdaText('Not a valid image', style: TextStyle(color: Colors.white70)),
               ),
             ),
           ),

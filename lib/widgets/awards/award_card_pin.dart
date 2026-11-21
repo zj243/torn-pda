@@ -1,5 +1,6 @@
 // Flutter imports:
 // Package imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -173,9 +174,8 @@ class AwardCardPinState extends State<AwardCardPin> {
             ),
             if (widget.award.daysLeft != -99)
               widget.award.daysLeft! > 0 && widget.award.daysLeft! < double.maxFinite
-                  ? Text(
-                      " - ${decimalFormat.format(widget.award.daysLeft!.round())} "
-                      "days",
+                  ? PdaText(
+                      " - {0} days", values: [decimalFormat.format(widget.award.daysLeft!.round())],
                       style: const TextStyle(fontSize: 12),
                     )
                   : widget.award.daysLeft == double.maxFinite

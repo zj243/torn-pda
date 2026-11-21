@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:torn_pda/utils/app_icon_menu.dart';
@@ -17,7 +18,7 @@ class AppIconMenuPage extends StatelessWidget {
       final taken = type.isNotEmpty && type != current && slots.contains(type);
       return ListTile(
         title: Text(title),
-        subtitle: taken ? Text('Already in slot ${slots.indexOf(type) + 1}') : null,
+        subtitle: taken ? PdaText("Already in slot {0}", values: [slots.indexOf(type) + 1]) : null,
         enabled: !taken,
         trailing: type == current ? const Icon(Icons.check_rounded) : null,
         onTap: () => Navigator.of(context).pop(type),
@@ -36,7 +37,7 @@ class AppIconMenuPage extends StatelessWidget {
             for (final section in AppIconMenuController.sections) option(section.type, section.localizedTitle),
             if (rooms.isNotEmpty) ...[
               const Divider(),
-              ListTile(dense: true, title: Text('Chats', style: Theme.of(context).textTheme.labelLarge)),
+              ListTile(dense: true, title: PdaText('Chats', style: Theme.of(context).textTheme.labelLarge)),
               for (final room in rooms) option(NativeChat.shortcutPrefix + room.id, room.name),
             ],
             const Divider(),
@@ -69,7 +70,7 @@ class AppIconMenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final menu = Get.find<AppIconMenuController>();
     return Scaffold(
-      appBar: AppBar(title: const Text('App icon menu')),
+      appBar: AppBar(title: const PdaText('App icon menu')),
       body: FutureBuilder(
         future: menu.load(),
         builder: (context, loaded) => loaded.connectionState != ConnectionState.done
@@ -88,7 +89,7 @@ class AppIconMenuPage extends StatelessWidget {
                     children: [
                       const Padding(
                         padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
-                        child: Text('Long press the Torn PDA icon on your home screen to jump to these'),
+                        child: PdaText('Long press the Torn PDA icon on your home screen to jump to these'),
                       ),
                       for (var i = 0; i < slots.length; i++) _slot(context, i, slots[i]),
                     ],

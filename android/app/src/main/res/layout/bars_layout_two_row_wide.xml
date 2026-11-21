@@ -359,7 +359,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
-                            android:text="Last update"
+                            android:text="@string/widget_last_update"
                             android:textColor="#000000"
                             android:textSize="12sp" />
           </LinearLayout>
@@ -907,7 +907,7 @@
                     android:textSize="11sp"
                     android:textStyle="bold"
                     android:textColor="#000000"
-                    android:text="Reload" />
+                    android:text="@string/widget_reload" />
         <ImageView
                     android:id="@+id/widget_icon_reload_error"
                     android:layout_width="12dp"

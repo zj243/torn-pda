@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toastification/toastification.dart';
@@ -127,7 +128,7 @@ class BackupReminderDialogState extends State<BackupReminderDialog> {
               ),
               const SizedBox(height: 16),
 
-              Text(
+              PdaText(
                 'Backup Reminder',
                 style: TextStyle(
                   fontSize: 20,
@@ -158,8 +159,8 @@ class BackupReminderDialogState extends State<BackupReminderDialog> {
               TextField(
                 controller: _passwordController,
                 decoration: InputDecoration(
-                  labelText: 'Encryption Key',
-                  hintText: 'Enter your backup password',
+                  labelText: context.interfaceText('Encryption Key'),
+                  hintText: context.interfaceText('Enter your backup password'),
                   filled: true,
                   fillColor: themeProvider.secondBackground,
                 ),
@@ -170,7 +171,7 @@ class BackupReminderDialogState extends State<BackupReminderDialog> {
               const SizedBox(height: 4),
 
               // Info text
-              Text(
+              PdaText(
                 'Use a password you will remember. This reminder creates a private backup for your own use.',
                 style: TextStyle(
                   fontSize: 12,
@@ -216,7 +217,7 @@ class BackupReminderDialogState extends State<BackupReminderDialog> {
                       Expanded(
                         child: TextButton(
                           onPressed: _isCreatingBackup ? null : _remindLater,
-                          child: Text(
+                          child: PdaText(
                             'Not now',
                             style: TextStyle(
                               color: themeProvider.mainText.withValues(alpha: 0.7),
@@ -227,7 +228,7 @@ class BackupReminderDialogState extends State<BackupReminderDialog> {
                       Expanded(
                         child: TextButton(
                           onPressed: _isCreatingBackup ? null : _disableReminders,
-                          child: Text(
+                          child: PdaText(
                             'Disable reminders',
                             style: TextStyle(
                               color: Colors.red.withValues(alpha: 0.7),

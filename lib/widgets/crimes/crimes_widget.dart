@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 
@@ -136,7 +137,7 @@ class CrimesWidgetState extends State<CrimesWidget> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
+              const PdaText(
                 "Configure your preferred quick crimes",
                 style: TextStyle(
                   color: Colors.orangeAccent,

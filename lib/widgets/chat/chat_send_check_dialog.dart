@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -59,7 +60,7 @@ Future<bool> _confirmChatSend(BuildContext context, {required ChatKeyRisk risk, 
           autofocus: true,
           style: TextButton.styleFrom(minimumSize: const Size(64, 48)),
           onPressed: () => Navigator.of(context).pop(false),
-          child: const Text('Cancel'),
+          child: const PdaText('Cancel'),
         ),
         TextButton(
           style: TextButton.styleFrom(
@@ -67,7 +68,7 @@ Future<bool> _confirmChatSend(BuildContext context, {required ChatKeyRisk risk, 
             foregroundColor: risk == ChatKeyRisk.none ? null : (danger ? scheme.error : scheme.tertiary),
           ),
           onPressed: () => Navigator.of(context).pop(true),
-          child: const Text('Send'),
+          child: const PdaText('Send'),
         ),
       ],
     ),

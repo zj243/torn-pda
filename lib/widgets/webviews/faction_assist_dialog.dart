@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:provider/provider.dart';
@@ -150,7 +151,7 @@ class _FactionAssistDialogState extends State<_FactionAssistDialog> {
           const Icon(MdiIcons.fencing, color: Colors.red, size: 22),
           const SizedBox(width: 8),
           Flexible(
-            child: Text(
+            child: PdaText(
               "FACTION ASSISTANCE",
               style: TextStyle(fontSize: 14, color: _themeProvider.mainText),
             ),
@@ -167,7 +168,7 @@ class _FactionAssistDialogState extends State<_FactionAssistDialog> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  PdaText(
                     "Select what to include in the assist notification:",
                     style: TextStyle(fontSize: 12, color: _themeProvider.mainText, fontStyle: FontStyle.italic),
                   ),
@@ -264,7 +265,7 @@ class _FactionAssistDialogState extends State<_FactionAssistDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(null),
-          child: const Text("CANCEL"),
+          child: const PdaText("CANCEL"),
         ),
         ElevatedButton.icon(
           style: ElevatedButton.styleFrom(
@@ -272,7 +273,7 @@ class _FactionAssistDialogState extends State<_FactionAssistDialog> {
             foregroundColor: Colors.white,
           ),
           icon: const Icon(Icons.send, size: 16),
-          label: const Text("SEND"),
+          label: const PdaText("SEND"),
           onPressed: () async {
             await _savePrefs();
 

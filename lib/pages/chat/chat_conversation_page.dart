@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -577,17 +578,17 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
           ? AppBar(
               toolbarHeight: toolbar,
               leading: IconButton(
-                tooltip: 'Cancel selection',
+                tooltip: context.interfaceText('Cancel selection'),
                 icon: const Icon(Icons.close_rounded),
                 onPressed: () => setState(_selected.clear),
               ),
-              title: Text('${_selected.length} selected'),
+              title: PdaText("{0} selected", values: [_selected.length]),
               actions: _selected.length == 1
                   ? null
                   : [
-                      IconButton(tooltip: 'Copy', icon: const Icon(Icons.copy_rounded), onPressed: _copySelected),
+                      IconButton(tooltip: context.interfaceText('Copy'), icon: const Icon(Icons.copy_rounded), onPressed: _copySelected),
                       IconButton(
-                        tooltip: 'Forward',
+                        tooltip: context.interfaceText('Forward'),
                         icon: const Icon(Icons.forward_rounded),
                         onPressed: chat.available ? _forwardSelected : null,
                       ),
@@ -617,7 +618,7 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
               toolbarHeight: toolbar,
               titleSpacing: 0,
               leading: IconButton(
-                tooltip: 'Close search',
+                tooltip: context.interfaceText('Close search'),
                 icon: const Icon(Icons.arrow_back_rounded),
                 onPressed: _toggleSearch,
               ),
@@ -630,7 +631,7 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
                 style: const TextStyle(color: Colors.white),
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
-                  hintText: 'Search in ${room.name}',
+                  hintText: context.interfaceText("Search in {0}", [room.name]),
                   hintStyle: const TextStyle(color: Colors.white70),
                   suffixStyle: const TextStyle(color: Colors.white70),
                   border: InputBorder.none,
@@ -644,12 +645,12 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
               ),
               actions: [
                 IconButton(
-                  tooltip: 'Older match',
+                  tooltip: context.interfaceText('Older match'),
                   icon: const Icon(Icons.keyboard_arrow_up_rounded),
                   onPressed: matchIds.isEmpty ? null : () => _stepMatch(older: true),
                 ),
                 IconButton(
-                  tooltip: 'Newer match',
+                  tooltip: context.interfaceText('Newer match'),
                   icon: const Icon(Icons.keyboard_arrow_down_rounded),
                   onPressed: matchIndex <= 0 ? null : () => _stepMatch(older: false),
                 ),
@@ -658,7 +659,7 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
           : AppBar(
               leading: compact
                   ? IconButton(
-                      tooltip: 'Back',
+                      tooltip: context.interfaceText('Back'),
                       icon: const Icon(Icons.arrow_back_rounded),
                       onPressed: widget.onBack,
                     )
@@ -754,20 +755,20 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
                 if (!compact && !narrow) ChatNextUnreadButton(count: chat.unreadQueue.length, onNext: _nextUnread),
                 if (compact && !narrow && widget.onPopOut != null)
                   IconButton(
-                    tooltip: 'Open in a small window',
+                    tooltip: context.interfaceText('Open in a small window'),
                     icon: const Icon(Icons.picture_in_picture_alt_rounded),
                     onPressed: widget.onPopOut,
                   ),
                 if (NativeChat.prefs.inAppEnabled && !widget.embedded) ...[
                   if (NativeChat.prefs.canMinimize)
                     IconButton(
-                      tooltip: 'Minimize to the bubble',
+                      tooltip: context.interfaceText('Minimize to the bubble'),
                       icon: const Icon(Icons.minimize_rounded),
                       onPressed: _minimize,
                     ),
                   if (!narrow)
                     IconButton(
-                      tooltip: 'Open in a small window',
+                      tooltip: context.interfaceText('Open in a small window'),
                       icon: const Icon(Icons.picture_in_picture_alt_rounded),
                       onPressed: _popOut,
                     ),
@@ -777,13 +778,13 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
                   onSelected: (action) => action(),
                   itemBuilder: (_) => [
                     if ((compact || narrow) && chat.unreadQueue.isNotEmpty)
-                      PopupMenuItem(value: _nextUnread, child: Text('Next unread (${chat.unreadQueue.length})')),
+                      PopupMenuItem(value: _nextUnread, child: PdaText("Next unread ({0})", values: [chat.unreadQueue.length])),
                     if (narrow && popOut != null)
-                      PopupMenuItem(value: popOut, child: const Text('Open in a small window')),
+                      PopupMenuItem(value: popOut, child: const PdaText('Open in a small window')),
                     PopupMenuItem(
                       enabled: chat.isLoaded(room.id),
                       value: _toggleSearch,
-                      child: const Text('Search in this chat'),
+                      child: const PdaText('Search in this chat'),
                     ),
                     if (room.isDm && ChatRoom.peerIdOf(room.id) != null)
                       PopupMenuItem(
@@ -792,7 +793,7 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
                           room.peer ?? ChatUser(id: ChatRoom.peerIdOf(room.id)!, name: room.name),
                           roomId: room.id,
                         ),
-                        child: const Text('Player details'),
+                        child: const PdaText('Player details'),
                       ),
                     if (!room.isDm)
                       PopupMenuItem(
@@ -809,10 +810,10 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
                           chat.markUnread(room.id);
                           widget.embedded ? widget.onBack?.call() : Navigator.maybePop(context);
                         },
-                        child: const Text('Mark as unread'),
+                        child: const PdaText('Mark as unread'),
                       ),
                     if (!room.isDm)
-                      PopupMenuItem(value: () => showChatRoomFilter(context, room), child: const Text('Filter')),
+                      PopupMenuItem(value: () => showChatRoomFilter(context, room), child: const PdaText('Filter')),
                   ],
                 ),
               ],
@@ -895,7 +896,7 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
         subtitle: 'Turn it on to read Torn chat here',
         action: FilledButton.tonal(
           onPressed: () => setState(() => NativeChat.setEnabled(true)),
-          child: const Text('Turn on'),
+          child: const PdaText('Turn on'),
         ),
       );
     }
@@ -917,7 +918,7 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
             ? null
             : FilledButton.tonal(
                 onPressed: load == ChatRoomLoad.unreachable ? chat.retry : () => chat.retryRoom(roomId),
-                child: const Text('Try again'),
+                child: const PdaText('Try again'),
               ),
       );
     }
@@ -1210,7 +1211,7 @@ class _TopRow extends StatelessWidget {
       child: Center(
         child: loading
             ? const SizedBox(width: 22, height: 22, child: CircularProgressIndicator(strokeWidth: 2.5))
-            : Text(
+            : PdaText(
                 'Start of the recent history',
                 style: theme.textTheme.labelMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant),
               ),

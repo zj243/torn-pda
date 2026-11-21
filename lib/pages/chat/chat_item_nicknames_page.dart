@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/models/chat/chat_item_aliases.dart';
 import 'package:torn_pda/widgets/chat/chat_alias_widgets.dart';
@@ -25,7 +26,7 @@ class _ChatItemNicknamesPageState extends State<ChatItemNicknamesPage> {
     final prefs = NativeChat.prefs;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Item nicknames'),
+        title: const PdaText('Item nicknames'),
         actions: [
           ChatExportMenu(
             tooltip: 'Export nicknames',
@@ -33,7 +34,7 @@ class _ChatItemNicknamesPageState extends State<ChatItemNicknamesPage> {
             copied: 'Nicknames copied',
           ),
           IconButton(
-            tooltip: 'Import nicknames',
+            tooltip: context.interfaceText('Import nicknames'),
             icon: const Icon(Icons.download_rounded),
             onPressed: () => showDialog<void>(context: context, builder: (_) => ChatImportDialog.itemNicknames()),
           ),
@@ -42,7 +43,7 @@ class _ChatItemNicknamesPageState extends State<ChatItemNicknamesPage> {
       floatingActionButton: ListenableBuilder(
         listenable: prefs,
         builder: (context, _) => FloatingActionButton(
-          tooltip: 'Add nickname',
+          tooltip: context.interfaceText('Add nickname'),
           onPressed: prefs.itemAliases.length >= ChatItemAliases.max
               ? null
               : () => showDialog<void>(context: context, builder: (_) => const ChatItemAliasAddDialog()),
@@ -62,7 +63,7 @@ class _ChatItemNicknamesPageState extends State<ChatItemNicknamesPage> {
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-                child: Text(
+                child: PdaText(
                   'Short names players use, like xans for Xanax. Price check and Item price recognize them',
                   style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
                 ),
@@ -72,13 +73,13 @@ class _ChatItemNicknamesPageState extends State<ChatItemNicknamesPage> {
                 child: TextField(
                   controller: _search,
                   decoration: InputDecoration(
-                    hintText: 'Search nicknames or items',
+                    hintText: context.interfaceText('Search nicknames or items'),
                     prefixIcon: const Icon(Icons.search_rounded),
                     isDense: true,
                     suffixIcon: query.isEmpty
                         ? null
                         : IconButton(
-                            tooltip: 'Clear search',
+                            tooltip: context.interfaceText('Clear search'),
                             icon: const Icon(Icons.close_rounded),
                             onPressed: _search.clear,
                           ),
@@ -102,7 +103,7 @@ class _ChatItemNicknamesPageState extends State<ChatItemNicknamesPage> {
                     builder: (_) => ChatItemAliasAddDialog(editing: a),
                   ),
                   trailing: IconButton(
-                    tooltip: 'Remove nickname ${a.alias}',
+                    tooltip: context.interfaceText("Remove nickname {0}", [a.alias]),
                     icon: const Icon(Icons.delete_outline_rounded),
                     onPressed: () => prefs.removeItemAlias(a),
                   ),

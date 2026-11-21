@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:torn_pda/models/chat/chat_models.dart';
@@ -69,8 +70,8 @@ class _ChatPersonSheetState extends State<_ChatPersonSheet> {
                 children: [
                   ListTile(
                     leading: ChatAvatar(user: user, size: 40),
-                    title: Text('Customize ${user.name}'),
-                    subtitle: const Text('Only you see this, only in Torn PDA'),
+                    title: PdaText("Customize {0}", values: [user.name]),
+                    subtitle: const PdaText('Only you see this, only in Torn PDA'),
                     trailing: style.isEmpty
                         ? null
                         : TextButton(
@@ -78,13 +79,13 @@ class _ChatPersonSheetState extends State<_ChatPersonSheet> {
                               _nickname.clear();
                               prefs.setPerson(user.id, ChatPersonStyle.none);
                             },
-                            child: const Text('Reset'),
+                            child: const PdaText('Reset'),
                           ),
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
                     child: Semantics(
-                      label: 'Preview',
+                      label: context.interfaceText('Preview'),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(12, 7, 12, 7),
                         decoration: BoxDecoration(color: bubble, borderRadius: BorderRadius.circular(18)),
@@ -105,7 +106,7 @@ class _ChatPersonSheetState extends State<_ChatPersonSheet> {
                                     : ChatPlayerColor.tinted(chatUserScheme(context, user.id).primary, bubble),
                               ),
                             ),
-                            Text('How their messages look', style: theme.textTheme.bodyMedium?.copyWith(color: text)),
+                            PdaText('How their messages look', style: theme.textTheme.bodyMedium?.copyWith(color: text)),
                           ],
                         ),
                       ),
@@ -113,7 +114,7 @@ class _ChatPersonSheetState extends State<_ChatPersonSheet> {
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
-                    child: Text('Name color', style: label),
+                    child: PdaText('Name color', style: label),
                   ),
                   _Swatches(
                     options: ChatPersonStyle.nameColors,
@@ -122,8 +123,8 @@ class _ChatPersonSheetState extends State<_ChatPersonSheet> {
                     onPick: (c) => _save(style.copyWith(nameColor: () => c)),
                   ),
                   SwitchListTile(
-                    title: const Text('Highlight their messages'),
-                    subtitle: const Text('Colored bubble in every room and in your private chat'),
+                    title: const PdaText('Highlight their messages'),
+                    subtitle: const PdaText('Colored bubble in every room and in your private chat'),
                     value: style.highlight,
                     onChanged: (v) => _save(style.copyWith(highlight: v)),
                   ),
@@ -142,9 +143,9 @@ class _ChatPersonSheetState extends State<_ChatPersonSheet> {
                       textInputAction: TextInputAction.done,
                       onChanged: (v) => _save(prefs.personOf(user.id).copyWith(nickname: v)),
                       decoration: InputDecoration(
-                        labelText: 'Nickname',
+                        labelText: context.interfaceText('Nickname'),
                         hintText: user.name,
-                        helperText: 'Shown instead of their name, only to you',
+                        helperText: context.interfaceText('Shown instead of their name, only to you'),
                         isDense: true,
                       ),
                     ),

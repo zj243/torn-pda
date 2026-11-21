@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:io';
 
 // Flutter imports:
@@ -53,8 +54,8 @@ abstract class TipTextBuilder {
 
   Widget? buildExpandedText();
 
-  Text buildHeaderText() {
-    return Text(
+  Widget buildHeaderText() {
+    return PdaText(
       headerValue,
       style: const TextStyle(
         fontSize: 15,
@@ -71,7 +72,7 @@ class ExpandableTip extends TipTextBuilder {
 
   @override
   Widget buildExpandedText() {
-    final text = Text(
+    final text = PdaText(
       expandedValue!,
       style: const TextStyle(
         fontSize: 13,
@@ -201,7 +202,7 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(g.title, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+                    PdaText(g.title, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
                     Text(chatNeedsText(needs), style: const TextStyle(fontSize: 12)),
                   ],
                 ),
@@ -212,7 +213,7 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
               padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
               child: Semantics(
                 header: true,
-                child: Text(g.title, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+                child: PdaText(g.title, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
               ),
             ),
           _tipPanelList(_chatTipGroups[g]!),
@@ -270,7 +271,7 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                const Text(
+                const PdaText(
                   "Frequently asked questions and tips",
                   style: TextStyle(
                     fontSize: 16,
@@ -278,24 +279,24 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
                   ),
                 ),
                 const SizedBox(height: 25),
-                const Text("GENERAL"),
+                const PdaText("GENERAL"),
                 const SizedBox(height: 10),
                 tipsPanels(TipClass.general),
                 const SizedBox(height: 25),
-                const Text("BROWSER - GENERAL"),
+                const PdaText("BROWSER - GENERAL"),
                 const SizedBox(height: 10),
                 tipsPanels(TipClass.browserGeneral),
                 const SizedBox(height: 25),
-                const Text("BROWSER - TABS"),
+                const PdaText("BROWSER - TABS"),
                 const SizedBox(height: 10),
                 tipsPanels(TipClass.browserTabs),
                 const SizedBox(height: 25),
-                const Text("BROWSER - FLOATING ACTION BUTTON"),
+                const PdaText("BROWSER - FLOATING ACTION BUTTON"),
                 const SizedBox(height: 10),
                 tipsPanels(TipClass.browserFAB),
                 const SizedBox(height: 25),
                 if (NativeChat.compiled) ...[
-                  const Text("CHAT"),
+                  const PdaText("CHAT"),
                   const SizedBox(height: 10),
                   tipsPanels(TipClass.chat),
                   const SizedBox(height: 25),
@@ -304,51 +305,51 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("HOME SCREEN WIDGET"),
+                      const PdaText("HOME SCREEN WIDGET"),
                       const SizedBox(height: 10),
                       tipsPanels(TipClass.appwidget),
                       const SizedBox(height: 25),
                     ],
                   ),
-                const Text("TRAVEL SECTION"),
+                const PdaText("TRAVEL SECTION"),
                 const SizedBox(height: 10),
                 tipsPanels(TipClass.travel),
                 const SizedBox(height: 25),
-                const Text("PROFILE SECTION"),
+                const PdaText("PROFILE SECTION"),
                 const SizedBox(height: 10),
                 tipsPanels(TipClass.profile),
                 const SizedBox(height: 25),
-                const Text("FACTION COMMUNICATION"),
+                const PdaText("FACTION COMMUNICATION"),
                 const SizedBox(height: 10),
                 tipsPanels(TipClass.factionCommunication),
                 const SizedBox(height: 25),
-                const Text("CHAINING - GENERAL"),
+                const PdaText("CHAINING - GENERAL"),
                 const SizedBox(height: 10),
                 tipsPanels(TipClass.chaining),
                 const SizedBox(height: 25),
-                const Text("CHAINING - WAR"),
+                const PdaText("CHAINING - WAR"),
                 const SizedBox(height: 10),
                 tipsPanels(TipClass.chainingWar),
                 const SizedBox(height: 25),
-                const Text("SPIES"),
+                const PdaText("SPIES"),
                 const SizedBox(height: 10),
                 tipsPanels(TipClass.spies),
                 const SizedBox(height: 25),
                 if (_settingsProvider.ffScouterEnabledStatusRemoteConfig) ...[
-                  const Text("FFSCOUTER"),
+                  const PdaText("FFSCOUTER"),
                   const SizedBox(height: 10),
                   tipsPanels(TipClass.ffScouter),
                   const SizedBox(height: 25),
                 ],
-                const Text("TRADING"),
+                const PdaText("TRADING"),
                 const SizedBox(height: 10),
                 tipsPanels(TipClass.trading),
                 const SizedBox(height: 25),
-                const Text("APP LINKS"),
+                const PdaText("APP LINKS"),
                 const SizedBox(height: 10),
                 tipsPanels(TipClass.deepLinks),
                 const SizedBox(height: 25),
-                const Text("USERSCRIPTS"),
+                const PdaText("USERSCRIPTS"),
                 const SizedBox(height: 10),
                 tipsPanels(TipClass.userScripts),
                 const SizedBox(height: 60),
@@ -384,7 +385,7 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
           if (_webViewProvider.appCanOpenBrowser) const PdaBrowserIcon(),
         ],
       ),
-      title: const Text('Torn PDA - Tips', style: TextStyle(color: Colors.white)),
+      title: const PdaText('Torn PDA - Tips', style: TextStyle(color: Colors.white)),
     );
   }
 
@@ -497,12 +498,12 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
       ComplexExpandableTip(
         headerValue: "What browser should I use?",
         buildExpandedWidget: () {
-          return const Text.rich(
+          return Text.rich(
             TextSpan(
-              text: "You can choose between 'external' and 'in-app' browser. "
+              text: context.interfaceText("You can choose between 'external' and 'in-app' browser. "
                   "This is accomplished in the Settings section.\n\n"
                   "The earlier will open your mobile phone's default browser application, but you will lose most "
-                  "functionalities in Torn PDA (such as quick crimes, trades calculator, city finder...)",
+                  "functionalities in Torn PDA (such as quick crimes, trades calculator, city finder...)"),
               style: TextStyle(
                 fontSize: 13,
               ),
@@ -516,14 +517,14 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
       ComplexExpandableTip(
         headerValue: "How do I access the browser?",
         buildExpandedWidget: () {
-          return const Text.rich(
+          return Text.rich(
             TextSpan(
-              text: "There are several ways:\n\n"
+              text: context.interfaceText("There are several ways:\n\n"
                   "If you would like to browse to a specific section in Torn, you can tap or long-press most of "
                   "the widgets in the apps (e.g.: life and nerve bars). This will automatically switch to the browser "
                   "view and navigate to your desired section.\n\n"
                   "If you just want to open Torn to resume your browsing session where you left it, you can just tap "
-                  "the white Torn PDA icon in the app bar, which will show the browser as it was left the last time.",
+                  "the white Torn PDA icon in the app bar, which will show the browser as it was left the last time."),
               style: TextStyle(
                 fontSize: 13,
               ),
@@ -537,13 +538,13 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
       ComplexExpandableTip(
         headerValue: "Short tap vs. long-press",
         buildExpandedWidget: () {
-          return const Text.rich(
+          return Text.rich(
             TextSpan(
-              text: "The browser will open both after a short tap or a long-press in any of the widgets that redirect "
+              text: context.interfaceText("The browser will open both after a short tap or a long-press in any of the widgets that redirect "
                   "to Torn, as explained in the previous Tip. By default, a short-tap will open the browser in a windowed "
                   "mode, whereas a long-press will launch it in full screen mode.\n\n"
                   "You can change this behavior in Settings. There is also more information about the full screen mode "
-                  "in another Tip below.",
+                  "in another Tip below."),
               style: TextStyle(
                 fontSize: 13,
               ),
@@ -557,9 +558,9 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
       ComplexExpandableTip(
         headerValue: "Browser styles",
         buildExpandedWidget: () {
-          return const Text.rich(
+          return Text.rich(
             TextSpan(
-              text: "There are three different browser styles in Torn PDA: the 'default', the 'bottom bar' "
+              text: context.interfaceText("There are three different browser styles in Torn PDA: the 'default', the 'bottom bar' "
                   "and the 'dialog' styles. "
                   "\n\nThey resemble the looks of the former 'full' and 'quick' browsers in previous versions of the "
                   "app, but they all share the same functionality today (including chaining).\n\n"
@@ -573,7 +574,7 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
                   "options that are available in the 'default' style with a tab in the title bar. In this style you'll "
                   "also have a couple of extra icons available to browse back or forward.\n\n"
                   "The 'dialog' style is similar to the bottom bar style, but the browser is positioned inside of "
-                  "a dialog, which makes it a bit narrower and looks exactly as the old 'quick browser'.",
+                  "a dialog, which makes it a bit narrower and looks exactly as the old 'quick browser'."),
               style: TextStyle(
                 fontSize: 13,
               ),
@@ -587,9 +588,9 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
       ComplexExpandableTip(
         headerValue: "File downloads (save & share)",
         buildExpandedWidget: () {
-          return const Text.rich(
+          return Text.rich(
             TextSpan(
-              text: "Torn PDA allows you to save and share files from the browser."
+              text: context.interfaceText("Torn PDA allows you to save and share files from the browser."
                   "\n\n"
                   "In some mobile devices and/or operating systems, accessing your downloaded files is not always easy "
                   "(and in some cases restricted to rooted devices or only by requesting high-level "
@@ -600,7 +601,7 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
                   "The cache files that are generated with this are automatically emptied by Torn PDA."
                   "\n\n"
                   "If you decide to 'save' files locally, make sure that you can access them in the app's data folder, "
-                  "since Torn PDA won't delete the file cache automatically in this case.",
+                  "since Torn PDA won't delete the file cache automatically in this case."),
               style: TextStyle(
                 fontSize: 13,
               ),
@@ -614,10 +615,10 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
       ComplexExpandableTip(
         headerValue: "Chaining tab",
         buildExpandedWidget: () {
-          return const Text.rich(
+          return Text.rich(
             TextSpan(
               text:
-                  "Whenever you access the browser from a target attack request (in the Chaining section), your first "
+                  context.interfaceText("Whenever you access the browser from a target attack request (in the Chaining section), your first "
                   "browser tab will be converted to a special 'chaining tab', with additional icons at the top (*) that "
                   "will allow you to continue from one target to another, until you reach the end of your list.\n\n"
                   "Please be aware that you can stop your chain session at any time by long-pressing the play/pause "
@@ -626,7 +627,7 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
                   "crimes, etc.) since it can lack some of the normal features in certain cases. Instead, it is better "
                   "to stop the chain session or use another tab.\n\n"
                   "(*): Please note that chain control buttons are also accesible if you tap/double tap your first browser "
-                  "tab while chaining, which makes them also easily accesible if you are using the full screen mode.",
+                  "tab while chaining, which makes them also easily accesible if you are using the full screen mode."),
               style: TextStyle(
                 fontSize: 13,
               ),
@@ -640,10 +641,10 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
       ComplexExpandableTip(
         headerValue: "How can I browse back or forward?",
         buildExpandedWidget: () {
-          return const Text.rich(
+          return Text.rich(
             TextSpan(
-              text: "There are several ways: you can either swipe your finger right or left across the title bar "
-                  "or double-tap any tab (while selected) and use the arrows in the vertical menu that appears.",
+              text: context.interfaceText("There are several ways: you can either swipe your finger right or left across the title bar "
+                  "or double-tap any tab (while selected) and use the arrows in the vertical menu that appears."),
               style: TextStyle(
                 fontSize: 13,
               ),
@@ -657,10 +658,10 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
       ComplexExpandableTip(
         headerValue: "How do I browse to a custom URL?",
         buildExpandedWidget: () {
-          return const Text.rich(
+          return Text.rich(
             TextSpan(
-              text: "Default style browser: short tap the title bar to open a small dialog with several options.\n\n"
-                  "'Bottom-bar' or 'dialog' styles: long-press the CLOSE button to open a small dialog with several options.",
+              text: context.interfaceText("Default style browser: short tap the title bar to open a small dialog with several options.\n\n"
+                  "'Bottom-bar' or 'dialog' styles: long-press the CLOSE button to open a small dialog with several options."),
               style: TextStyle(
                 fontSize: 13,
               ),
@@ -674,9 +675,9 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
       ComplexExpandableTip(
         headerValue: "How do I copy the current URL?",
         buildExpandedWidget: () {
-          return const Text.rich(
+          return Text.rich(
             TextSpan(
-              text: "Full browser: short tap the title bar to open a small dialog with several options.\n\n",
+              text: context.interfaceText("Full browser: short tap the title bar to open a small dialog with several options.\n\n"),
               style: TextStyle(
                 fontSize: 13,
               ),
@@ -690,12 +691,12 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
       ComplexExpandableTip(
         headerValue: "Save the current URL as a shortcut or navigate to an existing one",
         buildExpandedWidget: () {
-          return const Text.rich(
+          return Text.rich(
             TextSpan(
-              text: "If you are using tabs, a quick menu icon (three dots) will appear to the right. "
+              text: context.interfaceText("If you are using tabs, a quick menu icon (three dots) will appear to the right. "
                   "Tapping it will a vertical menu, with several shortcut options (heart icons).\n\n"
                   "Alternatively, if you are not using tabs, you can also tap the title bar to open a "
-                  "dialog with several options.",
+                  "dialog with several options."),
               style: TextStyle(
                 fontSize: 13,
               ),
@@ -709,15 +710,15 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
       ComplexExpandableTip(
         headerValue: "Ellipsis (...) button",
         buildExpandedWidget: () {
-          return const Text.rich(
+          return Text.rich(
             TextSpan(
-              text: "This '...' button appears in your tab bar and is relevant to access several functions. If used "
+              text: context.interfaceText("This '...' button appears in your tab bar and is relevant to access several functions. If used "
                   "correctly, it can also speed up several tasks.\n\n"
                   "You can tap it to show a quick list of quick actions, including shortcuts, access to the full screen "
                   "mode and a tap wipe tool.\n\nThere are also a few important quick shortcuts:\n\n"
                   "Double tap the button any time to get quick access to the shortcuts dialog\n\n"
                   "When in full screen mode, long-press the button (it will be shown circled and with an orange color) "
-                  "to revert to windowed mode immediately",
+                  "to revert to windowed mode immediately"),
               style: TextStyle(
                 fontSize: 13,
               ),
@@ -731,11 +732,11 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
       ComplexExpandableTip(
         headerValue: "Pull to refresh",
         buildExpandedWidget: () {
-          return const Text.rich(
+          return Text.rich(
             TextSpan(
-              text: "You can activate the pull to refresh functionality for the main browser in Settings.\n\n"
+              text: context.interfaceText("You can activate the pull to refresh functionality for the main browser in Settings.\n\n"
                   "There are certain (short) pages in Torn, with no scroll, that might not activate this feature; "
-                  "if that's the case, try pulling down from Torn's appbar at the very top!",
+                  "if that's the case, try pulling down from Torn's appbar at the very top!"),
               style: TextStyle(
                 fontSize: 13,
               ),
@@ -751,18 +752,18 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
         buildExpandedWidget: () {
           return Text.rich(
             TextSpan(
-              text: "The browser supports full screen, which can be activated from the quick menu tab in the "
+              text: context.interfaceText("The browser supports full screen, which can be activated from the quick menu tab in the "
                   "tab bar. \n\nTo access this feature, you need to have 'tabs' enabled in the "
-                  "Advanced Browser Settings section (in the app's Settings menu).",
+                  "Advanced Browser Settings section (in the app's Settings menu)."),
               style: const TextStyle(
                 fontSize: 13,
               ),
               children: [
-                const TextSpan(
-                  text: "\n\nFor more information, please ",
+                TextSpan(
+                  text: context.interfaceText("\n\nFor more information, please "),
                 ),
                 TextSpan(
-                  text: "tap here",
+                  text: context.interfaceText("tap here"),
                   style: const TextStyle(
                     decoration: TextDecoration.underline,
                     fontWeight: FontWeight.bold,
@@ -794,15 +795,15 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
       ComplexExpandableTip(
         headerValue: "How to exit full screen mode",
         buildExpandedWidget: () {
-          return const Text.rich(
+          return Text.rich(
             TextSpan(
-              text: "There are several ways to exit full screen mode:\n\n"
+              text: context.interfaceText("There are several ways to exit full screen mode:\n\n"
                   "• Long-press the ellipsis (...) button in the tab bar (when visible) - it will be shown circled and with an orange color\n\n"
                   "• Use the Floating Action Button if enabled in settings\n\n"
                   "• Swipe down from the top of the screen (not available on all devices)\n\n"
                   "• Double-click on Torn's top header bar. This is a convenient alternative method that works by double-clicking "
                   "on the black bar at the top of Torn's page (where the Torn logo is shown). This can be particularly "
-                  "useful when you don't have tabs or the Floating Action Button enabled, or when the swipe gesture doesn't work on your device.",
+                  "useful when you don't have tabs or the Floating Action Button enabled, or when the swipe gesture doesn't work on your device."),
               style: TextStyle(
                 fontSize: 13,
               ),
@@ -816,11 +817,11 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
       ComplexExpandableTip(
         headerValue: "Use terminal (developers only)",
         buildExpandedWidget: () {
-          return const Text.rich(
+          return Text.rich(
             TextSpan(
-              text: "There is a Terminal window (read only) available for development use (so that you can see "
+              text: context.interfaceText("There is a Terminal window (read only) available for development use (so that you can see "
                   "scripts or section outputs). To activate it, short tap the title bar to open a small dialog "
-                  "with several options.",
+                  "with several options."),
               style: TextStyle(
                 fontSize: 13,
               ),
@@ -998,7 +999,7 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError || snapshot.data == null) {
-                return const Text(
+                return const PdaText(
                   "Unable to check battery optimization status. Please review manually.",
                   style: TextStyle(fontSize: 13, color: Colors.red),
                 );
@@ -1006,7 +1007,7 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
                 final isRestricted = snapshot.data!;
                 return Column(
                   children: [
-                    const Text(
+                    const PdaText(
                       "Please be aware that the home screen widget has been built taking battery consumption into "
                       "consideration. It fetches the API and updates the layout once every few minutes, trying to minimize the "
                       "use of background tasks.\n\n"
@@ -1055,7 +1056,7 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
                                 debugPrint("Error opening battery settings: $e");
                               }
                             },
-                            child: const Text("Battery Settings"),
+                            child: const PdaText("Battery Settings"),
                           )
                       ],
                     ),
@@ -1072,13 +1073,13 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
       ComplexExpandableTip(
         headerValue: "Widget interaction",
         buildExpandedWidget: () {
-          return const Text.rich(
+          return Text.rich(
             TextSpan(
-              text: "As in the app, you can interact with almost every item in the widget (e.g.: tap the energy "
+              text: context.interfaceText("As in the app, you can interact with almost every item in the widget (e.g.: tap the energy "
                   "bar to launch the app and access the gym).\n\n"
                   "Also, your 9 top shortcuts in the main shortcuts list (which you can configure in Settings) will "
                   "be shown in the widget. If you can't see the shortcuts in the widget, "
-                  "ensure you expand it vertically!",
+                  "ensure you expand it vertically!"),
               style: TextStyle(
                 fontSize: 13,
               ),
@@ -1092,9 +1093,9 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
       ComplexExpandableTip(
         headerValue: "Widget theme",
         buildExpandedWidget: () {
-          return const Text.rich(
+          return Text.rich(
             TextSpan(
-              text: "You can change the home widget theme in the Settings menu in Torn PDA!",
+              text: context.interfaceText("You can change the home widget theme in the Settings menu in Torn PDA!"),
               style: TextStyle(
                 fontSize: 13,
               ),
@@ -1511,25 +1512,25 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
         buildExpandedWidget: () {
           return Text.rich(
             TextSpan(
-              text: "Torn PDA supports what's called deep linking or custom URLs. You can create a link outside "
+              text: context.interfaceText("Torn PDA supports what's called deep linking or custom URLs. You can create a link outside "
                   "of the application with the following scheme 'tornpda://', where the rest of the URL remains unchanged."
                   "\n\nExample: 'tornpda://www.torn.com/gym.php' should be recognized as a valid URL and open Torn PDA with "
                   "a browser pointing to the gym."
                   "\n\nIn order for this to work in some browser (e.g.: Chrome), you'll need to adapt "
-                  "your link to be similar to this example:\n\n",
+                  "your link to be similar to this example:\n\n"),
               style: const TextStyle(
                 fontSize: 13,
               ),
               children: [
-                const TextSpan(
+                TextSpan(
                   text:
-                      '<a href="intent://tornpda://www.cnn.com#Intent;package=com.manuito.tornpda;scheme=tornpda;end">click</a>',
+                      context.interfaceText('<a href="intent://tornpda://www.cnn.com#Intent;package=com.manuito.tornpda;scheme=tornpda;end">click</a>'),
                   style: TextStyle(
                     fontStyle: FontStyle.italic,
                   ),
                 ),
-                const TextSpan(
-                  text: "\n\nYou can find more information about this scheme in Chrome's ",
+                TextSpan(
+                  text: context.interfaceText("\n\nYou can find more information about this scheme in Chrome's "),
                 ),
                 WidgetSpan(
                   child: GestureDetector(
@@ -1549,7 +1550,7 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
                             browserTapType: BrowserTapType.long,
                           );
                     },
-                    child: const Text(
+                    child: const PdaText(
                       'official documentation',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -1562,8 +1563,8 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
                 const TextSpan(
                   text: ".",
                 ),
-                const TextSpan(
-                  text: "\n\nYou can test your app links in ",
+                TextSpan(
+                  text: context.interfaceText("\n\nYou can test your app links in "),
                 ),
                 WidgetSpan(
                   child: GestureDetector(
@@ -1593,9 +1594,9 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
                     ),
                   ),
                 ),
-                const TextSpan(
-                  text: " (you'll need to visit this with another app or browser "
-                      "to check whether it actually redirects to Torn PDA).",
+                TextSpan(
+                  text: context.interfaceText(" (you'll need to visit this with another app or browser "
+                      "to check whether it actually redirects to Torn PDA)."),
                 ),
               ],
             ),
@@ -1609,33 +1610,33 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
         buildExpandedWidget: () {
           return Text.rich(
             TextSpan(
-              text: "Thanks to the developers at Torn, Torn PDA is recognized as an official app to handle Torn "
+              text: context.interfaceText("Thanks to the developers at Torn, Torn PDA is recognized as an official app to handle Torn "
                   "links. This implies that your device will redirect them to the app by default, or open a choice dialog "
-                  "if you have any other eligible app for that purpose.\n\n",
+                  "if you have any other eligible app for that purpose.\n\n"),
               style: const TextStyle(
                 fontSize: 13,
               ),
               children: [
                 if (Platform.isIOS)
-                  const TextSpan(
-                      text: "If you would like to prevent this from happening on iOS, you can select the application "
+                  TextSpan(
+                      text: context.interfaceText("If you would like to prevent this from happening on iOS, you can select the application "
                           "you'd like to handle your Torn links by long-pressing (tap and hold) the relevant Torn link "
-                          "(you will only need to do this once).",
+                          "(you will only need to do this once)."),
                       children: [
                         TextSpan(
                             text:
-                                "\n\nPlease be aware that some applications (e.g.: Safari) might still insist and offer you "
+                                context.interfaceText("\n\nPlease be aware that some applications (e.g.: Safari) might still insist and offer you "
                                 "to use Torn PDA. As this is something specific to the way some apps have been designed, "
                                 "the way to get rid of these messages might vary from one app to another. In Safari's specific case, "
-                                "you can get rid of it by using extensions, or by adding a Torn browser shortcut to your home screen."),
+                                "you can get rid of it by using extensions, or by adding a Torn browser shortcut to your home screen.")),
                       ]),
                 if (Platform.isAndroid)
                   TextSpan(text: "", children: [
-                    const TextSpan(
-                      text: "If you would like to prevent this from happening on Android, access your ",
+                    TextSpan(
+                      text: context.interfaceText("If you would like to prevent this from happening on Android, access your "),
                     ),
                     TextSpan(
-                      text: "Android's Torn PDA app settings",
+                      text: context.interfaceText("Android's Torn PDA app settings"),
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.blue,
@@ -1646,12 +1647,12 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
                           await AppSettings.openAppSettings();
                         },
                     ),
-                    const TextSpan(
-                      text: " and ensure that the 'Open by default' option is deactivated.\n\n"
+                    TextSpan(
+                      text: context.interfaceText(" and ensure that the 'Open by default' option is deactivated.\n\n"
                           "Please note that some Android manufacturers with customized operating systems (e.g.: Xiaomi) "
                           "might not allow you to directly change this setting, or the changes might not work as intended. "
                           "In these cases, please have a look at apps such as 'Hidden Settings' that allow you to access "
-                          "the actual operating system configuration for any of your installed apps. ",
+                          "the actual operating system configuration for any of your installed apps. "),
                     ),
                   ]),
               ],
@@ -1671,7 +1672,7 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
         buildExpandedWidget: () {
           return Text.rich(
             TextSpan(
-              text: "You can use custom userscripts with Torn PDA. For more information, please visit the "
+              text: context.interfaceText("You can use custom userscripts with Torn PDA. For more information, please visit the "
                   "userscripts section in Settings & Advanced Browser Settings.\n\n"
                   "As a general rule, Torn PDA supports standard Javascript and jQuery, but it does not include any "
                   "external libraries that are served in frameworks such as GM or TM. Therefore, if you are trying to "
@@ -1682,7 +1683,7 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
                   "if you are an advanced programmer and would like to understand how to implement some complex "
                   "scenarios in your scripts that work with Torn PDA (including GET, POST, JS evaluation and some "
                   "Grease Monkey handlers).\n\n"
-                  "There is a list of several userscripts examples at ",
+                  "There is a list of several userscripts examples at "),
               style: const TextStyle(
                 fontSize: 13,
               ),
@@ -1705,7 +1706,7 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
                             browserTapType: BrowserTapType.long,
                           );
                     },
-                    child: const Text(
+                    child: const PdaText(
                       'our Github repository',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,

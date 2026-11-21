@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:torn_pda/l10n/app_language.dart';
 import 'dart:io';
 import 'package:bot_toast/bot_toast.dart';
@@ -344,7 +345,7 @@ class _ApiKeySectionWidgetState extends State<ApiKeySectionWidget> {
                 ),
               ),
             ),
-            Text("Error: ${widget.errorReason}"),
+            PdaText("Error: {0}", values: [widget.errorReason]),
             if (widget.errorDetails.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.only(top: 5),
@@ -507,12 +508,12 @@ class _ApiKeySectionWidgetState extends State<ApiKeySectionWidget> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Text("Gender: ${widget.userProfile!.gender}"),
-            Text("Level: ${widget.userProfile!.level}"),
-            Text("Life: ${widget.userProfile!.life!.current}"),
-            Text("Status: ${widget.userProfile!.status!.description}"),
-            Text("Last action: ${widget.userProfile!.lastAction!.relative}"),
-            Text("Rank: ${widget.userProfile!.rank}"),
+            PdaText("Gender: {0}", values: [widget.userProfile!.gender]),
+            PdaText("Level: {0}", values: [widget.userProfile!.level]),
+            PdaText("Life: {0}", values: [widget.userProfile!.life!.current]),
+            PdaText("Status: {0}", values: [widget.userProfile!.status!.description]),
+            PdaText("Last action: {0}", values: [widget.userProfile!.lastAction!.relative]),
+            PdaText("Rank: {0}", values: [widget.userProfile!.rank]),
           ],
         ),
       );

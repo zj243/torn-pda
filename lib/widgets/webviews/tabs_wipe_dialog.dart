@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:provider/provider.dart';
@@ -115,11 +116,11 @@ class TabsWipeDialogState extends State<TabsWipeDialog> {
                 ),
                 child: Column(
                   children: [
-                    const Text("Wipe Tabs\n"),
+                    const PdaText("Wipe Tabs\n"),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text("Include locked tabs"),
+                        const PdaText("Include locked tabs"),
                         const SizedBox(width: 15),
                         Switch(
                           value: wipeLockedTabs,
@@ -135,7 +136,7 @@ class TabsWipeDialogState extends State<TabsWipeDialog> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Flexible(child: Text("Inactive for")),
+                        const Flexible(child: PdaText("Inactive for")),
                         DropdownButton<TabsWipeTimeRange>(
                           value: selectedTimeRange,
                           items: timeRanges.map((TabsWipeTimeRange range) {
@@ -159,7 +160,7 @@ class TabsWipeDialogState extends State<TabsWipeDialog> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         TextButton(
-                          child: Text(
+                          child: PdaText(
                             "Wipe!",
                             style: TextStyle(
                               color: Colors.red[800],
@@ -175,7 +176,7 @@ class TabsWipeDialogState extends State<TabsWipeDialog> {
                           },
                         ),
                         TextButton(
-                          child: const Text("Close"),
+                          child: const PdaText("Close"),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },

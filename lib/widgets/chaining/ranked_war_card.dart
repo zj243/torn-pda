@@ -1,6 +1,7 @@
 // Dart imports:
 
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -141,8 +142,8 @@ class RankedWarCardState extends State<RankedWarCard> {
                             HtmlParser.fix(_factions[0].name),
                             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
                           ),
-                          Text(
-                            "Score: ${_factions[0].score}",
+                          PdaText(
+                            "Score: {0}", values: [_factions[0].score],
                             style: TextStyle(
                               fontSize: 11,
                               color: _factions[0].score! > _factions[1].score!
@@ -152,8 +153,8 @@ class RankedWarCardState extends State<RankedWarCard> {
                                       : Colors.red,
                             ),
                           ),
-                          Text(
-                            "Chain: ${_factions[0].chain}",
+                          PdaText(
+                            "Chain: {0}", values: [_factions[0].chain],
                             style: const TextStyle(
                               fontSize: 11,
                             ),
@@ -176,8 +177,8 @@ class RankedWarCardState extends State<RankedWarCard> {
                             HtmlParser.fix(_factions[1].name),
                             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
                           ),
-                          Text(
-                            "Score: ${_factions[1].score}",
+                          PdaText(
+                            "Score: {0}", values: [_factions[1].score],
                             style: TextStyle(
                               fontSize: 11,
                               color: _factions[1].score! > _factions[0].score!
@@ -187,8 +188,8 @@ class RankedWarCardState extends State<RankedWarCard> {
                                       : Colors.red,
                             ),
                           ),
-                          Text(
-                            "Chain: ${_factions[1].chain}",
+                          PdaText(
+                            "Chain: {0}", values: [_factions[1].chain],
                             style: const TextStyle(
                               fontSize: 11,
                             ),
@@ -243,7 +244,7 @@ class RankedWarCardState extends State<RankedWarCard> {
                 alignment: Alignment.centerRight,
                 child: TextButton.icon(
                   icon: const Icon(Icons.forum_outlined, size: 18),
-                  label: const Text('Share to chat'),
+                  label: const PdaText('Share to chat'),
                   onPressed: () => ChatShareIn.shareText(
                     ChatShareOut.rankedWar(
                       warId: widget.warId,
@@ -328,8 +329,8 @@ class RankedWarCardState extends State<RankedWarCard> {
 
     return Column(
       children: [
-        Text(
-          "Progress: $progress/${widget.rankedWar.war!.target}",
+        PdaText(
+          "Progress: {0}/{1}", values: [progress, widget.rankedWar.war!.target],
           style: const TextStyle(
             fontSize: 11,
           ),
@@ -366,7 +367,7 @@ class RankedWarCardState extends State<RankedWarCard> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text(
+        const PdaText(
           "Winner: ",
           style: TextStyle(
             fontSize: 11,

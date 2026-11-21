@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -37,7 +38,7 @@ class StakeoutsInfoDialogState extends State<StakeoutsInfoDialog> {
         return GestureDetector(
           onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
           child: AlertDialog(
-            title: const Text("Stakeouts...?"),
+            title: const PdaText("Stakeouts...?"),
             content: Scrollbar(
               controller: _scrollController,
               thumbVisibility: true,
@@ -48,33 +49,33 @@ class StakeoutsInfoDialogState extends State<StakeoutsInfoDialog> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      const PdaText(
                         "GENERAL",
                         style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 10),
-                      const Text.rich(
+                      Text.rich(
                         TextSpan(
                           text:
-                              "The Stakeouts section allows you configure specific alerts for players of your choice.\n\n"
+                              context.interfaceText("The Stakeouts section allows you configure specific alerts for players of your choice.\n\n"
                               "Please be aware that these alerts are only active while using Torn PDA. They will NOT "
                               "generate notifications if the app is in the background or closed."
                               "\n\nThere is a maximum of 15 slots for targets and each one of them is updated every 30 "
-                              "seconds, minimizing API usage as much as practicable",
+                              "seconds, minimizing API usage as much as practicable"),
                           style: TextStyle(fontSize: 13),
                           children: [
                             TextSpan(
-                              text: "\n\n\nDELAYED ALERTS",
+                              text: context.interfaceText("\n\n\nDELAYED ALERTS"),
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                             TextSpan(
                               text:
-                                  "\n\nWhenever you launch the application, or when stakeouts are re-enabled (using the "
+                                  context.interfaceText("\n\nWhenever you launch the application, or when stakeouts are re-enabled (using the "
                                   "main switch), some of your targets might be out of date. If this situation, you might get "
                                   "instant alert for a condition that is no longer true (e.g.: you relaunch Torn PDA after 12 "
                                   "hours of no use, and some of your targets cause alerts for changes that took place hours ago "
                                   "that are no longer useful).\n\nBy default, changes that happened more than 60 minutes ago "
-                                  "won't generate an alert, but you can change this setting here:",
+                                  "won't generate an alert, but you can change this setting here:"),
                               style: TextStyle(fontSize: 13),
                             ),
                           ],
@@ -86,7 +87,7 @@ class StakeoutsInfoDialogState extends State<StakeoutsInfoDialog> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             const Flexible(
-                              child: Text(
+                              child: PdaText(
                                 "Max alert delay (minutes)",
                                 style: TextStyle(fontSize: 13),
                               ),
@@ -169,7 +170,7 @@ class StakeoutsInfoDialogState extends State<StakeoutsInfoDialog> {
               Padding(
                 padding: const EdgeInsets.only(right: 8),
                 child: TextButton(
-                  child: const Text("Sounds good!"),
+                  child: const PdaText("Sounds good!"),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },

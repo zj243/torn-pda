@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -146,10 +147,10 @@ class PlayerNotesDialogState extends State<PlayerNotesDialog> with SingleTickerP
                 onTapOutside: (_) {
                   FocusScope.of(context).unfocus();
                 },
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   counterText: "",
                   border: OutlineInputBorder(),
-                  labelText: 'Insert note',
+                  labelText: context.interfaceText('Insert note'),
                 ),
               ),
             ],
@@ -186,7 +187,7 @@ class PlayerNotesDialogState extends State<PlayerNotesDialog> with SingleTickerP
                 foregroundColor: _themeProvider.buttonText,
               ),
               onPressed: _hasChanges ? _handleSave : null,
-              child: const Text("Save"),
+              child: const PdaText("Save"),
             ),
           ),
         ),
@@ -207,7 +208,7 @@ class PlayerNotesDialogState extends State<PlayerNotesDialog> with SingleTickerP
         if (_hasChanges)
           TextButton(
             onPressed: () => _tabController.animateTo(0),
-            child: const Text("Your Torn PDA note has unsaved changes", style: TextStyle(fontSize: 12)),
+            child: const PdaText("Your Torn PDA note has unsaved changes", style: TextStyle(fontSize: 12)),
           ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -238,10 +239,10 @@ class PlayerNotesDialogState extends State<PlayerNotesDialog> with SingleTickerP
     final discard = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        content: const Text("Discard the changes to your Torn PDA note?", style: TextStyle(fontSize: 14)),
+        content: const PdaText("Discard the changes to your Torn PDA note?", style: TextStyle(fontSize: 14)),
         actions: [
-          TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const Text("Keep editing")),
-          TextButton(onPressed: () => Navigator.of(ctx).pop(true), child: const Text("Discard")),
+          TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const PdaText("Keep editing")),
+          TextButton(onPressed: () => Navigator.of(ctx).pop(true), child: const PdaText("Discard")),
         ],
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/providers/webview_provider.dart';
 
@@ -44,7 +45,7 @@ class EditTabDialogState extends State<EditTabDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Custom tab name'),
+      title: const PdaText('Custom tab name'),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -61,11 +62,11 @@ class EditTabDialogState extends State<EditTabDialog> {
                   onFieldSubmitted: (value) {
                     _saveChanges();
                   },
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     counterText: "",
                     isDense: true,
                     border: OutlineInputBorder(),
-                    labelText: 'Tab name',
+                    labelText: context.interfaceText('Tab name'),
                     labelStyle: TextStyle(fontSize: 12),
                   ),
                 ),
@@ -82,7 +83,7 @@ class EditTabDialogState extends State<EditTabDialog> {
           ),
           const SizedBox(height: 20),
           SwitchListTile(
-            title: const Text(
+            title: const PdaText(
               'Show in page title',
               style: TextStyle(fontSize: 13),
             ),
@@ -94,7 +95,7 @@ class EditTabDialogState extends State<EditTabDialog> {
             },
           ),
           SwitchListTile(
-            title: const Text(
+            title: const PdaText(
               'Show in tab',
               style: TextStyle(fontSize: 13),
             ),
@@ -113,11 +114,11 @@ class EditTabDialogState extends State<EditTabDialog> {
             _clearFields();
             _saveChanges();
           },
-          child: const Text('Clear'),
+          child: const PdaText('Clear'),
         ),
         ElevatedButton(
           onPressed: _saveChanges,
-          child: const Text('Save'),
+          child: const PdaText('Save'),
         ),
       ],
     );

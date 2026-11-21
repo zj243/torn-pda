@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
@@ -649,8 +650,8 @@ class UserScriptsProvider extends ChangeNotifier {
         barrierDismissible: !Platform.isIOS,
         context: navigatorKey.currentContext!,
         builder: (context) => AlertDialog(
-          title: const Text("⚠️ Error restoring scripts"),
-          content: const Text(
+          title: const PdaText("⚠️ Error restoring scripts"),
+          content: const PdaText(
             "There was a problem loading your scripts. To protect your data, changes will not be saved.\n\n"
             "If this problem persists, you can reset your scripts to fix it (warning: this will delete all your scripts) or try importing a backup from Settings.",
           ),
@@ -658,7 +659,7 @@ class UserScriptsProvider extends ChangeNotifier {
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
               style: TextButton.styleFrom(foregroundColor: Colors.green),
-              child: const Text("Understood"),
+              child: const PdaText("Understood"),
             ),
             TextButton(
               onPressed: () {
@@ -666,7 +667,7 @@ class UserScriptsProvider extends ChangeNotifier {
                 _forceResetScripts();
               },
               style: TextButton.styleFrom(foregroundColor: Colors.red),
-              child: const Text("Reset Scripts"),
+              child: const PdaText("Reset Scripts"),
             ),
           ],
         ),
@@ -674,11 +675,11 @@ class UserScriptsProvider extends ChangeNotifier {
     } else {
       // Fallback if context is not available (unlikely)
       BotToast.showNotification(
-        title: (_) => const Text(
+        title: (_) => const PdaText(
           "⚠️ Error restoring scripts",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
-        subtitle: (_) => const Text(
+        subtitle: (_) => const PdaText(
           "There was a problem loading your scripts. To protect your data, changes will not be saved.\nPlease restart the app.",
           style: TextStyle(color: Colors.white),
         ),
@@ -1037,13 +1038,13 @@ class UserScriptsProvider extends ChangeNotifier {
         showDialog(
           context: navigatorKey.currentContext!,
           builder: (context) => AlertDialog(
-            title: const Text("Issue Loading Scripts"),
-            content: const Text(
+            title: const PdaText("Issue Loading Scripts"),
+            content: const PdaText(
               "We encountered a problem loading your user scripts. To protect your data, please restart the app so that we can try again.\n\n"
               "If this happens repeatedly, please go to 'Settings > Advanced Browser Settings > Manage Scripts' to reset them, "
               "or alternatively import a local or cloud backup if you have one.",
             ),
-            actions: [TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text("OK"))],
+            actions: [TextButton(onPressed: () => Navigator.of(context).pop(), child: const PdaText("OK"))],
           ),
         );
       } else {

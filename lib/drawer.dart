@@ -1,5 +1,6 @@
 // Dart imports:
 
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:torn_pda/l10n/app_language.dart';
 import 'dart:async';
 import 'dart:developer';
@@ -1316,7 +1317,7 @@ class DrawerPageState extends State<DrawerPage> with WidgetsBindingObserver, Aut
 
       if (showError) {
         BotToast.showText(
-          text: "Incorrect deep link!\n\n$url",
+          text: context.interfaceText("Incorrect deep link!\n\n{0}", [url]),
           textStyle: const TextStyle(fontSize: 14, color: Colors.white),
           contentColor: Colors.orange[700]!,
           duration: const Duration(seconds: 4),
@@ -2285,7 +2286,7 @@ class DrawerPageState extends State<DrawerPage> with WidgetsBindingObserver, Aut
                         children: [
                           const Padding(
                             padding: EdgeInsets.only(left: 4, top: 1),
-                            child: Text("API CALLS (60s)", style: TextStyle(fontSize: 9)),
+                            child: PdaText("API CALLS (60s)", style: TextStyle(fontSize: 9)),
                           ),
                           if (_apiController.delayCalls)
                             StreamBuilder<Map<String, dynamic>>(
@@ -2294,8 +2295,8 @@ class DrawerPageState extends State<DrawerPage> with WidgetsBindingObserver, Aut
                               builder: (BuildContext context, AsyncSnapshot<Map<String, dynamic>> snapshot) {
                                 final int queueLength = snapshot.data?['queueLength'] ?? 0;
                                 final double avgTime = snapshot.data?['avgTime'].toDouble() ?? 0;
-                                return Text(
-                                  "QUEUE: $queueLength${queueLength > 0 ? ' (delay ${avgTime.ceil()} sec)' : ''}",
+                                return PdaText(
+                                  "QUEUE: {0}{1}", values: [queueLength, queueLength > 0 ? ' (delay ${avgTime.ceil()} sec)' : ''],
                                   style: TextStyle(
                                     fontSize: 9,
                                     color: queueLength == 0 ? _themeProvider!.mainText : Colors.red,
@@ -2370,8 +2371,8 @@ class DrawerPageState extends State<DrawerPage> with WidgetsBindingObserver, Aut
                                 BotToast.showText(
                                   clickClose: true,
                                   text:
-                                      "Automatic sync with your device theme is enabled: bear in mind that your "
-                                      "current theme selection might be reverted!",
+                                      context.interfaceText("Automatic sync with your device theme is enabled: bear in mind that your "
+                                      "current theme selection might be reverted!"),
                                   textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                                   contentColor: Colors.orange[800]!,
                                   duration: const Duration(seconds: 6),
@@ -2397,7 +2398,7 @@ class DrawerPageState extends State<DrawerPage> with WidgetsBindingObserver, Aut
                               }
                               if (!syncToast) {
                                 BotToast.showText(
-                                  text: "Spooky...!",
+                                  text: context.interfaceText("Spooky...!"),
                                   textStyle: const TextStyle(fontSize: 14, color: Colors.grey),
                                   contentColor: const Color(0xFF0C0C0C),
                                   contentPadding: const EdgeInsets.all(10),
@@ -2740,7 +2741,7 @@ class DrawerPageState extends State<DrawerPage> with WidgetsBindingObserver, Aut
               // Brief confirmation that everything was restored successfully
               BotToast.showText(
                 clickClose: true,
-                text: "Local backup restored successfully, including your alerts configuration!",
+                text: context.interfaceText("Local backup restored successfully, including your alerts configuration!"),
                 textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                 contentColor: Colors.green,
                 duration: const Duration(seconds: 5),
@@ -2764,8 +2765,8 @@ class DrawerPageState extends State<DrawerPage> with WidgetsBindingObserver, Aut
             BotToast.showText(
               clickClose: true,
               text:
-                  "A critical error occurred while creating your profile after the import.\n\n"
-                  "Please check your internet connection, restart the app, and reload your API key in Settings.",
+                  context.interfaceText("A critical error occurred while creating your profile after the import.\n\n"
+                  "Please check your internet connection, restart the app, and reload your API key in Settings."),
               textStyle: const TextStyle(fontSize: 14, color: Colors.white),
               contentColor: Colors.red,
               duration: const Duration(seconds: 10),
@@ -2783,8 +2784,8 @@ class DrawerPageState extends State<DrawerPage> with WidgetsBindingObserver, Aut
           BotToast.showText(
             clickClose: true,
             text:
-                "A critical error occurred while creating your profile after the import.\n\n"
-                "Please check your internet connection, restart the app, and reload your API key in Settings.",
+                context.interfaceText("A critical error occurred while creating your profile after the import.\n\n"
+                "Please check your internet connection, restart the app, and reload your API key in Settings."),
             textStyle: const TextStyle(fontSize: 14, color: Colors.white),
             contentColor: Colors.red,
             duration: const Duration(seconds: 10),
@@ -3306,7 +3307,7 @@ class DrawerPageState extends State<DrawerPage> with WidgetsBindingObserver, Aut
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Flexible(
-                                child: Text(
+                                child: PdaText(
                                   "STOCK MARKET UPDATE!",
                                   style: TextStyle(fontSize: 11, color: _themeProvider!.mainText),
                                 ),
@@ -3322,7 +3323,7 @@ class DrawerPageState extends State<DrawerPage> with WidgetsBindingObserver, Aut
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             TextButton(
-                              child: const Text("Stock Exchange"),
+                              child: const PdaText("Stock Exchange"),
                               onPressed: () async {
                                 _webViewProvider.openBrowserPreference(
                                   context: context,
@@ -3334,7 +3335,7 @@ class DrawerPageState extends State<DrawerPage> with WidgetsBindingObserver, Aut
                             ),
                             const SizedBox(width: 10),
                             TextButton(
-                              child: const Text("Close"),
+                              child: const PdaText("Close"),
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },

@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/models/perks/user_perks_model.dart';
 import 'package:torn_pda/providers/api/api_utils.dart';
@@ -45,7 +46,7 @@ class GymWidgetState extends State<GymWidget> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text("Steadfast: ", style: TextStyle(color: Colors.orange, fontSize: 11)),
+                const PdaText("Steadfast: ", style: TextStyle(color: Colors.orange, fontSize: 11)),
                 Flexible(
                   child: Wrap(
                     alignment: WrapAlignment.center,

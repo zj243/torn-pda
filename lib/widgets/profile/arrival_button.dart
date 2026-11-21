@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/models/profile/own_profile_model.dart';
 import 'package:torn_pda/providers/settings_provider.dart';
@@ -84,7 +85,7 @@ class ArrivalButtonState extends State<ArrivalButton> with TickerProviderStateMi
                   const SizedBox(width: 6),
                   Column(
                     children: [
-                      Text(
+                      PdaText(
                         "APPROACHING",
                         style: TextStyle(
                           fontSize: 8,

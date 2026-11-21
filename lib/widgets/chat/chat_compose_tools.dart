@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -289,7 +290,7 @@ class _ChatComposeToolsState extends State<ChatComposeTools> {
   Widget _header({required Widget child, Widget? trailing}) => Row(
     children: [
       IconButton(
-        tooltip: 'Back to quick replies',
+        tooltip: context.interfaceText('Back to quick replies'),
         visualDensity: VisualDensity.compact,
         icon: const Icon(Icons.arrow_back_rounded, size: 20),
         onPressed: () => _show(_Tool.replies),
@@ -320,7 +321,7 @@ class _ChatComposeToolsState extends State<ChatComposeTools> {
           child: Column(mainAxisSize: MainAxisSize.min, children: [for (final row in rows) _chips(row)]),
         ),
         IconButton(
-          tooltip: 'Edit',
+          tooltip: context.interfaceText('Edit'),
           visualDensity: VisualDensity.compact,
           icon: const Icon(Icons.edit_outlined, size: 20),
           onPressed: () => showModalBottomSheet<void>(
@@ -331,7 +332,7 @@ class _ChatComposeToolsState extends State<ChatComposeTools> {
           ),
         ),
         IconButton(
-          tooltip: 'Help',
+          tooltip: context.interfaceText('Help'),
           visualDensity: VisualDensity.compact,
           icon: const Icon(Icons.help_outline_rounded, size: 20),
           onPressed: () => _show(_Tool.help),
@@ -355,7 +356,7 @@ class _ChatComposeToolsState extends State<ChatComposeTools> {
         ),
       ActionChip(
         avatar: Icon(emojis.isEmpty ? Icons.add_rounded : Icons.add_reaction_outlined, size: 18),
-        tooltip: 'Edit favorite emojis',
+        tooltip: context.interfaceText('Edit favorite emojis'),
         label: Text(emojis.isEmpty ? 'Add emoji' : 'Emojis'),
         visualDensity: VisualDensity.compact,
         onPressed: () async {
@@ -377,7 +378,7 @@ class _ChatComposeToolsState extends State<ChatComposeTools> {
       return [
         ActionChip(
           avatar: const Icon(Icons.add_rounded, size: 18),
-          label: const Text('Save a reply'),
+          label: const PdaText('Save a reply'),
           visualDensity: VisualDensity.compact,
           onPressed: () async {
             await showModalBottomSheet<void>(
@@ -517,7 +518,7 @@ class _ChatComposeToolsState extends State<ChatComposeTools> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        _header(child: Text('Quick actions', style: theme.textTheme.titleSmall)),
+        _header(child: PdaText('Quick actions', style: theme.textTheme.titleSmall)),
         for (final (i, row) in guide.rows.indexed) ...[
           if (guide.rows.length > 1) section('Row ${i + 1}'),
           for (final e in row) entry(e.icon, e.title, e.text),
@@ -527,7 +528,7 @@ class _ChatComposeToolsState extends State<ChatComposeTools> {
         for (final e in guide.off) entry(e.icon, e.title, e.text),
         Padding(
           padding: const EdgeInsets.only(bottom: 4),
-          child: Text('Nothing goes out until you tap Send. Change the replies and actions with Edit', style: small),
+          child: PdaText('Nothing goes out until you tap Send. Change the replies and actions with Edit', style: small),
         ),
       ],
     );
@@ -549,14 +550,14 @@ class _ChatComposeToolsState extends State<ChatComposeTools> {
     } else if (_failed) {
       below = Row(
         children: [
-          Expanded(child: Text('Could not load the item list', style: small)),
-          TextButton(onPressed: _openPricing, child: const Text('Retry')),
+          Expanded(child: PdaText('Could not load the item list', style: small)),
+          TextButton(onPressed: _openPricing, child: const PdaText('Retry')),
         ],
       );
     } else if (_query.text.trim().length < 2) {
-      below = Text('Type at least two letters', style: small);
+      below = PdaText('Type at least two letters', style: small);
     } else if (results.isEmpty) {
-      below = Text('No item found', style: small);
+      below = PdaText('No item found', style: small);
     } else {
       below = _chips([
         for (final item in results)
@@ -579,12 +580,12 @@ class _ChatComposeToolsState extends State<ChatComposeTools> {
             controller: _query,
             focusNode: _queryFocus,
             onChanged: (_) => setState(() {}),
-            decoration: const InputDecoration(hintText: 'Item name', isDense: true),
+            decoration: InputDecoration(hintText: context.interfaceText('Item name'), isDense: true),
           ),
           trailing: Tooltip(
-            message: 'Add the market link',
+            message: context.interfaceText('Add the market link'),
             child: FilterChip(
-              label: const Text('Link'),
+              label: const PdaText('Link'),
               selected: _withLink,
               visualDensity: VisualDensity.compact,
               onSelected: (value) => setState(() => _withLink = value),
@@ -647,12 +648,12 @@ class _ChatComposeToolsState extends State<ChatComposeTools> {
               ),
             ),
             IconButton(
-              tooltip: 'Add to the message',
+              tooltip: context.interfaceText('Add to the message'),
               icon: const Icon(Icons.add_comment_outlined, size: 20),
               onPressed: found == null ? null : () => widget.onInsert('${found.name} [${found.id}]'),
             ),
             IconButton(
-              tooltip: 'Player actions',
+              tooltip: context.interfaceText('Player actions'),
               icon: const Icon(Icons.more_horiz_rounded, size: 20),
               onPressed: found == null ? null : () => showChatPlayerActions(context, found),
             ),
@@ -676,19 +677,19 @@ class _ChatComposeToolsState extends State<ChatComposeTools> {
       below = _chips([
         ActionChip(
           avatar: const Icon(Icons.person_search_outlined, size: 18),
-          label: Text('Look up [$id]'),
+          label: PdaText("Look up [{0}]", values: [id]),
           visualDensity: VisualDensity.compact,
           onPressed: () => _pick(ChatUser(id: id, name: '')),
         ),
       ]);
     } else if (query.length < 2) {
-      below = Text('Type a name or an ID', style: small);
+      below = PdaText('Type a name or an ID', style: small);
     } else {
       final matches = _matches(query);
       final lookingUp =
           (_searchTimer?.isActive ?? false) || (chat != null && chat.searching && chat.searchQuery == query);
       below = matches.isEmpty && !lookingUp
-          ? Text('No player found', style: small)
+          ? PdaText('No player found', style: small)
           : _chips([
               for (final user in matches)
                 ActionChip(
@@ -717,7 +718,7 @@ class _ChatComposeToolsState extends State<ChatComposeTools> {
               if (id != null && id > 0) _pick(ChatUser(id: id, name: ''));
             },
             textInputAction: TextInputAction.search,
-            decoration: const InputDecoration(hintText: 'Player name or ID', isDense: true),
+            decoration: InputDecoration(hintText: context.interfaceText('Player name or ID'), isDense: true),
           ),
         ),
         const SizedBox(height: 4),
@@ -742,10 +743,10 @@ class _ChatComposeToolsState extends State<ChatComposeTools> {
             focusNode: _wikiFocus,
             onChanged: (_) => setState(() {}),
             textInputAction: TextInputAction.search,
-            decoration: const InputDecoration(hintText: 'Search the wiki', isDense: true),
+            decoration: InputDecoration(hintText: context.interfaceText('Search the wiki'), isDense: true),
           ),
           trailing: IconButton(
-            tooltip: 'Open the search in the browser',
+            tooltip: context.interfaceText('Open the search in the browser'),
             visualDensity: VisualDensity.compact,
             icon: const Icon(Icons.open_in_browser_rounded, size: 20),
             onPressed: query.length < 2 ? null : () => NativeChat.openUrl(search),
@@ -753,12 +754,12 @@ class _ChatComposeToolsState extends State<ChatComposeTools> {
         ),
         const SizedBox(height: 4),
         if (query.length < 2)
-          Text('Type at least two letters', style: small)
+          PdaText('Type at least two letters', style: small)
         else
           _chips([
             ActionChip(
               avatar: const Icon(Icons.search_rounded, size: 18),
-              label: Text('Search link: $query'),
+              label: PdaText("Search link: {0}", values: [query]),
               visualDensity: VisualDensity.compact,
               onPressed: () => widget.onInsert(search),
             ),
@@ -847,7 +848,7 @@ class ChatQuickActionsEditor extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
-                title: const Text('Rows'),
+                title: const PdaText('Rows'),
                 trailing: SegmentedButton<int>(
                   showSelectedIcon: false,
                   segments: [for (final n in chatQuickRowsOptions) ButtonSegment(value: n, label: Text('$n'))],
@@ -857,7 +858,7 @@ class ChatQuickActionsEditor extends StatelessWidget {
               ),
               for (final (i, type) in shown.indexed)
                 ListTile(
-                  title: Text('Row ${i + 1}'),
+                  title: PdaText("Row {0}", values: [i + 1]),
                   trailing: DropdownButton<ChatQuickRow>(
                     value: type,
                     underline: const SizedBox.shrink(),
@@ -925,15 +926,15 @@ class ChatEmojiEditor extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
               children: [
                 if (onPick == null) ...[
-                  Text('Favorites (${favorites.length}/${ChatEmoji.maxFavorites})', style: theme.textTheme.titleSmall),
-                  Text(
+                  PdaText("Favorites ({0}/{1})", values: [favorites.length, ChatEmoji.maxFavorites], style: theme.textTheme.titleSmall),
+                  PdaText(
                     'Tap an emoji below to add or remove it. Drag to reorder',
                     style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
                   ),
                   SizedBox(
                     height: 56,
                     child: favorites.isEmpty
-                        ? const Align(alignment: Alignment.centerLeft, child: Text('No favorites yet'))
+                        ? const Align(alignment: Alignment.centerLeft, child: PdaText('No favorites yet'))
                         : ReorderableListView(
                             scrollDirection: Axis.horizontal,
                             onReorderItem: prefs.moveEmojiFavorite,
@@ -941,7 +942,7 @@ class ChatEmojiEditor extends StatelessWidget {
                               for (final (i, emoji) in favorites.indexed)
                                 Semantics(
                                   key: ValueKey(emoji),
-                                  label: 'Favorite $emoji',
+                                  label: context.interfaceText("Favorite {0}", [emoji]),
                                   customSemanticsActions: {
                                     if (i > 0)
                                       const CustomSemanticsAction(label: 'Move left'): () =>
@@ -1075,7 +1076,7 @@ class _ChatQuickReplySettingsState extends State<ChatQuickReplySettings> {
               hintText: full ? 'Up to ${ChatPrefs.maxQuickReplies} replies' : 'Add a reply',
               isDense: true,
               suffixIcon: IconButton(
-                tooltip: 'Add reply',
+                tooltip: context.interfaceText('Add reply'),
                 icon: const Icon(Icons.add_rounded),
                 onPressed: full ? null : _add,
               ),
@@ -1101,8 +1102,8 @@ class _ChatQuickReplySettingsState extends State<ChatQuickReplySettings> {
         if (ChatTemplate.used(_reply.text).isNotEmpty)
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-            child: Text(
-              'Preview: ${ChatTemplate.fill(_reply.text, _values).text}',
+            child: PdaText(
+              "Preview: {0}", values: [ChatTemplate.fill(_reply.text, _values).text],
               style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
             ),
           ),
@@ -1181,7 +1182,7 @@ class ChatFormatBar extends StatelessWidget {
             button(Icons.link_rounded, 'Link', () => _apply(ChatFormat.link(controller.value))),
             const SizedBox(width: 6),
             Expanded(
-              child: Text(
+              child: PdaText(
                 'Select text to format it',
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,

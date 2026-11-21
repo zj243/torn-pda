@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -413,12 +414,12 @@ Future<void> openChatLink(BuildContext context, ChatLink link) async {
       builder: (context) => AlertDialog(
         icon: const Icon(Icons.warning_amber_rounded),
         title: Text(warning),
-        content: Text(
-          'This link goes to ${link.uri.host}, not to torn.com. Never enter your password or API key there.',
+        content: PdaText(
+          "This link goes to {0}, not to torn.com. Never enter your password or API key there.", values: [link.uri.host],
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.of(context).pop(false), child: const Text('Cancel')),
-          TextButton(onPressed: () => Navigator.of(context).pop(true), child: const Text('Open anyway')),
+          TextButton(onPressed: () => Navigator.of(context).pop(false), child: const PdaText('Cancel')),
+          TextButton(onPressed: () => Navigator.of(context).pop(true), child: const PdaText('Open anyway')),
         ],
       ),
     );
@@ -453,22 +454,22 @@ Future<void> showChatLinkMenu(BuildContext context, ChatLink link) async {
             ),
             ListTile(
               leading: const Icon(Icons.copy_rounded),
-              title: const Text('Copy link'),
+              title: const PdaText('Copy link'),
               onTap: () => Navigator.of(context).pop('copy'),
             ),
             ListTile(
               leading: const Icon(Icons.tab_rounded),
-              title: const Text('Open in main tab'),
+              title: const PdaText('Open in main tab'),
               onTap: () => Navigator.of(context).pop('main'),
             ),
             ListTile(
               leading: const Icon(Icons.add_box_outlined),
-              title: const Text('Open in new tab'),
+              title: const PdaText('Open in new tab'),
               onTap: () => Navigator.of(context).pop('new'),
             ),
             ListTile(
               leading: const Icon(Icons.open_in_new_rounded),
-              title: const Text('Open in external browser'),
+              title: const PdaText('Open in external browser'),
               onTap: () => Navigator.of(context).pop('external'),
             ),
           ],
@@ -705,7 +706,7 @@ class _ChatLinkCardState extends State<ChatLinkCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
+                    PdaText(
                       'YouTube',
                       style: theme.textTheme.labelSmall?.copyWith(color: color.withValues(alpha: 0.65), fontSize: 10),
                     ),
@@ -850,21 +851,21 @@ class _ChatLinkCardState extends State<ChatLinkCard> {
                 )
               else if (canAsk)
                 IconButton(
-                  tooltip: 'Show preview',
+                  tooltip: context.interfaceText('Show preview'),
                   iconSize: 18,
                   onPressed: _load,
                   icon: Icon(Icons.travel_explore_rounded, color: color.withValues(alpha: 0.7)),
                 ),
               if (link.kind == ChatLinkKind.forum && link.id != null)
                 IconButton(
-                  tooltip: 'Read here',
+                  tooltip: context.interfaceText('Read here'),
                   iconSize: 18,
                   onPressed: () => showChatForumReader(context, link),
                   icon: Icon(Icons.visibility_outlined, color: color.withValues(alpha: 0.7)),
                 ),
               if (link.kind == ChatLinkKind.player && link.id != null)
                 IconButton(
-                  tooltip: 'Player actions',
+                  tooltip: context.interfaceText('Player actions'),
                   iconSize: 18,
                   onPressed: () => showChatPlayerActions(
                     context,
@@ -874,7 +875,7 @@ class _ChatLinkCardState extends State<ChatLinkCard> {
                   icon: Icon(Icons.more_vert_rounded, color: color.withValues(alpha: 0.7)),
                 ),
               Tooltip(
-                message: 'Open in the app',
+                message: context.interfaceText('Open in the app'),
                 child: Icon(Icons.open_in_browser_rounded, size: 18, color: color.withValues(alpha: 0.7)),
               ),
             ],
@@ -929,7 +930,7 @@ Future<void> showChatTimeSheet(BuildContext context, ChatTimeRef ref) async {
     builder: (context) => SafeArea(
       child: ListTile(
         leading: const Icon(Icons.schedule_rounded),
-        title: Text('${chatClockOf(context).localClock(at, now)} your time'),
+        title: PdaText("{0} your time", values: [chatClockOf(context).localClock(at, now)]),
         subtitle: Text(ChatTimeRef.relative(at, now)),
       ),
     ),
@@ -1045,7 +1046,7 @@ Future<void> showChatPlayerActions(BuildContext context, ChatUser user, {String?
                 subtitle: Text(NativeChat.prefs.personOf(id).nickname.isEmpty ? '[$id]' : '${user.name} [$id]'),
                 trailing: IconButton(
                   icon: const Icon(Icons.copy_rounded, size: 20),
-                  tooltip: 'Copy ID',
+                  tooltip: context.interfaceText('Copy ID'),
                   onPressed: () {
                     Clipboard.setData(ClipboardData(text: '$id'));
                     chatToast('ID copied', seconds: 1);
@@ -1094,14 +1095,14 @@ Future<void> showChatPlayerActions(BuildContext context, ChatUser user, {String?
                             ? Icons.notifications_off_rounded
                             : Icons.notifications_active_rounded),
                 ),
-                title: const Text('Alerts and mute'),
-                subtitle: until == null ? null : Text('Muted until ${chatClockOf(context).stamp(until)}'),
+                title: const PdaText('Alerts and mute'),
+                subtitle: until == null ? null : PdaText("Muted until {0}", values: [chatClockOf(context).stamp(until)]),
                 onTap: () => Navigator.of(context).pop(('alerts', false)),
               ),
               if (notes != null)
                 ListTile(
                   leading: const Icon(MdiIcons.notebookEditOutline),
-                  title: const Text('Player note'),
+                  title: const PdaText('Player note'),
                   subtitle: Text(
                     notes.getNoteForPlayer('$id')?.note.trim().isNotEmpty == true
                         ? 'Edit your note, visible everywhere in Torn PDA'
@@ -1111,35 +1112,35 @@ Future<void> showChatPlayerActions(BuildContext context, ChatUser user, {String?
                 ),
               ListTile(
                 leading: const Icon(Icons.sticky_note_2_outlined),
-                title: const Text('Chat note'),
-                subtitle: const Text('Only visible in chat'),
+                title: const PdaText('Chat note'),
+                subtitle: const PdaText('Only visible in chat'),
                 onTap: () => Navigator.of(context).pop(('chatnote', false)),
               ),
               ListTile(
                 leading: Icon(friend ? Icons.person_remove_outlined : Icons.person_add_alt_outlined),
                 title: Text(friend ? 'Remove from chat friends' : 'Add to chat friends'),
-                subtitle: const Text('Your Chat list in Friends'),
+                subtitle: const PdaText('Your Chat list in Friends'),
                 onTap: () => Navigator.of(context).pop(('chatfriend', false)),
               ),
               if (Get.isRegistered<StakeoutsController>())
                 ListTile(
                   leading: const Icon(Icons.playlist_add_rounded),
-                  title: const Text('Targets and stakeouts'),
-                  subtitle: const Text('Add to your lists or copy ID and link'),
+                  title: const PdaText('Targets and stakeouts'),
+                  subtitle: const PdaText('Add to your lists or copy ID and link'),
                   onTap: () => Navigator.of(context).pop(('lists', false)),
                 ),
               if (!me)
                 ListTile(
                   leading: const Icon(Icons.monetization_on_outlined),
-                  title: const Text('Place bounty'),
-                  subtitle: const Text("Opens Torn's bounty form for them"),
+                  title: const PdaText('Place bounty'),
+                  subtitle: const PdaText("Opens Torn's bounty form for them"),
                   onTap: () => Navigator.of(context).pop(('bounty', false)),
                   onLongPress: () => Navigator.of(context).pop(('bounty', true)),
                 ),
               ListTile(
                 leading: const Icon(Icons.palette_outlined),
-                title: const Text('Customize'),
-                subtitle: const Text('Name color, highlight and nickname'),
+                title: const PdaText('Customize'),
+                subtitle: const PdaText('Name color, highlight and nickname'),
                 onTap: () => Navigator.of(context).pop(('customize', false)),
               ),
               ListTile(
@@ -1157,8 +1158,8 @@ Future<void> showChatPlayerActions(BuildContext context, ChatUser user, {String?
                 ),
                 ListTile(
                   leading: const Icon(Icons.flag_outlined),
-                  title: const Text('Report'),
-                  subtitle: const Text('Open Torn\'s report form'),
+                  title: const PdaText('Report'),
+                  subtitle: const PdaText('Open Torn\'s report form'),
                   onTap: () => Navigator.of(context).pop(('report', false)),
                 ),
               ],

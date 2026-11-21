@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -51,7 +52,7 @@ class _AppwidgetExplanationDialogState extends State<AppwidgetExplanationDialog>
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text("Home Widget"),
+      title: const PdaText("Home Widget"),
       content: SingleChildScrollView(
         child: Platform.isIOS ? _iosExplanation() : _androidExplanation(),
       ),
@@ -59,7 +60,7 @@ class _AppwidgetExplanationDialogState extends State<AppwidgetExplanationDialog>
         Padding(
           padding: const EdgeInsets.only(right: 8),
           child: TextButton(
-            child: const Text("Awesome!"),
+            child: const PdaText("Awesome!"),
             onPressed: () {
               Navigator.of(context).pop('exit');
             },
@@ -70,7 +71,7 @@ class _AppwidgetExplanationDialogState extends State<AppwidgetExplanationDialog>
   }
 
   Widget _iosExplanation() {
-    return const Text(
+    return const PdaText(
       "You have added the Torn PDA widget!\n\n"
       "How it stays up to date:\n\n"
       "- iOS decides how often widgets refresh, usually every 15 to 30 minutes while the widget is on screen. "
@@ -90,7 +91,7 @@ class _AppwidgetExplanationDialogState extends State<AppwidgetExplanationDialog>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        const PdaText(
           "You have installed your first home screen widget!\n\n"
           "Please be aware that you can change several options (such as the theme) in the Settings menu "
           "here in the main app.\n\n"
@@ -144,7 +145,7 @@ class _AppwidgetExplanationDialogState extends State<AppwidgetExplanationDialog>
                           debugPrint("Error opening battery settings: $e");
                         }
                       },
-                      child: const Text("Battery Settings"),
+                      child: const PdaText("Battery Settings"),
                     ),
                 ],
               );

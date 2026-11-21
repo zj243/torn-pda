@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:provider/provider.dart';
@@ -64,11 +65,11 @@ class FullScreenHeaderDoubleTapWarningDialogState extends State<FullScreenHeader
                 ),
                 child: Column(
                   children: [
-                    const Text(
+                    const PdaText(
                       "Warning!\n",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    const Text(
+                    const PdaText(
                       "You are about to disable the double-tap on Torn's header bar as a method to exit full screen mode.\n\n"
                       "Please make sure you have at least one other way to exit full screen mode, such as:\n\n"
                       "• Long-pressing the ellipsis (...) button in the tab bar\n\n"
@@ -83,7 +84,7 @@ class FullScreenHeaderDoubleTapWarningDialogState extends State<FullScreenHeader
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         TextButton(
-                          child: const Text("Cancel"),
+                          child: const PdaText("Cancel"),
                           onPressed: () {
                             Navigator.of(context).pop(false);
                           },

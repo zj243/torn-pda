@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:torn_pda/providers/settings_provider.dart';
@@ -49,7 +50,7 @@ class BrowserTextLivePanelState extends State<BrowserTextLivePanel> {
                 children: [
                   Icon(Icons.format_size, size: 18, color: _themeProvider.mainText),
                   const SizedBox(width: 8),
-                  Text(
+                  PdaText(
                     "Browser text size",
                     style: TextStyle(color: _themeProvider.mainText, fontWeight: FontWeight.bold),
                   ),

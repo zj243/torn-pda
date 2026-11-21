@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
@@ -83,7 +84,7 @@ class UserScriptsRevertDialogState extends State<UserScriptsRevertDialog> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Flexible(
-                          child: Text(
+                          child: PdaText(
                             "Overwrite existing (also if modified)",
                             style: TextStyle(fontSize: 12, color: _themeProvider.mainText),
                           ),
@@ -113,9 +114,7 @@ class UserScriptsRevertDialogState extends State<UserScriptsRevertDialog> {
                                   _userScriptsProvider
                                       .addDefaultScripts(overwriteExisting: _overwrite)
                                       .then((r) => BotToast.showText(
-                                            text: "${r.removed} script${r.removed == 1 ? "" : "s"} removed\n"
-                                                "${r.added} script${r.added == 1 ? "" : "s"} added\n\n"
-                                                "${r.failed} script${r.failed == 1 ? "" : "s"} failed to load",
+                                            text: context.interfaceText("{0} script{1} removed\n{2} script{3} added\n\n{4} script{5} failed to load", [r.removed, r.removed == 1 ? "" : "s", r.added, r.added == 1 ? "" : "s", r.failed, r.failed == 1 ? "" : "s"]),
                                             textStyle: const TextStyle(
                                               color: Colors.white,
                                             ),
@@ -131,7 +130,7 @@ class UserScriptsRevertDialogState extends State<UserScriptsRevertDialog> {
                                 },
                         ),
                         TextButton(
-                          child: const Text("Better not!"),
+                          child: const PdaText("Better not!"),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },

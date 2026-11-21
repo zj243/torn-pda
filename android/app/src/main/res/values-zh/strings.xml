@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="example_appwidget_description">主要状态小组件</string>
+    <string name="home_widget_label">显示主要状态、快捷方式和可点击的链接</string>
+    <string name="ranked_war_widget_description">查看即将开始、进行中和已结束的排位战</string>
+    <string name="ranked_war_widget_label">排位战</string>
+    <string name="travel_live_update_channel_name">旅行动态</string>
+    <string name="travel_live_update_channel_description">在锁屏和通知栏显示实时旅行倒计时。</string>
+    <string name="racing_live_update_channel_name">赛车动态</string>
+    <string name="racing_live_update_channel_description">在锁屏和通知栏显示实时赛车倒计时。</string>
+    <string name="live_update_eta_pattern">预计 %1$s 抵达</string>
+    <string name="live_update_arrived_label">已抵达</string>
+    <string name="live_update_unknown_eta">抵达时间未知</string>
+    <string name="live_update_arriving_pattern">还有 %1$s 抵达（%2$s）</string>
+    <string name="live_update_destination_unknown">未知</string>
+    <string name="live_update_notification_secondary">%1$s → %2$s</string>
+    <string name="live_update_remaining_pattern">剩余 %1$s</string>
+    <string name="live_update_remaining_less_than_pattern">剩余不足 %1$s</string>
+    <string name="live_update_earliest_return_pattern">最早可于 %1$s 返回</string>
+    <string name="live_update_arrived_at_pattern">已于 %1$s 抵达</string>
+    <string name="live_update_arrived_in_pattern">已抵达%1$s</string>
+    <string name="racing_live_update_title_waiting">等待比赛</string>
+    <string name="racing_live_update_title_racing">比赛进行中</string>
+    <string name="racing_live_update_title_finished">比赛已结束</string>
+    <string name="racing_live_update_body_pending">开始时间待定</string>
+    <string name="racing_live_update_timer_starts">%1$s 后开始</string>
+    <string name="racing_live_update_timer_ends">%1$s 后结束</string>
+    <string name="racing_live_update_status_waiting">等待开赛</string>
+    <string name="racing_live_update_status_racing">赛道上</string>
+    <string name="racing_live_update_status_finished">已完成</string>
+    <string name="widget_reload">刷新</string>
+    <string name="widget_last_update">上次更新</string>
+    <string name="widget_chaining">连击</string>
+    <string name="widget_war">帮派战</string>
+    <string name="widget_no_ranked_war">暂无排位战数据</string>
+    <string name="widget_no_shortcuts">尚未配置快捷方式，点击添加</string>
+    <string name="widget_won">胜利</string>
+    <string name="widget_lost">落败</string>
+</resources>

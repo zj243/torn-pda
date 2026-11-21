@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -26,7 +27,7 @@ Future<void> showScriptModePicker(BuildContext context) {
     context: context,
     builder: (dialogContext) => AlertDialog(
       backgroundColor: theme.secondBackground,
-      title: Text("Scripts mode", style: TextStyle(color: theme.mainText, fontSize: 16)),
+      title: PdaText("Scripts mode", style: TextStyle(color: theme.mainText, fontSize: 16)),
       contentPadding: const EdgeInsets.symmetric(vertical: 8),
       content: SingleChildScrollView(
         child: Column(
@@ -43,8 +44,8 @@ Future<void> showScriptModePicker(BuildContext context) {
                     fontWeight: mode.id == active?.id ? FontWeight.bold : FontWeight.normal,
                   ),
                 ),
-                subtitle: Text(
-                  "${provider.modeScriptCount(mode)} script${provider.modeScriptCount(mode) == 1 ? "" : "s"}",
+                subtitle: PdaText(
+                  "{0} script{1}", values: [provider.modeScriptCount(mode), provider.modeScriptCount(mode) == 1 ? "" : "s"],
                   style: TextStyle(color: theme.mainText, fontSize: 11),
                 ),
                 trailing: mode.id == active?.id ? Icon(Icons.check, color: mode.color) : null,
@@ -57,7 +58,7 @@ Future<void> showScriptModePicker(BuildContext context) {
               ListTile(
                 dense: true,
                 leading: const Icon(Icons.close, color: Colors.grey),
-                title: Text("Exit mode", style: TextStyle(color: theme.mainText)),
+                title: PdaText("Exit mode", style: TextStyle(color: theme.mainText)),
                 onTap: () {
                   Navigator.pop(dialogContext);
                   provider.setMode(null);
@@ -66,7 +67,7 @@ Future<void> showScriptModePicker(BuildContext context) {
             ListTile(
               dense: true,
               leading: const Icon(Icons.edit_note, color: Colors.grey),
-              title: Text("Manage modes", style: TextStyle(color: theme.mainText)),
+              title: PdaText("Manage modes", style: TextStyle(color: theme.mainText)),
               onTap: () {
                 Navigator.pop(dialogContext);
                 showScriptModesManager(context);
@@ -86,13 +87,13 @@ Future<void> showScriptModesManager(BuildContext context) {
     builder: (dialogContext) => Consumer<UserScriptsProvider>(
       builder: (_, provider, _) => AlertDialog(
         backgroundColor: theme.secondBackground,
-        title: Text("Scripts modes", style: TextStyle(color: theme.mainText, fontSize: 16)),
+        title: PdaText("Scripts modes", style: TextStyle(color: theme.mainText, fontSize: 16)),
         content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              PdaText(
                 "War mode is always available and cannot be changed. Create your own modes to run only the scripts "
                 "you choose in each situation.",
                 style: TextStyle(color: theme.mainText, fontSize: 12),
@@ -120,18 +121,17 @@ Future<void> showScriptModesManager(BuildContext context) {
                           context: dialogContext,
                           builder: (confirmContext) => AlertDialog(
                             backgroundColor: theme.secondBackground,
-                            content: Text(
-                              "Delete '${mode.name}'? Scripts will stay installed, but they will no longer be "
-                              "selected for this mode.",
+                            content: PdaText(
+                              "Delete '{0}'? Scripts will stay installed, but they will no longer be selected for this mode.", values: [mode.name],
                               style: TextStyle(color: theme.mainText, fontSize: 13),
                             ),
                             actions: [
                               TextButton(
-                                child: const Text("Cancel"),
+                                child: const PdaText("Cancel"),
                                 onPressed: () => Navigator.pop(confirmContext, false),
                               ),
                               TextButton(
-                                child: const Text("Delete", style: TextStyle(color: Colors.red)),
+                                child: const PdaText("Delete", style: TextStyle(color: Colors.red)),
                                 onPressed: () => Navigator.pop(confirmContext, true),
                               ),
                             ],
@@ -144,7 +144,7 @@ Future<void> showScriptModesManager(BuildContext context) {
                 ),
               TextButton.icon(
                 icon: const Icon(Icons.add),
-                label: const Text("New mode"),
+                label: const PdaText("New mode"),
                 onPressed: () async {
                   final name = await _askModeName(dialogContext, provider);
                   if (name != null) provider.addMode(name);
@@ -153,7 +153,7 @@ Future<void> showScriptModesManager(BuildContext context) {
             ],
           ),
         ),
-        actions: [TextButton(child: const Text("Close"), onPressed: () => Navigator.pop(dialogContext))],
+        actions: [TextButton(child: const PdaText("Close"), onPressed: () => Navigator.pop(dialogContext))],
       ),
     ),
   );
@@ -177,12 +177,12 @@ Future<String?> _askModeName(BuildContext context, UserScriptsProvider provider,
           autofocus: true,
           maxLength: 24,
           style: TextStyle(color: theme.mainText),
-          decoration: InputDecoration(hintText: "Mode name", errorText: error),
+          decoration: InputDecoration(hintText: context.interfaceText("Mode name"), errorText: error),
         ),
         actions: [
-          TextButton(child: const Text("Cancel"), onPressed: () => Navigator.pop(dialogContext)),
+          TextButton(child: const PdaText("Cancel"), onPressed: () => Navigator.pop(dialogContext)),
           TextButton(
-            child: const Text("Save"),
+            child: const PdaText("Save"),
             onPressed: () {
               final name = controller.text.trim();
               final taken = provider.allModes.any(

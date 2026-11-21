@@ -877,7 +877,7 @@
                     android:textSize="11sp"
                     android:textStyle="bold"
                     android:textColor="#000000"
-                    android:text="Reload" />
+                    android:text="@string/widget_reload" />
         <ImageView
                     android:id="@+id/widget_icon_reload_error"
                     android:layout_width="12dp"

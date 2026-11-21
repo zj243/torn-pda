@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:math' as math;
 
@@ -293,7 +294,7 @@ class _ChatForumReaderState extends State<ChatForumReader> {
                 child: FilledButton.tonalIcon(
                   onPressed: () => Navigator.pop(context, true),
                   icon: const Icon(Icons.forum_outlined, size: 18),
-                  label: Text('Go to page ${ChatForum.pageOf(number - 1)}'),
+                  label: PdaText("Go to page {0}", values: [ChatForum.pageOf(number - 1)]),
                 ),
               ),
             ),
@@ -356,14 +357,14 @@ class _ChatForumReaderState extends State<ChatForumReader> {
             autofocus: true,
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            decoration: const InputDecoration(labelText: 'Page'),
+            decoration: InputDecoration(labelText: context.interfaceText('Page')),
             onChanged: (v) => typed = v,
             onFieldSubmitted: go,
           ),
           actions: [
-            TextButton(onPressed: () => Navigator.pop(context, 1), child: const Text('First')),
-            if (last != null) TextButton(onPressed: () => Navigator.pop(context, last), child: const Text('Last')),
-            FilledButton(onPressed: () => go(typed), child: const Text('Go')),
+            TextButton(onPressed: () => Navigator.pop(context, 1), child: const PdaText('First')),
+            if (last != null) TextButton(onPressed: () => Navigator.pop(context, last), child: const PdaText('Last')),
+            FilledButton(onPressed: () => go(typed), child: const PdaText('Go')),
           ],
         );
       },
@@ -430,19 +431,19 @@ class _ChatForumReaderState extends State<ChatForumReader> {
                 Row(
                   children: [
                     IconButton(
-                      tooltip: 'Previous page',
+                      tooltip: context.interfaceText('Previous page'),
                       icon: const Icon(Icons.chevron_left_rounded),
                       onPressed: page > 1 ? () => _goTo(page - 1) : null,
                     ),
                     Tooltip(
-                      message: 'Go to page',
+                      message: context.interfaceText('Go to page'),
                       child: TextButton(
                         onPressed: _pickPage,
                         child: Text(last == null ? 'Page $page' : 'Page $page of $last'),
                       ),
                     ),
                     IconButton(
-                      tooltip: 'Next page',
+                      tooltip: context.interfaceText('Next page'),
                       icon: const Icon(Icons.chevron_right_rounded),
                       onPressed: last == null || page < last ? () => _goTo(page + 1) : null,
                     ),
@@ -450,7 +451,7 @@ class _ChatForumReaderState extends State<ChatForumReader> {
                     TextButton.icon(
                       onPressed: _openInTorn,
                       icon: const Icon(Icons.open_in_new_rounded, size: 18),
-                      label: const Text('Open in Torn'),
+                      label: const PdaText('Open in Torn'),
                     ),
                   ],
                 ),
@@ -489,7 +490,7 @@ class _ChatForumReaderState extends State<ChatForumReader> {
       child: Center(
         child: _loadingPrev
             ? const SizedBox.square(dimension: 24, child: CircularProgressIndicator(strokeWidth: 2))
-            : TextButton(onPressed: _loadPrev, child: const Text('Earlier posts')),
+            : TextButton(onPressed: _loadPrev, child: const PdaText('Earlier posts')),
       ),
     );
   }
@@ -502,8 +503,8 @@ class _ChatForumReaderState extends State<ChatForumReader> {
       child = Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text("Couldn't load the posts", style: theme.textTheme.bodyMedium),
-          TextButton(onPressed: _loadNext, child: const Text('Retry')),
+          PdaText("Couldn't load the posts", style: theme.textTheme.bodyMedium),
+          TextButton(onPressed: _loadNext, child: const PdaText('Retry')),
         ],
       );
     } else if (!_more) {
@@ -655,7 +656,7 @@ class _ForumPostViewState extends State<_ForumPostView> {
                           if (post.authorId > 0)
                             TextSpan(text: ' [${post.authorId}]', style: theme.textTheme.bodySmall),
                           if (post.karma != null)
-                            TextSpan(text: ' - ${chatCount(post.karma!)} karma', style: theme.textTheme.bodySmall),
+                            TextSpan(text: context.interfaceText(" - {0} karma", [chatCount(post.karma!)]), style: theme.textTheme.bodySmall),
                         ],
                       ),
                     ),

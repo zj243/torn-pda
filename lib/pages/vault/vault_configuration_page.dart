@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -81,7 +82,7 @@ class VaultConfigurationPageState extends State<VaultConfigurationPage> {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
-      title: const Text("Vault configuration", style: TextStyle(color: Colors.white)),
+      title: const PdaText("Vault configuration", style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
@@ -101,7 +102,7 @@ class VaultConfigurationPageState extends State<VaultConfigurationPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Flexible(
-              child: Text(
+              child: PdaText(
                 "There was an error detecting the total amount of money available in the vault, "
                 "please close the browser and try again!",
                 style: TextStyle(
@@ -123,17 +124,17 @@ class VaultConfigurationPageState extends State<VaultConfigurationPage> {
 
     // If we have never initialise (or we deleted) the share
     if (widget.vaultStatus.player == null) {
-      top = const Text("You have not initialised the vault share yet!");
+      top = const PdaText("You have not initialised the vault share yet!");
       share = Column(
         children: [
-          Text("Total: \$${_moneyFormat.format(widget.lastTransaction.balance)}"),
+          PdaText("Total: \${0}", values: [_moneyFormat.format(widget.lastTransaction.balance)]),
           const SizedBox(height: 10),
           Text("${UserHelper.playerName}: ?"),
           Text("$spouseName: ?"),
         ],
       );
       options = ElevatedButton(
-        child: const Text("Initialise"),
+        child: const PdaText("Initialise"),
         onPressed: () {
           _showVaultConfigurationDialog();
         },
@@ -148,10 +149,10 @@ class VaultConfigurationPageState extends State<VaultConfigurationPage> {
       );
 
       if (!widget.vaultStatus.error!) {
-        top = Text("Last transaction on ${formatter.formatMonthDay} @${formatter.formatHour}");
+        top = PdaText("Last transaction on {0} @{1}", values: [formatter.formatMonthDay, formatter.formatHour]);
         share = Column(
           children: [
-            Text("Total: \$${_moneyFormat.format(widget.vaultStatus.total)}"),
+            PdaText("Total: \${0}", values: [_moneyFormat.format(widget.vaultStatus.total)]),
             const SizedBox(height: 10),
             Text("${UserHelper.playerName}: "
                 "${_moneyFormat.format(widget.vaultStatus.player)}"),
@@ -160,18 +161,16 @@ class VaultConfigurationPageState extends State<VaultConfigurationPage> {
           ],
         );
       } else {
-        top = Text(
-          "There was an error identifying your last saved transaction (this might happen if "
-          "there are too many transactions since the last time you visited the vault).\n\n"
-          "Last known distribution on ${formatter.formatMonthDay} @${formatter.formatHour}",
+        top = PdaText(
+          "There was an error identifying your last saved transaction (this might happen if there are too many transactions since the last time you visited the vault).\n\nLast known distribution on {0} @{1}", values: [formatter.formatMonthDay, formatter.formatHour],
           style: TextStyle(
             color: Colors.orange[800],
           ),
         );
         topError = Column(
           children: [
-            Text(
-              "Total: \$${_moneyFormat.format(widget.vaultStatus.total)}",
+            PdaText(
+              "Total: \${0}", values: [_moneyFormat.format(widget.vaultStatus.total)],
               style: TextStyle(
                 color: Colors.orange[800],
               ),
@@ -199,10 +198,10 @@ class VaultConfigurationPageState extends State<VaultConfigurationPage> {
             children: [
               const Divider(),
               const SizedBox(height: 20),
-              const Text("Please, calculate your totals from the last known transaction (above) and reset the vault "
+              const PdaText("Please, calculate your totals from the last known transaction (above) and reset the vault "
                   "distribution with the correct values"),
               const SizedBox(height: 20),
-              Text("In the vault now: \$${_moneyFormat.format(widget.lastTransaction.balance)}"),
+              PdaText("In the vault now: \${0}", values: [_moneyFormat.format(widget.lastTransaction.balance)]),
               const SizedBox(height: 10),
               Text("${UserHelper.playerName}: ?"),
               Text("$spouseName: ?"),
@@ -284,11 +283,11 @@ class VaultConfigurationPageState extends State<VaultConfigurationPage> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("Reset vault distribution"),
-          content: const Text("Caution: this will reset your vault distribution!"),
+          title: const PdaText("Reset vault distribution"),
+          content: const PdaText("Caution: this will reset your vault distribution!"),
           actions: [
             TextButton(
-              child: const Text("Do it!"),
+              child: const PdaText("Do it!"),
               onPressed: () {
                 Navigator.of(context).pop();
                 setState(() {
@@ -303,7 +302,7 @@ class VaultConfigurationPageState extends State<VaultConfigurationPage> {
               },
             ),
             TextButton(
-              child: const Text("Oh no!"),
+              child: const PdaText("Oh no!"),
               onPressed: () {
                 Navigator.of(context).pop();
               },

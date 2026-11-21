@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:torn_pda/providers/settings_provider.dart';
@@ -271,7 +272,7 @@ class TerminalDialog extends StatelessWidget {
         side: BorderSide(color: Colors.green[900]!, width: 2),
         borderRadius: BorderRadius.circular(4),
       ),
-      title: const Text(
+      title: const PdaText(
         'Terminal',
         style: TextStyle(color: Colors.white),
       ),
@@ -365,7 +366,7 @@ class TerminalDialog extends StatelessWidget {
               controller: jsController,
               style: const TextStyle(color: Colors.white, fontSize: 12),
               decoration: InputDecoration(
-                labelText: 'Enter JS code',
+                labelText: context.interfaceText('Enter JS code'),
                 labelStyle: TextStyle(color: Colors.green[800]),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.green[800]!),
@@ -399,19 +400,19 @@ class TerminalDialog extends StatelessWidget {
               ClipboardData(text: widget.terminalProvider.getTerminal(widget.webviewKey!)),
             );
           },
-          child: const Text('Copy All'),
+          child: const PdaText('Copy All'),
         ),
         TextButton(
           onPressed: () {
             widget.terminalProvider.clearTerminal(widget.webviewKey!);
           },
-          child: const Text('Clear'),
+          child: const PdaText('Clear'),
         ),
         TextButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: const Text('Close'),
+          child: const PdaText('Close'),
         ),
       ],
     );

@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:developer';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
@@ -125,14 +126,14 @@ class SpiesManagementDialogState extends State<SpiesManagementDialog> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.max,
         children: [
-          const Text(
+          const PdaText(
             "SPIES MANAGEMENT",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 10),
           Row(
             children: [
-              const Text(
+              const PdaText(
                 "Provider: ",
                 style: TextStyle(
                   fontSize: 12,
@@ -203,7 +204,7 @@ class SpiesManagementDialogState extends State<SpiesManagementDialog> {
               ),
               child: const Padding(
                 padding: EdgeInsets.symmetric(vertical: 4),
-                child: Text("Update!"),
+                child: PdaText("Update!"),
               ),
               onPressed: () async {
                 setState(() {
@@ -218,8 +219,7 @@ class SpiesManagementDialogState extends State<SpiesManagementDialog> {
                   if (success) {
                     BotToast.showText(
                       clickClose: true,
-                      text: "Update successful!\n\n"
-                          "${_spyController.spiesSource == SpiesSource.yata ? _spyController.yataSpies.length : _spyController.tornStatsSpies.spies.length} spies retrieved!",
+                      text: context.interfaceText("Update successful!\n\n{0} spies retrieved!", [_spyController.spiesSource == SpiesSource.yata ? _spyController.yataSpies.length : _spyController.tornStatsSpies.spies.length]),
                       textStyle: const TextStyle(
                         fontSize: 14,
                         color: Colors.white,
@@ -236,7 +236,7 @@ class SpiesManagementDialogState extends State<SpiesManagementDialog> {
                 if (!success) {
                   BotToast.showText(
                     clickClose: true,
-                    text: "Update failed!",
+                    text: context.interfaceText("Update failed!"),
                     textStyle: const TextStyle(
                       fontSize: 14,
                       color: Colors.white,
@@ -264,7 +264,7 @@ class SpiesManagementDialogState extends State<SpiesManagementDialog> {
                 FocusScope.of(context).unfocus();
               },
               decoration: InputDecoration(
-                hintText: 'Search by name or ID...',
+                hintText: context.interfaceText('Search by name or ID...'),
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: ValueListenableBuilder<String>(
                   valueListenable: _searchQueryNotifier,
@@ -308,7 +308,7 @@ class SpiesManagementDialogState extends State<SpiesManagementDialog> {
                 Padding(
                   padding: const EdgeInsets.only(right: 15),
                   child: TextButton(
-                    child: const Text("Close"),
+                    child: const PdaText("Close"),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
@@ -352,8 +352,8 @@ class SpiesManagementDialogState extends State<SpiesManagementDialog> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Updating ${_spyController.spiesSource == SpiesSource.yata ? "YATA" : "Torn Stats"}..."),
-                  const Text(
+                  PdaText("Updating {0}...", values: [_spyController.spiesSource == SpiesSource.yata ? "YATA" : "Torn Stats"]),
+                  const PdaText(
                     "(time limit is 2 minutes)",
                     style: TextStyle(
                       fontSize: 14,
@@ -372,7 +372,7 @@ class SpiesManagementDialogState extends State<SpiesManagementDialog> {
               Padding(
                 padding: const EdgeInsets.only(right: 15),
                 child: TextButton(
-                  child: const Text(
+                  child: const PdaText(
                     "Cancel",
                     style: TextStyle(color: Colors.orange),
                   ),
@@ -461,8 +461,8 @@ class SpiesManagementDialogState extends State<SpiesManagementDialog> {
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            "Found $spiesCount spies",
+          PdaText(
+            "Found {0} spies", values: [spiesCount],
             style: const TextStyle(
               fontSize: 12,
             ),
@@ -495,7 +495,7 @@ class SpiesManagementDialogState extends State<SpiesManagementDialog> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            PdaText(
               "Error listing spies!",
               style: TextStyle(
                 color: Colors.red,
@@ -558,8 +558,8 @@ class SpiesManagementDialogState extends State<SpiesManagementDialog> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "STR: ${spy.strength == -1 ? '??' : formatBigNumbers(spy.strength!)}",
+                  PdaText(
+                    "STR: {0}", values: [spy.strength == -1 ? '??' : formatBigNumbers(spy.strength!)],
                     style: const TextStyle(
                       fontSize: 11,
                     ),
@@ -573,8 +573,8 @@ class SpiesManagementDialogState extends State<SpiesManagementDialog> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "DEF: ${spy.defense == -1 ? '??' : formatBigNumbers(spy.defense!)}",
+                  PdaText(
+                    "DEF: {0}", values: [spy.defense == -1 ? '??' : formatBigNumbers(spy.defense!)],
                     style: const TextStyle(
                       fontSize: 11,
                     ),
@@ -588,8 +588,8 @@ class SpiesManagementDialogState extends State<SpiesManagementDialog> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "SPD: ${spy.speed == -1 ? '??' : formatBigNumbers(spy.speed!)}",
+                  PdaText(
+                    "SPD: {0}", values: [spy.speed == -1 ? '??' : formatBigNumbers(spy.speed!)],
                     style: const TextStyle(
                       fontSize: 11,
                     ),
@@ -603,8 +603,8 @@ class SpiesManagementDialogState extends State<SpiesManagementDialog> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "DEX: ${spy.dexterity == -1 ? '??' : formatBigNumbers(spy.dexterity!)}",
+                  PdaText(
+                    "DEX: {0}", values: [spy.dexterity == -1 ? '??' : formatBigNumbers(spy.dexterity!)],
                     style: const TextStyle(
                       fontSize: 11,
                     ),
@@ -619,8 +619,8 @@ class SpiesManagementDialogState extends State<SpiesManagementDialog> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "TOTAL: ${spy.total == -1 ? '??' : formatBigNumbers(spy.total!)}",
+                  PdaText(
+                    "TOTAL: {0}", values: [spy.total == -1 ? '??' : formatBigNumbers(spy.total!)],
                     style: const TextStyle(
                       fontSize: 11,
                     ),
@@ -672,8 +672,8 @@ class SpiesManagementDialogState extends State<SpiesManagementDialog> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "STR: ${spy.strength == -1 ? '??' : formatBigNumbers(spy.strength!)}",
+                  PdaText(
+                    "STR: {0}", values: [spy.strength == -1 ? '??' : formatBigNumbers(spy.strength!)],
                     style: const TextStyle(
                       fontSize: 11,
                     ),
@@ -683,8 +683,8 @@ class SpiesManagementDialogState extends State<SpiesManagementDialog> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "DEF: ${spy.defense == -1 ? '??' : formatBigNumbers(spy.defense!)}",
+                  PdaText(
+                    "DEF: {0}", values: [spy.defense == -1 ? '??' : formatBigNumbers(spy.defense!)],
                     style: const TextStyle(
                       fontSize: 11,
                     ),
@@ -694,8 +694,8 @@ class SpiesManagementDialogState extends State<SpiesManagementDialog> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "SPD: ${spy.speed == -1 ? '??' : formatBigNumbers(spy.speed!)}",
+                  PdaText(
+                    "SPD: {0}", values: [spy.speed == -1 ? '??' : formatBigNumbers(spy.speed!)],
                     style: const TextStyle(
                       fontSize: 11,
                     ),
@@ -705,8 +705,8 @@ class SpiesManagementDialogState extends State<SpiesManagementDialog> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "DEX: ${spy.dexterity == -1 ? '??' : formatBigNumbers(spy.dexterity!)}",
+                  PdaText(
+                    "DEX: {0}", values: [spy.dexterity == -1 ? '??' : formatBigNumbers(spy.dexterity!)],
                     style: const TextStyle(
                       fontSize: 11,
                     ),
@@ -717,8 +717,8 @@ class SpiesManagementDialogState extends State<SpiesManagementDialog> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "TOTAL: ${spy.total == -1 ? '??' : formatBigNumbers(spy.total!)}",
+                  PdaText(
+                    "TOTAL: {0}", values: [spy.total == -1 ? '??' : formatBigNumbers(spy.total!)],
                     style: const TextStyle(
                       fontSize: 11,
                     ),

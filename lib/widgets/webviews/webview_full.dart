@@ -1,6 +1,7 @@
 // Dart imports:
 // ignore_for_file: overridden_fields
 
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
@@ -1052,9 +1053,9 @@ class WebViewFullState extends State<WebViewFull>
                               },
                               controller: _findController,
                               focusNode: _findFocus,
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 border: InputBorder.none,
-                                hintText: "What are you looking for?",
+                                hintText: context.interfaceText("What are you looking for?"),
                                 hintStyle: TextStyle(fontStyle: FontStyle.italic, fontSize: 12),
                               ),
                               style: TextStyle(color: _themeProvider.mainText, fontSize: 16),
@@ -1160,11 +1161,11 @@ class WebViewFullState extends State<WebViewFull>
                 padding: EdgeInsets.only(top: !_webViewProvider.webViewSplitActive ? 8 : 13),
                 child: Showcase(
                   key: _showCaseCloseButton,
-                  title: 'Options menu',
+                  title: context.interfaceText('Options menu'),
                   description:
-                      '\nLong press the bottom bar of the quick browser to open a '
+                      context.interfaceText('\nLong press the bottom bar of the quick browser to open a '
                       'menu with additional options, including faction attack assists calls!\n\n'
-                      'Swipe down/up to hide or show your tab bar!',
+                      'Swipe down/up to hide or show your tab bar!'),
                   targetPadding: const EdgeInsets.only(top: 8),
                   disableMovingAnimation: true,
                   textColor: _themeProvider.mainText,
@@ -1179,7 +1180,7 @@ class WebViewFullState extends State<WebViewFull>
                           if (!_webViewProvider.webViewSplitActive)
                             Column(
                               children: [
-                                Text(
+                                PdaText(
                                   "CLOSE",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
@@ -1198,7 +1199,7 @@ class WebViewFullState extends State<WebViewFull>
                                   _currentUrl.contains("www.torn.com/page.php?sid=attack&user2ID=") ||
                                   _currentUrl.contains("www.torn.com/loader2.php?sid=getInAttack&user2ID=")) &&
                               UserHelper.factionId != 0)
-                            Text(
+                            PdaText(
                               "ASSIST",
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -1207,7 +1208,7 @@ class WebViewFullState extends State<WebViewFull>
                               ),
                             )
                           else
-                            Text(
+                            PdaText(
                               "OPTIONS",
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -2468,30 +2469,30 @@ class WebViewFullState extends State<WebViewFull>
               context: context,
               builder: (context) {
                 return AlertDialog(
-                  title: const Text('Authentication Required'),
+                  title: const PdaText('Authentication Required'),
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       TextField(
                         controller: usernameController,
-                        decoration: const InputDecoration(labelText: 'User'),
+                        decoration: InputDecoration(labelText: context.interfaceText('User')),
                       ),
                       TextField(
                         controller: passwordController,
-                        decoration: const InputDecoration(labelText: 'Password'),
+                        decoration: InputDecoration(labelText: context.interfaceText('Password')),
                         obscureText: true,
                       ),
                     ],
                   ),
                   actions: [
                     TextButton(
-                      child: const Text('Cancel'),
+                      child: const PdaText('Cancel'),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
                     ),
                     TextButton(
-                      child: const Text('Send'),
+                      child: const PdaText('Send'),
                       onPressed: () {
                         proceed = true;
                         Navigator.of(context).pop();
@@ -2601,7 +2602,7 @@ class WebViewFullState extends State<WebViewFull>
                           borderRadius: BorderRadius.circular(4.0),
                           border: Border.all(color: Colors.blue),
                         ),
-                        child: const Text(
+                        child: const PdaText(
                           "Override!",
                           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
                         ),
@@ -2992,8 +2993,8 @@ class WebViewFullState extends State<WebViewFull>
       BotToast.showText(
         clickClose: true,
         text:
-            "Authentication error detected!\n\nIf you have inserted your username and password combination in Torn "
-            "PDA's settings section, please verify that they are correct!",
+            context.interfaceText("Authentication error detected!\n\nIf you have inserted your username and password combination in Torn "
+            "PDA's settings section, please verify that they are correct!"),
         textStyle: const TextStyle(fontSize: 14, color: Colors.white),
         contentColor: Colors.red,
         duration: const Duration(seconds: 6),
@@ -3008,8 +3009,8 @@ class WebViewFullState extends State<WebViewFull>
         if (_webViewProvider.browserShowInForeground) {
           BotToast.showText(
             text:
-                "Trying to log back into Torn\n\n"
-                "Please wait...!",
+                context.interfaceText("Trying to log back into Torn\n\n"
+                "Please wait...!"),
             textStyle: const TextStyle(fontSize: 14, color: Colors.white),
             contentColor: Colors.blue,
             duration: const Duration(seconds: 4),
@@ -3045,7 +3046,7 @@ class WebViewFullState extends State<WebViewFull>
         } else {
           if (loginResponse.transientError) {
             BotToast.showText(
-              text: "Temporary authentication issue (timeout or server error). Please retry in a moment.",
+              text: context.interfaceText("Temporary authentication issue (timeout or server error). Please retry in a moment."),
               textStyle: const TextStyle(fontSize: 14, color: Colors.white),
               contentColor: Colors.orange,
               duration: const Duration(seconds: 4),
@@ -3055,8 +3056,8 @@ class WebViewFullState extends State<WebViewFull>
           }
           BotToast.showText(
             text:
-                "Browser error while authenticating: please log in again or verify your user / pass combination "
-                "in the Settings section!",
+                context.interfaceText("Browser error while authenticating: please log in again or verify your user / pass combination "
+                "in the Settings section!"),
             textStyle: const TextStyle(fontSize: 14, color: Colors.white),
             contentColor: Colors.red,
             duration: const Duration(seconds: 4),
@@ -3238,7 +3239,7 @@ class WebViewFullState extends State<WebViewFull>
                           focusNode: _findFocus,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: "What are you looking for?",
+                            hintText: context.interfaceText("What are you looking for?"),
                             hintStyle: TextStyle(fontStyle: FontStyle.italic, color: Colors.grey[300], fontSize: 12),
                           ),
                           style: const TextStyle(color: Colors.white, fontSize: 16),
@@ -3406,12 +3407,12 @@ class WebViewFullState extends State<WebViewFull>
                           child: ClipRRect(
                             child: Showcase(
                               key: _showCaseTitleBar,
-                              title: 'Options menu',
+                              title: context.interfaceText('Options menu'),
                               description:
-                                  '\nTap the page title to open a menu with additional options, '
+                                  context.interfaceText('\nTap the page title to open a menu with additional options, '
                                   'including faction attack assists calls!\n\n'
                                   'Swipe left/right to browse back/forward\n\n'
-                                  'Swipe down/up to hide or show your tab bar!',
+                                  'Swipe down/up to hide or show your tab bar!'),
                               targetPadding: const EdgeInsets.all(10),
                               disableMovingAnimation: true,
                               textColor: _themeProvider.mainText,
@@ -3441,7 +3442,7 @@ class WebViewFullState extends State<WebViewFull>
                                             child: Column(
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
-                                                const Text(
+                                                const PdaText(
                                                   "ASSIST",
                                                   overflow: TextOverflow.fade,
                                                   style: TextStyle(fontSize: 9, color: Colors.orange),
@@ -3706,7 +3707,7 @@ class WebViewFullState extends State<WebViewFull>
 
     if (showToast) {
       BotToast.showText(
-        text: "Reloading...",
+        text: context.interfaceText("Reloading..."),
         textStyle: const TextStyle(fontSize: 14, color: Colors.white),
         contentColor: Colors.grey[600]!,
         duration: const Duration(seconds: 1),
@@ -4140,7 +4141,7 @@ class WebViewFullState extends State<WebViewFull>
             if (!_travelHomeIconTriggered) {
               setState(() => _travelHomeIconTriggered = true);
               BotToast.showText(
-                text: 'Tap again to travel back!',
+                text: context.interfaceText('Tap again to travel back!'),
                 textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                 contentColor: Colors.orange[800]!,
                 duration: const Duration(seconds: 3),
@@ -4453,12 +4454,12 @@ class WebViewFullState extends State<WebViewFull>
     if (_tradesIconActive) {
       return Showcase(
         key: _showCaseTradeOptions,
-        title: 'Trading options!',
+        title: context.interfaceText('Trading options!'),
         description:
-            '\nIf you are a trader, you can manage the different trading providers available in Torn PDA '
+            context.interfaceText('\nIf you are a trader, you can manage the different trading providers available in Torn PDA '
             'by tapping this icon (e.g.: Torn Exchange)!\n\nThere\'s also additional options available, '
             'such as detailed profit information.\n\nIf you prefer, you can also deactivate the whole Trade Calculator '
-            'widget to gain some space.',
+            'widget to gain some space.'),
         targetPadding: const EdgeInsets.all(10),
         disableMovingAnimation: true,
         textColor: _themeProvider.mainText,
@@ -4823,7 +4824,7 @@ class WebViewFullState extends State<WebViewFull>
               });
             }
           },
-          child: Text(
+          child: PdaText(
             "FILL",
             style: TextStyle(
               color: _bazaarFillActive
@@ -4945,7 +4946,7 @@ class WebViewFullState extends State<WebViewFull>
       showDialog(
         context: context,
         builder: (_) => AlertDialog(
-          title: const Text("WARNING"),
+          title: const PdaText("WARNING"),
           content: Scrollbar(
             controller: _scrollControllerBugsReport,
             thumbVisibility: true,
@@ -4956,36 +4957,34 @@ class WebViewFullState extends State<WebViewFull>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text("Torn PDA is a third-party application, and is not developed by Torn."),
+                    const PdaText("Torn PDA is a third-party application, and is not developed by Torn."),
                     const SizedBox(height: 10),
-                    const Text(
+                    const PdaText(
                       "Please do not report PDA bugs here, as they will be closed by Torn staff. Any bugs "
                       "caused by the app should be reported to the developers via one of the buttons at"
                       "the bottom.",
                     ),
                     const SizedBox(height: 10),
-                    Text(
-                      "Make sure that you have tested in "
-                      "${Platform.isIOS ? "Safari" : "your system browser"}"
-                      " first to see whether the issue persists. If you're not sure, reach out to us below.",
+                    PdaText(
+                      "Make sure that you have tested in {0} first to see whether the issue persists. If you're not sure, reach out to us below.", values: [Platform.isIOS ? "Safari" : "your system browser"],
                     ),
                     const SizedBox(height: 30),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         TextButton(
-                          child: const Text("Forum Thread"),
+                          child: const PdaText("Forum Thread"),
                           onPressed: () {
                             _loadUrl("https://www.torn.com/forums.php#/p=threads&f=67&t=16163503");
                             Navigator.of(context).pop();
                           },
                         ),
                         TextButton(
-                          child: const Text("Discord"),
+                          child: const PdaText("Discord"),
                           onPressed: () =>
                               launchUrl(Uri.parse("https://discord.gg/vyP23kJ"), mode: LaunchMode.externalApplication),
                         ),
-                        TextButton(child: const Text("Close"), onPressed: () => Navigator.of(context).pop()),
+                        TextButton(child: const PdaText("Close"), onPressed: () => Navigator.of(context).pop()),
                       ],
                     ),
                   ],
@@ -5003,11 +5002,11 @@ class WebViewFullState extends State<WebViewFull>
     if (document.outerHtml.contains("Please use the new endpoints instead (page.php).")) {
       try {
         final newUrl = _currentUrl.replaceFirst("loader.php", "page.php");
-        BotToast.showText(text: "Redirecting to Torn's updated loader (page.php)...");
+        BotToast.showText(text: context.interfaceText("Redirecting to Torn's updated loader (page.php)..."));
         _loadUrl(newUrl);
       } on Exception catch (e) {
         logToUser("Failed to redirect to new loader: $e");
-        BotToast.showText(text: "Failed to redirect to Torn's updated loader.", backgroundColor: Colors.red);
+        BotToast.showText(text: context.interfaceText("Failed to redirect to Torn's updated loader."), backgroundColor: Colors.red);
       }
     }
   }
@@ -5191,7 +5190,7 @@ class WebViewFullState extends State<WebViewFull>
 
             BotToast.showText(
               crossPage: false,
-              text: "Default chat hide enabled (new tabs)",
+              text: context.interfaceText("Default chat hide enabled (new tabs)"),
               textStyle: const TextStyle(fontSize: 14, color: Colors.white),
               contentColor: Colors.blue,
               duration: const Duration(seconds: 2),
@@ -5223,7 +5222,7 @@ class WebViewFullState extends State<WebViewFull>
 
             BotToast.showText(
               crossPage: false,
-              text: "Default chat hide disabled",
+              text: context.interfaceText("Default chat hide disabled"),
               textStyle: const TextStyle(fontSize: 14, color: Colors.white),
               contentColor: Colors.grey[700]!,
               duration: const Duration(seconds: 2),
@@ -5525,9 +5524,8 @@ class WebViewFullState extends State<WebViewFull>
                         Image.asset('images/icons/map/gym.png', width: 24),
                         const SizedBox(width: 20),
                         Flexible(
-                          child: Text(
-                            'Energy is too high '
-                            '(${energyMax <= 100 ? "$energyMin% - $energyMax%" : "> $energyMin%"})!',
+                          child: PdaText(
+                            "Energy is too high ({0})!", values: [energyMax <= 100 ? "$energyMin% - $energyMax%" : "> $energyMin%"],
                           ),
                         ),
                       ],
@@ -5570,9 +5568,8 @@ class WebViewFullState extends State<WebViewFull>
                         Image.asset('images/icons/home/crimes.png', width: 24, color: Colors.red),
                         const SizedBox(width: 20),
                         Flexible(
-                          child: Text(
-                            'Nerve is too high '
-                            '(${nerveUserSelectedThreshold ~/ 10 * 10 <= 100 ? "$nerveUserSelectedThreshold%" : "> max"})!',
+                          child: PdaText(
+                            "Nerve is too high ({0})!", values: [nerveUserSelectedThreshold ~/ 10 * 10 <= 100 ? "$nerveUserSelectedThreshold%" : "> max"],
                           ),
                         ),
                       ],
@@ -5615,9 +5612,8 @@ class WebViewFullState extends State<WebViewFull>
                         Image.asset('images/icons/heart.png', width: 24, color: Colors.blue),
                         const SizedBox(width: 20),
                         Flexible(
-                          child: Text(
-                            'Life is too high '
-                            '(${lifeUserSelectedThreshold ~/ 10 * 10 <= 100 ? "$lifeUserSelectedThreshold%" : "> max"})!',
+                          child: PdaText(
+                            "Life is too high ({0})!", values: [lifeUserSelectedThreshold ~/ 10 * 10 <= 100 ? "$lifeUserSelectedThreshold%" : "> max"],
                           ),
                         ),
                       ],
@@ -5793,7 +5789,7 @@ class WebViewFullState extends State<WebViewFull>
                       children: [
                         const Icon(Icons.money, size: 24, color: Colors.green),
                         const SizedBox(width: 20),
-                        Flexible(child: Text('Low on cash! (< $cash)')),
+                        Flexible(child: PdaText("Low on cash! (< {0})", values: [cash])),
                       ],
                     ),
                   ),
@@ -5897,7 +5893,7 @@ class WebViewFullState extends State<WebViewFull>
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Expanded(
-                          child: Text(
+                          child: PdaText(
                             'This could be a waste!',
                             textAlign: TextAlign.center,
                             style: TextStyle(fontWeight: FontWeight.bold),
@@ -5922,7 +5918,7 @@ class WebViewFullState extends State<WebViewFull>
                                 onPressed: () {
                                   toastification.dismiss(holder);
                                 },
-                                child: Text("CLOSE", style: TextStyle(color: _themeProvider.mainText, fontSize: 10)),
+                                child: PdaText("CLOSE", style: TextStyle(color: _themeProvider.mainText, fontSize: 10)),
                                 style: TextButton.styleFrom(
                                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
                                   shape: RoundedRectangleBorder(
@@ -5942,7 +5938,7 @@ class WebViewFullState extends State<WebViewFull>
                                   _settingsProvider.travelWalletMoneyWarning = false;
                                   _settingsProvider.travelOrganizedCrimeWarning = false;
                                 },
-                                child: Text("DISABLE", style: TextStyle(color: _themeProvider.mainText, fontSize: 10)),
+                                child: PdaText("DISABLE", style: TextStyle(color: _themeProvider.mainText, fontSize: 10)),
                                 style: TextButton.styleFrom(
                                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
                                   shape: RoundedRectangleBorder(
@@ -6110,7 +6106,7 @@ class WebViewFullState extends State<WebViewFull>
 
           if (!tsMembers.status!) {
             BotToast.showText(
-              text: "Could not load NNB from TornStats: ${tsMembers.message}",
+              text: context.interfaceText("Could not load NNB from TornStats: {0}", [tsMembers.message]),
               clickClose: true,
               textStyle: const TextStyle(fontSize: 14, color: Colors.white),
               contentColor: Colors.red[900]!,
@@ -6140,7 +6136,7 @@ class WebViewFullState extends State<WebViewFull>
       );
     } catch (e) {
       BotToast.showText(
-        text: "Could not load NNB from $_ocSource: $e",
+        text: context.interfaceText("Could not load NNB from {0}: {1}", [_ocSource, e]),
         clickClose: true,
         textStyle: const TextStyle(fontSize: 14, color: Colors.white),
         contentColor: Colors.red[900]!,
@@ -6720,7 +6716,7 @@ class WebViewFullState extends State<WebViewFull>
                   if (open == null) return;
                   Clipboard.setData(ClipboardData(text: open));
                   BotToast.showText(
-                    text: "Link copied to the clipboard: $open",
+                    text: context.interfaceText("Link copied to the clipboard: {0}", [open]),
                     textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                     contentColor: Colors.grey[700]!,
                     contentPadding: const EdgeInsets.all(10),
@@ -6780,7 +6776,7 @@ class WebViewFullState extends State<WebViewFull>
                     );
                   } else {
                     BotToast.showText(
-                      text: "URL error!",
+                      text: context.interfaceText("URL error!"),
                       textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                       contentColor: Colors.orange[800]!,
                       contentPadding: const EdgeInsets.all(10),
@@ -7049,11 +7045,11 @@ class WebViewFullState extends State<WebViewFull>
   Widget _nextAttackActionButton() {
     return Showcase(
       key: _showCasePlayPauseChain,
-      title: 'Chain Forward/Stop!',
+      title: context.interfaceText('Chain Forward/Stop!'),
       description:
-          '\nYou can now continue your chain even if you close the browser.\n\n'
+          context.interfaceText('\nYou can now continue your chain even if you close the browser.\n\n'
           'If you would like to stop your chain at some point, long-press this button '
-          'to revert to a standard browser tab!',
+          'to revert to a standard browser tab!'),
       targetPadding: const EdgeInsets.all(10),
       disableMovingAnimation: true,
       textColor: _themeProvider.mainText,
@@ -7175,8 +7171,7 @@ class WebViewFullState extends State<WebViewFull>
       if (targetsSkipped > 0 && !reachedEnd) {
         BotToast.showText(
           text:
-              "Skipped ${skippedNames.join(", ")}, either in jail, hospital or in a different "
-              "country",
+              context.interfaceText("Skipped {0}, either in jail, hospital or in a different country", [skippedNames.join(", ")]),
           textStyle: const TextStyle(fontSize: 14, color: Colors.white),
           contentColor: Colors.grey[600]!,
           duration: const Duration(seconds: 5),
@@ -7207,8 +7202,7 @@ class WebViewFullState extends State<WebViewFull>
       if (targetsSkipped > 0 && reachedEnd) {
         BotToast.showText(
           text:
-              "No more targets, all remaining are either in jail, hospital or in a different "
-              "country (${skippedNames.join(", ")})\n\nPress and hold the play/pause button to stop the chaining mode",
+              context.interfaceText("No more targets, all remaining are either in jail, hospital or in a different country ({0})\n\nPress and hold the play/pause button to stop the chaining mode", [skippedNames.join(", ")]),
           textStyle: const TextStyle(fontSize: 14, color: Colors.white),
           contentColor: Colors.grey[600]!,
           duration: const Duration(seconds: 5),
@@ -7308,8 +7302,7 @@ class WebViewFullState extends State<WebViewFull>
       if (targetsSkipped > 0 && !reachedEnd) {
         BotToast.showText(
           text:
-              "Skipped ${skippedNames.join(", ")}, either in jail, hospital or in a different "
-              "country",
+              context.interfaceText("Skipped {0}, either in jail, hospital or in a different country", [skippedNames.join(", ")]),
           textStyle: const TextStyle(fontSize: 14, color: Colors.white),
           contentColor: Colors.grey[600]!,
           duration: const Duration(seconds: 5),
@@ -7320,8 +7313,7 @@ class WebViewFullState extends State<WebViewFull>
       if (targetsSkipped > 0 && reachedEnd) {
         BotToast.showText(
           text:
-              "No more targets, all remaining are either in jail, hospital or in a different "
-              "country (${skippedNames.join(", ")})\n\nPress and hold the play/pause button to stop the chaining mode",
+              context.interfaceText("No more targets, all remaining are either in jail, hospital or in a different country ({0})\n\nPress and hold the play/pause button to stop the chaining mode", [skippedNames.join(", ")]),
           textStyle: const TextStyle(fontSize: 14, color: Colors.white),
           contentColor: Colors.grey[600]!,
           duration: const Duration(seconds: 5),
@@ -7446,8 +7438,8 @@ class WebViewFullState extends State<WebViewFull>
                       children: [
                         const Icon(MdiIcons.notebookOutline, color: Colors.white, size: 16),
                         const SizedBox(width: 5),
-                        Text(
-                          'Note for ${_chainingPayload!.attackNameList[_attackNumber]}',
+                        PdaText(
+                          "Note for {0}", values: [_chainingPayload!.attackNameList[_attackNumber]],
                           textAlign: TextAlign.center,
                           style: const TextStyle(color: Colors.white),
                         ),
@@ -7546,7 +7538,7 @@ class WebViewFullState extends State<WebViewFull>
     if (_browserExitRefused) {
       _webViewProvider.closeSplitDevTools();
       BotToast.showText(
-        text: "Close the empty panel first",
+        text: context.interfaceText("Close the empty panel first"),
         textStyle: const TextStyle(fontSize: 14, color: Colors.white),
         contentColor: Colors.grey[800]!,
         duration: const Duration(seconds: 2),
@@ -7724,12 +7716,12 @@ class DownloadProgressToastState extends State<DownloadProgressToast> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                    child: const Text("Hide", style: TextStyle(color: Colors.white)),
+                    child: const PdaText("Hide", style: TextStyle(color: Colors.white)),
                     onPressed: hideToast,
                   ),
                   const SizedBox(width: 10),
                   TextButton(
-                    child: const Text("Cancel", style: TextStyle(color: Colors.white)),
+                    child: const PdaText("Cancel", style: TextStyle(color: Colors.white)),
                     onPressed: cancelDownload,
                   ),
                 ],

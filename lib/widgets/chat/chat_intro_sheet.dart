@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:torn_pda/providers/webview_provider.dart';
@@ -38,8 +39,8 @@ class ChatHideWebChatTile extends StatelessWidget {
     return ListenableBuilder(
       listenable: web,
       builder: (context, _) => SwitchListTile(
-        title: Text(title),
-        subtitle: const Text('In all tabs. Each tab\'s chat icon can still bring it back'),
+        title: PdaText(title),
+        subtitle: const PdaText('In all tabs. Each tab\'s chat icon can still bring it back'),
         contentPadding: contentPadding,
         value: web.chatRemovalActiveGlobal,
         onChanged: web.setChatHiddenEverywhere,
@@ -74,9 +75,9 @@ class _ChatIntro extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: theme.textTheme.titleSmall),
+                PdaText(title, style: theme.textTheme.titleSmall),
                 const SizedBox(height: 2),
-                Text(text, style: small),
+                PdaText(text, style: small),
               ],
             ),
           ),
@@ -115,11 +116,11 @@ class _ChatIntro extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('In-app chat', style: theme.textTheme.titleLarge),
+          PdaText('In-app chat', style: theme.textTheme.titleLarge),
           const SizedBox(height: 4),
-          Text('Read and write Torn chat without its panel', style: small),
+          PdaText('Read and write Torn chat without its panel', style: small),
           const SizedBox(height: 2),
-          Text('It needs a Torn page open in the browser', style: small),
+          PdaText('It needs a Torn page open in the browser', style: small),
           const SizedBox(height: 18),
           if (welcome)
             for (final e in chatHelp.where((e) => e.spots.contains(ChatHelpSpot.intro))) entry(e.icon, e.title, e.text)
@@ -129,7 +130,7 @@ class _ChatIntro extends StatelessWidget {
                 access()
               else
                 ExpansionTile(
-                  title: Text(group.title, style: theme.textTheme.titleMedium),
+                  title: PdaText(group.title, style: theme.textTheme.titleMedium),
                   initiallyExpanded: group == ChatHelpGroup.start,
                   tilePadding: EdgeInsets.zero,
                   childrenPadding: const EdgeInsets.only(top: 4),
@@ -149,15 +150,15 @@ class _ChatIntro extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Chat button', style: theme.textTheme.bodyLarge),
+                        PdaText('Chat button', style: theme.textTheme.bodyLarge),
                         const SizedBox(height: 6),
                         const ChatLauncherPicker(),
                       ],
                     ),
                   ),
                   SwitchListTile(
-                    title: const Text('Ticker'),
-                    subtitle: const Text('A line for each new message. Tap one to read it'),
+                    title: const PdaText('Ticker'),
+                    subtitle: const PdaText('A line for each new message. Tap one to read it'),
                     contentPadding: EdgeInsets.zero,
                     value: NativeChat.prefs.ticker,
                     onChanged: NativeChat.prefs.setTicker,
@@ -169,7 +170,7 @@ class _ChatIntro extends StatelessWidget {
           const SizedBox(height: 4),
           SizedBox(
             width: double.infinity,
-            child: FilledButton(onPressed: () => Navigator.pop(context), child: const Text('Got it')),
+            child: FilledButton(onPressed: () => Navigator.pop(context), child: const PdaText('Got it')),
           ),
         ],
       ),

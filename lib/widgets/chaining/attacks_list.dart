@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -22,7 +23,7 @@ class AttacksList extends StatelessWidget {
       return Column(
         children: <Widget>[
           const Padding(padding: EdgeInsets.only(top: 80.0, bottom: 20), child: CircularProgressIndicator()),
-          const Text('Getting last attacks...'),
+          const PdaText('Getting last attacks...'),
           _apiErrorWarning(context),
         ],
       );
@@ -84,7 +85,7 @@ class AttacksList extends StatelessWidget {
             Flexible(
               child: Column(
                 children: [
-                  const Text(
+                  const PdaText(
                     'API ERROR',
                     style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
                   ),

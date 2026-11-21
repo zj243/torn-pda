@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:torn_pda/l10n/app_language.dart';
 import 'package:torn_pda/utils/live_activities/racing_live_activity_parser.dart';
 import 'package:torn_pda/widgets/profile/shortcut_paged_grid.dart';
@@ -459,7 +460,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                             const SizedBox(height: 50),
                             Padding(padding: const EdgeInsets.symmetric(horizontal: 10), child: _shortcutsCarrousel()),
                             const SizedBox(height: 50),
-                            Text(
+                            PdaText(
                               'OOPS!',
                               style: TextStyle(
                                 color: _themeProvider!.getTextColor(Colors.red),
@@ -471,7 +472,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                               padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
                               child: Column(
                                 children: [
-                                  Text('There was an error: ${_apiError!.errorReason}', textAlign: TextAlign.center),
+                                  PdaText("There was an error: {0}", values: [_apiError!.errorReason], textAlign: TextAlign.center),
                                   if (_apiError!.pdaErrorDetails.isNotEmpty)
                                     Padding(
                                       padding: const EdgeInsets.only(top: 20),
@@ -480,7 +481,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                           if (_apiError!.errorId != 9)
                                             Column(
                                               children: [
-                                                const Text(
+                                                const PdaText(
                                                   'Error details:',
                                                   style: TextStyle(fontSize: 12),
                                                   textAlign: TextAlign.center,
@@ -494,7 +495,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                               ],
                                             ),
                                           if (_apiError!.errorId == 9)
-                                            Text(
+                                            PdaText(
                                               "The API has been manually disabled by the developers. "
                                               "This normally lasts just a few minutes\n\n"
                                               "Otherwise, you can head to the forums of Discord to see if there "
@@ -506,13 +507,13 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                       ),
                                     ),
                                   const SizedBox(height: 20),
-                                  const Text(
+                                  const PdaText(
                                     'Torn PDA is retrying automatically. '
                                     "If you have good Internet connectivity, it might be an issue with Torn's API.",
                                     textAlign: TextAlign.center,
                                   ),
                                   const SizedBox(height: 20),
-                                  const Text(
+                                  const PdaText(
                                     'You can still try to access Torn through shortcuts or the main '
                                     'menu icon below.',
                                     textAlign: TextAlign.center,
@@ -581,9 +582,9 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
             children: [
               if (_user?.name != null && _user!.name!.isNotEmpty)
                 Semantics(
-                  label: "[${_user!.name}] - Level ${_user!.level}",
-                  onTapHint: "Show online status",
-                  onLongPressHint: "Copy ID to clipboard",
+                  label: context.interfaceText("[{0}] - Level {1}", [_user!.name, _user!.level]),
+                  onTapHint: context.interfaceText("Show online status"),
+                  onLongPressHint: context.interfaceText("Copy ID to clipboard"),
                   child: GestureDetector(
                     onTap: () {
                       String status;
@@ -700,8 +701,8 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                 children: [
                                   const Icon(Icons.content_copy, color: Colors.white, size: 20),
                                   const SizedBox(width: 12),
-                                  Text(
-                                    "ID ${_user!.playerId} copied!",
+                                  PdaText(
+                                    "ID {0} copied!", values: [_user!.playerId],
                                     style: const TextStyle(
                                       fontSize: 15,
                                       color: Colors.white,
@@ -739,8 +740,8 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                         ),
                         Semantics(
                           button: true,
-                          label: "Open your profile",
-                          onTapHint: "Open profile page in the browser",
+                          label: context.interfaceText("Open your profile"),
+                          onTapHint: context.interfaceText("Open profile page in the browser"),
                           child: GestureDetector(
                             behavior: HitTestBehavior.opaque,
                             onTap: () {
@@ -755,8 +756,8 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Text(
-                                      "[${_user!.playerId}] - Level ${_user!.level}",
+                                    PdaText(
+                                      "[{0}] - Level {1}", values: [_user!.playerId, _user!.level],
                                       style: const TextStyle(fontSize: 10, color: Colors.white),
                                     ),
                                     const Padding(
@@ -798,13 +799,13 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
           if (_webViewProvider.appCanOpenBrowser)
             Showcase(
               key: _showcasePdaBrowserButton,
-              title: 'Direct Torn access!',
+              title: context.interfaceText('Direct Torn access!'),
               description:
-                  '\nUse this PDA button in any section to quickly access Torn.\n\n'
+                  context.interfaceText('\nUse this PDA button in any section to quickly access Torn.\n\n'
                   'By using this icon, you will immediately resume your Torn browser experience, exactly as you '
                   'left it, with no new tabs reloading.\n\n'
                   'Make sure to visit the Settings and Tips section to learn how you can also configure '
-                  'your taps (quick or long) to launch the browser in windowed or full screen modes!',
+                  'your taps (quick or long) to launch the browser in windowed or full screen modes!'),
               showArrow: false,
               disableMovingAnimation: true,
               textColor: _themeProvider!.mainText,
@@ -823,11 +824,11 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
             padding: const EdgeInsets.only(right: 8),
             child: Showcase(
               key: _showcaseProfileClock,
-              title: 'There is a lot to explore!',
+              title: context.interfaceText('There is a lot to explore!'),
               description:
-                  '\nAlmost anything in Torn PDA can be interacted with!\n\n'
+                  context.interfaceText('\nAlmost anything in Torn PDA can be interacted with!\n\n'
                   "Try for yourself, and don't forget to visit the Tips section for more "
-                  'information!',
+                  'information!'),
               showArrow: false,
               disableMovingAnimation: true,
               textColor: _themeProvider!.mainText,
@@ -1123,7 +1124,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
             }
             final thisShortcut = _shortcutsProv.activeShortcuts[index];
             return Semantics(
-              label: "Shortcut to ${thisShortcut.name}",
+              label: context.interfaceText("Shortcut to {0}", [thisShortcut.name]),
               child: ExcludeSemantics(child: shortcutTile(thisShortcut)),
             );
           },
@@ -1187,7 +1188,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
       final description = Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          PdaText(
             'No shortcuts configured, add some!',
             style: TextStyle(color: messageColor, fontStyle: FontStyle.italic, fontSize: 13),
           ),
@@ -1696,7 +1697,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
               children: [
                 Row(
                   children: <Widget>[
-                    Flexible(child: Text('Arriving in ${_user!.travel!.destination} at $formattedTime')),
+                    Flexible(child: PdaText("Arriving in {0} at {1}", values: [_user!.travel!.destination, formattedTime])),
                   ],
                 ),
                 TravelReturnWidget(
@@ -1839,14 +1840,14 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                     Icon(MdiIcons.airport, size: 22, color: _themeProvider!.mainText),
                     const SizedBox(width: 6),
                     Semantics(
-                      label: "Open Travel Agency",
+                      label: context.interfaceText("Open Travel Agency"),
                       child: Column(
                         children: [
                           ExcludeSemantics(
-                            child: Text("TRAVEL", style: TextStyle(fontSize: 8, color: _themeProvider!.mainText)),
+                            child: PdaText("TRAVEL", style: TextStyle(fontSize: 8, color: _themeProvider!.mainText)),
                           ),
                           ExcludeSemantics(
-                            child: Text("AGENCY", style: TextStyle(fontSize: 8, color: _themeProvider!.mainText)),
+                            child: PdaText("AGENCY", style: TextStyle(fontSize: 8, color: _themeProvider!.mainText)),
                           ),
                         ],
                       ),
@@ -2015,9 +2016,9 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
             Padding(
               padding: const EdgeInsets.only(bottom: 15),
               child: Semantics(
-                label: "Travel Card",
+                label: context.interfaceText("Travel Card"),
                 child: const ExcludeSemantics(
-                  child: Text('TRAVEL', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  child: PdaText('TRAVEL', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                 ),
               ),
             ),
@@ -2048,8 +2049,8 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                     Row(
                       children: [
                         const SizedBox(width: 65),
-                        Text(
-                          'CHAINING (${_chainModel.chain!.current}/${_chainModel.chain!.max})',
+                        PdaText(
+                          "CHAINING ({0}/{1})", values: [_chainModel.chain!.current, _chainModel.chain!.max],
                           style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 10),
                         ),
                       ],
@@ -2079,8 +2080,8 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                     key: _showcaseProfileBars,
                                     title: context.l10n.labelDidYouKnow,
                                     description:
-                                        '\nTap any of the bars to launch a browser '
-                                        'straight to the gym, crimes or items sections!',
+                                        context.interfaceText('\nTap any of the bars to launch a browser '
+                                        'straight to the gym, crimes or items sections!'),
                                     targetPadding: const EdgeInsets.all(10),
                                     disableMovingAnimation: true,
                                     textColor: _themeProvider!.mainText,
@@ -3580,8 +3581,8 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
       Padding(
         padding: const EdgeInsets.only(top: 10),
         child: Center(
-          child: Text(
-            "(Showing last $maxToShow messages)",
+          child: PdaText(
+            "(Showing last {0} messages)", values: [maxToShow],
             style: const TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
           ),
         ),
@@ -3837,7 +3838,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
     _sharedEffTotal = 'Total: ${decimalFormat.format(totalEffective)}';
 
     return Semantics(
-      label: "Player stats",
+      label: context.interfaceText("Player stats"),
       explicitChildNodes: true,
       child: Card(
         child: Builder(
@@ -3868,7 +3869,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                     _cashWallet(dense: false),
                     const SizedBox(height: 4),
                     Semantics(
-                      label: "${_miscModel!.money?.points ?? '(error)'} Torn Points, tap to open",
+                      label: context.interfaceText("{0} Torn Points, tap to open", [_miscModel!.money?.points ?? '(error)']),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -3895,12 +3896,12 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                       children: [
                         Flexible(
                           child: SelectionArea(
-                            child: Text('Battle Stats (eff.): ${decimalFormat.format(totalEffective)}'),
+                            child: PdaText("Battle Stats (eff.): {0}", values: [decimalFormat.format(totalEffective)]),
                           ),
                         ),
                         if (totalEffectiveModifier == null)
                           SelectionArea(
-                            child: Text('(error)', style: TextStyle(color: _themeProvider!.getTextColor(Colors.red))),
+                            child: PdaText('(error)', style: TextStyle(color: _themeProvider!.getTextColor(Colors.red))),
                           )
                         else if (totalEffectiveModifier < 0)
                           SelectionArea(
@@ -3920,7 +3921,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                     ),
                     const SizedBox(height: 2),
                     SelectionArea(
-                      child: Text('Battle Stats: ${decimalFormat.format(_miscModel!.battleStats?.total ?? 0)}'),
+                      child: PdaText("Battle Stats: {0}", values: [decimalFormat.format(_miscModel!.battleStats?.total ?? 0)]),
                     ),
                     if (_settingsProvider!.tornStatsChartEnabled &&
                         _settingsProvider!.tornStatsChartInCollapsedMiscCard)
@@ -3973,11 +3974,11 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                       )
                     else
                       const SizedBox(height: 8),
-                    SelectionArea(child: Text('MAN: ${decimalFormat.format(_miscModel!.workStats?.manualLabor ?? 0)}')),
+                    SelectionArea(child: PdaText("MAN: {0}", values: [decimalFormat.format(_miscModel!.workStats?.manualLabor ?? 0)])),
                     SelectionArea(
-                      child: Text('INT: ${decimalFormat.format(_miscModel!.workStats?.intelligence ?? 0)}'),
+                      child: PdaText("INT: {0}", values: [decimalFormat.format(_miscModel!.workStats?.intelligence ?? 0)]),
                     ),
-                    SelectionArea(child: Text('END: ${decimalFormat.format(_miscModel!.workStats?.endurance ?? 0)}')),
+                    SelectionArea(child: PdaText("END: {0}", values: [decimalFormat.format(_miscModel!.workStats?.endurance ?? 0)])),
                   ],
                 ),
               ),
@@ -3993,8 +3994,8 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SelectionArea(child: Text('Rank: ${_user!.rank}')),
-                            SelectionArea(child: Text('Age: ${_user!.age}')),
+                            SelectionArea(child: PdaText("Rank: {0}", values: [_user!.rank])),
+                            SelectionArea(child: PdaText("Age: {0}", values: [_user!.age])),
                           ],
                         ),
                       ),
@@ -4005,7 +4006,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                         child: Row(
                           children: [
                             Semantics(
-                              label: "Open Torn Points",
+                              label: context.interfaceText("Open Torn Points"),
                               child: GestureDetector(
                                 onLongPress: () {
                                   _launchBrowser(url: 'https://www.torn.com/points.php', shortTap: false);
@@ -4031,8 +4032,8 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                         child: Row(
                           children: [
                             Semantics(
-                              label: "Effective Stats",
-                              child: const Text(
+                              label: context.interfaceText("Effective Stats"),
+                              child: const PdaText(
                                 'EFFECTIVE STATS',
                                 style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                               ),
@@ -4054,7 +4055,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                           children: [
                             Row(
                               children: [
-                                const SizedBox(width: 80, child: Text('Strength: ')),
+                                const SizedBox(width: 80, child: PdaText('Strength: ')),
                                 SelectionArea(
                                   child: Text(
                                     strengthString.contains("error")
@@ -4070,7 +4071,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                             ),
                             Row(
                               children: [
-                                const SizedBox(width: 80, child: Text('Defense: ')),
+                                const SizedBox(width: 80, child: PdaText('Defense: ')),
                                 SelectionArea(
                                   child: Text(
                                     defenseString.contains("error")
@@ -4086,7 +4087,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                             ),
                             Row(
                               children: [
-                                const SizedBox(width: 80, child: Text('Speed: ')),
+                                const SizedBox(width: 80, child: PdaText('Speed: ')),
                                 SelectionArea(
                                   child: Text(
                                     speedString.contains("error")
@@ -4102,7 +4103,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                             ),
                             Row(
                               children: [
-                                const SizedBox(width: 80, child: Text('Dexterity: ')),
+                                const SizedBox(width: 80, child: PdaText('Dexterity: ')),
                                 SelectionArea(
                                   child: Text(
                                     dexString.contains("error") ? '(error)' : decimalFormat.format(dexModifiedTotal),
@@ -4117,7 +4118,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                             SizedBox(width: 50, child: Divider(color: _themeProvider!.mainText, thickness: 0.5)),
                             Row(
                               children: [
-                                const SizedBox(width: 80, child: Text('Total: ')),
+                                const SizedBox(width: 80, child: PdaText('Total: ')),
                                 SelectionArea(child: Text(decimalFormat.format(totalEffective))),
                               ],
                             ),
@@ -4130,8 +4131,8 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                         child: Row(
                           children: [
                             Semantics(
-                              label: "Battle Stats",
-                              child: const Text(
+                              label: context.interfaceText("Battle Stats"),
+                              child: const PdaText(
                                 'BATTLE STATS',
                                 style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                               ),
@@ -4153,7 +4154,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                           children: [
                             Row(
                               children: [
-                                const SizedBox(width: 80, child: Text('Strength: ')),
+                                const SizedBox(width: 80, child: PdaText('Strength: ')),
                                 SelectionArea(
                                   child: Text(decimalFormat.format(_miscModel!.battleStats?.strength?.value ?? 0)),
                                 ),
@@ -4168,7 +4169,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                             ),
                             Row(
                               children: [
-                                const SizedBox(width: 80, child: Text('Defense: ')),
+                                const SizedBox(width: 80, child: PdaText('Defense: ')),
                                 SelectionArea(
                                   child: Text(decimalFormat.format(_miscModel!.battleStats?.defense?.value ?? 0)),
                                 ),
@@ -4183,7 +4184,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                             ),
                             Row(
                               children: [
-                                const SizedBox(width: 80, child: Text('Speed: ')),
+                                const SizedBox(width: 80, child: PdaText('Speed: ')),
                                 SelectionArea(
                                   child: Text(decimalFormat.format(_miscModel!.battleStats?.speed?.value ?? 0)),
                                 ),
@@ -4198,7 +4199,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                             ),
                             Row(
                               children: [
-                                const SizedBox(width: 80, child: Text('Dexterity: ')),
+                                const SizedBox(width: 80, child: PdaText('Dexterity: ')),
                                 SelectionArea(
                                   child: Text(decimalFormat.format(_miscModel!.battleStats?.dexterity?.value ?? 0)),
                                 ),
@@ -4214,7 +4215,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                             SizedBox(width: 50, child: Divider(color: _themeProvider!.mainText, thickness: 0.5)),
                             Row(
                               children: [
-                                const SizedBox(width: 80, child: Text('Total: ')),
+                                const SizedBox(width: 80, child: PdaText('Total: ')),
                                 SelectionArea(child: Text(decimalFormat.format(_miscModel!.battleStats?.total ?? 0))),
                               ],
                             ),
@@ -4273,7 +4274,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                         padding: const EdgeInsets.only(bottom: 5),
                         child: Row(
                           children: [
-                            const Text('WORK STATS', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+                            const PdaText('WORK STATS', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
                             const SizedBox(width: 5),
                             GestureDetector(
                               child: const Icon(Icons.copy, size: 14),
@@ -4291,7 +4292,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                           children: [
                             Row(
                               children: [
-                                const SizedBox(width: 100, child: Text('Manual labor: ')),
+                                const SizedBox(width: 100, child: PdaText('Manual labor: ')),
                                 SelectionArea(
                                   child: Text(decimalFormat.format(_miscModel!.workStats?.manualLabor ?? 0)),
                                 ),
@@ -4299,7 +4300,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                             ),
                             Row(
                               children: [
-                                const SizedBox(width: 100, child: Text('Intelligence: ')),
+                                const SizedBox(width: 100, child: PdaText('Intelligence: ')),
                                 SelectionArea(
                                   child: Text(decimalFormat.format(_miscModel!.workStats?.intelligence ?? 0)),
                                 ),
@@ -4307,14 +4308,14 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                             ),
                             Row(
                               children: [
-                                const SizedBox(width: 100, child: Text('Endurance: ')),
+                                const SizedBox(width: 100, child: PdaText('Endurance: ')),
                                 SelectionArea(child: Text(decimalFormat.format(_miscModel!.workStats?.endurance ?? 0))),
                               ],
                             ),
                             SizedBox(width: 50, child: Divider(color: _themeProvider!.mainText, thickness: 0.5)),
                             Row(
                               children: [
-                                const SizedBox(width: 100, child: Text('Total: ')),
+                                const SizedBox(width: 100, child: PdaText('Total: ')),
                                 SelectionArea(child: Text(decimalFormat.format(_miscModel!.workStats?.total ?? 0))),
                               ],
                             ),
@@ -4330,7 +4331,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                               padding: const EdgeInsets.only(bottom: 5),
                               child: Row(
                                 children: [
-                                  const Text('SKILLS', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+                                  const PdaText('SKILLS', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
                                   const SizedBox(width: 5),
                                   GestureDetector(
                                     child: const Icon(Icons.copy, size: 14),
@@ -4349,21 +4350,21 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                   if (racing.isNotEmpty)
                                     Row(
                                       children: [
-                                        const SizedBox(width: 80, child: Text('Racing: ')),
+                                        const SizedBox(width: 80, child: PdaText('Racing: ')),
                                         SelectionArea(child: Text(racing)),
                                       ],
                                     ),
                                   if (reviving.isNotEmpty)
                                     Row(
                                       children: [
-                                        const SizedBox(width: 80, child: Text('Reviving: ')),
+                                        const SizedBox(width: 80, child: PdaText('Reviving: ')),
                                         SelectionArea(child: Text(reviving)),
                                       ],
                                     ),
                                   if (hunting.isNotEmpty)
                                     Row(
                                       children: [
-                                        const SizedBox(width: 80, child: Text('Hunting: ')),
+                                        const SizedBox(width: 80, child: PdaText('Hunting: ')),
                                         SelectionArea(child: Text(hunting)),
                                       ],
                                     ),
@@ -4371,11 +4372,11 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                     if (searchForCash.isNotEmpty)
                                       const Padding(
                                         padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
-                                        child: Text('CRIMES', style: TextStyle(fontSize: 10)),
+                                        child: PdaText('CRIMES', style: TextStyle(fontSize: 10)),
                                       ),
                                   Row(
                                     children: [
-                                      const SizedBox(width: 130, child: Text('Search for Cash: ')),
+                                      const SizedBox(width: 130, child: PdaText('Search for Cash: ')),
                                       SelectionArea(
                                         child: Text(
                                           searchForCash,
@@ -4391,7 +4392,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                   if (bootlegging.isNotEmpty)
                                     Row(
                                       children: [
-                                        const SizedBox(width: 130, child: Text('Bootlegging: ')),
+                                        const SizedBox(width: 130, child: PdaText('Bootlegging: ')),
                                         SelectionArea(
                                           child: Text(
                                             bootlegging,
@@ -4407,7 +4408,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                   if (graffiti.isNotEmpty)
                                     Row(
                                       children: [
-                                        const SizedBox(width: 130, child: Text('Graffiti: ')),
+                                        const SizedBox(width: 130, child: PdaText('Graffiti: ')),
                                         SelectionArea(
                                           child: Text(
                                             graffiti,
@@ -4423,7 +4424,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                   if (shoplifting.isNotEmpty)
                                     Row(
                                       children: [
-                                        const SizedBox(width: 130, child: Text('Shoplifting: ')),
+                                        const SizedBox(width: 130, child: PdaText('Shoplifting: ')),
                                         SelectionArea(
                                           child: Text(
                                             shoplifting,
@@ -4439,7 +4440,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                   if (pickpocketing.isNotEmpty)
                                     Row(
                                       children: [
-                                        const SizedBox(width: 130, child: Text('Pickpocketing: ')),
+                                        const SizedBox(width: 130, child: PdaText('Pickpocketing: ')),
                                         SelectionArea(
                                           child: Text(
                                             pickpocketing,
@@ -4455,7 +4456,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                   if (cardSkimming.isNotEmpty)
                                     Row(
                                       children: [
-                                        const SizedBox(width: 130, child: Text('Card Skimming: ')),
+                                        const SizedBox(width: 130, child: PdaText('Card Skimming: ')),
                                         SelectionArea(
                                           child: Text(
                                             cardSkimming,
@@ -4471,7 +4472,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                   if (burglary.isNotEmpty)
                                     Row(
                                       children: [
-                                        const SizedBox(width: 130, child: Text('Burglary: ')),
+                                        const SizedBox(width: 130, child: PdaText('Burglary: ')),
                                         SelectionArea(
                                           child: Text(
                                             burglary,
@@ -4487,7 +4488,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                   if (hustling.isNotEmpty)
                                     Row(
                                       children: [
-                                        const SizedBox(width: 130, child: Text('Hustling: ')),
+                                        const SizedBox(width: 130, child: PdaText('Hustling: ')),
                                         SelectionArea(
                                           child: Text(
                                             hustling,
@@ -4503,7 +4504,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                   if (disposal.isNotEmpty)
                                     Row(
                                       children: [
-                                        const SizedBox(width: 130, child: Text('Disposal: ')),
+                                        const SizedBox(width: 130, child: PdaText('Disposal: ')),
                                         SelectionArea(
                                           child: Text(
                                             disposal,
@@ -4519,7 +4520,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                   if (cracking.isNotEmpty)
                                     Row(
                                       children: [
-                                        const SizedBox(width: 130, child: Text('Cracking: ')),
+                                        const SizedBox(width: 130, child: PdaText('Cracking: ')),
                                         SelectionArea(
                                           child: Text(
                                             cracking,
@@ -4535,7 +4536,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                   if (forgery.isNotEmpty)
                                     Row(
                                       children: [
-                                        const SizedBox(width: 130, child: Text('Forgery: ')),
+                                        const SizedBox(width: 130, child: PdaText('Forgery: ')),
                                         SelectionArea(
                                           child: Text(
                                             forgery,
@@ -4551,7 +4552,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                   if (scamming.isNotEmpty)
                                     Row(
                                       children: [
-                                        const SizedBox(width: 130, child: Text('Scamming: ')),
+                                        const SizedBox(width: 130, child: PdaText('Scamming: ')),
                                         SelectionArea(
                                           child: Text(
                                             scamming,
@@ -4567,7 +4568,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                   if (arson.isNotEmpty)
                                     Row(
                                       children: [
-                                        const SizedBox(width: 130, child: Text('Arson: ')),
+                                        const SizedBox(width: 130, child: PdaText('Arson: ')),
                                         SelectionArea(
                                           child: Text(
                                             arson,
@@ -4605,9 +4606,9 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
               _openWalletDialog();
             },
             child: Semantics(
-              label: 'Wallet icon',
+              label: context.interfaceText('Wallet icon'),
               value: '',
-              onTapHint: 'Open wallet dialog',
+              onTapHint: context.interfaceText('Open wallet dialog'),
               child: dense!
                   ? const Icon(Icons.account_balance_wallet_rounded, size: 17, color: Colors.brown)
                   : const Icon(MdiIcons.cash100, color: Colors.green),
@@ -4667,18 +4668,18 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
               text: TextSpan(
                 style: DefaultTextStyle.of(context).style,
                 children: [
-                  const TextSpan(text: "You don't have a job! You can get one in the "),
+                  TextSpan(text: context.interfaceText("You don't have a job! You can get one in the ")),
                   TextSpan(
-                    text: "newspaper",
+                    text: context.interfaceText("newspaper"),
                     style: const TextStyle(color: Colors.blue, decoration: TextDecoration.underline),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
                         _launchBrowser(url: 'https://www.torn.com/joblist.php#!p=main', shortTap: true);
                       },
                   ),
-                  const TextSpan(text: "or in the "),
+                  TextSpan(text: context.interfaceText("or in the ")),
                   TextSpan(
-                    text: "recruitment forum",
+                    text: context.interfaceText("recruitment forum"),
                     style: const TextStyle(color: Colors.blue, decoration: TextDecoration.underline),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
@@ -4942,7 +4943,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                 Flexible(
                   child: RichText(
                     text: TextSpan(
-                      text: "Your bank investment of ",
+                      text: context.interfaceText("Your bank investment of "),
                       style: DefaultTextStyle.of(context).style,
                       children: <TextSpan>[
                         TextSpan(
@@ -4953,7 +4954,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                 : _themeProvider?.getTextColor(Colors.red),
                           ),
                         ),
-                        const TextSpan(text: " will expire in "),
+                        TextSpan(text: context.interfaceText(" will expire in ")),
                         TextSpan(
                           text: expiryString,
                           style: TextStyle(color: expiryColor),
@@ -5014,11 +5015,11 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                 Flexible(
                   child: RichText(
                     text: TextSpan(
-                      text: "Your course: ",
+                      text: context.interfaceText("Your course: "),
                       style: DefaultTextStyle.of(context).style,
                       children: <TextSpan>[
                         TextSpan(text: "$courseName"),
-                        const TextSpan(text: ", will end in "),
+                        TextSpan(text: context.interfaceText(", will end in ")),
                         TextSpan(
                           text: expiryString,
                           style: TextStyle(color: expiryColor),
@@ -5043,7 +5044,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
               const Icon(MdiIcons.schoolOutline),
               const SizedBox(width: 10),
               Flexible(
-                child: Text(
+                child: PdaText(
                   "You are not enrolled in any education course!",
                   style: TextStyle(color: _themeProvider!.getTextColor(Colors.red[500])),
                 ),
@@ -5089,11 +5090,11 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
               Flexible(
                 child: RichText(
                   text: TextSpan(
-                    text: "Your virus: ",
+                    text: context.interfaceText("Your virus: "),
                     style: DefaultTextStyle.of(context).style,
                     children: <TextSpan>[
                       TextSpan(text: _virusModel!.item.name),
-                      const TextSpan(text: ", will finish coding in "),
+                      TextSpan(text: context.interfaceText(", will finish coding in ")),
                       TextSpan(
                         text: expiryString,
                         style: TextStyle(color: expiryColor),
@@ -5146,7 +5147,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
       return Padding(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
         child: Semantics(
-          label: 'Miscellaneous',
+          label: context.interfaceText('Miscellaneous'),
           explicitChildNodes: true,
           child: Card(
             child: Padding(
@@ -5282,11 +5283,11 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Total: ', style: TextStyle(fontWeight: FontWeight.bold)),
+                const PdaText('Total: ', style: TextStyle(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 10),
                 ...moneySources,
                 const SizedBox(height: 10),
-                const Text('Updated at: ', style: TextStyle(fontWeight: FontWeight.bold)),
+                const PdaText('Updated at: ', style: TextStyle(fontWeight: FontWeight.bold)),
               ],
             ),
             Column(
@@ -5314,20 +5315,20 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
 
     return Card(
       child: Semantics(
-        label: "Networth",
+        label: context.interfaceText("Networth"),
         child: ExpandablePanel(
           theme: ExpandableThemeData(iconColor: _themeProvider!.mainText),
           controller: _networthExpController,
           header: const Padding(
             padding: EdgeInsets.all(15.0),
             child: ExcludeSemantics(
-              child: Text('NETWORTH', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              child: PdaText('NETWORTH', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             ),
           ),
           collapsed: Padding(
             padding: const EdgeInsets.fromLTRB(25, 5, 20, 20),
-            child: Text(
-              '\$${moneyFormat.format(total)} (updated $formattedTimestamp)',
+            child: PdaText(
+              "\${0} (updated {1})", values: [moneyFormat.format(total), formattedTimestamp],
               softWrap: true,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
@@ -5942,7 +5943,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
             (!_customEnergyMaxOverride && _user!.energy!.current! > customTriggerRoundedUp)) {
           _cancelNotifications(ProfileNotification.energy);
           BotToast.showText(
-            text: 'Energy notification expired, removing!',
+            text: context.interfaceText('Energy notification expired, removing!'),
             textStyle: const TextStyle(fontSize: 14, color: Colors.white),
             contentColor: Colors.grey[700]!,
             duration: const Duration(seconds: 5),
@@ -5999,7 +6000,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
             (!_customNerveMaxOverride && _user!.nerve!.current! > _customNerveTrigger!)) {
           _cancelNotifications(ProfileNotification.nerve);
           BotToast.showText(
-            text: 'Nerve notification expired, removing!',
+            text: context.interfaceText('Nerve notification expired, removing!'),
             textStyle: const TextStyle(fontSize: 14, color: Colors.white),
             contentColor: Colors.grey[700]!,
             duration: const Duration(seconds: 5),
@@ -6112,7 +6113,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         if (_user!.status!.state != (isHospital ? 'Hospital' : 'Jail') || newTimeStamp <= now + 1) {
           _cancelNotifications(type);
           BotToast.showText(
-            text: '${isHospital ? 'Hospital' : 'Jail'} notification expired, removing!',
+            text: context.interfaceText("{0} notification expired, removing!", [isHospital ? 'Hospital' : 'Jail']),
             textStyle: const TextStyle(fontSize: 14, color: Colors.white),
             contentColor: Colors.grey[700]!,
             duration: const Duration(seconds: 5),
@@ -6154,7 +6155,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
       }
 
       BotToast.showText(
-        text: 'Some notifications have been updated: $thoseUpdated',
+        text: context.interfaceText("Some notifications have been updated: {0}", [thoseUpdated]),
         textStyle: const TextStyle(fontSize: 14, color: Colors.white),
         contentColor: Colors.grey[700]!,
         duration: const Duration(seconds: 5),
@@ -6976,7 +6977,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
       );
 
       BotToast.showText(
-        text: '$alarmSetString (activated by Torn PDA, as it is over 24 hours away)',
+        text: context.interfaceText("{0} (activated by Torn PDA, as it is over 24 hours away)", [alarmSetString]),
         textStyle: const TextStyle(fontSize: 14, color: Colors.white),
         contentColor: percentageError
             ? _themeProvider!.getTextColor(Colors.red)
@@ -6992,7 +6993,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
       final available = await AlarmKitServiceIos.isAvailable();
       if (!available) {
         BotToast.showText(
-          text: 'Alarms are not available on this iOS device!',
+          text: context.interfaceText('Alarms are not available on this iOS device!'),
           textStyle: const TextStyle(fontSize: 14, color: Colors.white),
           contentColor: _themeProvider!.getTextColor(Colors.red),
           duration: const Duration(seconds: 5),
@@ -7017,7 +7018,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         );
       } catch (e) {
         BotToast.showText(
-          text: 'Could not schedule alarm!',
+          text: context.interfaceText('Could not schedule alarm!'),
           textStyle: const TextStyle(fontSize: 14, color: Colors.white),
           contentColor: _themeProvider!.getTextColor(Colors.red),
           duration: const Duration(seconds: 5),
@@ -7089,7 +7090,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
   void _setTimer(ProfileNotification profileNotification) {
     if (Platform.isIOS) {
       BotToast.showText(
-        text: 'Timers are not supported on iOS',
+        text: context.interfaceText('Timers are not supported on iOS'),
         textStyle: const TextStyle(fontSize: 14, color: Colors.white),
         contentColor: _themeProvider!.getTextColor(Colors.red),
         duration: const Duration(seconds: 5),
@@ -7146,7 +7147,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
     // SET_TIMER is capped at 86400 seconds, same limit the alarm path already enforces
     if (totalSeconds > 86400) {
       BotToast.showText(
-        text: "Timers can't be set for a period longer than 24 hours!",
+        text: context.interfaceText("Timers can't be set for a period longer than 24 hours!"),
         textStyle: const TextStyle(fontSize: 14, color: Colors.white),
         contentColor: _themeProvider!.getTextColor(Colors.red),
         duration: const Duration(seconds: 5),
@@ -7270,7 +7271,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                                   color: Colors.white70,
                                 ),
                                 const SizedBox(width: 15),
-                                const Text("Personal vault"),
+                                const PdaText("Personal vault"),
                               ],
                             ),
                             onPressed: () async {
@@ -7292,7 +7293,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                               children: [
                                 Image.asset('images/icons/faction.png', width: 15, height: 15, color: Colors.white70),
                                 const SizedBox(width: 15),
-                                const Text("Faction vault"),
+                                const PdaText("Faction vault"),
                               ],
                             ),
                             onPressed: () async {
@@ -7314,7 +7315,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                               children: [
                                 Image.asset('images/icons/home/job.png', width: 15, height: 15, color: Colors.white70),
                                 const SizedBox(width: 15),
-                                const Text("Company vault"),
+                                const PdaText("Company vault"),
                               ],
                             ),
                             onPressed: () async {
@@ -7386,7 +7387,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                           child: ElevatedButton(
-                            child: const Row(children: [Icon(Icons.person), SizedBox(width: 15), Text("Inventory")]),
+                            child: const Row(children: [Icon(Icons.person), SizedBox(width: 15), PdaText("Inventory")]),
                             onPressed: () async {
                               const url = "https://www.torn.com/item.php#medical-items";
                               if (longPress) {
@@ -7406,7 +7407,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                               children: [
                                 Image.asset('images/icons/faction.png', width: 25, height: 15, color: Colors.white70),
                                 const SizedBox(width: 15),
-                                const Text("Faction"),
+                                const PdaText("Faction"),
                               ],
                             ),
                             onPressed: () async {
@@ -7515,7 +7516,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
     return Row(
       children: [
         Semantics(
-          label: "Open job points dialog",
+          label: context.interfaceText("Open job points dialog"),
           child: GestureDetector(
             onLongPress: () {
               _launchBrowser(url: 'https://www.torn.com/companies.php', shortTap: false);
@@ -7561,12 +7562,12 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
         padding: const EdgeInsets.only(left: 2),
         child: Semantics(
           container: true,
-          label: "Company addition is $_companyAddiction",
+          label: context.interfaceText("Company addition is {0}", [_companyAddiction]),
           child: Row(
             children: [
               Image.asset('images/icons/chart_down.png', height: 18, color: Colors.brown[300]),
               const SizedBox(width: 9),
-              const Text("Company Addiction: "),
+              const PdaText("Company Addiction: "),
               Text("$_companyAddiction", style: TextStyle(color: c)),
             ],
           ),

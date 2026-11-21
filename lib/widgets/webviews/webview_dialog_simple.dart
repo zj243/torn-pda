@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -140,7 +141,7 @@ class _SimpleWebViewContentState extends State<_SimpleWebViewContent> {
             padding: const EdgeInsets.symmetric(horizontal: 40),
             color: Colors.transparent,
             child: Center(
-              child: Text(
+              child: PdaText(
                 "CLOSE",
                 style: TextStyle(color: _themeProvider.mainText, fontWeight: FontWeight.bold, fontSize: 10),
               ),

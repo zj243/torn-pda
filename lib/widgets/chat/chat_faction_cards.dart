@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -105,8 +106,8 @@ class ChatHitCard extends StatelessWidget {
               Icon(MaterialCommunityIcons.sword_cross, size: 16, color: chatWarColor(context, color)),
               const SizedBox(width: 6),
               Flexible(
-                child: Text(
-                  'Hitting ${call.name}',
+                child: PdaText(
+                  "Hitting {0}", values: [call.name],
                   style: theme.textTheme.bodyMedium?.copyWith(color: color, fontWeight: FontWeight.w600),
                 ),
               ),
@@ -119,10 +120,10 @@ class ChatHitCard extends StatelessWidget {
               Flexible(
                 child: switch (count.phase) {
                   ChatHitPhase.counting when join != null => Text.rich(
-                    TextSpan(children: [TextSpan(text: 'Attacking in ', style: small), clock]),
+                    TextSpan(children: [TextSpan(text: context.interfaceText('Attacking in '), style: small), clock]),
                   ),
                   ChatHitPhase.counting => Text.rich(
-                    TextSpan(children: [clock, TextSpan(text: ' to go', style: small)]),
+                    TextSpan(children: [clock, TextSpan(text: context.interfaceText(' to go'), style: small)]),
                   ),
                   ChatHitPhase.now => Text(missed ? 'missed' : 'now', style: big),
                   ChatHitPhase.done => Row(
@@ -165,7 +166,7 @@ class ChatHitCard extends StatelessWidget {
                 children: [
                   Icon(Icons.group_rounded, size: 14, color: small?.color),
                   const SizedBox(width: 4),
-                  Text('${joiners.length} joined', style: small),
+                  PdaText("{0} joined", values: [joiners.length], style: small),
                 ],
               ),
             ),
@@ -249,7 +250,7 @@ class ChatLocalLine extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
-    final note = Text(
+    final note = PdaText(
       'Only you see this',
       style: theme.textTheme.labelSmall?.copyWith(color: scheme.onSurfaceVariant.withValues(alpha: 0.7)),
     );
@@ -364,8 +365,8 @@ class _RetalLine extends StatelessWidget {
                     Icon(MaterialCommunityIcons.sword_cross, size: 14, color: color),
                     const SizedBox(width: 4),
                     Flexible(
-                      child: Text(
-                        'Retal: ${player.name} - ${chatClock(left)}$stats',
+                      child: PdaText(
+                        "Retal: {0} - {1}{2}", values: [player.name, chatClock(left), stats],
                         semanticsLabel: 'Retal on ${player.name}, ${chatClock(left)} left$stats, player options',
                         style: theme.textTheme.bodySmall?.copyWith(
                           color: color,
@@ -388,7 +389,7 @@ class _RetalLine extends StatelessWidget {
                     onPressed: () => chatAttackRetal(player.id, player.name, message.roomId),
                     style: ChatHitCard._buttonStyle(theme, color),
                     icon: const Icon(MaterialCommunityIcons.sword_cross, size: 16),
-                    label: const Text('Attack'),
+                    label: const PdaText('Attack'),
                   ),
                   OutlinedButton.icon(
                     onPressed: sent ? null : () => ops.shareRetal(message.roomId, message.id),
@@ -441,8 +442,8 @@ class ChatRetalCard extends StatelessWidget {
                 Icon(MaterialCommunityIcons.sword_cross, size: 16, color: chatWarColor(context, color)),
                 const SizedBox(width: 6),
                 Flexible(
-                  child: Text(
-                    'Retal: ${call.name}',
+                  child: PdaText(
+                    "Retal: {0}", values: [call.name],
                     style: theme.textTheme.bodyMedium?.copyWith(color: color, fontWeight: FontWeight.w600),
                   ),
                 ),
@@ -459,7 +460,7 @@ class ChatRetalCard extends StatelessWidget {
                           TextSpan(
                             children: [
                               TextSpan(text: chatClock(seconds), style: big),
-                              TextSpan(text: ' left', style: small),
+                              TextSpan(text: context.interfaceText(' left'), style: small),
                             ],
                           ),
                         )
@@ -468,7 +469,7 @@ class ChatRetalCard extends StatelessWidget {
                           children: [
                             Icon(Icons.done_rounded, size: 14, color: small?.color),
                             const SizedBox(width: 4),
-                            Text('ended at ${chatClockOf(context).clock(call.until)}', style: small),
+                            PdaText("ended at {0}", values: [chatClockOf(context).clock(call.until)], style: small),
                           ],
                         ),
                 ),
@@ -477,7 +478,7 @@ class ChatRetalCard extends StatelessWidget {
                   OutlinedButton(
                     onPressed: () => chatAttackRetal(call.id, call.name, message.roomId),
                     style: ChatHitCard._buttonStyle(theme, color),
-                    child: const Text('Attack'),
+                    child: const PdaText('Attack'),
                   ),
                 ],
               ],
@@ -537,9 +538,8 @@ class ChatWatchCard extends StatelessWidget {
             style: small,
           ),
           for (final w in watchers)
-            Text(
-              '${w.user.id == me ? 'You' : NativeChat.prefs.displayName(w.user.id, w.user.name)}'
-              ' - from ${clock.clock(w.since)} to ${clock.clock(w.until)}',
+            PdaText(
+              "{0} - from {1} to {2}", values: [w.user.id == me ? 'You' : NativeChat.prefs.displayName(w.user.id, w.user.name), clock.clock(w.since), clock.clock(w.until)],
               style: w.user.id == me ? small?.copyWith(fontWeight: FontWeight.w700) : small,
             ),
         ],

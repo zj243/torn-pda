@@ -1,5 +1,6 @@
 // Flutter imports:
 // Package imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
@@ -82,8 +83,8 @@ class BountiesWidgetState extends State<BountiesWidget> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "Max level: ${_bountiesModel.levelMax}",
+                          PdaText(
+                            "Max level: {0}", values: [_bountiesModel.levelMax],
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 10,
@@ -96,11 +97,11 @@ class BountiesWidgetState extends State<BountiesWidget> {
                     width: 80,
                     child: Column(
                       children: [
-                        Text(
+                        PdaText(
                           'BOUNTIES',
                           style: TextStyle(color: Colors.orange, fontSize: 12),
                         ),
-                        Text(
+                        PdaText(
                           '(tap to expand)',
                           style: TextStyle(color: Colors.orange, fontSize: 9),
                         ),
@@ -113,8 +114,8 @@ class BountiesWidgetState extends State<BountiesWidget> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text(
-                            "Unavailable: ${_bountiesModel.removeRed ? "hide" : "show"}",
+                          PdaText(
+                            "Unavailable: {0}", values: [_bountiesModel.removeRed ? "hide" : "show"],
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 10,
@@ -153,7 +154,7 @@ class BountiesWidgetState extends State<BountiesWidget> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         const Flexible(
-          child: Text(
+          child: PdaText(
             "Max level",
             style: TextStyle(
               color: Colors.white,
@@ -194,7 +195,7 @@ class BountiesWidgetState extends State<BountiesWidget> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
+        const PdaText(
           "Unavailable (red) targets",
           style: TextStyle(
             color: Colors.white,

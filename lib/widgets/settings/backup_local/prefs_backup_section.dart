@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:torn_pda/l10n/app_language.dart';
 import 'dart:convert';
 import 'dart:io';
@@ -110,11 +111,11 @@ class PrefsBackupWidgetState extends State<PrefsBackupWidget> {
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Column(
                   children: [
-                    const Text(
+                    const PdaText(
                       'You will need this key to restore the settings in the future, so make sure to remember!',
                       style: TextStyle(fontSize: 13),
                     ),
-                    Text(
+                    PdaText(
                       '\nWARNING: if configured, your API Key, alternative API keys for external providers, email address, etc.,'
                       ' will be included in the backup\n\nDO NOT SHARE IT WITH OTHERS!',
                       style: TextStyle(
@@ -132,7 +133,7 @@ class PrefsBackupWidgetState extends State<PrefsBackupWidget> {
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Column(
                   children: [
-                    Text(
+                    PdaText(
                       '\nIMPORTANT: certain settting will not be restored. This applies fundamentally to the following:\n\n'
                       '  - Alerts (automatic notifications)\n'
                       '  - Native login credentials\n\n'
@@ -169,13 +170,13 @@ class PrefsBackupWidgetState extends State<PrefsBackupWidget> {
       builder: (dialogCtx) => StatefulBuilder(
         builder: (context, setStateDialog) {
           return AlertDialog(
-            title: const Text('Create local backup'),
+            title: const PdaText('Create local backup'),
             content: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  const PdaText(
                     'Choose whether this backup is only for you or safe to share with other players.',
                     style: TextStyle(fontSize: 13),
                   ),
@@ -186,12 +187,12 @@ class PrefsBackupWidgetState extends State<PrefsBackupWidget> {
                     segments: const [
                       ButtonSegment<BackupExportMode>(
                         value: BackupExportMode.private,
-                        label: Text('Private'),
+                        label: PdaText('Private'),
                         icon: Icon(Icons.lock),
                       ),
                       ButtonSegment<BackupExportMode>(
                         value: BackupExportMode.shareable,
-                        label: Text('Shareable'),
+                        label: PdaText('Shareable'),
                         icon: Icon(Icons.share),
                       ),
                     ],
@@ -204,22 +205,22 @@ class PrefsBackupWidgetState extends State<PrefsBackupWidget> {
                   ),
                   const SizedBox(height: 12),
                   if (selectedMode == BackupExportMode.private)
-                    const Text(
+                    const PdaText(
                       'Encrypted. Keeps API keys, auth-related data and personal session state.',
                       style: TextStyle(fontSize: 12),
                     )
                   else
-                    const Text(
+                    const PdaText(
                       'No password. Excludes API keys, native login data, Firebase tokens and browser session state.',
                       style: TextStyle(fontSize: 12),
                     ),
                   const SizedBox(height: 8),
                   if (selectedMode == BackupExportMode.private) ...[
-                    const Text(
+                    const PdaText(
                       'You will need this key to restore the settings in the future, so make sure to remember it.',
                       style: TextStyle(fontSize: 13),
                     ),
-                    Text(
+                    PdaText(
                       '\nWARNING: if configured, your API Key, alternative API keys for external providers, email address, etc.,'
                       ' will be included in the backup\n\nDO NOT SHARE IT WITH OTHERS!',
                       style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic, color: warnColor),
@@ -228,14 +229,14 @@ class PrefsBackupWidgetState extends State<PrefsBackupWidget> {
                     TextField(
                       controller: keyCtl,
                       maxLength: 20,
-                      decoration: const InputDecoration(
-                        labelText: 'Encryption key',
+                      decoration: InputDecoration(
+                        labelText: context.interfaceText('Encryption key'),
                         floatingLabelBehavior: FloatingLabelBehavior.always,
                       ),
                       style: const TextStyle(fontSize: 15),
                     ),
                   ] else
-                    Text(
+                    PdaText(
                       'This backup will be saved without a password and suggested as pda_settings_shareable_...\n\n'
                       'Sensitive authentication-related data will be excluded automatically.',
                       style: TextStyle(
@@ -252,12 +253,12 @@ class PrefsBackupWidgetState extends State<PrefsBackupWidget> {
               ElevatedButton.icon(
                 onPressed: () => Navigator.pop(dialogCtx, 'local'),
                 icon: const Icon(Icons.save),
-                label: const Text('Local Save'),
+                label: const PdaText('Local Save'),
               ),
               ElevatedButton.icon(
                 onPressed: () => Navigator.pop(dialogCtx, 'other'),
                 icon: const Icon(Icons.share),
-                label: const Text('Other Apps'),
+                label: const PdaText('Other Apps'),
               ),
             ],
           );
@@ -379,18 +380,17 @@ class PrefsBackupWidgetState extends State<PrefsBackupWidget> {
       final confirm = await showDialog<bool>(
         context: ctx,
         builder: (dialogCtx) => AlertDialog(
-          title: const Text('Confirm restore'),
+          title: const PdaText('Confirm restore'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                'Identified $backupKeys saved preferences in this file.'
-                '\n\nRestore on next launch?',
+              PdaText(
+                "Identified {0} saved preferences in this file.\n\nRestore on next launch?", values: [backupKeys],
               ),
               if (opened.shareable) ...[
                 Padding(
                   padding: const EdgeInsets.only(top: 12),
-                  child: Text(
+                  child: PdaText(
                     'This is a shareable backup. API keys, auth-related data and browser session state are not imported.',
                     style: TextStyle(
                       fontSize: 12,
@@ -401,7 +401,7 @@ class PrefsBackupWidgetState extends State<PrefsBackupWidget> {
                 ),
               ],
               if (opened.needsReview) ImportedScriptsWarning(backup: opened),
-              Text(
+              PdaText(
                 '\nNote: restart app to apply changes',
                 style: TextStyle(
                   fontSize: 13,
@@ -431,7 +431,7 @@ class PrefsBackupWidgetState extends State<PrefsBackupWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        const PdaText(
           'Save current settings to a file and restore them on next app launch. '
           'Private backups use a key; shareable backups exclude sensitive authentication data.',
           style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),

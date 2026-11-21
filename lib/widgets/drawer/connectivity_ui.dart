@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/providers/theme_provider.dart';
 import 'package:torn_pda/utils/connectivity/connectivity_handler.dart';
@@ -39,7 +40,7 @@ class ConnectivityUI extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(width: 8),
-                  Text(
+                  PdaText(
                     'No connection found, please wait!',
                     style: TextStyle(
                       color: themeProvider.mainText,
@@ -49,7 +50,7 @@ class ConnectivityUI extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 10),
-              Text(
+              PdaText(
                 'Torn PDA needs Internet access to continue',
                 style: TextStyle(
                   color: themeProvider.mainText.withValues(alpha: 0.7),

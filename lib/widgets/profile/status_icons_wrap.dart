@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/models/profile/own_profile_model.dart';
@@ -114,8 +115,8 @@ class StatusIconsWrapState extends State<StatusIconsWrap> {
               Semantics(
                 label: details.replaceAll(" 0 days, 0 hours, ", " ").replaceAll(" 0 days, ", " "),
                 value: '',
-                onTapHint: 'Open browser',
-                onLongPressHint: 'Open browser',
+                onTapHint: context.interfaceText('Open browser'),
+                onLongPressHint: context.interfaceText('Open browser'),
                 child: GestureDetector(
                   child: icon,
                   onTap: () {

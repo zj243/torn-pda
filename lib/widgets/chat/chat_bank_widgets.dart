@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/models/chat/chat_banking.dart';
 import 'package:torn_pda/models/chat/chat_models.dart';
@@ -35,11 +36,11 @@ class ChatBankInsert extends StatelessWidget {
     final go = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Already paid'),
-        content: Text('$paidBy marked this request as paid. Open the vault page anyway?'),
+        title: const PdaText('Already paid'),
+        content: PdaText("{0} marked this request as paid. Open the vault page anyway?", values: [paidBy]),
         actions: [
-          TextButton(onPressed: () => Navigator.of(context).pop(false), child: const Text('Cancel')),
-          TextButton(onPressed: () => Navigator.of(context).pop(true), child: const Text('Open')),
+          TextButton(onPressed: () => Navigator.of(context).pop(false), child: const PdaText('Cancel')),
+          TextButton(onPressed: () => Navigator.of(context).pop(true), child: const PdaText('Open')),
         ],
       ),
     );
@@ -72,7 +73,7 @@ class ChatBankInsert extends StatelessWidget {
       ChatBankStatus.open => [
         if (entry.safe)
           Tooltip(
-            message: 'Request in the PDA format',
+            message: context.interfaceText('Request in the PDA format'),
             child: Icon(Icons.verified_outlined, size: 18, color: theme.colorScheme.primary),
           ),
         ActionChip(
@@ -84,7 +85,7 @@ class ChatBankInsert extends StatelessWidget {
         ActionChip(
           key: paidKey,
           avatar: const Icon(Icons.done_rounded, size: 18),
-          label: const Text('Mark as paid'),
+          label: const PdaText('Mark as paid'),
           onPressed: () => _markPaid(context, amount),
         ),
       ],
@@ -98,7 +99,7 @@ class ChatBankInsert extends StatelessWidget {
         Icon(Icons.check_circle_outline_rounded, size: 16, color: theme.hintColor),
         Text(paidBy == null ? 'Paid' : 'Paid by $paidName', style: muted),
       ],
-      _ => [Icon(Icons.block_rounded, size: 16, color: theme.hintColor), Text('Cancelled', style: muted)],
+      _ => [Icon(Icons.block_rounded, size: 16, color: theme.hintColor), PdaText('Cancelled', style: muted)],
     };
     return IgnorePointer(
       ignoring: hidden,
@@ -144,7 +145,7 @@ class _BankPaidDialogState extends State<_BankPaidDialog> {
     final valid = _blank || _amount != null;
     final text = chatBankPaidText(widget.to, _blank ? null : _amount);
     return AlertDialog(
-      title: const Text('Mark as paid'),
+      title: const PdaText('Mark as paid'),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -154,20 +155,20 @@ class _BankPaidDialogState extends State<_BankPaidDialog> {
             keyboardType: TextInputType.text,
             onChanged: (_) => setState(() {}),
             decoration: InputDecoration(
-              labelText: 'Amount paid (optional)',
+              labelText: context.interfaceText('Amount paid (optional)'),
               prefixText: '\$ ',
               errorText: valid ? null : 'Enter an amount like 5m or 250000, or all',
             ),
           ),
           const SizedBox(height: 12),
-          Text('Sends to the faction chat:', style: Theme.of(context).textTheme.labelMedium),
+          PdaText('Sends to the faction chat:', style: Theme.of(context).textTheme.labelMedium),
           const SizedBox(height: 4),
           Text(text),
         ],
       ),
       actions: [
-        TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Cancel')),
-        TextButton(onPressed: valid ? () => Navigator.of(context).pop(text) : null, child: const Text('Send')),
+        TextButton(onPressed: () => Navigator.of(context).pop(), child: const PdaText('Cancel')),
+        TextButton(onPressed: valid ? () => Navigator.of(context).pop(text) : null, child: const PdaText('Send')),
       ],
     );
   }
@@ -210,7 +211,7 @@ class _BankRequestDialogState extends State<_BankRequestDialog> {
       onPressed: () => Navigator.of(context).pop(text),
     );
     return AlertDialog(
-      title: const Text('Request money'),
+      title: const PdaText('Request money'),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -224,8 +225,8 @@ class _BankRequestDialogState extends State<_BankRequestDialog> {
             },
             onSubmitted: (_) => _submit(),
             decoration: InputDecoration(
-              labelText: 'Amount',
-              hintText: 'For example 5m, 250k, 1,500,000 or all',
+              labelText: context.interfaceText('Amount'),
+              hintText: context.interfaceText('For example 5m, 250k, 1,500,000 or all'),
               prefixText: '\$ ',
               errorText: _invalid ? 'Enter an amount like 5m or 250000, or all' : null,
             ),
@@ -243,8 +244,8 @@ class _BankRequestDialogState extends State<_BankRequestDialog> {
         ],
       ),
       actions: [
-        TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Cancel')),
-        TextButton(onPressed: _submit, child: const Text('Add to message')),
+        TextButton(onPressed: () => Navigator.of(context).pop(), child: const PdaText('Cancel')),
+        TextButton(onPressed: _submit, child: const PdaText('Add to message')),
       ],
     );
   }

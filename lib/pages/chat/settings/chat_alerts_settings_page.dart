@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/pages/chat/settings/chat_settings_subpage.dart';
 import 'package:torn_pda/widgets/alerts/alert_cards.dart';
@@ -29,7 +30,7 @@ class ChatAlertsSettingsPage extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 8),
-              child: TextButton(onPressed: NativeChat.openAlerts, child: Text('Open Alerts')),
+              child: TextButton(onPressed: NativeChat.openAlerts, child: PdaText('Open Alerts')),
             ),
           ),
           const ChatSettingsHeading('While the app is open'),

@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:torn_pda/models/cityshops/city_shop_item_model.dart';
@@ -54,7 +55,7 @@ class CityShopItemTile extends StatelessWidget {
                 children: [
                   CityShopModeBadge(label: modeLabel, color: modeColor),
                   const SizedBox(width: 6),
-                  Text("Stock: ${item.stock}", style: const TextStyle(fontSize: 11)),
+                  PdaText("Stock: {0}", values: [item.stock], style: const TextStyle(fontSize: 11)),
                 ],
               ),
               const SizedBox(height: 2),

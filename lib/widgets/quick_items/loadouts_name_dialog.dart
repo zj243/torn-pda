@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/models/quick_item_model.dart';
 import 'package:torn_pda/providers/quick_items_provider.dart';
@@ -63,8 +64,8 @@ class LoadoutsNameDialogState extends State<LoadoutsNameDialog> {
                   mainAxisSize: MainAxisSize.min, // To make the card compact
                   children: <Widget>[
                     Flexible(
-                      child: Text(
-                        "Enter a custom name for this loadout (${widget.loadout.loadoutNumber}):",
+                      child: PdaText(
+                        "Enter a custom name for this loadout ({0}):", values: [widget.loadout.loadoutNumber],
                         style: TextStyle(fontSize: 12, color: widget.themeProvider!.mainText),
                       ),
                     ),
@@ -86,14 +87,14 @@ class LoadoutsNameDialogState extends State<LoadoutsNameDialog> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         TextButton(
-                          child: const Text("Save"),
+                          child: const PdaText("Save"),
                           onPressed: () {
                             widget.quickItemsProvider!.changeLoadoutName(widget.loadout, _nameController.text);
                             Navigator.of(context).pop();
                           },
                         ),
                         TextButton(
-                          child: const Text("Forget it"),
+                          child: const PdaText("Forget it"),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },

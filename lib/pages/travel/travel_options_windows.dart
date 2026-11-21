@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:torn_pda/l10n/app_language.dart';
 import 'dart:async';
 
@@ -96,7 +97,7 @@ class TravelOptionsWindowsState extends State<TravelOptionsWindows> {
                               children: <Widget>[
                                 const Padding(
                                   padding: EdgeInsets.all(20.0),
-                                  child: Text('Here you can specify your preferred notification '
+                                  child: PdaText('Here you can specify your preferred notification '
                                       'trigger time before arrival. Tap the text icon in the appbar '
                                       'to change the notification title and body.'),
                                 ),
@@ -126,7 +127,7 @@ class TravelOptionsWindowsState extends State<TravelOptionsWindows> {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
-      title: const Text("Travel notification", style: TextStyle(color: Colors.white)),
+      title: const PdaText("Travel notification", style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
@@ -153,7 +154,7 @@ class TravelOptionsWindowsState extends State<TravelOptionsWindows> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               const Flexible(
-                child: Text('Notification'),
+                child: PdaText('Notification'),
               ),
               const Padding(
                 padding: EdgeInsets.only(left: 20),
@@ -176,7 +177,7 @@ class TravelOptionsWindowsState extends State<TravelOptionsWindows> {
           value: "0",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "20 seconds",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -189,7 +190,7 @@ class TravelOptionsWindowsState extends State<TravelOptionsWindows> {
           value: "1",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "40 seconds",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -202,7 +203,7 @@ class TravelOptionsWindowsState extends State<TravelOptionsWindows> {
           value: "2",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "1 minute",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -215,7 +216,7 @@ class TravelOptionsWindowsState extends State<TravelOptionsWindows> {
           value: "3",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "2 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -228,7 +229,7 @@ class TravelOptionsWindowsState extends State<TravelOptionsWindows> {
           value: "4",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "5 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(

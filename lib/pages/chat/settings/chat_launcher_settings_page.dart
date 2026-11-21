@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/pages/chat/settings/chat_settings_subpage.dart';
 import 'package:torn_pda/pages/settings/app_icon_menu_page.dart';
@@ -43,7 +44,7 @@ class ChatLauncherSettingsPage extends StatelessWidget {
             'Tap it to open ${prefs.launcherTap == ChatLauncherTap.full ? 'the full chat' : 'a chat window'}, '
             'long press it for Window, Full chat and Chat settings',
           ),
-          const ListTile(title: Text('Tapping the button opens')),
+          const ListTile(title: PdaText('Tapping the button opens')),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: SizedBox(
@@ -51,8 +52,8 @@ class ChatLauncherSettingsPage extends StatelessWidget {
               child: SegmentedButton<ChatLauncherTap>(
                 showSelectedIcon: false,
                 segments: const [
-                  ButtonSegment(value: ChatLauncherTap.full, label: Text('Full chat')),
-                  ButtonSegment(value: ChatLauncherTap.window, label: Text('Window')),
+                  ButtonSegment(value: ChatLauncherTap.full, label: PdaText('Full chat')),
+                  ButtonSegment(value: ChatLauncherTap.window, label: PdaText('Window')),
                 ],
                 selected: {prefs.launcherTap},
                 onSelectionChanged: (v) => prefs.setLauncherTap(v.first),
@@ -61,20 +62,20 @@ class ChatLauncherSettingsPage extends StatelessWidget {
           ),
           if (prefs.launcher != ChatLauncher.bubble)
             SwitchListTile(
-              title: const Text('Minimize chats to small bubbles'),
-              subtitle: const Text('One bubble per chat, tap it to bring the chat back. Off, windows only close'),
+              title: const PdaText('Minimize chats to small bubbles'),
+              subtitle: const PdaText('One bubble per chat, tap it to bring the chat back. Off, windows only close'),
               value: prefs.miniBubbles,
               onChanged: prefs.setMiniBubbles,
             ),
           SwitchListTile(
-            title: const Text('Reopen chats as I left them'),
-            subtitle: const Text('Windows and the full chat you had open come back after a restart'),
+            title: const PdaText('Reopen chats as I left them'),
+            subtitle: const PdaText('Windows and the full chat you had open come back after a restart'),
             value: prefs.reopenChats,
             onChanged: prefs.setReopenChats,
           ),
           ListTile(
-            title: const Text('App icon menu'),
-            subtitle: const Text('Pick what a long press on the Torn PDA icon shows'),
+            title: const PdaText('App icon menu'),
+            subtitle: const PdaText('Pick what a long press on the Torn PDA icon shows'),
             trailing: const Icon(Icons.chevron_right_rounded),
             onTap: () => Navigator.of(context).push(
               MaterialPageRoute(
@@ -84,7 +85,7 @@ class ChatLauncherSettingsPage extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: const Text('Chat icon on Torn profiles'),
+            title: const PdaText('Chat icon on Torn profiles'),
             subtitle: Text(
               prefs.profileIcon == ChatProfileIcon.pda
                   ? 'Opens a private chat window in Torn PDA'

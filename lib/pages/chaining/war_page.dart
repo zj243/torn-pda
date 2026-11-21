@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -220,17 +221,16 @@ class WarPageState extends State<WarPage> {
             if (w.factions.where((f) => f.hidden!).isNotEmpty)
               Padding(
                 padding: const EdgeInsets.only(top: 8),
-                child: Text(
-                  "${w.factions.where((f) => f.hidden!).length} "
-                  "${w.factions.where((f) => f.hidden!).length == 1 ? 'faction is' : 'factions are'} filtered out",
+                child: PdaText(
+                  "{0} {1} filtered out", values: [w.factions.where((f) => f.hidden!).length, w.factions.where((f) => f.hidden!).length == 1 ? 'faction is' : 'factions are'],
                   style: TextStyle(fontSize: 12, color: Colors.orange[700]),
                 ),
               ),
             if (hiddenMembers > 0)
               Padding(
                 padding: const EdgeInsets.only(top: 8),
-                child: Text(
-                  "$hiddenMembers ${hiddenMembers == 1 ? 'target is' : 'targets are'} hidden",
+                child: PdaText(
+                  "{0} {1} hidden", values: [hiddenMembers, hiddenMembers == 1 ? 'target is' : 'targets are'],
                   style: const TextStyle(fontSize: 12),
                 ),
               ),
@@ -580,7 +580,7 @@ class WarPageState extends State<WarPage> {
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider!.appBarTop ? 2 : 0,
       systemOverlayStyle: SystemUiOverlayStyle.light,
-      title: const Text("War", style: TextStyle(color: Colors.white)),
+      title: const PdaText("War", style: TextStyle(color: Colors.white)),
       leadingWidth: _webViewProvider.appCanOpenBrowser ? 88 : 50,
       leading: Row(
         children: [
@@ -604,13 +604,13 @@ class WarPageState extends State<WarPage> {
         Showcase(
           disableMovingAnimation: true,
           key: _showCaseAddFaction,
-          title: 'Welcome to War!',
+          title: context.interfaceText('Welcome to War!'),
           description:
-              "\nThe first thing you'll want to do is to add an enemy faction to your list. You can do so by "
+              context.interfaceText("\nThe first thing you'll want to do is to add an enemy faction to your list. You can do so by "
               "tapping this icon."
               "\n\nIf you don't know the faction's ID, you can optionally insert one of it's members' "
               "ID (look for the 'person' icon)."
-              "\n\nMake sure to have a look at the Tips section in the main menu for more information and tricks!",
+              "\n\nMake sure to have a look at the Tips section in the main menu for more information and tricks!"),
           textColor: _themeProvider!.mainText,
           tooltipBackgroundColor: _themeProvider!.secondBackground,
           descTextStyle: const TextStyle(fontSize: 13),
@@ -625,12 +625,12 @@ class WarPageState extends State<WarPage> {
         Showcase(
           disableMovingAnimation: true,
           key: _showCaseUpdate,
-          title: 'Updating targets!',
+          title: context.interfaceText('Updating targets!'),
           description:
-              "\nThere are a couple of ways to update war targets.\n\nWith a short tap, you can perform "
+              context.interfaceText("\nThere are a couple of ways to update war targets.\n\nWith a short tap, you can perform "
               "a quick update with minimal target information (some stats and life information won't be available).\n\n"
               "A long-press will start a slower but full update of all targets.\n\n"
-              "Alternatively, you can update targets individually.",
+              "Alternatively, you can update targets individually."),
           textColor: _themeProvider!.mainText,
           tooltipBackgroundColor: _themeProvider!.secondBackground,
           descTextStyle: const TextStyle(fontSize: 13),
@@ -669,8 +669,7 @@ class WarPageState extends State<WarPage> {
                           BotToast.showText(
                             clickClose: true,
                             text:
-                                "Updating $allMembers war targets, this might take a while.\n\nExtra time needed to "
-                                "avoid issues with API request limits!",
+                                context.interfaceText("Updating {0} war targets, this might take a while.\n\nExtra time needed to avoid issues with API request limits!", [allMembers]),
                             textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                             contentColor: messageColor,
                             duration: const Duration(seconds: 3),
@@ -898,7 +897,7 @@ class WarPageState extends State<WarPage> {
                               children: [
                                 Row(
                                   children: [
-                                    const Text("Manage Spies"),
+                                    const PdaText("Manage Spies"),
                                     const SizedBox(width: 8),
                                     SizedBox(
                                       height: 25,
@@ -930,7 +929,7 @@ class WarPageState extends State<WarPage> {
                             child: Icon(Icons.share, size: 24, color: _themeProvider!.mainText),
                           ),
                           const SizedBox(width: 10),
-                          const Flexible(child: Text("Share stats")),
+                          const Flexible(child: PdaText("Share stats")),
                         ],
                       ),
                     );
@@ -946,7 +945,7 @@ class WarPageState extends State<WarPage> {
                             child: Image.asset('images/icons/nuke-revive.png', width: 24),
                           ),
                           const SizedBox(width: 10),
-                          const Flexible(child: Text("Request a revive (Nuke)")),
+                          const Flexible(child: PdaText("Request a revive (Nuke)")),
                         ],
                       ),
                     );
@@ -961,7 +960,7 @@ class WarPageState extends State<WarPage> {
                             child: Image.asset('images/icons/uhc_revive.png', width: 24),
                           ),
                           const SizedBox(width: 10),
-                          const Flexible(child: Text("Request a revive (UHC)")),
+                          const Flexible(child: PdaText("Request a revive (UHC)")),
                         ],
                       ),
                     );
@@ -993,7 +992,7 @@ class WarPageState extends State<WarPage> {
                             child: Image.asset('images/icons/wtf_revive.png', width: 24),
                           ),
                           const SizedBox(width: 10),
-                          const Flexible(child: Text("Request a revive (WTF)")),
+                          const Flexible(child: PdaText("Request a revive (WTF)")),
                         ],
                       ),
                     );
@@ -1008,7 +1007,7 @@ class WarPageState extends State<WarPage> {
                             child: Image.asset('images/icons/midnightx_revive.png', width: 24),
                           ),
                           const SizedBox(width: 10),
-                          const Flexible(child: Text("Request a revive (Midnight X)")),
+                          const Flexible(child: PdaText("Request a revive (Midnight X)")),
                         ],
                       ),
                     );
@@ -1023,7 +1022,7 @@ class WarPageState extends State<WarPage> {
                             child: Image.asset('images/icons/wolverines_revive.png', width: 24),
                           ),
                           const SizedBox(width: 10),
-                          const Flexible(child: Text("Request a revive (The Wolverines)")),
+                          const Flexible(child: PdaText("Request a revive (The Wolverines)")),
                         ],
                       ),
                     );
@@ -1038,7 +1037,7 @@ class WarPageState extends State<WarPage> {
                             child: Image.asset('images/icons/combat_ready_revive.png', width: 24),
                           ),
                           const SizedBox(width: 10),
-                          const Flexible(child: Text("Request a revive (Combat Ready)")),
+                          const Flexible(child: PdaText("Request a revive (Combat Ready)")),
                         ],
                       ),
                     );
@@ -1053,7 +1052,7 @@ class WarPageState extends State<WarPage> {
                             child: Image.asset('images/icons/asclepius_revive.png', width: 24),
                           ),
                           const SizedBox(width: 10),
-                          const Flexible(child: Text("Request a revive (Asclepius)")),
+                          const Flexible(child: PdaText("Request a revive (Asclepius)")),
                         ],
                       ),
                     );
@@ -1097,7 +1096,7 @@ class WarPageState extends State<WarPage> {
       if (mounted && !firstTime) {
         BotToast.showText(
           clickClose: true,
-          text: "Fetching information, please wait...",
+          text: context.interfaceText("Fetching information, please wait..."),
           textStyle: const TextStyle(fontSize: 14, color: Colors.white),
           contentColor: Colors.grey[700]!,
           duration: const Duration(seconds: 3),
@@ -1256,9 +1255,9 @@ class AddFactionDialog extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min, // To make the card compact
             children: <Widget>[
-              const Text("Add Faction to War", style: TextStyle(fontSize: 13)),
+              const PdaText("Add Faction to War", style: TextStyle(fontSize: 13)),
               const SizedBox(height: 5),
-              Text(
+              PdaText(
                 "Press the icon to the right to switch between faction ID or player ID input",
                 style: TextStyle(fontSize: 11, fontStyle: FontStyle.italic, color: Colors.grey[600]),
               ),
@@ -1311,14 +1310,14 @@ class AddFactionDialog extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   TextButton(
-                    child: const Text("Add"),
+                    child: const PdaText("Add"),
                     onPressed: () async {
                       if (addFormKey.currentState!.validate()) {
                         warController.setAddUserActive(true);
 
                         BotToast.showText(
                           clickClose: true,
-                          text: "Fetching information, please wait...",
+                          text: context.interfaceText("Fetching information, please wait..."),
                           textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                           contentColor: Colors.grey[700]!,
                           duration: const Duration(seconds: 3),
@@ -1395,7 +1394,7 @@ class AddFactionDialog extends StatelessWidget {
                     },
                   ),
                   TextButton(
-                    child: const Text("Close"),
+                    child: const PdaText("Close"),
                     onPressed: () {
                       Navigator.of(context).pop();
                       addIdController.text = '';
@@ -1468,7 +1467,7 @@ class HiddenMembersDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       actions: [
         TextButton(
-          child: const Text("Close"),
+          child: const PdaText("Close"),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -1480,7 +1479,7 @@ class HiddenMembersDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text("Reset hidden targets", style: TextStyle(fontSize: 14)),
+            const PdaText("Reset hidden targets", style: TextStyle(fontSize: 14)),
             const SizedBox(height: 20),
             Flexible(child: ListView(shrinkWrap: true, children: hiddenCards)),
           ],
@@ -1516,7 +1515,7 @@ class HiddenMembersDialog extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(m!.name!, style: const TextStyle(fontSize: 13)),
-                          Text("Level ${m.level}", style: const TextStyle(fontSize: 13)),
+                          PdaText("Level {0}", values: [m.level], style: const TextStyle(fontSize: 13)),
                         ],
                       ),
                       Row(
@@ -1580,7 +1579,7 @@ class WarTargetsListState extends State<WarTargetsList> {
             child: Divider(color: Colors.grey),
           ),
         ),
-        Text("UNPINNED", style: TextStyle(fontSize: 12, color: Colors.grey)),
+        PdaText("UNPINNED", style: TextStyle(fontSize: 12, color: Colors.grey)),
         Flexible(
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 5, horizontal: 30),

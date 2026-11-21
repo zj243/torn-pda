@@ -1,5 +1,6 @@
 // Flutter imports:
 // Package imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -31,7 +32,7 @@ class FriendsPageState extends State<FriendsPage> {
 
   // For appBar search
   Icon _searchIcon = const Icon(Icons.search);
-  Widget _appBarText = const Text("Friends");
+  Widget _appBarText = const PdaText("Friends");
   final _focusSearch = FocusNode();
 
   final _popupChoices = <FriendSort>[
@@ -139,9 +140,7 @@ class FriendsPageState extends State<FriendsPage> {
                   } else {
                     BotToast.showText(
                       text:
-                          'Update with errors: ${updateResult.numberErrors} errors '
-                          'out of ${updateResult.numberErrors + updateResult.numberSuccessful} '
-                          'total friends!',
+                          context.interfaceText("Update with errors: {0} errors out of {1} total friends!", [updateResult.numberErrors, updateResult.numberErrors + updateResult.numberSuccessful]),
                       textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                       contentColor: Colors.red,
                       duration: const Duration(seconds: 3),
@@ -215,7 +214,7 @@ class FriendsPageState extends State<FriendsPage> {
                                   focusNode: _focusSearch,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: "search friends",
+                                    hintText: context.interfaceText("search friends"),
                                     hintStyle: TextStyle(
                                       fontStyle: FontStyle.italic,
                                       color: Colors.grey[300],
@@ -235,7 +234,7 @@ class FriendsPageState extends State<FriendsPage> {
                 _focusSearch.requestFocus();
               } else {
                 _searchIcon = Icon(Icons.search, color: myColor);
-                _appBarText = const Text("Friends");
+                _appBarText = const PdaText("Friends");
               }
             });
           },
@@ -255,11 +254,11 @@ class FriendsPageState extends State<FriendsPage> {
             final bool? confirm = await showDialog<bool>(
               context: context,
               builder: (dialogContext) => AlertDialog(
-                title: const Text('Wipe friends list'),
-                content: const Text('This will remove all friends. Are you sure?'),
+                title: const PdaText('Wipe friends list'),
+                content: const PdaText('This will remove all friends. Are you sure?'),
                 actions: [
-                  TextButton(onPressed: () => Navigator.of(dialogContext).pop(false), child: const Text('Cancel')),
-                  TextButton(onPressed: () => Navigator.of(dialogContext).pop(true), child: const Text('Wipe')),
+                  TextButton(onPressed: () => Navigator.of(dialogContext).pop(false), child: const PdaText('Cancel')),
+                  TextButton(onPressed: () => Navigator.of(dialogContext).pop(true), child: const PdaText('Wipe')),
                 ],
               ),
             );
@@ -267,7 +266,7 @@ class FriendsPageState extends State<FriendsPage> {
             if (confirm == true) {
               _friendsProvider.wipeAllFriends();
               BotToast.showText(
-                text: 'Friends list wiped',
+                text: context.interfaceText('Friends list wiped'),
                 textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                 contentColor: Colors.orange.shade700,
                 duration: const Duration(seconds: 3),
@@ -346,7 +345,7 @@ class FriendsPageState extends State<FriendsPage> {
                             if (!addingFactionActive) ...[
                               Align(
                                 alignment: Alignment.centerLeft,
-                                child: Text('Individual', style: TextStyle(fontSize: 12, color: Colors.grey[700])),
+                                child: PdaText('Individual', style: TextStyle(fontSize: 12, color: Colors.grey[700])),
                               ),
                               const SizedBox(height: 8),
                               Form(
@@ -362,10 +361,10 @@ class FriendsPageState extends State<FriendsPage> {
                                       minLines: 1,
                                       maxLines: 2,
                                       keyboardType: TextInputType.number,
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         counterText: '',
                                         border: OutlineInputBorder(),
-                                        labelText: 'Insert friend ID',
+                                        labelText: context.interfaceText('Insert friend ID'),
                                       ),
                                       validator: (value) {
                                         if (value!.isEmpty) {
@@ -389,7 +388,7 @@ class FriendsPageState extends State<FriendsPage> {
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         TextButton(
-                                          child: const Text('Add'),
+                                          child: const PdaText('Add'),
                                           onPressed: addingFriendActive
                                               ? null
                                               : () async {
@@ -406,7 +405,7 @@ class FriendsPageState extends State<FriendsPage> {
                                                     if (tryAddFriend.success) {
                                                       BotToast.showText(
                                                         text:
-                                                            'Added ${tryAddFriend.friendName} [${tryAddFriend.friendId}]',
+                                                            context.interfaceText("Added {0} [{1}]", [tryAddFriend.friendName, tryAddFriend.friendId]),
                                                         textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                                                         contentColor: Colors.green,
                                                         duration: const Duration(seconds: 3),
@@ -415,7 +414,7 @@ class FriendsPageState extends State<FriendsPage> {
                                                     } else {
                                                       BotToast.showText(
                                                         text:
-                                                            'Error adding $inputId. ${tryAddFriend.errorReason ?? ''}',
+                                                            context.interfaceText("Error adding {0}. {1}", [inputId, tryAddFriend.errorReason ?? '']),
                                                         textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                                                         contentColor: Colors.red,
                                                         duration: const Duration(seconds: 3),
@@ -445,10 +444,10 @@ class FriendsPageState extends State<FriendsPage> {
                             if (!addingFactionActive) ...[
                               Align(
                                 alignment: Alignment.centerLeft,
-                                child: Text('From faction', style: TextStyle(fontSize: 12, color: Colors.grey[700])),
+                                child: PdaText('From faction', style: TextStyle(fontSize: 12, color: Colors.grey[700])),
                               ),
                               const SizedBox(height: 5),
-                              Text(
+                              PdaText(
                                 'Press the icon to the right to switch between faction ID or player ID input',
                                 style: TextStyle(fontSize: 11, fontStyle: FontStyle.italic, color: Colors.grey[600]),
                               ),
@@ -621,7 +620,7 @@ class FriendsPageState extends State<FriendsPage> {
                                         },
                                       ),
                                       TextButton(
-                                        child: const Text('Close'),
+                                        child: const PdaText('Close'),
                                         onPressed: () {
                                           if (addingFactionActive) {
                                             friendsProvider.cancelImport();

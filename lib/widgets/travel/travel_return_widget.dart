@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/providers/settings_provider.dart';
 import 'package:torn_pda/utils/time_formatter.dart';
@@ -41,8 +42,8 @@ class TravelReturnWidget extends StatelessWidget {
         timeFormatSetting: settingsProvider!.currentTimeFormat,
         timeZoneSetting: settingsProvider!.currentTimeZone,
       ).formatHour;
-      returnWidget = Text(
-        '(earliest return ~$formattedReturn)',
+      returnWidget = PdaText(
+        "(earliest return ~{0})", values: [formattedReturn],
         style: const TextStyle(
           fontSize: 11.5,
         ),

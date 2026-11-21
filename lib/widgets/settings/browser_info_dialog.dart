@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 
 class BrowserInfoDialog extends StatefulWidget {
@@ -15,11 +16,11 @@ class BrowserInfoDialogState extends State<BrowserInfoDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text("Browser type"),
+      title: const PdaText("Browser type"),
       content: const SingleChildScrollView(
         child: Column(
           children: [
-            Text("Choosing the in-app browser "
+            PdaText("Choosing the in-app browser "
                 "offers a better experience and additional "
                 "features, such as foreign stock uploading "
                 "to a common database in YATA that everyone "
@@ -33,7 +34,7 @@ class BrowserInfoDialogState extends State<BrowserInfoDialog> {
       ),
       actions: [
         TextButton(
-          child: const Text("Close"),
+          child: const PdaText("Close"),
           onPressed: () {
             Navigator.of(context).pop();
           },

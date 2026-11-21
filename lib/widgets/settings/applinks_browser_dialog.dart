@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:app_settings/app_settings.dart';
 import 'package:easy_rich_text/easy_rich_text.dart';
@@ -28,7 +29,7 @@ class AppLinksBrowserDialogState extends State<AppLinksBrowserDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text("Important! External browser and default Torn links"),
+      title: const PdaText("Important! External browser and default Torn links"),
       content: Container(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -71,7 +72,7 @@ class AppLinksBrowserDialogState extends State<AppLinksBrowserDialog> {
       ),
       actions: [
         TextButton(
-          child: const Text(
+          child: const PdaText(
             "Open app\nsettings",
             textAlign: TextAlign.center,
           ),
@@ -81,7 +82,7 @@ class AppLinksBrowserDialogState extends State<AppLinksBrowserDialog> {
           },
         ),
         TextButton(
-          child: const Text("Disregard"),
+          child: const PdaText("Disregard"),
           onPressed: () async {
             Navigator.of(context).pop();
           },

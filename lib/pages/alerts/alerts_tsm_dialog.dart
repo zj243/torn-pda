@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:io';
 
 import 'package:bot_toast/bot_toast.dart';
@@ -32,7 +33,7 @@ class _AlertsTsmDialogState extends State<AlertsTsmDialog> {
         children: [
           const Padding(
             padding: EdgeInsets.all(8.0),
-            child: Text(
+            child: PdaText(
               "If you are having issues receiving alerts, it could be due to several causes. This dialog will guide "
               "you to try to resolve the problem.",
               style: TextStyle(fontSize: 14),
@@ -40,7 +41,7 @@ class _AlertsTsmDialogState extends State<AlertsTsmDialog> {
           ),
           const Padding(
             padding: EdgeInsets.all(8.0),
-            child: Text(
+            child: PdaText(
               "To start with, please tap the following button to send yourself a test notification:",
               style: TextStyle(fontSize: 14),
             ),
@@ -57,7 +58,7 @@ class _AlertsTsmDialogState extends State<AlertsTsmDialog> {
                         strokeWidth: 2,
                       ),
                     )
-                  : const Text("Test Notification"),
+                  : const PdaText("Test Notification"),
               onPressed: _isTestingNotification
                   ? null
                   : () async {
@@ -71,7 +72,7 @@ class _AlertsTsmDialogState extends State<AlertsTsmDialog> {
 
                       if (success) {
                         BotToast.showText(
-                          text: "Request sent, please wait for a few seconds...",
+                          text: context.interfaceText("Request sent, please wait for a few seconds..."),
                           textStyle: const TextStyle(
                             fontSize: 14,
                             color: Colors.white,
@@ -84,7 +85,7 @@ class _AlertsTsmDialogState extends State<AlertsTsmDialog> {
 
                       if (!success) {
                         BotToast.showText(
-                          text: "There was a problem sending the request, no communicationn with the server!",
+                          text: context.interfaceText("There was a problem sending the request, no communicationn with the server!"),
                           textStyle: const TextStyle(
                             fontSize: 14,
                             color: Colors.white,
@@ -103,14 +104,14 @@ class _AlertsTsmDialogState extends State<AlertsTsmDialog> {
           ),
           const Padding(
             padding: EdgeInsets.all(8.0),
-            child: Text(
+            child: PdaText(
               "Did it reach you?",
               style: TextStyle(fontSize: 14),
             ),
           ),
           const Padding(
             padding: EdgeInsets.all(8.0),
-            child: Text(
+            child: PdaText(
               "If it did, it means the server can reach your device with no issues. However, if you are still not getting "
               "other app notifications, please verify that they are correctly selected in the Alerts section and "
               "that your device main settings are not blocking or muting Torn PDA. Otherwise, keep reading.",
@@ -119,7 +120,7 @@ class _AlertsTsmDialogState extends State<AlertsTsmDialog> {
           ),
           const Padding(
             padding: EdgeInsets.all(8.0),
-            child: Text(
+            child: PdaText(
               "If the test failed or other notifications are not gettin in, there might be a communication issue "
               "going on with the server. Please consider the following steps:",
               style: TextStyle(fontSize: 14),
@@ -127,7 +128,7 @@ class _AlertsTsmDialogState extends State<AlertsTsmDialog> {
           ),
           const Padding(
             padding: EdgeInsets.fromLTRB(16, 8, 8, 8),
-            child: Text(
+            child: PdaText(
               "1) In case this could be due a misconfiguration at server level, please tap the Soft Reset button "
               "below. Torn PDA will try to reconfigure your user. If you get a success message, please retry "
               "the test notification. Otherwise, keep reading.",
@@ -146,7 +147,7 @@ class _AlertsTsmDialogState extends State<AlertsTsmDialog> {
                         strokeWidth: 2,
                       ),
                     )
-                  : const Text("Soft Reset"),
+                  : const PdaText("Soft Reset"),
               onPressed: _isResetting
                   ? null
                   : () async {
@@ -180,7 +181,7 @@ class _AlertsTsmDialogState extends State<AlertsTsmDialog> {
                           }
 
                           BotToast.showText(
-                            text: "Reset successful",
+                            text: context.interfaceText("Reset successful"),
                             textStyle: const TextStyle(
                               fontSize: 14,
                               color: Colors.white,
@@ -200,7 +201,7 @@ class _AlertsTsmDialogState extends State<AlertsTsmDialog> {
                       }
 
                       BotToast.showText(
-                        text: "There was an error updating the database, try again later!",
+                        text: context.interfaceText("There was an error updating the database, try again later!"),
                         textStyle: const TextStyle(
                           fontSize: 14,
                           color: Colors.white,
@@ -218,14 +219,14 @@ class _AlertsTsmDialogState extends State<AlertsTsmDialog> {
           ),
           const Padding(
             padding: EdgeInsets.fromLTRB(16, 8, 8, 8),
-            child: Text(
+            child: PdaText(
               "2) You can manually force a user reconfiguration in the server by going to Settings in Torn PDA. ",
               style: TextStyle(fontSize: 14),
             ),
           ),
           const Padding(
             padding: EdgeInsets.fromLTRB(16, 8, 8, 8),
-            child: Text(
+            child: PdaText(
               "Start by reloading your API Key (expand the API section at the top and tap 'Reload'). "
               "If that does not solve the problem (check once again the Test Notification here), "
               "remove your API Key (tap the bin icon) and insert it once again.",
@@ -234,7 +235,7 @@ class _AlertsTsmDialogState extends State<AlertsTsmDialog> {
           ),
           const Padding(
             padding: EdgeInsets.fromLTRB(16, 8, 8, 8),
-            child: Text(
+            child: PdaText(
               "3) Lastly, make sure your device or network configuration (router) is not blocking the Google Cloud or Google "
               "Services, since the Alerts server is hosted there. Some users might use a firewall to block Google "
               "or even download the app from a alternative app store; if that's your case, be aware that you might "
@@ -244,7 +245,7 @@ class _AlertsTsmDialogState extends State<AlertsTsmDialog> {
           ),
           const Padding(
             padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
-            child: Text(
+            child: PdaText(
               "If all of this fails, there might be a bigger issue happening with your local Torn PDA installation. "
               "Please consider uninstalling the app and installing it again. Before you do so, make sure you backup "
               "whatever option you like in the cloud (you can do this in Settings).",

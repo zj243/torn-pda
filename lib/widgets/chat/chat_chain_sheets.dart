@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -213,10 +214,10 @@ class _FactionOpsSheetState extends State<_FactionOpsSheet> {
         children: [
           SegmentedButton<_Tab>(
             segments: const [
-              ButtonSegment(value: _Tab.targets, label: Text('Targets')),
-              ButtonSegment(value: _Tab.war, label: Text('War')),
-              ButtonSegment(value: _Tab.retals, label: Text('Retals')),
-              ButtonSegment(value: _Tab.finder, label: Text('Finder')),
+              ButtonSegment(value: _Tab.targets, label: PdaText('Targets')),
+              ButtonSegment(value: _Tab.war, label: PdaText('War')),
+              ButtonSegment(value: _Tab.retals, label: PdaText('Retals')),
+              ButtonSegment(value: _Tab.finder, label: PdaText('Finder')),
             ],
             selected: {_tab},
             showSelectedIcon: false,
@@ -521,7 +522,7 @@ class _ChainCooldown extends StatelessWidget {
         ].join(' - ');
         return Semantics(
           container: true,
-          label: 'Chain cooldown, $left left, $details',
+          label: context.interfaceText("Chain cooldown, {0} left, {1}", [left, details]),
           excludeSemantics: true,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
@@ -531,7 +532,7 @@ class _ChainCooldown extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Expanded(child: Text('Cooldown', style: theme.textTheme.titleMedium)),
+                    Expanded(child: PdaText('Cooldown', style: theme.textTheme.titleMedium)),
                     Text(left, style: chatBigStyle(theme)?.copyWith(color: chatChainColor(context, chain.level))),
                   ],
                 ),
@@ -575,7 +576,7 @@ class _ChainHead extends StatelessWidget {
               child: Row(
                 children: [
                   if (chain == null)
-                    Text(
+                    PdaText(
                       'No chain',
                       style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant),
                     )
@@ -597,7 +598,7 @@ class _ChainHead extends StatelessWidget {
               onPressed: () => unawaited(openPastChains(context)),
               child: const Row(
                 mainAxisSize: MainAxisSize.min,
-                children: [Text('Past chains'), Icon(Icons.chevron_right_rounded, size: 18)],
+                children: [PdaText('Past chains'), Icon(Icons.chevron_right_rounded, size: 18)],
               ),
             ),
         ],
@@ -676,14 +677,14 @@ class _WatchRowState extends State<_WatchRow> {
             children: [
               Icon(mine == null ? MdiIcons.shieldOutline : MdiIcons.shield, size: 18),
               const SizedBox(width: 8),
-              Text('On watch', style: theme.textTheme.titleSmall),
+              PdaText('On watch', style: theme.textTheme.titleSmall),
               const SizedBox(width: 12),
-              if (watch?.short ?? false) Flexible(child: Text('Older messages still loading', style: muted)),
+              if (watch?.short ?? false) Flexible(child: PdaText('Older messages still loading', style: muted)),
             ],
           ),
           const SizedBox(height: 4),
           if (state.watchers.isEmpty)
-            Text('No one', style: muted)
+            PdaText('No one', style: muted)
           else
             for (final w in state.watchers)
               Row(
@@ -698,7 +699,7 @@ class _WatchRowState extends State<_WatchRow> {
                           : null,
                     ),
                   ),
-                  Text('From ${clock.clock(w.since)} to ${clock.clock(w.until)}', style: muted),
+                  PdaText("From {0} to {1}", values: [clock.clock(w.since), clock.clock(w.until)], style: muted),
                 ],
               ),
           for (final r in state.reliefs)
@@ -742,7 +743,7 @@ class _WatchRowState extends State<_WatchRow> {
                     ),
                     FilledButton.tonal(
                       onPressed: can ? () => _take(room) : null,
-                      child: const Text('Take watch'),
+                      child: const PdaText('Take watch'),
                     ),
                   ]
                 : [
@@ -755,11 +756,11 @@ class _WatchRowState extends State<_WatchRow> {
                     OutlinedButton(
                       style: chatSecondaryButton(theme.colorScheme),
                       onPressed: can ? () => send(() => ops.askRelief(room, _relief)) : null,
-                      child: const Text('Ask for relief'),
+                      child: const PdaText('Ask for relief'),
                     ),
                     FilledButton.tonal(
                       onPressed: can ? () => send(() => ops.leaveWatch(room)) : null,
-                      child: const Text('Leave watch'),
+                      child: const PdaText('Leave watch'),
                     ),
                   ],
           ),
@@ -806,8 +807,8 @@ class _ChainSwitches extends StatelessWidget {
               Expanded(
                 child: ListTile(
                   leading: const Icon(MdiIcons.alphaPCircleOutline),
-                  title: const Text('Panic', maxLines: 1, overflow: TextOverflow.ellipsis),
-                  subtitle: const Text('Set up in Chaining', maxLines: 1, overflow: TextOverflow.ellipsis),
+                  title: const PdaText('Panic', maxLines: 1, overflow: TextOverflow.ellipsis),
+                  subtitle: const PdaText('Set up in Chaining', maxLines: 1, overflow: TextOverflow.ellipsis),
                   trailing: const Icon(Icons.chevron_right_rounded),
                   dense: true,
                   contentPadding: const EdgeInsets.symmetric(horizontal: 12),
@@ -845,7 +846,7 @@ class _WarHead extends StatelessWidget {
     if (war == null) {
       return Padding(
         padding: const EdgeInsets.fromLTRB(20, 6, 20, 4),
-        child: Text('No ranked war', style: theme.textTheme.titleMedium?.copyWith(color: muted)),
+        child: PdaText('No ranked war', style: theme.textTheme.titleMedium?.copyWith(color: muted)),
       );
     }
     final ahead = war.ours >= war.theirs;
@@ -856,8 +857,7 @@ class _WarHead extends StatelessWidget {
       child: Semantics(
         container: true,
         label:
-            'Ranked war, ${war.ours} to ${war.theirs}, ${ahead ? 'ahead' : 'behind'} by '
-            '${(war.ours - war.theirs).abs()}, $span in',
+            context.interfaceText("Ranked war, {0} to {1}, {2} by {3}, {4} in", [war.ours, war.theirs, ahead ? 'ahead' : 'behind', (war.ours - war.theirs).abs(), span]),
         excludeSemantics: true,
         child: Row(
           children: [

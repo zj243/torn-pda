@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:bot_toast/bot_toast.dart';
@@ -62,7 +63,7 @@ class IconsFilterPageState extends State<IconsFilterPage> {
                 const Padding(
                   padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
                   child:
-                      Text("Select which icons you would like to include as part of the Profile section's header"),
+                      PdaText("Select which icons you would like to include as part of the Profile section's header"),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 50),
@@ -88,7 +89,7 @@ class IconsFilterPageState extends State<IconsFilterPage> {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: widget.settingsProvider!.appBarTop ? 2 : 0,
-      title: const Text("Filter icons", style: TextStyle(color: Colors.white)),
+      title: const PdaText("Filter icons", style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
@@ -123,7 +124,7 @@ class IconsFilterPageState extends State<IconsFilterPage> {
                   icon: const Icon(Icons.link),
                   onPressed: () {
                     BotToast.showText(
-                      text: "This icon will open a browser (on double or long tap) to the appropriate section in game",
+                      text: context.interfaceText("This icon will open a browser (on double or long tap) to the appropriate section in game"),
                       textStyle: const TextStyle(
                         fontSize: 14,
                         color: Colors.white,

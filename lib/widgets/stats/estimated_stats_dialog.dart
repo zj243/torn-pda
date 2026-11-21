@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/providers/theme_provider.dart';
 import 'package:torn_pda/widgets/stats/stats_dialog.dart';
@@ -46,7 +47,7 @@ class EstimatedStatsDialog extends StatelessWidget {
     }
     final Widget refillWidget = Row(
       children: [
-        const Text(
+        const PdaText(
           "> (E) Refills: ",
           style: TextStyle(fontSize: 14),
         ),
@@ -71,7 +72,7 @@ class EstimatedStatsDialog extends StatelessWidget {
     }
     final Widget enhancementWidget = Row(
       children: [
-        const Text(
+        const PdaText(
           "> Enhancer(s): ",
           style: TextStyle(fontSize: 14),
         ),
@@ -120,7 +121,7 @@ class EstimatedStatsDialog extends StatelessWidget {
 
       awardsWidget = Row(
         children: [
-          const Text(
+          const PdaText(
             "> Awards: ",
             style: TextStyle(fontSize: 14),
           ),
@@ -139,7 +140,7 @@ class EstimatedStatsDialog extends StatelessWidget {
       children: [
         Row(
           children: [
-            const Text(
+            const PdaText(
               "> SSL probability: ",
               style: TextStyle(fontSize: 14),
             ),
@@ -160,7 +161,7 @@ class EstimatedStatsDialog extends StatelessWidget {
         ),
         const Padding(
           padding: EdgeInsets.only(left: 12),
-          child: Text(
+          child: PdaText(
             "[Sports Science Lab Gym]",
             style: TextStyle(fontSize: 9),
           ),
@@ -170,12 +171,12 @@ class EstimatedStatsDialog extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Xanax: ${estimatedStatsPayload.otherXanTaken}",
+              PdaText(
+                "Xanax: {0}", values: [estimatedStatsPayload.otherXanTaken],
                 style: const TextStyle(fontSize: 12),
               ),
-              Text(
-                "Ecstasy: ${estimatedStatsPayload.otherEctTaken}",
+              PdaText(
+                "Ecstasy: {0}", values: [estimatedStatsPayload.otherEctTaken],
                 style: const TextStyle(fontSize: 12),
               ),
               Text(
@@ -197,7 +198,7 @@ class EstimatedStatsDialog extends StatelessWidget {
           children: [
             const Padding(
               padding: EdgeInsets.only(bottom: 20),
-              child: Text(
+              child: PdaText(
                 "TRAINING COMPARISON",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
@@ -205,16 +206,16 @@ class EstimatedStatsDialog extends StatelessWidget {
             if (estimatedStatsPayload.otherFactionName != "0")
               Padding(
                 padding: const EdgeInsets.all(2),
-                child: Text(
-                  "Faction: ${estimatedStatsPayload.otherFactionName}",
+                child: PdaText(
+                  "Faction: {0}", values: [estimatedStatsPayload.otherFactionName],
                   style: const TextStyle(fontSize: 12),
                 ),
               ),
             if (estimatedStatsPayload.otherLastActionRelative.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.all(2),
-                child: Text(
-                  "Online: ${estimatedStatsPayload.otherLastActionRelative.replaceAll(RegExp('0 minutes ago'), "now")}",
+                child: PdaText(
+                  "Online: {0}", values: [estimatedStatsPayload.otherLastActionRelative.replaceAll(RegExp('0 minutes ago'), "now")],
                   style: const TextStyle(fontSize: 12),
                 ),
               ),
@@ -248,7 +249,7 @@ class EstimatedStatsDialog extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 20, left: 4),
                 child: Row(
                   children: [
-                    const Text(
+                    const PdaText(
                       "> Estimated stats: ",
                       style: TextStyle(fontSize: 14),
                     ),

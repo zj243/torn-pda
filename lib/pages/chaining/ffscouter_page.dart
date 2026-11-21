@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:convert';
 
 import 'package:bot_toast/bot_toast.dart';
@@ -252,7 +253,7 @@ class FFScouterPageState extends State<FFScouterPage> with SingleTickerProviderS
                 )
               : IconButton(
                   icon: const Icon(Icons.sync, color: Colors.white),
-                  tooltip: "Refresh all statuses",
+                  tooltip: context.interfaceText("Refresh all statuses"),
                   onPressed: _refreshAllTargetStatuses,
                 ),
         IconButton(
@@ -279,13 +280,13 @@ class FFScouterPageState extends State<FFScouterPage> with SingleTickerProviderS
           children: [
             Icon(Icons.shield_outlined, color: Colors.grey[400], size: 50),
             const SizedBox(height: 16),
-            Text(
+            PdaText(
               "FFScouter is not enabled",
               style: TextStyle(color: Colors.grey[600], fontSize: 16, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 10),
-            Text(
+            PdaText(
               "Please review the information, terms and data policy before enabling FFScouter",
               style: TextStyle(color: Colors.grey[500], fontSize: 13),
               textAlign: TextAlign.center,
@@ -303,7 +304,7 @@ class FFScouterPageState extends State<FFScouterPage> with SingleTickerProviderS
                 if (mounted) setState(() {});
               },
               icon: const Icon(Icons.info_outline, size: 18),
-              label: const Text("Review & Enable"),
+              label: const PdaText("Review & Enable"),
             ),
           ],
         ),
@@ -320,13 +321,13 @@ class FFScouterPageState extends State<FFScouterPage> with SingleTickerProviderS
           children: [
             Icon(Icons.cloud_off, color: Colors.grey[400], size: 50),
             const SizedBox(height: 16),
-            Text(
+            PdaText(
               "FFScouter temporarily deactivated",
               style: TextStyle(color: Colors.grey[600], fontSize: 16, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 10),
-            Text(
+            PdaText(
               "This feature is temporarily disabled. Please try again later.",
               style: TextStyle(color: Colors.grey[500], fontSize: 13),
               textAlign: TextAlign.center,
@@ -353,7 +354,7 @@ class FFScouterPageState extends State<FFScouterPage> with SingleTickerProviderS
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Filters", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                  const PdaText("Filters", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
                   Icon(_filtersExpanded ? Icons.expand_less : Icons.expand_more, size: 20),
                 ],
               ),
@@ -395,7 +396,7 @@ class FFScouterPageState extends State<FFScouterPage> with SingleTickerProviderS
       children: [
         Row(
           children: [
-            const Text("Mode: ", style: TextStyle(fontSize: 13)),
+            const PdaText("Mode: ", style: TextStyle(fontSize: 13)),
             const SizedBox(width: 8),
             Expanded(
               child: SegmentedButton<String?>(
@@ -420,15 +421,15 @@ class FFScouterPageState extends State<FFScouterPage> with SingleTickerProviderS
                 segments: const [
                   ButtonSegment(
                     value: null,
-                    label: FittedBox(fit: BoxFit.scaleDown, child: Text("Custom")),
+                    label: FittedBox(fit: BoxFit.scaleDown, child: PdaText("Custom")),
                   ),
                   ButtonSegment(
                     value: "respect",
-                    label: FittedBox(fit: BoxFit.scaleDown, child: Text("Respect")),
+                    label: FittedBox(fit: BoxFit.scaleDown, child: PdaText("Respect")),
                   ),
                   ButtonSegment(
                     value: "level",
-                    label: FittedBox(fit: BoxFit.scaleDown, child: Text("Level")),
+                    label: FittedBox(fit: BoxFit.scaleDown, child: PdaText("Level")),
                   ),
                 ],
                 selected: {_preset},
@@ -457,17 +458,17 @@ class FFScouterPageState extends State<FFScouterPage> with SingleTickerProviderS
   Widget _buildLevelRange() {
     return Row(
       children: [
-        const Text("Level: ", style: TextStyle(fontSize: 13)),
+        const PdaText("Level: ", style: TextStyle(fontSize: 13)),
         SizedBox(
           width: 50,
           child: TextFormField(
             controller: _minLevelCtrl,
             keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               isDense: true,
               contentPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 6),
               border: OutlineInputBorder(),
-              labelText: "Min",
+              labelText: context.interfaceText("Min"),
               labelStyle: TextStyle(fontSize: 11),
             ),
             style: const TextStyle(fontSize: 13),
@@ -486,11 +487,11 @@ class FFScouterPageState extends State<FFScouterPage> with SingleTickerProviderS
           child: TextFormField(
             controller: _maxLevelCtrl,
             keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               isDense: true,
               contentPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 6),
               border: OutlineInputBorder(),
-              labelText: "Max",
+              labelText: context.interfaceText("Max"),
               labelStyle: TextStyle(fontSize: 11),
             ),
             style: const TextStyle(fontSize: 13),
@@ -510,17 +511,17 @@ class FFScouterPageState extends State<FFScouterPage> with SingleTickerProviderS
   Widget _buildFairFightRange() {
     return Row(
       children: [
-        const Text("Fair Fight: ", style: TextStyle(fontSize: 13)),
+        const PdaText("Fair Fight: ", style: TextStyle(fontSize: 13)),
         SizedBox(
           width: 55,
           child: TextFormField(
             controller: _minFfCtrl,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               isDense: true,
               contentPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 6),
               border: OutlineInputBorder(),
-              labelText: "Min",
+              labelText: context.interfaceText("Min"),
               labelStyle: TextStyle(fontSize: 11),
             ),
             style: const TextStyle(fontSize: 13),
@@ -539,11 +540,11 @@ class FFScouterPageState extends State<FFScouterPage> with SingleTickerProviderS
           child: TextFormField(
             controller: _maxFfCtrl,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               isDense: true,
               contentPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 6),
               border: OutlineInputBorder(),
-              labelText: "Max",
+              labelText: context.interfaceText("Max"),
               labelStyle: TextStyle(fontSize: 11),
             ),
             style: const TextStyle(fontSize: 13),
@@ -581,7 +582,7 @@ class FFScouterPageState extends State<FFScouterPage> with SingleTickerProviderS
                 ),
               ),
               const SizedBox(width: 4),
-              const Text("Inactive only", style: TextStyle(fontSize: 12)),
+              const PdaText("Inactive only", style: TextStyle(fontSize: 12)),
             ],
           ),
         ),
@@ -603,7 +604,7 @@ class FFScouterPageState extends State<FFScouterPage> with SingleTickerProviderS
                 ),
               ),
               const SizedBox(width: 4),
-              const Text("Factionless only", style: TextStyle(fontSize: 12)),
+              const PdaText("Factionless only", style: TextStyle(fontSize: 12)),
             ],
           ),
         ),
@@ -614,17 +615,17 @@ class FFScouterPageState extends State<FFScouterPage> with SingleTickerProviderS
   Widget _buildLimitSelector() {
     return Row(
       children: [
-        const Text("Results: ", style: TextStyle(fontSize: 13)),
+        const PdaText("Results: ", style: TextStyle(fontSize: 13)),
         SizedBox(
           width: 55,
           child: TextFormField(
             controller: _limitCtrl,
             keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               isDense: true,
               contentPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 6),
               border: OutlineInputBorder(),
-              labelText: "Max",
+              labelText: context.interfaceText("Max"),
               labelStyle: TextStyle(fontSize: 11),
             ),
             style: const TextStyle(fontSize: 13),
@@ -681,7 +682,7 @@ class FFScouterPageState extends State<FFScouterPage> with SingleTickerProviderS
               ),
               if (_errorCode == 6) ...[
                 const SizedBox(height: 12),
-                Text(
+                PdaText(
                   "Your API key is not registered with FFScouter. "
                   "You can register it directly from Torn PDA.",
                   style: TextStyle(color: Colors.grey[600], fontSize: 13),
@@ -703,7 +704,7 @@ class FFScouterPageState extends State<FFScouterPage> with SingleTickerProviderS
                     if (mounted) setState(() {});
                   },
                   icon: const Icon(Icons.app_registration, size: 18),
-                  label: const Text("Register Key"),
+                  label: const PdaText("Register Key"),
                 ),
               ],
             ],
@@ -721,7 +722,7 @@ class FFScouterPageState extends State<FFScouterPage> with SingleTickerProviderS
             children: [
               Icon(Icons.search, color: Colors.grey[400], size: 50),
               const SizedBox(height: 10),
-              Text(
+              PdaText(
                 "Set your filters and tap Find Targets\nto search via FFScouter",
                 style: TextStyle(color: Colors.grey[600], fontSize: 13),
                 textAlign: TextAlign.center,

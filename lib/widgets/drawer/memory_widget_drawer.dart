@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -65,8 +66,8 @@ class MemoryBarWidgetDrawerState extends State<MemoryBarWidgetDrawer> {
         child: Center(
           child: Column(
             children: [
-              Text('MEMORY USAGE', style: TextStyle(fontSize: 12, color: Colors.red)),
-              Text('Error: unable to fetch memory info', style: TextStyle(fontSize: 12, color: Colors.red)),
+              PdaText('MEMORY USAGE', style: TextStyle(fontSize: 12, color: Colors.red)),
+              PdaText('Error: unable to fetch memory info', style: TextStyle(fontSize: 12, color: Colors.red)),
             ],
           ),
         ),
@@ -124,13 +125,13 @@ class MemoryBarWidgetDrawerState extends State<MemoryBarWidgetDrawer> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Text('MEMORY USAGE', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
+        const PdaText('MEMORY USAGE', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
         const SizedBox(height: 4),
         Row(children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('USED', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
+              const PdaText('USED', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
               Text(_fmt(usedM), style: const TextStyle(fontSize: 12)),
             ],
           ),
@@ -148,7 +149,7 @@ class MemoryBarWidgetDrawerState extends State<MemoryBarWidgetDrawer> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const Text('TOTAL', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
+              const PdaText('TOTAL', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
               Text(deviceTotal > 0 ? _fmt(deviceTotal) : '—', style: const TextStyle(fontSize: 12)),
             ],
           ),
@@ -185,7 +186,7 @@ class MemoryBarWidgetDrawerState extends State<MemoryBarWidgetDrawer> {
                 Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                   dot(purple),
                   Flexible(
-                      child: Text('Free: ${_fmt(deviceFree)}',
+                      child: PdaText("Free: {0}", values: [_fmt(deviceFree)],
                           style: const TextStyle(fontSize: 12), textAlign: TextAlign.end))
                 ]),
               ],

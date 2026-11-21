@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:easy_rich_text/easy_rich_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class LootRangersExplanationDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text("Loot Rangers"),
+      title: const PdaText("Loot Rangers"),
       content: SingleChildScrollView(
         child: EasyRichText(
           "The Loot Rangers Discord server is a community of Torn City players who come together to "
@@ -42,7 +43,7 @@ class LootRangersExplanationDialog extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: 8),
           child: TextButton(
-            child: const Text("Awesome!"),
+            child: const PdaText("Awesome!"),
             onPressed: () {
               Navigator.of(context).pop('exit');
             },

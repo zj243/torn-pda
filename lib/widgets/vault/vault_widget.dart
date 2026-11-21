@@ -1,4 +1,5 @@
 // Package imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:html/dom.dart' as dom;
@@ -61,7 +62,7 @@ class VaultWidgetState extends State<VaultWidget> {
         header: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
+            const PdaText(
               'VAULT SHARE',
               style: TextStyle(color: Colors.orange, fontSize: 12),
             ),
@@ -93,7 +94,7 @@ class VaultWidgetState extends State<VaultWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Flexible(
-                  child: Text(
+                  child: PdaText(
                     "There was an error identifying your last saved transaction, please reenter "
                     "the current vault distribution again",
                     style: TextStyle(color: Colors.red, fontSize: 12),
@@ -112,7 +113,7 @@ class VaultWidgetState extends State<VaultWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Flexible(
-                      child: Text(
+                      child: PdaText(
                         "Initialise vault values",
                         style: TextStyle(color: Colors.orange, fontSize: 12),
                       ),
@@ -125,7 +126,7 @@ class VaultWidgetState extends State<VaultWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Flexible(
-                      child: Text(
+                      child: PdaText(
                         "(alternatively, deactivate the widget through the appbar icon)",
                         style: TextStyle(
                           color: Colors.orange,

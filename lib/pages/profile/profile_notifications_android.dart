@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -109,7 +110,7 @@ class ProfileNotificationsAndroidState extends State<ProfileNotificationsAndroid
                         children: <Widget>[
                           const Padding(
                             padding: EdgeInsets.all(20.0),
-                            child: Text('Here you can specify your preferred alerting '
+                            child: PdaText('Here you can specify your preferred alerting '
                                 'method for each type of event.'),
                           ),
                           _rowsWithTypes(),
@@ -135,7 +136,7 @@ class ProfileNotificationsAndroidState extends State<ProfileNotificationsAndroid
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
-      title: const Text("Notification options", style: TextStyle(color: Colors.white)),
+      title: const PdaText("Notification options", style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
@@ -216,7 +217,7 @@ class ProfileNotificationsAndroidState extends State<ProfileNotificationsAndroid
         types.add(
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Text(
+            child: PdaText(
               'This option does not apply if you are using the dedicated card for Travel in the '
               "Profile section (in that case you'll have direct access to all types of notification methods)",
               style: TextStyle(
@@ -233,7 +234,7 @@ class ProfileNotificationsAndroidState extends State<ProfileNotificationsAndroid
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Text("Travel timings & text"),
+                const PdaText("Travel timings & text"),
                 IconButton(
                   icon: const Icon(Icons.keyboard_arrow_right_outlined),
                   onPressed: () {
@@ -272,7 +273,7 @@ class ProfileNotificationsAndroidState extends State<ProfileNotificationsAndroid
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Text('Trigger'),
+                const PdaText('Trigger'),
                 const Padding(
                   padding: EdgeInsets.only(left: 20),
                 ),
@@ -334,7 +335,7 @@ class ProfileNotificationsAndroidState extends State<ProfileNotificationsAndroid
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Text('Trigger'),
+                const PdaText('Trigger'),
                 const Padding(
                   padding: EdgeInsets.only(left: 20),
                 ),
@@ -395,7 +396,7 @@ class ProfileNotificationsAndroidState extends State<ProfileNotificationsAndroid
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Text("Hospital notification timings"),
+                const PdaText("Hospital notification timings"),
                 IconButton(
                   icon: const Icon(Icons.keyboard_arrow_right_outlined),
                   onPressed: () {
@@ -423,7 +424,7 @@ class ProfileNotificationsAndroidState extends State<ProfileNotificationsAndroid
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Text("Jail notification timings"),
+                const PdaText("Jail notification timings"),
                 IconButton(
                   icon: const Icon(Icons.keyboard_arrow_right_outlined),
                   onPressed: () {
@@ -451,7 +452,7 @@ class ProfileNotificationsAndroidState extends State<ProfileNotificationsAndroid
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Text("Ranked War notification timings"),
+                const PdaText("Ranked War notification timings"),
                 IconButton(
                   icon: const Icon(Icons.keyboard_arrow_right_outlined),
                   onPressed: () {
@@ -479,7 +480,7 @@ class ProfileNotificationsAndroidState extends State<ProfileNotificationsAndroid
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Text("Race start notification timings"),
+                const PdaText("Race start notification timings"),
                 IconButton(
                   icon: const Icon(Icons.keyboard_arrow_right_outlined),
                   onPressed: () {
@@ -544,7 +545,7 @@ class ProfileNotificationsAndroidState extends State<ProfileNotificationsAndroid
           value: "0",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "Notification",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -557,7 +558,7 @@ class ProfileNotificationsAndroidState extends State<ProfileNotificationsAndroid
           value: "1",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "Alarm",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -570,7 +571,7 @@ class ProfileNotificationsAndroidState extends State<ProfileNotificationsAndroid
           value: "2",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "Timer",
               textAlign: TextAlign.right,
               style: TextStyle(

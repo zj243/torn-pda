@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:io';
 
 // Flutter imports:
@@ -94,11 +95,11 @@ class DelayedTravelDialogState extends State<DelayedTravelDialog> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text("Departure notification", style: TextStyle(fontSize: 13)),
+                          const PdaText("Departure notification", style: TextStyle(fontSize: 13)),
                           _timeDropdown(),
                         ],
                       ),
-                      Text(
+                      PdaText(
                         'Be aware that the restock time calculation might not be exact. You can '
                         'shift your notification earlier or later here',
                         style: TextStyle(color: Colors.grey[600], fontSize: 11, fontStyle: FontStyle.italic),
@@ -106,7 +107,7 @@ class DelayedTravelDialogState extends State<DelayedTravelDialog> {
                       if (Platform.isAndroid && !_systemClockSupportsTarget)
                         Padding(
                           padding: const EdgeInsets.only(top: 8),
-                          child: Text(
+                          child: PdaText(
                             "Android's clock cannot schedule more than 24 hours ahead, so this alarm will be "
                             "activated by Torn PDA instead and the system timer is not available",
                             style: TextStyle(color: Colors.orange[700], fontSize: 11, fontStyle: FontStyle.italic),
@@ -126,7 +127,7 @@ class DelayedTravelDialogState extends State<DelayedTravelDialog> {
                               if (_notificationActive) {
                                 _cancelNotifications();
                                 BotToast.showText(
-                                  text: 'Notification cancelled!',
+                                  text: context.interfaceText('Notification cancelled!'),
                                   textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                                   contentColor: Colors.orange[700]!,
                                   duration: const Duration(seconds: 5),
@@ -136,7 +137,7 @@ class DelayedTravelDialogState extends State<DelayedTravelDialog> {
                                 _scheduleNotification();
                                 Navigator.of(context).pop();
                                 BotToast.showText(
-                                  text: 'Boarding call notification set for ${_timeFormatter(_targetTime)}',
+                                  text: context.interfaceText("Boarding call notification set for {0}", [_timeFormatter(_targetTime)]),
                                   textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                                   contentColor: Colors.green[700]!,
                                   duration: const Duration(seconds: 5),
@@ -156,7 +157,7 @@ class DelayedTravelDialogState extends State<DelayedTravelDialog> {
                                 if (_alarmKitActive) {
                                   await _cancelAlarmIOS();
                                   BotToast.showText(
-                                    text: 'Boarding call alarm cancelled!',
+                                    text: context.interfaceText('Boarding call alarm cancelled!'),
                                     textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                                     contentColor: Colors.orange[700]!,
                                     duration: const Duration(seconds: 5),
@@ -165,7 +166,7 @@ class DelayedTravelDialogState extends State<DelayedTravelDialog> {
                                 } else {
                                   await _scheduleAlarmIOS();
                                   BotToast.showText(
-                                    text: 'Boarding call alarm set for ${_timeFormatter(_targetTime)}',
+                                    text: context.interfaceText("Boarding call alarm set for {0}", [_timeFormatter(_targetTime)]),
                                     textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                                     contentColor: Colors.green[700]!,
                                     duration: const Duration(seconds: 5),
@@ -184,7 +185,7 @@ class DelayedTravelDialogState extends State<DelayedTravelDialog> {
                                   if (_inAppAlarmActive) await _cancelInAppAlarm();
                                   _setAlarm();
                                   BotToast.showText(
-                                    text: 'Boarding call alarm set for ${_timeFormatter(_targetTime)}',
+                                    text: context.interfaceText("Boarding call alarm set for {0}", [_timeFormatter(_targetTime)]),
                                     textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                                     contentColor: Colors.green[700]!,
                                     duration: const Duration(seconds: 5),
@@ -196,7 +197,7 @@ class DelayedTravelDialogState extends State<DelayedTravelDialog> {
                                 if (_inAppAlarmActive) {
                                   await _cancelInAppAlarm();
                                   BotToast.showText(
-                                    text: 'Boarding call alarm cancelled!',
+                                    text: context.interfaceText('Boarding call alarm cancelled!'),
                                     textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                                     contentColor: Colors.orange[700]!,
                                     duration: const Duration(seconds: 5),
@@ -208,8 +209,7 @@ class DelayedTravelDialogState extends State<DelayedTravelDialog> {
                                 await _scheduleInAppAlarm();
                                 BotToast.showText(
                                   text:
-                                      'Boarding call alarm set for ${_timeFormatter(_targetTime)}, '
-                                      'it will be activated by Torn PDA',
+                                      context.interfaceText("Boarding call alarm set for {0}, it will be activated by Torn PDA", [_timeFormatter(_targetTime)]),
                                   textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                                   contentColor: Colors.green[700]!,
                                   duration: const Duration(seconds: 5),
@@ -228,7 +228,7 @@ class DelayedTravelDialogState extends State<DelayedTravelDialog> {
                                 }
                                 _setTimer();
                                 BotToast.showText(
-                                  text: 'Boarding call timer set for ${_timeFormatter(_targetTime)}',
+                                  text: context.interfaceText("Boarding call timer set for {0}", [_timeFormatter(_targetTime)]),
                                   textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                                   contentColor: Colors.green[700]!,
                                   duration: const Duration(seconds: 5),
@@ -247,7 +247,7 @@ class DelayedTravelDialogState extends State<DelayedTravelDialog> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         TextButton(
-                          child: const Text("Close"),
+                          child: const PdaText("Close"),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
@@ -420,7 +420,7 @@ class DelayedTravelDialogState extends State<DelayedTravelDialog> {
     final available = await AlarmKitServiceIos.isAvailable();
     if (!available) {
       BotToast.showText(
-        text: 'Alarms are not available on this iOS device!',
+        text: context.interfaceText('Alarms are not available on this iOS device!'),
         textStyle: const TextStyle(fontSize: 14, color: Colors.white),
         contentColor: Colors.orange[700]!,
         duration: const Duration(seconds: 5),
@@ -531,7 +531,7 @@ class DelayedTravelDialogState extends State<DelayedTravelDialog> {
 
   void _showSystemClockLimitToast() {
     BotToast.showText(
-      text: "Android's timer cannot be set for more than 24 hours, use the alarm or the notification instead!",
+      text: context.interfaceText("Android's timer cannot be set for more than 24 hours, use the alarm or the notification instead!"),
       textStyle: const TextStyle(fontSize: 14, color: Colors.white),
       contentColor: Colors.orange[700]!,
       duration: const Duration(seconds: 5),

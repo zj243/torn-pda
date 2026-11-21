@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 // Package imports:
 import 'package:bot_toast/bot_toast.dart';
@@ -122,8 +123,8 @@ class StakeoutsPageState extends State<StakeoutsPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(children: [const Text("Alerts silenced until"), Text(sleepString!)]),
-                    ElevatedButton(onPressed: () => s.disableSleepStakeouts(), child: const Text("Deactivate")),
+                    Column(children: [const PdaText("Alerts silenced until"), Text(sleepString!)]),
+                    ElevatedButton(onPressed: () => s.disableSleepStakeouts(), child: const PdaText("Deactivate")),
                   ],
                 ),
               ),
@@ -137,10 +138,10 @@ class StakeoutsPageState extends State<StakeoutsPage> {
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: Tooltip(
-                    message: 'Watch your stakeouts in a floating window',
+                    message: context.interfaceText('Watch your stakeouts in a floating window'),
                     child: OutlinedButton.icon(
                       icon: const Icon(Icons.picture_in_picture_alt_outlined, size: 18),
-                      label: const Text('Floating window'),
+                      label: const PdaText('Floating window'),
                       onPressed: () => Get.find<PipController>().openStakeouts(
                         players: s.stakeouts.where((stakeout) => s.isAnyOptionActive(stakeout: stakeout)).length,
                       ),
@@ -153,11 +154,11 @@ class StakeoutsPageState extends State<StakeoutsPage> {
                 padding: const EdgeInsets.fromLTRB(20, 100, 20, 0),
                 child: Column(
                   children: [
-                    const Text("No stakeout targets!", textAlign: TextAlign.center),
+                    const PdaText("No stakeout targets!", textAlign: TextAlign.center),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text("Add your first one:", textAlign: TextAlign.center),
+                        const PdaText("Add your first one:", textAlign: TextAlign.center),
                         IconButton(
                           icon: const Icon(MdiIcons.cameraPlusOutline, size: 30),
                           onPressed: () {
@@ -184,7 +185,7 @@ class StakeoutsPageState extends State<StakeoutsPage> {
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
       systemOverlayStyle: SystemUiOverlayStyle.light,
-      title: const Text("Stakeouts", style: TextStyle(color: Colors.white)),
+      title: const PdaText("Stakeouts", style: TextStyle(color: Colors.white)),
       leadingWidth: _webViewProvider.appCanOpenBrowser ? 88 : 50,
       leading: Row(
         children: [
@@ -211,7 +212,7 @@ class StakeoutsPageState extends State<StakeoutsPage> {
           onPressed: () {
             if (_s.stakeouts.length >= 15) {
               BotToast.showText(
-                text: "You have reached a maximum of 15 stakeout targets!",
+                text: context.interfaceText("You have reached a maximum of 15 stakeout targets!"),
                 textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                 contentColor: Colors.grey[800]!,
                 duration: const Duration(seconds: 3),
@@ -224,8 +225,8 @@ class StakeoutsPageState extends State<StakeoutsPage> {
         ),
         Showcase(
           key: _showcaseInfo,
-          title: 'Stakeouts information',
-          description: '\nMake sure to read this to understand how stakeouts are implemented in Torn PDA!',
+          title: context.interfaceText('Stakeouts information'),
+          description: context.interfaceText('\nMake sure to read this to understand how stakeouts are implemented in Torn PDA!'),
           targetPadding: const EdgeInsets.all(10),
           disableMovingAnimation: true,
           textColor: _themeProvider.mainText,
@@ -258,7 +259,7 @@ class StakeoutsPageState extends State<StakeoutsPage> {
               value: s.stakeoutsEnabled!,
               onChanged: (value) {
                 value ? s.enableStakeOuts() : s.disableStakeouts();
-                BotToast.showText(text: "Stakeouts ${value ? 'enabled' : 'disabled'}!");
+                BotToast.showText(text: context.interfaceText("Stakeouts {0}!", [value ? 'enabled' : 'disabled']));
               },
               activeTrackColor: Colors.lightGreenAccent,
               activeThumbColor: Colors.green,
@@ -302,10 +303,10 @@ class StakeoutsPageState extends State<StakeoutsPage> {
                             minLines: 1,
                             maxLines: 2,
                             keyboardType: TextInputType.number,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               counterText: "",
                               border: OutlineInputBorder(),
-                              labelText: 'Insert player ID',
+                              labelText: context.interfaceText('Insert player ID'),
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -324,7 +325,7 @@ class StakeoutsPageState extends State<StakeoutsPage> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
                               TextButton(
-                                child: const Text("Add"),
+                                child: const PdaText("Add"),
                                 onPressed: () async {
                                   if (_addFormKey.currentState!.validate()) {
                                     // Get rid of dialog first
@@ -348,7 +349,7 @@ class StakeoutsPageState extends State<StakeoutsPage> {
                                 },
                               ),
                               TextButton(
-                                child: const Text("Cancel"),
+                                child: const PdaText("Cancel"),
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                   _addIdController.text = '';

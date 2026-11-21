@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -112,7 +113,7 @@ class _FFScouterFlightInfoState extends State<FFScouterFlightInfo> {
       context: context,
       builder: (ctx) {
         return AlertDialog(
-          title: const Text("FFScouter flight", style: TextStyle(fontSize: 16)),
+          title: const PdaText("FFScouter flight", style: TextStyle(fontSize: 16)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,7 +131,7 @@ class _FFScouterFlightInfoState extends State<FFScouterFlightInfo> {
               if (flight.bookLikelyBeingUsed == true) _detailRow("Travel book", "Likely in use"),
             ],
           ),
-          actions: [TextButton(onPressed: () => Navigator.of(ctx).pop(), child: const Text("Close"))],
+          actions: [TextButton(onPressed: () => Navigator.of(ctx).pop(), child: const PdaText("Close"))],
         );
       },
     );

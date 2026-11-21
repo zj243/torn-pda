@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 // Package imports:
@@ -69,7 +70,7 @@ class FriendCardState extends State<FriendCard> {
             icon: Icons.delete,
             onPressed: (context) {
               BotToast.showText(
-                text: 'Deleted ${_friend!.name}!',
+                text: context.interfaceText("Deleted {0}!", [_friend!.name]),
                 textStyle: const TextStyle(
                   fontSize: 14,
                   color: Colors.white,
@@ -234,7 +235,7 @@ class FriendCardState extends State<FriendCard> {
                         ),
                         const Padding(
                           padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          child: PdaText(
                             'Action: ',
                           ),
                         ),
@@ -289,7 +290,7 @@ class FriendCardState extends State<FriendCard> {
                         padding: const EdgeInsetsDirectional.only(start: 8),
                         child: Row(
                           children: <Widget>[
-                            const Text('Notes: '),
+                            const PdaText('Notes: '),
                             GetBuilder<PlayerNotesController>(
                               builder: (ctrl) {
                                 final note = ctrl.getNoteForPlayer(_friend!.playerId.toString());
@@ -637,7 +638,7 @@ class FriendCardState extends State<FriendCard> {
     if (updateWorked) {
     } else {
       BotToast.showText(
-        text: "Error updating ${_friend!.name}!",
+        text: context.interfaceText("Error updating {0}!", [_friend!.name]),
         textStyle: const TextStyle(
           fontSize: 14,
           color: Colors.white,

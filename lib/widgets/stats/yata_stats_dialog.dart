@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:torn_pda/models/chaining/yata/yata_stats_response_model.dart';
@@ -44,7 +45,7 @@ class _YataStatsDialogState extends State<YataStatsDialog> {
               children: [
                 Padding(
                   padding: EdgeInsets.only(bottom: 20),
-                  child: Text(
+                  child: PdaText(
                     "YATA STATS ESTIMATE",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
@@ -58,14 +59,14 @@ class _YataStatsDialogState extends State<YataStatsDialog> {
                   if (snapshot.data is YataStatsResponse) {
                     return _mainYataResponseWidget(snapshot.data as YataStatsResponse);
                   }
-                  return const Text("Error fetching from YATA");
+                  return const PdaText("Error fetching from YATA");
                 }
                 return const Padding(
                   padding: EdgeInsets.only(top: 100),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Text("Fetching from YATA"),
+                      PdaText("Fetching from YATA"),
                       Padding(
                         padding: EdgeInsets.only(top: 20),
                         child: Center(child: CircularProgressIndicator()),
@@ -83,7 +84,7 @@ class _YataStatsDialogState extends State<YataStatsDialog> {
 
   Widget _mainYataResponseWidget(YataStatsResponse yataResponse) {
     if (yataResponse.success) {
-      if (yataResponse.data == null) return const Text("Error: missing data!");
+      if (yataResponse.data == null) return const PdaText("Error: missing data!");
 
       YataStatsData? statsData = yataResponse.data!.data[widget.yataStatsPayload.targetId.toString()];
       if (statsData != null) {
@@ -94,35 +95,35 @@ class _YataStatsDialogState extends State<YataStatsDialog> {
           children: [
             Row(
               children: [
-                const Text("Total: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                const PdaText("Total: ", style: TextStyle(fontWeight: FontWeight.bold)),
                 Text(statsData.total != null ? formatBigNumbers(statsData.total!) : 'unknown'),
               ],
             ),
             const SizedBox(height: 10),
             Row(
               children: [
-                const Text("Score: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                const PdaText("Score: ", style: TextStyle(fontWeight: FontWeight.bold)),
                 Text(statsData.score != null ? formatBigNumbers(statsData.score!) : 'unknown'),
               ],
             ),
             const SizedBox(height: 10),
             Row(
               children: [
-                const Text("Type: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                const PdaText("Type: ", style: TextStyle(fontWeight: FontWeight.bold)),
                 Text(statsData.type ?? 'unknown'),
               ],
             ),
             const SizedBox(height: 10),
             Row(
               children: [
-                const Text("Skewness: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                const PdaText("Skewness: ", style: TextStyle(fontWeight: FontWeight.bold)),
                 Text("${statsData.skewness ?? 'unknown'}"),
               ],
             ),
             const SizedBox(height: 10),
             Row(
               children: [
-                const Text("Updated: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                const PdaText("Updated: ", style: TextStyle(fontWeight: FontWeight.bold)),
                 Text(ts),
               ],
             ),
@@ -143,7 +144,7 @@ class _YataStatsDialogState extends State<YataStatsDialog> {
     }
 
     return const Center(
-      child: Text(
+      child: PdaText(
         "Error: missing data!",
         style: TextStyle(
           color: Colors.red,

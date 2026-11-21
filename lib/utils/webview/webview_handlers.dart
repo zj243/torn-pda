@@ -1,4 +1,5 @@
 // ignore: depend_on_referenced_packages
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
@@ -730,7 +731,7 @@ class WebviewHandlers {
               type: ToastificationType.error,
               alignment: Alignment.bottomCenter,
               autoCloseDuration: const Duration(seconds: 10),
-              title: const Text("There was an error launching native application!", maxLines: 10),
+              title: const PdaText("There was an error launching native application!", maxLines: 10),
             );
             return {'success': false, 'error': 'The application could not be launched'};
           }
@@ -743,7 +744,7 @@ class WebviewHandlers {
             type: ToastificationType.error,
             alignment: Alignment.bottomCenter,
             autoCloseDuration: const Duration(seconds: 10),
-            title: const Text("There was an error launching native application!", maxLines: 10),
+            title: const PdaText("There was an error launching native application!", maxLines: 10),
           );
           return {'success': false, 'error': e.toString()};
         }
@@ -814,7 +815,7 @@ class WebviewHandlers {
 
           return {'status': 'success', 'message': 'File shared successfully'};
         } catch (e) {
-          BotToast.showText(text: "Script share file error: $e");
+          BotToast.showText(text: context.interfaceText("Script share file error: {0}", [e]));
           log('[Share File Error] $e');
           return {'status': 'error', 'message': e.toString()};
         }

@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:torn_pda/models/chaining/ffscouter/ffscouter_activity_model.dart';
@@ -99,9 +100,9 @@ class _FFScouterActivityBadgeState extends State<FFScouterActivityBadge> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Now: ~$nowPct% likely active", style: const TextStyle(fontSize: 13)),
-              Text(
-                "Most active around ${peakHour.toString().padLeft(2, '0')}:00",
+              PdaText("Now: ~{0}% likely active", values: [nowPct], style: const TextStyle(fontSize: 13)),
+              PdaText(
+                "Most active around {0}:00", values: [peakHour.toString().padLeft(2, '0')],
                 style: const TextStyle(fontSize: 13),
               ),
               const SizedBox(height: 12),
@@ -120,7 +121,7 @@ class _FFScouterActivityBadgeState extends State<FFScouterActivityBadge> {
               ),
             ],
           ),
-          actions: [TextButton(onPressed: () => Navigator.of(ctx).pop(), child: const Text("Close"))],
+          actions: [TextButton(onPressed: () => Navigator.of(ctx).pop(), child: const PdaText("Close"))],
         );
       },
     );

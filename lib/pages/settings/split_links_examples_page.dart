@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -74,7 +75,7 @@ class SplitLinksExamplesPageState extends State<SplitLinksExamplesPage> {
         iconTheme: const IconThemeData(color: Colors.white),
         elevation: _settingsProvider.appBarTop ? 2 : 0,
         toolbarHeight: 50,
-        title: const Text("Links from the app", style: TextStyle(color: Colors.white)),
+        title: const PdaText("Links from the app", style: TextStyle(color: Colors.white)),
         leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: _goBack),
       ),
       body: Container(
@@ -82,7 +83,7 @@ class SplitLinksExamplesPageState extends State<SplitLinksExamplesPage> {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 40),
           children: [
-            Text(
+            PdaText(
               "When the app and a browser are side by side, links tapped in the app open in the current tab or a new tab of the browser next to it, or on the app's side, which then shows the tab it was covering or a new one",
               style: subtle,
             ),
@@ -115,7 +116,7 @@ class SplitLinksExamplesPageState extends State<SplitLinksExamplesPage> {
                 ),
               ),
             const SizedBox(height: 16),
-            Text(
+            PdaText(
               "If no group of tabs is behind the app, Tab behind app works like New tab, app side. If the tab that would load the page has a full lock, a new tab is opened instead.",
               style: subtle,
             ),

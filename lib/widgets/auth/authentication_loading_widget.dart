@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -119,7 +120,7 @@ class _AuthenticationLoadingWidgetState extends State<AuthenticationLoadingWidge
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
+        PdaText(
           'Syncing your session...',
           style: TextStyle(
             color: widget.themeProvider.mainText,
@@ -134,7 +135,7 @@ class _AuthenticationLoadingWidgetState extends State<AuthenticationLoadingWidge
         const SizedBox(height: 30),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40),
-          child: Text(
+          child: PdaText(
             "We're reloading your preferences from the server",
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -145,8 +146,8 @@ class _AuthenticationLoadingWidgetState extends State<AuthenticationLoadingWidge
           ),
         ),
         const SizedBox(height: 20),
-        Text(
-          'Please keep the app open (${_secondsRemaining}s)',
+        PdaText(
+          "Please keep the app open ({0}s)", values: [_secondsRemaining],
           style: TextStyle(
             color: widget.themeProvider.mainText.withValues(alpha: 0.7),
             fontSize: 14,

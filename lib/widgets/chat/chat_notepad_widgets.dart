@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -103,21 +104,21 @@ class _NotepadSheetState extends State<_NotepadSheet> {
     final name = await showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('New folder'),
+        title: const PdaText('New folder'),
         content: TextFormField(
           autofocus: true,
           onChanged: (v) => typed = v,
           onFieldSubmitted: (v) => Navigator.pop(context, v),
           decoration: InputDecoration(
-            hintText: 'Name',
+            hintText: context.interfaceText('Name'),
             helperText: _folder.isEmpty
                 ? 'Up to ${ChatNote.maxFolderDepth} levels, like Raids/Weekly'
                 : 'Inside $_folder',
           ),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-          FilledButton(onPressed: () => Navigator.pop(context, typed), child: const Text('Create')),
+          TextButton(onPressed: () => Navigator.pop(context), child: const PdaText('Cancel')),
+          FilledButton(onPressed: () => Navigator.pop(context, typed), child: const PdaText('Create')),
         ],
       ),
     );
@@ -146,7 +147,7 @@ class _NotepadSheetState extends State<_NotepadSheet> {
     return MergeSemantics(
       key: ValueKey('folder:$path'),
       child: Semantics(
-        label: '${folder.name} folder, ${folder.count} ${folder.count == 1 ? 'note' : 'notes'}',
+        label: context.interfaceText("{0} folder, {1} {2}", [folder.name, folder.count, folder.count == 1 ? 'note' : 'notes']),
         excludeSemantics: true,
         button: true,
         onTap: () => setState(() => _folder = path),
@@ -190,7 +191,7 @@ class _NotepadSheetState extends State<_NotepadSheet> {
           ? ReorderableDragStartListener(
               index: drag,
               child: Semantics(
-                label: 'Drag to reorder',
+                label: context.interfaceText('Drag to reorder'),
                 child: const SizedBox(width: 40, height: 40, child: Icon(Icons.drag_handle_rounded)),
               ),
             )
@@ -254,28 +255,28 @@ class _NotepadSheetState extends State<_NotepadSheet> {
             ),
             ListTile(
               leading: const Icon(Icons.edit_rounded),
-              title: const Text('Rename'),
+              title: const PdaText('Rename'),
               onTap: () => Navigator.pop(context, 'rename'),
             ),
             ListTile(
               leading: const Icon(Icons.drive_file_move_outlined),
-              title: const Text('Move to folder'),
+              title: const PdaText('Move to folder'),
               onTap: () => Navigator.pop(context, 'move'),
             ),
             ListTile(
               leading: const Icon(Icons.copy_all_rounded),
-              title: const Text('Duplicate'),
+              title: const PdaText('Duplicate'),
               onTap: () => Navigator.pop(context, 'duplicate'),
             ),
             if (note.body.trim().isNotEmpty)
               ListTile(
                 leading: const Icon(Icons.share_rounded),
-                title: const Text('Share'),
+                title: const PdaText('Share'),
                 onTap: () => Navigator.pop(context, 'share'),
               ),
             ListTile(
               leading: const Icon(Icons.delete_outline_rounded),
-              title: const Text('Delete'),
+              title: const PdaText('Delete'),
               onTap: () => Navigator.pop(context, 'delete'),
             ),
           ],
@@ -353,7 +354,7 @@ class _NotepadSheetState extends State<_NotepadSheet> {
     } else if (_notepad.loadFailed && _notepad.notes.isEmpty) {
       body = _Message(
         text: "Couldn't load your notes",
-        action: TextButton(onPressed: _notepad.load, child: const Text('Retry')),
+        action: TextButton(onPressed: _notepad.load, child: const PdaText('Retry')),
       );
     } else if (_notepad.notes.isEmpty) {
       body = const _Message(text: 'No notes yet');
@@ -387,7 +388,7 @@ class _NotepadSheetState extends State<_NotepadSheet> {
             children: [
               if (_folder.isNotEmpty && !searching)
                 IconButton(
-                  tooltip: 'Up a folder',
+                  tooltip: context.interfaceText('Up a folder'),
                   icon: const Icon(Icons.arrow_back_rounded),
                   onPressed: () => setState(() {
                     final cut = _folder.lastIndexOf('/');
@@ -410,10 +411,10 @@ class _NotepadSheetState extends State<_NotepadSheet> {
                 initialValue: prefs.noteSort,
                 onSelected: prefs.setNoteSort,
                 itemBuilder: (_) => const [
-                  PopupMenuItem(value: ChatNoteSort.torn, child: Text("Torn's order")),
-                  PopupMenuItem(value: ChatNoteSort.name, child: Text('Name')),
-                  PopupMenuItem(value: ChatNoteSort.edited, child: Text('Last edited')),
-                  PopupMenuItem(value: ChatNoteSort.custom, child: Text('Custom, drag to order')),
+                  PopupMenuItem(value: ChatNoteSort.torn, child: PdaText("Torn's order")),
+                  PopupMenuItem(value: ChatNoteSort.name, child: PdaText('Name')),
+                  PopupMenuItem(value: ChatNoteSort.edited, child: PdaText('Last edited')),
+                  PopupMenuItem(value: ChatNoteSort.custom, child: PdaText('Custom, drag to order')),
                 ],
               ),
               PopupMenuButton<bool>(
@@ -421,9 +422,9 @@ class _NotepadSheetState extends State<_NotepadSheet> {
                 enabled: canCreate,
                 onSelected: (folder) => folder ? _createFolder() : _create(),
                 itemBuilder: (_) => [
-                  const PopupMenuItem(value: false, child: Text('Note')),
+                  const PopupMenuItem(value: false, child: PdaText('Note')),
                   if (_folder.isEmpty || _folder.split('/').length < ChatNote.maxFolderDepth)
-                    const PopupMenuItem(value: true, child: Text('Folder')),
+                    const PopupMenuItem(value: true, child: PdaText('Folder')),
                 ],
                 child: Semantics(
                   button: true,
@@ -435,7 +436,7 @@ class _NotepadSheetState extends State<_NotepadSheet> {
                       children: [
                         Icon(Icons.add_rounded, color: newColor),
                         const SizedBox(width: 4),
-                        Text('New', style: theme.textTheme.labelLarge?.copyWith(color: newColor)),
+                        PdaText('New', style: theme.textTheme.labelLarge?.copyWith(color: newColor)),
                       ],
                     ),
                   ),
@@ -450,12 +451,12 @@ class _NotepadSheetState extends State<_NotepadSheet> {
             controller: _search,
             decoration: InputDecoration(
               isDense: true,
-              hintText: 'Search notes',
+              hintText: context.interfaceText('Search notes'),
               prefixIcon: const Icon(Icons.search_rounded, size: 20),
               suffixIcon: _search.text.isEmpty
                   ? null
                   : IconButton(
-                      tooltip: 'Clear',
+                      tooltip: context.interfaceText('Clear'),
                       icon: const Icon(Icons.close_rounded, size: 20),
                       onPressed: _search.clear,
                     ),
@@ -468,12 +469,12 @@ class _NotepadSheetState extends State<_NotepadSheet> {
             child: Row(
               children: [
                 Expanded(
-                  child: Text(
+                  child: PdaText(
                     "Torn can't be reached - last copy, read only",
                     style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.error),
                   ),
                 ),
-                TextButton(onPressed: _notepad.load, child: const Text('Retry')),
+                TextButton(onPressed: _notepad.load, child: const PdaText('Retry')),
               ],
             ),
           ),
@@ -505,17 +506,17 @@ class _AddToNoteSheet extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 4),
-                child: Text('Add to note', style: theme.textTheme.titleMedium),
+                child: PdaText('Add to note', style: theme.textTheme.titleMedium),
               ),
               if (!usable)
                 Padding(
                   padding: const EdgeInsets.all(16),
-                  child: Text("Torn can't be reached, try again later", style: theme.textTheme.bodyMedium),
+                  child: PdaText("Torn can't be reached, try again later", style: theme.textTheme.bodyMedium),
                 )
               else ...[
                 ListTile(
                   leading: const Icon(Icons.add_rounded),
-                  title: const Text('New note'),
+                  title: const PdaText('New note'),
                   onTap: () => Navigator.of(context).pop((note: null)),
                 ),
                 if (notepad.loading && notes.isEmpty)

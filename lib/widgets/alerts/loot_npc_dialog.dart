@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/models/chaining/target_model.dart';
@@ -49,7 +50,7 @@ class LootAlertsDialogState extends State<LootAlertsDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text("Loot alerts"),
+      title: const PdaText("Loot alerts"),
       content: SizedBox(
         width: double.maxFinite,
         child: Scrollbar(
@@ -59,7 +60,7 @@ class LootAlertsDialogState extends State<LootAlertsDialog> {
             controller: _scrollController,
             child: Column(
               children: [
-                const Text(
+                const PdaText(
                   "Choose which NPCs and levels you would like to be alerted about",
                   style: TextStyle(fontSize: 14),
                 ),
@@ -68,7 +69,7 @@ class LootAlertsDialogState extends State<LootAlertsDialog> {
                   builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
                       if (_npcAlertModelList.isEmpty) {
-                        return const Text(
+                        return const PdaText(
                           "\nError!\n\nThere was a problem retrieving your current configuration from the database. "
                           "\n\nPlease check your internet connection or use the hammer icon at the top to reset your alert "
                           "preferences.",
@@ -99,7 +100,7 @@ class LootAlertsDialogState extends State<LootAlertsDialog> {
                         children: [
                           CircularProgressIndicator(),
                           SizedBox(height: 15),
-                          Text(
+                          PdaText(
                             "Retrieving configuration...",
                             style: TextStyle(fontSize: 14),
                           ),
@@ -117,7 +118,7 @@ class LootAlertsDialogState extends State<LootAlertsDialog> {
         Padding(
           padding: const EdgeInsets.only(right: 15),
           child: TextButton(
-            child: const Text("Close"),
+            child: const PdaText("Close"),
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -214,7 +215,7 @@ class NpcAlertConfigLineState extends State<NpcAlertConfigLine> {
                 const Baseline(
                   baseline: 0,
                   baselineType: TextBaseline.alphabetic,
-                  child: Text(
+                  child: PdaText(
                     "LEVEL 4",
                     style: TextStyle(fontSize: 10),
                   ),
@@ -236,7 +237,7 @@ class NpcAlertConfigLineState extends State<NpcAlertConfigLine> {
                 const Baseline(
                   baseline: 0,
                   baselineType: TextBaseline.alphabetic,
-                  child: Text(
+                  child: PdaText(
                     "LEVEL 5",
                     style: TextStyle(fontSize: 10),
                   ),

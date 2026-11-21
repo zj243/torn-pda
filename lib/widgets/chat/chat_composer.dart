@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:file_picker/file_picker.dart' show PlatformFile;
@@ -226,14 +227,13 @@ class _ChatComposerState extends State<ChatComposer> {
     final upload = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Upload the shared image?'),
-        content: Text(
-          'It goes to ${host.label} and anyone with the link can see it. The link stays in the message box, '
-          'nothing is sent',
+        title: const PdaText('Upload the shared image?'),
+        content: PdaText(
+          "It goes to {0} and anyone with the link can see it. The link stays in the message box, nothing is sent", values: [host.label],
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.of(context).pop(false), child: const Text('Cancel')),
-          FilledButton(onPressed: () => Navigator.of(context).pop(true), child: const Text('Upload')),
+          TextButton(onPressed: () => Navigator.of(context).pop(false), child: const PdaText('Cancel')),
+          FilledButton(onPressed: () => Navigator.of(context).pop(true), child: const PdaText('Upload')),
         ],
       ),
     );
@@ -363,7 +363,7 @@ class _ChatComposerState extends State<ChatComposer> {
                 dense: true,
                 leading: const Icon(Icons.chat_bubble_outline_rounded, size: 20),
                 title: Text(reply, maxLines: 1, overflow: TextOverflow.ellipsis),
-                trailing: Text('Reply', style: small),
+                trailing: PdaText('Reply', style: small),
                 onTap: () => _runCommand('reply', reply),
               ),
           ],
@@ -461,12 +461,12 @@ class _ChatComposerState extends State<ChatComposer> {
               TextButton.icon(
                 onPressed: () => _uploadFrom(fromFiles: false),
                 icon: const Icon(Icons.photo_library_outlined, size: 20),
-                label: const Text('Gallery'),
+                label: const PdaText('Gallery'),
               ),
               TextButton.icon(
                 onPressed: () => _uploadFrom(fromFiles: true),
                 icon: const Icon(Icons.folder_open_outlined, size: 20),
-                label: const Text('Files'),
+                label: const PdaText('Files'),
               ),
             ],
           ),
@@ -495,7 +495,7 @@ class _ChatComposerState extends State<ChatComposer> {
                 if (mounted) setState(() => _uploadError = null);
               },
               icon: const Icon(Icons.key_rounded, size: 18),
-              label: Text('Change the ${host.credentialName}'),
+              label: PdaText("Change the {0}", values: [host.credentialName]),
             ),
         ],
       );
@@ -521,7 +521,7 @@ class _ChatComposerState extends State<ChatComposer> {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         IconButton(
-          tooltip: 'Attach an image',
+          tooltip: context.interfaceText('Attach an image'),
           onPressed: widget.enabled && _upload == null
               ? () => setState(() {
                   _attachOpen = !_attachOpen;
@@ -537,7 +537,7 @@ class _ChatComposerState extends State<ChatComposer> {
         ),
         if (_toolsOpen || _quickFrom != ChatQuickFrom.commands)
           IconButton(
-            tooltip: 'Quick actions',
+            tooltip: context.interfaceText('Quick actions'),
             onPressed: widget.enabled
                 ? () => setState(() {
                     _toolsOpen = !_toolsOpen;
@@ -584,7 +584,7 @@ class _ChatComposerState extends State<ChatComposer> {
                   contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(24), borderSide: BorderSide.none),
                   suffixIcon: IconButton(
-                    tooltip: 'Text format',
+                    tooltip: context.interfaceText('Text format'),
                     onPressed: widget.enabled ? () => setState(() => _formatOpen = !_formatOpen) : null,
                     icon: Icon(Icons.text_format_rounded, color: _formatOpen ? scheme.primary : null),
                   ),
@@ -694,8 +694,8 @@ class _ChatComposerState extends State<ChatComposer> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text(
-                              'Replying to ${reply.sender.name}',
+                            PdaText(
+                              "Replying to {0}", values: [reply.sender.name],
                               style: theme.textTheme.labelMedium?.copyWith(
                                 color: scheme.primary,
                                 fontWeight: FontWeight.w700,
@@ -713,7 +713,7 @@ class _ChatComposerState extends State<ChatComposer> {
                         ),
                       ),
                       IconButton(
-                        tooltip: 'Cancel reply',
+                        tooltip: context.interfaceText('Cancel reply'),
                         icon: const Icon(Icons.close_rounded, size: 20),
                         onPressed: widget.onCancelReply,
                       ),

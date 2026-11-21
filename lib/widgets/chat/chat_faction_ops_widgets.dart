@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
@@ -244,7 +245,7 @@ class _ReportReady extends StatelessWidget {
         color: dark ? Colors.green[300] : Colors.green[800],
         borderRadius: BorderRadius.circular(4),
       ),
-      child: Text(
+      child: PdaText(
         'REPORT READY',
         style: TextStyle(
           fontSize: 8.5,
@@ -326,8 +327,8 @@ class ChatRetalWatchSwitch extends StatelessWidget {
       listenable: Listenable.merge([NativeChat.prefs, ops.retalDenied]),
       builder: (context, _) => SwitchListTile(
         secondary: const Icon(MdiIcons.radar),
-        title: const Text('Watch retals'),
-        subtitle: ops.retalDenied.value ? const Text('Retals need faction API access') : null,
+        title: const PdaText('Watch retals'),
+        subtitle: ops.retalDenied.value ? const PdaText('Retals need faction API access') : null,
         value: NativeChat.prefs.watchRetals,
         onChanged: ops.retalDenied.value ? null : ops.setRetalWatch,
       ),

@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
@@ -60,7 +61,7 @@ class JailRecordDialog extends StatelessWidget {
                   child: Row(
                     children: [
                       Flexible(
-                        child: Text(
+                        child: PdaText(
                           "Set max score",
                           style: TextStyle(fontSize: 11, color: themeProvider.mainText),
                         ),
@@ -112,7 +113,7 @@ class JailRecordDialog extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     TextButton(
-                      child: const Text("Set"),
+                      child: const PdaText("Set"),
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
                           Navigator.of(context).pop();
@@ -122,7 +123,7 @@ class JailRecordDialog extends StatelessWidget {
                       },
                     ),
                     TextButton(
-                      child: const Text("Cancel"),
+                      child: const PdaText("Cancel"),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },

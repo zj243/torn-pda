@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 // Flutter imports:
@@ -76,17 +77,17 @@ class PrefsLocalAfterImportDialogState extends State<PrefsLocalAfterImportDialog
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          PdaText(
                             'READ THIS, ACTION NEEDED!',
                             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(height: 30),
-                          Text(
+                          PdaText(
                             'Local Preferences Imported',
                             style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(height: 30),
-                          Text(
+                          PdaText(
                             'After importing a backup from a local file, a new user has been created for you in the '
                             'Torn PDA server to handle Alerts and other settings.\n\n'
                             'As a result, a few things have been reset to their default values.\n\n'

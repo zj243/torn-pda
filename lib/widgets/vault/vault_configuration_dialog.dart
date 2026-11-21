@@ -1,5 +1,6 @@
 // Flutter imports:
 // Package imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -82,16 +83,15 @@ class VaultConfigurationDialogState extends State<VaultConfigurationDialog> {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                      child: Text(
-                        "Total"
-                        "\n\$${_moneyFormat.format(widget.lastTransaction.balance)}",
+                      child: PdaText(
+                        "Total\n\${0}", values: [_moneyFormat.format(widget.lastTransaction.balance)],
                         style: const TextStyle(fontSize: 13),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 3),
-                      child: Text(
-                        "${UserHelper.playerName}'s share",
+                      child: PdaText(
+                        "{0}'s share", values: [UserHelper.playerName],
                         style: const TextStyle(fontSize: 13),
                       ),
                     ),
@@ -197,7 +197,7 @@ class VaultConfigurationDialogState extends State<VaultConfigurationDialog> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         TextButton(
-                          child: const Text("Set"),
+                          child: const PdaText("Set"),
                           onPressed: () async {
                             var success = false;
 
@@ -212,7 +212,7 @@ class VaultConfigurationDialogState extends State<VaultConfigurationDialog> {
                                 }
                               } catch (e) {
                                 BotToast.showText(
-                                  text: "Error, not saved!",
+                                  text: context.interfaceText("Error, not saved!"),
                                   textStyle: const TextStyle(
                                     fontSize: 14,
                                     color: Colors.white,
@@ -235,7 +235,7 @@ class VaultConfigurationDialogState extends State<VaultConfigurationDialog> {
                                 widget.callbackShares();
 
                                 BotToast.showText(
-                                  text: "Vault distribution saved!",
+                                  text: context.interfaceText("Vault distribution saved!"),
                                   textStyle: const TextStyle(
                                     fontSize: 14,
                                     color: Colors.white,
@@ -250,7 +250,7 @@ class VaultConfigurationDialogState extends State<VaultConfigurationDialog> {
                         ),
                         const SizedBox(width: 10),
                         TextButton(
-                          child: const Text("Cancel"),
+                          child: const PdaText("Cancel"),
                           onPressed: () {
                             Navigator.of(context).pop();
                             _ownAmountController.text = '';

@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:torn_pda/models/chat/chat_faction_ops.dart';
@@ -54,9 +55,9 @@ class _ChatTestingSettingsPageState extends State<ChatTestingSettingsPage> {
     final picked = await showDialog<String>(
       context: context,
       builder: (context) => SimpleDialog(
-        title: const Text('Test faction room'),
+        title: const PdaText('Test faction room'),
         children: [
-          SimpleDialogOption(onPressed: () => Navigator.pop(context, ''), child: const Text('Off')),
+          SimpleDialogOption(onPressed: () => Navigator.pop(context, ''), child: const PdaText('Off')),
           for (final dm in dms)
             SimpleDialogOption(
               onPressed: () => Navigator.pop(context, dm.id),
@@ -92,7 +93,7 @@ class _ChatTestingSettingsPageState extends State<ChatTestingSettingsPage> {
         final room = prefs.testFactionRoom;
         return [
           ListTile(
-            title: const Text('Test faction room'),
+            title: const PdaText('Test faction room'),
             subtitle: Text(
               room == null
                   ? 'Off - pick a private chat to act as a second faction room'
@@ -102,8 +103,8 @@ class _ChatTestingSettingsPageState extends State<ChatTestingSettingsPage> {
             onTap: _pickRoom,
           ),
           SwitchListTile(
-            title: const Text('Simulate chain'),
-            subtitle: const Text('Only the chat sees it, never the chain widget or alerts. Off when the app closes'),
+            title: const PdaText('Simulate chain'),
+            subtitle: const PdaText('Only the chat sees it, never the chain widget or alerts. Off when the app closes'),
             value: _on,
             onChanged: _toggle,
           ),
@@ -116,19 +117,19 @@ class _ChatTestingSettingsPageState extends State<ChatTestingSettingsPage> {
           ),
           SwitchListTile(
             dense: true,
-            title: const Text('Cooldown'),
+            title: const PdaText('Cooldown'),
             value: _ops.testChain.cooldown,
             onChanged: (on) => _edit(cooldown: on),
           ),
           SwitchListTile(
             dense: true,
-            title: const Text('Live'),
+            title: const PdaText('Live'),
             value: _ops.simulatedLive,
             onChanged: (on) => _edit(live: on),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-            child: Text(
+            child: PdaText(
               'Take watch here turns on your real Chain Watcher',
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: Theme.of(context).colorScheme.onSurfaceVariant,

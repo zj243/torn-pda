@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:io';
 import 'dart:math' as math;
@@ -389,8 +390,8 @@ class ChatMessageBubble extends StatelessWidget {
                 Icon(Icons.shortcut_rounded, size: 14, color: note?.color),
                 const SizedBox(width: 4),
                 Flexible(
-                  child: Text(
-                    'Forwarded from ${forwarded.from}',
+                  child: PdaText(
+                    "Forwarded from {0}", values: [forwarded.from],
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: note?.copyWith(fontStyle: FontStyle.italic),
@@ -460,7 +461,7 @@ class ChatMessageBubble extends StatelessWidget {
                       lead: !showSender
                           ? (isMine
                                 ? TextSpan(
-                                    text: 'You: ',
+                                    text: context.interfaceText('You: '),
                                     style: TextStyle(color: metaColor),
                                   )
                                 : null)
@@ -614,7 +615,7 @@ class ChatMessageBubble extends StatelessWidget {
                       if (failed) ...[
                         Icon(Icons.error_outline_rounded, size: 12, color: scheme.error),
                         const SizedBox(width: 3),
-                        Text(
+                        PdaText(
                           'Not sent, tap to retry',
                           style: theme.textTheme.labelSmall?.copyWith(color: scheme.error),
                         ),
@@ -948,7 +949,7 @@ class ChatUnreadSeparator extends StatelessWidget {
           line,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Text(
+            child: PdaText(
               'New messages',
               style: theme.textTheme.labelMedium?.copyWith(color: color, fontWeight: FontWeight.w700),
             ),
@@ -1118,10 +1119,10 @@ class ChatLoadFailed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final retry = TextButton(onPressed: onRetry, child: const Text('Try again'));
+    final retry = TextButton(onPressed: onRetry, child: const PdaText('Try again'));
     if (compact) {
       final style = theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant);
-      return Row(children: [Expanded(child: Text('Could not load $name', style: style)), retry]);
+      return Row(children: [Expanded(child: PdaText("Could not load {0}", values: [name], style: style)), retry]);
     }
     return Center(
       child: Column(
@@ -1130,7 +1131,7 @@ class ChatLoadFailed extends StatelessWidget {
           const Icon(Icons.cloud_off_rounded),
           Padding(
             padding: const EdgeInsets.fromLTRB(12, 6, 12, 0),
-            child: Text('Could not load $name', textAlign: TextAlign.center, style: theme.textTheme.bodySmall),
+            child: PdaText("Could not load {0}", values: [name], textAlign: TextAlign.center, style: theme.textTheme.bodySmall),
           ),
           retry,
         ],
@@ -1291,14 +1292,14 @@ class ChatSessionMessage extends StatelessWidget {
         runSpacing: 4,
         children: [
           if (outage)
-            FilledButton.tonal(onPressed: NativeChat.controller.retry, child: const Text('Try again'))
+            FilledButton.tonal(onPressed: NativeChat.controller.retry, child: const PdaText('Try again'))
           else if (browser)
-            const FilledButton.tonal(onPressed: NativeChat.openTornBrowser, child: Text('Open browser'))
+            const FilledButton.tonal(onPressed: NativeChat.openTornBrowser, child: PdaText('Open browser'))
           else ...[
-            const FilledButton.tonal(onPressed: NativeChat.openSettings, child: Text('Open Settings')),
-            const OutlinedButton(onPressed: NativeChat.openTornBrowser, child: Text('Open browser')),
+            const FilledButton.tonal(onPressed: NativeChat.openSettings, child: PdaText('Open Settings')),
+            const OutlinedButton(onPressed: NativeChat.openTornBrowser, child: PdaText('Open browser')),
           ],
-          TextButton(onPressed: () => NativeChat.setEnabled(false), child: const Text('Turn off chat')),
+          TextButton(onPressed: () => NativeChat.setEnabled(false), child: const PdaText('Turn off chat')),
         ],
       ),
     );
@@ -1382,13 +1383,13 @@ class _ChatPausedGateState extends State<ChatPausedGate> {
                             children: [
                               Icon(Icons.tab_unselected_rounded, size: 40, color: scheme.onSurfaceVariant),
                               const SizedBox(height: 14),
-                              Text(
+                              PdaText(
                                 'No Torn tab open',
                                 textAlign: TextAlign.center,
                                 style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
                               ),
                               const SizedBox(height: 14),
-                              Text(
+                              PdaText(
                                 'Chat needs a Torn page open in the browser.',
                                 textAlign: TextAlign.center,
                                 style: theme.textTheme.bodyMedium?.copyWith(color: scheme.onSurfaceVariant),
@@ -1406,7 +1407,7 @@ class _ChatPausedGateState extends State<ChatPausedGate> {
                               OutlinedButton(
                                 style: _pausedButton,
                                 onPressed: () => Navigator.of(context).popUntil((route) => route.isFirst),
-                                child: const Text('Close chat'),
+                                child: const PdaText('Close chat'),
                               ),
                             ],
                           ),
@@ -2201,7 +2202,7 @@ class ChatPinnedBar extends StatelessWidget {
                   ],
                 ),
               ),
-              IconButton(tooltip: 'Unpin', icon: const Icon(Icons.close_rounded, size: 20), onPressed: onUnpin),
+              IconButton(tooltip: context.interfaceText('Unpin'), icon: const Icon(Icons.close_rounded, size: 20), onPressed: onUnpin),
             ],
           ),
         ),
@@ -2326,11 +2327,11 @@ class _ChatWaitingStripState extends State<ChatWaitingStrip> {
           ListTile(
             minTileHeight: 48,
             leading: Icon(Icons.hourglass_top_rounded, color: scheme.primary),
-            title: Text('Waiting for you (${widget.waiting.length})'),
+            title: PdaText("Waiting for you ({0})", values: [widget.waiting.length]),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                if (expanded) TextButton(onPressed: widget.onDismissAll, child: const Text('Dismiss all')),
+                if (expanded) TextButton(onPressed: widget.onDismissAll, child: const PdaText('Dismiss all')),
                 Icon(expanded ? Icons.expand_less_rounded : Icons.expand_more_rounded),
               ],
             ),
@@ -2355,7 +2356,7 @@ class _ChatWaitingStripState extends State<ChatWaitingStrip> {
                         style: theme.textTheme.bodySmall?.copyWith(color: scheme.onSurfaceVariant),
                       ),
                       IconButton(
-                        tooltip: 'Dismiss',
+                        tooltip: context.interfaceText('Dismiss'),
                         icon: const Icon(Icons.close_rounded),
                         onPressed: () => widget.onDismiss(room.id),
                       ),
@@ -2402,7 +2403,7 @@ Future<void> showChatArchived(BuildContext context, void Function(String roomId)
                 },
                 trailing: TextButton(
                   onPressed: () => NativeChat.prefs.setArchived(room.id, false),
-                  child: const Text('Unarchive'),
+                  child: const PdaText('Unarchive'),
                 ),
               ),
           ],
@@ -2439,7 +2440,7 @@ Future<void> showChatHiddenRooms(BuildContext context) {
                 title: Text(room.name),
                 trailing: TextButton(
                   onPressed: () => NativeChat.prefs.setRoomState(room.id, ChatRoomState.live),
-                  child: const Text('Show'),
+                  child: const PdaText('Show'),
                 ),
               ),
           ],

@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:io';
 
 import 'package:bot_toast/bot_toast.dart';
@@ -86,13 +87,9 @@ class ProfileCheckAddButtonState extends State<ProfileCheckAddButton> {
 
                     return Showcase(
                       key: _showcaseButton,
-                      title: 'Did you know?',
+                      title: context.interfaceText('Did you know?'),
                       description:
-                          '\nYou can tap this icon to add or remove ${widget.playerName} or any other player '
-                          'from several of your lists (including entire factions in War!).\n\nIt will also allow '
-                          "you to quickly copy the player's ID and the profile's page link.\n\n"
-                          'A green icon means the player is not in any of your lists, while an orange icon means '
-                          'he/she is at least associated with one of them.\n\nTry it out!',
+                          context.interfaceText("\nYou can tap this icon to add or remove {0} or any other player from several of your lists (including entire factions in War!).\n\nIt will also allow you to quickly copy the player's ID and the profile's page link.\n\nA green icon means the player is not in any of your lists, while an orange icon means he/she is at least associated with one of them.\n\nTry it out!", [widget.playerName]),
                       targetPadding: const EdgeInsets.all(10),
                       disableMovingAnimation: true,
                       textColor: _themeProvider.mainText,
@@ -223,7 +220,7 @@ class ProfileCheckAddDialogState extends State<ProfileCheckAddDialog> {
                     },
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [Icon(Icons.copy), Text(" ID")],
+                      children: [Icon(Icons.copy), PdaText(" ID")],
                     ),
                   ),
                 ),
@@ -237,7 +234,7 @@ class ProfileCheckAddDialogState extends State<ProfileCheckAddDialog> {
                     },
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [Icon(Icons.copy), Text(" Link")],
+                      children: [Icon(Icons.copy), PdaText(" Link")],
                     ),
                   ),
                 ),
@@ -259,8 +256,8 @@ class ProfileCheckAddDialogState extends State<ProfileCheckAddDialog> {
                     child: _toggleTargetActive
                         ? const SizedBox(height: 12, width: 12, child: CircularProgressIndicator())
                         : _isTarget
-                        ? const Text("Remove target")
-                        : const Text("Add target"),
+                        ? const PdaText("Remove target")
+                        : const PdaText("Add target"),
                   ),
                 ),
               ],
@@ -281,8 +278,8 @@ class ProfileCheckAddDialogState extends State<ProfileCheckAddDialog> {
                     child: _toggleStakeoutActive
                         ? const SizedBox(height: 12, width: 12, child: CircularProgressIndicator())
                         : _isStakeout
-                        ? const Text("Remove stakeout")
-                        : const Text("Add stakeout"),
+                        ? const PdaText("Remove stakeout")
+                        : const PdaText("Add stakeout"),
                   ),
                 ),
               ],
@@ -303,8 +300,8 @@ class ProfileCheckAddDialogState extends State<ProfileCheckAddDialog> {
                     child: _togglePanicActive
                         ? const SizedBox(height: 12, width: 12, child: CircularProgressIndicator())
                         : _isPanic
-                        ? const Text("Remove panic target")
-                        : const Text("Add panic target"),
+                        ? const PdaText("Remove panic target")
+                        : const PdaText("Add panic target"),
                   ),
                 ),
               ],
@@ -333,8 +330,8 @@ class ProfileCheckAddDialogState extends State<ProfileCheckAddDialog> {
                             child: _toggleWarActive
                                 ? const SizedBox(height: 12, width: 12, child: CircularProgressIndicator())
                                 : _isWar
-                                ? const Text("Remove war faction")
-                                : const Text("Add war faction"),
+                                ? const PdaText("Remove war faction")
+                                : const PdaText("Add war faction"),
                           ),
                         ),
                       ],
@@ -349,7 +346,7 @@ class ProfileCheckAddDialogState extends State<ProfileCheckAddDialog> {
       ),
       actions: [
         TextButton(
-          child: const Text("Close"),
+          child: const PdaText("Close"),
           onPressed: () {
             Navigator.of(context).pop();
           },

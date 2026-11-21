@@ -208,6 +208,22 @@ public class MainActivity extends FlutterActivity {
         new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), CHANNEL)
                 .setMethodCallHandler((call, result) -> {
                     switch (call.method) {
+                        case "setInterfaceLanguage":
+                            // ZJ：Android 13 及以上同步系统应用语言，锁屏通知也采用相同的资源。
+                            String language = call.argument("language");
+                            if (!"system".equals(language) && !"zh".equals(language) && !"en".equals(language)) {
+                                result.error("invalid_language", "Unsupported interface language", null);
+                                break;
+                            }
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                                android.app.LocaleManager locales = getSystemService(android.app.LocaleManager.class);
+                                locales.setApplicationLocales("system".equals(language)
+                                    ? android.os.LocaleList.getEmptyLocaleList()
+                                    : android.os.LocaleList.forLanguageTags(language));
+                            }
+                            result.success(null);
+                            break;
+
                         case "cancelNotifications":
                             cancelNotifications();
                             result.success(null);

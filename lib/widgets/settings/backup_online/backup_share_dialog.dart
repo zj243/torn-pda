@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -105,7 +106,7 @@ class BackupShareDialogState extends State<BackupShareDialog> with TickerProvide
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
+                            PdaText(
                               "SHARE SETTINGS",
                               style: TextStyle(fontSize: 18),
                             ),
@@ -125,7 +126,7 @@ class BackupShareDialogState extends State<BackupShareDialog> with TickerProvide
                                 children: [
                                   Icon(Icons.settings_outlined, color: widget.themeProvider.mainText),
                                   const SizedBox(width: 10),
-                                  Text("CONFIGURE",
+                                  PdaText("CONFIGURE",
                                       style: TextStyle(color: widget.themeProvider.mainText, fontSize: 12)),
                                 ],
                               ),
@@ -136,7 +137,7 @@ class BackupShareDialogState extends State<BackupShareDialog> with TickerProvide
                                 children: [
                                   Icon(Icons.download, color: widget.themeProvider.mainText),
                                   const SizedBox(width: 10),
-                                  Text("IMPORT", style: TextStyle(color: widget.themeProvider.mainText, fontSize: 12)),
+                                  PdaText("IMPORT", style: TextStyle(color: widget.themeProvider.mainText, fontSize: 12)),
                                 ],
                               ),
                             ),
@@ -154,7 +155,7 @@ class BackupShareDialogState extends State<BackupShareDialog> with TickerProvide
                             child: Column(
                               children: [
                                 SizedBox(height: 40),
-                                Text("Fetching server info..."),
+                                PdaText("Fetching server info..."),
                                 SizedBox(height: 25),
                                 CircularProgressIndicator(),
                                 SizedBox(height: 40),
@@ -167,7 +168,7 @@ class BackupShareDialogState extends State<BackupShareDialog> with TickerProvide
                       if (_serverError.isNotEmpty) {
                         return Column(
                           children: [
-                            const Text("SERVER ERROR", style: TextStyle(color: Colors.red)),
+                            const PdaText("SERVER ERROR", style: TextStyle(color: Colors.red)),
                             Text(_serverError, style: const TextStyle(color: Colors.red)),
                           ],
                         );
@@ -260,7 +261,7 @@ class BackupShareDialogState extends State<BackupShareDialog> with TickerProvide
                                     width: 20,
                                     child: const CircularProgressIndicator(),
                                   )
-                                : const Text("Save"),
+                                : const PdaText("Save"),
                           ),
                         if (_tabController.index == 1 &&
                             _importedPrefs.isNotEmpty &&
@@ -280,7 +281,7 @@ class BackupShareDialogState extends State<BackupShareDialog> with TickerProvide
                                 _ownSharePasswordController.text != _ownSharePasswordInit ||
                                 !listEquals(_ownSelectedItems, _ownSelectedItemsInit)) {
                               BotToast.showText(
-                                text: "You made changes to your own backup settings but didn't save them!",
+                                text: context.interfaceText("You made changes to your own backup settings but didn't save them!"),
                                 contentColor: Colors.blue,
                                 textStyle: const TextStyle(
                                   fontSize: 14,
@@ -292,7 +293,7 @@ class BackupShareDialogState extends State<BackupShareDialog> with TickerProvide
                             }
                             Navigator.pop(context);
                           },
-                          child: const Text("Close"),
+                          child: const PdaText("Close"),
                         ),
                       ],
                     ),
@@ -313,7 +314,7 @@ class BackupShareDialogState extends State<BackupShareDialog> with TickerProvide
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Column(
           children: [
-            Text(
+            PdaText(
               "If you have been given another user's backup share password, you can import the user's settings "
               "to your own app by using this form",
               style: TextStyle(
@@ -330,12 +331,12 @@ class BackupShareDialogState extends State<BackupShareDialog> with TickerProvide
                 style: const TextStyle(fontSize: 14),
                 controller: _importIdController,
                 maxLength: 10,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   isDense: true,
                   errorMaxLines: 2,
                   counterText: "",
                   border: OutlineInputBorder(),
-                  labelText: 'User ID',
+                  labelText: context.interfaceText('User ID'),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -364,7 +365,7 @@ class BackupShareDialogState extends State<BackupShareDialog> with TickerProvide
                   errorMaxLines: 2,
                   counterText: "",
                   border: const OutlineInputBorder(),
-                  labelText: 'Remote password',
+                  labelText: context.interfaceText('Remote password'),
                   suffixIcon: IconButton(
                     icon: Icon(
                       _ownSharePasswordVisible ? Icons.visibility_off : Icons.visibility,
@@ -396,7 +397,7 @@ class BackupShareDialogState extends State<BackupShareDialog> with TickerProvide
                   if (_importFetchActive)
                     Container(width: 15, height: 15, child: const CircularProgressIndicator())
                   else
-                    const Text('Fetch'),
+                    const PdaText('Fetch'),
                 ],
               ),
               onPressed: _importFetchActive
@@ -434,7 +435,7 @@ class BackupShareDialogState extends State<BackupShareDialog> with TickerProvide
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              const Flexible(child: Text("Share own backup")),
+              const Flexible(child: PdaText("Share own backup")),
               Switch(
                 value: _ownShareEnabled,
                 onChanged: (enabled) async {
@@ -447,7 +448,7 @@ class BackupShareDialogState extends State<BackupShareDialog> with TickerProvide
               ),
             ],
           ),
-          Text(
+          PdaText(
             "Enable other players to import your selected settings if they know your id and share password",
             style: TextStyle(
               color: Colors.grey[600],
@@ -469,7 +470,7 @@ class BackupShareDialogState extends State<BackupShareDialog> with TickerProvide
                 errorMaxLines: 2,
                 counterText: "",
                 border: const OutlineInputBorder(),
-                labelText: 'Share password',
+                labelText: context.interfaceText('Share password'),
                 suffixIcon: IconButton(
                   icon: Icon(
                     _ownSharePasswordVisible ? Icons.visibility_off : Icons.visibility,
@@ -542,7 +543,7 @@ class BackupShareDialogState extends State<BackupShareDialog> with TickerProvide
             ),
           ),
           const SizedBox(height: 10),
-          Text(
+          PdaText(
             "CAUTION: select a password that you will share with other users with whom you want to share "
             "your settings. Ensure this is NOT your game password or API key.",
             style: TextStyle(
@@ -552,8 +553,8 @@ class BackupShareDialogState extends State<BackupShareDialog> with TickerProvide
             ),
           ),
           const SizedBox(height: 20),
-          const Text("Select what you want to share:"),
-          Text(
+          const PdaText("Select what you want to share:"),
+          PdaText(
             "This will be applicable only if you have any settings saved in the server",
             style: TextStyle(
               color: Colors.grey[600],
@@ -578,8 +579,8 @@ class BackupShareDialogState extends State<BackupShareDialog> with TickerProvide
       checkColor: Colors.white,
       activeColor: Colors.blueGrey,
       value: _ownSelectedItems.contains("shortcuts"),
-      title: const Text("Shortcuts", style: TextStyle(fontSize: 14)),
-      subtitle: const Text("Shortcuts list and settings", style: TextStyle(fontSize: 12)),
+      title: const PdaText("Shortcuts", style: TextStyle(fontSize: 14)),
+      subtitle: const PdaText("Shortcuts list and settings", style: TextStyle(fontSize: 12)),
       onChanged: (value) {
         setState(() {
           _ownSelectedItems.contains("shortcuts")
@@ -596,12 +597,12 @@ class BackupShareDialogState extends State<BackupShareDialog> with TickerProvide
       checkColor: Colors.white,
       activeColor: Colors.blueGrey,
       value: _ownSelectedItems.contains("userscripts"),
-      title: const Text("User scripts", style: TextStyle(fontSize: 14)),
-      subtitle: const Text("Scripts list", style: TextStyle(fontSize: 12)),
+      title: const PdaText("User scripts", style: TextStyle(fontSize: 14)),
+      subtitle: const PdaText("Scripts list", style: TextStyle(fontSize: 12)),
       onChanged: (value) {
         if (value == true) {
           BotToast.showText(
-            text: "Ensure no identificative information is included in your existing scripts (e.g.: API Key!)",
+            text: context.interfaceText("Ensure no identificative information is included in your existing scripts (e.g.: API Key!)"),
             clickClose: true,
             contentColor: Colors.orange[800]!,
             textStyle: const TextStyle(
@@ -628,8 +629,8 @@ class BackupShareDialogState extends State<BackupShareDialog> with TickerProvide
       checkColor: Colors.white,
       activeColor: Colors.blueGrey,
       value: _ownSelectedItems.contains("targets"),
-      title: const Text("Targets", style: TextStyle(fontSize: 14)),
-      subtitle: const Text("Targets list and notes", style: TextStyle(fontSize: 12)),
+      title: const PdaText("Targets", style: TextStyle(fontSize: 14)),
+      subtitle: const PdaText("Targets list and notes", style: TextStyle(fontSize: 12)),
       onChanged: (value) {
         setState(() {
           _ownSelectedItems.contains("targets")

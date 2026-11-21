@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:convert';
 
 import 'package:animations/animations.dart';
@@ -80,13 +81,13 @@ class TradesWidgetState extends State<TradesWidget> {
                   SizedBox(width: 90, child: _awhContainer()),
                 const Column(
                   children: [
-                    Text(
+                    PdaText(
                       'Trade Calculator',
                       style: TextStyle(
                         color: Colors.orange,
                       ),
                     ),
-                    Text(
+                    PdaText(
                       '(TAP TO EXPAND)',
                       style: TextStyle(
                         color: Colors.orange,
@@ -114,7 +115,7 @@ class TradesWidgetState extends State<TradesWidget> {
                           if (_tradesProv.container.tradePriceProviderServerError)
                             Row(
                               children: [
-                                const Text(
+                                const PdaText(
                                   'ERROR',
                                   style: TextStyle(
                                     fontSize: 10,
@@ -156,7 +157,7 @@ class TradesWidgetState extends State<TradesWidget> {
                               ],
                             )
                           else
-                            const Text(
+                            const PdaText(
                               "SYNC'D",
                               style: TextStyle(
                                 fontSize: 10,
@@ -617,7 +618,7 @@ class TradesWidgetState extends State<TradesWidget> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(
+                      PdaText(
                         'LIST',
                         textAlign: TextAlign.end,
                         style: TextStyle(
@@ -648,7 +649,7 @@ class TradesWidgetState extends State<TradesWidget> {
                       Icon(Icons.warning_amber_outlined, size: 16, color: Colors.orange),
                       SizedBox(width: 5),
                       Flexible(
-                        child: Text(
+                        child: PdaText(
                           'EXPAND TO SEE\nMISSING ITEMS',
                           textAlign: TextAlign.end,
                           style: TextStyle(
@@ -666,8 +667,8 @@ class TradesWidgetState extends State<TradesWidget> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Flexible(
-                  child: Text(
-                    '\$${_moneyFormat.format(total)} market price',
+                  child: PdaText(
+                    "\${0} market price", values: [_moneyFormat.format(total)],
                     textAlign: TextAlign.end,
                     style: TextStyle(
                       color: total <= tradeSyncTotalMoney ? Colors.orange : Colors.green,
@@ -685,7 +686,7 @@ class TradesWidgetState extends State<TradesWidget> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Flexible(
-                      child: Text(
+                      child: PdaText(
                         'Cannot calculate profit!',
                         textAlign: TextAlign.end,
                         style: TextStyle(
@@ -704,8 +705,8 @@ class TradesWidgetState extends State<TradesWidget> {
                   children: [
                     if (_tradesProv.container.tradePriceProviderSupportsProviderProfit)
                       Flexible(
-                        child: Text(
-                          '\$$tradeSyncProfit profit (${_tradesProv.container.tradePriceProvider.shortLabel})',
+                        child: PdaText(
+                          "\${0} profit ({1})", values: [tradeSyncProfit, _tradesProv.container.tradePriceProvider.shortLabel],
                           textAlign: TextAlign.end,
                           style: const TextStyle(
                             color: Colors.white,
@@ -715,9 +716,8 @@ class TradesWidgetState extends State<TradesWidget> {
                         ),
                       ),
                     Flexible(
-                      child: Text(
-                        '\$${_moneyFormat.format(total - int.parse(_tradesProv.container.tradePriceProviderTotalMoney))} '
-                        'profit (market)',
+                      child: PdaText(
+                        "\${0} profit (market)", values: [_moneyFormat.format(total - int.parse(_tradesProv.container.tradePriceProviderTotalMoney))],
                         textAlign: TextAlign.end,
                         style: const TextStyle(
                           color: Colors.white,
@@ -775,7 +775,7 @@ class TradesWidgetState extends State<TradesWidget> {
         if (tradeSyncListedItems == 0) {
           items.add(Padding(
             padding: const EdgeInsets.only(bottom: 6),
-            child: Text(
+            child: PdaText(
               'PRICED ITEMS',
               style: TextStyle(color: _tradeSyncColor(), fontSize: 8, fontWeight: FontWeight.bold),
             ),
@@ -839,8 +839,8 @@ class TradesWidgetState extends State<TradesWidget> {
                   children: [
                     if (tradeSyncProduct.hasProviderProfit)
                       Flexible(
-                        child: Text(
-                          '$providerItemProfit profit (${_tradesProv.container.tradePriceProvider.shortLabel})',
+                        child: PdaText(
+                          "{0} profit ({1})", values: [providerItemProfit, _tradesProv.container.tradePriceProvider.shortLabel],
                           textAlign: TextAlign.end,
                           style: const TextStyle(
                             color: Colors.white,
@@ -852,8 +852,8 @@ class TradesWidgetState extends State<TradesWidget> {
                     if (!_isTradeSyncGroupingItem(tradeSyncProduct.name) ||
                         _tradesProv.container.tradePriceProvider == TradePriceProvider.tornW3b)
                       Flexible(
-                        child: Text(
-                          '$marketItemProfit profit (market)',
+                        child: PdaText(
+                          "{0} profit (market)", values: [marketItemProfit],
                           textAlign: TextAlign.end,
                           style: const TextStyle(
                             color: Colors.white,
@@ -899,8 +899,8 @@ class TradesWidgetState extends State<TradesWidget> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Flexible(
-                child: Text(
-                  'ITEMS NOT CONFIGURED\nIN ${_tradesProv.container.tradePriceProviderName.toUpperCase()}',
+                child: PdaText(
+                  "ITEMS NOT CONFIGURED\nIN {0}", values: [_tradesProv.container.tradePriceProviderName.toUpperCase()],
                   textAlign: TextAlign.end,
                   style: const TextStyle(
                     color: Colors.orange,
@@ -926,8 +926,8 @@ class TradesWidgetState extends State<TradesWidget> {
         items.add(
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
-            child: Text(
-              '(additional \$${_moneyFormat.format(remainingTotal)} market value)',
+            child: PdaText(
+              "(additional \${0} market value)", values: [_moneyFormat.format(remainingTotal)],
               textAlign: TextAlign.end,
               style: const TextStyle(
                 color: Colors.orange,
@@ -985,8 +985,8 @@ class TradesWidgetState extends State<TradesWidget> {
     if (sideMoney > 0) {
       noItemsFound = false;
       items.add(
-        Text(
-          '\$${_moneyFormat.format(sideMoney)} in cash',
+        PdaText(
+          "\${0} in cash", values: [_moneyFormat.format(sideMoney)],
           style: const TextStyle(
             color: Colors.green,
             fontSize: 13,
@@ -1088,7 +1088,7 @@ class TradesWidgetState extends State<TradesWidget> {
 
     if (noItemsFound) {
       items.add(
-        const Text(
+        const PdaText(
           'No items found',
           style: TextStyle(color: Colors.orange, fontSize: 13),
         ),
@@ -1115,7 +1115,7 @@ class TradesWidgetState extends State<TradesWidget> {
     } else {
       BotToast.showText(
         clickClose: true,
-        text: "There was an error, no information copied!",
+        text: context.interfaceText("There was an error, no information copied!"),
         textStyle: const TextStyle(
           fontSize: 14,
           color: Colors.white,

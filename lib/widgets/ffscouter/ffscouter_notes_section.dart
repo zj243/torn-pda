@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -100,7 +101,7 @@ class _FFScouterNotesSectionState extends State<FFScouterNotesSection> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  child: Text(
+                  child: PdaText(
                     "Saved in FFScouter as soon as you send them, and available on any device. Personal notes are "
                     "only visible to you, faction notes to your whole faction.",
                     style: TextStyle(fontSize: 11, color: muted, fontStyle: FontStyle.italic),
@@ -131,7 +132,7 @@ class _FFScouterNotesSectionState extends State<FFScouterNotesSection> {
               if (notes.isEmpty && !loading)
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 6),
-                  child: Text("No FFScouter notes for this player", style: TextStyle(fontSize: 12, color: muted)),
+                  child: PdaText("No FFScouter notes for this player", style: TextStyle(fontSize: 12, color: muted)),
                 ),
               if (notes.isNotEmpty)
                 ConstrainedBox(
@@ -165,13 +166,13 @@ class _FFScouterNotesSectionState extends State<FFScouterNotesSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        PdaText(
           "Your API key needs to be registered with FFScouter to use shared notes",
           style: TextStyle(fontSize: 12, color: themeProvider.mainText),
         ),
         TextButton.icon(
           icon: const Icon(Icons.app_registration, size: 16),
-          label: const Text("Register key"),
+          label: const PdaText("Register key"),
           onPressed: () async {
             await Navigator.push(
               context,
@@ -268,7 +269,7 @@ class _FFScouterNotesSectionState extends State<FFScouterNotesSection> {
             ],
           ),
           if (!canPostFaction && (ctrl.info?.inFaction ?? false))
-            Text(
+            PdaText(
               "Your faction leaders can allow members to post faction notes on ffscouter.com",
               style: TextStyle(fontSize: 11, color: Colors.grey[600], fontStyle: FontStyle.italic),
             ),
@@ -310,7 +311,7 @@ class _FFScouterNotesSectionState extends State<FFScouterNotesSection> {
               TextButton.icon(
                 style: TextButton.styleFrom(visualDensity: VisualDensity.compact),
                 icon: const Icon(Icons.move_up, size: 16),
-                label: const Text("Use my Torn PDA note", style: TextStyle(fontSize: 12)),
+                label: const PdaText("Use my Torn PDA note", style: TextStyle(fontSize: 12)),
                 onPressed: _copyFromPda,
               ),
             ],
@@ -353,15 +354,15 @@ class _FFScouterNotesSectionState extends State<FFScouterNotesSection> {
       final accepted = await showDialog<bool>(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: const Text("Faction note", style: TextStyle(fontSize: 16)),
-          content: const Text(
+          title: const PdaText("Faction note", style: TextStyle(fontSize: 16)),
+          content: const PdaText(
             "Faction notes are stored by FFScouter and every member of your faction can read them, also from "
             "the FFScouter website and scripts.",
             style: TextStyle(fontSize: 13),
           ),
           actions: [
-            TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const Text("Cancel")),
-            TextButton(onPressed: () => Navigator.of(ctx).pop(true), child: const Text("Post")),
+            TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const PdaText("Cancel")),
+            TextButton(onPressed: () => Navigator.of(ctx).pop(true), child: const PdaText("Post")),
           ],
         ),
       );
@@ -383,7 +384,7 @@ class _FFScouterNotesSectionState extends State<FFScouterNotesSection> {
     if (error == null) {
       if (_scroll.hasClients) _scroll.jumpTo(0);
       BotToast.showText(
-        text: "Saved in FFScouter",
+        text: context.interfaceText("Saved in FFScouter"),
         contentColor: Colors.green[800]!,
         textStyle: const TextStyle(fontSize: 13, color: Colors.white),
         duration: const Duration(seconds: 2),
@@ -395,14 +396,14 @@ class _FFScouterNotesSectionState extends State<FFScouterNotesSection> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text("Delete note", style: TextStyle(fontSize: 16)),
+        title: const PdaText("Delete note", style: TextStyle(fontSize: 16)),
         content: Text(
           note.isFaction ? "This removes the note for your whole faction." : "Delete this note?",
           style: const TextStyle(fontSize: 13),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const Text("Cancel")),
-          TextButton(onPressed: () => Navigator.of(ctx).pop(true), child: const Text("Delete")),
+          TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const PdaText("Cancel")),
+          TextButton(onPressed: () => Navigator.of(ctx).pop(true), child: const PdaText("Delete")),
         ],
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -16,18 +17,18 @@ class ApiErrorDialogState extends State<ApiErrorDialog> {
     final formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
     return AlertDialog(
       insetPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24.0),
-      title: const Text('API Error Log'),
+      title: const PdaText('API Error Log'),
       content: Obx(() {
         final errors = controller.apiErrors;
         if (errors.isEmpty) {
-          return const Center(child: Text('No errors recorded.'));
+          return const Center(child: PdaText('No errors recorded.'));
         }
         final recentFirst = errors.reversed.toList();
         return SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              const PdaText(
                 "Note: be careful if taking screenshots, as some of these errors might contain your API key in plain text. "
                 "Make sure that you only share this with Torn PDA developers.",
                 style: TextStyle(fontSize: 12, color: Colors.red),
@@ -46,7 +47,7 @@ class ApiErrorDialogState extends State<ApiErrorDialog> {
                           children: [
                             Row(
                               children: [
-                                const Text(
+                                const PdaText(
                                   'Time (TCT): ',
                                   style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                                 ),
@@ -56,7 +57,7 @@ class ApiErrorDialogState extends State<ApiErrorDialog> {
                             const SizedBox(height: 4),
                             Row(
                               children: [
-                                const Text(
+                                const PdaText(
                                   'API Version: ',
                                   style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                                 ),
@@ -64,7 +65,7 @@ class ApiErrorDialogState extends State<ApiErrorDialog> {
                               ],
                             ),
                             const SizedBox(height: 4),
-                            const Text(
+                            const PdaText(
                               'Error:',
                               style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                             ),
@@ -78,8 +79,8 @@ class ApiErrorDialogState extends State<ApiErrorDialog> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Flexible(
-                                  child: Text(
-                                    "DETAILS\n${err.trace}",
+                                  child: PdaText(
+                                    "DETAILS\n{0}", values: [err.trace],
                                     style: const TextStyle(fontSize: 12),
                                   ),
                                 ),
@@ -97,7 +98,7 @@ class ApiErrorDialogState extends State<ApiErrorDialog> {
         );
       }),
       actions: [
-        TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Close')),
+        TextButton(onPressed: () => Navigator.of(context).pop(), child: const PdaText('Close')),
       ],
     );
   }

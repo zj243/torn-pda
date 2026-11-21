@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -47,7 +48,7 @@ Future<ChatRoom?> showChatRoomPicker(BuildContext context, ChatController chat, 
                     return ListTile(
                       leading: ChatRoomAvatar(room: room, size: 40),
                       title: Text(room.name, maxLines: 1, overflow: TextOverflow.ellipsis),
-                      subtitle: room.isDm ? const Text('Private chat') : null,
+                      subtitle: room.isDm ? const PdaText('Private chat') : null,
                       onTap: () => Navigator.of(context).pop(room),
                     );
                   },

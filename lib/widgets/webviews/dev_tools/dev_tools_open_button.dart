@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -64,7 +65,7 @@ class _DevToolsCooldownButtonState extends State<DevToolsCooldownButton> {
             children: [
               const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2)),
               const SizedBox(width: 12),
-              Text("Dev Tools in $_secondsRemaining s"),
+              PdaText("Dev Tools in {0} s", values: [_secondsRemaining]),
             ],
           );
         } else {
@@ -73,7 +74,7 @@ class _DevToolsCooldownButtonState extends State<DevToolsCooldownButton> {
             children: [
               Icon(Icons.build_circle_outlined),
               SizedBox(width: 8),
-              Text("Open Dev Tools"),
+              PdaText("Open Dev Tools"),
             ],
           );
         }

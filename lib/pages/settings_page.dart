@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:torn_pda/l10n/app_language.dart';
 import 'dart:async';
 import 'dart:developer';
@@ -153,7 +154,7 @@ class SettingsPageState extends State<SettingsPage> {
         searchText: _searchText,
         rows: [
           SearchableRow(
-            label: '${context.l10n.appLanguage} Language 简体中文 English',
+            label: context.interfaceText("{0} Language 简体中文 English", [context.l10n.appLanguage]),
             searchText: _searchText,
             child: const AppLanguageTile(),
           ),
@@ -1270,7 +1271,7 @@ class SettingsPageState extends State<SettingsPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 'This is only applicable for the tall widget layout',
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               )
@@ -1490,8 +1491,8 @@ class SettingsPageState extends State<SettingsPage> {
                         padding: EdgeInsets.only(right: 5),
                         child: Icon(MdiIcons.accountMultipleOutline, size: 18),
                       ),
-                      Text(
-                        "${s.spiesSource == SpiesSource.yata ? 'YATA' : 'Torn Stats'} database: ${s.spiesSource == SpiesSource.yata ? s.yataSpies.length : s.tornStatsSpies.spies.length} spies",
+                      PdaText(
+                        "{0} database: {1} spies", values: [s.spiesSource == SpiesSource.yata ? 'YATA' : 'Torn Stats', s.spiesSource == SpiesSource.yata ? s.yataSpies.length : s.tornStatsSpies.spies.length],
                       ),
                     ],
                   ),
@@ -1585,7 +1586,7 @@ class SettingsPageState extends State<SettingsPage> {
                     onPressed: () async {
                       _spyController.deleteSpies();
                       BotToast.showText(
-                        text: "Spies deleted!",
+                        text: context.interfaceText("Spies deleted!"),
                         textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                         contentColor: Colors.blue,
                         duration: const Duration(seconds: 1),
@@ -1841,7 +1842,7 @@ class SettingsPageState extends State<SettingsPage> {
                         if (ffsPremium.isPremium) {
                           _showFFScouterPremiumFeaturesDialog();
                         } else {
-                          BotToast.showText(text: "No active FFScouter premium found for your key");
+                          BotToast.showText(text: context.interfaceText("No active FFScouter premium found for your key"));
                         }
                       },
                       icon: const Icon(Icons.sync, size: 16),
@@ -2059,7 +2060,7 @@ class SettingsPageState extends State<SettingsPage> {
     }
 
     return buildSectionWithRows(
-      title: "FFSCOUTER",
+      title: context.interfaceText("FFSCOUTER"),
       rows: rows,
       searchText: _searchText,
     );
@@ -2496,8 +2497,8 @@ class SettingsPageState extends State<SettingsPage> {
                       children: [
                         Text(context.l10n.labelHighRefreshRate),
                         if (_refreshRateInfo.isNotEmpty)
-                          Text(
-                            'Current: ${_refreshRateInfo['currentRefreshRate']?.round().toString() ?? 'Unknown'} Hz',
+                          PdaText(
+                            "Current: {0} Hz", values: [_refreshRateInfo['currentRefreshRate']?.round().toString() ?? 'Unknown'],
                             style: TextStyle(
                               color: Colors.grey[600],
                               fontSize: 11,
@@ -2505,8 +2506,8 @@ class SettingsPageState extends State<SettingsPage> {
                             ),
                           ),
                         if (_refreshRateInfo.isNotEmpty && _refreshRateInfo['maximumFramesPerSecond'] != null)
-                          Text(
-                            'Max: ${_refreshRateInfo['maximumFramesPerSecond']?.toString() ?? 'Unknown'} Hz',
+                          PdaText(
+                            "Max: {0} Hz", values: [_refreshRateInfo['maximumFramesPerSecond']?.toString() ?? 'Unknown'],
                             style: TextStyle(
                               color: Colors.grey[600],
                               fontSize: 11,
@@ -3526,7 +3527,7 @@ class SettingsPageState extends State<SettingsPage> {
                     child: Text(context.l10n.labelPing),
                     onPressed: () async {
                       BotToast.showText(
-                        text: "Please wait...",
+                        text: context.interfaceText("Please wait..."),
                         textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                         contentColor: Colors.blue,
                         duration: const Duration(seconds: 1),
@@ -3716,7 +3717,7 @@ class SettingsPageState extends State<SettingsPage> {
                                   }
 
                                   BotToast.showText(
-                                    text: "Chaining settings reset to defaults",
+                                    text: context.interfaceText("Chaining settings reset to defaults"),
                                     textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                                     contentColor: Colors.green,
                                     duration: const Duration(seconds: 3),
@@ -4278,7 +4279,7 @@ class SettingsPageState extends State<SettingsPage> {
 
   Widget _vibrationDropdown() {
     if (_androidSdk < 26) {
-      return const Text(
+      return const PdaText(
         'This functionality is only available in Android 8 (API 26 - Oreo) or higher, sorry!',
         style: TextStyle(
           color: Colors.red,
@@ -4624,7 +4625,7 @@ class SettingsPageState extends State<SettingsPage> {
               );
               if (restored != null && restored.activeAlerts.isNotEmpty) {
                 BotToast.showText(
-                  text: "Your alerts have been restored",
+                  text: context.interfaceText("Your alerts have been restored"),
                   textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                   contentColor: Colors.green,
                   duration: const Duration(seconds: 5),

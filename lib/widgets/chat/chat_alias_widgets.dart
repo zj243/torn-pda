@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:convert';
 
@@ -38,8 +39,8 @@ class ChatExportMenu extends StatelessWidget {
     icon: const Icon(Icons.ios_share_rounded),
     onSelected: (how) => _export(context, how),
     itemBuilder: (_) => const [
-      PopupMenuItem(value: 'share', child: Text('Share as text')),
-      PopupMenuItem(value: 'copy', child: Text('Copy to clipboard')),
+      PopupMenuItem(value: 'share', child: PdaText('Share as text')),
+      PopupMenuItem(value: 'copy', child: PdaText('Copy to clipboard')),
     ],
   );
 }
@@ -108,15 +109,15 @@ class _ChatItemAliasAddDialogState extends State<ChatItemAliasAddDialog> {
                 autofocus: true,
                 maxLength: 24,
                 onChanged: (_) => setState(() {}),
-                decoration: const InputDecoration(labelText: 'Nickname', hintText: 'xans'),
+                decoration: InputDecoration(labelText: context.interfaceText('Nickname'), hintText: 'xans'),
               ),
               TextField(
                 controller: _search,
                 onChanged: (_) => setState(() {}),
-                decoration: const InputDecoration(labelText: 'Search the item', prefixIcon: Icon(Icons.search_rounded)),
+                decoration: InputDecoration(labelText: context.interfaceText('Search the item'), prefixIcon: Icon(Icons.search_rounded)),
               ),
               if (_failed)
-                const Padding(padding: EdgeInsets.only(top: 8), child: Text('Could not load the item list'))
+                const Padding(padding: EdgeInsets.only(top: 8), child: PdaText('Could not load the item list'))
               else if (catalog == null)
                 const Padding(
                   padding: EdgeInsets.only(top: 8),
@@ -137,15 +138,15 @@ class _ChatItemAliasAddDialogState extends State<ChatItemAliasAddDialog> {
               if (_item != null)
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
-                  child: Text('Picked: $_item', style: theme.textTheme.bodySmall),
+                  child: PdaText("Picked: {0}", values: [_item], style: theme.textTheme.bodySmall),
                 ),
             ],
           ),
         ),
       ),
       actions: [
-        TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-        TextButton(onPressed: ready ? _save : null, child: const Text('Save')),
+        TextButton(onPressed: () => Navigator.pop(context), child: const PdaText('Cancel')),
+        TextButton(onPressed: ready ? _save : null, child: const PdaText('Save')),
       ],
     );
   }
@@ -251,14 +252,14 @@ class _ChatImportDialogState extends State<ChatImportDialog> {
             ),
             TextButton.icon(
               icon: const Icon(Icons.folder_open_rounded),
-              label: const Text('Choose file'),
+              label: const PdaText('Choose file'),
               onPressed: _file,
             ),
           ],
         ),
       ),
       actions: [
-        TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+        TextButton(onPressed: () => Navigator.pop(context), child: const PdaText('Cancel')),
         for (final (label, run) in widget.actions)
           TextButton(onPressed: empty ? null : () => _run(run), child: Text(label)),
       ],

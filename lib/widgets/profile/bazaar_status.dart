@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:torn_pda/models/profile/own_profile_misc.dart';
@@ -46,13 +47,13 @@ class BazaarStatusCard extends StatelessWidget {
         children: [
           const SizedBox(
             width: 60,
-            child: Text("Bazaar:"),
+            child: PdaText("Bazaar:"),
           ),
           Text(bazaarNumber),
           Text(" ($bazaarPendingString)"),
           const SizedBox(width: 8),
           Semantics(
-            label: 'Open bazaar dialog',
+            label: context.interfaceText('Open bazaar dialog'),
             child: GestureDetector(
               child: const Icon(
                 MdiIcons.storefrontOutline,

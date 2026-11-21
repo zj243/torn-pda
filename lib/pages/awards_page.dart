@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -153,7 +154,7 @@ class AwardsPageState extends State<AwardsPage> {
                   // FAB
                   floatingActionButton: FloatingActionButton.extended(
                     icon: const Icon(Icons.filter_list),
-                    label: const Text("Filter"),
+                    label: const PdaText("Filter"),
                     elevation: 4,
                     onPressed: () {
                       if (_pc.isPanelAnimating) return;
@@ -176,7 +177,7 @@ class AwardsPageState extends State<AwardsPage> {
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[const Text('Calling YATA...'), const SizedBox(height: 30), FlippingYata()],
+                  children: <Widget>[const PdaText('Calling YATA...'), const SizedBox(height: 30), FlippingYata()],
                 ),
               );
             }
@@ -203,9 +204,8 @@ class AwardsPageState extends State<AwardsPage> {
             padding: const EdgeInsets.only(left: 15, top: 15),
             child: Row(
               children: [
-                Text(
-                  'Your rarity score: '
-                  '${double.parse((_headerInfo.playerScore! / 10000).toStringAsFixed(2))}',
+                PdaText(
+                  "Your rarity score: {0}", values: [double.parse((_headerInfo.playerScore! / 10000).toStringAsFixed(2))],
                 ),
                 const SizedBox(width: 8),
                 GestureDetector(
@@ -236,13 +236,13 @@ class AwardsPageState extends State<AwardsPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 20),
-                const Text('PINNED AWARDS', style: TextStyle(fontWeight: FontWeight.bold)),
+                const PdaText('PINNED AWARDS', style: TextStyle(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 4),
                 pinnedSection,
               ],
             ),
           const SizedBox(height: 20),
-          const Text('AWARDS LIST', style: TextStyle(fontWeight: FontWeight.bold)),
+          const PdaText('AWARDS LIST', style: TextStyle(fontWeight: FontWeight.bold)),
           const SizedBox(height: 4),
         ],
       ),
@@ -310,7 +310,7 @@ class AwardsPageState extends State<AwardsPage> {
               children: <Widget>[
                 Row(
                   children: [
-                    const Text("Show achieved"),
+                    const PdaText("Show achieved"),
                     Switch(
                       value: _showAchievedAwards,
                       onChanged: (value) {
@@ -328,7 +328,7 @@ class AwardsPageState extends State<AwardsPage> {
                   selected: _hiddenCategories.isEmpty ? true : false,
                   side: BorderSide(color: _hiddenCategories.isEmpty ? Colors.green : Colors.grey[600]!, width: 1.5),
                   avatar: CircleAvatar(backgroundColor: _hiddenCategories.isEmpty ? Colors.green : Colors.grey),
-                  label: const Text("ALL", style: TextStyle(fontSize: 12)),
+                  label: const PdaText("ALL", style: TextStyle(fontSize: 12)),
                   selectedColor: Colors.transparent,
                   disabledColor: Colors.grey,
                   onSelected: (bool isSelected) {
@@ -363,14 +363,14 @@ class AwardsPageState extends State<AwardsPage> {
       elevation: _settingsProvider.appBarTop ? 2 : 0,
       title: Row(
         children: [
-          const Text('Awards'),
+          const PdaText('Awards'),
           const SizedBox(width: 8),
           GestureDetector(
             onTap: () {
               BotToast.showText(
                 text:
-                    "This section is part of YATA's mobile interface, all details "
-                    "information and actions are directly linked to your YATA account.",
+                    context.interfaceText("This section is part of YATA's mobile interface, all details "
+                    "information and actions are directly linked to your YATA account."),
                 textStyle: const TextStyle(fontSize: 13, color: Colors.white),
                 contentColor: Colors.green[800]!,
                 duration: const Duration(seconds: 6),
@@ -455,12 +455,12 @@ class AwardsPageState extends State<AwardsPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Text(
+            const PdaText(
               'There was an error with YATA!',
               style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
-            const Text(
+            const PdaText(
               'Please make sure you have a valid account with YATA in order to '
               'use this section. ',
             ),
@@ -480,7 +480,7 @@ class AwardsPageState extends State<AwardsPage> {
                 ),
                 const SizedBox(width: 10),
                 const Flexible(
-                  child: Text(
+                  child: PdaText(
                     "Don't have one? Have you changed your API key recently? "
                     'Login here with YATA (tap the icon) and then reload this section!',
                   ),
@@ -494,7 +494,7 @@ class AwardsPageState extends State<AwardsPage> {
                 ElevatedButton(
                   child: const Row(
                     mainAxisSize: MainAxisSize.min,
-                    children: [Icon(Icons.refresh), SizedBox(width: 6), Text('Reload')],
+                    children: [Icon(Icons.refresh), SizedBox(width: 6), PdaText('Reload')],
                   ),
                   onPressed: () {
                     setState(() {
@@ -505,7 +505,7 @@ class AwardsPageState extends State<AwardsPage> {
               ],
             ),
             const SizedBox(height: 30),
-            const Text(
+            const PdaText(
               'Otherwise, there might be a problem signing in with YATA, please '
               'try again later!',
             ),
@@ -519,14 +519,14 @@ class AwardsPageState extends State<AwardsPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
+            PdaText(
               'There was an error contacting with YATA!',
               style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20),
-            Text('Please try again later.'),
+            PdaText('Please try again later.'),
             SizedBox(height: 20),
-            Text('If this problem reoccurs, please let us know!'),
+            PdaText('If this problem reoccurs, please let us know!'),
           ],
         ),
       );

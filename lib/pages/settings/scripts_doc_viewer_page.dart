@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 // Flutter imports:
@@ -101,7 +102,7 @@ class ScriptDocViewerPageState extends State<ScriptDocViewerPage> {
       actions: [
         IconButton(
           icon: const Icon(Icons.open_in_new, size: 20),
-          tooltip: "Open on GitHub",
+          tooltip: context.interfaceText("Open on GitHub"),
           onPressed: () => _openInBrowser(ScriptDocsService.githubUrlFor(widget.entry.path)),
         ),
       ],
@@ -121,7 +122,7 @@ class ScriptDocViewerPageState extends State<ScriptDocViewerPage> {
             children: [
               Icon(Icons.description_outlined, size: 48, color: Colors.grey[600]),
               const SizedBox(height: 15),
-              Text(
+              PdaText(
                 "This document could not be loaded",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 14, color: Colors.grey[600]),
@@ -129,7 +130,7 @@ class ScriptDocViewerPageState extends State<ScriptDocViewerPage> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () => _openInBrowser(ScriptDocsService.githubUrlFor(widget.entry.path)),
-                child: const Text("Open on GitHub"),
+                child: const PdaText("Open on GitHub"),
               ),
             ],
           ),

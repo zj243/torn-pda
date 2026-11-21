@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 
 class BugsAnnouncementDialog extends StatelessWidget {
@@ -19,13 +20,13 @@ class BugsAnnouncementDialog extends StatelessWidget {
               //color: _themeProvider.mainText,
             ),
           ),
-          const Flexible(child: Text("Recent bugs reported with third-party user scripts")),
+          const Flexible(child: PdaText("Recent bugs reported with third-party user scripts")),
         ],
       ),
       content: const SingleChildScrollView(
         child: Column(
           children: [
-            Text(
+            PdaText(
               "Over the past few months, we've received several reports regarding issues within the app "
               "(such as the Crimes page not loading, app crashes, general instability, etc.). "
               "After investigating alongside many of you, we've found that in the vast majority of cases, "
@@ -50,7 +51,7 @@ class BugsAnnouncementDialog extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: 8),
           child: TextButton(
-            child: const Text("Ok!"),
+            child: const PdaText("Ok!"),
             onPressed: () {
               Navigator.of(context).pop('exit');
             },

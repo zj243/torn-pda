@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:provider/provider.dart';
@@ -64,8 +65,8 @@ class TabsHideReminderDialogState extends State<TabsHideReminderDialog> {
                 ),
                 child: Column(
                   children: [
-                    const Text("You have hidden your tabs!\n"),
-                    const Text(
+                    const PdaText("You have hidden your tabs!\n"),
+                    const PdaText(
                       "Just a quick reminder (in case you still have not reviewed the Tips section): swiping up/down "
                       "the title bar will hide/show your tab bar, so that you can enjoy more space when needed!\n\n"
                       "This feature can be completely disabled in Settings.",

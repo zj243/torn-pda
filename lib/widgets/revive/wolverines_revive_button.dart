@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -42,7 +43,7 @@ class WolverinesReviveButtonState extends State<WolverinesReviveButton> {
             child: Image.asset('images/icons/wolverines_revive.png', width: 24),
           ),
           const SizedBox(width: 10),
-          const Flexible(child: Text("Request a revive (The Wolverines)")),
+          const Flexible(child: PdaText("Request a revive (The Wolverines)")),
         ],
       ),
     );
@@ -79,7 +80,7 @@ Future<void> openWolverinesReviveDialog(BuildContext ctx, ThemeProvider themePro
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Flexible(
-                              child: Text(
+                              child: PdaText(
                                 "REQUEST A REVIVE FROM THE WOLVERINES",
                                 style: TextStyle(fontSize: 11, color: themeProvider.mainText),
                               ),
@@ -93,7 +94,7 @@ Future<void> openWolverinesReviveDialog(BuildContext ctx, ThemeProvider themePro
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
                           TextButton(
-                            child: const Text("Medic!"),
+                            child: const PdaText("Medic!"),
                             onPressed: () async {
                               // User can be null if we are not accessing from the Profile page
                               if (user == null) {
@@ -106,8 +107,8 @@ Future<void> openWolverinesReviveDialog(BuildContext ctx, ThemeProvider themePro
                               if (user == null) {
                                 BotToast.showText(
                                   text:
-                                      'There was an error contacting Torn API to get your current status, '
-                                      'please try again after a while!',
+                                      context.interfaceText('There was an error contacting Torn API to get your current status, '
+                                      'please try again after a while!'),
                                   textStyle: const TextStyle(fontSize: 13, color: Colors.white),
                                   contentColor: Colors.red[800]!,
                                   duration: const Duration(seconds: 5),
@@ -120,8 +121,8 @@ Future<void> openWolverinesReviveDialog(BuildContext ctx, ThemeProvider themePro
                               if (user!.status!.color != 'red' && user!.status!.state != "Hospital") {
                                 BotToast.showText(
                                   text:
-                                      'According to Torn you are not currently hospitalized, please wait a '
-                                      'few seconds and try again!',
+                                      context.interfaceText('According to Torn you are not currently hospitalized, please wait a '
+                                      'few seconds and try again!'),
                                   textStyle: const TextStyle(fontSize: 13, color: Colors.white),
                                   contentColor: Colors.red[800]!,
                                   duration: const Duration(seconds: 5),
@@ -157,7 +158,7 @@ Future<void> openWolverinesReviveDialog(BuildContext ctx, ThemeProvider themePro
                             },
                           ),
                           TextButton(
-                            child: const Text("Cancel"),
+                            child: const PdaText("Cancel"),
                             onPressed: () {
                               Navigator.of(context).pop();
                             },

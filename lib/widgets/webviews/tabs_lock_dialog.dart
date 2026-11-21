@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:provider/provider.dart';
@@ -44,7 +45,7 @@ class TabsLockDialog extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    const Text("You locked your first tab!\n"),
+                    const PdaText("You locked your first tab!\n"),
                     const Text(
                       "But how does it work...?\n\n"
                       //
@@ -74,7 +75,7 @@ class TabsLockDialog extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         TextButton(
-                          child: const Text("Close"),
+                          child: const PdaText("Close"),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },

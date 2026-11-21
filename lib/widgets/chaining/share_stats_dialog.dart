@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +22,7 @@ class ShareStatsDialogState extends State<ShareStatsDialog> {
         settingsProvider.ffScouterEnabledStatus == 1 && settingsProvider.ffScouterEnabledStatusRemoteConfig;
 
     return AlertDialog(
-      title: const Text('Share stats'),
+      title: const PdaText('Share stats'),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -30,21 +31,21 @@ class ShareStatsDialogState extends State<ShareStatsDialog> {
               onPressed: () {
                 _w.shareStats(context);
               },
-              child: const Text("Share"),
+              child: const PdaText("Share"),
             ),
             ElevatedButton(
               onPressed: () {
                 _w.generateCSV(context);
               },
-              child: const Text("Generate CSV"),
+              child: const PdaText("Generate CSV"),
             ),
             const Padding(
               padding: EdgeInsets.all(5.0),
               child: Divider(),
             ),
-            const Text("OPTIONS", style: TextStyle(fontSize: 10)),
+            const PdaText("OPTIONS", style: TextStyle(fontSize: 10)),
             SwitchListTile(
-              title: const Text(
+              title: const PdaText(
                 'Include hidden targets',
                 style: TextStyle(fontSize: 13),
               ),
@@ -56,7 +57,7 @@ class ShareStatsDialogState extends State<ShareStatsDialog> {
               },
             ),
             SwitchListTile(
-              title: const Text(
+              title: const PdaText(
                 'Show only totals',
                 style: TextStyle(fontSize: 13),
               ),
@@ -68,7 +69,7 @@ class ShareStatsDialogState extends State<ShareStatsDialog> {
               },
             ),
             SwitchListTile(
-              title: const Text(
+              title: const PdaText(
                 'Show estimates if spied stats are not available',
                 style: TextStyle(fontSize: 13),
               ),
@@ -80,7 +81,7 @@ class ShareStatsDialogState extends State<ShareStatsDialog> {
               },
             ),
             SwitchListTile(
-              title: const Text(
+              title: const PdaText(
                 'Include targets with no stats available',
                 style: TextStyle(fontSize: 13),
               ),
@@ -93,7 +94,7 @@ class ShareStatsDialogState extends State<ShareStatsDialog> {
             ),
             if (ffScouterActive)
               SwitchListTile(
-                title: const Text(
+                title: const PdaText(
                   'Share FFScouter fair fight',
                   style: TextStyle(fontSize: 13),
                 ),
@@ -112,7 +113,7 @@ class ShareStatsDialogState extends State<ShareStatsDialog> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: const Text('Close'),
+          child: const PdaText('Close'),
         ),
       ],
     );

@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -89,7 +90,7 @@ class TargetsOptionsPageState extends State<TargetsOptionsPage> {
                           const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
+                              PdaText(
                                 'CHAINING',
                                 style: TextStyle(fontSize: 10),
                               ),
@@ -100,7 +101,7 @@ class TargetsOptionsPageState extends State<TargetsOptionsPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                const Text("Show targets notes"),
+                                const PdaText("Show targets notes"),
                                 Switch(
                                   value: _showTargetsNotes,
                                   onChanged: (value) {
@@ -117,7 +118,7 @@ class TargetsOptionsPageState extends State<TargetsOptionsPage> {
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: Text(
+                            child: PdaText(
                               'If enabled, you will be shown the note you have saved for every '
                               'target and its color as you progress with the chain. Applies only '
                               'for standard targets.',
@@ -137,7 +138,7 @@ class TargetsOptionsPageState extends State<TargetsOptionsPage> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
-                                      const Text("Show blank notes"),
+                                      const PdaText("Show blank notes"),
                                       Switch(
                                         value: _showBlankTargetsNotes,
                                         onChanged: (value) {
@@ -154,7 +155,7 @@ class TargetsOptionsPageState extends State<TargetsOptionsPage> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 15),
-                                  child: Text(
+                                  child: PdaText(
                                     "If enabled, you will be shown a colored square even if your target's note is empty, "
                                     'so that you are aware of the color even if no details have been entered.',
                                     style: TextStyle(
@@ -175,7 +176,7 @@ class TargetsOptionsPageState extends State<TargetsOptionsPage> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
-                                      const Text("Last online & faction warning"),
+                                      const PdaText("Last online & faction warning"),
                                       Switch(
                                         value: _showOnlineFactionWarning,
                                         onChanged: (value) {
@@ -192,7 +193,7 @@ class TargetsOptionsPageState extends State<TargetsOptionsPage> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 15),
-                                  child: Text(
+                                  child: PdaText(
                                     "If enabled, in addition to the target's note (if any) you'll be shown if the "
                                     'target has been online in the last 7 days. If so, a faction check will also be performed. '
                                     'This is to avoid attacking active targets, if desired.',
@@ -211,7 +212,7 @@ class TargetsOptionsPageState extends State<TargetsOptionsPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                const Text("Skip red/blue targets"),
+                                const PdaText("Skip red/blue targets"),
                                 Switch(
                                   value: _settingsProvider.targetSkippingAll,
                                   onChanged: (value) {
@@ -227,7 +228,7 @@ class TargetsOptionsPageState extends State<TargetsOptionsPage> {
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: Text(
+                            child: PdaText(
                               'If enabled, targets that are in hospital, jail or in another '
                               'country will be skipped (max 3 at a time, to avoid delays). '
                               'This does NOT affect Panic Mode.',
@@ -247,7 +248,7 @@ class TargetsOptionsPageState extends State<TargetsOptionsPage> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
-                                      const Text("Also skip first target"),
+                                      const PdaText("Also skip first target"),
                                       Switch(
                                         value: _settingsProvider.targetSkippingFirst,
                                         onChanged: (value) {
@@ -263,7 +264,7 @@ class TargetsOptionsPageState extends State<TargetsOptionsPage> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 15),
-                                  child: Text(
+                                  child: PdaText(
                                     "If enabled, your first, manually selected target will be skipped as well if it's "
                                     'red/blue. This might be useful if your list is not updated and the target you '
                                     'select is not available. This does NOT affect Panic Mode.',
@@ -282,7 +283,7 @@ class TargetsOptionsPageState extends State<TargetsOptionsPage> {
                           const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
+                              PdaText(
                                 'RETALIATION SECTION',
                                 style: TextStyle(fontSize: 10),
                               ),
@@ -293,7 +294,7 @@ class TargetsOptionsPageState extends State<TargetsOptionsPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                const Text("Section enabled"),
+                                const PdaText("Section enabled"),
                                 Switch(
                                   value: _retaliationEnabled,
                                   onChanged: (value) {
@@ -327,7 +328,7 @@ class TargetsOptionsPageState extends State<TargetsOptionsPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                const Text("Show YATA icon"),
+                                const PdaText("Show YATA icon"),
                                 Switch(
                                   value: _yataTargetsEnabled,
                                   onChanged: (value) {
@@ -344,7 +345,7 @@ class TargetsOptionsPageState extends State<TargetsOptionsPage> {
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: Text(
+                            child: PdaText(
                               "If enabled, you'll have access to a 'Y' icon in the top bar from "
                               'where you can import and export to YATA. Please note that deletions '
                               'are not propagated between YATA and Torn PDA, but notes are '
@@ -362,7 +363,7 @@ class TargetsOptionsPageState extends State<TargetsOptionsPage> {
                           const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
+                              PdaText(
                                 'FFSCOUTER',
                                 style: TextStyle(fontSize: 10),
                               ),
@@ -373,7 +374,7 @@ class TargetsOptionsPageState extends State<TargetsOptionsPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                const Text("Section enabled"),
+                                const PdaText("Section enabled"),
                                 Switch(
                                   value: _targetFinderEnabled,
                                   onChanged: (value) {
@@ -391,7 +392,7 @@ class TargetsOptionsPageState extends State<TargetsOptionsPage> {
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: Text(
+                            child: PdaText(
                               'If enabled, you\'ll have access to the FFScouter tab '
                               'in the Chaining section, which allows you to find targets '
                               'powered by FFScouter.',
@@ -424,7 +425,7 @@ class TargetsOptionsPageState extends State<TargetsOptionsPage> {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
-      title: const Text("Chaining Options", style: TextStyle(color: Colors.white)),
+      title: const PdaText("Chaining Options", style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {

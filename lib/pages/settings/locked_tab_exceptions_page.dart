@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:torn_pda/providers/settings_provider.dart';
@@ -30,7 +31,7 @@ class LockedTabsNavigationExceptionsPageState extends State<LockedTabsNavigation
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Locked Tabs Exceptions'),
+        title: const PdaText('Locked Tabs Exceptions'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -38,7 +39,7 @@ class LockedTabsNavigationExceptionsPageState extends State<LockedTabsNavigation
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text(
+              const PdaText(
                 "By adding URL pairs, you can allow navigation between both in a locked tab. Note: the browser will "
                 "look for matching patterns between URLs (e.g., if you just input 'item' in both, browsing between URLs "
                 "containing 'item' will be allowed). You can be as specific or as general as you prefer.\n\n"
@@ -53,7 +54,7 @@ class LockedTabsNavigationExceptionsPageState extends State<LockedTabsNavigation
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Toggle Browser"),
+                  const PdaText("Toggle Browser"),
                   const SizedBox(width: 10),
                   PdaBrowserIcon(color: context.read<ThemeProvider>().mainText),
                 ],
@@ -123,7 +124,7 @@ class LockedTabsNavigationExceptionsPageState extends State<LockedTabsNavigation
                           _errorMessage = null;
                         });
                       },
-                      child: const Text('Cancel'),
+                      child: const PdaText('Cancel'),
                     ),
                   ],
                 ],
@@ -131,7 +132,7 @@ class LockedTabsNavigationExceptionsPageState extends State<LockedTabsNavigation
               const SizedBox(height: 20),
               const Divider(),
               const SizedBox(height: 10),
-              const Text(
+              const PdaText(
                 "EXCEPTIONS",
                 style: TextStyle(fontSize: 11),
               ),

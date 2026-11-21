@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class FFScouterFactionActivityPanel extends StatelessWidget {
               child: ExpansionTile(
                 tilePadding: const EdgeInsets.symmetric(horizontal: 16),
                 leading: const Icon(Icons.access_time, size: 20),
-                title: const Text("Enemy activity", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                title: const PdaText("Enemy activity", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
                 childrenPadding: const EdgeInsets.fromLTRB(12, 0, 12, 10),
                 children: [
                   const _Legend(),
@@ -44,7 +45,7 @@ class FFScouterFactionActivityPanel extends StatelessWidget {
                           for (final f in factions) _FactionActivityCard(key: ValueKey(f.id), faction: f),
                           const Padding(
                             padding: EdgeInsets.only(top: 6),
-                            child: Text("Provided by FFScouter", style: TextStyle(fontSize: 9, color: Colors.grey)),
+                            child: PdaText("Provided by FFScouter", style: TextStyle(fontSize: 9, color: Colors.grey)),
                           ),
                         ],
                       ),
@@ -70,7 +71,7 @@ class _Legend extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          PdaText(
             "Likely online right now (from their usual daily pattern)",
             style: TextStyle(fontSize: 9, color: Colors.grey[600], fontStyle: FontStyle.italic),
           ),
@@ -158,7 +159,7 @@ class _FactionActivityCardState extends State<_FactionActivityCard> {
               child: Center(child: SizedBox(height: 12, width: 12, child: CircularProgressIndicator(strokeWidth: 2))),
             )
           else if (p == null || !p.hasData)
-            Text("No activity data", style: TextStyle(fontSize: 11, color: Colors.grey[600]))
+            PdaText("No activity data", style: TextStyle(fontSize: 11, color: Colors.grey[600]))
           else
             _Heatmap(hourly: p.hourly()),
           _MostActive(faction: widget.faction),
@@ -210,7 +211,7 @@ class _Heatmap extends StatelessWidget {
             Text("06", style: TextStyle(fontSize: 9, color: Colors.grey[600])),
             Text("12", style: TextStyle(fontSize: 9, color: Colors.grey[600])),
             Text("18", style: TextStyle(fontSize: 9, color: Colors.grey[600])),
-            Text("23 TCT", style: TextStyle(fontSize: 9, color: Colors.grey[600])),
+            PdaText("23 TCT", style: TextStyle(fontSize: 9, color: Colors.grey[600])),
           ],
         ),
       ],
@@ -275,7 +276,7 @@ class _MostActiveState extends State<_MostActive> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 8),
-        Text(
+        PdaText(
           "Most active",
           style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.grey[600]),
         ),

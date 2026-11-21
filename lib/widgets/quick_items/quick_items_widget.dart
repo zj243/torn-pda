@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:developer';
 
@@ -198,7 +199,7 @@ class QuickItemsWidgetState extends State<QuickItemsWidget> {
                 if (useLongPress)
                   const Padding(
                     padding: EdgeInsets.only(top: 5),
-                    child: Text(
+                    child: PdaText(
                       'Long-press here to add quick items from your list',
                       style: TextStyle(color: Colors.orangeAccent, fontSize: 12),
                       textAlign: TextAlign.center,
@@ -213,7 +214,7 @@ class QuickItemsWidgetState extends State<QuickItemsWidget> {
                       const SizedBox(width: 8),
                       const Padding(
                         padding: EdgeInsets.only(top: 5),
-                        child: Text(
+                        child: PdaText(
                           'Tap to add quick items from your list',
                           style: TextStyle(color: Colors.orangeAccent, fontSize: 12),
                           textAlign: TextAlign.center,
@@ -226,7 +227,7 @@ class QuickItemsWidgetState extends State<QuickItemsWidget> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                    const PdaText(
                       "Configure your faction's armoury quick items",
                       style: TextStyle(
                         color: Colors.orangeAccent,
@@ -563,7 +564,7 @@ class QuickItemsWidgetState extends State<QuickItemsWidget> {
                     _togglePicker(true);
                   } else {
                     BotToast.showText(
-                      text: 'Hold to activate!',
+                      text: context.interfaceText('Hold to activate!'),
                       textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                       contentColor: Colors.blue[700]!,
                       duration: const Duration(seconds: 2),
@@ -606,7 +607,7 @@ class QuickItemsWidgetState extends State<QuickItemsWidget> {
       // Check if page is in grid/thumbnails mode
       if (resultStr == 'grid-mode') {
         BotToast.showText(
-          text: 'Quick item picker requires List view mode. Please switch from Grid to List view.',
+          text: context.interfaceText('Quick item picker requires List view mode. Please switch from Grid to List view.'),
           textStyle: const TextStyle(fontSize: 14, color: Colors.white),
           contentColor: Colors.orange[800]!,
           duration: const Duration(seconds: 4),

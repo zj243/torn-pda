@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/models/profile/own_profile_basic.dart';
 import 'package:torn_pda/utils/firebase_functions.dart';
@@ -62,7 +63,7 @@ class BackupRestoreDialogState extends State<BackupRestoreDialog> with TickerPro
                 children: [
                   Icon(Icons.download),
                   SizedBox(width: 10),
-                  Text(
+                  PdaText(
                     "RESTORE SETTINGS",
                     style: TextStyle(fontSize: 18),
                   ),
@@ -76,7 +77,7 @@ class BackupRestoreDialogState extends State<BackupRestoreDialog> with TickerPro
                   if (_serverError.isNotEmpty) {
                     return Column(
                       children: [
-                        const Text("SERVER ERROR", style: TextStyle(color: Colors.red)),
+                        const PdaText("SERVER ERROR", style: TextStyle(color: Colors.red)),
                         Text(_serverError, style: const TextStyle(color: Colors.red)),
                       ],
                     );
@@ -85,7 +86,7 @@ class BackupRestoreDialogState extends State<BackupRestoreDialog> with TickerPro
                   if (_serverPrefs.isEmpty) {
                     return const Column(
                       children: [
-                        Text("No online backup found!"),
+                        PdaText("No online backup found!"),
                       ],
                     );
                   }
@@ -106,7 +107,7 @@ class BackupRestoreDialogState extends State<BackupRestoreDialog> with TickerPro
                     child: Column(
                       children: [
                         SizedBox(height: 40),
-                        Text("Fetching server info..."),
+                        PdaText("Fetching server info..."),
                         SizedBox(height: 25),
                         CircularProgressIndicator(),
                         SizedBox(height: 40),
@@ -134,7 +135,7 @@ class BackupRestoreDialogState extends State<BackupRestoreDialog> with TickerPro
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text("Close"),
+                    child: const PdaText("Close"),
                   ),
                 ],
               ),

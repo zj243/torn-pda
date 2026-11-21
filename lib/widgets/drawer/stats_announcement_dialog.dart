@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:torn_pda/providers/theme_provider.dart';
@@ -26,25 +27,25 @@ class StatsAnnouncementDialog extends StatelessWidget {
               //color: _themeProvider.mainText,
             ),
           ),
-          const Text("Enjoying Torn PDA?"),
+          const PdaText("Enjoying Torn PDA?"),
         ],
       ),
       content: SingleChildScrollView(
         child: Column(
           children: [
-            const Text(
+            const PdaText(
               "Three years of development, more than 100k lines of code, an active Discord community, a beta-testing "
               "team, official dev support... and more than 30k users that enjoy their Torn City game experience daily: "
               "this is what Torn PDA has become thanks to your support, suggestions and comments.",
               style: TextStyle(fontSize: 14),
             ),
             const SizedBox(height: 15),
-            const Text(
+            const PdaText(
               "THANK YOU!",
               style: TextStyle(fontSize: 14),
             ),
             const SizedBox(height: 15),
-            const Text(
+            const PdaText(
               "If you are enjoying the app and wouldn't mind to spend a minute to improve the game we love even more, "
               "I would kindly ask you to spread the word and help us improve. Just that. This is not about donations.",
               style: TextStyle(fontSize: 14),
@@ -52,7 +53,7 @@ class StatsAnnouncementDialog extends StatelessWidget {
             const SizedBox(height: 15),
             RichText(
               text: TextSpan(
-                text: "Give Torn PDA a thumbs up in the ",
+                text: context.interfaceText("Give Torn PDA a thumbs up in the "),
                 style: TextStyle(fontSize: 14, color: _themeProvider!.mainText),
                 children: <InlineSpan>[
                   WidgetSpan(
@@ -73,16 +74,16 @@ class StatsAnnouncementDialog extends StatelessWidget {
                               browserTapType: BrowserTapType.long,
                             );
                       },
-                      child: const Text(
+                      child: const PdaText(
                         'forums',
                         style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue, fontSize: 14),
                       ),
                     ),
                   ),
-                  const TextSpan(
-                    text: ", rate the app with your honest opinion, and keep your "
+                  TextSpan(
+                    text: context.interfaceText(", rate the app with your honest opinion, and keep your "
                         "suggestions coming. And do so with any other apps, services, extensions, helpers, spreadsheets,... "
-                        "you use. Third-party developers work every day to make the game we all love a bit more enjoyable!",
+                        "you use. Third-party developers work every day to make the game we all love a bit more enjoyable!"),
                   ),
                 ],
               ),
@@ -94,7 +95,7 @@ class StatsAnnouncementDialog extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: 8),
           child: TextButton(
-            child: const Text("Awesome!"),
+            child: const PdaText("Awesome!"),
             onPressed: () {
               Navigator.of(context).pop('exit');
             },

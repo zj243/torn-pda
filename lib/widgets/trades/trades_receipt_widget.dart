@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -239,7 +240,7 @@ class _TradeReceiptRowState extends State<TradeReceiptRow> {
       widget.onReceiptUpdated?.call(_receiptData!);
 
       BotToast.showText(
-        text: '${widget.providerName} receipt updated successfully!',
+        text: context.interfaceText("{0} receipt updated successfully!", [widget.providerName]),
         textStyle: const TextStyle(
           fontSize: 14,
           color: Colors.white,
@@ -265,14 +266,14 @@ class _TradeReceiptRowState extends State<TradeReceiptRow> {
         return StatefulBuilder(
           builder: (context, setStateDialog) {
             return AlertDialog(
-              title: Text('Edit ${widget.providerName} receipt'),
+              title: PdaText("Edit {0} receipt", values: [widget.providerName]),
               content: SizedBox(
                 width: 420,
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text(
+                      const PdaText(
                         'You can update per-item prices for this receipt. TornW3B allows editing receipts for up to 6 hours after creation.',
                       ),
                       const SizedBox(height: 12),
@@ -287,8 +288,8 @@ class _TradeReceiptRowState extends State<TradeReceiptRow> {
                               TextFormField(
                                 initialValue: pendingPrices[index].toString(),
                                 keyboardType: TextInputType.number,
-                                decoration: const InputDecoration(
-                                  labelText: 'Price per item',
+                                decoration: InputDecoration(
+                                  labelText: context.interfaceText('Price per item'),
                                   border: OutlineInputBorder(),
                                   isDense: true,
                                 ),
@@ -312,7 +313,7 @@ class _TradeReceiptRowState extends State<TradeReceiptRow> {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  child: const Text('Cancel'),
+                  child: const PdaText('Cancel'),
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -348,7 +349,7 @@ class _TradeReceiptRowState extends State<TradeReceiptRow> {
 
                     Navigator.of(context).pop(updates);
                   },
-                  child: const Text('Update'),
+                  child: const PdaText('Update'),
                 ),
               ],
             );

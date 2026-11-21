@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 // Package imports:
@@ -291,7 +292,7 @@ class TargetCardState extends State<TargetCard> {
                                         ),
                                       ),
                                       const SizedBox(width: 4),
-                                      const Text('Notes: '),
+                                      const PdaText('Notes: '),
                                       if (shown != null && fits)
                                         Flexible(
                                           child: Text(
@@ -478,18 +479,18 @@ class TargetCardState extends State<TargetCard> {
 
     if (respect == -1) {
       respectResult = TextSpan(
-        text: 'unk',
+        text: context.interfaceText('unk'),
         style: TextStyle(color: _themeProvider.mainText),
       );
     } else if (respect == 0) {
       if (_target!.userWonOrDefended!) {
         respectResult = TextSpan(
-          text: '0 (def)',
+          text: context.interfaceText('0 (def)'),
           style: TextStyle(color: _themeProvider.mainText),
         );
       } else {
         respectResult = TextSpan(
-          text: 'Lost',
+          text: context.interfaceText('Lost'),
           style: TextStyle(color: _themeProvider.getTextColor(Colors.red), fontWeight: FontWeight.bold),
         );
       }
@@ -502,7 +503,7 @@ class TargetCardState extends State<TargetCard> {
 
     if (fairFight == -1) {
       fairFightResult = TextSpan(
-        text: 'unk',
+        text: context.interfaceText('unk'),
         style: TextStyle(color: _themeProvider.mainText),
       );
     } else {
@@ -543,7 +544,7 @@ class TargetCardState extends State<TargetCard> {
                 text: TextSpan(
                   children: <TextSpan>[
                     TextSpan(
-                      text: ' / FF: ',
+                      text: context.interfaceText(' / FF: '),
                       style: TextStyle(color: _themeProvider.mainText),
                     ),
                     fairFightResult,
@@ -601,7 +602,7 @@ class TargetCardState extends State<TargetCard> {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        const Text('Life '),
+        const PdaText('Life '),
         LinearPercentIndicator(
           padding: const EdgeInsets.all(0),
           barRadius: const Radius.circular(10),
@@ -753,7 +754,7 @@ class TargetCardState extends State<TargetCard> {
     if (updateWorked) {
     } else {
       BotToast.showText(
-        text: "Error updating ${_target!.name}!",
+        text: context.interfaceText("Error updating {0}!", [_target!.name]),
         textStyle: const TextStyle(fontSize: 14, color: Colors.white),
         contentColor: _themeProvider.getTextColor(Colors.red),
         duration: const Duration(seconds: 3),
@@ -844,9 +845,7 @@ class TargetCardState extends State<TargetCard> {
   void _warnFedetalOrFallen() {
     BotToast.showText(
       text:
-          "This player is "
-          "${_target!.status!.state!.replaceAll("Federal", "in federal jail").toLowerCase()}"
-          " and cannot be attacked!",
+          context.interfaceText("This player is {0} and cannot be attacked!", [_target!.status!.state!.replaceAll("Federal", "in federal jail").toLowerCase()]),
       textStyle: const TextStyle(fontSize: 14, color: Colors.white),
       contentColor: _themeProvider.getTextColor(Colors.red),
       duration: const Duration(seconds: 5),

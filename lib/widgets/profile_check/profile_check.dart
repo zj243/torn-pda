@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:developer';
 import 'dart:io';
 
@@ -304,7 +305,7 @@ class ProfileAttackCheckWidgetState extends State<ProfileAttackCheckWidget> {
                   ),
                   const SizedBox(width: 10),
                   const Flexible(
-                    child: Text(
+                    child: PdaText(
                       "Hi! Thank you for using Torn PDA!",
                       style: TextStyle(
                         color: Colors.pink,
@@ -358,7 +359,7 @@ class ProfileAttackCheckWidgetState extends State<ProfileAttackCheckWidget> {
               ),
               SizedBox(width: 10),
               Flexible(
-                child: Text(
+                child: PdaText(
                   "This is you. You're beautiful!",
                   style: TextStyle(
                     color: Colors.green,
@@ -561,7 +562,7 @@ class ProfileAttackCheckWidgetState extends State<ProfileAttackCheckWidget> {
         _errorDetailsWidget = Container(
           child: const Padding(
             padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
-            child: Text(
+            child: PdaText(
               "Error contacting API (no details available)",
               style: TextStyle(
                 color: Colors.white,
@@ -849,7 +850,7 @@ class ProfileAttackCheckWidgetState extends State<ProfileAttackCheckWidget> {
                       Text("~${ffsEntry.displayText}", style: TextStyle(fontSize: 11, color: ffsColor)),
                       const SizedBox(width: 3),
                       Tooltip(
-                        message: "Spy age exceeds threshold",
+                        message: context.interfaceText("Spy age exceeds threshold"),
                         child: Icon(Icons.history, size: 14, color: ffsColor),
                       ),
                     ],

@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -415,12 +416,12 @@ class _TickerCaptionState extends State<_TickerCaption> with SingleTickerProvide
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              TextButton(style: buttons, onPressed: widget.onOpen, child: const Text('Open')),
+              TextButton(style: buttons, onPressed: widget.onOpen, child: const PdaText('Open')),
               TextButton.icon(
                 style: buttons,
                 onPressed: widget.onReply,
                 icon: const Icon(Icons.reply_rounded, size: 16),
-                label: const Text('Reply'),
+                label: const PdaText('Reply'),
               ),
             ],
           ),

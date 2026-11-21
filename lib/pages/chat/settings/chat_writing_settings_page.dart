@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/pages/chat/settings/chat_settings_subpage.dart';
 import 'package:torn_pda/pages/chat/settings/chat_upload_settings_page.dart';
@@ -23,26 +24,26 @@ class ChatWritingSettingsPage extends StatelessWidget {
         return [
           const ChatSettingsHeading('Sending'),
           SwitchListTile(
-            title: const Text('Warn before sending API keys'),
-            subtitle: const Text('Asks first if a message looks like an API key'),
+            title: const PdaText('Warn before sending API keys'),
+            subtitle: const PdaText('Asks first if a message looks like an API key'),
             value: prefs.warnApiKey,
             onChanged: prefs.setWarnApiKey,
           ),
           SwitchListTile(
-            title: const Text('Confirm messages to public rooms'),
-            subtitle: const Text('Asks before sending to a public room like Global or Trade'),
+            title: const PdaText('Confirm messages to public rooms'),
+            subtitle: const PdaText('Asks before sending to a public room like Global or Trade'),
             value: prefs.confirmPublic,
             onChanged: prefs.setConfirmPublic,
           ),
           SwitchListTile(
-            title: const Text('Enter sends with a physical keyboard'),
-            subtitle: const Text('Shift and Enter adds a new line'),
+            title: const PdaText('Enter sends with a physical keyboard'),
+            subtitle: const PdaText('Shift and Enter adds a new line'),
             value: prefs.enterSendsHardware,
             onChanged: prefs.setEnterSendsHardware,
           ),
           SwitchListTile(
-            title: const Text('Enter sends with the on-screen keyboard'),
-            subtitle: const Text('The action key sends instead of adding a new line'),
+            title: const PdaText('Enter sends with the on-screen keyboard'),
+            subtitle: const PdaText('The action key sends instead of adding a new line'),
             value: prefs.enterSendsSoft,
             onChanged: prefs.setEnterSendsSoft,
           ),
@@ -59,10 +60,10 @@ class ChatWritingSettingsPage extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: const Text('Open quick actions with'),
+            title: const PdaText('Open quick actions with'),
             subtitle: prefs.quickFrom == ChatQuickFrom.button
                 ? null
-                : const Text('Typing / at the start of a message lists them'),
+                : const PdaText('Typing / at the start of a message lists them'),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
@@ -71,9 +72,9 @@ class ChatWritingSettingsPage extends StatelessWidget {
               child: SegmentedButton<ChatQuickFrom>(
                 showSelectedIcon: false,
                 segments: const [
-                  ButtonSegment(value: ChatQuickFrom.both, label: Text('Both')),
-                  ButtonSegment(value: ChatQuickFrom.button, label: Text('Button')),
-                  ButtonSegment(value: ChatQuickFrom.commands, label: Text('/ commands')),
+                  ButtonSegment(value: ChatQuickFrom.both, label: PdaText('Both')),
+                  ButtonSegment(value: ChatQuickFrom.button, label: PdaText('Button')),
+                  ButtonSegment(value: ChatQuickFrom.commands, label: PdaText('/ commands')),
                 ],
                 selected: {prefs.quickFrom},
                 onSelectionChanged: (v) => prefs.setQuickFrom(v.first),

@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:math' as math;
 import 'dart:ui' show FlutterView;
 
@@ -229,11 +230,11 @@ class _ChatBigWindowViewState extends State<ChatBigWindowView> {
     final chat = widget.chat;
     if (widget.roomId != null || !chat.available) return const [];
     return [
-      PopupMenuItem(value: () => ChatInboxButtons.pickFriend(context, chat, _pick), child: const Text('Friends')),
+      PopupMenuItem(value: () => ChatInboxButtons.pickFriend(context, chat, _pick), child: const PdaText('Friends')),
       if (chat.ready)
         PopupMenuItem(
           value: () => ChatInboxButtons.pickNewChat(context, chat, _pick),
-          child: const Text('New private chat'),
+          child: const PdaText('New private chat'),
         ),
     ];
   }
@@ -270,7 +271,7 @@ class _ChatBigWindowViewState extends State<ChatBigWindowView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('Chat', style: style),
+                PdaText('Chat', style: style),
                 DefaultTextStyle.merge(
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,

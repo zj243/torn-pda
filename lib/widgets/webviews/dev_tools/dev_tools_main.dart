@@ -3,6 +3,7 @@
 */
 
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -161,19 +162,19 @@ class _DevToolsMainPageState extends State<DevToolsMainPage> with SingleTickerPr
             itemBuilder: (BuildContext context) => <PopupMenuEntry<int>>[
               const PopupMenuItem<int>(
                 value: 5,
-                child: Text('Show browser for 5 seconds'),
+                child: PdaText('Show browser for 5 seconds'),
               ),
               const PopupMenuItem<int>(
                 value: 15,
-                child: Text('Show browser for 15 seconds'),
+                child: PdaText('Show browser for 15 seconds'),
               ),
               const PopupMenuItem<int>(
                 value: 30,
-                child: Text('Show browser for 30 seconds'),
+                child: PdaText('Show browser for 30 seconds'),
               ),
               const PopupMenuItem<int>(
                 value: 60,
-                child: Text('Show browser for 60 seconds'),
+                child: PdaText('Show browser for 60 seconds'),
               ),
             ],
           ),

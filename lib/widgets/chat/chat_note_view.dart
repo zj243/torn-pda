@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:file_picker/file_picker.dart' show PlatformFile;
@@ -40,7 +41,7 @@ Future<void> chatMoveNote(BuildContext context, ChatNotepad notepad, ChatNote no
   final folder = await showDialog<String>(
     context: context,
     builder: (context) => AlertDialog(
-      title: const Text('Move to folder'),
+      title: const PdaText('Move to folder'),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -50,9 +51,9 @@ Future<void> chatMoveNote(BuildContext context, ChatNotepad notepad, ChatNote no
               initialValue: typed,
               onChanged: (v) => typed = v,
               autofocus: existing.isEmpty,
-              decoration: const InputDecoration(
-                hintText: 'Folder',
-                helperText: 'Up to ${ChatNote.maxFolderDepth} levels, like Raids/Weekly',
+              decoration: InputDecoration(
+                hintText: context.interfaceText('Folder'),
+                helperText: context.interfaceText("Up to {0} levels, like Raids/Weekly", [ChatNote.maxFolderDepth]),
               ),
             ),
             const SizedBox(height: 8),
@@ -68,9 +69,9 @@ Future<void> chatMoveNote(BuildContext context, ChatNotepad notepad, ChatNote no
         ),
       ),
       actions: [
-        TextButton(onPressed: () => Navigator.pop(context, ''), child: const Text('No folder')),
-        TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-        FilledButton(onPressed: () => Navigator.pop(context, typed), child: const Text('Move')),
+        TextButton(onPressed: () => Navigator.pop(context, ''), child: const PdaText('No folder')),
+        TextButton(onPressed: () => Navigator.pop(context), child: const PdaText('Cancel')),
+        FilledButton(onPressed: () => Navigator.pop(context, typed), child: const PdaText('Move')),
       ],
     ),
   );
@@ -84,16 +85,16 @@ Future<void> chatRenameNote(BuildContext context, ChatNotepad notepad, ChatNote 
   final title = await showDialog<String>(
     context: context,
     builder: (context) => AlertDialog(
-      title: const Text('Rename'),
+      title: const PdaText('Rename'),
       content: TextFormField(
         initialValue: typed,
         autofocus: true,
         onChanged: (v) => typed = v,
-        decoration: const InputDecoration(hintText: 'Title'),
+        decoration: InputDecoration(hintText: context.interfaceText('Title')),
       ),
       actions: [
-        TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-        FilledButton(onPressed: () => Navigator.pop(context, typed), child: const Text('Save')),
+        TextButton(onPressed: () => Navigator.pop(context), child: const PdaText('Cancel')),
+        FilledButton(onPressed: () => Navigator.pop(context, typed), child: const PdaText('Save')),
       ],
     ),
   );
@@ -116,19 +117,19 @@ Future<void> chatShareNote(BuildContext context, ChatNote note) async {
           if (NativeChat.controller.available)
             ListTile(
               leading: const Icon(Icons.send_outlined),
-              title: const Text('Send to chat'),
-              subtitle: const Text('Pick a chat, it waits in the message box'),
+              title: const PdaText('Send to chat'),
+              subtitle: const PdaText('Pick a chat, it waits in the message box'),
               onTap: () => Navigator.pop(context, 'chat'),
             ),
           ListTile(
             leading: const Icon(Icons.copy_rounded),
-            title: const Text('Copy'),
+            title: const PdaText('Copy'),
             onTap: () => Navigator.pop(context, 'copy'),
           ),
           ListTile(
             leading: const Icon(Icons.share_rounded),
-            title: const Text('Share'),
-            subtitle: const Text('Other apps'),
+            title: const PdaText('Share'),
+            subtitle: const PdaText('Other apps'),
             onTap: () => Navigator.pop(context, 'share'),
           ),
         ],
@@ -291,7 +292,7 @@ class _ChatNoteViewState extends State<ChatNoteView> {
       children: [
         Row(
           children: [
-            IconButton(tooltip: 'Back', icon: const Icon(Icons.arrow_back_rounded), onPressed: widget.onBack),
+            IconButton(tooltip: context.interfaceText('Back'), icon: const Icon(Icons.arrow_back_rounded), onPressed: widget.onBack),
             Expanded(
               child: editing
                   ? TextField(
@@ -308,7 +309,7 @@ class _ChatNoteViewState extends State<ChatNoteView> {
             ),
             if (current.body.trim().isNotEmpty)
               IconButton(
-                tooltip: 'Share',
+                tooltip: context.interfaceText('Share'),
                 icon: const Icon(Icons.share_outlined),
                 onPressed: () => chatShareNote(context, _current),
               ),
@@ -319,7 +320,7 @@ class _ChatNoteViewState extends State<ChatNoteView> {
                 onPressed: () => _edit(!editing),
               ),
             if (!readOnly)
-              IconButton(tooltip: 'Delete', icon: const Icon(Icons.delete_outline_rounded), onPressed: _delete),
+              IconButton(tooltip: context.interfaceText('Delete'), icon: const Icon(Icons.delete_outline_rounded), onPressed: _delete),
           ],
         ),
         Padding(
@@ -339,12 +340,12 @@ class _ChatNoteViewState extends State<ChatNoteView> {
                     icon: const Icon(Icons.add_photo_alternate_outlined),
                     onSelected: (fromFiles) => _addImage(fromFiles: fromFiles),
                     itemBuilder: (_) => const [
-                      PopupMenuItem(value: false, child: Text('Gallery')),
-                      PopupMenuItem(value: true, child: Text('Files')),
+                      PopupMenuItem(value: false, child: PdaText('Gallery')),
+                      PopupMenuItem(value: true, child: PdaText('Files')),
                     ],
                   ),
                 IconButton(
-                  tooltip: 'Add a task',
+                  tooltip: context.interfaceText('Add a task'),
                   icon: const Icon(Icons.add_task_rounded),
                   onPressed: () => _insertLine('- [ ] '),
                 ),
@@ -410,12 +411,12 @@ class _ChatNoteViewState extends State<ChatNoteView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('This note changed somewhere else', style: TextStyle(color: theme.colorScheme.onErrorContainer)),
+          PdaText('This note changed somewhere else', style: TextStyle(color: theme.colorScheme.onErrorContainer)),
           Wrap(
             alignment: WrapAlignment.end,
             children: [
-              TextButton(onPressed: _useTheirs, child: const Text('Load that one')),
-              TextButton(onPressed: _notepad.keepMine, child: const Text('Keep mine')),
+              TextButton(onPressed: _useTheirs, child: const PdaText('Load that one')),
+              TextButton(onPressed: _notepad.keepMine, child: const PdaText('Keep mine')),
             ],
           ),
         ],
@@ -426,13 +427,13 @@ class _ChatNoteViewState extends State<ChatNoteView> {
   Widget _status(ThemeData theme, {required bool conflict}) {
     final style = theme.textTheme.bodySmall;
     final error = style?.copyWith(color: theme.colorScheme.error);
-    if (_notepad.offline) return Text('Offline copy, read only', style: error);
-    if (conflict) return Text('Not saved', style: error);
+    if (_notepad.offline) return PdaText('Offline copy, read only', style: error);
+    if (conflict) return PdaText('Not saved', style: error);
     if (_notepad.saveFailed) {
       return Row(
         children: [
-          Text('Not saved', style: error),
-          TextButton(onPressed: _notepad.save, child: const Text('Retry')),
+          PdaText('Not saved', style: error),
+          TextButton(onPressed: _notepad.save, child: const PdaText('Retry')),
         ],
       );
     }

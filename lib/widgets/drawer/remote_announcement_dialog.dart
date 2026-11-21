@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:torn_pda/models/remote_announcement.dart';
@@ -38,7 +39,7 @@ class RemoteAnnouncementDialog extends StatelessWidget {
           ),
         Padding(
           padding: const EdgeInsets.only(right: 8),
-          child: TextButton(child: const Text("Ok"), onPressed: () => Navigator.of(context).pop()),
+          child: TextButton(child: const PdaText("Ok"), onPressed: () => Navigator.of(context).pop()),
         ),
       ],
     );

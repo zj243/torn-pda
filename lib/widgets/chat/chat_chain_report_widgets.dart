@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -129,7 +130,7 @@ class _ReportWaiting extends StatelessWidget {
               ChatTicking(
                 until: next,
                 builder: (context) {
-                  if (view.checking) return Text('Checking', style: muted);
+                  if (view.checking) return PdaText('Checking', style: muted);
                   if (next == null) return const SizedBox.shrink();
                   final left = chatClock(next.difference(DateTime.now()));
                   return Text(failed ? 'Retry in $left' : 'Next check $left', style: muted);
@@ -326,7 +327,7 @@ class _ChatChainReportBodyState extends State<ChatChainReportBody> {
           child: Text.rich(
             TextSpan(
               children: [
-                const TextSpan(text: 'You  ', style: TextStyle(fontWeight: FontWeight.w700)),
+                TextSpan(text: context.interfaceText('You  '), style: TextStyle(fontWeight: FontWeight.w700)),
                 TextSpan(
                   text: you == null
                       ? "Didn't attack"
@@ -379,14 +380,14 @@ class _ChatChainReportBodyState extends State<ChatChainReportBody> {
                               ),
                               Semantics(
                                 link: true,
-                                label: 'against ${b.defenderId}, open profile',
+                                label: context.interfaceText("against {0}, open profile", [b.defenderId]),
                                 excludeSemantics: true,
                                 child: InkWell(
                                   onTap: () => _openProfile(context, b.defenderId),
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-                                    child: Text(
-                                      'vs ${b.defenderId}',
+                                    child: PdaText(
+                                      "vs {0}", values: [b.defenderId],
                                       style: small?.copyWith(
                                         color: scheme.primary,
                                         decoration: TextDecoration.underline,
@@ -456,7 +457,7 @@ class _ChatChainReportBodyState extends State<ChatChainReportBody> {
               const SizedBox(height: 4),
               counts([('Losses', hits.losses), ('Draws', hits.draws), ('Escapes', hits.escapes)]),
               const SizedBox(height: 4),
-              Text('Targets ${chatCount(report.targets)} - Best hit ${chatRespect(report.best)}'),
+              PdaText("Targets {0} - Best hit {1}", values: [chatCount(report.targets), chatRespect(report.best)]),
             ],
           ),
         ),
@@ -560,7 +561,7 @@ class _ChatChainReportBodyState extends State<ChatChainReportBody> {
                       child: Row(
                         children: [
                           Expanded(
-                            child: Text("${chatCount(nonAttackers.length)} didn't attack", style: theme.textTheme.titleMedium),
+                            child: PdaText("{0} didn't attack", values: [chatCount(nonAttackers.length)], style: theme.textTheme.titleMedium),
                           ),
                           AnimatedRotation(
                             turns: _nonAttackersOpen ? 0.5 : 0,

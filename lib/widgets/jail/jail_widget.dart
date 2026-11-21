@@ -1,5 +1,6 @@
 // Flutter imports:
 // Package imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:math';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
@@ -96,22 +97,22 @@ class JailWidgetState extends State<JailWidget> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "Quick bail: ${_jailModel.bailTicked ? 'ON' : 'OFF'}",
+                          PdaText(
+                            "Quick bail: {0}", values: [_jailModel.bailTicked ? 'ON' : 'OFF'],
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 10,
                             ),
                           ),
-                          Text(
-                            "Quick bust: ${_jailModel.bustTicked ? 'ON' : 'OFF'}",
+                          PdaText(
+                            "Quick bust: {0}", values: [_jailModel.bustTicked ? 'ON' : 'OFF'],
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 10,
                             ),
                           ),
-                          Text(
-                            "Show oneself: ${_jailModel.excludeSelf ? 'YES' : 'NO'}",
+                          PdaText(
+                            "Show oneself: {0}", values: [_jailModel.excludeSelf ? 'YES' : 'NO'],
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 10,
@@ -124,11 +125,11 @@ class JailWidgetState extends State<JailWidget> {
                     width: 80,
                     child: Column(
                       children: [
-                        const Text(
+                        const PdaText(
                           'JAIL',
                           style: TextStyle(color: Colors.orange, fontSize: 12),
                         ),
-                        const Text(
+                        const PdaText(
                           '(tap to expand)',
                           style: TextStyle(color: Colors.orange, fontSize: 9),
                         ),
@@ -145,22 +146,22 @@ class JailWidgetState extends State<JailWidget> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text(
-                            "Time (h): ${_jailModel.timeMin}-${_jailModel.timeMax}",
+                          PdaText(
+                            "Time (h): {0}-{1}", values: [_jailModel.timeMin, _jailModel.timeMax],
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 10,
                             ),
                           ),
-                          Text(
-                            "Level: ${_jailModel.levelMin}-${_jailModel.levelMax}",
+                          PdaText(
+                            "Level: {0}-{1}", values: [_jailModel.levelMin, _jailModel.levelMax],
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 10,
                             ),
                           ),
-                          Text(
-                            "Score: ${_jailModel.scoreMin} - ${_jailModel.scoreMax}",
+                          PdaText(
+                            "Score: {0} - {1}", values: [_jailModel.scoreMin, _jailModel.scoreMax],
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 10,
@@ -217,7 +218,7 @@ class JailWidgetState extends State<JailWidget> {
   Row _bailEnabled() {
     return Row(
       children: [
-        const Text(
+        const PdaText(
           "Quick bail",
           style: TextStyle(
             color: Colors.white,
@@ -246,7 +247,7 @@ class JailWidgetState extends State<JailWidget> {
   Row _bustEnabler() {
     return Row(
       children: [
-        const Text(
+        const PdaText(
           "Quick bust",
           style: TextStyle(
             color: Colors.white,
@@ -275,7 +276,7 @@ class JailWidgetState extends State<JailWidget> {
   Row _filtersEnabled() {
     return Row(
       children: [
-        const Text(
+        const PdaText(
           "Filters enabled",
           style: TextStyle(
             color: Colors.white,
@@ -304,7 +305,7 @@ class JailWidgetState extends State<JailWidget> {
   Row _excludeSelf() {
     return Row(
       children: [
-        const Text(
+        const PdaText(
           "Always show self",
           style: TextStyle(
             color: Colors.white,
@@ -335,7 +336,7 @@ class JailWidgetState extends State<JailWidget> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         const Flexible(
-          child: Text(
+          child: PdaText(
             "Time (h)",
             style: TextStyle(
               color: Colors.white,
@@ -387,7 +388,7 @@ class JailWidgetState extends State<JailWidget> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         const Flexible(
-          child: Text(
+          child: PdaText(
             "Level",
             style: TextStyle(
               color: Colors.white,
@@ -465,15 +466,15 @@ class JailWidgetState extends State<JailWidget> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Score Min ${_jailModel.scoreMin}",
+            PdaText(
+              "Score Min {0}", values: [_jailModel.scoreMin],
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 11,
               ),
             ),
-            Text(
-              "Score Max ${_jailModel.scoreMax}",
+            PdaText(
+              "Score Max {0}", values: [_jailModel.scoreMax],
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 11,

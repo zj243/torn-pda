@@ -1,6 +1,8 @@
 import 'dart:developer';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:torn_pda/l10n/generated/app_localizations.dart';
 import 'package:torn_pda/utils/sembast_db.dart';
@@ -35,6 +37,18 @@ class AppLanguageController extends ChangeNotifier {
     try {
       await PrefsDatabase.setString(_key, next.name);
       choice = next;
+      if (defaultTargetPlatform == TargetPlatform.android) {
+        // ZJ：Flutter 的偏好已保存；系统不支持同步时仍可使用应用内译文。
+        try {
+          await const MethodChannel('tornpda.channel').invokeMethod<void>(
+            'setInterfaceLanguage', {'language': next.name},
+          );
+        } on PlatformException catch (error, stack) {
+          log('同步 Android 应用语言失败', name: 'AppLanguage', error: error, stackTrace: stack);
+        } on MissingPluginException catch (error) {
+          log('Android 应用语言通道不可用', name: 'AppLanguage', error: error);
+        }
+      }
       log('界面语言已切换为 ${next.name}', name: 'AppLanguage');
       return true;
     } catch (error, stack) {

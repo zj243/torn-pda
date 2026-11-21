@@ -1,5 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:convert';
 import 'dart:io' show Platform;
 import 'dart:math';
@@ -361,7 +362,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
         title: Text(title),
         content: Text(message),
         actions: [
-          TextButton(onPressed: () => Navigator.of(dialogContext).pop(false), child: const Text("Cancel")),
+          TextButton(onPressed: () => Navigator.of(dialogContext).pop(false), child: const PdaText("Cancel")),
           TextButton(
             onPressed: () => Navigator.of(dialogContext).pop(true),
             child: Text(confirmLabel, style: TextStyle(color: Colors.red.shade700)),
@@ -423,21 +424,21 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
     showDialog(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: Text("Edit $title"),
+        title: PdaText("Edit {0}", values: [title]),
         content: initialValue.length > _dialogFullChars
-            ? Text(
-                "This value is too large to edit here (${_formatBytes(utf8.encode(initialValue).length)}). Delete it or edit it from the userscript instead.",
+            ? PdaText(
+                "This value is too large to edit here ({0}). Delete it or edit it from the userscript instead.", values: [_formatBytes(utf8.encode(initialValue).length)],
               )
             : TextFormField(controller: controller, autofocus: true, maxLines: 5, minLines: 1),
         actions: [
-          TextButton(onPressed: () => Navigator.of(dialogContext).pop(), child: const Text("Cancel")),
+          TextButton(onPressed: () => Navigator.of(dialogContext).pop(), child: const PdaText("Cancel")),
           if (initialValue.length <= _dialogFullChars)
             TextButton(
               onPressed: () async {
                 await onSave(controller.text);
                 if (dialogContext.mounted) Navigator.of(dialogContext).pop();
               },
-              child: const Text("Save"),
+              child: const PdaText("Save"),
             ),
         ],
       ),
@@ -456,14 +457,14 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
         return StatefulBuilder(
           builder: (context, setDialogState) {
             return AlertDialog(
-              title: Text("Edit ${cookie.name}", overflow: TextOverflow.ellipsis),
+              title: PdaText("Edit {0}", values: [cookie.name], overflow: TextOverflow.ellipsis),
               content: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     TextFormField(
                       controller: valueController,
-                      decoration: const InputDecoration(labelText: "Value"),
+                      decoration: InputDecoration(labelText: context.interfaceText("Value")),
                       maxLines: 3,
                       minLines: 1,
                     ),
@@ -486,7 +487,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text("Expires Date", style: TextStyle(fontSize: 12)),
+                                  const PdaText("Expires Date", style: TextStyle(fontSize: 12)),
                                   Text(
                                     expiresDate != null ? expiresDate!.toIso8601String().substring(0, 10) : "Session",
                                     style: const TextStyle(fontSize: 16),
@@ -507,7 +508,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
                 ),
               ),
               actions: [
-                TextButton(onPressed: () => Navigator.of(dialogContext).pop(), child: const Text("Cancel")),
+                TextButton(onPressed: () => Navigator.of(dialogContext).pop(), child: const PdaText("Cancel")),
                 TextButton(
                   onPressed: () async {
                     final updatedCookie = Cookie(
@@ -523,7 +524,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
                     await onSave(updatedCookie);
                     if (dialogContext.mounted) Navigator.of(dialogContext).pop();
                   },
-                  child: const Text("Save"),
+                  child: const PdaText("Save"),
                 ),
               ],
             );
@@ -553,10 +554,10 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text("Value:", style: TextStyle(fontWeight: FontWeight.bold)),
+                const PdaText("Value:", style: TextStyle(fontWeight: FontWeight.bold)),
                 if (value.length > _dialogFullChars) ...[
-                  Text(
-                    "Large value (${_formatBytes(utf8.encode(value).length)}). Showing a preview; use Copy for the full value.",
+                  PdaText(
+                    "Large value ({0}). Showing a preview; use Copy for the full value.", values: [_formatBytes(utf8.encode(value).length)],
                     style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 12),
                   ),
                   const SizedBox(height: 8),
@@ -565,7 +566,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
                   SelectableText(value),
                 if (expiresDate != null) ...[
                   const SizedBox(height: 16),
-                  const Text("Expires:", style: TextStyle(fontWeight: FontWeight.bold)),
+                  const PdaText("Expires:", style: TextStyle(fontWeight: FontWeight.bold)),
                   SelectableText(expiresDate.toIso8601String().substring(0, 10)),
                 ],
               ],
@@ -578,7 +579,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Tooltip(
-                message: "Edit",
+                message: context.interfaceText("Edit"),
                 child: IconButton(
                   icon: const Icon(Icons.edit_outlined),
                   onPressed: () {
@@ -588,7 +589,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
                 ),
               ),
               Tooltip(
-                message: "Copy",
+                message: context.interfaceText("Copy"),
                 child: IconButton(
                   icon: const Icon(Icons.copy_outlined),
                   onPressed: () {
@@ -600,7 +601,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
               ),
               if (canDelete)
                 Tooltip(
-                  message: "Delete",
+                  message: context.interfaceText("Delete"),
                   child: IconButton(
                     icon: Icon(Icons.delete_outline, color: Colors.red.shade700),
                     onPressed: () {
@@ -611,7 +612,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
                 ),
             ],
           ),
-          TextButton(onPressed: () => Navigator.of(dialogContext).pop(), child: const Text("CLOSE")),
+          TextButton(onPressed: () => Navigator.of(dialogContext).pop(), child: const PdaText("CLOSE")),
         ],
       ),
     );
@@ -715,12 +716,12 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
           ...extraActions,
           TextButton.icon(
             icon: const Icon(Icons.refresh, size: 18),
-            label: const Text("Reload"),
+            label: const PdaText("Reload"),
             onPressed: s.loading ? null : onReload,
           ),
           TextButton.icon(
             icon: const Icon(Icons.checklist, size: 18),
-            label: const Text("Select"),
+            label: const PdaText("Select"),
             onPressed: canSelect ? () => setState(() => s.selecting = true) : null,
           ),
         ],
@@ -741,7 +742,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
       child: Row(
         children: [
           Expanded(
-            child: Text("${s.selected.length} selected", style: const TextStyle(fontWeight: FontWeight.bold)),
+            child: PdaText("{0} selected", values: [s.selected.length], style: const TextStyle(fontWeight: FontWeight.bold)),
           ),
           TextButton(
             onPressed: () => setState(() {
@@ -751,12 +752,12 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
             child: Text(allSelected ? "NONE" : "ALL"),
           ),
           IconButton(
-            tooltip: "Delete selected",
+            tooltip: context.interfaceText("Delete selected"),
             icon: Icon(Icons.delete_outline, color: s.selected.isEmpty ? null : Colors.red.shade700),
             onPressed: s.selected.isEmpty ? null : onDeleteSelected,
           ),
           IconButton(
-            tooltip: "Cancel",
+            tooltip: context.interfaceText("Cancel"),
             icon: const Icon(Icons.close),
             onPressed: () => setState(() {
               s.selecting = false;
@@ -944,7 +945,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
   @override
   Widget build(BuildContext context) {
     if (widget.webViewController == null) {
-      return const Center(child: Text("WebView not available."));
+      return const Center(child: PdaText("WebView not available."));
     }
 
     var entryItems = <Widget>[
@@ -980,9 +981,9 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
 
     return ExpansionTile(
       key: const ValueKey('script_storage'),
-      title: const Text("Torn PDA Script Storage", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
-      subtitle: Text(
-        "Native per-script storage - ${_formatBytes(total)} / ${_formatBytes(ScriptStorage.globalCapBytes)}",
+      title: const PdaText("Torn PDA Script Storage", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
+      subtitle: PdaText(
+        "Native per-script storage - {0} / {1}", values: [_formatBytes(total), _formatBytes(ScriptStorage.globalCapBytes)],
         style: const TextStyle(fontSize: 12, color: Colors.grey),
       ),
       children: [
@@ -991,7 +992,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
             child: Padding(padding: EdgeInsets.all(16.0), child: CircularProgressIndicator()),
           )
         else if (_namespaces.isEmpty)
-          const Padding(padding: EdgeInsets.all(16.0), child: Text("No script is using native storage yet."))
+          const Padding(padding: EdgeInsets.all(16.0), child: PdaText("No script is using native storage yet."))
         else
           for (final n in _namespaces) _buildScriptStorageNamespace(n, names[n['sid']]),
         Padding(
@@ -1001,7 +1002,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
             children: [
               TextButton.icon(
                 icon: const Icon(Icons.refresh, size: 18),
-                label: const Text("Reload"),
+                label: const PdaText("Reload"),
                 onPressed: _namespacesLoading ? null : _reloadNamespaces,
               ),
             ],
@@ -1022,8 +1023,8 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
       key: ValueKey(sectionId),
       tilePadding: const EdgeInsets.symmetric(horizontal: 16.0),
       title: Text(name ?? "Unknown script", maxLines: 1, overflow: TextOverflow.ellipsis),
-      subtitle: Text(
-        "${_formatBytes(_namespaceUsed(namespace))} / ${_formatBytes(quota)} - ${_namespaceCount(namespace)} keys",
+      subtitle: PdaText(
+        "{0} / {1} - {2} keys", values: [_formatBytes(_namespaceUsed(namespace)), _formatBytes(quota), _namespaceCount(namespace)],
         style: const TextStyle(fontSize: 12, color: Colors.grey),
       ),
       onExpansionChanged: (expanded) {
@@ -1037,12 +1038,12 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
           extraActions: [
             TextButton.icon(
               icon: const Icon(Icons.tune, size: 18),
-              label: const Text("Set limit"),
+              label: const PdaText("Set limit"),
               onPressed: () => _editScriptQuota(sid),
             ),
             TextButton.icon(
               icon: Icon(Icons.delete_sweep_outlined, size: 18, color: Colors.red.shade700),
-              label: Text("Clear", style: TextStyle(color: Colors.red.shade700)),
+              label: PdaText("Clear", style: TextStyle(color: Colors.red.shade700)),
               onPressed: () => _clearNamespace(sid, name),
             ),
           ],
@@ -1051,7 +1052,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
         if (!s.loaded)
           const Padding(padding: EdgeInsets.all(12.0), child: LinearProgressIndicator())
         else if (s.rows.isEmpty)
-          const Padding(padding: EdgeInsets.all(12.0), child: Text("Empty."))
+          const Padding(padding: EdgeInsets.all(12.0), child: PdaText("Empty."))
         else
           for (final row in s.rows)
             _buildSelectableRow(
@@ -1094,7 +1095,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
 
     return ExpansionTile(
       key: const ValueKey('cookies'),
-      title: const Text("Cookies", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
+      title: const PdaText("Cookies", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
       children: [
         if (s.loading && !s.loaded)
           const Center(
@@ -1134,7 +1135,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
               ),
               const Divider(height: 1, thickness: 1),
               if (sortedCookies.isEmpty)
-                const Padding(padding: EdgeInsets.all(16.0), child: Text("No cookies for this domain.")),
+                const Padding(padding: EdgeInsets.all(16.0), child: PdaText("No cookies for this domain.")),
               for (final row in sortedCookies)
                 _buildSelectableRow(
                   sectionId: _cookiesId,
@@ -1142,7 +1143,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
                   showSize: false,
                   onDelete: () => _deleteCookieRows([row]),
                   lockedWidget: Tooltip(
-                    message: "HttpOnly cookies cannot be deleted individually",
+                    message: context.interfaceText("HttpOnly cookies cannot be deleted individually"),
                     child: Icon(Icons.lock, size: 20, color: Colors.grey.shade600),
                   ),
                   onCellTap: () => _showActionDialog(
@@ -1175,7 +1176,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
               _buildNewCookieForm(),
               const Divider(height: 1, thickness: 1),
               TextButton(
-                child: const Text("Clear all cookies for this domain"),
+                child: const PdaText("Clear all cookies for this domain"),
                 onPressed: () async {
                   final confirmed = await _confirm(
                     "Clear cookies",
@@ -1226,7 +1227,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
     return ExpansionTile(
       key: ValueKey(local ? 'local_storage' : 'session_storage'),
       title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
-      subtitle: Text("Origin: $origin - Size: $size", style: const TextStyle(fontSize: 12, color: Colors.grey)),
+      subtitle: PdaText("Origin: {0} - Size: {1}", values: [origin, size], style: const TextStyle(fontSize: 12, color: Colors.grey)),
       children: [
         if (s.loading && !s.loaded)
           const Center(
@@ -1273,7 +1274,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
                 ),
               ),
               const Divider(height: 1, thickness: 1),
-              if (sortedItems.isEmpty) Padding(padding: const EdgeInsets.all(16.0), child: Text("$title is empty.")),
+              if (sortedItems.isEmpty) Padding(padding: const EdgeInsets.all(16.0), child: PdaText("{0} is empty.", values: [title])),
               for (final row in sortedItems)
                 _buildSelectableRow(
                   sectionId: sectionId,
@@ -1323,7 +1324,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
                 Expanded(
                   child: TextFormField(
                     controller: _newCookieNameController,
-                    decoration: const InputDecoration(labelText: "Cookie Name"),
+                    decoration: InputDecoration(labelText: context.interfaceText("Cookie Name")),
                     validator: (v) => (v == null || v.isEmpty) ? 'Required' : null,
                   ),
                 ),
@@ -1331,7 +1332,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
                 Expanded(
                   child: TextFormField(
                     controller: _newCookieValueController,
-                    decoration: const InputDecoration(labelText: "Cookie Value"),
+                    decoration: InputDecoration(labelText: context.interfaceText("Cookie Value")),
                     validator: (v) => (v == null || v.isEmpty) ? 'Required' : null,
                   ),
                 ),
@@ -1342,14 +1343,14 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
                 Expanded(
                   child: TextFormField(
                     controller: _newCookieDomainController,
-                    decoration: const InputDecoration(labelText: "Cookie Domain"),
+                    decoration: InputDecoration(labelText: context.interfaceText("Cookie Domain")),
                   ),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
                   child: TextFormField(
                     controller: _newCookiePathController,
-                    decoration: const InputDecoration(labelText: "Cookie Path"),
+                    decoration: InputDecoration(labelText: context.interfaceText("Cookie Path")),
                     validator: (v) => (v == null || v.isEmpty) ? 'Required' : null,
                   ),
                 ),
@@ -1378,7 +1379,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text("Expires in:", style: TextStyle(fontSize: 12)),
+                                const PdaText("Expires in:", style: TextStyle(fontSize: 12)),
                                 Text(
                                   _newCookieExpiresDate != null
                                       ? _newCookieExpiresDate!.toIso8601String().substring(0, 10)
@@ -1400,7 +1401,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
                 ),
                 Row(
                   children: [
-                    const Text("Secure"),
+                    const PdaText("Secure"),
                     Checkbox(value: _newCookieIsSecure, onChanged: (v) => setState(() => _newCookieIsSecure = v!)),
                   ],
                 ),
@@ -1409,7 +1410,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
             SizedBox(
               width: double.infinity,
               child: TextButton(
-                child: const Text("Add Cookie"),
+                child: const PdaText("Add Cookie"),
                 onPressed: () async {
                   if (_newCookieFormKey.currentState?.validate() ?? false) {
                     final url = await widget.webViewController?.getUrl();
@@ -1481,7 +1482,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
             SizedBox(
               width: double.infinity,
               child: TextButton(
-                child: const Text("Add Item"),
+                child: const PdaText("Add Item"),
                 onPressed: () {
                   if (formKey.currentState?.validate() ?? false) {
                     onAdded?.call(nameController.text, valueController.text);
@@ -1502,10 +1503,10 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
       builder: (context, urlSnapshot) {
         return ExpansionTile(
           key: const ValueKey('android_storage'),
-          title: const Text("Web Storage Android", style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+          title: const PdaText("Web Storage Android", style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
           children: [
             if (!urlSnapshot.hasData || urlSnapshot.data == null)
-              const Padding(padding: EdgeInsets.all(16.0), child: Text("No URL found"))
+              const Padding(padding: EdgeInsets.all(16.0), child: PdaText("No URL found"))
             else
               Builder(
                 builder: (context) {
@@ -1513,7 +1514,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
                   return Column(
                     children: <Widget>[
                       ListTile(
-                        title: const Text("Quota"),
+                        title: const PdaText("Quota"),
                         subtitle: FutureBuilder<int?>(
                           future: _webStorageManager?.getQuotaForOrigin(origin: origin),
                           builder: (context, snapshot) =>
@@ -1521,7 +1522,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
                         ),
                       ),
                       ListTile(
-                        title: const Text("Usage"),
+                        title: const PdaText("Usage"),
                         subtitle: FutureBuilder<int?>(
                           future: _webStorageManager?.getUsageForOrigin(origin: origin),
                           builder: (context, snapshot) =>
@@ -1548,7 +1549,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
   Widget _buildIOSWebStorageExpansionTile() {
     return ExpansionTile(
       key: const ValueKey('ios_storage'),
-      title: const Text("Web Storage iOS", style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+      title: const PdaText("Web Storage iOS", style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
       children: [
         FutureBuilder<List<WebsiteDataRecord>>(
           future: _webStorageManager?.fetchDataRecords(dataTypes: WebsiteDataType.ALL),
@@ -1560,7 +1561,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
             }
             if (snapshot.hasError || !snapshot.hasData) {
               return const Center(
-                child: Padding(padding: EdgeInsets.all(16.0), child: Text("Could not load data.")),
+                child: Padding(padding: EdgeInsets.all(16.0), child: PdaText("Could not load data.")),
               );
             }
 
@@ -1605,7 +1606,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
                       const SizedBox(
                         width: 48,
                         child: Center(
-                          child: Text("Del", style: TextStyle(fontWeight: FontWeight.bold)),
+                          child: PdaText("Del", style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                       ),
                     ],
@@ -1634,7 +1635,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
                 SizedBox(
                   width: double.infinity,
                   child: TextButton(
-                    child: const Text("Clear all"),
+                    child: const PdaText("Clear all"),
                     onPressed: () async {
                       await _webStorageManager?.removeDataModifiedSince(
                         dataTypes: WebsiteDataType.ALL,
@@ -1658,7 +1659,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
       builder: (context) => AlertDialog(
         title: Text(title),
         content: SingleChildScrollView(child: SelectableText(content)),
-        actions: [TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Close'))],
+        actions: [TextButton(onPressed: () => Navigator.of(context).pop(), child: const PdaText('Close'))],
       ),
     );
   }
@@ -1666,7 +1667,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
   Widget _buildHttpAuthCredentialDatabaseExpansionTile() {
     return ExpansionTile(
       key: const ValueKey('http_auth'),
-      title: const Text("Http Auth Credentials", style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+      title: const PdaText("Http Auth Credentials", style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
       children: [
         FutureBuilder<List<URLProtectionSpaceHttpAuthCredentials>>(
           future: _httpAuthCredentialDatabase?.getAllAuthCredentials(),
@@ -1678,7 +1679,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
             }
             if (snapshot.hasError || !snapshot.hasData || snapshot.data!.isEmpty) {
               return const Center(
-                child: Padding(padding: EdgeInsets.all(16.0), child: Text("No credentials saved.")),
+                child: Padding(padding: EdgeInsets.all(16.0), child: PdaText("No credentials saved.")),
               );
             }
 
@@ -1689,8 +1690,8 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          "Protection Space: ${p.protectionSpace?.host ?? ""}",
+                        child: PdaText(
+                          "Protection Space: {0}", values: [p.protectionSpace?.host ?? ""],
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -1717,7 +1718,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
                             const SizedBox(
                               width: 48,
                               child: Center(
-                                child: Text("Del", style: TextStyle(fontWeight: FontWeight.bold)),
+                                child: PdaText("Del", style: TextStyle(fontWeight: FontWeight.bold)),
                               ),
                             ),
                           ],
@@ -1746,7 +1747,7 @@ class _DevToolsStorageTabState extends State<DevToolsStorageTab> {
                     ],
                   ),
                 TextButton(
-                  child: const Text("Clear all"),
+                  child: const PdaText("Clear all"),
                   onPressed: () async {
                     await _httpAuthCredentialDatabase?.clearAllAuthCredentials();
                     setState(() {});

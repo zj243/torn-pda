@@ -1,4 +1,5 @@
 // Package imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:io';
 
 import 'package:bot_toast/bot_toast.dart';
@@ -241,7 +242,7 @@ class AlertsSettingsState extends State<AlertsSettings> {
                 ),
                 TextSpan(text: on == 1 ? " alert on" : " alerts on", style: const TextStyle(fontSize: 16)),
                 TextSpan(
-                  text: "  of ${all.length}",
+                  text: context.interfaceText("  of {0}", [all.length]),
                   style: TextStyle(fontSize: 13, color: muted),
                 ),
               ],
@@ -254,7 +255,7 @@ class AlertsSettingsState extends State<AlertsSettings> {
             ),
           Padding(
             padding: const EdgeInsets.only(top: 10),
-            child: Text(
+            child: PdaText(
               "Alerts are automatic notifications that you only need to activate once. They usually arrive earlier "
               "than manual notifications, but may be delayed by network status or device throttling.",
               style: TextStyle(fontSize: 12, height: 1.35, color: muted),
@@ -262,7 +263,7 @@ class AlertsSettingsState extends State<AlertsSettings> {
           ),
           Row(
             children: [
-              const Text("Discreet alerts", style: TextStyle(fontSize: 14)),
+              const PdaText("Discreet alerts", style: TextStyle(fontSize: 14)),
               IconButton(
                 icon: const Icon(Icons.info_outline, size: 20),
                 visualDensity: VisualDensity.compact,
@@ -436,21 +437,21 @@ class AlertsSettingsState extends State<AlertsSettings> {
       value: "app",
       child: SizedBox(
         width: 110,
-        child: Text("App", textAlign: TextAlign.right, style: TextStyle(fontSize: 14)),
+        child: PdaText("App", textAlign: TextAlign.right, style: TextStyle(fontSize: 14)),
       ),
     ),
     DropdownMenuItem(
       value: "itemsOwn",
       child: SizedBox(
         width: 110,
-        child: Text("Own items", textAlign: TextAlign.right, style: TextStyle(fontSize: 14)),
+        child: PdaText("Own items", textAlign: TextAlign.right, style: TextStyle(fontSize: 14)),
       ),
     ),
     DropdownMenuItem(
       value: "itemsFaction",
       child: SizedBox(
         width: 110,
-        child: Text("Faction items", textAlign: TextAlign.right, style: TextStyle(fontSize: 14)),
+        child: PdaText("Faction items", textAlign: TextAlign.right, style: TextStyle(fontSize: 14)),
       ),
     ),
   ];
@@ -469,7 +470,7 @@ class AlertsSettingsState extends State<AlertsSettings> {
           value: "factionMain",
           child: SizedBox(
             width: 110,
-            child: Text("Faction page", textAlign: TextAlign.right, style: TextStyle(fontSize: 14)),
+            child: PdaText("Faction page", textAlign: TextAlign.right, style: TextStyle(fontSize: 14)),
           ),
         ),
       ],
@@ -526,7 +527,7 @@ class AlertsSettingsState extends State<AlertsSettings> {
               value: hour,
               child: SizedBox(
                 width: 80,
-                child: Text("$hour:00 TCT", textAlign: TextAlign.right, style: const TextStyle(fontSize: 14)),
+                child: PdaText("{0}:00 TCT", values: [hour], textAlign: TextAlign.right, style: const TextStyle(fontSize: 14)),
               ),
             ),
         ],
@@ -758,7 +759,7 @@ class AlertsSettingsState extends State<AlertsSettings> {
   void _alertUpdateFailedToast() {
     BotToast.showText(
       clickClose: true,
-      text: "Could not save the change, please try again",
+      text: context.interfaceText("Could not save the change, please try again"),
       textStyle: const TextStyle(fontSize: 14, color: Colors.white),
       contentColor: Colors.orange[900]!,
       duration: const Duration(seconds: 4),
@@ -795,13 +796,13 @@ class AlertsSettingsState extends State<AlertsSettings> {
             OutlinedButton(
               onPressed: () => _pickCityShopHour(from: true),
               style: OutlinedButton.styleFrom(visualDensity: VisualDensity.compact),
-              child: Text("From ${_cityShopHourLabel(from)} TCT", style: const TextStyle(fontSize: 12)),
+              child: PdaText("From {0} TCT", values: [_cityShopHourLabel(from)], style: const TextStyle(fontSize: 12)),
             ),
             const SizedBox(width: 8),
             OutlinedButton(
               onPressed: () => _pickCityShopHour(from: false),
               style: OutlinedButton.styleFrom(visualDensity: VisualDensity.compact),
-              child: Text("To ${_cityShopHourLabel(to)} TCT", style: const TextStyle(fontSize: 12)),
+              child: PdaText("To {0} TCT", values: [_cityShopHourLabel(to)], style: const TextStyle(fontSize: 12)),
             ),
           ],
         ),
@@ -985,14 +986,14 @@ class AlertsSettingsState extends State<AlertsSettings> {
       value: "browser",
       child: SizedBox(
         width: 110,
-        child: Text("Browser", textAlign: TextAlign.right, style: TextStyle(fontSize: 14)),
+        child: PdaText("Browser", textAlign: TextAlign.right, style: TextStyle(fontSize: 14)),
       ),
     ),
     DropdownMenuItem(
       value: "foreignStocks",
       child: SizedBox(
         width: 110,
-        child: Text("Foreign Stocks", textAlign: TextAlign.right, style: TextStyle(fontSize: 14)),
+        child: PdaText("Foreign Stocks", textAlign: TextAlign.right, style: TextStyle(fontSize: 14)),
       ),
     ),
   ];
@@ -1394,9 +1395,9 @@ class AlertsSettingsState extends State<AlertsSettings> {
           if (enabled) {
             BotToast.showText(
               text:
-                  "Please make sure that you understand the consequences of this setting "
+                  context.interfaceText("Please make sure that you understand the consequences of this setting "
                   "by reading the information dialog.\n\n"
-                  "You will NOT receive relation alerts.",
+                  "You will NOT receive relation alerts."),
               textStyle: const TextStyle(fontSize: 14, color: Colors.white),
               contentColor: Colors.blue,
               duration: const Duration(seconds: 6),
@@ -1477,7 +1478,7 @@ class AlertsSettingsState extends State<AlertsSettings> {
                 child: OutlinedButton(
                   style: OutlinedButton.styleFrom(visualDensity: VisualDensity.compact),
                   onPressed: () => showChatSettingsFrom(context, alerts: true),
-                  child: const Text("Chat settings"),
+                  child: const PdaText("Chat settings"),
                 ),
               ),
               value: NativeChat.prefs.dmPush,
@@ -1553,18 +1554,18 @@ class AlertsSettingsState extends State<AlertsSettings> {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text("Battery Optimization Detected"),
-            content: const Text(
+            title: const PdaText("Battery Optimization Detected"),
+            content: const PdaText(
               "To ensure Live Updates work correctly in the background, please disable battery optimization for Torn PDA.",
             ),
             actions: [
-              TextButton(onPressed: () => Navigator.pop(context), child: const Text("Cancel")),
+              TextButton(onPressed: () => Navigator.pop(context), child: const PdaText("Cancel")),
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                   channel.invokeMethod('openBatterySettings');
                 },
-                child: const Text("Open Settings"),
+                child: const PdaText("Open Settings"),
               ),
             ],
           ),
@@ -1579,7 +1580,7 @@ class AlertsSettingsState extends State<AlertsSettings> {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
-      title: const Text('Alerts', style: TextStyle(color: Colors.white)),
+      title: const PdaText('Alerts', style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: const Icon(Icons.menu),
         onPressed: () {
@@ -1630,11 +1631,11 @@ class AlertsSettingsState extends State<AlertsSettings> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('There was an error contacting the server!', style: TextStyle(color: Colors.red)),
+          PdaText('There was an error contacting the server!', style: TextStyle(color: Colors.red)),
           SizedBox(height: 20),
-          Text('Please try again later.', style: TextStyle(color: Colors.red)),
+          PdaText('Please try again later.', style: TextStyle(color: Colors.red)),
           SizedBox(height: 20),
-          Text(
+          PdaText(
             'If this problem reoccurs, please log out from Torn API (remove '
             'you API Key in the Settings section and insert it again). Sorry for '
             'the inconvenience!',
@@ -1646,13 +1647,13 @@ class AlertsSettingsState extends State<AlertsSettings> {
 
   Widget _alertsInfoDialog() {
     return AlertDialog(
-      title: const Text("Alerts", style: TextStyle(fontSize: 18)),
+      title: const PdaText("Alerts", style: TextStyle(fontSize: 18)),
       content: const SingleChildScrollView(
         child: Column(
           children: [
             Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text(
+              child: PdaText(
                 "Note: if you don't use Torn PDA for more than 5 days, "
                 "all notifications will be turned off automatically. "
                 "\n\nThis is to prevent the over usage of resources. "
@@ -1666,7 +1667,7 @@ class AlertsSettingsState extends State<AlertsSettings> {
       ),
       actions: [
         TextButton(
-          child: const Text("Close"),
+          child: const PdaText("Close"),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -1683,7 +1684,7 @@ class AlertsSettingsState extends State<AlertsSettings> {
 
   AlertDialog _retalsGeneralExplanation() {
     return AlertDialog(
-      title: const Text("Retaliation alerts"),
+      title: const PdaText("Retaliation alerts"),
       content: Scrollbar(
         controller: _scrollControllerRetalsGeneral,
         thumbVisibility: true,
@@ -1694,7 +1695,7 @@ class AlertsSettingsState extends State<AlertsSettings> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                const PdaText(
                   "NOTE: you will not receive retaliation alerts when traveling, nor when the attack took place abroad "
                   "and you are in Torn, nor if the attack took place in Torn and you are abroad.\n\nHowever, due to API limits, "
                   "you might receive spurious notifications when you are abroad but in a different country from the attack.\n\n"
@@ -1703,36 +1704,36 @@ class AlertsSettingsState extends State<AlertsSettings> {
                   style: TextStyle(fontSize: 13),
                 ),
                 if (!_factionApiAccess)
-                  const Text(
+                  const PdaText(
                     "You DO NOT HAVE Faction API access\n\n",
                     style: TextStyle(fontSize: 13, color: Colors.red, fontWeight: FontWeight.bold),
                   )
                 else
-                  const Text(
+                  const PdaText(
                     "You HAVE Faction API access\n\n",
                     style: TextStyle(fontSize: 13, color: Colors.green, fontWeight: FontWeight.bold),
                   ),
                 if (!_factionApiAccess)
-                  const Text(
+                  const PdaText(
                     "For retaliation notifications to work, at least one member of your faction with API access "
                     " privileges must have this alert active in Torn PDA. If this condition is not met at some point, "
                     "Torn PDA will notify you about it so that you can discuss this internally.\n\n",
                     style: TextStyle(fontSize: 13),
                   )
                 else
-                  const Text(
+                  const PdaText(
                     "For retaliation notifications to work, at least one member of your faction with API access "
                     " privileges must have this alert active in Torn PDA. This can be you or any other member.\n\n",
                     style: TextStyle(fontSize: 13),
                   ),
                 if (!_factionApiAccess)
-                  const Text(
+                  const PdaText(
                     "As you have no Faction API access, but the above criteria is met, you will be able to receive "
                     "notifications, but you won't be able to access the Retaliation target list (in Chaining).",
                     style: TextStyle(fontSize: 13),
                   )
                 else
-                  const Text(
+                  const PdaText(
                     "Members of your faction with no Faction API access will be able to receive "
                     "notifications, but they won't be able to access the Retaliation target list (in Chaining).",
                     style: TextStyle(fontSize: 13),
@@ -1747,7 +1748,7 @@ class AlertsSettingsState extends State<AlertsSettings> {
         Padding(
           padding: const EdgeInsets.only(right: 8),
           child: TextButton(
-            child: const Text("Understood"),
+            child: const PdaText("Understood"),
             onPressed: () {
               Navigator.of(context).pop('exit');
             },
@@ -1759,7 +1760,7 @@ class AlertsSettingsState extends State<AlertsSettings> {
 
   AlertDialog _retalsNotificationExplanation() {
     return AlertDialog(
-      title: const Text("Retaliation notification"),
+      title: const PdaText("Retaliation notification"),
       content: Scrollbar(
         controller: _scrollControllerRetalsNotification,
         thumbVisibility: true,
@@ -1770,7 +1771,7 @@ class AlertsSettingsState extends State<AlertsSettings> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                PdaText(
                   "By default, on tapping a retaliation notification you will be redirected to the Retaliation "
                   "section (inside of Chaining); this is independent of how many targets are available for retaliation "
                   "at the same time.\n\nIn this section you can have a look at the stats, target status, etc."
@@ -1790,7 +1791,7 @@ class AlertsSettingsState extends State<AlertsSettings> {
         Padding(
           padding: const EdgeInsets.only(right: 8),
           child: TextButton(
-            child: const Text("Understood"),
+            child: const PdaText("Understood"),
             onPressed: () {
               Navigator.of(context).pop('exit');
             },
@@ -1802,7 +1803,7 @@ class AlertsSettingsState extends State<AlertsSettings> {
 
   AlertDialog _retalsDonorExplanation() {
     return AlertDialog(
-      title: const Text("Retaliation API Faction permissions donor"),
+      title: const PdaText("Retaliation API Faction permissions donor"),
       content: Scrollbar(
         controller: _scrollControllerRetalsDonor,
         thumbVisibility: true,
@@ -1813,7 +1814,7 @@ class AlertsSettingsState extends State<AlertsSettings> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                PdaText(
                   "As explained in the Retalation Alerts information dialog, as a member of your faction with the "
                   "required Faction API access, your API key send retaliation notifications to faction members. "
                   "This will work as long as retalation alerts are active.\n\n"
@@ -1832,7 +1833,7 @@ class AlertsSettingsState extends State<AlertsSettings> {
         Padding(
           padding: const EdgeInsets.only(right: 8),
           child: TextButton(
-            child: const Text("Understood"),
+            child: const PdaText("Understood"),
             onPressed: () {
               Navigator.of(context).pop('exit');
             },

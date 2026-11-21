@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
@@ -116,7 +117,7 @@ class WebviewUrlDialogState extends State<WebviewUrlDialog> {
                   mainAxisSize: MainAxisSize.min, // To make the card compact
                   children: <Widget>[
                     Flexible(
-                      child: Text("OPTIONS", style: TextStyle(fontSize: 12, color: _themeProvider!.mainText)),
+                      child: PdaText("OPTIONS", style: TextStyle(fontSize: 12, color: _themeProvider!.mainText)),
                     ),
                     const SizedBox(height: 15),
                     if ((widget.url.contains("www.torn.com/loader.php?sid=attack&user2ID=") ||
@@ -131,7 +132,7 @@ class WebviewUrlDialogState extends State<WebviewUrlDialog> {
                               Icon(MdiIcons.fencing, size: 20),
                               SizedBox(width: 5),
                               Flexible(
-                                child: Text(
+                                child: PdaText(
                                   'FACTION ASSISTANCE',
                                   style: TextStyle(fontSize: 12),
                                   textAlign: TextAlign.center,
@@ -154,7 +155,7 @@ class WebviewUrlDialogState extends State<WebviewUrlDialog> {
 
                             // Show a loading toast while fetching data
                             BotToast.showText(
-                              text: "Fetching target info…",
+                              text: context.interfaceText("Fetching target info…"),
                               textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                               contentColor: Colors.grey[700]!,
                               contentPadding: const EdgeInsets.all(10),
@@ -256,7 +257,7 @@ class WebviewUrlDialogState extends State<WebviewUrlDialog> {
                             if (result == null) return; // User cancelled
 
                             final hideRequesting = BotToast.showText(
-                              text: "Requesting assistance from faction members!",
+                              text: context.interfaceText("Requesting assistance from faction members!"),
                               textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                               contentColor: Colors.green,
                               duration: firebaseFunctions.assistTimeout,
@@ -311,11 +312,11 @@ class WebviewUrlDialogState extends State<WebviewUrlDialog> {
                                   onFieldSubmitted: (value) {
                                     onCustomURLSubmitted();
                                   },
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     counterText: "",
                                     isDense: true,
                                     border: OutlineInputBorder(),
-                                    labelText: 'Browse URL',
+                                    labelText: context.interfaceText('Browse URL'),
                                     labelStyle: TextStyle(fontSize: 12),
                                   ),
                                   validator: (value) {
@@ -347,7 +348,7 @@ class WebviewUrlDialogState extends State<WebviewUrlDialog> {
                             Icon(Icons.home, size: 20),
                             SizedBox(width: 5),
                             Flexible(
-                              child: Text('Torn Home', style: TextStyle(fontSize: 12), textAlign: TextAlign.center),
+                              child: PdaText('Torn Home', style: TextStyle(fontSize: 12), textAlign: TextAlign.center),
                             ),
                           ],
                         ),
@@ -372,7 +373,7 @@ class WebviewUrlDialogState extends State<WebviewUrlDialog> {
                             Icon(Icons.copy, size: 20),
                             SizedBox(width: 5),
                             Flexible(
-                              child: Text('Copy URL', style: TextStyle(fontSize: 12), textAlign: TextAlign.center),
+                              child: PdaText('Copy URL', style: TextStyle(fontSize: 12), textAlign: TextAlign.center),
                             ),
                           ],
                         ),
@@ -385,7 +386,7 @@ class WebviewUrlDialogState extends State<WebviewUrlDialog> {
                           }
 
                           BotToast.showText(
-                            text: "Link copied! [$input]",
+                            text: context.interfaceText("Link copied! [{0}]", [input]),
                             textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                             contentColor: Colors.green,
                             duration: const Duration(milliseconds: 1500),
@@ -416,7 +417,7 @@ class WebviewUrlDialogState extends State<WebviewUrlDialog> {
                             ),
                             const SizedBox(width: 5),
                             const Flexible(
-                              child: Text(
+                              child: PdaText(
                                 'Browse shortcuts',
                                 style: TextStyle(fontSize: 12),
                                 textAlign: TextAlign.center,
@@ -435,7 +436,7 @@ class WebviewUrlDialogState extends State<WebviewUrlDialog> {
                             Image.asset('images/icons/heart_add.png', width: 20, color: Colors.white),
                             const SizedBox(width: 8),
                             const Flexible(
-                              child: Text(
+                              child: PdaText(
                                 'Save as shortcut',
                                 style: TextStyle(fontSize: 12),
                                 textAlign: TextAlign.center,
@@ -460,7 +461,7 @@ class WebviewUrlDialogState extends State<WebviewUrlDialog> {
                               Icon(Icons.search, size: 20),
                               SizedBox(width: 8),
                               Flexible(
-                                child: Text(
+                                child: PdaText(
                                   'Find in page',
                                   style: TextStyle(fontSize: 12),
                                   textAlign: TextAlign.center,
@@ -488,7 +489,7 @@ class WebviewUrlDialogState extends State<WebviewUrlDialog> {
                             Icon(Icons.open_in_browser_outlined, size: 20),
                             SizedBox(width: 8),
                             Flexible(
-                              child: Text(
+                              child: PdaText(
                                 'External browser',
                                 style: TextStyle(fontSize: 12),
                                 textAlign: TextAlign.center,
@@ -544,7 +545,7 @@ class WebviewUrlDialogState extends State<WebviewUrlDialog> {
                                   Icon(Icons.zoom_in, size: 20),
                                   SizedBox(width: 5),
                                   Flexible(
-                                    child: Text('Zoom', style: TextStyle(fontSize: 12), textAlign: TextAlign.center),
+                                    child: PdaText('Zoom', style: TextStyle(fontSize: 12), textAlign: TextAlign.center),
                                   ),
                                 ],
                               ),
@@ -566,7 +567,7 @@ class WebviewUrlDialogState extends State<WebviewUrlDialog> {
                               Icon(Icons.cleaning_services_outlined, size: 20),
                               SizedBox(width: 8),
                               Flexible(
-                                child: Text(
+                                child: PdaText(
                                   'Soft cache reset',
                                   style: TextStyle(fontSize: 12),
                                   textAlign: TextAlign.center,
@@ -590,7 +591,7 @@ class WebviewUrlDialogState extends State<WebviewUrlDialog> {
                             const Divider(),
                             const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [Text('DEVELOPERS', style: TextStyle(fontSize: 10))],
+                              children: [PdaText('DEVELOPERS', style: TextStyle(fontSize: 10))],
                             ),
                             Column(
                               children: [
@@ -599,7 +600,7 @@ class WebviewUrlDialogState extends State<WebviewUrlDialog> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
-                                      const Text("Quick terminal", style: TextStyle(fontSize: 12)),
+                                      const PdaText("Quick terminal", style: TextStyle(fontSize: 12)),
                                       Switch(
                                         value: _settingsProvider.terminalEnabled,
                                         onChanged: (value) {
@@ -629,7 +630,7 @@ class WebviewUrlDialogState extends State<WebviewUrlDialog> {
                                         Icon(MdiIcons.script, size: 20),
                                         SizedBox(width: 8),
                                         Flexible(
-                                          child: Text(
+                                          child: PdaText(
                                             'User Scripts',
                                             style: TextStyle(fontSize: 12),
                                             textAlign: TextAlign.center,
@@ -665,7 +666,7 @@ class WebviewUrlDialogState extends State<WebviewUrlDialog> {
                                         Icon(Icons.heart_broken, size: 20),
                                         SizedBox(width: 8),
                                         Flexible(
-                                          child: Text(
+                                          child: PdaText(
                                             'Kill renderer',
                                             style: TextStyle(fontSize: 12),
                                             textAlign: TextAlign.center,
@@ -688,7 +689,7 @@ class WebviewUrlDialogState extends State<WebviewUrlDialog> {
                       ),
                     const SizedBox(height: 8),
                     TextButton(
-                      child: const Text("Close"),
+                      child: const PdaText("Close"),
                       onPressed: () {
                         _customURLController.text = "";
                         Navigator.of(context).pop();
@@ -849,11 +850,11 @@ class CustomShortcutDialogState extends State<CustomShortcutDialog> {
                             textCapitalization: TextCapitalization.sentences,
                             controller: _customShortcutNameController,
                             maxLength: 30,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               counterText: "",
                               isDense: true,
                               border: OutlineInputBorder(),
-                              labelText: 'Name',
+                              labelText: context.interfaceText('Name'),
                             ),
                             validator: (value) {
                               if (value!.replaceAll(' ', '').isEmpty) {
@@ -928,7 +929,7 @@ class CustomShortcutDialogState extends State<CustomShortcutDialog> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         TextButton(
-                          child: const Text("Add"),
+                          child: const PdaText("Add"),
                           onPressed: () {
                             if (!_customShortcutURLKey.currentState!.validate()) {
                               return;
@@ -953,7 +954,7 @@ class CustomShortcutDialogState extends State<CustomShortcutDialog> {
                           },
                         ),
                         TextButton(
-                          child: const Text("Close"),
+                          child: const PdaText("Close"),
                           onPressed: () {
                             Navigator.of(context).pop();
                             _customShortcutNameController.text = '';

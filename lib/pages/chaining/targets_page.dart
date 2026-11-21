@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 // Package imports:
@@ -76,7 +77,7 @@ class TargetsPageState extends State<TargetsPage> {
 
   // For appBar search
   Icon _searchIcon = const Icon(Icons.search);
-  Widget _appBarText = const Text("Targets");
+  Widget _appBarText = const PdaText("Targets");
   final _focusSearch = FocusNode();
 
   /// Strictly whether we button is enabled in options
@@ -195,9 +196,7 @@ class TargetsPageState extends State<TargetsPage> {
                     } else {
                       BotToast.showText(
                         text:
-                            'Update with errors: ${updateResult.numberErrors} errors '
-                            'out of ${updateResult.numberErrors + updateResult.numberSuccessful} '
-                            'total targets!',
+                            context.interfaceText("Update with errors: {0} errors out of {1} total targets!", [updateResult.numberErrors, updateResult.numberErrors + updateResult.numberSuccessful]),
                         textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                         contentColor: Colors.red,
                         duration: const Duration(seconds: 3),
@@ -214,7 +213,7 @@ class TargetsPageState extends State<TargetsPage> {
         if (_targetsProvider.currentColorFilterOut.isNotEmpty)
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 2),
-            child: Text(
+            child: PdaText(
               "NOTE: there is an active color filter!",
               style: TextStyle(color: Colors.orange[800], fontSize: 12),
             ),
@@ -283,7 +282,7 @@ class TargetsPageState extends State<TargetsPage> {
                                   focusNode: _focusSearch,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: "search targets",
+                                    hintText: context.interfaceText("search targets"),
                                     hintStyle: TextStyle(
                                       fontStyle: FontStyle.italic,
                                       color: Colors.grey[300],
@@ -303,7 +302,7 @@ class TargetsPageState extends State<TargetsPage> {
                 _focusSearch.requestFocus();
               } else {
                 _searchIcon = Icon(Icons.search, color: myColor);
-                _appBarText = const Text("Targets");
+                _appBarText = const PdaText("Targets");
               }
             });
           },
@@ -392,10 +391,10 @@ class TargetsPageState extends State<TargetsPage> {
                             minLines: 1,
                             maxLines: 2,
                             keyboardType: TextInputType.number,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               counterText: "",
                               border: OutlineInputBorder(),
-                              labelText: 'Insert player ID',
+                              labelText: context.interfaceText('Insert player ID'),
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -414,7 +413,7 @@ class TargetsPageState extends State<TargetsPage> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
                               TextButton(
-                                child: const Text("Add"),
+                                child: const PdaText("Add"),
                                 onPressed: () async {
                                   if (_addFormKey.currentState!.validate()) {
                                     // Get rid of dialog first, so that it can't
@@ -444,7 +443,7 @@ class TargetsPageState extends State<TargetsPage> {
                                 },
                               ),
                               TextButton(
-                                child: const Text("Cancel"),
+                                child: const PdaText("Cancel"),
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                   _addIdController.text = '';
@@ -595,7 +594,7 @@ class TargetsPageState extends State<TargetsPage> {
         break;
       case TargetsSyncAction.tornImported:
         BotToast.showText(
-          text: 'Targets imported from Torn.',
+          text: context.interfaceText('Targets imported from Torn.'),
           textStyle: const TextStyle(fontSize: 13, color: Colors.white),
           contentColor: Colors.green[800]!,
           duration: const Duration(seconds: 3),
@@ -604,7 +603,7 @@ class TargetsPageState extends State<TargetsPage> {
         break;
       case TargetsSyncAction.tornFailed:
         BotToast.showText(
-          text: 'Torn import failed.',
+          text: context.interfaceText('Torn import failed.'),
           textStyle: const TextStyle(fontSize: 13, color: Colors.white),
           contentColor: Colors.red[800]!,
           duration: const Duration(seconds: 3),
@@ -639,11 +638,11 @@ class TargetsPageState extends State<TargetsPage> {
                       mainAxisSize: MainAxisSize.min, // To make the card compact
                       children: <Widget>[
                         const Flexible(
-                          child: Text("CAUTION", style: TextStyle(fontSize: 13, color: Colors.red)),
+                          child: PdaText("CAUTION", style: TextStyle(fontSize: 13, color: Colors.red)),
                         ),
                         const SizedBox(height: 10),
                         Flexible(
-                          child: Text(
+                          child: PdaText(
                             "This will wipe all your targets (consider performing a backup or "
                             "exporting to YATA).",
                             style: TextStyle(fontSize: 12, color: _themeProvider.mainText),
@@ -651,21 +650,21 @@ class TargetsPageState extends State<TargetsPage> {
                         ),
                         const SizedBox(height: 10),
                         Flexible(
-                          child: Text("Are you sure?", style: TextStyle(fontSize: 12, color: _themeProvider.mainText)),
+                          child: PdaText("Are you sure?", style: TextStyle(fontSize: 12, color: _themeProvider.mainText)),
                         ),
                         const SizedBox(height: 8),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             TextButton(
-                              child: const Text("Wipe!"),
+                              child: const PdaText("Wipe!"),
                               onPressed: () {
                                 _targetsProvider.wipeAllTargets();
                                 Navigator.of(context).pop();
                               },
                             ),
                             TextButton(
-                              child: const Text("Oh no!"),
+                              child: const PdaText("Oh no!"),
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },

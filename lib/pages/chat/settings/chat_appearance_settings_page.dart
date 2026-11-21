@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/pages/chat/settings/chat_settings_subpage.dart';
 import 'package:torn_pda/providers/chat/chat_prefs.dart';
@@ -28,9 +29,9 @@ class ChatAppearanceSettingsPage extends StatelessWidget {
               value: NativeChat.prefs.chatTimes,
               underline: const SizedBox.shrink(),
               items: const [
-                DropdownMenuItem(value: ChatTimes.app, child: Text('As in app settings')),
-                DropdownMenuItem(value: ChatTimes.tct, child: Text('Torn City Time (TCT)')),
-                DropdownMenuItem(value: ChatTimes.local, child: Text('Local time')),
+                DropdownMenuItem(value: ChatTimes.app, child: PdaText('As in app settings')),
+                DropdownMenuItem(value: ChatTimes.tct, child: PdaText('Torn City Time (TCT)')),
+                DropdownMenuItem(value: ChatTimes.local, child: PdaText('Local time')),
               ],
               onChanged: (v) => NativeChat.prefs.setChatTimes(v!),
             ),
@@ -43,9 +44,9 @@ class ChatAppearanceSettingsPage extends StatelessWidget {
               value: NativeChat.prefs.animations,
               underline: const SizedBox.shrink(),
               items: const [
-                DropdownMenuItem(value: ChatAnimations.quick, child: Text('Quick')),
-                DropdownMenuItem(value: ChatAnimations.smooth, child: Text('Smooth')),
-                DropdownMenuItem(value: ChatAnimations.verySmooth, child: Text('Very smooth')),
+                DropdownMenuItem(value: ChatAnimations.quick, child: PdaText('Quick')),
+                DropdownMenuItem(value: ChatAnimations.smooth, child: PdaText('Smooth')),
+                DropdownMenuItem(value: ChatAnimations.verySmooth, child: PdaText('Very smooth')),
               ],
               onChanged: (v) => NativeChat.prefs.setAnimations(v!),
             ),

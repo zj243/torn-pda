@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -165,8 +166,8 @@ class _DevToolsTerminalTabState extends State<DevToolsTerminalTab> {
               keyboardType: TextInputType.multiline,
               minLines: 1,
               maxLines: 8,
-              decoration: const InputDecoration(
-                hintText: 'Execute JavaScript...',
+              decoration: InputDecoration(
+                hintText: context.interfaceText('Execute JavaScript...'),
                 border: InputBorder.none,
               ),
               onSubmitted: (value) {
@@ -178,7 +179,7 @@ class _DevToolsTerminalTabState extends State<DevToolsTerminalTab> {
           ),
           IconButton(
             icon: const Icon(Icons.keyboard_arrow_up),
-            tooltip: "Previous command",
+            tooltip: context.interfaceText("Previous command"),
             onPressed: () {
               if (_commandHistory.isEmpty) return;
               _historyIndex--;
@@ -193,7 +194,7 @@ class _DevToolsTerminalTabState extends State<DevToolsTerminalTab> {
           ),
           IconButton(
             icon: const Icon(Icons.keyboard_arrow_down),
-            tooltip: "Next command",
+            tooltip: context.interfaceText("Next command"),
             onPressed: () {
               if (_commandHistory.isEmpty) return;
               _historyIndex++;
@@ -212,14 +213,14 @@ class _DevToolsTerminalTabState extends State<DevToolsTerminalTab> {
           ),
           IconButton(
             icon: const Icon(Icons.delete_sweep_outlined),
-            tooltip: "Clear terminal",
+            tooltip: context.interfaceText("Clear terminal"),
             onPressed: () {
               provider.clearTerminal(widget.webviewKey);
             },
           ),
           IconButton(
             icon: const Icon(Icons.send),
-            tooltip: "Execute",
+            tooltip: context.interfaceText("Execute"),
             onPressed: () => _evaluateJavaScript(_commandController.text),
           ),
         ],

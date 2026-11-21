@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -78,7 +79,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
                         children: <Widget>[
                           const Padding(
                             padding: EdgeInsets.all(20.0),
-                            child: Text('Here you can specify your preferred notification '
+                            child: PdaText('Here you can specify your preferred notification '
                                 'trigger time before a ranked war starts'),
                           ),
                           _rowsWithTypes(),
@@ -104,7 +105,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
-      title: const Text("War notification", style: TextStyle(color: Colors.white)),
+      title: const PdaText("War notification", style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
@@ -123,7 +124,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               const Flexible(
-                child: Text('Notification'),
+                child: PdaText('Notification'),
               ),
               const Padding(
                 padding: EdgeInsets.only(left: 20),
@@ -139,7 +140,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('Alarm'),
+              const PdaText('Alarm'),
               const Padding(
                 padding: EdgeInsets.only(left: 20),
               ),
@@ -160,7 +161,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Flexible(
-                            child: Text(
+                            child: PdaText(
                               "(alarms are set on the minute)",
                               style: TextStyle(
                                 fontStyle: FontStyle.italic,
@@ -183,7 +184,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 const Flexible(
-                  child: Text('Timer'),
+                  child: PdaText('Timer'),
                 ),
                 const Padding(
                   padding: EdgeInsets.only(left: 20),
@@ -206,7 +207,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
           value: 60,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "1 minute",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -219,7 +220,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
           value: 600,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "10 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -232,7 +233,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
           value: 1800,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "30 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -245,7 +246,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
           value: 3600,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "1 hour",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -258,7 +259,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
           value: 21600,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "6 hours",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -284,7 +285,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
               value: 20,
               child: SizedBox(
                 width: 140,
-                child: Text(
+                child: PdaText(
                   "20 seconds before",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -297,7 +298,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
               value: 40,
               child: SizedBox(
                 width: 140,
-                child: Text(
+                child: PdaText(
                   "40 seconds before",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -310,7 +311,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
               value: 60,
               child: SizedBox(
                 width: 140,
-                child: Text(
+                child: PdaText(
                   "1 minute before",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -323,7 +324,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
               value: 120,
               child: SizedBox(
                 width: 140,
-                child: Text(
+                child: PdaText(
                   "2 minutes before",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -336,7 +337,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
               value: 300,
               child: SizedBox(
                 width: 140,
-                child: Text(
+                child: PdaText(
                   "5 minutes before",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -349,7 +350,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
               value: 600,
               child: SizedBox(
                 width: 140,
-                child: Text(
+                child: PdaText(
                   "10 minutes before",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -362,7 +363,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
               value: 1800,
               child: SizedBox(
                 width: 140,
-                child: Text(
+                child: PdaText(
                   "30 minutes before",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -375,7 +376,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
               value: 3600,
               child: SizedBox(
                 width: 140,
-                child: Text(
+                child: PdaText(
                   "1 hour before",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -388,7 +389,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
               value: 21600,
               child: SizedBox(
                 width: 140,
-                child: Text(
+                child: PdaText(
                   "6 hours before",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -403,7 +404,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
               value: 1,
               child: SizedBox(
                 width: 80,
-                child: Text(
+                child: PdaText(
                   "1 minute",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -416,7 +417,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
               value: 10,
               child: SizedBox(
                 width: 80,
-                child: Text(
+                child: PdaText(
                   "10 minutes",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -429,7 +430,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
               value: 30,
               child: SizedBox(
                 width: 80,
-                child: Text(
+                child: PdaText(
                   "30 minutes",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -442,7 +443,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
               value: 60,
               child: SizedBox(
                 width: 80,
-                child: Text(
+                child: PdaText(
                   "1 hour",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -455,7 +456,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
               value: 360,
               child: SizedBox(
                 width: 80,
-                child: Text(
+                child: PdaText(
                   "6 hours",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -486,7 +487,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
           value: 60,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "1 minute",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -499,7 +500,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
           value: 600,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "10 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -512,7 +513,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
           value: 1800,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "30 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -525,7 +526,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
           value: 3600,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "1 hour",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -538,7 +539,7 @@ class WarAheadOptionsState extends State<WarAheadOptions> {
           value: 21600,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "6 hours",
               textAlign: TextAlign.right,
               style: TextStyle(

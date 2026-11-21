@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:math';
 
 // Flutter imports:
@@ -39,7 +40,7 @@ class RevivingServicesDialogState extends State<RevivingServicesDialog> {
       },
       child: AlertDialog(
         title: _details == null
-            ? const Text("Reviving services")
+            ? const PdaText("Reviving services")
             : Row(
                 children: [
                   Image.asset(_details!.icon, width: 24),
@@ -61,12 +62,12 @@ class RevivingServicesDialogState extends State<RevivingServicesDialog> {
             padding: const EdgeInsets.only(right: 15),
             child: _details == null
                 ? TextButton(
-                    child: const Text("Close"),
+                    child: const PdaText("Close"),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   )
-                : TextButton(child: const Text("Back"), onPressed: _showList),
+                : TextButton(child: const PdaText("Back"), onPressed: _showList),
           ),
         ],
       ),
@@ -77,7 +78,7 @@ class RevivingServicesDialogState extends State<RevivingServicesDialog> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const Text(
+          const PdaText(
             "Choose which reviving services you might want to use. "
             "If enabled, when you are in hospital you'll have the option to call "
             "one of their revivers from several places (e.g. Profile and Chaining sections).",
@@ -94,7 +95,7 @@ class RevivingServicesDialogState extends State<RevivingServicesDialog> {
                     icon: const Icon(Icons.info_outline, size: 20),
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(minWidth: 30, minHeight: 30),
-                    tooltip: "More information",
+                    tooltip: context.interfaceText("More information"),
                     onPressed: () => _showDetails(provider),
                   ),
                   Switch(
@@ -111,7 +112,7 @@ class RevivingServicesDialogState extends State<RevivingServicesDialog> {
               ),
             ),
           const SizedBox(height: 15),
-          const Text(
+          const PdaText(
             "NOTE: Torn PDA is not affiliated to any of these services in any form",
             style: TextStyle(fontSize: 12),
           ),
@@ -132,7 +133,7 @@ class RevivingServicesDialogState extends State<RevivingServicesDialog> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Flexible(child: Text("Use ${_details!.name}", style: const TextStyle(fontSize: 13))),
+              Flexible(child: PdaText("Use {0}", values: [_details!.name], style: const TextStyle(fontSize: 13))),
               Switch(
                 value: _details!.isActive(_w),
                 onChanged: (value) {

@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/models/chat/chat_models.dart';
 import 'package:torn_pda/providers/chat/chat_prefs.dart';
@@ -49,7 +50,7 @@ class ChatFilterStrip extends StatelessWidget {
               ),
             ),
           ),
-          IconButton(tooltip: 'Edit filter', icon: const Icon(Icons.tune_rounded), onPressed: onEdit),
+          IconButton(tooltip: context.interfaceText('Edit filter'), icon: const Icon(Icons.tune_rounded), onPressed: onEdit),
         ],
       ),
     );
@@ -87,9 +88,9 @@ class _ChatFilterSheet extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Filter ${room.name}', style: Theme.of(context).textTheme.titleMedium),
+              PdaText("Filter {0}", values: [room.name], style: Theme.of(context).textTheme.titleMedium),
               const SizedBox(height: 4),
-              Text(
+              PdaText(
                 'Whole words, any case. Your own messages, mentions and highlight words always show',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
@@ -170,7 +171,7 @@ class _TermListState extends State<_TermList> {
             hintText: widget.hint,
             counterText: '',
             isDense: true,
-            suffixIcon: IconButton(tooltip: 'Add', icon: const Icon(Icons.add_rounded), onPressed: _add),
+            suffixIcon: IconButton(tooltip: context.interfaceText('Add'), icon: const Icon(Icons.add_rounded), onPressed: _add),
           ),
         ),
       ],

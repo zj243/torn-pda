@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:math' as math;
 
@@ -138,7 +139,7 @@ class _ChatHitPickerState extends State<ChatHitPicker> {
                     runSpacing: 4,
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
-                      Text('in', style: muted),
+                      PdaText('in', style: muted),
                       for (final s in _choices)
                         ChoiceChip(
                           label: Text('${s}s'),
@@ -151,7 +152,7 @@ class _ChatHitPickerState extends State<ChatHitPicker> {
                         ),
                       if (out != null)
                         ChoiceChip(
-                          label: Text('When out (${out}s)'),
+                          label: PdaText("When out ({0}s)", values: [out]),
                           selected: whenOut,
                           onSelected: (_) => setState(() {
                             _custom = false;
@@ -172,7 +173,7 @@ class _ChatHitPickerState extends State<ChatHitPicker> {
                             onChanged: (_) => setState(() {}),
                             decoration: InputDecoration(
                               isDense: true,
-                              labelText: 'Seconds',
+                              labelText: context.interfaceText('Seconds'),
                               suffixText: 's',
                               border: OutlineInputBorder(borderRadius: BorderRadius.circular(999)),
                             ),
@@ -188,7 +189,7 @@ class _ChatHitPickerState extends State<ChatHitPicker> {
                           }),
                         ),
                       FilterChip(
-                        label: const Text('Link'),
+                        label: const PdaText('Link'),
                         tooltip: 'Attack link for the web chat. Without it, PDA joins only targets in Targets or War',
                         selected: widget.prefs.hitCallLink,
                         onSelected: (on) => setState(() => widget.prefs.setHitCallLink(on)),
@@ -253,7 +254,7 @@ class _ChatHitPickerState extends State<ChatHitPicker> {
             selected: selected,
             inMutuallyExclusiveGroup: true,
             label: t.name,
-            onTapHint: 'pick as the target',
+            onTapHint: context.interfaceText('pick as the target'),
             onTap: () => _select(t),
             excludeSemantics: true,
             child: SizedBox(

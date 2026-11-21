@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -128,7 +129,7 @@ class WebViewPanicState extends State<WebViewPanic> {
             final match = regex.firstMatch(message.message)!;
             final loadout = match.group(1);
             BotToast.showText(
-              text: "Loadout $loadout activated!",
+              text: context.interfaceText("Loadout {0} activated!", [loadout]),
               textStyle: const TextStyle(
                 fontSize: 14,
                 color: Colors.white,
@@ -139,7 +140,7 @@ class WebViewPanicState extends State<WebViewPanic> {
             );
           } else {
             BotToast.showText(
-              text: "There was a problem activating the loadout, are you already using it?",
+              text: context.interfaceText("There was a problem activating the loadout, are you already using it?"),
               textStyle: const TextStyle(
                 fontSize: 14,
                 color: Colors.white,
@@ -346,7 +347,7 @@ class WebViewPanicState extends State<WebViewPanic> {
     if (canForward) {
       await _webViewController!.goForward();
       BotToast.showText(
-        text: "Forward",
+        text: context.interfaceText("Forward"),
         textStyle: const TextStyle(
           fontSize: 14,
           color: Colors.white,
@@ -357,7 +358,7 @@ class WebViewPanicState extends State<WebViewPanic> {
       );
     } else {
       BotToast.showText(
-        text: "Can't go forward!",
+        text: context.interfaceText("Can't go forward!"),
         textStyle: const TextStyle(
           fontSize: 14,
           color: Colors.white,
@@ -374,7 +375,7 @@ class WebViewPanicState extends State<WebViewPanic> {
     if (canBack) {
       await _webViewController!.goBack();
       BotToast.showText(
-        text: "Back",
+        text: context.interfaceText("Back"),
         textStyle: const TextStyle(
           fontSize: 14,
           color: Colors.white,
@@ -385,7 +386,7 @@ class WebViewPanicState extends State<WebViewPanic> {
       );
     } else {
       BotToast.showText(
-        text: "Can't go back!",
+        text: context.interfaceText("Can't go back!"),
         textStyle: const TextStyle(
           fontSize: 14,
           color: Colors.white,
@@ -460,7 +461,7 @@ class WebViewPanicState extends State<WebViewPanic> {
             await _webViewController!.reload();
 
             BotToast.showText(
-              text: "Reloading...",
+              text: context.interfaceText("Reloading..."),
               textStyle: const TextStyle(
                 fontSize: 14,
                 color: Colors.white,
@@ -565,8 +566,7 @@ class WebViewPanicState extends State<WebViewPanic> {
 
       if (targetsSkipped > 0 && !reachedEnd) {
         BotToast.showText(
-          text: "Skipped ${skippedNames.join(", ")}, either in jail, hospital or in a different "
-              "country",
+          text: context.interfaceText("Skipped {0}, either in jail, hospital or in a different country", [skippedNames.join(", ")]),
           textStyle: const TextStyle(
             fontSize: 14,
             color: Colors.white,
@@ -594,8 +594,7 @@ class WebViewPanicState extends State<WebViewPanic> {
 
       if (targetsSkipped > 0 && reachedEnd) {
         BotToast.showText(
-          text: "No more targets, all remaining are either in jail, hospital or in a different "
-              "country (${skippedNames.join(", ")})\n\nPress and hold the play/pause button to stop the chaining mode",
+          text: context.interfaceText("No more targets, all remaining are either in jail, hospital or in a different country ({0})\n\nPress and hold the play/pause button to stop the chaining mode", [skippedNames.join(", ")]),
           textStyle: const TextStyle(
             fontSize: 14,
             color: Colors.white,
@@ -688,8 +687,7 @@ class WebViewPanicState extends State<WebViewPanic> {
 
       if (targetsSkipped > 0 && !reachedEnd) {
         BotToast.showText(
-          text: "Skipped ${skippedNames.join(", ")}, either in jail, hospital or in a different "
-              "country",
+          text: context.interfaceText("Skipped {0}, either in jail, hospital or in a different country", [skippedNames.join(", ")]),
           textStyle: const TextStyle(
             fontSize: 14,
             color: Colors.white,
@@ -702,8 +700,7 @@ class WebViewPanicState extends State<WebViewPanic> {
 
       if (targetsSkipped > 0 && reachedEnd) {
         BotToast.showText(
-          text: "No more targets, all remaining are either in jail, hospital or in a different "
-              "country (${skippedNames.join(", ")})\n\nPress and hold the play/pause button to stop the chaining mode",
+          text: context.interfaceText("No more targets, all remaining are either in jail, hospital or in a different country ({0})\n\nPress and hold the play/pause button to stop the chaining mode", [skippedNames.join(", ")]),
           textStyle: const TextStyle(
             fontSize: 14,
             color: Colors.white,
@@ -861,8 +858,8 @@ class WebViewPanicState extends State<WebViewPanic> {
                           size: 16,
                         ),
                         const SizedBox(width: 5),
-                        Text(
-                          'Note for ${widget.attackNameList[_attackNumber]}',
+                        PdaText(
+                          "Note for {0}", values: [widget.attackNameList[_attackNumber]],
                           textAlign: TextAlign.center,
                           style: const TextStyle(color: Colors.white),
                         ),

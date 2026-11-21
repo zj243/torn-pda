@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 
@@ -20,12 +21,12 @@ class AlarmPermissionsDialogState extends State<AlarmPermissionsDialog> {
   Widget build(BuildContext context) {
     _settingsProvider = Provider.of<SettingsProvider>(context, listen: true);
     return AlertDialog(
-      title: const Text("Exact Alarm Permissions"),
+      title: const PdaText("Exact Alarm Permissions"),
       content: Container(
         child: const Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
+            PdaText(
               "In order for in-app notifications to work properly, Torn PDA needs permissions to schedule 'exact "
               "alarms and reminders', including when the app is in the background, completely closed or your phone "
               "is in a deep idle or sleep state.\n\n"
@@ -39,7 +40,7 @@ class AlarmPermissionsDialogState extends State<AlarmPermissionsDialog> {
       ),
       actions: [
         TextButton(
-          child: const Text(
+          child: const PdaText(
             "Notification\nsettings",
             textAlign: TextAlign.center,
           ),
@@ -50,7 +51,7 @@ class AlarmPermissionsDialogState extends State<AlarmPermissionsDialog> {
           },
         ),
         TextButton(
-          child: const Text(
+          child: const PdaText(
             "Remind me\nnext time",
             textAlign: TextAlign.center,
           ),
@@ -60,7 +61,7 @@ class AlarmPermissionsDialogState extends State<AlarmPermissionsDialog> {
           },
         ),
         TextButton(
-          child: const Text("Disregard"),
+          child: const PdaText("Disregard"),
           onPressed: () async {
             _settingsProvider.exactPermissionDialogShownAndroid = 2;
             Navigator.of(context).pop();

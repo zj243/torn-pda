@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -78,7 +79,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
                         children: <Widget>[
                           const Padding(
                             padding: EdgeInsets.all(20.0),
-                            child: Text('Here you can specify your preferred notification '
+                            child: PdaText('Here you can specify your preferred notification '
                                 'trigger time before jail release'),
                           ),
                           _rowsWithTypes(),
@@ -104,7 +105,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
-      title: const Text("Jail notification", style: TextStyle(color: Colors.white)),
+      title: const PdaText("Jail notification", style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () => _goBack(),
@@ -121,7 +122,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               const Flexible(
-                child: Text('Notification'),
+                child: PdaText('Notification'),
               ),
               const Padding(
                 padding: EdgeInsets.only(left: 20),
@@ -137,7 +138,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('Alarm'),
+              const PdaText('Alarm'),
               const Padding(
                 padding: EdgeInsets.only(left: 20),
               ),
@@ -158,7 +159,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Flexible(
-                            child: Text(
+                            child: PdaText(
                               "(alarms are set on the minute)",
                               style: TextStyle(
                                 fontStyle: FontStyle.italic,
@@ -181,7 +182,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 const Flexible(
-                  child: Text('Timer'),
+                  child: PdaText('Timer'),
                 ),
                 const Padding(
                   padding: EdgeInsets.only(left: 20),
@@ -204,7 +205,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
           value: 20,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "20 seconds",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -217,7 +218,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
           value: 40,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "40 seconds",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -230,7 +231,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
           value: 60,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "1 minute",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -243,7 +244,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
           value: 120,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "2 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -256,7 +257,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
           value: 300,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "5 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -282,7 +283,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
               value: 20,
               child: SizedBox(
                 width: 130,
-                child: Text(
+                child: PdaText(
                   "20 seconds before",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -295,7 +296,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
               value: 40,
               child: SizedBox(
                 width: 130,
-                child: Text(
+                child: PdaText(
                   "40 seconds before",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -308,7 +309,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
               value: 60,
               child: SizedBox(
                 width: 120,
-                child: Text(
+                child: PdaText(
                   "1 minute before",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -321,7 +322,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
               value: 120,
               child: SizedBox(
                 width: 120,
-                child: Text(
+                child: PdaText(
                   "2 minutes before",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -334,7 +335,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
               value: 300,
               child: SizedBox(
                 width: 120,
-                child: Text(
+                child: PdaText(
                   "5 minutes before",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -347,7 +348,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
               value: 600,
               child: SizedBox(
                 width: 120,
-                child: Text(
+                child: PdaText(
                   "10 minutes before",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -362,7 +363,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
               value: 0,
               child: SizedBox(
                 width: 120,
-                child: Text(
+                child: PdaText(
                   "Same minute",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -375,7 +376,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
               value: 1,
               child: SizedBox(
                 width: 120,
-                child: Text(
+                child: PdaText(
                   "1 minute before",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -388,7 +389,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
               value: 2,
               child: SizedBox(
                 width: 120,
-                child: Text(
+                child: PdaText(
                   "2 minutes before",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -401,7 +402,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
               value: 5,
               child: SizedBox(
                 width: 120,
-                child: Text(
+                child: PdaText(
                   "5 minutes before",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -414,7 +415,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
               value: 10,
               child: SizedBox(
                 width: 120,
-                child: Text(
+                child: PdaText(
                   "10 minutes before",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -445,7 +446,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
           value: 20,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "20 seconds",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -458,7 +459,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
           value: 40,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "40 seconds",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -471,7 +472,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
           value: 60,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "1 minute",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -484,7 +485,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
           value: 120,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "2 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -497,7 +498,7 @@ class JailAheadOptionsState extends State<JailAheadOptions> {
           value: 300,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "5 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(

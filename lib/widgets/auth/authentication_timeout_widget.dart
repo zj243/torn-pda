@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/providers/theme_provider.dart';
 import 'package:torn_pda/providers/webview_provider.dart';
@@ -42,7 +43,7 @@ class AuthenticationTimeoutWidget extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 30),
-                  Text(
+                  PdaText(
                     "We can't sync your settings",
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -54,7 +55,7 @@ class AuthenticationTimeoutWidget extends StatelessWidget {
                   const SizedBox(height: 15),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Text(
+                    child: PdaText(
                       'Your Firebase session did not restore. Try relaunching the app first, then follow the steps below to get back in sync.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -70,7 +71,7 @@ class AuthenticationTimeoutWidget extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        PdaText(
                           'Follow these recovery steps:',
                           style: TextStyle(
                             color: themeProvider.mainText,
@@ -128,7 +129,7 @@ class AuthenticationTimeoutWidget extends StatelessWidget {
                           ),
                           elevation: 3,
                         ),
-                        child: const Text(
+                        child: const PdaText(
                           'Understood',
                           style: TextStyle(
                             fontSize: 16,

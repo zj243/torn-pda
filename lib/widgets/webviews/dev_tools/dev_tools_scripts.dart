@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:provider/provider.dart';
@@ -72,7 +73,7 @@ class _DevToolsScriptsTabState extends State<DevToolsScriptsTab> {
                   Icon(Icons.info_outline, color: _themeProvider.mainText.withValues(alpha: 0.7), size: 20),
                   const SizedBox(width: 10),
                   Expanded(
-                    child: Text(
+                    child: PdaText(
                       "These scripts are currently injected because they match the criteria for this page.",
                       style: TextStyle(
                         color: _themeProvider.mainText.withValues(alpha: 0.8),
@@ -87,7 +88,7 @@ class _DevToolsScriptsTabState extends State<DevToolsScriptsTab> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  PdaText(
                     "Active Scripts",
                     style: TextStyle(
                       color: _themeProvider.mainText,
@@ -108,8 +109,8 @@ class _DevToolsScriptsTabState extends State<DevToolsScriptsTab> {
                           children: [
                             const Icon(Icons.check_circle_outline, size: 14, color: Colors.green),
                             const SizedBox(width: 6),
-                            Text(
-                              "${activeScripts.length} running",
+                            PdaText(
+                              "{0} running", values: [activeScripts.length],
                               style: const TextStyle(
                                 color: Colors.green,
                                 fontWeight: FontWeight.bold,
@@ -122,7 +123,7 @@ class _DevToolsScriptsTabState extends State<DevToolsScriptsTab> {
                       const SizedBox(width: 10),
                       IconButton(
                         icon: Icon(Icons.settings_outlined, color: _themeProvider.mainText),
-                        tooltip: "Manage Scripts",
+                        tooltip: context.interfaceText("Manage Scripts"),
                         onPressed: _openUserScriptsSettings,
                       ),
                     ],
@@ -146,7 +147,7 @@ class _DevToolsScriptsTabState extends State<DevToolsScriptsTab> {
                         color: _themeProvider.mainText.withValues(alpha: 0.2),
                       ),
                       const SizedBox(height: 16),
-                      Text(
+                      PdaText(
                         "No active scripts for this page",
                         style: TextStyle(
                           color: _themeProvider.mainText.withValues(alpha: 0.5),
@@ -223,12 +224,12 @@ class _DevToolsScriptsTabState extends State<DevToolsScriptsTab> {
                 ),
                 IconButton(
                   icon: Icon(Icons.code, color: _themeProvider.mainText),
-                  tooltip: "View Source",
+                  tooltip: context.interfaceText("View Source"),
                   onPressed: () => _showScriptSource(context, script),
                 ),
                 IconButton(
                   icon: const Icon(Icons.delete_forever_outlined, color: Colors.redAccent),
-                  tooltip: "Disable & Remove",
+                  tooltip: context.interfaceText("Disable & Remove"),
                   onPressed: () => _showDisableDialog(context, script),
                 ),
               ],
@@ -338,7 +339,7 @@ class _DevToolsScriptsTabState extends State<DevToolsScriptsTab> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text("Close"),
+            child: const PdaText("Close"),
           ),
         ],
       ),
@@ -350,17 +351,17 @@ class _DevToolsScriptsTabState extends State<DevToolsScriptsTab> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: _themeProvider.canvas,
-        title: Text("Disable & Remove", style: TextStyle(color: _themeProvider.mainText)),
+        title: PdaText("Disable & Remove", style: TextStyle(color: _themeProvider.mainText)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Are you sure you want to disable '${script.name}'?",
+            PdaText(
+              "Are you sure you want to disable '{0}'?", values: [script.name],
               style: TextStyle(color: _themeProvider.mainText),
             ),
             const SizedBox(height: 16),
-            Text(
+            PdaText(
               "Please note:",
               style: TextStyle(color: _themeProvider.mainText, fontWeight: FontWeight.bold),
             ),
@@ -375,14 +376,14 @@ class _DevToolsScriptsTabState extends State<DevToolsScriptsTab> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text("Cancel"),
+            child: const PdaText("Cancel"),
           ),
           TextButton(
             onPressed: () async {
               Navigator.pop(context);
               await _disableAndRemove(script);
             },
-            child: const Text("Disable & Remove", style: TextStyle(color: Colors.redAccent)),
+            child: const PdaText("Disable & Remove", style: TextStyle(color: Colors.redAccent)),
           ),
         ],
       ),
@@ -462,7 +463,7 @@ class _DevToolsScriptsTabState extends State<DevToolsScriptsTab> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: _themeProvider.canvas,
-        title: Text("Scripts Changed", style: TextStyle(color: _themeProvider.mainText)),
+        title: PdaText("Scripts Changed", style: TextStyle(color: _themeProvider.mainText)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -473,15 +474,15 @@ class _DevToolsScriptsTabState extends State<DevToolsScriptsTab> {
                   const Icon(Icons.update, color: Colors.blueAccent),
                   const SizedBox(width: 10),
                   Expanded(
-                    child: Text(
-                      "${added.length + modified.length} script(s) added or updated.",
+                    child: PdaText(
+                      "{0} script(s) added or updated.", values: [added.length + modified.length],
                       style: TextStyle(color: _themeProvider.mainText, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 8),
-              Text(
+              PdaText(
                 "These changes will apply on the next page load.",
                 style: TextStyle(color: _themeProvider.mainText.withValues(alpha: 0.8), fontSize: 13),
               ),
@@ -493,15 +494,15 @@ class _DevToolsScriptsTabState extends State<DevToolsScriptsTab> {
                   const Icon(Icons.delete_outline, color: Colors.orangeAccent),
                   const SizedBox(width: 10),
                   Expanded(
-                    child: Text(
-                      "${removed.length} script(s) disabled/removed.",
+                    child: PdaText(
+                      "{0} script(s) disabled/removed.", values: [removed.length],
                       style: TextStyle(color: _themeProvider.mainText, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 8),
-              Text(
+              PdaText(
                 "Please note:",
                 style: TextStyle(color: _themeProvider.mainText, fontWeight: FontWeight.bold, fontSize: 13),
               ),
@@ -516,7 +517,7 @@ class _DevToolsScriptsTabState extends State<DevToolsScriptsTab> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text("Close"),
+            child: const PdaText("Close"),
           ),
         ],
       ),

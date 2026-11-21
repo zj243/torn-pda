@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
@@ -616,10 +617,10 @@ class _AuthRecoveryWidgetState extends State<AuthRecoveryWidget> {
     if (!mounted) return;
     BotToast.showText(
       text:
-          "There was an issues recovering your user preferences from the server.\n\n"
+          context.interfaceText("There was an issues recovering your user preferences from the server.\n\n"
           "This might happen if your device lost or tried to restore data from a backup.\n\n"
           "Torn PDA managed to recover your user, but Alerts (automatic notifications) "
-          "could not be restored.\n\nPlease reconfigure them in the Alerts section.",
+          "could not be restored.\n\nPlease reconfigure them in the Alerts section."),
       textStyle: const TextStyle(fontSize: 14, color: Colors.white),
       clickClose: false,
       contentColor: Colors.orange[700]!,

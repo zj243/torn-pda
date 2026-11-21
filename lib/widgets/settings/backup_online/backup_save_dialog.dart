@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:io';
 
 import 'package:bot_toast/bot_toast.dart';
@@ -60,7 +61,7 @@ class BackupSaveDialogState extends State<BackupSaveDialog> with TickerProviderS
                 children: [
                   Icon(Icons.upload),
                   SizedBox(width: 10),
-                  Text(
+                  PdaText(
                     "UPLOAD SETTINGS",
                     style: TextStyle(fontSize: 18),
                   ),
@@ -74,7 +75,7 @@ class BackupSaveDialogState extends State<BackupSaveDialog> with TickerProviderS
                   if (_serverError.isNotEmpty) {
                     return Column(
                       children: [
-                        const Text("SERVER ERROR", style: TextStyle(color: Colors.red)),
+                        const PdaText("SERVER ERROR", style: TextStyle(color: Colors.red)),
                         Text(_serverError, style: const TextStyle(color: Colors.red)),
                       ],
                     );
@@ -100,7 +101,7 @@ class BackupSaveDialogState extends State<BackupSaveDialog> with TickerProviderS
                     child: Column(
                       children: [
                         SizedBox(height: 40),
-                        Text("Fetching server info..."),
+                        PdaText("Fetching server info..."),
                         SizedBox(height: 25),
                         CircularProgressIndicator(),
                         SizedBox(height: 40),
@@ -123,13 +124,13 @@ class BackupSaveDialogState extends State<BackupSaveDialog> with TickerProviderS
                       },
                       child: _uploadInProgress
                           ? Container(height: 20, width: 20, child: const CircularProgressIndicator())
-                          : const Text("Save", style: TextStyle(color: Colors.green)),
+                          : const PdaText("Save", style: TextStyle(color: Colors.green)),
                     ),
                   TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text("Close"),
+                    child: const PdaText("Close"),
                   ),
                 ],
               ),
@@ -147,11 +148,11 @@ class BackupSaveDialogState extends State<BackupSaveDialog> with TickerProviderS
         checkColor: Colors.white,
         activeColor: Colors.blueGrey,
         value: _selectedItems.contains("userscripts"),
-        title: const Text("User scripts"),
+        title: const PdaText("User scripts"),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("Scripts list", style: TextStyle(fontSize: 12)),
+            const PdaText("Scripts list", style: TextStyle(fontSize: 12)),
             BackupPrefsGroups.assessIncoming(_serverPrefs, BackupPrefs.userscripts)
                 ? _addExistingSubtitle()
                 : Container(),
@@ -175,11 +176,11 @@ class BackupSaveDialogState extends State<BackupSaveDialog> with TickerProviderS
         checkColor: Colors.white,
         activeColor: Colors.blueGrey,
         value: _selectedItems.contains("shortcuts"),
-        title: const Text("Shortcuts"),
+        title: const PdaText("Shortcuts"),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("Shortcuts list and settings", style: TextStyle(fontSize: 12)),
+            const PdaText("Shortcuts list and settings", style: TextStyle(fontSize: 12)),
             BackupPrefsGroups.assessIncoming(_serverPrefs, BackupPrefs.shortcuts)
                 ? _addExistingSubtitle()
                 : Container(),
@@ -201,11 +202,11 @@ class BackupSaveDialogState extends State<BackupSaveDialog> with TickerProviderS
         checkColor: Colors.white,
         activeColor: Colors.blueGrey,
         value: _selectedItems.contains("targets"),
-        title: const Text("Targets"),
+        title: const PdaText("Targets"),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("Targets list and notes", style: TextStyle(fontSize: 12)),
+            const PdaText("Targets list and notes", style: TextStyle(fontSize: 12)),
             BackupPrefsGroups.assessIncoming(_serverPrefs, BackupPrefs.targets) ? _addExistingSubtitle() : Container(),
           ],
         ),
@@ -218,8 +219,8 @@ class BackupSaveDialogState extends State<BackupSaveDialog> with TickerProviderS
     );
   }
 
-  Text _addExistingSubtitle() {
-    return const Text(
+  Widget _addExistingSubtitle() {
+    return const PdaText(
       "EXISTING SAVE (OVERWRITE)",
       style: TextStyle(fontSize: 11, color: Colors.red),
     );

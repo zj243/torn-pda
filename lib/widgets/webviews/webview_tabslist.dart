@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -257,7 +258,7 @@ class TabsListState extends State<TabsList> with TickerProviderStateMixin, Widge
                     children: [
                       const Icon(Icons.lock, color: Colors.orange),
                       const SizedBox(height: 10),
-                      Text("Positional Lock", style: TextStyle(color: _themeProvider.mainText)),
+                      PdaText("Positional Lock", style: TextStyle(color: _themeProvider.mainText)),
                     ],
                   ),
                   autoCloseDuration: const Duration(milliseconds: 1500),

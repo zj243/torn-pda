@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:torn_pda/models/api_v2/torn_v2.swagger.dart';
@@ -79,8 +80,8 @@ class _FactionSheetState extends State<_FactionSheet> {
   Widget _membersTile(List<FactionMember> members) {
     return ListTile(
       leading: const Icon(Icons.groups_rounded),
-      title: Text('Members (${members.length})'),
-      subtitle: const Text('Status, filters and sorting'),
+      title: PdaText("Members ({0})", values: [members.length]),
+      subtitle: const PdaText('Status, filters and sorting'),
       trailing: const Icon(Icons.chevron_right_rounded),
       onTap: () => showChatFactionMembers(context, prefs: NativeChat.prefs, roster: _roster),
     );
@@ -123,7 +124,7 @@ class _FactionSheetState extends State<_FactionSheet> {
                           ? null
                           : IconButton(
                               icon: const Icon(Icons.copy_rounded, size: 20),
-                              tooltip: 'Copy ID',
+                              tooltip: context.interfaceText('Copy ID'),
                               onPressed: () {
                                 Clipboard.setData(ClipboardData(text: '$id'));
                                 chatToast('ID copied', seconds: 1);
@@ -147,15 +148,15 @@ class _FactionSheetState extends State<_FactionSheet> {
                       else if (membersLoading)
                         const ListTile(
                           leading: SizedBox.square(dimension: 18, child: CircularProgressIndicator(strokeWidth: 2)),
-                          title: Text('Loading members'),
+                          title: PdaText('Loading members'),
                         )
                       else
-                        const ListTile(leading: Icon(Icons.groups_rounded), title: Text("Couldn't load the members")),
+                        const ListTile(leading: Icon(Icons.groups_rounded), title: PdaText("Couldn't load the members")),
                     ],
                     const Divider(height: 1),
                     ListTile(
                       leading: const Icon(Icons.open_in_new_rounded),
-                      title: const Text('Open faction page'),
+                      title: const PdaText('Open faction page'),
                       onTap: () {
                         Navigator.of(context).pop();
                         NativeChat.openLink(widget.link.url, always: true);

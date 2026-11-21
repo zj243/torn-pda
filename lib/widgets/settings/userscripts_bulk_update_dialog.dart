@@ -1,4 +1,5 @@
 // Package imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
@@ -57,7 +58,7 @@ class UserScriptsBulkUpdateDialogState extends State<UserScriptsBulkUpdateDialog
               children: [
                 Icon(MdiIcons.earthPlus),
                 SizedBox(width: 8),
-                Text("Script updates", style: TextStyle(fontSize: 15)),
+                PdaText("Script updates", style: TextStyle(fontSize: 15)),
               ],
             ),
           ),
@@ -65,11 +66,11 @@ class UserScriptsBulkUpdateDialogState extends State<UserScriptsBulkUpdateDialog
             const Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [Text("Fetching scripts..."), SizedBox(height: 20), CircularProgressIndicator()],
+                children: [PdaText("Fetching scripts..."), SizedBox(height: 20), CircularProgressIndicator()],
               ),
             )
           else if (_items.isEmpty)
-            const Expanded(child: Center(child: Text("Everything is up to date!")))
+            const Expanded(child: Center(child: PdaText("Everything is up to date!")))
           else
             Expanded(
               child: ListView(
@@ -78,7 +79,7 @@ class UserScriptsBulkUpdateDialogState extends State<UserScriptsBulkUpdateDialog
                 children: [
                   const Padding(
                     padding: EdgeInsets.fromLTRB(8, 0, 8, 8),
-                    child: Text(
+                    child: PdaText(
                       "Select the scripts to update. Updates that request new permissions need to be "
                       "expanded and reviewed before they can be selected.",
                       style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
@@ -133,8 +134,8 @@ class UserScriptsBulkUpdateDialogState extends State<UserScriptsBulkUpdateDialog
                     children: [
                       Text(script.name, style: const TextStyle(fontSize: 13)),
                       if (remote != null)
-                        Text(
-                          "v${script.version} to v${remote.version}",
+                        PdaText(
+                          "v{0} to v{1}", values: [script.version, remote.version],
                           style: TextStyle(
                             fontSize: 11,
                             color: Colors.green[_themeProvider.currentTheme == AppTheme.light ? 800 : 400],
@@ -194,7 +195,7 @@ class UserScriptsBulkUpdateDialogState extends State<UserScriptsBulkUpdateDialog
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (item.newGrants.isNotEmpty) ...[
-            const Text(
+            const PdaText(
               "This update requests new permissions (@grant):",
               style: TextStyle(fontSize: 12, color: Colors.orange),
             ),
@@ -203,7 +204,7 @@ class UserScriptsBulkUpdateDialogState extends State<UserScriptsBulkUpdateDialog
             const SizedBox(height: 8),
           ],
           if (item.script.customApiKey.isNotEmpty) ...[
-            const Text("Your custom API key for this script will be kept.", style: TextStyle(fontSize: 12)),
+            const PdaText("Your custom API key for this script will be kept.", style: TextStyle(fontSize: 12)),
             const SizedBox(height: 8),
           ],
           Container(
@@ -230,14 +231,14 @@ class UserScriptsBulkUpdateDialogState extends State<UserScriptsBulkUpdateDialog
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          TextButton(onPressed: _applying ? null : () => Navigator.of(context).pop(), child: const Text("Close")),
+          TextButton(onPressed: _applying ? null : () => Navigator.of(context).pop(), child: const PdaText("Close")),
           const SizedBox(width: 8),
           if (_items.isNotEmpty)
             ElevatedButton(
               onPressed: selectedCount == 0 || _applying ? null : _applySelected,
               child: _applying
                   ? const SizedBox(width: 15, height: 15, child: CircularProgressIndicator(strokeWidth: 2))
-                  : Text("Update selected ($selectedCount)"),
+                  : PdaText("Update selected ({0})", values: [selectedCount]),
             ),
         ],
       ),
@@ -261,8 +262,8 @@ class UserScriptsBulkUpdateDialogState extends State<UserScriptsBulkUpdateDialog
       item.reviewed = true;
       BotToast.showText(
         text:
-            "This update requests new permissions!\n\n"
-            "Please review them (and the source code) and tap the checkbox again to select it.",
+            context.interfaceText("This update requests new permissions!\n\n"
+            "Please review them (and the source code) and tap the checkbox again to select it."),
         textStyle: const TextStyle(fontSize: 14, color: Colors.white),
         contentColor: Colors.orange[800]!,
         duration: const Duration(seconds: 6),

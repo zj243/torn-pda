@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -101,7 +102,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             const SizedBox(height: 15),
                             const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [Text('MANUAL NOTIFICATIONS', style: TextStyle(fontSize: 10))],
+                              children: [PdaText('MANUAL NOTIFICATIONS', style: TextStyle(fontSize: 10))],
                             ),
                             const SizedBox(height: 10),
                             Padding(
@@ -109,7 +110,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  Text(
+                                  PdaText(
                                     "Timings and triggers",
                                     style: TextStyle(
                                       color: widget.apiValid ? _themeProvider.mainText : Colors.grey,
@@ -150,14 +151,14 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             const SizedBox(height: 5),
                             const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [Text('HEADER', style: TextStyle(fontSize: 10))],
+                              children: [PdaText('HEADER', style: TextStyle(fontSize: 10))],
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 15),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  const Text("Show wallet"),
+                                  const PdaText("Show wallet"),
                                   Switch(
                                     value: _showHeaderWallet,
                                     onChanged: (value) {
@@ -174,7 +175,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 15),
-                              child: Text(
+                              child: PdaText(
                                 'Show your current wallet cash at the top',
                                 style: TextStyle(
                                   color: Colors.grey[600],
@@ -190,7 +191,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
-                                      const Text("Show main icons"),
+                                      const PdaText("Show main icons"),
                                       Switch(
                                         value: _showHeaderIcons,
                                         onChanged: (value) {
@@ -207,7 +208,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 15),
-                                  child: Text(
+                                  child: PdaText(
                                     'Show main game icons at the top. Bear in mind not all of them are represented '
                                     'and some information will already be shown in other tabs in the Profile section',
                                     style: TextStyle(
@@ -223,7 +224,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
-                                        const Text("Filter icons"),
+                                        const PdaText("Filter icons"),
                                         IconButton(
                                           icon: const Icon(Icons.keyboard_arrow_right_outlined),
                                           onPressed: () {
@@ -246,14 +247,14 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             const SizedBox(height: 5),
                             const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [Text('COOLDOWNS', style: TextStyle(fontSize: 10))],
+                              children: [PdaText('COOLDOWNS', style: TextStyle(fontSize: 10))],
                             ),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  const Text("Show education"),
+                                  const PdaText("Show education"),
                                   Switch(
                                     value: _settingsProvider.educationBarEnabled,
                                     onChanged: (value) {
@@ -269,7 +270,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 15),
-                              child: Text(
+                              child: PdaText(
                                 'This information is also available in MISC, but you can choose to have it shown in the cool downs section '
                                 'with dedicated manual notifications or alarms.',
                                 style: TextStyle(
@@ -284,7 +285,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  const Text("Show virus coding"),
+                                  const PdaText("Show virus coding"),
                                   Switch(
                                     value: _settingsProvider.virusBarEnabled,
                                     onChanged: (value) {
@@ -300,7 +301,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 15),
-                              child: Text(
+                              child: PdaText(
                                 'This information is also available in MISC, but you can choose to have it shown in the cool downs section '
                                 'with dedicated manual notifications or alarms.',
                                 style: TextStyle(
@@ -315,14 +316,14 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             const SizedBox(height: 5),
                             const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [Text('STATUS CARD', style: TextStyle(fontSize: 10))],
+                              children: [PdaText('STATUS CARD', style: TextStyle(fontSize: 10))],
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 15),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  const Text("Colored status card"),
+                                  const PdaText("Colored status card"),
                                   Switch(
                                     value: _settingsProvider.colorCodedStatusCard,
                                     onChanged: (value) {
@@ -339,7 +340,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 15),
-                              child: Text(
+                              child: PdaText(
                                 "If active, you'll see a colored shadow under the status card depending on the "
                                 "actual player status color in Torn",
                                 style: TextStyle(
@@ -354,14 +355,14 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             const SizedBox(height: 5),
                             const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [Text('TRAVEL', style: TextStyle(fontSize: 10))],
+                              children: [PdaText('TRAVEL', style: TextStyle(fontSize: 10))],
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 15),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  const Text("Dedicated Travel card"),
+                                  const PdaText("Dedicated Travel card"),
                                   Switch(
                                     value: _dedicatedTravelCard,
                                     onChanged: (value) {
@@ -378,7 +379,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 15),
-                              child: Text(
+                              child: PdaText(
                                 "If active, you'll get an extra card for travel information, "
                                 'access to foreign stocks and notifications (reduced version of the '
                                 "Travel section). If inactive, you'll still have basic travel information "
@@ -396,14 +397,14 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             const SizedBox(height: 5),
                             const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [Text('RANKED WAR WIDGET', style: TextStyle(fontSize: 10))],
+                              children: [PdaText('RANKED WAR WIDGET', style: TextStyle(fontSize: 10))],
                             ),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  const Text("Show next Ranked War"),
+                                  const PdaText("Show next Ranked War"),
                                   Switch(
                                     value: _settingsProvider.rankedWarsInProfile,
                                     onChanged: (value) {
@@ -419,7 +420,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 15),
-                              child: Text(
+                              child: PdaText(
                                 'Show a mini widget in the Status card with information regarding the approaching '
                                 'Ranked War, including notifications. When the Ranked War is active, a scoreboard '
                                 'is shown. It can be clicked to access the war in Torn.',
@@ -438,7 +439,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
-                                        const Text("Show total hours (hide days)"),
+                                        const PdaText("Show total hours (hide days)"),
                                         Switch(
                                           value: _settingsProvider.rankedWarsInProfileShowTotalHours,
                                           onChanged: (value) {
@@ -454,7 +455,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 15),
-                                    child: Text(
+                                    child: PdaText(
                                       'This will hide the days from the countdown to the ranked war and show '
                                       'total remaining hours instead (e.g.: you will be shown 75 hours instead of '
                                       '3 days and 2 hours)',
@@ -472,14 +473,14 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             const SizedBox(height: 5),
                             const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [Text('BARS BEHAVIOR', style: TextStyle(fontSize: 10))],
+                              children: [PdaText('BARS BEHAVIOR', style: TextStyle(fontSize: 10))],
                             ),
                             Padding(
                               padding: const EdgeInsets.only(left: 20, right: 20),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  const Flexible(child: Text("Life bar")),
+                                  const Flexible(child: PdaText("Life bar")),
                                   const Padding(padding: EdgeInsets.only(left: 20)),
                                   Flexible(flex: 2, child: _lifeBarDropdown()),
                                 ],
@@ -487,7 +488,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 20),
-                              child: Text(
+                              child: PdaText(
                                 "Choose which medical section to open when tapping on the life bar. "
                                 "If 'ask' is chosen a dialog will appear every time",
                                 style: TextStyle(
@@ -502,14 +503,14 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             const SizedBox(height: 5),
                             const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [Text('ORGANIZED CRIMES', style: TextStyle(fontSize: 10))],
+                              children: [PdaText('ORGANIZED CRIMES', style: TextStyle(fontSize: 10))],
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 15),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  const Text("Show organized crimes"),
+                                  const PdaText("Show organized crimes"),
                                   Switch(
                                     value: _settingsProvider.oCrimesEnabled,
                                     onChanged: (value) {
@@ -525,7 +526,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 15),
-                              child: Text(
+                              child: PdaText(
                                 'Shown in the miscellaneous card and in status when the time approaches. '
                                 'NOTE: if you have faction API access permission, the OC calculation will be exact and include '
                                 "the participants' status. Otherwise, it will be calculated based on received events",
@@ -541,14 +542,14 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             const SizedBox(height: 5),
                             const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [Text('PROPERTIES RENTAL', style: TextStyle(fontSize: 10))],
+                              children: [PdaText('PROPERTIES RENTAL', style: TextStyle(fontSize: 10))],
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 15),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  const Flexible(child: Text("Show also rented out properties")),
+                                  const Flexible(child: PdaText("Show also rented out properties")),
                                   Switch(
                                     value: _settingsProvider.showAllRentedOutProperties,
                                     onChanged: (value) {
@@ -564,7 +565,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 15),
-                              child: Text(
+                              child: PdaText(
                                 'If active, you will see all the properties you rent out to other players in the '
                                 'Rented Properties section in the Miscellaneous card. If inactive, you will only '
                                 'see the properties you rent (the ones you pay rent for)',
@@ -580,14 +581,14 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             const SizedBox(height: 5),
                             const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [Text('TORNSTATS CHART', style: TextStyle(fontSize: 10))],
+                              children: [PdaText('TORNSTATS CHART', style: TextStyle(fontSize: 10))],
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 15),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  const Text("Show stats chart"),
+                                  const PdaText("Show stats chart"),
                                   Switch(
                                     value: _settingsProvider.tornStatsChartEnabled,
                                     onChanged: (value) {
@@ -606,7 +607,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 15),
-                              child: Text(
+                              child: PdaText(
                                 "Show Torn Stats's stats chart in the Basic Info card. Stats are updated every "
                                 "24 hours, but you can force a manual update request by tapping the Torn Stats logo "
                                 "in the chart legend. If there is an issue, you can try to force a manual update by "
@@ -626,7 +627,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
-                                        const Flexible(child: Text("Chart type")),
+                                        const Flexible(child: PdaText("Chart type")),
                                         const Padding(padding: EdgeInsets.only(left: 20)),
                                         Flexible(child: _chartTypeDropdown()),
                                       ],
@@ -637,7 +638,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
-                                        const Text("Show both charts"),
+                                        const PdaText("Show both charts"),
                                         Switch(
                                           value: _settingsProvider.tornStatsChartShowBoth,
                                           onChanged: (value) {
@@ -656,7 +657,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
-                                        const Flexible(child: Text("Chart range")),
+                                        const Flexible(child: PdaText("Chart range")),
                                         const Padding(padding: EdgeInsets.only(left: 20)),
                                         Flexible(child: _chartRangeDropdown()),
                                       ],
@@ -670,7 +671,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                                         Flexible(
                                           child: Padding(
                                             padding: const EdgeInsets.symmetric(horizontal: 15),
-                                            child: Text(
+                                            child: PdaText(
                                               "The available range options depend on the data provided by Torn Stats",
                                               style: TextStyle(
                                                 color: Colors.grey[600],
@@ -687,7 +688,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
-                                        const Text("Show with card collapsed"),
+                                        const PdaText("Show with card collapsed"),
                                         Switch(
                                           value: _settingsProvider.tornStatsChartInCollapsedMiscCard,
                                           onChanged: (value) {
@@ -703,7 +704,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 15),
-                                    child: Text(
+                                    child: PdaText(
                                       "Show stats chart also when the Basic Info card is collapsed (it will be "
                                       "always available with the card expanded",
                                       style: TextStyle(
@@ -720,12 +721,12 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             const SizedBox(height: 5),
                             const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [Text('EXPANDABLE PANELS', style: TextStyle(fontSize: 10))],
+                              children: [PdaText('EXPANDABLE PANELS', style: TextStyle(fontSize: 10))],
                             ),
                             const SizedBox(height: 8),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 15),
-                              child: Text(
+                              child: PdaText(
                                 'Choose whether you want to automatically expand '
                                 'or collapse certain sections. You can always '
                                 'toggle manually by tapping',
@@ -741,7 +742,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  const Text("Expand events"),
+                                  const PdaText("Expand events"),
                                   Switch(
                                     value: _expandEvents,
                                     onChanged: (value) {
@@ -761,7 +762,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  const Flexible(child: Text("Events to show")),
+                                  const Flexible(child: PdaText("Events to show")),
                                   const Padding(padding: EdgeInsets.only(left: 20)),
                                   Flexible(child: _eventsNumberDropdown()),
                                 ],
@@ -772,7 +773,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  const Text("Expand messages"),
+                                  const PdaText("Expand messages"),
                                   Switch(
                                     value: _expandMessages,
                                     onChanged: (value) {
@@ -792,7 +793,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  const Flexible(child: Text("Messages to show")),
+                                  const Flexible(child: PdaText("Messages to show")),
                                   const Padding(padding: EdgeInsets.only(left: 20)),
                                   Flexible(child: _messagesNumberDropdown()),
                                 ],
@@ -803,7 +804,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  const Text("Expand basic info"),
+                                  const PdaText("Expand basic info"),
                                   Switch(
                                     value: _expandBasicInfo,
                                     onChanged: (value) {
@@ -823,7 +824,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  const Text("Expand networth"),
+                                  const PdaText("Expand networth"),
                                   Switch(
                                     value: _expandNetworth,
                                     onChanged: (value) {
@@ -843,14 +844,14 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             const SizedBox(height: 5),
                             const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [Text('MISC', style: TextStyle(fontSize: 10))],
+                              children: [PdaText('MISC', style: TextStyle(fontSize: 10))],
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 15),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  const Text("Show jobless warning"),
+                                  const PdaText("Show jobless warning"),
                                   Switch(
                                     value: _settingsProvider.joblessWarningEnabled,
                                     onChanged: (value) {
@@ -866,7 +867,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 15),
-                              child: Text(
+                              child: PdaText(
                                 "If active, a warning will be shown in the Misc card if you don't have a job",
                                 style: TextStyle(
                                   color: Colors.grey[600],
@@ -880,7 +881,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  const Text("Hide navigation FAB"),
+                                  const PdaText("Hide navigation FAB"),
                                   Switch(
                                     value: _hideProfileFab,
                                     onChanged: (value) {
@@ -897,7 +898,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 15),
-                              child: Text(
+                              child: PdaText(
                                 'Hides the floating action button in the Profile page that provides '
                                 'quick navigation to City, Trades, Items, Crimes, Gym and Home',
                                 style: TextStyle(
@@ -912,7 +913,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             const SizedBox(height: 5),
                             const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [Text('CARDS ORDER', style: TextStyle(fontSize: 10))],
+                              children: [PdaText('CARDS ORDER', style: TextStyle(fontSize: 10))],
                             ),
                             const SizedBox(height: 5),
                             Padding(
@@ -938,7 +939,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
                             const SizedBox(height: 5),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 15),
-                              child: Text(
+                              child: PdaText(
                                 'Drag card names to sort them accordingly in the '
                                 'Profile section',
                                 style: TextStyle(
@@ -969,7 +970,7 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
-      title: const Text("Profile Options", style: TextStyle(color: Colors.white)),
+      title: const PdaText("Profile Options", style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
@@ -987,14 +988,14 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
           value: "line",
           child: SizedBox(
             width: 60,
-            child: Text("Line", textAlign: TextAlign.right, style: TextStyle(fontSize: 14)),
+            child: PdaText("Line", textAlign: TextAlign.right, style: TextStyle(fontSize: 14)),
           ),
         ),
         DropdownMenuItem(
           value: "pie",
           child: SizedBox(
             width: 60,
-            child: Text("Pie", textAlign: TextAlign.right, style: TextStyle(fontSize: 14)),
+            child: PdaText("Pie", textAlign: TextAlign.right, style: TextStyle(fontSize: 14)),
           ),
         ),
       ],
@@ -1281,21 +1282,21 @@ class ProfileOptionsPageState extends State<ProfileOptionsPage> {
           value: "ask",
           child: SizedBox(
             width: 80,
-            child: Text("Ask", textAlign: TextAlign.right, style: TextStyle(fontSize: 14)),
+            child: PdaText("Ask", textAlign: TextAlign.right, style: TextStyle(fontSize: 14)),
           ),
         ),
         DropdownMenuItem(
           value: "inventory",
           child: SizedBox(
             width: 80,
-            child: Text("Inventory", textAlign: TextAlign.right, style: TextStyle(fontSize: 14)),
+            child: PdaText("Inventory", textAlign: TextAlign.right, style: TextStyle(fontSize: 14)),
           ),
         ),
         DropdownMenuItem(
           value: "faction",
           child: SizedBox(
             width: 80,
-            child: Text("Faction", textAlign: TextAlign.right, style: TextStyle(fontSize: 14)),
+            child: PdaText("Faction", textAlign: TextAlign.right, style: TextStyle(fontSize: 14)),
           ),
         ),
       ],

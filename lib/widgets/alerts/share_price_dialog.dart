@@ -1,5 +1,6 @@
 // Flutter imports:
 // Package imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -117,17 +118,14 @@ class SharePriceDialogState extends State<SharePriceDialog> {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                      child: Text(
-                        "Configure your price alerts here. "
-                        "Use the red bin icon to the right to remove the current alert."
-                        "\n\n"
-                        "${widget.stock.acronym}'s price: \$${widget.stock.currentPrice}",
+                      child: PdaText(
+                        "Configure your price alerts here. Use the red bin icon to the right to remove the current alert.\n\n{0}'s price: \${1}", values: [widget.stock.acronym, widget.stock.currentPrice],
                         style: const TextStyle(fontSize: 13),
                       ),
                     ),
                     const Padding(
                       padding: EdgeInsets.only(bottom: 3),
-                      child: Text(
+                      child: PdaText(
                         "Gain alert price",
                         style: TextStyle(fontSize: 13),
                       ),
@@ -279,7 +277,7 @@ class SharePriceDialogState extends State<SharePriceDialog> {
                     const SizedBox(height: 16.0),
                     const Padding(
                       padding: EdgeInsets.only(bottom: 3),
-                      child: Text(
+                      child: PdaText(
                         "Loss price alert",
                         style: TextStyle(fontSize: 13),
                       ),
@@ -437,7 +435,7 @@ class SharePriceDialogState extends State<SharePriceDialog> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         TextButton(
-                          child: const Text("Set"),
+                          child: const PdaText("Set"),
                           onPressed: () async {
                             bool success = false;
 
@@ -490,7 +488,7 @@ class SharePriceDialogState extends State<SharePriceDialog> {
                               widget.callbackPrices(gain, loss);
 
                               BotToast.showText(
-                                text: "Saved ${widget.stock.acronym}!",
+                                text: context.interfaceText("Saved {0}!", [widget.stock.acronym]),
                                 textStyle: const TextStyle(
                                   fontSize: 14,
                                   color: Colors.white,
@@ -501,8 +499,7 @@ class SharePriceDialogState extends State<SharePriceDialog> {
                               );
                             } else {
                               BotToast.showText(
-                                text: "There was an error saving ${widget.stock.acronym}, "
-                                    "please try again later!",
+                                text: context.interfaceText("There was an error saving {0}, please try again later!", [widget.stock.acronym]),
                                 textStyle: const TextStyle(
                                   fontSize: 14,
                                   color: Colors.white,
@@ -516,7 +513,7 @@ class SharePriceDialogState extends State<SharePriceDialog> {
                         ),
                         const SizedBox(width: 10),
                         TextButton(
-                          child: const Text("Cancel"),
+                          child: const PdaText("Cancel"),
                           onPressed: () {
                             Navigator.of(context).pop();
                             _gainController.text = '';

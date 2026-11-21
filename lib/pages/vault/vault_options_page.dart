@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -65,7 +66,7 @@ class VaultOptionsPageState extends State<VaultOptionsPage> {
                                   SizedBox(height: 20),
                                   Padding(
                                     padding: EdgeInsets.symmetric(horizontal: 15),
-                                    child: Text(
+                                    child: PdaText(
                                       "NOTE: Torn PDA did not detect a vault in your property, either "
                                       "because there is none, you don't have access to it or there "
                                       "no transactions listed.",
@@ -80,7 +81,7 @@ class VaultOptionsPageState extends State<VaultOptionsPage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  const Text("Use vault share"),
+                                  const PdaText("Use vault share"),
                                   Switch(
                                     value: _vaultEnabled,
                                     onChanged: (value) {
@@ -118,7 +119,7 @@ class VaultOptionsPageState extends State<VaultOptionsPage> {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
-      title: const Text("Vault options", style: TextStyle(color: Colors.white)),
+      title: const PdaText("Vault options", style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {

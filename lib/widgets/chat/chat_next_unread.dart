@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -11,7 +12,7 @@ class ChatNextUnreadButton extends StatelessWidget {
   Widget build(BuildContext context) {
     if (count == 0) return const SizedBox.shrink();
     return IconButton(
-      tooltip: 'Next unread, $count waiting',
+      tooltip: context.interfaceText("Next unread, {0} waiting", [count]),
       icon: Badge(
         label: ExcludeSemantics(child: Text(count > 99 ? '99+' : '$count')),
         child: const Icon(Icons.skip_next_rounded),
@@ -98,7 +99,7 @@ class ChatUnreadAbove extends StatelessWidget {
             ),
           ),
           IconButton(
-            tooltip: 'Mark as read',
+            tooltip: context.interfaceText('Mark as read'),
             onPressed: onRead,
             icon: Icon(Icons.close_rounded, size: 18, color: color),
             constraints: const BoxConstraints.tightFor(width: 48, height: 48),

@@ -1,5 +1,6 @@
 // Flutter imports:
 // Package imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:torn_pda/drawer.dart';
@@ -91,7 +92,7 @@ class TradesOptionsState extends State<TradesOptions> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
-                                      const Text("Use trade calculator"),
+                                      const PdaText("Use trade calculator"),
                                       Switch(
                                         value: _tradeCalculatorEnabled,
                                         onChanged: (value) {
@@ -108,7 +109,7 @@ class TradesOptionsState extends State<TradesOptions> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 15),
-                                  child: Text(
+                                  child: PdaText(
                                     'Consider deactivating the trade calculator if it impacts '
                                     'performance or you just simply would not prefer to use it',
                                     style: TextStyle(
@@ -167,7 +168,7 @@ class TradesOptionsState extends State<TradesOptions> {
                                 const SizedBox(height: 10),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 15),
-                                  child: Text(
+                                  child: PdaText(
                                     'Only one external trading service can be active at a time.',
                                     style: TextStyle(
                                       color: Colors.grey[600],
@@ -192,11 +193,11 @@ class TradesOptionsState extends State<TradesOptions> {
                                           ),
                                           const SizedBox(width: 10),
                                           if (_settingsProvider.tornExchangeEnabledStatusRemoteConfig)
-                                            const Text("Torn Exchange")
+                                            const PdaText("Torn Exchange")
                                           else
                                             const Column(
                                               children: [
-                                                Text(
+                                                PdaText(
                                                   "Torn Exchange has been disabled temporarily",
                                                   style: TextStyle(color: Colors.red, fontStyle: FontStyle.italic),
                                                 ),
@@ -215,7 +216,7 @@ class TradesOptionsState extends State<TradesOptions> {
                                     15,
                                     0,
                                   ),
-                                  child: Text(
+                                  child: PdaText(
                                     'If you are a professional trader and have an account with Torn '
                                     'Exchange, you can activate the sync functionality here',
                                     style: TextStyle(
@@ -234,12 +235,12 @@ class TradesOptionsState extends State<TradesOptions> {
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             const Flexible(
-                                              child: Text("Show detailed profits"),
+                                              child: PdaText("Show detailed profits"),
                                             ),
                                             tornExchangeProfitSwitch(),
                                           ],
                                         ),
-                                        Text(
+                                        PdaText(
                                           'By enabling this option, you will be shown additional white figures '
                                           'with total and individual item profits: one refers to market value profit '
                                           'and the other to Torn Exchange profit.\n\n'
@@ -277,7 +278,7 @@ class TradesOptionsState extends State<TradesOptions> {
                                             size: 26,
                                           ),
                                           SizedBox(width: 10),
-                                          Text("TornW3B"),
+                                          PdaText("TornW3B"),
                                         ],
                                       ),
                                       tornW3bSwitch(),
@@ -286,7 +287,7 @@ class TradesOptionsState extends State<TradesOptions> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                                  child: Text(
+                                  child: PdaText(
                                     'TornW3B is a focused lens on the Torn economy. It aggregates bazaar and market '
                                     'signals so traders can price items quickly and generate editable receipts.',
                                     style: TextStyle(
@@ -305,12 +306,12 @@ class TradesOptionsState extends State<TradesOptions> {
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             const Flexible(
-                                              child: Text("Show detailed profits"),
+                                              child: PdaText("Show detailed profits"),
                                             ),
                                             tornExchangeProfitSwitch(),
                                           ],
                                         ),
-                                        Text(
+                                        PdaText(
                                           'By enabling this option, Torn PDA will show detailed market-based '
                                           'profit comparisons for TornW3B-priced items, both per item and for the '
                                           'whole trade.\n\n'
@@ -351,7 +352,7 @@ class TradesOptionsState extends State<TradesOptions> {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
-      title: const Text("Trade Calculator", style: TextStyle(color: Colors.white)),
+      title: const PdaText("Trade Calculator", style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {

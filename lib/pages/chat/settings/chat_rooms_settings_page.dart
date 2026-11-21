@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/models/chat/chat_models.dart';
 import 'package:torn_pda/models/chat/chat_rooms.dart';
@@ -27,9 +28,9 @@ class ChatRoomsSettingsPage extends StatelessWidget {
             child: SegmentedButton<ChatGlobalsPlacement>(
               showSelectedIcon: false,
               segments: const [
-                ButtonSegment(value: ChatGlobalsPlacement.top, label: Text('On top')),
-                ButtonSegment(value: ChatGlobalsPlacement.mixed, label: Text('By activity')),
-                ButtonSegment(value: ChatGlobalsPlacement.tab, label: Text('Social tab')),
+                ButtonSegment(value: ChatGlobalsPlacement.top, label: PdaText('On top')),
+                ButtonSegment(value: ChatGlobalsPlacement.mixed, label: PdaText('By activity')),
+                ButtonSegment(value: ChatGlobalsPlacement.tab, label: PdaText('Social tab')),
               ],
               selected: {prefs.placementOf(room)},
               onSelectionChanged: (v) => prefs.setRoomPlacement(room, v.first),
@@ -99,13 +100,13 @@ class ChatRoomsSettingsPage extends StatelessWidget {
           const SizedBox(height: 8),
           const ChatSettingsHeading('Unread', description: 'What adds to the unread counts'),
           SwitchListTile(
-            title: const Text('Muted chats count as unread'),
+            title: const PdaText('Muted chats count as unread'),
             value: prefs.mutedUnread,
             onChanged: prefs.setMutedUnread,
           ),
           ListTile(
-            title: const Text('Waiting for you'),
-            subtitle: const Text('Private chats left unanswered, shown at the top of the list'),
+            title: const PdaText('Waiting for you'),
+            subtitle: const PdaText('Private chats left unanswered, shown at the top of the list'),
             trailing: DropdownButton<int>(
               value: _waitingChoices.contains(prefs.waitingHours) ? prefs.waitingHours : 3,
               underline: const SizedBox.shrink(),
@@ -121,13 +122,13 @@ class ChatRoomsSettingsPage extends StatelessWidget {
             CheckboxListTile(
               secondary: room == 'dm' ? Icon(chatRoomIcon(room)) : ChatRoomGlyphBox(chat.roomById(room)),
               title: Text(ChatRooms.labelOf(room, remote)),
-              subtitle: ChatPrefs.globalRooms.contains(room) ? const Text('Torn never marks it as read') : null,
+              subtitle: ChatPrefs.globalRooms.contains(room) ? const PdaText('Torn never marks it as read') : null,
               value: prefs.bubbleRooms.contains(room),
               onChanged: (v) => prefs.setBubbleRoom(room, v ?? false),
             ),
           SwitchListTile(
-            title: const Text('Show a single total'),
-            subtitle: const Text('Instead of one number per chat'),
+            title: const PdaText('Show a single total'),
+            subtitle: const PdaText('Instead of one number per chat'),
             value: prefs.bubbleTotal,
             onChanged: prefs.setBubbleTotal,
           ),

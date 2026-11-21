@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:torn_pda/models/chaining/bars_model.dart';
@@ -121,7 +122,7 @@ class _StatusSheetState extends State<_StatusSheet> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Insert my status', style: theme.textTheme.titleMedium),
+            PdaText('Insert my status', style: theme.textTheme.titleMedium),
             const SizedBox(height: 8),
             if (_loading)
               const Padding(
@@ -129,7 +130,7 @@ class _StatusSheetState extends State<_StatusSheet> {
                 child: SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2)),
               )
             else if (pieces.isEmpty)
-              Text(
+              PdaText(
                 'Could not load your status. Check your API key and try again later',
                 style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
               ),
@@ -166,7 +167,7 @@ class _StatusSheetState extends State<_StatusSheet> {
                         Navigator.of(context).pop();
                         widget.onInsert(text);
                       },
-                child: const Text('Insert'),
+                child: const PdaText('Insert'),
               ),
             ),
           ],

@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:bot_toast/bot_toast.dart';
@@ -126,7 +127,7 @@ class _CityShopsPageState extends State<CityShopsPage> {
     if (!mounted) return;
     if (!success) {
       BotToast.showText(
-        text: "Could not update, check your connection",
+        text: context.interfaceText("Could not update, check your connection"),
         textStyle: const TextStyle(fontSize: 14, color: Colors.white),
         contentColor: Colors.orange[900]!,
         duration: const Duration(seconds: 4),
@@ -191,7 +192,7 @@ class _CityShopsPageState extends State<CityShopsPage> {
       backgroundColor: themeProvider.canvas,
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
-        title: const Text("City shops", style: TextStyle(color: Colors.white)),
+        title: const PdaText("City shops", style: TextStyle(color: Colors.white)),
         actions: [
           IconButton(
             icon: const Icon(Icons.info_outline, color: Colors.white),
@@ -265,7 +266,7 @@ class _CityShopsPageState extends State<CityShopsPage> {
       builder: (context) {
         return AlertDialog(
           backgroundColor: themeProvider.secondBackground,
-          title: Text("How these alerts work", style: TextStyle(fontSize: 16, color: themeProvider.mainText)),
+          title: PdaText("How these alerts work", style: TextStyle(fontSize: 16, color: themeProvider.mainText)),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -287,14 +288,14 @@ class _CityShopsPageState extends State<CityShopsPage> {
                   CityShopMode.noData,
                   "Not seen restocking often enough yet. It will move up on its own once there is enough data.",
                 ),
-                Text(
+                PdaText(
                   "Tap the bell to follow an item, or the item itself to see what has been measured for it.",
                   style: TextStyle(fontSize: 12, color: themeProvider.mainText),
                 ),
               ],
             ),
           ),
-          actions: [TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text("Close"))],
+          actions: [TextButton(onPressed: () => Navigator.of(context).pop(), child: const PdaText("Close"))],
         );
       },
     );
@@ -340,7 +341,7 @@ class _CityShopsPageState extends State<CityShopsPage> {
                 suffixIcon: _search.isEmpty
                     ? null
                     : IconButton(icon: const Icon(Icons.close, size: 16), onPressed: () => _searchController.clear()),
-                hintText: "Search item or shop",
+                hintText: context.interfaceText("Search item or shop"),
                 hintStyle: TextStyle(fontSize: 13, color: themeProvider.mainText.withAlpha(120)),
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
                 enabledBorder: OutlineInputBorder(
@@ -474,7 +475,7 @@ class _CityShopsPageState extends State<CityShopsPage> {
           items: [
             DropdownMenuItem<String?>(
               value: null,
-              child: Text("All shops", style: TextStyle(fontSize: 12, color: themeProvider.mainText)),
+              child: PdaText("All shops", style: TextStyle(fontSize: 12, color: themeProvider.mainText)),
             ),
             for (final shop in _shopNames)
               DropdownMenuItem<String?>(

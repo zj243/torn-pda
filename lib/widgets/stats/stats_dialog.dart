@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
@@ -288,7 +289,7 @@ class _StatsDialogState extends State<StatsDialog> with TickerProviderStateMixin
       });
       BotToast.showText(
         clickClose: true,
-        text: "No spy record available!",
+        text: context.interfaceText("No spy record available!"),
         textStyle: const TextStyle(
           fontSize: 14,
           color: Colors.white,

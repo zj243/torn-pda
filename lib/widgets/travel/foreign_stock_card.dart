@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import "dart:collection";
 import 'dart:convert';
@@ -248,9 +249,9 @@ class ForeignStockCardState extends State<ForeignStockCard> {
               children: [
                 Showcase(
                   key: _showcaseHideStock,
-                  title: 'Swipe to hide',
-                  description: "\nSwipe right to hide stocks you don't want to see.\n\nYou can restore them "
-                      "later at any time by using the 'eye' icon in the app bar.",
+                  title: context.interfaceText('Swipe to hide'),
+                  description: context.interfaceText("\nSwipe right to hide stocks you don't want to see.\n\nYou can restore them "
+                      "later at any time by using the 'eye' icon in the app bar."),
                   targetPadding: const EdgeInsets.all(10),
                   disableMovingAnimation: true,
                   textColor: _themeProvider.mainText,
@@ -277,7 +278,7 @@ class ForeignStockCardState extends State<ForeignStockCard> {
                               alignment: Alignment.centerLeft,
                               child: TextButton.icon(
                                 icon: const Icon(Icons.forum_outlined, size: 18),
-                                label: const Text('Share to chat'),
+                                label: const PdaText('Share to chat'),
                                 onPressed: () => ChatShareIn.shareText(
                                   ChatShareOut.foreignStock(
                                     item: widget.foreignStock.name ?? '',
@@ -535,15 +536,15 @@ class ForeignStockCardState extends State<ForeignStockCard> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Average restock time: $average",
+                      PdaText(
+                        "Average restock time: {0}", values: [average],
                         style: const TextStyle(
                           fontSize: 12,
                         ),
                       ),
                       if (_averageTimeToSellout > 0)
-                        Text(
-                          "Average time to sell out: ${_formatDuration(Duration(seconds: _averageTimeToSellout))}",
+                        PdaText(
+                          "Average time to sell out: {0}", values: [_formatDuration(Duration(seconds: _averageTimeToSellout))],
                           style: const TextStyle(
                             fontSize: 12,
                           ),
@@ -552,7 +553,7 @@ class ForeignStockCardState extends State<ForeignStockCard> {
                         Row(
                           children: [
                             const Flexible(
-                              child: Text(
+                              child: PdaText(
                                 "Next restock might happen at: ",
                                 style: TextStyle(fontSize: 12),
                               ),
@@ -569,7 +570,7 @@ class ForeignStockCardState extends State<ForeignStockCard> {
                       if (reliability.isNotEmpty)
                         Row(
                           children: [
-                            const Text(
+                            const PdaText(
                               "Reliability: ",
                               style: TextStyle(
                                 fontSize: 12,
@@ -626,15 +627,14 @@ class ForeignStockCardState extends State<ForeignStockCard> {
                         checkColor: Colors.white,
                         activeColor: Colors.blue,
                         value: widget.activeRestocks!.keys.contains(_codeName) ? true : false,
-                        title: const Text(
+                        title: const PdaText(
                           "Restock alert (auto)",
                           style: TextStyle(
                             fontSize: 12,
                           ),
                         ),
-                        subtitle: Text(
-                          "Get notified whenever ${widget.foreignStock.name} is restocked in "
-                          "${widget.foreignStock.countryFullName}",
+                        subtitle: PdaText(
+                          "Get notified whenever {0} is restocked in {1}", values: [widget.foreignStock.name, widget.foreignStock.countryFullName],
                           style: const TextStyle(
                             fontSize: 11,
                             fontStyle: FontStyle.italic,
@@ -701,8 +701,8 @@ class ForeignStockCardState extends State<ForeignStockCard> {
           final alertsEnabled = await Prefs().getRestocksNotificationEnabled();
           if (!alertsEnabled) {
             BotToast.showText(
-              text: "Your restocks notifications are OFF, remember to active "
-                  "them in the Alerts section!",
+              text: context.interfaceText("Your restocks notifications are OFF, remember to active "
+                  "them in the Alerts section!"),
               textStyle: const TextStyle(
                 fontSize: 14,
                 color: Colors.white,
@@ -766,8 +766,8 @@ class ForeignStockCardState extends State<ForeignStockCard> {
             if (widget.inventoryEnabled && stock.inventoryQuantity != null)
               SizedBox(
                 width: 100,
-                child: Text(
-                  "Inv: x${stock.inventoryQuantity}",
+                child: PdaText(
+                  "Inv: x{0}", values: [stock.inventoryQuantity],
                   style: const TextStyle(fontSize: 11),
                 ),
               ),
@@ -828,9 +828,9 @@ class ForeignStockCardState extends State<ForeignStockCard> {
           GestureDetector(
             child: Showcase(
               key: _showcaseMoneyIcon,
-              title: 'Quick money check',
-              description: '\nTap to see if you need to carry some more money before your departure.'
-                  ' If you do, tap the safe to vault icon to access it in game.',
+              title: context.interfaceText('Quick money check'),
+              description: context.interfaceText('\nTap to see if you need to carry some more money before your departure.'
+                  ' If you do, tap the safe to vault icon to access it in game.'),
               targetPadding: const EdgeInsets.all(10),
               disableMovingAnimation: true,
               textColor: _themeProvider.mainText,
@@ -924,7 +924,7 @@ class ForeignStockCardState extends State<ForeignStockCard> {
                                   ),
                                 ),
                                 SizedBox(height: 6),
-                                Text(
+                                PdaText(
                                   'Open Vault',
                                   style: TextStyle(
                                     color: Colors.white,
@@ -978,8 +978,8 @@ class ForeignStockCardState extends State<ForeignStockCard> {
       profitPerHourFormatted = '+\$$profitPerHourFormatted';
     }
 
-    profitPerMinuteWidget = Text(
-      '($profitPerHourFormatted/hour)',
+    profitPerMinuteWidget = PdaText(
+      "({0}/hour)", values: [profitPerHourFormatted],
       style: TextStyle(color: profitColor, fontSize: 11),
     );
 
@@ -1019,8 +1019,8 @@ class ForeignStockCardState extends State<ForeignStockCard> {
         GestureDetector(
           child: Showcase(
             key: _showcaseFlagIcon,
-            title: 'Travel Agency',
-            description: '\nTap any flag to access the Travel Agency directly from this section!',
+            title: context.interfaceText('Travel Agency'),
+            description: context.interfaceText('\nTap any flag to access the Travel Agency directly from this section!'),
             targetPadding: const EdgeInsets.all(10),
             disableMovingAnimation: true,
             textColor: _themeProvider.mainText,
@@ -1040,8 +1040,8 @@ class ForeignStockCardState extends State<ForeignStockCard> {
         ),
         Showcase(
           key: _showcaseExpandIcon,
-          title: 'Detailed view',
-          description: '\nClick to expand the item card and learn more details about your travel and stock!',
+          title: context.interfaceText('Detailed view'),
+          description: context.interfaceText('\nClick to expand the item card and learn more details about your travel and stock!'),
           targetPadding: const EdgeInsets.all(10),
           disableMovingAnimation: true,
           textColor: _themeProvider.mainText,
@@ -1121,9 +1121,7 @@ class ForeignStockCardState extends State<ForeignStockCard> {
         if (isCached) {
           // Simple info for cached data
           BotToast.showText(
-            text: "Main providers cannot be reached!"
-                "\n\nThis is cached data ${timeString == 'now' ? 'updated seconds now' : 'last updated $timeString ago'}\n\n"
-                "IMPORTANT: quantity and restock information might have changed since then!",
+            text: context.interfaceText("Main providers cannot be reached!\n\nThis is cached data {0}\n\nIMPORTANT: quantity and restock information might have changed since then!", [timeString == 'now' ? 'updated seconds now' : 'last updated $timeString ago']),
             textStyle: const TextStyle(
               fontSize: 14,
             ),
@@ -1135,7 +1133,7 @@ class ForeignStockCardState extends State<ForeignStockCard> {
           // Show normal update info
           BotToast.showText(
             text:
-                "${widget.providerName ?? 'Live'} data recorded ${timeString == 'now' ? 'seconds ago' : '$timeString ago'}",
+                context.interfaceText("{0} data recorded {1}", [widget.providerName ?? 'Live', timeString == 'now' ? 'seconds ago' : '$timeString ago']),
             textStyle: const TextStyle(
               fontSize: 14,
               color: Colors.white,
@@ -1399,7 +1397,7 @@ class ForeignStockCardState extends State<ForeignStockCard> {
 
     // Immediate departure section
     affected.add(
-      const Text(
+      const PdaText(
         "Bars/cooldowns (immediate departure):",
         style: TextStyle(
           fontSize: 12,
@@ -1417,7 +1415,7 @@ class ForeignStockCardState extends State<ForeignStockCard> {
       affected.add(
         Padding(
           padding: const EdgeInsets.only(left: 5),
-          child: Text(
+          child: PdaText(
             "No affectation",
             style: TextStyle(
               color: _themeProvider.getTextColor(Colors.green),
@@ -1438,8 +1436,8 @@ class ForeignStockCardState extends State<ForeignStockCard> {
       affected.add(
         Padding(
           padding: const EdgeInsets.only(top: 10),
-          child: Text(
-            "Bars/cooldowns ($whenToTravel):",
+          child: PdaText(
+            "Bars/cooldowns ({0}):", values: [whenToTravel],
             style: const TextStyle(
               fontSize: 12,
             ),
@@ -1460,7 +1458,7 @@ class ForeignStockCardState extends State<ForeignStockCard> {
         affected.add(
           Padding(
             padding: const EdgeInsets.only(left: 5),
-            child: Text(
+            child: PdaText(
               "No affectation",
               style: TextStyle(
                 color: _themeProvider.getTextColor(Colors.green),
@@ -1910,7 +1908,7 @@ class ForeignStockCardState extends State<ForeignStockCard> {
         const SizedBox(width: 2),
         if (_flyingToThisCountry)
           if (_landedInWidgetCountry)
-            Text(
+            PdaText(
               "LANDED",
               style: TextStyle(
                 fontSize: 11,
@@ -2038,8 +2036,8 @@ class ForeignStockCardState extends State<ForeignStockCard> {
               crossAxisAlignment: WrapCrossAlignment.center,
               spacing: 6,
               children: [
-                Text(
-                  'Copy $label',
+                PdaText(
+                  "Copy {0}", values: [label],
                   textAlign: TextAlign.center,
                   softWrap: true,
                   style: TextStyle(
@@ -2109,7 +2107,7 @@ class ForeignStockCardState extends State<ForeignStockCard> {
                                   color: Colors.white70,
                                 ),
                                 const SizedBox(width: 15),
-                                const Text("Personal vault"),
+                                const PdaText("Personal vault"),
                               ],
                             ),
                             onPressed: () async {
@@ -2146,7 +2144,7 @@ class ForeignStockCardState extends State<ForeignStockCard> {
                                   color: Colors.white70,
                                 ),
                                 const SizedBox(width: 15),
-                                const Text("Faction vault"),
+                                const PdaText("Faction vault"),
                               ],
                             ),
                             onPressed: () async {
@@ -2183,7 +2181,7 @@ class ForeignStockCardState extends State<ForeignStockCard> {
                                   color: Colors.white70,
                                 ),
                                 const SizedBox(width: 15),
-                                const Text("Company vault"),
+                                const PdaText("Company vault"),
                               ],
                             ),
                             onPressed: () async {
@@ -2230,7 +2228,7 @@ class ForeignStockCardState extends State<ForeignStockCard> {
                         ),
                         const SizedBox(height: 10),
                         TextButton(
-                          child: const Text("Cancel"),
+                          child: const PdaText("Cancel"),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
@@ -2269,7 +2267,7 @@ class ForeignStockCardState extends State<ForeignStockCard> {
 
   Future<void> _refreshMoney() async {
     BotToast.showText(
-      text: "Refreshing cash on hand, might take a few seconds...",
+      text: context.interfaceText("Refreshing cash on hand, might take a few seconds..."),
       textStyle: const TextStyle(
         fontSize: 14,
         color: Colors.white,

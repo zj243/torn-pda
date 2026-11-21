@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:torn_pda/l10n/app_language.dart';
 import 'package:torn_pda/l10n/generated/app_localizations.dart';
 import 'package:torn_pda/models/drawer_section.dart';
+import 'package:torn_pda/l10n/pda_text.dart';
 
 /// ZJ：验证切换语言后显示文本、后台通知默认值和未知状态的回退行为。
 void main() {
@@ -20,6 +21,8 @@ void main() {
             Text(strings.playerState('Unknown state')),
             Text(strings.fullAt('18:00')),
             Text(strings.travelNotificationBody),
+            const PdaText('Level: {0}', values: [42]),
+            const PdaText('Untranslated {0}', values: ['player {0}']),
           ]);
         }),
       ));
@@ -30,6 +33,8 @@ void main() {
       expect(find.text(chinese ? '18:00 回满' : 'Full at 18:00'), findsOneWidget);
       expect(find.text(chinese ? '即将抵达目的地！' : 'Arriving at your destination!'), findsOneWidget);
       expect(find.text('Unknown state'), findsOneWidget);
+      expect(find.text(chinese ? '等级：42' : 'Level: 42'), findsOneWidget);
+      expect(find.text('Untranslated player {0}'), findsOneWidget);
       expect(DrawerSection.travel.name, 'travel');
     }
   });

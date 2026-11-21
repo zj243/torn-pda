@@ -1,5 +1,6 @@
 // Flutter imports:
 // Package imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -269,9 +270,8 @@ class AwardCardState extends State<AwardCard> {
                   ),
                   if (award.daysLeft != -99)
                     award.daysLeft! > 0 && award.daysLeft! < double.maxFinite
-                        ? Text(
-                            " - ${decimalFormat.format(award.daysLeft!.round())} "
-                            "days",
+                        ? PdaText(
+                            " - {0} days", values: [decimalFormat.format(award.daysLeft!.round())],
                             style: const TextStyle(fontSize: 12),
                           )
                         : award.daysLeft == double.maxFinite
@@ -309,9 +309,7 @@ class AwardCardState extends State<AwardCard> {
                   GestureDetector(
                     onTap: () {
                       BotToast.showText(
-                        text: "Circulation: ${decimalFormat.format(award.circulation)}\n\n "
-                            "Rarity: ${award.rarity}\n\n"
-                            "Score: ${rarityFormat.format(award.rScore)}%",
+                        text: context.interfaceText("Circulation: {0}\n\n Rarity: {1}\n\nScore: {2}%", [decimalFormat.format(award.circulation), award.rarity, rarityFormat.format(award.rScore)]),
                         textStyle: const TextStyle(
                           fontSize: 13,
                           color: Colors.white,

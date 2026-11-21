@@ -1,4 +1,5 @@
 // Package imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 
 // Flutter imports:
@@ -57,14 +58,14 @@ class WorkStatsTargetsDialogState extends State<WorkStatsTargetsDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text("Work stats targets"),
+      title: const PdaText("Work stats targets"),
       content: SingleChildScrollView(
         child: Form(
           key: _formKey,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
+              const PdaText(
                 "You'll get a single notification for each target as soon as you reach it, and the target will "
                 "then be cleared. Leave a field empty to disable that particular target",
                 style: TextStyle(fontSize: 13),
@@ -80,10 +81,10 @@ class WorkStatsTargetsDialogState extends State<WorkStatsTargetsDialog> {
         ),
       ),
       actions: [
-        TextButton(onPressed: _saving ? null : () => Navigator.of(context).pop(false), child: const Text("Cancel")),
+        TextButton(onPressed: _saving ? null : () => Navigator.of(context).pop(false), child: const PdaText("Cancel")),
         Padding(
           padding: const EdgeInsets.only(right: 15),
-          child: TextButton(onPressed: _saving ? null : _save, child: const Text("Save")),
+          child: TextButton(onPressed: _saving ? null : _save, child: const PdaText("Save")),
         ),
       ],
     );
@@ -128,7 +129,7 @@ class WorkStatsTargetsDialogState extends State<WorkStatsTargetsDialog> {
       setState(() => _saving = false);
       BotToast.showText(
         clickClose: true,
-        text: "Could not save your targets, please try again!",
+        text: context.interfaceText("Could not save your targets, please try again!"),
         textStyle: const TextStyle(fontSize: 14, color: Colors.white),
         contentColor: Colors.orange[900]!,
         duration: const Duration(seconds: 4),

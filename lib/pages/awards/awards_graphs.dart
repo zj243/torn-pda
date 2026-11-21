@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:math';
 
@@ -104,13 +105,13 @@ class AwardsGraphsState extends State<AwardsGraphs> {
       elevation: _settingsProvider.appBarTop ? 2 : 0,
       title: Row(
         children: [
-          const Text('Awards graph'),
+          const PdaText('Awards graph'),
           const SizedBox(width: 8),
           GestureDetector(
             onTap: () {
               BotToast.showText(
-                text: "This section is part of YATA's mobile interface, all details "
-                    "information and actions are directly linked to your YATA account.",
+                text: context.interfaceText("This section is part of YATA's mobile interface, all details "
+                    "information and actions are directly linked to your YATA account."),
                 textStyle: const TextStyle(
                   fontSize: 13,
                   color: Colors.white,

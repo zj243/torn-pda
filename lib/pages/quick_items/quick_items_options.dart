@@ -1,5 +1,6 @@
 // Flutter imports:
 // Package imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -100,7 +101,7 @@ class QuickItemsOptionsState extends State<QuickItemsOptions> {
         child: ListTile(
           dense: true,
           leading: const Icon(Icons.power_settings_new, size: 20),
-          title: const Text('Enable quick items', style: TextStyle(fontSize: 13)),
+          title: const PdaText('Enable quick items', style: TextStyle(fontSize: 13)),
           trailing: Switch(
             value: false,
             onChanged: (value) {
@@ -134,12 +135,12 @@ class QuickItemsOptionsState extends State<QuickItemsOptions> {
                 tilePadding: const EdgeInsets.symmetric(horizontal: 16),
                 childrenPadding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
                 leading: const Icon(Icons.settings, size: 20),
-                title: const Text('OPTIONS', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                title: const PdaText('OPTIONS', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
                 children: [
                   ListTile(
                     contentPadding: EdgeInsets.zero,
                     dense: true,
-                    title: const Text('Enable quick items', style: TextStyle(fontSize: 13)),
+                    title: const PdaText('Enable quick items', style: TextStyle(fontSize: 13)),
                     trailing: Switch(
                       value: quickItemsEnabled,
                       onChanged: (value) {
@@ -157,8 +158,8 @@ class QuickItemsOptionsState extends State<QuickItemsOptions> {
                     ListTile(
                       contentPadding: EdgeInsets.zero,
                       dense: true,
-                      title: const Text('Hide inventory count', style: TextStyle(fontSize: 13)),
-                      subtitle: const Text(
+                      title: const PdaText('Hide inventory count', style: TextStyle(fontSize: 13)),
+                      subtitle: const PdaText(
                         'Hide item quantities from the quick items chips.',
                         style: TextStyle(fontSize: 11, fontStyle: FontStyle.italic),
                       ),
@@ -173,8 +174,8 @@ class QuickItemsOptionsState extends State<QuickItemsOptions> {
                     ListTile(
                       contentPadding: EdgeInsets.zero,
                       dense: true,
-                      title: const Text('Hide loadouts', style: TextStyle(fontSize: 13)),
-                      subtitle: const Text(
+                      title: const PdaText('Hide loadouts', style: TextStyle(fontSize: 13)),
+                      subtitle: const PdaText(
                         'Hide loadout chips from the quick items bar without removing them, '
                         'keeping their names and order.',
                         style: TextStyle(fontSize: 11, fontStyle: FontStyle.italic),
@@ -190,8 +191,8 @@ class QuickItemsOptionsState extends State<QuickItemsOptions> {
                     ListTile(
                       contentPadding: EdgeInsets.zero,
                       dense: true,
-                      title: const Text('Long-press to add items', style: TextStyle(fontSize: 13)),
-                      subtitle: const Text(
+                      title: const PdaText('Long-press to add items', style: TextStyle(fontSize: 13)),
+                      subtitle: const PdaText(
                         'Replace the (+) button with a long-press gesture anywhere on the widget. '
                         'Tap or long-press again to exit add mode.',
                         style: TextStyle(fontSize: 11, fontStyle: FontStyle.italic),
@@ -210,7 +211,7 @@ class QuickItemsOptionsState extends State<QuickItemsOptions> {
                   if (!widget.isFaction && itemsProvider.longPressToAdd)
                     Padding(
                       padding: const EdgeInsets.only(bottom: 4),
-                      child: Text(
+                      child: PdaText(
                         'Long-press anywhere on the quick items bar to activate the item picker. '
                         'Tap or long-press again to exit add mode.',
                         style: TextStyle(fontSize: 11, color: Colors.orange[700]),
@@ -281,7 +282,7 @@ class QuickItemsOptionsState extends State<QuickItemsOptions> {
                         const Center(
                           child: Padding(
                             padding: EdgeInsets.all(30),
-                            child: Text(
+                            child: PdaText(
                               'Quick Items deactivated',
                               style: TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
                             ),
@@ -296,14 +297,14 @@ class QuickItemsOptionsState extends State<QuickItemsOptions> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text("ACTIVE QUICK ITEMS"),
+                                PdaText("ACTIVE QUICK ITEMS"),
                                 Padding(
                                   padding: EdgeInsets.only(left: 10),
-                                  child: Text('SWIPE TO REMOVE', style: TextStyle(fontSize: 10)),
+                                  child: PdaText('SWIPE TO REMOVE', style: TextStyle(fontSize: 10)),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(left: 10),
-                                  child: Text('LONG-PRESS TO SORT', style: TextStyle(fontSize: 10)),
+                                  child: PdaText('LONG-PRESS TO SORT', style: TextStyle(fontSize: 10)),
                                 ),
                               ],
                             ),
@@ -336,11 +337,11 @@ class QuickItemsOptionsState extends State<QuickItemsOptions> {
                               padding: EdgeInsets.all(50),
                               child: Column(
                                 children: [
-                                  Text('Loading loadouts...'),
+                                  PdaText('Loading loadouts...'),
                                   SizedBox(height: 40),
                                   CircularProgressIndicator(),
                                   SizedBox(height: 40),
-                                  Text(
+                                  PdaText(
                                     'If this takes too long, there might be a connection '
                                     'problem or Torn API might be down. Close the browser '
                                     'completely and try again in a while!',
@@ -370,8 +371,8 @@ class QuickItemsOptionsState extends State<QuickItemsOptions> {
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
       title: widget.isFaction
-          ? const Text("Quick faction items", style: TextStyle(color: Colors.white))
-          : const Text("Quick items", style: TextStyle(color: Colors.white)),
+          ? const PdaText("Quick faction items", style: TextStyle(color: Colors.white))
+          : const PdaText("Quick items", style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
@@ -385,7 +386,7 @@ class QuickItemsOptionsState extends State<QuickItemsOptions> {
             if ((!widget.isFaction && _itemsProvider!.activeQuickItems.isEmpty) ||
                 (widget.isFaction && _itemsProviderFaction.activeQuickItemsFaction.isEmpty)) {
               BotToast.showText(
-                text: 'You have no active quick items, activate some!',
+                text: context.interfaceText('You have no active quick items, activate some!'),
                 textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                 contentColor: Colors.orange[800]!,
                 contentPadding: const EdgeInsets.all(10),
@@ -573,9 +574,9 @@ class QuickItemsOptionsState extends State<QuickItemsOptions> {
                                         ),
                                       ),
                                       if (item.loaned == true)
-                                        Text("Loaned", style: TextStyle(fontSize: 10, color: Colors.teal[300])),
+                                        PdaText("Loaned", style: TextStyle(fontSize: 10, color: Colors.teal[300])),
                                       if (!item.isLoadout! && item.inventory != null)
-                                        Text("(inv: x${item.inventory})", style: const TextStyle(fontSize: 10)),
+                                        PdaText("(inv: x{0})", values: [item.inventory], style: const TextStyle(fontSize: 10)),
                                       if (_statLine(item) != null) _statLine(item)!,
                                     ],
                                   ),
@@ -648,9 +649,9 @@ class QuickItemsOptionsState extends State<QuickItemsOptions> {
               child: TextField(
                 controller: _searchController,
                 maxLength: 30,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   isDense: true,
-                  labelText: "Search",
+                  labelText: context.interfaceText("Search"),
                   counterText: "",
                   prefixIcon: Icon(Icons.search),
                   border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(6.0))),
@@ -746,7 +747,7 @@ class QuickItemsOptionsState extends State<QuickItemsOptions> {
                                               // Reset visibility after animation
                                               item.visible = true;
                                             },
-                                      child: Text('ADD', style: TextStyle(color: Colors.green[500])),
+                                      child: PdaText('ADD', style: TextStyle(color: Colors.green[500])),
                                     ),
                                   ],
                                 ),
@@ -834,7 +835,7 @@ class QuickItemsOptionsState extends State<QuickItemsOptions> {
 
                                           item.visible = true;
                                         },
-                                  child: Text('ADD', style: TextStyle(color: Colors.green[500])),
+                                  child: PdaText('ADD', style: TextStyle(color: Colors.green[500])),
                                 ),
                               ],
                             ),
@@ -882,7 +883,7 @@ class QuickItemsOptionsState extends State<QuickItemsOptions> {
                       mainAxisSize: MainAxisSize.min, // To make the card compact
                       children: <Widget>[
                         Flexible(
-                          child: Text(
+                          child: PdaText(
                             "This will reset all your quick items and order, "
                             "are you sure?",
                             style: TextStyle(fontSize: 12, color: _themeProvider!.mainText),
@@ -893,7 +894,7 @@ class QuickItemsOptionsState extends State<QuickItemsOptions> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             TextButton(
-                              child: const Text("Reset!"),
+                              child: const PdaText("Reset!"),
                               onPressed: () {
                                 if (widget.isFaction) {
                                   _itemsProviderFaction.wipeAllQuickItems();
@@ -904,7 +905,7 @@ class QuickItemsOptionsState extends State<QuickItemsOptions> {
                               },
                             ),
                             TextButton(
-                              child: const Text("Oh no!"),
+                              child: const PdaText("Oh no!"),
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
@@ -1010,11 +1011,11 @@ class _LongPressConfirmationDialogState extends State<_LongPressConfirmationDial
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Long-press mode', style: TextStyle(fontSize: 16)),
+      title: const PdaText('Long-press mode', style: TextStyle(fontSize: 16)),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text(
+          const PdaText(
             'If you enable this, the (+) button will be replaced. '
             'You will need to long-press anywhere on the quick items bar to activate the item picker.\n\n'
             'Once in add mode, tap or long-press anywhere to exit.',
@@ -1062,7 +1063,7 @@ class _LongPressConfirmationDialogState extends State<_LongPressConfirmationDial
           ),
         ],
       ),
-      actions: [TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Cancel'))],
+      actions: [TextButton(onPressed: () => Navigator.of(context).pop(), child: const PdaText('Cancel'))],
     );
   }
 }

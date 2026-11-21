@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -94,7 +95,7 @@ class ProfileNotificationsWindowsState extends State<ProfileNotificationsWindows
                         children: <Widget>[
                           const Padding(
                             padding: EdgeInsets.all(20.0),
-                            child: Text('Here you can specify your preferred alerting '
+                            child: PdaText('Here you can specify your preferred alerting '
                                 'values for each type of event.'),
                           ),
                           _rowsWithTypes(),
@@ -127,7 +128,7 @@ class ProfileNotificationsWindowsState extends State<ProfileNotificationsWindows
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
-      title: const Text("Notification options", style: TextStyle(color: Colors.white)),
+      title: const PdaText("Notification options", style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
@@ -147,7 +148,7 @@ class ProfileNotificationsWindowsState extends State<ProfileNotificationsWindows
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Text("Travel timings & text"),
+                const PdaText("Travel timings & text"),
                 IconButton(
                   icon: const Icon(Icons.keyboard_arrow_right_outlined),
                   onPressed: () {
@@ -186,7 +187,7 @@ class ProfileNotificationsWindowsState extends State<ProfileNotificationsWindows
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Flexible(child: Text('Energy')),
+                const Flexible(child: PdaText('Energy')),
                 const Padding(
                   padding: EdgeInsets.only(left: 20),
                 ),
@@ -243,7 +244,7 @@ class ProfileNotificationsWindowsState extends State<ProfileNotificationsWindows
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Flexible(child: Text('Nerve')),
+                const Flexible(child: PdaText('Nerve')),
                 const Padding(
                   padding: EdgeInsets.only(left: 20),
                 ),
@@ -299,7 +300,7 @@ class ProfileNotificationsWindowsState extends State<ProfileNotificationsWindows
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Text("Hospital notification timings"),
+                const PdaText("Hospital notification timings"),
                 IconButton(
                   icon: const Icon(Icons.keyboard_arrow_right_outlined),
                   onPressed: () {
@@ -327,7 +328,7 @@ class ProfileNotificationsWindowsState extends State<ProfileNotificationsWindows
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Text("Jail notification timings"),
+                const PdaText("Jail notification timings"),
                 IconButton(
                   icon: const Icon(Icons.keyboard_arrow_right_outlined),
                   onPressed: () {
@@ -355,7 +356,7 @@ class ProfileNotificationsWindowsState extends State<ProfileNotificationsWindows
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Text("Ranked War notification timings"),
+                const PdaText("Ranked War notification timings"),
                 IconButton(
                   icon: const Icon(Icons.keyboard_arrow_right_outlined),
                   onPressed: () {

@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
@@ -122,13 +123,13 @@ class ChatInboxViewState extends State<ChatInboxView> {
               if (widget.chat.canMarkRead(room.id))
                 ListTile(
                   leading: const Icon(Icons.done_all_rounded),
-                  title: const Text('Mark as read'),
+                  title: const PdaText('Mark as read'),
                   onTap: () => Navigator.pop(context, 'read'),
                 ),
               if (widget.chat.canMarkUnread(room.id))
                 ListTile(
                   leading: const Icon(Icons.mark_chat_unread_outlined),
-                  title: const Text('Mark as unread'),
+                  title: const PdaText('Mark as unread'),
                   onTap: () => Navigator.pop(context, 'unread'),
                 ),
               ListTile(
@@ -137,9 +138,9 @@ class ChatInboxViewState extends State<ChatInboxView> {
                       ? Icons.snooze_rounded
                       : (prefs.isMuted(room.id) ? Icons.notifications_off_rounded : Icons.notifications_active_rounded),
                 ),
-                title: const Text('Alerts and mute'),
+                title: const PdaText('Alerts and mute'),
                 subtitle: switch (prefs.mutedUntilOf(room.id)) {
-                  final until? => Text('Muted until ${chatClockOf(context).stamp(until)}'),
+                  final until? => PdaText("Muted until {0}", values: [chatClockOf(context).stamp(until)]),
                   null => null,
                 },
                 onTap: () => Navigator.pop(context, 'alerts'),
@@ -152,22 +153,22 @@ class ChatInboxViewState extends State<ChatInboxView> {
               if (room.isDm)
                 ListTile(
                   leading: const Icon(Icons.archive_outlined),
-                  title: const Text('Archive'),
-                  subtitle: const Text('Out of the list until they write again. Torn keeps the chat'),
+                  title: const PdaText('Archive'),
+                  subtitle: const PdaText('Out of the list until they write again. Torn keeps the chat'),
                   onTap: () => Navigator.pop(context, 'archive'),
                 ),
               if (room.isDm && widget.chat.isDmOpen(room.id))
                 ListTile(
                   leading: const Icon(Icons.close_rounded),
-                  title: const Text('Close chat'),
-                  subtitle: const Text('Closes its panel in Torn. It stays in your recent chats'),
+                  title: const PdaText('Close chat'),
+                  subtitle: const PdaText('Closes its panel in Torn. It stays in your recent chats'),
                   onTap: () => Navigator.pop(context, 'close'),
                 ),
               if (!room.isDm)
                 ListTile(
                   leading: const Icon(Icons.visibility_off_rounded),
-                  title: const Text('Hide this room'),
-                  subtitle: const Text('Only in Torn PDA, chat settings bring it back'),
+                  title: const PdaText('Hide this room'),
+                  subtitle: const PdaText('Only in Torn PDA, chat settings bring it back'),
                   onTap: () => Navigator.pop(context, 'hide'),
                 ),
             ],
@@ -317,14 +318,13 @@ class ChatInboxViewState extends State<ChatInboxView> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Mark all as read'),
-        content: Text(
-          '${count == 1 ? 'One conversation has' : '$count conversations have'} unread messages. '
-          'Global, Trade, hidden and archived chats are skipped',
+        title: const PdaText('Mark all as read'),
+        content: PdaText(
+          "{0} unread messages. Global, Trade, hidden and archived chats are skipped", values: [count == 1 ? 'One conversation has' : '$count conversations have'],
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancel')),
-          FilledButton(onPressed: () => Navigator.pop(context, true), child: const Text('Mark as read')),
+          TextButton(onPressed: () => Navigator.pop(context, false), child: const PdaText('Cancel')),
+          FilledButton(onPressed: () => Navigator.pop(context, true), child: const PdaText('Mark as read')),
         ],
       ),
     );
@@ -368,7 +368,7 @@ class ChatInboxViewState extends State<ChatInboxView> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text('Chats'),
+                const PdaText('Chats'),
                 if (mainUnread > 0)
                   chip(
                     count(mainUnread),
@@ -386,7 +386,7 @@ class ChatInboxViewState extends State<ChatInboxView> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text('Social'),
+                const PdaText('Social'),
                 for (final room in social)
                   if (chat.countsUnread(room.id))
                     if (chat.unreadShown(room.id) case (final unread, final more) when unread > 0)
@@ -421,7 +421,7 @@ class ChatInboxViewState extends State<ChatInboxView> {
             setState(() => NativeChat.setEnabled(true));
             showChatIntro(context);
           },
-          child: const Text('Turn on'),
+          child: const PdaText('Turn on'),
         ),
       );
     }
@@ -430,7 +430,7 @@ class ChatInboxViewState extends State<ChatInboxView> {
       return ChatStateMessage(
         icon: Icons.cloud_off_rounded,
         title: 'Could not reach the chat',
-        action: FilledButton.tonal(onPressed: chat.retry, child: const Text('Try again')),
+        action: FilledButton.tonal(onPressed: chat.retry, child: const PdaText('Try again')),
       );
     }
     return null;
@@ -454,18 +454,18 @@ class ChatInboxViewState extends State<ChatInboxView> {
         if (widget.onSaved != null && NativeChat.prefs.savedMessages.isNotEmpty)
           ActionChip(
             avatar: const Icon(Icons.bookmark_border_rounded, size: 18),
-            label: Text('Saved ${NativeChat.prefs.savedMessages.length}'),
+            label: PdaText("Saved {0}", values: [NativeChat.prefs.savedMessages.length]),
             onPressed: widget.onSaved,
           ),
         if (widget.chat.ready && NativeChat.prefs.notepad)
           ActionChip(
             avatar: const Icon(Icons.sticky_note_2_outlined, size: 18),
-            label: const Text('Notepad'),
+            label: const PdaText('Notepad'),
             onPressed: () => showChatNotepad(context),
           ),
       ],
     );
-    final markAll = TextButton(onPressed: _markAllRead, child: const Text('Mark all as read'));
+    final markAll = TextButton(onPressed: _markAllRead, child: const PdaText('Mark all as read'));
     final stacked = chatLargeText(MediaQuery.textScalerOf(context));
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 4, 12, 0),
@@ -500,14 +500,14 @@ class ChatInboxViewState extends State<ChatInboxView> {
       if (archived.isNotEmpty)
         ListTile(
           leading: const Icon(Icons.archive_outlined),
-          title: Text('Archived (${archived.length})'),
+          title: PdaText("Archived ({0})", values: [archived.length]),
           trailing: const Icon(Icons.chevron_right_rounded),
           onTap: () => showChatArchived(context, _open),
         ),
       if (hidden.isNotEmpty)
         ListTile(
           leading: const Icon(Icons.visibility_off_outlined),
-          title: Text('Hidden rooms (${hidden.length})'),
+          title: PdaText("Hidden rooms ({0})", values: [hidden.length]),
           trailing: const Icon(Icons.chevron_right_rounded),
           onTap: () => showChatHiddenRooms(context),
         ),
@@ -560,7 +560,7 @@ class ChatInboxViewState extends State<ChatInboxView> {
             child: TextButton.icon(
               onPressed: chat.loadMoreRecent,
               icon: const Icon(Icons.expand_more_rounded),
-              label: const Text('Older private chats'),
+              label: const PdaText('Older private chats'),
             ),
           );
         }

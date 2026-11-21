@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:developer';
 
@@ -187,7 +188,7 @@ class WebViewSimpleDialogState extends State<WebViewSimpleDialog> {
                   height: 30,
                   color: Colors.transparent, // Background to extend the buttons detection area
                   child: Center(
-                    child: Text(
+                    child: PdaText(
                       "CLOSE",
                       textAlign: TextAlign.center,
                       style: TextStyle(

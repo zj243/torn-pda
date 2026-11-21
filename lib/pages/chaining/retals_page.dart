@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 // Flutter imports:
@@ -153,12 +154,12 @@ class RetalsPageState extends State<RetalsPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Next update in "),
+                const PdaText("Next update in "),
                 Countdown(
                   seconds: 20,
                   callback: _updateRetal,
                 ),
-                const Text(" seconds"),
+                const PdaText(" seconds"),
               ],
             ),
           ),
@@ -177,7 +178,7 @@ class RetalsPageState extends State<RetalsPage> {
               children: [
                 Padding(
                   padding: EdgeInsets.only(bottom: 100),
-                  child: Text("No retaliation targets found!"),
+                  child: PdaText("No retaliation targets found!"),
                 ),
               ],
             ),
@@ -205,7 +206,7 @@ class RetalsPageState extends State<RetalsPage> {
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
       systemOverlayStyle: SystemUiOverlayStyle.light,
-      title: const Text("Retaliation", style: TextStyle(color: Colors.white)),
+      title: const PdaText("Retaliation", style: TextStyle(color: Colors.white)),
       leadingWidth: _webViewProvider.appCanOpenBrowser ? 88 : 50,
       leading: Row(
         children: [
@@ -323,7 +324,7 @@ class RetalsPageState extends State<RetalsPage> {
                           children: [
                             Row(
                               children: [
-                                const Text("Manage Spies"),
+                                const PdaText("Manage Spies"),
                                 const SizedBox(width: 8),
                                 SizedBox(
                                   height: 25,
@@ -378,7 +379,7 @@ class RetalsPageState extends State<RetalsPage> {
 
   AlertDialog _disclaimerDialog() {
     return AlertDialog(
-      title: const Text("Retaliation"),
+      title: const PdaText("Retaliation"),
       content: Scrollbar(
         controller: _scrollController,
         thumbVisibility: true,
@@ -389,44 +390,44 @@ class RetalsPageState extends State<RetalsPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                PdaText(
                   "A retaliation hit is an attack (hospitalisation only) made on someone that has attacked one of "
                   "your faction members within the last 5 minutes. Retaliations provide a multiplier of 1.5x, and can "
                   "only be claimed once on a player until they attack your faction again.",
                   style: TextStyle(fontSize: 13, fontStyle: FontStyle.italic),
                 ),
                 SizedBox(height: 25),
-                Text(
+                PdaText(
                   "This section shows targets that:\n",
                   style: TextStyle(fontSize: 13),
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 8),
-                  child: Text(
+                  child: PdaText(
                     "- Attacked your faction in the last 5 minutes",
                     style: TextStyle(fontSize: 13),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 8),
-                  child: Text(
+                  child: PdaText(
                     "- Won the attack",
                     style: TextStyle(fontSize: 13),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 8),
-                  child: Text(
+                  child: PdaText(
                     "- Have not been retaliated yet",
                     style: TextStyle(fontSize: 13),
                   ),
                 ),
                 SizedBox(height: 25),
-                Text(
+                PdaText(
                   "IMPORTANT",
                   style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                 ),
-                Text(
+                PdaText(
                   "\nPlease note that this section can potentially make a intensive use of the API if there are "
                   "lots of targets available to retaliate.\n\nIt will auto-update every few seconds; any attempt to "
                   "manually update at lower intervals could result in the API limits being reached in this or other "
@@ -443,7 +444,7 @@ class RetalsPageState extends State<RetalsPage> {
         Padding(
           padding: const EdgeInsets.only(right: 8),
           child: TextButton(
-            child: const Text("Understood"),
+            child: const PdaText("Understood"),
             onPressed: () {
               Navigator.of(context).pop('exit');
             },

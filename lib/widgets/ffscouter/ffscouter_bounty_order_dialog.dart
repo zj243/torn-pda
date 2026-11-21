@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:convert';
 
@@ -114,13 +115,13 @@ class _BountyOrderDialogState extends State<_BountyOrderDialog> {
   Widget build(BuildContext context) {
     final quote = _quote;
     return AlertDialog(
-      title: const Text("Place a bounty", style: TextStyle(fontSize: 16)),
+      title: const PdaText("Place a bounty", style: TextStyle(fontSize: 16)),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
+            PdaText(
               "Other players get paid for every hit on your target. FFScouter checks the hits and pays them. "
               "You pay with Xanax once the order is placed.",
               style: TextStyle(fontSize: 12, color: Colors.grey[600]),
@@ -145,12 +146,12 @@ class _BountyOrderDialogState extends State<_BountyOrderDialog> {
         ),
       ),
       actions: [
-        TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text("Cancel")),
+        TextButton(onPressed: () => Navigator.of(context).pop(), child: const PdaText("Cancel")),
         TextButton(
           onPressed: _placing || quote == null || _targetId == null ? null : _place,
           child: _placing
               ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2))
-              : const Text("Place order"),
+              : const PdaText("Place order"),
         ),
       ],
     );
@@ -192,15 +193,14 @@ class _BountyOrderDialogState extends State<_BountyOrderDialog> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text("Place order?", style: TextStyle(fontSize: 16)),
-        content: Text(
-          "${_quantity!} hits on player ${_targetId!} for ${_money.format(_pricePerHit!)} each. "
-          "You will need to send ${quote.expectedXanax} Xanax to pay for it.",
+        title: const PdaText("Place order?", style: TextStyle(fontSize: 16)),
+        content: PdaText(
+          "{0} hits on player {1} for {2} each. You will need to send {3} Xanax to pay for it.", values: [_quantity!, _targetId!, _money.format(_pricePerHit!), quote.expectedXanax],
           style: const TextStyle(fontSize: 13),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const Text("Cancel")),
-          TextButton(onPressed: () => Navigator.of(ctx).pop(true), child: const Text("Place order")),
+          TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const PdaText("Cancel")),
+          TextButton(onPressed: () => Navigator.of(ctx).pop(true), child: const PdaText("Place order")),
         ],
       ),
     );
@@ -248,20 +248,19 @@ Future<void> showFFScouterBountyPaymentDialog(
   return showDialog<void>(
     context: context,
     builder: (ctx) => AlertDialog(
-      title: Text("Order ${order.reference}", style: const TextStyle(fontSize: 16)),
+      title: PdaText("Order {0}", values: [order.reference], style: const TextStyle(fontSize: 16)),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Send ${payment.xanaxExpected - payment.xanaxReceived} Xanax with this exact message"
-            "${deadline != null ? " before $deadline TCT" : ""}:",
+          PdaText(
+            "Send {0} Xanax with this exact message{1}:", values: [payment.xanaxExpected - payment.xanaxReceived, deadline != null ? " before $deadline TCT" : ""],
             style: const TextStyle(fontSize: 13),
           ),
           const SizedBox(height: 8),
           SelectableText(payment.message, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
           const SizedBox(height: 8),
-          Text(
+          PdaText(
             "The order page on FFScouter shows who to send them to. The bounty goes live once it is fully paid.",
             style: TextStyle(fontSize: 12, color: Colors.grey[600]),
           ),
@@ -271,15 +270,15 @@ Future<void> showFFScouterBountyPaymentDialog(
         TextButton(
           onPressed: () {
             Clipboard.setData(ClipboardData(text: payment.message));
-            BotToast.showText(text: "Message copied");
+            BotToast.showText(text: context.interfaceText("Message copied"));
           },
-          child: const Text("Copy message"),
+          child: const PdaText("Copy message"),
         ),
         TextButton(
           onPressed: () => openSimpleWebViewDialog(context: ctx, url: order.url, title: "Order ${order.reference}"),
-          child: const Text("Order page"),
+          child: const PdaText("Order page"),
         ),
-        TextButton(onPressed: () => Navigator.of(ctx).pop(), child: const Text("Close")),
+        TextButton(onPressed: () => Navigator.of(ctx).pop(), child: const PdaText("Close")),
       ],
     ),
   );

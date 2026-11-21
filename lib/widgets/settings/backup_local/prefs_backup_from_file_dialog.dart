@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
@@ -88,19 +89,19 @@ class _PreferencesImportDialogState extends State<PreferencesImportDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Import preferences'),
+      title: const PdaText('Import preferences'),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
+            const PdaText(
               'A backup file was detected. Importing will overwrite ALL current settings',
               style: TextStyle(fontSize: 12),
             ),
             if (!_encrypted) ...[
               const Padding(
                 padding: EdgeInsets.only(top: 12),
-                child: Text(
+                child: PdaText(
                   'This is a shareable backup, so no password is needed. Sensitive auth-related data is not imported.',
                   style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
                 ),
@@ -111,7 +112,7 @@ class _PreferencesImportDialogState extends State<PreferencesImportDialog> {
             if (_encrypted)
               TextField(
                 controller: _keyCtl,
-                decoration: const InputDecoration(labelText: 'Decryption key'),
+                decoration: InputDecoration(labelText: context.interfaceText('Decryption key')),
                 autofocus: true,
                 maxLength: 20,
                 enabled: !_busy && _opened == null,
@@ -120,12 +121,12 @@ class _PreferencesImportDialogState extends State<PreferencesImportDialog> {
         ),
       ),
       actions: [
-        TextButton(onPressed: _busy ? null : () => Navigator.pop(context), child: const Text('Cancel')),
+        TextButton(onPressed: _busy ? null : () => Navigator.pop(context), child: const PdaText('Cancel')),
         ElevatedButton(
           onPressed: _busy ? null : _import,
           child: _busy
               ? const SizedBox(height: 18, width: 18, child: CircularProgressIndicator(strokeWidth: 2))
-              : const Text('Import'),
+              : const PdaText('Import'),
         ),
       ],
     );
@@ -145,13 +146,13 @@ class ImportedScriptsWarning extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (backup.scriptsDisabled)
-            const Text(
+            const PdaText(
               'Userscripts are imported disabled - review them before enabling them.',
               style: TextStyle(fontSize: 12),
             ),
           if (backup.activeScripts.isNotEmpty)
-            Text(
-              'These scripts will run after restoring: ${backup.activeScripts.join(', ')}',
+            PdaText(
+              "These scripts will run after restoring: {0}", values: [backup.activeScripts.join(', ')],
               style: const TextStyle(fontSize: 12),
             ),
           if (backup.apiKeyScripts.isNotEmpty)

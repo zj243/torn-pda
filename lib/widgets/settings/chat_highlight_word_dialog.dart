@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:torn_pda/providers/settings_provider.dart';
@@ -26,7 +27,7 @@ class ChatHighlightAddWordsDialogState extends State<ChatHighlightAddWordsDialog
   Widget build(BuildContext context) {
     _settingsProvider = Provider.of<SettingsProvider>(context, listen: true);
     return AlertDialog(
-      title: const Text('Highlight words'),
+      title: const PdaText('Highlight words'),
       content: Container(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
         child: SingleChildScrollView(
@@ -34,11 +35,8 @@ class ChatHighlightAddWordsDialogState extends State<ChatHighlightAddWordsDialog
             key: _formKey,
             child: Column(
               children: [
-                Text(
-                    "Your username will be highlighted by default, so you do not need to add it here. "
-                    "Keep in mind that the highlights are a simple substring check - if you add 'cat', "
-                    "it would match 'catastrophe'."
-                    "${NativeChat.compiled ? " The Torn PDA chat uses the same list, but matches whole words only." : ""}",
+                PdaText(
+                    "Your username will be highlighted by default, so you do not need to add it here. Keep in mind that the highlights are a simple substring check - if you add 'cat', it would match 'catastrophe'.{0}", values: [NativeChat.compiled ? " The Torn PDA chat uses the same list, but matches whole words only." : ""],
                     style: TextStyle(
                       fontSize: 12,
                       fontStyle: FontStyle.italic,
@@ -53,7 +51,7 @@ class ChatHighlightAddWordsDialogState extends State<ChatHighlightAddWordsDialog
                           controller: _addChatHighlightTextController,
                           style: const TextStyle(fontSize: 14),
                           maxLength: 30,
-                          decoration: const InputDecoration(hintText: "Enter a word to highlight"),
+                          decoration: InputDecoration(hintText: context.interfaceText("Enter a word to highlight")),
                           validator: (s) {
                             if (s is! String || s.trim().isEmpty) {
                               return 'Please enter a valid word';
@@ -117,7 +115,7 @@ class ChatHighlightAddWordsDialogState extends State<ChatHighlightAddWordsDialog
       ),
       actions: <Widget>[
         TextButton(
-          child: const Text('Got it'),
+          child: const PdaText('Got it'),
           onPressed: () {
             Navigator.of(context).pop();
           },

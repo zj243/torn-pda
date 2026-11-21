@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
@@ -197,8 +198,8 @@ class _ChatListReplyState extends State<ChatListReply>
             ),
           if (forwarded != null)
             ExcludeSemantics(
-              child: Text(
-                'Forwarded from ${forwarded.from}',
+              child: PdaText(
+                "Forwarded from {0}", values: [forwarded.from],
                 style: small?.copyWith(color: color, fontStyle: FontStyle.italic),
               ),
             ),
@@ -391,7 +392,7 @@ class _ChatListReplyState extends State<ChatListReply>
                       onSubmitted: (_) => _send(),
                       scrollPadding: const EdgeInsets.fromLTRB(20, 20, 20, 150),
                       decoration: InputDecoration(
-                        hintText: 'Message $name',
+                        hintText: context.interfaceText("Message {0}", [name]),
                         hintMaxLines: 1,
                         filled: true,
                         fillColor: scheme.surfaceContainerLowest,

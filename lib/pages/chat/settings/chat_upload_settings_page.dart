@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/pages/chat/settings/chat_settings_subpage.dart';
 import 'package:torn_pda/providers/chat/chat_image_upload.dart';
@@ -21,12 +22,12 @@ class ChatUploadSettingsPage extends StatelessWidget {
           autofocus: true,
           autocorrect: false,
           enableSuggestions: false,
-          decoration: InputDecoration(hintText: 'Paste the ${host.credentialName}'),
+          decoration: InputDecoration(hintText: context.interfaceText("Paste the {0}", [host.credentialName])),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context, ''), child: const Text('Clear')),
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-          FilledButton(onPressed: () => Navigator.pop(context, typed), child: const Text('Save')),
+          TextButton(onPressed: () => Navigator.pop(context, ''), child: const PdaText('Clear')),
+          TextButton(onPressed: () => Navigator.pop(context), child: const PdaText('Cancel')),
+          FilledButton(onPressed: () => Navigator.pop(context, typed), child: const PdaText('Save')),
         ],
       ),
     );
@@ -51,7 +52,7 @@ class ChatUploadSettingsPage extends StatelessWidget {
         return [
           ListTile(
             leading: const Icon(Icons.cloud_upload_outlined),
-            title: const Text('Image host'),
+            title: const PdaText('Image host'),
             trailing: DropdownButton<ChatImageHost>(
               value: host,
               underline: const SizedBox(),
@@ -64,20 +65,19 @@ class ChatUploadSettingsPage extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              'Images you attach go to ${host.label}, a third party, and anyone with the link can see '
-              'them. ${switch (host) {
+            child: PdaText(
+              "Images you attach go to {0}, a third party, and anyone with the link can see them. {1}", values: [host.label, switch (host) {
                 ChatImageHost.imgur => 'It needs the Client-ID of a free imgur app registered with anonymous use',
                 ChatImageHost.imgbb => 'It needs the API key of a free ImgBB account',
                 ChatImageHost.catbox => 'It works without an account, a userhash keeps the uploads in yours',
-              }}',
+              }],
               style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
             ),
           ),
           if (host == ChatImageHost.imgbb)
             ListTile(
               leading: const Icon(Icons.auto_delete_outlined),
-              title: const Text('Delete images after'),
+              title: const PdaText('Delete images after'),
               trailing: DropdownButton<int>(
                 value: prefs.imgbbExpiration,
                 underline: const SizedBox(),

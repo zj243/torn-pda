@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:math' as math;
 
@@ -214,7 +215,7 @@ class StakeoutCardState extends State<StakeoutCard> {
                             ],
                           )
                         else
-                          const Text("no recent update", style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic)),
+                          const PdaText("no recent update", style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic)),
                       ],
                     ),
                   ),
@@ -233,7 +234,7 @@ class StakeoutCardState extends State<StakeoutCard> {
                   children: [
                     if (!_s.isAnyOptionActive(stakeout: _stakeout!))
                       Flexible(
-                        child: Text(
+                        child: PdaText(
                           "Nothing enabled, expand the card for options!",
                           style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic, color: Colors.orange[800]),
                         ),
@@ -364,7 +365,7 @@ class StakeoutCardState extends State<StakeoutCard> {
                       ),
                     ),
                     const SizedBox(width: 5),
-                    const Text(
+                    const PdaText(
                       'Notes: ',
                       style: TextStyle(fontSize: 12),
                     ),
@@ -420,7 +421,7 @@ class StakeoutCardState extends State<StakeoutCard> {
                     ),
                   ),
                   SizedBox(width: 8),
-                  Text("Is okay"),
+                  PdaText("Is okay"),
                 ],
               ),
               Switch(
@@ -448,7 +449,7 @@ class StakeoutCardState extends State<StakeoutCard> {
                     ),
                   ),
                   SizedBox(width: 8),
-                  Text("Is hospitalized"),
+                  PdaText("Is hospitalized"),
                 ],
               ),
               Switch(
@@ -475,7 +476,7 @@ class StakeoutCardState extends State<StakeoutCard> {
                     ),
                   ),
                   SizedBox(width: 8),
-                  Text("Is revivable"),
+                  PdaText("Is revivable"),
                 ],
               ),
               Switch(
@@ -502,7 +503,7 @@ class StakeoutCardState extends State<StakeoutCard> {
                     ),
                   ),
                   SizedBox(width: 8),
-                  Text("Has landed"),
+                  PdaText("Has landed"),
                 ],
               ),
               Switch(
@@ -529,7 +530,7 @@ class StakeoutCardState extends State<StakeoutCard> {
                     ),
                   ),
                   SizedBox(width: 8),
-                  Text("Comes online"),
+                  PdaText("Comes online"),
                 ],
               ),
               Switch(
@@ -556,7 +557,7 @@ class StakeoutCardState extends State<StakeoutCard> {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  const Text("Life below %"),
+                  const PdaText("Life below %"),
                 ],
               ),
               Switch(
@@ -575,7 +576,7 @@ class StakeoutCardState extends State<StakeoutCard> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("Percentage"),
+                  const PdaText("Percentage"),
                   GestureDetector(
                     child: Container(
                       decoration: BoxDecoration(border: Border.all()),
@@ -605,7 +606,7 @@ class StakeoutCardState extends State<StakeoutCard> {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  const Text("Offline time"),
+                  const PdaText("Offline time"),
                 ],
               ),
               Switch(
@@ -624,7 +625,7 @@ class StakeoutCardState extends State<StakeoutCard> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("Hours"),
+                  const PdaText("Hours"),
                   GestureDetector(
                     child: Container(
                       decoration: BoxDecoration(border: Border.all()),
@@ -814,7 +815,7 @@ class StakeoutCardState extends State<StakeoutCard> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text("Life"),
+                            const PdaText("Life"),
                             Form(
                               key: _lifePercentageFormController,
                               child: SizedBox(
@@ -878,7 +879,7 @@ class StakeoutCardState extends State<StakeoutCard> {
                         ),
                         const SizedBox(height: 20),
                         TextButton(
-                          child: const Text("Close"),
+                          child: const PdaText("Close"),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
@@ -953,7 +954,7 @@ class StakeoutCardState extends State<StakeoutCard> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text("Time"),
+                            const PdaText("Time"),
                             Form(
                               key: _offlineHoursFormController,
                               child: SizedBox(
@@ -1017,7 +1018,7 @@ class StakeoutCardState extends State<StakeoutCard> {
                         ),
                         const SizedBox(height: 20),
                         TextButton(
-                          child: const Text("Close"),
+                          child: const PdaText("Close"),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },

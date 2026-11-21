@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/models/chat/chat_models.dart';
 import 'package:torn_pda/pages/chat/chat_player_nicknames_page.dart';
@@ -17,8 +18,8 @@ class ChatPeopleSettingsPage extends StatelessWidget {
         final prefs = NativeChat.prefs;
         return [
           SwitchListTile(
-            title: const Text('Color per player'),
-            subtitle: const Text('Each sender keeps the same name color in rooms'),
+            title: const PdaText('Color per player'),
+            subtitle: const PdaText('Each sender keeps the same name color in rooms'),
             value: prefs.playerColors,
             onChanged: prefs.setPlayerColors,
           ),

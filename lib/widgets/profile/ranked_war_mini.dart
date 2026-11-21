@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
@@ -137,7 +138,7 @@ class RankedWarMiniState extends State<RankedWarMini> {
                         ),
                       ],
                     ),
-                    const Text(
+                    const PdaText(
                       " vs ",
                       style: TextStyle(
                         fontSize: 12,

@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:torn_pda/l10n/app_language.dart';
 import 'dart:async';
 import 'dart:io';
@@ -221,7 +222,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
           if (_webViewProvider.appCanOpenBrowser) const PdaBrowserIcon(),
         ],
       ),
-      title: const Text('Travel', style: TextStyle(color: Colors.white)),
+      title: const PdaText('Travel', style: TextStyle(color: Colors.white)),
       actions: <Widget>[
         IconButton(
           icon: Icon(
@@ -231,7 +232,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
           onPressed: () {
             _updateInformation();
             BotToast.showText(
-              text: "Refreshing",
+              text: context.interfaceText("Refreshing"),
               textStyle: const TextStyle(
                 fontSize: 14,
                 color: Colors.white,
@@ -331,7 +332,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
         await _scheduleNotification().then((value) {
           String? formattedTime = _formatTime(value);
           BotToast.showText(
-            text: "Notification set for $formattedTime",
+            text: context.interfaceText("Notification set for {0}", [formattedTime]),
             textStyle: const TextStyle(
               fontSize: 14,
               color: Colors.white,
@@ -359,7 +360,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
       onTap: () async {
         await _cancelTravelNotification();
         BotToast.showText(
-          text: "Notification cancelled!",
+          text: context.interfaceText("Notification cancelled!"),
           textStyle: const TextStyle(
             fontSize: 14,
             color: Colors.black,
@@ -387,7 +388,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
         await _setAlarm().then((value) {
           String? formattedTime = _formatTime(value);
           BotToast.showText(
-            text: 'Alarm set for $formattedTime!',
+            text: context.interfaceText("Alarm set for {0}!", [formattedTime]),
             textStyle: const TextStyle(
               fontSize: 14,
               color: Colors.white,
@@ -416,7 +417,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
         await _setAlarm().then((value) {
           String? formattedTime = _formatTime(value);
           BotToast.showText(
-            text: 'Alarm set for $formattedTime!',
+            text: context.interfaceText("Alarm set for {0}!", [formattedTime]),
             textStyle: const TextStyle(
               fontSize: 14,
               color: Colors.white,
@@ -444,7 +445,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
       onTap: () async {
         await _cancelAlarmIos();
         BotToast.showText(
-          text: 'Alarm cancelled!',
+          text: context.interfaceText('Alarm cancelled!'),
           textStyle: const TextStyle(
             fontSize: 14,
             color: Colors.black,
@@ -472,7 +473,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
         await _setTimer().then((value) {
           String? formattedTime = _formatTime(value);
           BotToast.showText(
-            text: "Timer set for $formattedTime",
+            text: context.interfaceText("Timer set for {0}", [formattedTime]),
             textStyle: const TextStyle(
               fontSize: 14,
               color: Colors.white,
@@ -558,7 +559,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
     // We detected no api key loaded in preferences
     if (_myCurrentKey == '') {
       return <Widget>[
-        const Text(
+        const PdaText(
           'Torn API Key not found!',
           style: TextStyle(
             color: Colors.red,
@@ -568,7 +569,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 40, vertical: 30),
-          child: Text(
+          child: PdaText(
             'Please go to the Settings section and configure your '
             'Torn API Key properly.',
           ),
@@ -584,7 +585,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
             children: <Widget>[
               const Padding(
                 padding: EdgeInsetsDirectional.only(bottom: 15),
-                child: Text(
+                child: PdaText(
                   "ERROR CONTACTING TORN",
                   style: TextStyle(
                     color: Colors.red,
@@ -592,9 +593,9 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
                   ),
                 ),
               ),
-              Text("Error: $_errorReason"),
+              PdaText("Error: {0}", values: [_errorReason]),
               const SizedBox(height: 40),
-              const Text("You can still try to visit the website:"),
+              const PdaText("You can still try to visit the website:"),
               const SizedBox(height: 10),
               _travelAgencyButton(),
             ],
@@ -613,8 +614,8 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
           ),
           Padding(
             padding: const EdgeInsetsDirectional.only(bottom: 10),
-            child: Text(
-              'Arrived in ${_travelModel.destination}!',
+            child: PdaText(
+              "Arrived in {0}!", values: [_travelModel.destination],
               style: const TextStyle(
                 color: Colors.orange,
                 fontSize: 20,
@@ -632,7 +633,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: ElevatedButton(
-              child: const Text("Go visit!"),
+              child: const PdaText("Go visit!"),
               onPressed: () async {
                 await context.read<WebViewProvider>().openBrowserPreference(
                       context: context,
@@ -662,8 +663,8 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
               width: 150,
             ),
           ),
-          Text(
-            'Approaching ${_travelModel.destination}!',
+          PdaText(
+            "Approaching {0}!", values: [_travelModel.destination],
             style: const TextStyle(
               color: Colors.orange,
               fontSize: 20,
@@ -729,7 +730,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
           ),
           const Padding(
             padding: EdgeInsetsDirectional.only(bottom: 30),
-            child: Text(
+            child: PdaText(
               'TRAVELING',
               style: TextStyle(
                 color: Colors.green,
@@ -738,8 +739,8 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
               ),
             ),
           ),
-          Text(
-            'Arriving in ${_travelModel.destination} at:',
+          PdaText(
+            "Arriving in {0} at:", values: [_travelModel.destination],
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -825,7 +826,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
                 width: 150,
               ),
             ),
-            const Text(
+            const PdaText(
               'NO TRAVEL DETECTED',
               style: TextStyle(
                 fontSize: 16,
@@ -834,7 +835,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
             ),
             const Padding(
               padding: EdgeInsetsDirectional.only(top: 8, bottom: 40),
-              child: Text(
+              child: PdaText(
                 '(auto refreshing)',
                 style: TextStyle(
                   fontSize: 14,
@@ -862,7 +863,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
 
   ElevatedButton _travelAgencyButton() {
     return ElevatedButton(
-      child: const Text("Travel Agency"),
+      child: const PdaText("Travel Agency"),
       onPressed: () async {
         await context.read<WebViewProvider>().openBrowserPreference(
               context: context,
@@ -1054,7 +1055,7 @@ class TravelPageState extends State<TravelPage> with WidgetsBindingObserver {
       final available = await AlarmKitServiceIos.isAvailable();
       if (!available) {
         BotToast.showText(
-          text: 'Alarms are not available on this iOS device!',
+          text: context.interfaceText('Alarms are not available on this iOS device!'),
           textStyle: const TextStyle(
             fontSize: 14,
             color: Colors.white,

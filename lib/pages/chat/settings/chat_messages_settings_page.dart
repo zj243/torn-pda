@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/models/chat/chat_rooms.dart';
 import 'package:torn_pda/pages/chat/chat_item_nicknames_page.dart';
@@ -31,9 +32,9 @@ class ChatMessagesSettingsPage extends StatelessWidget {
             child: SegmentedButton<ChatImageAutoLoad>(
               showSelectedIcon: false,
               segments: const [
-                ButtonSegment(value: ChatImageAutoLoad.never, label: Text('Never')),
-                ButtonSegment(value: ChatImageAutoLoad.torn, label: Text('Only Torn')),
-                ButtonSegment(value: ChatImageAutoLoad.always, label: Text('Always')),
+                ButtonSegment(value: ChatImageAutoLoad.never, label: PdaText('Never')),
+                ButtonSegment(value: ChatImageAutoLoad.torn, label: PdaText('Only Torn')),
+                ButtonSegment(value: ChatImageAutoLoad.always, label: PdaText('Always')),
               ],
               selected: {value},
               onSelectionChanged: (v) => onChanged(v.first),
@@ -56,14 +57,14 @@ class ChatMessagesSettingsPage extends StatelessWidget {
         final prefs = NativeChat.prefs;
         return [
           SwitchListTile(
-            title: const Text('Load images in private chats'),
-            subtitle: const Text('Private chats, faction, company and groups. Known sites only, others wait for a tap'),
+            title: const PdaText('Load images in private chats'),
+            subtitle: const PdaText('Private chats, faction, company and groups. Known sites only, others wait for a tap'),
             value: prefs.imagesPrivate,
             onChanged: prefs.setImagesPrivate,
           ),
           SwitchListTile(
-            title: const Text('Load images in public channels'),
-            subtitle: const Text('Global, Trade and other public rooms. Known sites only, others wait for a tap'),
+            title: const PdaText('Load images in public channels'),
+            subtitle: const PdaText('Global, Trade and other public rooms. Known sites only, others wait for a tap'),
             value: prefs.imagesPublic,
             onChanged: prefs.setImagesPublic,
           ),
@@ -76,7 +77,7 @@ class ChatMessagesSettingsPage extends StatelessWidget {
           if (prefs.linkPreviews == ChatImageAutoLoad.always) ...[
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-              child: Text('Load link previews automatically', style: Theme.of(context).textTheme.titleSmall),
+              child: PdaText('Load link previews automatically', style: Theme.of(context).textTheme.titleSmall),
             ),
             for (final group in prefs.tickerOptions)
               SwitchListTile(
@@ -87,14 +88,14 @@ class ChatMessagesSettingsPage extends StatelessWidget {
               ),
           ],
           SwitchListTile(
-            title: const Text('Play YouTube videos in chat'),
-            subtitle: const Text('Off opens them like any other link'),
+            title: const PdaText('Play YouTube videos in chat'),
+            subtitle: const PdaText('Off opens them like any other link'),
             value: prefs.youtubeInline,
             onChanged: prefs.setYoutubeInline,
           ),
           SwitchListTile(
-            title: const Text('Preview links in a window'),
-            subtitle: const Text('A small browser over the app, without scripts'),
+            title: const PdaText('Preview links in a window'),
+            subtitle: const PdaText('A small browser over the app, without scripts'),
             value: prefs.linkWindow,
             onChanged: prefs.setLinkWindow,
           ),
@@ -104,15 +105,15 @@ class ChatMessagesSettingsPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Open links in', style: Theme.of(context).textTheme.bodyMedium),
+                  PdaText('Open links in', style: Theme.of(context).textTheme.bodyMedium),
                   const SizedBox(height: 4),
                   SizedBox(
                     width: double.infinity,
                     child: SegmentedButton<bool>(
                       showSelectedIcon: false,
                       segments: const [
-                        ButtonSegment(value: false, label: Text('Main tab')),
-                        ButtonSegment(value: true, label: Text('New tab')),
+                        ButtonSegment(value: false, label: PdaText('Main tab')),
+                        ButtonSegment(value: true, label: PdaText('New tab')),
                       ],
                       selected: {prefs.linkNewTab},
                       onSelectionChanged: (v) => prefs.setLinkNewTab(v.first),
@@ -123,34 +124,34 @@ class ChatMessagesSettingsPage extends StatelessWidget {
             ),
           const ChatSettingsHeading('Notepad'),
           SwitchListTile(
-            title: const Text('Show notepad'),
-            subtitle: const Text("Torn's notepad, from the chat list"),
+            title: const PdaText('Show notepad'),
+            subtitle: const PdaText("Torn's notepad, from the chat list"),
             value: prefs.notepad,
             onChanged: prefs.setNotepad,
           ),
           if (prefs.notepad)
             SwitchListTile(
-              title: const Text('Link previews in notes'),
-              subtitle: const Text('Off keeps links as plain text, ready to copy'),
+              title: const PdaText('Link previews in notes'),
+              subtitle: const PdaText('Off keeps links as plain text, ready to copy'),
               value: prefs.notePreviews,
               onChanged: prefs.setNotePreviews,
             ),
           const ChatSettingsHeading('Trade'),
           SwitchListTile(
-            title: const Text('Price check on offers'),
-            subtitle: const Text('Shows the market value next to WTS and WTB prices in Trade and Global'),
+            title: const PdaText('Price check on offers'),
+            subtitle: const PdaText('Shows the market value next to WTS and WTB prices in Trade and Global'),
             value: prefs.priceCheck,
             onChanged: prefs.setPriceCheck,
           ),
           SwitchListTile(
-            title: const Text('Bazaar status'),
-            subtitle: const Text("Shows below trade offers if the seller's bazaar is open"),
+            title: const PdaText('Bazaar status'),
+            subtitle: const PdaText("Shows below trade offers if the seller's bazaar is open"),
             value: prefs.bazaarAnalysis,
             onChanged: prefs.priceCheck ? prefs.setBazaarAnalysis : null,
           ),
           SwitchListTile(
-            title: const Text('Compare amounts with your cash'),
-            subtitle: const Text('Tapping an amount says if your cash covers it'),
+            title: const PdaText('Compare amounts with your cash'),
+            subtitle: const PdaText('Tapping an amount says if your cash covers it'),
             value: prefs.moneyOnHand,
             onChanged: prefs.setMoneyOnHand,
           ),
@@ -162,15 +163,15 @@ class ChatMessagesSettingsPage extends StatelessWidget {
           ),
           const ChatSettingsHeading('Reading'),
           SwitchListTile(
-            title: const Text('Explain Torn slang everywhere'),
-            subtitle: const Text('Underline terms like OC or xanax in every chat, not only in the New players room'),
+            title: const PdaText('Explain Torn slang everywhere'),
+            subtitle: const PdaText('Underline terms like OC or xanax in every chat, not only in the New players room'),
             value: prefs.slangEverywhere,
             onChanged: prefs.setSlangEverywhere,
           ),
           ListTile(
             leading: const Icon(Icons.translate_rounded),
-            title: const Text('Translate to'),
-            subtitle: const Text(
+            title: const PdaText('Translate to'),
+            subtitle: const PdaText(
               'Long press a message and tap translate. Only that text goes to Google Translate, '
               'or to MyMemory if it fails',
             ),
@@ -178,7 +179,7 @@ class ChatMessagesSettingsPage extends StatelessWidget {
               value: ChatTranslator.languages.containsKey(prefs.translateTo) ? prefs.translateTo : '',
               underline: const SizedBox(),
               items: [
-                DropdownMenuItem(value: '', child: Text('Device (${ChatTranslator.deviceLanguage()})')),
+                DropdownMenuItem(value: '', child: PdaText("Device ({0})", values: [ChatTranslator.deviceLanguage()])),
                 for (final e in ChatTranslator.languages.entries) DropdownMenuItem(value: e.key, child: Text(e.value)),
               ],
               onChanged: (v) => prefs.setTranslateTo(v ?? ''),

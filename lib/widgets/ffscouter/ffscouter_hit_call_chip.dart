@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -115,19 +116,18 @@ class FFScouterHitCallChip extends StatelessWidget {
           final mine = claims.any((c) => c.claimerId == UserHelper.playerId);
           final myCalls = ctrl.myClaims.length;
           return AlertDialog(
-            title: Text("Calls on ${targetName ?? targetId}", style: const TextStyle(fontSize: 16)),
+            title: PdaText("Calls on {0}", values: [targetName ?? targetId], style: const TextStyle(fontSize: 16)),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 if (claims.isEmpty)
-                  const Text("Nobody in your faction has called this target", style: TextStyle(fontSize: 13)),
+                  const PdaText("Nobody in your faction has called this target", style: TextStyle(fontSize: 13)),
                 for (int i = 0; i < claims.length; i++)
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 2),
-                    child: Text(
-                      "#${i + 1}  ${claims[i].claimerName ?? claims[i].claimerId}  "
-                      "(expires in ${_remaining(claims[i])})",
+                    child: PdaText(
+                      "#{0}  {1}  (expires in {2})", values: [i + 1, claims[i].claimerName ?? claims[i].claimerId, _remaining(claims[i])],
                       style: TextStyle(
                         fontSize: 13,
                         fontWeight: claims[i].claimerId == UserHelper.playerId ? FontWeight.bold : FontWeight.normal,
@@ -135,9 +135,8 @@ class FFScouterHitCallChip extends StatelessWidget {
                     ),
                   ),
                 const SizedBox(height: 10),
-                Text(
-                  "Calls are shared with your faction through FFScouter and expire after "
-                  "${ctrl.ttlSeconds ~/ 60} minutes.",
+                PdaText(
+                  "Calls are shared with your faction through FFScouter and expire after {0} minutes.", values: [ctrl.ttlSeconds ~/ 60],
                   style: TextStyle(fontSize: 11, color: Colors.grey[600], fontStyle: FontStyle.italic),
                 ),
               ],
@@ -149,7 +148,7 @@ class FFScouterHitCallChip extends StatelessWidget {
                     Navigator.of(ctx).pop();
                     _toast(await ctrl.releaseAll());
                   },
-                  child: Text("Release all mine ($myCalls)"),
+                  child: PdaText("Release all mine ({0})", values: [myCalls]),
                 ),
               if (mine)
                 TextButton(
@@ -157,7 +156,7 @@ class FFScouterHitCallChip extends StatelessWidget {
                     Navigator.of(ctx).pop();
                     _toast(await ctrl.unclaim(targetId));
                   },
-                  child: const Text("Release"),
+                  child: const PdaText("Release"),
                 )
               else
                 TextButton(
@@ -167,7 +166,7 @@ class FFScouterHitCallChip extends StatelessWidget {
                   },
                   child: Text(claims.isEmpty ? "Call" : "Call too"),
                 ),
-              TextButton(onPressed: () => Navigator.of(ctx).pop(), child: const Text("Close")),
+              TextButton(onPressed: () => Navigator.of(ctx).pop(), child: const PdaText("Close")),
             ],
           );
         },

@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/models/chat/chat_models.dart';
 import 'package:torn_pda/providers/chat/chat_prefs.dart';
@@ -71,7 +72,7 @@ class _ChatFactionEventsFoldState extends State<ChatFactionEventsFold> {
                           child: Text('${chatClockOf(context).clock(e.createdAt)}  ${e.content}', style: style),
                         ),
                       const SizedBox(height: 4),
-                      Text(
+                      PdaText(
                         'Only you see this',
                         style: theme.textTheme.labelSmall?.copyWith(
                           color: scheme.onSurfaceVariant.withValues(alpha: 0.7),
@@ -96,7 +97,7 @@ class ChatFactionEventsSetting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(
-      title: const Text('Faction events in chat'),
+      title: const PdaText('Faction events in chat'),
       subtitle: Text(
         prefs.factionEventsDenied
             ? 'Your API key cannot read faction news. Give it faction access, then turn this on again'

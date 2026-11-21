@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:developer';
 
 import 'package:bot_toast/bot_toast.dart';
@@ -173,7 +174,7 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
                 children: [
                   const GoldStorageIcon(size: 16),
                   const SizedBox(width: 6),
-                  Text(
+                  PdaText(
                     "Native storage: set limit",
                     style: TextStyle(fontSize: 11, color: Colors.amber.shade800, fontWeight: FontWeight.w600),
                   ),
@@ -215,11 +216,11 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
                 maxLength: 100,
                 minLines: 1,
                 maxLines: 2,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   isDense: true,
                   counterText: "",
                   border: OutlineInputBorder(),
-                  labelText: 'Script name',
+                  labelText: context.interfaceText('Script name'),
                 ),
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -250,9 +251,9 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Row(children: [Icon(MdiIcons.earth, size: 14), SizedBox(width: 4), Text("Remote load/update")]),
+                const Row(children: [Icon(MdiIcons.earth, size: 14), SizedBox(width: 4), PdaText("Remote load/update")]),
                 ElevatedButton(
-                  child: const Text("Configure"),
+                  child: const PdaText("Configure"),
                   onPressed: () {
                     _tabController.animateTo(1);
                   },
@@ -266,7 +267,7 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Row(
-                  children: [Icon(MdiIcons.lightningBoltOutline, size: 16), SizedBox(width: 4), Text("Injection time")],
+                  children: [Icon(MdiIcons.lightningBoltOutline, size: 16), SizedBox(width: 4), PdaText("Injection time")],
                 ),
                 ToggleSwitch(
                   minHeight: 28,
@@ -310,11 +311,11 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
                   style: const TextStyle(fontSize: 12),
                   controller: _addSourceController,
                   keyboardType: TextInputType.multiline,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     isDense: true,
                     counterText: "",
                     border: OutlineInputBorder(),
-                    labelText: 'Paste source code',
+                    labelText: context.interfaceText('Paste source code'),
                   ),
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -329,7 +330,7 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
                     } on Exception catch (e) {
                       if (e.toString().contains("No header found")) {
                         BotToast.showText(
-                          text: "No header was found in the script, it will be injected in all pages!",
+                          text: context.interfaceText("No header was found in the script, it will be injected in all pages!"),
                           textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                           contentColor: Colors.orange[800]!,
                           duration: const Duration(seconds: 4),
@@ -366,7 +367,7 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
                     ),
                     const SizedBox(width: 8),
                     ElevatedButton(
-                      child: const Text("Cancel"),
+                      child: const PdaText("Cancel"),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
@@ -391,14 +392,14 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
-              title: const Text('Custom API Key'),
+              title: const PdaText('Custom API Key'),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (widget.editingExistingScript)
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "IMPORTANT: be aware that this change MIGHT NOT take "
                           "effect immediately, particularly if this script was already "
                           "running before you set the API key.\n\n"
@@ -421,7 +422,7 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
                                     apiKeyLeakWarningAccepted = true;
                                   });
                                 },
-                          child: const Text("Understood"),
+                          child: const PdaText("Understood"),
                         ),
                         const SizedBox(height: 12),
                       ],
@@ -429,20 +430,20 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
                   TextField(
                     controller: apiKeyController,
                     enabled: apiKeyLeakWarningAccepted,
-                    decoration: const InputDecoration(hintText: "Custom script API key"),
+                    decoration: InputDecoration(hintText: context.interfaceText("Custom script API key")),
                     autofocus: false,
                   ),
                 ],
               ),
               actions: <Widget>[
                 TextButton(
-                  child: const Text('Cancel'),
+                  child: const PdaText('Cancel'),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
                 ),
                 TextButton(
-                  child: const Text('Save'),
+                  child: const PdaText('Save'),
                   onPressed: apiKeyLeakWarningAccepted
                       ? () {
                           Navigator.of(context).pop(apiKeyController.text);
@@ -511,11 +512,11 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
                 controller: _remoteUrlController,
                 minLines: 1,
                 maxLines: 2,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   isDense: true,
                   counterText: "",
                   border: OutlineInputBorder(),
-                  labelText: 'Remote URL',
+                  labelText: context.interfaceText('Remote URL'),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty || !value.contains("https")) {
@@ -628,7 +629,7 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
                             BotToast.showText(
                               align: const Alignment(0, 0),
                               clickClose: true,
-                              text: "An unknown error occurred whilst parsing the remote script.",
+                              text: context.interfaceText("An unknown error occurred whilst parsing the remote script."),
                               textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                               contentColor: Colors.orange[800]!,
                               duration: const Duration(seconds: 4),
@@ -646,7 +647,7 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
                 ),
                 const SizedBox(width: 20),
                 ElevatedButton(
-                  child: const Text("Clear"),
+                  child: const PdaText("Clear"),
                   onPressed: _remoteUrlController.text.isEmpty
                       ? null
                       : () {
@@ -680,7 +681,7 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Text("Fetching script..."), SizedBox(height: 20), CircularProgressIndicator()],
+                    children: [PdaText("Fetching script..."), SizedBox(height: 20), CircularProgressIndicator()],
                   ),
                 )
               : Expanded(
@@ -701,7 +702,7 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
                           counterText: "",
                           border: const OutlineInputBorder(),
                           label: _remoteSourceController.text.isEmpty
-                              ? const Center(child: Text("Remote source"))
+                              ? const Center(child: PdaText("Remote source"))
                               : null,
                         ),
                         validator: (value) {
@@ -757,7 +758,7 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
                                 BotToast.showText(
                                   align: const Alignment(0, 0),
                                   clickClose: true,
-                                  text: "Script successfully added!",
+                                  text: context.interfaceText("Script successfully added!"),
                                   textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                                   contentColor: Colors.green,
                                   duration: const Duration(seconds: 4),
@@ -795,7 +796,7 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
                             },
                     ),
                     const SizedBox(width: 8),
-                    ElevatedButton(child: const Text("Cancel"), onPressed: Navigator.of(context).pop),
+                    ElevatedButton(child: const PdaText("Cancel"), onPressed: Navigator.of(context).pop),
                   ],
                 ),
               ),
@@ -820,7 +821,7 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
           BotToast.showText(
             align: const Alignment(0, 0),
             clickClose: true,
-            text: "Error parsing script: $e",
+            text: context.interfaceText("Error parsing script: {0}", [e]),
             textStyle: const TextStyle(fontSize: 14, color: Colors.white),
             contentColor: Colors.orange[800]!,
             duration: const Duration(seconds: 4),
@@ -866,7 +867,7 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
         } on Exception catch (e) {
           if (e.toString().contains("No header found")) {
             BotToast.showText(
-              text: "No header was found in the script, it will be injected in all pages!",
+              text: context.interfaceText("No header was found in the script, it will be injected in all pages!"),
               textStyle: const TextStyle(fontSize: 14, color: Colors.white),
               contentColor: Colors.orange[800]!,
               duration: const Duration(seconds: 4),
@@ -891,7 +892,7 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
             BotToast.showText(
               align: const Alignment(0, 0),
               clickClose: true,
-              text: "Error parsing script: $e",
+              text: context.interfaceText("Error parsing script: {0}", [e]),
               textStyle: const TextStyle(fontSize: 14, color: Colors.white),
               contentColor: Colors.orange[800]!,
               duration: const Duration(seconds: 4),
@@ -925,7 +926,7 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
         );
         if (!couldParseHeader) {
           BotToast.showText(
-            text: "Could not parse the header, the script will inject on all pages.",
+            text: context.interfaceText("Could not parse the header, the script will inject on all pages."),
             textStyle: const TextStyle(fontSize: 14, color: Colors.white),
             contentColor: Colors.orange[800]!,
             duration: const Duration(seconds: 4),
@@ -949,11 +950,11 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
-          title: const Text("Script permissions"),
+          title: const PdaText("Script permissions"),
           content: SingleChildScrollView(
             child: ListBody(
               children: [
-                const Text(
+                const PdaText(
                   "This script requests the following permissions (@grant). Only continue if you trust the script and understand what these permissions are used for.",
                 ),
                 const SizedBox(height: 12),
@@ -964,8 +965,8 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
             ),
           ),
           actions: [
-            TextButton(child: const Text("Cancel"), onPressed: () => Navigator.of(dialogContext).pop(false)),
-            TextButton(child: const Text("Continue"), onPressed: () => Navigator.of(dialogContext).pop(true)),
+            TextButton(child: const PdaText("Cancel"), onPressed: () => Navigator.of(dialogContext).pop(false)),
+            TextButton(child: const PdaText("Continue"), onPressed: () => Navigator.of(dialogContext).pop(true)),
           ],
         );
       },
@@ -977,10 +978,7 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
   void _saveScriptWithoutApiKeyWarning() {
     BotToast.showText(
       text:
-          "This script uses an API key.\n\nUnless you specify a custom one for it, "
-          "your Torn PDA API key will be used!"
-          "\n\nPress 'Set API Key' to configure or "
-          "'${widget.editingExistingScript ? "Save Update" : "Load Script"}' again to proceed without one.",
+          context.interfaceText("This script uses an API key.\n\nUnless you specify a custom one for it, your Torn PDA API key will be used!\n\nPress 'Set API Key' to configure or '{0}' again to proceed without one.", [widget.editingExistingScript ? "Save Update" : "Load Script"]),
       textStyle: const TextStyle(fontSize: 14, color: Colors.white),
       contentColor: Colors.orange[800]!,
       duration: const Duration(seconds: 10),
@@ -1013,21 +1011,21 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
               builder: (BuildContext dialogContext) {
                 const String apiUrl = "https://www.torn.com/api.html";
                 return AlertDialog(
-                  title: const Text("About Custom API Keys"),
+                  title: const PdaText("About Custom API Keys"),
                   content: SingleChildScrollView(
                     child: ListBody(
                       children: <Widget>[
-                        const Text(
+                        const PdaText(
                           "This script uses a special keyword that "
                           "tells Torn PDA that it needs an API Key to function.",
                         ),
                         const SizedBox(height: 10),
-                        const Text(
+                        const PdaText(
                           "If you don't provide an alternative API key for this script, "
                           "Torn PDA will pass its own main application API Key.",
                         ),
                         const SizedBox(height: 10),
-                        const Text(
+                        const PdaText(
                           "Usually, this is not an issue.\n\n"
                           "However, it's a good security practice to create different API keys with specific, "
                           "limited permissions based on the script's needs. "
@@ -1038,10 +1036,10 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
                         RichText(
                           text: TextSpan(
                             children: <TextSpan>[
-                              const TextSpan(
+                              TextSpan(
                                 style: TextStyle(fontSize: 16),
                                 text:
-                                    "You can find more information about Torn API key rules, permission levels, and what data they can access on the official Torn API documentation page:\n\n",
+                                    context.interfaceText("You can find more information about Torn API key rules, permission levels, and what data they can access on the official Torn API documentation page:\n\n"),
                               ),
                               TextSpan(
                                 text: apiUrl,
@@ -1063,7 +1061,7 @@ class UserScriptsAddDialogState extends State<UserScriptsAddDialog> with TickerP
                   ),
                   actions: <Widget>[
                     TextButton(
-                      child: const Text("Close"),
+                      child: const PdaText("Close"),
                       onPressed: () {
                         Navigator.of(dialogContext).pop();
                       },

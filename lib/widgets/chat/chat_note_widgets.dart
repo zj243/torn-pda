@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -63,15 +64,15 @@ class _ChatNoteLineState extends State<ChatNoteLine> {
         }
         return Semantics(
           button: true,
-          label: 'Chat note: $note. Edit',
+          label: context.interfaceText("Chat note: {0}. Edit", [note]),
           excludeSemantics: true,
           child: InkWell(
             onTap: () => showChatNoteEditor(context, widget.id, widget.name),
             child: Text.rich(
               TextSpan(
                 children: [
-                  const TextSpan(
-                    text: 'Chat note: ',
+                  TextSpan(
+                    text: context.interfaceText('Chat note: '),
                     style: TextStyle(fontWeight: FontWeight.w600),
                   ),
                   ...spans,
@@ -114,7 +115,7 @@ class ChatPlayerNotes extends StatelessWidget {
                 Text.rich(
                   TextSpan(
                     children: [
-                      TextSpan(text: 'Player note: ', style: bold),
+                      TextSpan(text: context.interfaceText('Player note: '), style: bold),
                       TextSpan(text: player),
                     ],
                   ),
@@ -165,7 +166,7 @@ class _ChatNoteDialogState extends State<_ChatNoteDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Chat note: ${widget.name}'),
+      title: PdaText("Chat note: {0}", values: [widget.name]),
       content: TextField(
         controller: _text,
         autofocus: true,
@@ -173,13 +174,13 @@ class _ChatNoteDialogState extends State<_ChatNoteDialog> {
         maxLines: 5,
         maxLength: ChatPrefs.playerNoteMax,
         textCapitalization: TextCapitalization.sentences,
-        decoration: const InputDecoration(helperText: 'Only visible in chat'),
+        decoration: InputDecoration(helperText: context.interfaceText('Only visible in chat')),
       ),
       actions: [
         if (NativeChat.prefs.playerNoteFor(widget.id).isNotEmpty)
-          TextButton(onPressed: () => _save(''), child: const Text('Delete')),
-        TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Cancel')),
-        FilledButton(onPressed: () => _save(_text.text), child: const Text('Save')),
+          TextButton(onPressed: () => _save(''), child: const PdaText('Delete')),
+        TextButton(onPressed: () => Navigator.of(context).pop(), child: const PdaText('Cancel')),
+        FilledButton(onPressed: () => _save(_text.text), child: const PdaText('Save')),
       ],
     );
   }

@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -26,11 +27,11 @@ class EventsFilterDialogState extends State<EventsFilterDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text("Filter out events"),
+      title: const PdaText("Filter out events"),
       content: SingleChildScrollView(
         child: Column(
           children: [
-            const Text(
+            const PdaText(
               "Choose which type of events you would like to "
               "filter OUT (you won't receive notifications from these).",
               style: TextStyle(
@@ -42,7 +43,7 @@ class EventsFilterDialogState extends State<EventsFilterDialog> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("Organized crimes"),
+                  const PdaText("Organized crimes"),
                   Switch(
                     value: _firebaseUserModel!.eventsFilter.contains('crimes'),
                     onChanged: (value) {
@@ -68,7 +69,7 @@ class EventsFilterDialogState extends State<EventsFilterDialog> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("Company trains"),
+                  const PdaText("Company trains"),
                   Switch(
                     value: _firebaseUserModel!.eventsFilter.contains('trains'),
                     onChanged: (value) {
@@ -94,7 +95,7 @@ class EventsFilterDialogState extends State<EventsFilterDialog> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("Racing"),
+                  const PdaText("Racing"),
                   Switch(
                     value: _firebaseUserModel!.eventsFilter.contains('racing'),
                     onChanged: (value) {
@@ -120,7 +121,7 @@ class EventsFilterDialogState extends State<EventsFilterDialog> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("Bazaar"),
+                  const PdaText("Bazaar"),
                   Switch(
                     value: _firebaseUserModel!.eventsFilter.contains('bazaar'),
                     onChanged: (value) {
@@ -146,7 +147,7 @@ class EventsFilterDialogState extends State<EventsFilterDialog> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("Attacks"),
+                  const PdaText("Attacks"),
                   Switch(
                     value: _firebaseUserModel!.eventsFilter.contains('attacks'),
                     onChanged: (value) {
@@ -172,7 +173,7 @@ class EventsFilterDialogState extends State<EventsFilterDialog> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("Revives"),
+                  const PdaText("Revives"),
                   Switch(
                     value: _firebaseUserModel!.eventsFilter.contains('revives'),
                     onChanged: (value) {
@@ -198,7 +199,7 @@ class EventsFilterDialogState extends State<EventsFilterDialog> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("Trades"),
+                  const PdaText("Trades"),
                   Switch(
                     value: _firebaseUserModel!.eventsFilter.contains('trades'),
                     onChanged: (value) {
@@ -224,7 +225,7 @@ class EventsFilterDialogState extends State<EventsFilterDialog> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("Market sales"),
+                  const PdaText("Market sales"),
                   Switch(
                     value: _firebaseUserModel!.eventsFilter.contains('market_sales'),
                     onChanged: (value) {
@@ -250,7 +251,7 @@ class EventsFilterDialogState extends State<EventsFilterDialog> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("Bounty claims"),
+                  const PdaText("Bounty claims"),
                   Switch(
                     value: _firebaseUserModel!.eventsFilter.contains('bounty_claims'),
                     onChanged: (value) {
@@ -276,7 +277,7 @@ class EventsFilterDialogState extends State<EventsFilterDialog> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("Player referrals"),
+                  const PdaText("Player referrals"),
                   Switch(
                     value: _firebaseUserModel!.eventsFilter.contains('referrals'),
                     onChanged: (value) {
@@ -302,7 +303,7 @@ class EventsFilterDialogState extends State<EventsFilterDialog> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("Faction applications"),
+                  const PdaText("Faction applications"),
                   Switch(
                     value: _firebaseUserModel!.eventsFilter.contains('faction_applications'),
                     onChanged: (value) {
@@ -328,7 +329,7 @@ class EventsFilterDialogState extends State<EventsFilterDialog> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("Property rental"),
+                  const PdaText("Property rental"),
                   Switch(
                     value: _firebaseUserModel!.eventsFilter.contains('rental'),
                     onChanged: (value) {
@@ -356,7 +357,7 @@ class EventsFilterDialogState extends State<EventsFilterDialog> {
         Padding(
           padding: const EdgeInsets.only(right: 15),
           child: TextButton(
-            child: const Text("Close"),
+            child: const PdaText("Close"),
             onPressed: () {
               Navigator.of(context).pop();
             },

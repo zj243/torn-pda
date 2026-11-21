@@ -1,5 +1,6 @@
 // Package imports:
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:torn_pda/drawer.dart';
@@ -56,7 +57,7 @@ class AlertsSettingsWindowsState extends State<AlertsSettingsWindows> {
             children: [
               Padding(
                 padding: EdgeInsets.all(20),
-                child: Text(
+                child: PdaText(
                   "Alerts are automatic notifications that you only "
                   "need to activate once.",
                   style: TextStyle(fontSize: 12),
@@ -74,7 +75,7 @@ class AlertsSettingsWindowsState extends State<AlertsSettingsWindows> {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
-      title: const Text('Alerts', style: TextStyle(color: Colors.white)),
+      title: const PdaText('Alerts', style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: const Icon(Icons.menu),
         onPressed: () {

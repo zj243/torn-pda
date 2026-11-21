@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:provider/provider.dart';
@@ -44,8 +45,8 @@ class FullScreenExplanationDialog extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    const Text("Full screen...!?\n"),
-                    const Text(
+                    const PdaText("Full screen...!?\n"),
+                    const PdaText(
                       "You've entered the full screen mode!\n\n"
                       "Bear in mind that by default, all Torn PDA widgets and Torn chats will be deactivated, so that "
                       "you can concentrate on what's important. If you'd like to change this behavior, you can "
@@ -72,7 +73,7 @@ class FullScreenExplanationDialog extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         TextButton(
-                          child: const Text("Close"),
+                          child: const PdaText("Close"),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },

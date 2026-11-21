@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -207,7 +208,7 @@ class PlayerNotesListDialogState extends State<PlayerNotesListDialog> {
           child: Column(
             children: [
               // Title
-              Text(
+              PdaText(
                 'Player Notes',
                 style: TextStyle(
                   fontSize: 18,
@@ -222,7 +223,7 @@ class PlayerNotesListDialogState extends State<PlayerNotesListDialog> {
                 controller: _searchController,
                 style: TextStyle(color: _themeProvider.mainText),
                 decoration: InputDecoration(
-                  hintText: 'Search by name or ID...',
+                  hintText: context.interfaceText('Search by name or ID...'),
                   hintStyle: TextStyle(color: _themeProvider.mainText.withValues(alpha: 0.6)),
                   prefixIcon: Icon(Icons.search, color: _themeProvider.mainText),
                   border: OutlineInputBorder(
@@ -281,7 +282,7 @@ class PlayerNotesListDialogState extends State<PlayerNotesListDialog> {
                 children: [
                   TextButton(
                     onPressed: () => Navigator.of(context).pop(),
-                    child: Text(
+                    child: PdaText(
                       'Close',
                       style: TextStyle(color: _themeProvider.mainText),
                     ),
@@ -463,7 +464,7 @@ class PlayerNotesListDialogState extends State<PlayerNotesListDialog> {
                           size: 20,
                         ),
                         onPressed: () => _openBrowser(note.playerId),
-                        tooltip: 'Open profile',
+                        tooltip: context.interfaceText('Open profile'),
                       ),
                     ],
                   ),

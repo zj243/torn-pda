@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -136,7 +137,7 @@ class _PipViewState extends State<PipView> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('No chain data', style: TextStyle(color: Colors.white, fontSize: 22)),
+                const PdaText('No chain data', style: TextStyle(color: Colors.white, fontSize: 22)),
                 if (chain.watcherActive && _watchLabel(chain).isNotEmpty)
                   Text(_watchLabel(chain), style: const TextStyle(color: Colors.white70, fontSize: 16)),
               ],
@@ -328,7 +329,7 @@ class _PipViewState extends State<PipView> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
+          const PdaText(
             'STAKEOUTS',
             style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
           ),

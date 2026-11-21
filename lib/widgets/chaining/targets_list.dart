@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -90,22 +91,22 @@ class TargetsListState extends State<TargetsList> {
                 final action = await showDialog<String>(
                   context: this.context,
                   builder: (ctx) => AlertDialog(
-                    title: const Text('Remove target?'),
-                    content: Text(
-                      '$targetName has a note attached. Do you want to keep or also delete the note?',
+                    title: const PdaText('Remove target?'),
+                    content: PdaText(
+                      "{0} has a note attached. Do you want to keep or also delete the note?", values: [targetName],
                     ),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.pop(ctx, 'cancel'),
-                        child: const Text('Cancel'),
+                        child: const PdaText('Cancel'),
                       ),
                       TextButton(
                         onPressed: () => Navigator.pop(ctx, 'remove'),
-                        child: const Text('Remove'),
+                        child: const PdaText('Remove'),
                       ),
                       TextButton(
                         onPressed: () => Navigator.pop(ctx, 'remove_and_delete_note'),
-                        child: const Text('Remove + delete note'),
+                        child: const PdaText('Remove + delete note'),
                       ),
                     ],
                   ),
@@ -119,7 +120,7 @@ class TargetsListState extends State<TargetsList> {
               }
 
               BotToast.showText(
-                text: 'Deleted $targetName!',
+                text: context.interfaceText("Deleted {0}!", [targetName]),
                 textStyle: const TextStyle(
                   fontSize: 14,
                   color: Colors.white,

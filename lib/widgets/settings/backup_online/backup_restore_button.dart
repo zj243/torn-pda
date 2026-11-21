@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:io';
 
 import 'package:bot_toast/bot_toast.dart';
@@ -65,14 +66,14 @@ class BackupRestoreButtonState extends State<BackupRestoreButton> with TickerPro
             },
       child: _restoreInProcess
           ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator())
-          : const Text("Restore", style: TextStyle(color: Colors.green)),
+          : const PdaText("Restore", style: TextStyle(color: Colors.green)),
     );
   }
 
   Future<void> _restoreOwnOnlineBackup() async {
     if (widget.userProfile == null) {
       BotToast.showText(
-        text: "Error getting user data: empty!",
+        text: context.interfaceText("Error getting user data: empty!"),
         contentColor: Colors.red,
         textStyle: const TextStyle(
           fontSize: 14,
@@ -155,7 +156,7 @@ class BackupRestoreButtonState extends State<BackupRestoreButton> with TickerPro
     try {
       if (widget.otherData.isEmpty) {
         BotToast.showText(
-          text: "Error getting user data: empty!",
+          text: context.interfaceText("Error getting user data: empty!"),
           contentColor: Colors.red,
           textStyle: const TextStyle(
             fontSize: 14,

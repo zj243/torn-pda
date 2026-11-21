@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -100,22 +101,22 @@ class _ChatPageState extends State<ChatPage> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Chat'),
+            const PdaText('Chat'),
             ChatConnectionLine(state: chat.connection),
           ],
         ),
         actions: [
           if (chat.available)
-            IconButton(tooltip: 'Search', icon: const Icon(Icons.search_rounded), onPressed: _openSearch),
+            IconButton(tooltip: context.interfaceText('Search'), icon: const Icon(Icons.search_rounded), onPressed: _openSearch),
           ChatAlertsButton(onOpen: _open),
           if (NativeChat.prefs.inAppEnabled)
-            const IconButton(
-              tooltip: 'Open in a window',
+            IconButton(
+              tooltip: context.interfaceText('Open in a window'),
               icon: Icon(Icons.picture_in_picture_alt_rounded),
               onPressed: NativeChat.openBigWindow,
             ),
           IconButton(
-            tooltip: 'Chat settings',
+            tooltip: context.interfaceText('Chat settings'),
             icon: const Icon(Icons.tune_rounded),
             onPressed: () => showChatSettings(Navigator.of(context)),
           ),
@@ -181,7 +182,7 @@ class ChatInboxButtons extends StatelessWidget {
                   const SizedBox(height: 12),
                   FloatingActionButton(
                     heroTag: null,
-                    tooltip: 'New private chat',
+                    tooltip: context.interfaceText('New private chat'),
                     onPressed: () => pickNewChat(context, chat, onPick),
                     child: const Icon(Icons.add_comment_rounded),
                   ),
@@ -235,7 +236,7 @@ class _NewChatSheetState extends State<_NewChatSheet> {
                 onChanged: (text) => _onChanged(chat, text),
                 onSubmitted: chat.search,
                 decoration: InputDecoration(
-                  hintText: 'Search a player by name',
+                  hintText: context.interfaceText('Search a player by name'),
                   prefixIcon: const Icon(Icons.search_rounded),
                   filled: true,
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(24), borderSide: BorderSide.none),
@@ -266,7 +267,7 @@ class _NewChatSheetState extends State<_NewChatSheet> {
                             title: Text(user.name),
                             subtitle: Text('[${user.id}]'),
                             trailing: IconButton(
-                              tooltip: 'Player details',
+                              tooltip: context.interfaceText('Player details'),
                               icon: const Icon(Icons.more_vert_rounded),
                               onPressed: () => showChatPlayerActions(context, user),
                             ),

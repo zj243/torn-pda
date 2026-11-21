@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:math' as math;
 
@@ -267,13 +268,13 @@ class ChatWindowBox extends StatelessWidget {
                           child: Text(fullscreen ? 'Restore window size' : 'Maximize window'),
                         ),
                       if (onCycleSize != null)
-                        PopupMenuItem(value: onCycleSize, child: Text('Window size: ${sizeLabel ?? 'custom'}')),
+                        PopupMenuItem(value: onCycleSize, child: PdaText("Window size: {0}", values: [sizeLabel ?? 'custom'])),
                       if (onNext != null && nextCount > 0)
-                        PopupMenuItem(value: onNext, child: Text('Next unread ($nextCount)')),
+                        PopupMenuItem(value: onNext, child: PdaText("Next unread ({0})", values: [nextCount])),
                       if (onExpand != null && !expandShown)
-                        PopupMenuItem(value: onExpand, child: const Text('Open the full chat')),
+                        PopupMenuItem(value: onExpand, child: const PdaText('Open the full chat')),
                       if (onSettings case final onSettings?)
-                        PopupMenuItem(value: onSettings, child: const Text('Chat settings')),
+                        PopupMenuItem(value: onSettings, child: const PdaText('Chat settings')),
                     ],
                   ),
                   _headerButton('Close', const Icon(Icons.close_rounded), onClose),
@@ -484,7 +485,7 @@ class _ChatQuickWindowState extends State<ChatQuickWindow> {
                   padding: const EdgeInsets.fromLTRB(12, 6, 12, 0),
                   child: Text(reason, textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodySmall),
                 ),
-              if (!chat.needsLogin) TextButton(onPressed: chat.retry, child: const Text('Try again')),
+              if (!chat.needsLogin) TextButton(onPressed: chat.retry, child: const PdaText('Try again')),
             ],
           ),
         );
@@ -507,7 +508,7 @@ class _ChatQuickWindowState extends State<ChatQuickWindow> {
     _arrivals.update(room.id, all);
     final shown = all.sublist(math.max(0, all.length - _shown));
     if (shown.isEmpty) {
-      return Center(child: Text('No messages yet', style: Theme.of(context).textTheme.bodySmall));
+      return Center(child: PdaText('No messages yet', style: Theme.of(context).textTheme.bodySmall));
     }
     String rowKey(int i) {
       final key = ChatArrivalTracker.keyOf(shown[i]);

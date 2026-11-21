@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:torn_pda/providers/theme_provider.dart';
@@ -167,7 +168,7 @@ class ShortcutIconPicker extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        PdaText(
           "Choose an icon:",
           style: TextStyle(fontSize: 12, color: themeProvider.mainText),
         ),
@@ -187,7 +188,7 @@ class ShortcutIconPicker extends StatelessWidget {
                 ),
                 if (fullColorIcons.isNotEmpty) ...[
                   const SizedBox(height: 8),
-                  Text(
+                  PdaText(
                     "Full color:",
                     style: TextStyle(fontSize: 10, color: Colors.grey[500]),
                   ),
@@ -208,7 +209,7 @@ class ShortcutIconPicker extends StatelessWidget {
         if (!selectedIsFullColor) ...[
           Row(
             children: [
-              Text(
+              PdaText(
                 "Icon color overlay:",
                 style: TextStyle(fontSize: 12, color: themeProvider.mainText),
               ),
@@ -232,7 +233,7 @@ class ShortcutIconPicker extends StatelessWidget {
           ],
           const SizedBox(height: 12),
         ],
-        Text(
+        PdaText(
           "Border color:",
           style: TextStyle(fontSize: 12, color: themeProvider.mainText),
         ),

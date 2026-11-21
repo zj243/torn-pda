@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -88,8 +89,8 @@ class _FFScouterTargetCardState extends State<FFScouterTargetCard> {
                       color: _themeProvider.currentTheme == AppTheme.light ? Colors.grey[300] : Colors.grey[700],
                       borderRadius: BorderRadius.circular(4),
                     ),
-                    child: Text(
-                      "Lv ${target.level ?? '?'}",
+                    child: PdaText(
+                      "Lv {0}", values: [target.level ?? '?'],
                       style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: _themeProvider.mainText),
                     ),
                   ),
@@ -104,7 +105,7 @@ class _FFScouterTargetCardState extends State<FFScouterTargetCard> {
                             padding: EdgeInsets.zero,
                             constraints: const BoxConstraints(),
                             icon: Icon(Icons.refresh, size: 20, color: Colors.blueGrey[400]),
-                            tooltip: "Refresh status",
+                            tooltip: context.interfaceText("Refresh status"),
                             onPressed: () => _refreshTargetStatus(target),
                           ),
                   ),
@@ -208,7 +209,7 @@ class _FFScouterTargetCardState extends State<FFScouterTargetCard> {
               size: 20,
               color: hasNote ? iconColor : Colors.blueGrey[400],
             ),
-            tooltip: "Notes",
+            tooltip: context.interfaceText("Notes"),
             onPressed: () {
               showPlayerNotesDialog(
                 context: context,
@@ -430,7 +431,7 @@ class _FFScouterTargetCardState extends State<FFScouterTargetCard> {
       } else {
         if (mounted) setState(() => _refreshing = false);
         BotToast.showText(
-          text: "Could not fetch status for ${target.name}",
+          text: context.interfaceText("Could not fetch status for {0}", [target.name]),
           contentColor: Colors.red[800]!,
           textStyle: const TextStyle(fontSize: 13, color: Colors.white),
           duration: const Duration(seconds: 2),

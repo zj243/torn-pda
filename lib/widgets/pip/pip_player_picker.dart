@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -113,7 +114,7 @@ class PipSelectionAppBar extends StatelessWidget implements PreferredSizeWidget 
         final count = selection.count;
         return AppBar(
           iconTheme: const IconThemeData(color: Colors.white),
-          leading: IconButton(icon: const Icon(Icons.close), tooltip: 'Cancel', onPressed: selection.cancel),
+          leading: IconButton(icon: const Icon(Icons.close), tooltip: context.interfaceText('Cancel'), onPressed: selection.cancel),
           title: Text(
             count == 0 ? 'Tap up to ${PipController.maxPlayers}' : '$count selected',
             style: const TextStyle(color: Colors.white),
@@ -191,7 +192,7 @@ class PipPlayersButton extends StatelessWidget {
     final enabled = context.select<SettingsProvider, bool>((s) => s.pipEnabled && s.pipPlayerButtons);
     if (!enabled || !Get.find<PipController>().supported) return const SizedBox.shrink();
     return IconButton(
-      tooltip: 'Watch players in a floating window',
+      tooltip: context.interfaceText('Watch players in a floating window'),
       constraints: const BoxConstraints.tightFor(width: 44, height: 44),
       padding: EdgeInsets.zero,
       style: const ButtonStyle(tapTargetSize: MaterialTapTargetSize.shrinkWrap),

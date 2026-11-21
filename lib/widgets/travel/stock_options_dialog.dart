@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
@@ -87,7 +88,7 @@ class StocksOptionsDialogState extends State<StocksOptionsDialog> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       const Flexible(
-                        child: Text(
+                        child: PdaText(
                           "Show inventory quantities",
                           style: TextStyle(
                             fontSize: 13,
@@ -111,7 +112,7 @@ class StocksOptionsDialogState extends State<StocksOptionsDialog> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       const Flexible(
-                        child: Text(
+                        child: PdaText(
                           "Show arrival time",
                           style: TextStyle(
                             fontSize: 13,
@@ -135,7 +136,7 @@ class StocksOptionsDialogState extends State<StocksOptionsDialog> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       const Flexible(
-                        child: Text(
+                        child: PdaText(
                           "Bars/cooldown analysis",
                           style: TextStyle(
                             fontSize: 13,
@@ -159,7 +160,7 @@ class StocksOptionsDialogState extends State<StocksOptionsDialog> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       const Flexible(
-                        child: Text(
+                        child: PdaText(
                           "Auto-filter by destination",
                           style: TextStyle(
                             fontSize: 13,
@@ -179,7 +180,7 @@ class StocksOptionsDialogState extends State<StocksOptionsDialog> {
                       ),
                     ],
                   ),
-                  Text(
+                  PdaText(
                     'While traveling to or staying in a foreign country, show only that '
                     "country's stocks automatically",
                     style: TextStyle(
@@ -192,8 +193,8 @@ class StocksOptionsDialogState extends State<StocksOptionsDialog> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        "Capacity: $_capacity",
+                      PdaText(
+                        "Capacity: {0}", values: [_capacity],
                         style: const TextStyle(
                           fontSize: 13,
                         ),
@@ -242,7 +243,7 @@ class StocksOptionsDialogState extends State<StocksOptionsDialog> {
                     ],
                   ),
                   const SizedBox(height: 5),
-                  Text(
+                  PdaText(
                     'Affects profit per hour calculation',
                     style: TextStyle(
                       color: Colors.grey[600],
@@ -254,7 +255,7 @@ class StocksOptionsDialogState extends State<StocksOptionsDialog> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
+                      const PdaText(
                         "Market selling fee (%)",
                         style: TextStyle(
                           fontSize: 13,
@@ -296,7 +297,7 @@ class StocksOptionsDialogState extends State<StocksOptionsDialog> {
                   ),
                   Align(
                     alignment: Alignment.centerLeft,
-                    child: Text(
+                    child: PdaText(
                       'Affects profit calculation',
                       style: TextStyle(
                         color: Colors.grey[600],
@@ -309,7 +310,7 @@ class StocksOptionsDialogState extends State<StocksOptionsDialog> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
+                      const PdaText(
                         "Ticket",
                         style: TextStyle(
                           fontSize: 13,
@@ -318,7 +319,7 @@ class StocksOptionsDialogState extends State<StocksOptionsDialog> {
                       _timeFormatDropdown(),
                     ],
                   ),
-                  Text(
+                  PdaText(
                     'Affects all travel time-based calculations. Does not affect '
                     'profit calculation',
                     style: TextStyle(
@@ -332,7 +333,7 @@ class StocksOptionsDialogState extends State<StocksOptionsDialog> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Flexible(
-                        child: Text(
+                        child: PdaText(
                           "Preferred data provider",
                           style: TextStyle(
                             fontSize: 13,
@@ -342,7 +343,7 @@ class StocksOptionsDialogState extends State<StocksOptionsDialog> {
                       _dataProviderDropdown(),
                     ],
                   ),
-                  Text(
+                  PdaText(
                     'Dictates which data provider will be used to download the data in first place (there is a '
                     'failover between them to ensure data availability). Note: data will be uploaded to both providers '
                     'regardless of this setting',
@@ -358,7 +359,7 @@ class StocksOptionsDialogState extends State<StocksOptionsDialog> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         TextButton(
-                          child: const Text("Close"),
+                          child: const PdaText("Close"),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
@@ -403,7 +404,7 @@ class StocksOptionsDialogState extends State<StocksOptionsDialog> {
           value: TravelTicket.standard,
           child: SizedBox(
             width: 70,
-            child: Text(
+            child: PdaText(
               "Standard",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -416,7 +417,7 @@ class StocksOptionsDialogState extends State<StocksOptionsDialog> {
           value: TravelTicket.private,
           child: SizedBox(
             width: 70,
-            child: Text(
+            child: PdaText(
               "Airstrip",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -429,7 +430,7 @@ class StocksOptionsDialogState extends State<StocksOptionsDialog> {
           value: TravelTicket.wlt,
           child: SizedBox(
             width: 70,
-            child: Text(
+            child: PdaText(
               "Private",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -442,7 +443,7 @@ class StocksOptionsDialogState extends State<StocksOptionsDialog> {
           value: TravelTicket.business,
           child: SizedBox(
             width: 70,
-            child: Text(
+            child: PdaText(
               "Business",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -483,7 +484,7 @@ class StocksOptionsDialogState extends State<StocksOptionsDialog> {
           value: "prometheus",
           child: SizedBox(
             width: 100,
-            child: Text(
+            child: PdaText(
               "Prometheus",
               textAlign: TextAlign.right,
               style: TextStyle(

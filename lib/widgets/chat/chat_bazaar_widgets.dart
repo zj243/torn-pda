@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/models/chat/chat_bazaar.dart';
 import 'package:torn_pda/models/chat/chat_money.dart';
@@ -144,9 +145,9 @@ class _ChatBazaarSheetState extends State<_ChatBazaarSheet> {
                       Expanded(
                         child: TextField(
                           onChanged: (v) => setState(() => _query = v),
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             isDense: true,
-                            hintText: 'Search items',
+                            hintText: context.interfaceText('Search items'),
                             prefixIcon: Icon(Icons.search_rounded, size: 20),
                             border: OutlineInputBorder(),
                           ),
@@ -155,7 +156,7 @@ class _ChatBazaarSheetState extends State<_ChatBazaarSheet> {
                       const SizedBox(width: 8),
                       FilledButton.tonal(
                         onPressed: () => NativeChat.openLink(chatPlayerUrl('bazaar', widget.userId)!, always: true),
-                        child: const Text('Open bazaar'),
+                        child: const PdaText('Open bazaar'),
                       ),
                     ],
                   ),
@@ -197,7 +198,7 @@ class _ChatBazaarSheetState extends State<_ChatBazaarSheet> {
                 fontWeight: FontWeight.w600,
               ),
             ),
-          Text('Open in bazaar', style: theme.textTheme.labelSmall?.copyWith(color: theme.colorScheme.primary)),
+          PdaText('Open in bazaar', style: theme.textTheme.labelSmall?.copyWith(color: theme.colorScheme.primary)),
         ],
       ),
     );

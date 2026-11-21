@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:developer';
 import 'dart:io';
 
@@ -182,7 +183,7 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
       return Scaffold(
         appBar: AppBar(
           iconTheme: const IconThemeData(color: Colors.white),
-          title: const Text("Troubleshooting", style: TextStyle(color: Colors.white)),
+          title: const PdaText("Troubleshooting", style: TextStyle(color: Colors.white)),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -204,7 +205,7 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
       child: Scaffold(
         appBar: AppBar(
           iconTheme: const IconThemeData(color: Colors.white),
-          title: const Text("Troubleshooting", style: TextStyle(color: Colors.white)),
+          title: const PdaText("Troubleshooting", style: TextStyle(color: Colors.white)),
           bottom: const TabBar(
             tabs: [
               Tab(text: "Automatic Notifications"),
@@ -229,7 +230,7 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
-        title: const Text("Troubleshooting", style: TextStyle(color: Colors.white)),
+        title: const PdaText("Troubleshooting", style: TextStyle(color: Colors.white)),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -259,13 +260,13 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        const PdaText(
           "If you are having issues receiving alerts, it could be due to several causes. This section will guide "
           "you to try to resolve the problem.",
           style: TextStyle(fontSize: 14),
         ),
         const SizedBox(height: 16),
-        const Text(
+        const PdaText(
           "To start with, please tap the following button to send yourself a test notification:",
           style: TextStyle(fontSize: 14),
         ),
@@ -281,30 +282,30 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
                       strokeWidth: 2,
                     ),
                   )
-                : const Text("Test Notification"),
+                : const PdaText("Test Notification"),
             onPressed: _isTestingNotification ? null : _testNotification,
           ),
         ),
         const SizedBox(height: 16),
-        const Text(
+        const PdaText(
           "Did it reach you?",
           style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
-        const Text(
+        const PdaText(
           "If it did, it means the server can reach your device with no issues. However, if you are still not getting "
           "other app notifications, please verify that they are correctly selected in the Alerts section and "
           "that your device main settings are not blocking or muting Torn PDA. Otherwise, keep reading.",
           style: TextStyle(fontSize: 14),
         ),
         const SizedBox(height: 12),
-        const Text(
+        const PdaText(
           "If the test failed or other notifications are not getting in, there might be a communication issue "
           "going on with the server. Please consider the following steps:",
           style: TextStyle(fontSize: 14),
         ),
         const SizedBox(height: 12),
-        const Text(
+        const PdaText(
           "1) In case this could be due a misconfiguration at server level, please tap the Soft Reset button "
           "below. Torn PDA will try to reconfigure your user. If you get a success message, please retry "
           "the test notification. Otherwise, keep reading.",
@@ -322,24 +323,24 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
                       strokeWidth: 2,
                     ),
                   )
-                : const Text("Soft Reset"),
+                : const PdaText("Soft Reset"),
             onPressed: _isResetting ? null : _softReset,
           ),
         ),
         const SizedBox(height: 12),
-        const Text(
+        const PdaText(
           "2) You can manually force a user reconfiguration in the server by going to Settings in Torn PDA.",
           style: TextStyle(fontSize: 14),
         ),
         const SizedBox(height: 8),
-        const Text(
+        const PdaText(
           "Start by reloading your API Key (expand the API section at the top and tap 'Reload'). "
           "If that does not solve the problem (check once again the Test Notification here), "
           "remove your API Key (tap the bin icon) and insert it once again.",
           style: TextStyle(fontSize: 14),
         ),
         const SizedBox(height: 12),
-        const Text(
+        const PdaText(
           "3) Lastly, make sure your device or network configuration (router) is not blocking the Google Cloud or Google "
           "Services, since the Alerts server is hosted there. Some users might use a firewall to block Google "
           "or even download the app from an alternative app store; if that's your case, be aware that you might "
@@ -347,7 +348,7 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
           style: TextStyle(fontSize: 14),
         ),
         const SizedBox(height: 12),
-        const Text(
+        const PdaText(
           "If all of this fails, there might be a bigger issue happening with your local Torn PDA installation. "
           "Please consider uninstalling the app and installing it again. Before you do so, make sure you backup "
           "whatever option you like in the cloud (you can do this in Settings).",
@@ -387,7 +388,7 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
             children: [
               Expanded(
                 child: ChoiceChip(
-                  label: const Center(child: Text("Travel")),
+                  label: const Center(child: PdaText("Travel")),
                   selected: _selectedMockLiveUpdateTestType == _MockLiveUpdateTestType.travel,
                   onSelected: (_) {
                     setState(() {
@@ -399,7 +400,7 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
               const SizedBox(width: 8),
               Expanded(
                 child: ChoiceChip(
-                  label: const Center(child: Text("Racing")),
+                  label: const Center(child: PdaText("Racing")),
                   selected: _selectedMockLiveUpdateTestType == _MockLiveUpdateTestType.racing,
                   onSelected: (_) {
                     setState(() {
@@ -431,29 +432,29 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
           controller: _mockLiveUpdateLocationController,
           textCapitalization: TextCapitalization.words,
           textInputAction: TextInputAction.done,
-          decoration: const InputDecoration(
-            labelText: "Foreign location",
-            hintText: "Mexico",
-            helperText: "Used as the destination when traveling abroad or as the origin when returning to Torn.",
+          decoration: InputDecoration(
+            labelText: context.interfaceText("Foreign location"),
+            hintText: context.interfaceText("Mexico"),
+            helperText: context.interfaceText("Used as the destination when traveling abroad or as the origin when returning to Torn."),
           ),
         ),
         const SizedBox(height: 16),
         DropdownButtonFormField<_MockLiveUpdateDirection>(
-          decoration: const InputDecoration(labelText: "Direction"),
+          decoration: InputDecoration(labelText: context.interfaceText("Direction")),
           isExpanded: true,
           initialValue: _mockLiveUpdateDirection,
           items: const [
             DropdownMenuItem(
               value: _MockLiveUpdateDirection.outbound,
-              child: Text("Traveling abroad"),
+              child: PdaText("Traveling abroad"),
             ),
             DropdownMenuItem(
               value: _MockLiveUpdateDirection.returnToTorn,
-              child: Text("Returning to Torn"),
+              child: PdaText("Returning to Torn"),
             ),
             DropdownMenuItem(
               value: _MockLiveUpdateDirection.repatriation,
-              child: Text("Repatriating from hospital"),
+              child: PdaText("Repatriating from hospital"),
             ),
           ],
           onChanged: (value) {
@@ -465,7 +466,7 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
         ),
         const SizedBox(height: 16),
         DropdownButtonFormField<_MockTravelScenario>(
-          decoration: const InputDecoration(labelText: "Scenario"),
+          decoration: InputDecoration(labelText: context.interfaceText("Scenario")),
           isExpanded: true,
           initialValue: _selectedMockTravelScenario,
           items: _mockTravelScenarioPresets
@@ -494,8 +495,8 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
         SwitchListTile(
           dense: true,
           contentPadding: EdgeInsets.zero,
-          title: const Text("Mark session as arrived"),
-          subtitle: Text(
+          title: const PdaText("Mark session as arrived"),
+          subtitle: PdaText(
             "Useful to preview the landed state and capsule copy.",
             style: TextStyle(color: Colors.grey[600], fontSize: 12),
           ),
@@ -530,7 +531,7 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
               child: OutlinedButton.icon(
                 onPressed: _endMockLiveUpdate,
                 icon: const Icon(Icons.stop),
-                label: const Text("End"),
+                label: const PdaText("End"),
               ),
             ),
           ],
@@ -552,13 +553,13 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
       key: const ValueKey<String>('racing-mock-tester'),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        const PdaText(
           "Use this builder to force local Racing Live Updates without waiting for a real race state.",
           style: TextStyle(fontSize: 14),
         ),
         const SizedBox(height: 16),
         DropdownButtonFormField<_MockRacingScenario>(
-          decoration: const InputDecoration(labelText: "Scenario"),
+          decoration: InputDecoration(labelText: context.interfaceText("Scenario")),
           isExpanded: true,
           initialValue: _selectedMockRacingScenario,
           items: _mockRacingScenarioPresets
@@ -606,7 +607,7 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
               child: OutlinedButton.icon(
                 onPressed: _endMockRacingLiveUpdate,
                 icon: const Icon(Icons.stop),
-                label: const Text("End"),
+                label: const PdaText("End"),
               ),
             ),
           ],
@@ -635,7 +636,7 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
 
     if (success) {
       BotToast.showText(
-        text: "Request sent, please wait for a few seconds...",
+        text: context.interfaceText("Request sent, please wait for a few seconds..."),
         textStyle: const TextStyle(fontSize: 14, color: Colors.white),
         contentColor: Colors.green[800]!,
         duration: const Duration(seconds: 5),
@@ -645,7 +646,7 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
 
     if (!success) {
       BotToast.showText(
-        text: "There was a problem sending the request, no communication with the server!",
+        text: context.interfaceText("There was a problem sending the request, no communication with the server!"),
         textStyle: const TextStyle(fontSize: 14, color: Colors.white),
         contentColor: Colors.orange[800]!,
         duration: const Duration(seconds: 5),
@@ -668,7 +669,7 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
       widget.reassignFirebaseUserModelCallback(fb);
 
       BotToast.showText(
-        text: "Reset successful",
+        text: context.interfaceText("Reset successful"),
         textStyle: const TextStyle(fontSize: 14, color: Colors.white),
         contentColor: Colors.green[800]!,
         duration: const Duration(seconds: 5),
@@ -682,7 +683,7 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
     }
 
     BotToast.showText(
-      text: "There was an error updating the database, try again later!",
+      text: context.interfaceText("There was an error updating the database, try again later!"),
       textStyle: const TextStyle(fontSize: 14, color: Colors.white),
       contentColor: Colors.orange[800]!,
       duration: const Duration(seconds: 5),
@@ -698,7 +699,7 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
   Future<void> _sendMockLiveUpdate() async {
     final bool liveUpdatesSupported = (Platform.isAndroid && kSdkAndroid >= 26) || (Platform.isIOS && kSdkIos >= 16.2);
     if (!liveUpdatesSupported) {
-      BotToast.showText(text: "Live Updates are only available on Android 8+ or iOS 16.2+.");
+      BotToast.showText(text: context.interfaceText("Live Updates are only available on Android 8+ or iOS 16.2+."));
       return;
     }
 
@@ -706,7 +707,7 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
 
     final LiveActivityBridgeController? controller = _ensureLiveActivityBridge();
     if (controller == null) {
-      BotToast.showText(text: "Live Update bridge is unavailable.");
+      BotToast.showText(text: context.interfaceText("Live Update bridge is unavailable."));
       return;
     }
 
@@ -748,10 +749,10 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
       });
 
       if (result.isSuccess) {
-        BotToast.showText(text: "Mock Live Update ${result.status.name} (${result.sessionId ?? "no session"})");
+        BotToast.showText(text: context.interfaceText("Mock Live Update {0} ({1})", [result.status.name, result.sessionId ?? "no session"]));
       } else {
         final reason = result.reason != null ? " (${_formatUnsupportedReason(result.reason!)})" : "";
-        BotToast.showText(text: "Live Update unsupported$reason");
+        BotToast.showText(text: context.interfaceText("Live Update unsupported{0}", [reason]));
       }
     } catch (error, stackTrace) {
       log("Mock Live Update failed: $error");
@@ -763,14 +764,14 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
       } else {
         _sendingMockLiveUpdate = false;
       }
-      BotToast.showText(text: "Unable to start Live Update");
+      BotToast.showText(text: context.interfaceText("Unable to start Live Update"));
     }
   }
 
   Future<void> _endMockLiveUpdate() async {
     final LiveActivityBridgeController? controller = _ensureLiveActivityBridge();
     if (controller == null) {
-      BotToast.showText(text: "Live Update bridge is unavailable.");
+      BotToast.showText(text: context.interfaceText("Live Update bridge is unavailable."));
       return;
     }
 
@@ -782,22 +783,22 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
           _lastMockLiveUpdateStatus = null;
           _lastMockLiveUpdateReason = null;
         });
-        BotToast.showText(text: "Live Update ended");
+        BotToast.showText(text: context.interfaceText("Live Update ended"));
       } else {
         final reason = result.reason != null ? " (${_formatUnsupportedReason(result.reason!)})" : "";
-        BotToast.showText(text: "Unable to end Live Update$reason");
+        BotToast.showText(text: context.interfaceText("Unable to end Live Update{0}", [reason]));
       }
     } catch (error, stackTrace) {
       log("Ending Live Update failed: $error");
       logErrorToCrashlytics("Ending Live Update failed", error, stackTrace);
-      BotToast.showText(text: "Error ending Live Update");
+      BotToast.showText(text: context.interfaceText("Error ending Live Update"));
     }
   }
 
   Future<void> _sendMockRacingLiveUpdate() async {
     final bool liveUpdatesSupported = (Platform.isAndroid && kSdkAndroid >= 26) || (Platform.isIOS && kSdkIos >= 16.2);
     if (!liveUpdatesSupported) {
-      BotToast.showText(text: "Live Updates are only available on Android 8+ or iOS 16.2+.");
+      BotToast.showText(text: context.interfaceText("Live Updates are only available on Android 8+ or iOS 16.2+."));
       return;
     }
 
@@ -805,7 +806,7 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
 
     final LiveActivityBridgeController? controller = _ensureLiveActivityBridge();
     if (controller == null) {
-      BotToast.showText(text: "Live Update bridge is unavailable.");
+      BotToast.showText(text: context.interfaceText("Live Update bridge is unavailable."));
       return;
     }
 
@@ -830,10 +831,10 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
       });
 
       if (result.isSuccess) {
-        BotToast.showText(text: "Mock Racing Live Update ${result.status.name} (${result.sessionId ?? "no session"})");
+        BotToast.showText(text: context.interfaceText("Mock Racing Live Update {0} ({1})", [result.status.name, result.sessionId ?? "no session"]));
       } else {
         final reason = result.reason != null ? " (${_formatUnsupportedReason(result.reason!)})" : "";
-        BotToast.showText(text: "Racing Live Update unsupported$reason");
+        BotToast.showText(text: context.interfaceText("Racing Live Update unsupported{0}", [reason]));
       }
     } catch (error, stackTrace) {
       log("Mock Racing Live Update failed: $error");
@@ -845,14 +846,14 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
       } else {
         _sendingMockRacingLiveUpdate = false;
       }
-      BotToast.showText(text: "Unable to start Racing Live Update");
+      BotToast.showText(text: context.interfaceText("Unable to start Racing Live Update"));
     }
   }
 
   Future<void> _endMockRacingLiveUpdate() async {
     final LiveActivityBridgeController? controller = _ensureLiveActivityBridge();
     if (controller == null) {
-      BotToast.showText(text: "Live Update bridge is unavailable.");
+      BotToast.showText(text: context.interfaceText("Live Update bridge is unavailable."));
       return;
     }
 
@@ -864,15 +865,15 @@ class _AlertsTroubleshootingPageState extends State<AlertsTroubleshootingPage> {
           _lastMockRacingLiveUpdateStatus = null;
           _lastMockRacingLiveUpdateReason = null;
         });
-        BotToast.showText(text: "Racing Live Update ended");
+        BotToast.showText(text: context.interfaceText("Racing Live Update ended"));
       } else {
         final reason = result.reason != null ? " (${_formatUnsupportedReason(result.reason!)})" : "";
-        BotToast.showText(text: "Unable to end Racing Live Update$reason");
+        BotToast.showText(text: context.interfaceText("Unable to end Racing Live Update{0}", [reason]));
       }
     } catch (error, stackTrace) {
       log("Ending Racing Live Update failed: $error");
       logErrorToCrashlytics("Ending Racing Live Update failed", error, stackTrace);
-      BotToast.showText(text: "Error ending Racing Live Update");
+      BotToast.showText(text: context.interfaceText("Error ending Racing Live Update"));
     }
   }
 

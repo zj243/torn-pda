@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
@@ -299,13 +300,13 @@ class ForeignStockPageState extends State<ForeignStockPage> {
                       children: [
                         Image.asset('images/icons/airplane.png', height: 100),
                         const SizedBox(height: 15),
-                        const Text(
+                        const PdaText(
                           'OOPS!',
                           style: TextStyle(color: Colors.red, fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-                          child: Text(
+                          child: PdaText(
                             'There was an error getting the information, please '
                             'try again later or pull to refresh!',
                           ),
@@ -333,7 +334,7 @@ class ForeignStockPageState extends State<ForeignStockPage> {
               return const Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[Text('Fetching data...'), SizedBox(height: 30), CircularProgressIndicator()],
+                  children: <Widget>[PdaText('Fetching data...'), SizedBox(height: 30), CircularProgressIndicator()],
                 ),
               );
             }
@@ -357,7 +358,7 @@ class ForeignStockPageState extends State<ForeignStockPage> {
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider!.appBarTop ? 2 : 0,
       leadingWidth: appCanOpenBrowser ? 88 : 56,
-      title: const Text("Foreign Stock", style: TextStyle(color: Colors.white)),
+      title: const PdaText("Foreign Stock", style: TextStyle(color: Colors.white)),
       leading: Row(
         children: [
           IconButton(
@@ -373,7 +374,7 @@ class ForeignStockPageState extends State<ForeignStockPage> {
         if (_inventoryEnabled)
           IconButton(
             icon: Icon(MdiIcons.packageVariantClosed, color: _inventoryComplete ? Colors.green : Colors.white),
-            tooltip: "Load inventory",
+            tooltip: context.interfaceText("Load inventory"),
             onPressed: _requestInventory,
           ),
         PopupMenuButton<StockSort>(
@@ -766,7 +767,7 @@ class ForeignStockPageState extends State<ForeignStockPage> {
           Flexible(
             child: Row(
               children: [
-                const Text('Last server update: ', style: TextStyle(fontSize: 11)),
+                const PdaText('Last server update: ', style: TextStyle(fontSize: 11)),
                 const SizedBox(width: 2),
                 Flexible(
                   child: Text(_timeStampToString(_stocksModel.timestamp!), style: const TextStyle(fontSize: 11)),
@@ -801,7 +802,7 @@ class ForeignStockPageState extends State<ForeignStockPage> {
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 15),
       child: Row(
         children: <Widget>[
-          const Text('Items: ', style: TextStyle(fontSize: 11)),
+          const PdaText('Items: ', style: TextStyle(fontSize: 11)),
           const SizedBox(width: 2),
           Flexible(child: Text(_typesFilteredText, style: const TextStyle(fontSize: 11))),
           if (_hasItemFiltersApplied)
@@ -815,7 +816,7 @@ class ForeignStockPageState extends State<ForeignStockPage> {
                     border: Border.all(color: Colors.orange[800]!, width: 1),
                     borderRadius: BorderRadius.circular(4),
                   ),
-                  child: Text(
+                  child: PdaText(
                     'SHOW ALL',
                     style: TextStyle(fontSize: 10, color: Colors.orange[800], fontWeight: FontWeight.bold),
                   ),
@@ -848,14 +849,14 @@ class ForeignStockPageState extends State<ForeignStockPage> {
       providerIcon = GestureDetector(
         child: Column(
           children: [
-            const Text("PROVIDER", style: TextStyle(fontSize: 10)),
+            const PdaText("PROVIDER", style: TextStyle(fontSize: 10)),
             const SizedBox(height: 4),
             Image.asset('images/icons/yata_logo.png', height: 36),
           ],
         ),
         onTap: () {
           BotToast.showText(
-            text: "Data provided by YATA",
+            text: context.interfaceText("Data provided by YATA"),
             textStyle: const TextStyle(fontSize: 13, color: Colors.white),
             contentColor: Colors.blue,
             clickClose: true,
@@ -868,7 +869,7 @@ class ForeignStockPageState extends State<ForeignStockPage> {
       providerIcon = GestureDetector(
         child: Column(
           children: [
-            const Text("PROVIDER", style: TextStyle(fontSize: 10)),
+            const PdaText("PROVIDER", style: TextStyle(fontSize: 10)),
             const SizedBox(height: 4),
             Container(
               width: 32,
@@ -883,7 +884,7 @@ class ForeignStockPageState extends State<ForeignStockPage> {
         ),
         onTap: () {
           BotToast.showText(
-            text: "Data provided by Prometheus",
+            text: context.interfaceText("Data provided by Prometheus"),
             textStyle: const TextStyle(fontSize: 13, color: Colors.white),
             contentColor: Colors.blue,
             clickClose: true,
@@ -949,11 +950,11 @@ class ForeignStockPageState extends State<ForeignStockPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  'Tourism Day: capacity doubled ($_capacity → $_effectiveCapacity)\n',
+                PdaText(
+                  "Tourism Day: capacity doubled ({0} → {1})\n", values: [_capacity, _effectiveCapacity],
                   style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
                 ),
-                const Text(
+                const PdaText(
                   '(affects total cost and profit calculations)',
                   style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
                 ),
@@ -1000,7 +1001,7 @@ class ForeignStockPageState extends State<ForeignStockPage> {
           ),
           const SizedBox(width: 4),
           Tooltip(
-            message: 'Remove this filter for the current session',
+            message: context.interfaceText('Remove this filter for the current session'),
             child: InkWell(
               borderRadius: BorderRadius.circular(16),
               onTap: () {
@@ -1200,7 +1201,7 @@ class ForeignStockPageState extends State<ForeignStockPage> {
   /// Show backup provider notification
   void _showBackupProviderNotification(String primary, String backup) {
     BotToast.showText(
-      text: "$primary API temporarily unavailable, using $backup API",
+      text: context.interfaceText("{0} API temporarily unavailable, using {1} API", [primary, backup]),
       textStyle: const TextStyle(fontSize: 14),
       contentColor: Colors.amber[700]!,
       duration: const Duration(seconds: 3),
@@ -1232,11 +1233,11 @@ class ForeignStockPageState extends State<ForeignStockPage> {
                   children: [
                     Icon(Icons.warning_amber_outlined, size: 24),
                     SizedBox(width: 10),
-                    Text('SHOWING CACHED DATA', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    PdaText('SHOWING CACHED DATA', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   ],
                 ),
                 const SizedBox(height: 15),
-                const Text(
+                const PdaText(
                   'Main providers could not be reached. Showing cached data from Torn PDA Database.\n\n'
                   '⚠️ Stock quantities may be outdated\n'
                   '⚠️ Restock information (charts, flight suggestions) may be incorrect\n\n'
@@ -1248,7 +1249,7 @@ class ForeignStockPageState extends State<ForeignStockPage> {
                 ElevatedButton.icon(
                   onPressed: () => BotToast.cleanAll(),
                   icon: const Icon(Icons.close, size: 18, color: Colors.black),
-                  label: const Text('Got it', style: TextStyle(color: Colors.black)),
+                  label: const PdaText('Got it', style: TextStyle(color: Colors.black)),
                   style: ElevatedButton.styleFrom(foregroundColor: Colors.orange.shade600),
                 ),
               ],
@@ -1283,11 +1284,11 @@ class ForeignStockPageState extends State<ForeignStockPage> {
                   children: [
                     Icon(Icons.error_outline, size: 24),
                     SizedBox(width: 10),
-                    Text('ALL SOURCES UNAVAILABLE', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    PdaText('ALL SOURCES UNAVAILABLE', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   ],
                 ),
                 const SizedBox(height: 15),
-                const Text(
+                const PdaText(
                   'All data sources (YATA, Prometheus, and Torn PDA Database) are currently unavailable.\n\nPlease try again later.',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 14),
@@ -1296,7 +1297,7 @@ class ForeignStockPageState extends State<ForeignStockPage> {
                 ElevatedButton.icon(
                   onPressed: () => BotToast.cleanAll(),
                   icon: const Icon(Icons.close, size: 18, color: Colors.black),
-                  label: const Text('Got it', style: TextStyle(color: Colors.black)),
+                  label: const PdaText('Got it', style: TextStyle(color: Colors.black)),
                   style: ElevatedButton.styleFrom(foregroundColor: Colors.orange.shade600),
                 ),
               ],
@@ -1433,7 +1434,7 @@ class ForeignStockPageState extends State<ForeignStockPage> {
       error = e.errorReason;
       log("Recalling API due to items error: ${e.errorReason}");
       BotToast.showText(
-        text: "Torn API replied with error, retrying after a few seconds, please wait...",
+        text: context.interfaceText("Torn API replied with error, retrying after a few seconds, please wait..."),
         textStyle: const TextStyle(fontSize: 13, color: Colors.white),
         contentColor: Colors.orange[800]!,
         duration: const Duration(seconds: 5),
@@ -1447,7 +1448,7 @@ class ForeignStockPageState extends State<ForeignStockPage> {
       _apiSuccess = false;
       if (itemsResponse.errorReason.isNotEmpty) {
         BotToast.showText(
-          text: "Torn API response with error: $error",
+          text: context.interfaceText("Torn API response with error: {0}", [error]),
           textStyle: const TextStyle(fontSize: 13, color: Colors.white),
           contentColor: Colors.red[800]!,
           duration: const Duration(seconds: 4),
@@ -1526,7 +1527,7 @@ class ForeignStockPageState extends State<ForeignStockPage> {
       error = e.errorReason;
       log("Recalling API due to profile error: ${e.errorReason}");
       BotToast.showText(
-        text: "Torn API replied with error, retrying after a few seconds, please wait...",
+        text: context.interfaceText("Torn API replied with error, retrying after a few seconds, please wait..."),
         textStyle: const TextStyle(fontSize: 13, color: Colors.white),
         contentColor: Colors.orange[800]!,
         duration: const Duration(seconds: 5),
@@ -1540,7 +1541,7 @@ class ForeignStockPageState extends State<ForeignStockPage> {
       _apiSuccess = false;
       if (profileResponse.errorReason.isNotEmpty) {
         BotToast.showText(
-          text: "Torn API response with error: $error",
+          text: context.interfaceText("Torn API response with error: {0}", [error]),
           textStyle: const TextStyle(fontSize: 13, color: Colors.white),
           contentColor: Colors.red[800]!,
           duration: const Duration(seconds: 4),
@@ -1984,7 +1985,7 @@ class HiddenForeignStockDialogState extends State<HiddenForeignStockDialog> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       actions: [
         TextButton(
-          child: const Text("Close"),
+          child: const PdaText("Close"),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -1997,7 +1998,7 @@ class HiddenForeignStockDialogState extends State<HiddenForeignStockDialog> {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (hiddenCards.isNotEmpty) ...[
-              const Text("Hidden stocks", style: TextStyle(fontSize: 14)),
+              const PdaText("Hidden stocks", style: TextStyle(fontSize: 14)),
               const SizedBox(height: 10),
               Flexible(child: ListView(shrinkWrap: true, children: hiddenCards)),
             ],
@@ -2005,8 +2006,8 @@ class HiddenForeignStockDialogState extends State<HiddenForeignStockDialog> {
             if (blacklistCards.isNotEmpty) ...[
               const Column(
                 children: [
-                  Text("Blacklisted items", style: TextStyle(fontSize: 14)),
-                  Text("(ALL COUNTRIES)", style: TextStyle(fontSize: 9)),
+                  PdaText("Blacklisted items", style: TextStyle(fontSize: 14)),
+                  PdaText("(ALL COUNTRIES)", style: TextStyle(fontSize: 9)),
                 ],
               ),
               const SizedBox(height: 10),
@@ -2087,7 +2088,7 @@ class HiddenForeignStockDialogState extends State<HiddenForeignStockDialog> {
                 color: widget.themeProvider!.cardColor,
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(8, 3, 8, 3),
-                  child: Text('$itemName (all countries)', style: const TextStyle(fontSize: 13)),
+                  child: PdaText("{0} (all countries)", values: [itemName], style: const TextStyle(fontSize: 13)),
                 ),
               ),
             ),

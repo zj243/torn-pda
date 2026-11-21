@@ -41,7 +41,7 @@ public class HomeWidgetRankedWar extends HomeWidgetProvider {
         view.setViewVisibility(R.id.rw_finished_layout, View.GONE);
         view.setViewVisibility(R.id.rw_no_war_layout, View.GONE);
         if (!widgetVisible) {
-            setupNoWarLayout(view, "No ranked war data");
+            setupNoWarLayout(view, context.getString(R.string.widget_no_ranked_war));
             return;
         }
         String state = prefs.getString("rw_state", "none");
@@ -53,10 +53,10 @@ public class HomeWidgetRankedWar extends HomeWidgetProvider {
                 setupActiveWarLayout(view, prefs);
                 break;
             case "finished":
-                setupFinishedWarLayout(view, prefs, isDarkMode);
+                setupFinishedWarLayout(view, context, prefs, isDarkMode);
                 break;
             default:
-                setupNoWarLayout(view, "No ranked war data");
+                setupNoWarLayout(view, context.getString(R.string.widget_no_ranked_war));
                 break;
         }
     }
@@ -72,7 +72,7 @@ public class HomeWidgetRankedWar extends HomeWidgetProvider {
         view.setInt(R.id.rw_icon_reload, "setColorFilter", reloadIconColor);
 
         int playerChain = prefs.getInt("rw_player_chain", 0);
-        view.setTextViewText(R.id.rw_header_center_text, "CHAINING");
+        view.setTextViewText(R.id.rw_header_center_text, context.getString(R.string.widget_chaining));
         view.setTextColor(R.id.rw_header_center_text, Color.parseColor("#F44336"));
         view.setInt(R.id.rw_chaining_indicator, "setBackgroundResource", R.drawable.chaining_indicator_background);
 
@@ -135,7 +135,7 @@ public class HomeWidgetRankedWar extends HomeWidgetProvider {
         view.setProgressBar(R.id.rw_active_progress_bar, targetScore, progress, false);
     }
 
-    private void setupFinishedWarLayout(RemoteViews view, SharedPreferences prefs, boolean isDarkMode) {
+    private void setupFinishedWarLayout(RemoteViews view, Context context, SharedPreferences prefs, boolean isDarkMode) {
         view.setViewVisibility(R.id.rw_finished_layout, View.VISIBLE);
 
         int playerScore = prefs.getInt("rw_player_score", 0);
@@ -146,7 +146,7 @@ public class HomeWidgetRankedWar extends HomeWidgetProvider {
         boolean playerWon = playerScore >= enemyScore;
         int resultColor = playerWon ? Color.parseColor("#4CAF50") : Color.parseColor("#F44336");
 
-        String resultText = playerWon ? "Won" : "Lost";
+        String resultText = context.getString(playerWon ? R.string.widget_won : R.string.widget_lost);
         String finalDisplayText = resultText + " " + endDate;
 
         view.setInt(R.id.rw_finished_border_box, "setBackgroundColor", resultColor);

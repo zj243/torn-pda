@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -24,11 +25,11 @@ class LootFilterDialogState extends State<LootFilterDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text("Filter out NPCs"),
+      title: const PdaText("Filter out NPCs"),
       content: SingleChildScrollView(
         child: Column(
           children: [
-            const Text(
+            const PdaText(
               "Choose if you would like to filter OUT NPCs (only currently active NPCs are shown)",
               style: TextStyle(
                 fontSize: 13,
@@ -45,7 +46,7 @@ class LootFilterDialogState extends State<LootFilterDialog> {
         Padding(
           padding: const EdgeInsets.only(right: 15),
           child: TextButton(
-            child: const Text("Close"),
+            child: const PdaText("Close"),
             onPressed: () {
               Navigator.of(context).pop();
             },

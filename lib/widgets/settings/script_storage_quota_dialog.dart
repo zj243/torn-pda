@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -17,27 +18,27 @@ Future<bool> showScriptStorageQuotaDialog(BuildContext context, String sid) asyn
     context: context,
     builder: (dialogContext) => StatefulBuilder(
       builder: (context, setDialogState) => AlertDialog(
-        title: const Text("Native storage"),
+        title: const PdaText("Native storage"),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            const PdaText(
               "This script keeps its data with Torn PDA instead of the browser, so it is more stable and does not "
               "compete for the browser's space.",
               style: TextStyle(fontSize: 12),
             ),
             const SizedBox(height: 8),
-            const Text(
+            const PdaText(
               "Great job by the script author for using this feature!",
               style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic, color: Color(0xFFB8860B)),
             ),
             const SizedBox(height: 12),
-            Text("Currently using ${_formatBytes(used)}", style: const TextStyle(fontSize: 12, color: Colors.grey)),
+            PdaText("Currently using {0}", values: [_formatBytes(used)], style: const TextStyle(fontSize: 12, color: Colors.grey)),
             const Divider(height: 24),
-            const Text("Storage limit", style: TextStyle(fontWeight: FontWeight.bold)),
+            const PdaText("Storage limit", style: TextStyle(fontWeight: FontWeight.bold)),
             Center(
-              child: Text("${value.round()} MB", style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              child: PdaText("{0} MB", values: [value.round()], style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             ),
             Slider(
               value: value,
@@ -47,20 +48,20 @@ Future<bool> showScriptStorageQuotaDialog(BuildContext context, String sid) asyn
               label: "${value.round()} MB",
               onChanged: (v) => setDialogState(() => value = v),
             ),
-            Text(
-              "Default is $defaultMb MB, up to $maxMb MB.",
+            PdaText(
+              "Default is {0} MB, up to {1} MB.", values: [defaultMb, maxMb],
               style: const TextStyle(fontSize: 12, color: Colors.grey),
             ),
           ],
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.of(dialogContext).pop(false), child: const Text("Cancel")),
+          TextButton(onPressed: () => Navigator.of(dialogContext).pop(false), child: const PdaText("Cancel")),
           TextButton(
             onPressed: () async {
               await ScriptStorage.setQuota(sid, value.round() == defaultMb ? 0 : value.round() * mb);
               if (dialogContext.mounted) Navigator.of(dialogContext).pop(true);
             },
-            child: const Text("Save"),
+            child: const PdaText("Save"),
           ),
         ],
       ),

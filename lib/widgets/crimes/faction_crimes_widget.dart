@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 
 class FactionCrimesWidget extends StatefulWidget {
@@ -26,8 +27,8 @@ class FactionCrimesWidgetState extends State<FactionCrimesWidget> {
             height: 18,
           ),
           const SizedBox(width: 8),
-          Text(
-            "Member's NNB source: ${widget.source}",
+          PdaText(
+            "Member's NNB source: {0}", values: [widget.source],
             style: const TextStyle(
               color: Colors.white,
               fontSize: 11,

@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +57,7 @@ class OrganizedCrimeWidgetState extends State<OrganizedCrimeWidget> {
           Flexible(
             child: RichText(
               text: TextSpan(
-                text: "No OC planned!",
+                text: context.interfaceText("No OC planned!"),
                 style: TextStyle(fontSize: 14, color: Colors.orange[800]),
               ),
             ),
@@ -111,8 +112,8 @@ class OrganizedCrimeWidgetState extends State<OrganizedCrimeWidget> {
     ).formatHourWithDaysElapsed();
 
     final readyTextSpan = hasExpired
-        ? const TextSpan(
-            text: 'ready to start',
+        ? TextSpan(
+            text: context.interfaceText('ready to start'),
             style: TextStyle(
               fontSize: 14,
               color: Colors.green,
@@ -122,8 +123,8 @@ class OrganizedCrimeWidgetState extends State<OrganizedCrimeWidget> {
         : TextSpan(
             children: [
               if (missingSlots > 0)
-                const TextSpan(
-                  text: 'incomplete, ',
+                TextSpan(
+                  text: context.interfaceText('incomplete, '),
                   style: TextStyle(fontSize: 14, color: Colors.red),
                 ),
               TextSpan(
@@ -159,12 +160,12 @@ class OrganizedCrimeWidgetState extends State<OrganizedCrimeWidget> {
       style: const TextStyle(fontSize: 16.0, color: Colors.black),
       children: [
         TextSpan(
-          text: "OC '$ocName' is ",
+          text: context.interfaceText("OC '{0}' is ", [ocName]),
           style: TextStyle(fontSize: 14, color: themeProvider.mainText),
         ),
         readyTextSpan,
         TextSpan(
-          text: ', you are in as a $position with a pass rate of $successChance%',
+          text: context.interfaceText(", you are in as a {0} with a pass rate of {1}%", [position, successChance]),
           style: TextStyle(fontSize: 14, color: themeProvider.mainText),
         ),
         if (itemRequirementTextSpan != null) ...[

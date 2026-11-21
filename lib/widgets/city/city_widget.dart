@@ -1,5 +1,6 @@
 // Flutter imports:
 // Package imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
@@ -79,8 +80,8 @@ class CityWidgetState extends State<CityWidget> {
         children: [
           Column(
             children: [
-              Text('City Finder', style: TextStyle(color: Colors.orange)),
-              Text('(TAP TO EXPAND)', style: TextStyle(color: Colors.orange, fontSize: 8)),
+              PdaText('City Finder', style: TextStyle(color: Colors.orange)),
+              PdaText('(TAP TO EXPAND)', style: TextStyle(color: Colors.orange, fontSize: 8)),
             ],
           ),
         ],
@@ -143,7 +144,7 @@ class CityWidgetState extends State<CityWidget> {
         Padding(
           padding: const EdgeInsets.only(bottom: 2),
           child: Row(
-            children: [Text("Found 1 item", style: TextStyle(fontSize: 12, color: Colors.grey[300]))],
+            children: [PdaText("Found 1 item", style: TextStyle(fontSize: 12, color: Colors.grey[300]))],
           ),
         ),
       );
@@ -158,7 +159,7 @@ class CityWidgetState extends State<CityWidget> {
           padding: const EdgeInsets.only(bottom: 2),
           child: Row(
             children: <Widget>[
-              Text("Found $itemQuantity items, total value ", style: TextStyle(fontSize: 12, color: Colors.grey[300])),
+              PdaText("Found {0} items, total value ", values: [itemQuantity], style: TextStyle(fontSize: 12, color: Colors.grey[300])),
               Text("\$${_moneyFormat.format(totalPrice)}", style: TextStyle(fontSize: 12, color: Colors.green[300])),
             ],
           ),

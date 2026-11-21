@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 // Package imports:
@@ -361,14 +362,14 @@ class RankedWarsPageState extends State<RankedWarsPage> with SingleTickerProvide
           ? TextField(
               controller: _searchController,
               autofocus: true,
-              decoration: const InputDecoration(
-                hintText: 'Search by faction name...',
+              decoration: InputDecoration(
+                hintText: context.interfaceText('Search by faction name...'),
                 hintStyle: TextStyle(color: Colors.white70),
                 border: InputBorder.none,
               ),
               style: const TextStyle(color: Colors.white, fontSize: 18),
             )
-          : const Text("Ranked Wars", style: TextStyle(color: Colors.white)),
+          : const PdaText("Ranked Wars", style: TextStyle(color: Colors.white)),
       actions: _isSearching
           ? []
           : [
@@ -443,7 +444,7 @@ class RankedWarsPageState extends State<RankedWarsPage> with SingleTickerProvide
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider!.appBarTop ? 2 : 0,
       systemOverlayStyle: SystemUiOverlayStyle.light,
-      title: const Text("Ranked Wars", style: TextStyle(color: Colors.white)),
+      title: const PdaText("Ranked Wars", style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
@@ -477,22 +478,22 @@ class RankedWarsPageState extends State<RankedWarsPage> with SingleTickerProvide
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             if (_rankedWarsModel.rankedwars != null && _rankedWarsModel.rankedwars!.isEmpty)
-              Text(
+              PdaText(
                 'No wars found',
                 style: TextStyle(color: Colors.orange[800], fontSize: 20, fontWeight: FontWeight.bold),
               )
             else
-              const Text(
+              const PdaText(
                 'OOPS!',
                 style: TextStyle(color: Colors.red, fontSize: 20, fontWeight: FontWeight.bold),
               ),
             const SizedBox(height: 20),
             if (_rankedWarsModel.rankedwars != null && _rankedWarsModel.rankedwars!.isEmpty)
-              const Text(
+              const PdaText(
                 'The ranked wars list returned from the API is empty, please try again later!',
               )
             else
-              const Text(
+              const PdaText(
                 'There was an error getting data from the API, please try again later!',
               ),
           ],

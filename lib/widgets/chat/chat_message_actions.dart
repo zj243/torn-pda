@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/widgets/chat/chat_color_widgets.dart';
 import 'package:torn_pda/widgets/chat/native_chat.dart';
@@ -89,13 +90,13 @@ class ChatMessageActions extends StatelessWidget {
             pill([
               for (final emoji in emojis)
                 IconButton(
-                  tooltip: 'Reply with $emoji',
+                  tooltip: context.interfaceText("Reply with {0}", [emoji]),
                   style: style(false),
                   onPressed: () => onEmoji?.call(emoji),
                   icon: Text(emoji, style: const TextStyle(fontSize: 20, height: 1)),
                 ),
               IconButton(
-                tooltip: 'More emojis',
+                tooltip: context.interfaceText('More emojis'),
                 iconSize: 18,
                 style: style(false),
                 onPressed: onMoreEmojis,
@@ -130,7 +131,7 @@ class ChatMessageActionsEditor extends StatelessWidget {
                 secondary: ReorderableDragStartListener(
                   index: i,
                   child: Semantics(
-                    label: 'Drag to reorder ${chatMessageActionLooks[id]!.$2}',
+                    label: context.interfaceText("Drag to reorder {0}", [chatMessageActionLooks[id]!.$2]),
                     child: const SizedBox(width: 48, height: 48, child: Icon(Icons.drag_handle_rounded)),
                   ),
                 ),
@@ -141,7 +142,7 @@ class ChatMessageActionsEditor extends StatelessWidget {
                     Flexible(child: Text(chatMessageActionLooks[id]!.$2)),
                   ],
                 ),
-                subtitle: id == 'note' && !prefs.notepad ? const Text('Needs the notepad on') : null,
+                subtitle: id == 'note' && !prefs.notepad ? const PdaText('Needs the notepad on') : null,
                 value: !prefs.messageActionHidden.contains(id),
                 onChanged: id == 'note' && !prefs.notepad ? null : (on) => prefs.setMessageActionShown(id, on),
               ),

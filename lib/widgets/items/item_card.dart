@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:developer';
 
 import 'package:bot_toast/bot_toast.dart';
@@ -133,22 +134,22 @@ class ItemCardState extends State<ItemCard> {
                                   ),
                                   Wrap(
                                     children: [
-                                      Text(
-                                        "Value: \$${decimalFormat.format(widget.item.marketValue)}",
+                                      PdaText(
+                                        "Value: \${0}", values: [decimalFormat.format(widget.item.marketValue)],
                                         style: const TextStyle(fontSize: 10),
                                       ),
                                       const SizedBox(width: 5),
                                       if (widget.item.sellPrice != null && widget.item.sellPrice! > 0)
-                                        Text(
-                                          "(Sell @ \$${decimalFormat.format(widget.item.sellPrice)})",
+                                        PdaText(
+                                          "(Sell @ \${0})", values: [decimalFormat.format(widget.item.sellPrice)],
                                           style: const TextStyle(fontSize: 10),
                                         ),
                                     ],
                                   ),
                                   Row(
                                     children: [
-                                      Text(
-                                        "Circulation: ${formatBigNumbers(widget.item.circulation!)}",
+                                      PdaText(
+                                        "Circulation: {0}", values: [formatBigNumbers(widget.item.circulation!)],
                                         style: const TextStyle(fontSize: 10),
                                       ),
                                       _rarityIcon(),
@@ -182,8 +183,8 @@ class ItemCardState extends State<ItemCard> {
                                     ),
                                     const SizedBox(height: 4),
                                     if (widget.inventorySuccess)
-                                      Text(
-                                        "inv: x${widget.item.inventoryOwned}",
+                                      PdaText(
+                                        "inv: x{0}", values: [widget.item.inventoryOwned],
                                         style: const TextStyle(fontSize: 9),
                                       ),
                                     if (widget.item.totalValue > 0)
@@ -313,48 +314,48 @@ class ItemCardState extends State<ItemCard> {
         padding: const EdgeInsetsDirectional.only(top: 15),
         child: Column(
           children: [
-            Text(
-              "Full body coverage: ${widget.item.coverage!.fullBodyCoverage}",
+            PdaText(
+              "Full body coverage: {0}", values: [widget.item.coverage!.fullBodyCoverage],
               style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 10),
             ),
-            Text(
-              "Head coverage: ${widget.item.coverage!.headCoverage}",
+            PdaText(
+              "Head coverage: {0}", values: [widget.item.coverage!.headCoverage],
               style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 10),
             ),
-            Text(
-              "Throat coverage: ${widget.item.coverage!.throatCoverage}",
+            PdaText(
+              "Throat coverage: {0}", values: [widget.item.coverage!.throatCoverage],
               style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 10),
             ),
-            Text(
-              "Foot coverage: ${widget.item.coverage!.footCoverage}",
+            PdaText(
+              "Foot coverage: {0}", values: [widget.item.coverage!.footCoverage],
               style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 10),
             ),
-            Text(
-              "Leg coverage: ${widget.item.coverage!.legCoverage}",
+            PdaText(
+              "Leg coverage: {0}", values: [widget.item.coverage!.legCoverage],
               style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 10),
             ),
-            Text(
-              "Hand coverage: ${widget.item.coverage!.handCoverage}",
+            PdaText(
+              "Hand coverage: {0}", values: [widget.item.coverage!.handCoverage],
               style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 10),
             ),
-            Text(
-              "Arm coverage: ${widget.item.coverage!.armCoverage}",
+            PdaText(
+              "Arm coverage: {0}", values: [widget.item.coverage!.armCoverage],
               style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 10),
             ),
-            Text(
-              "Heart coverage: ${widget.item.coverage!.heartCoverage}",
+            PdaText(
+              "Heart coverage: {0}", values: [widget.item.coverage!.heartCoverage],
               style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 10),
             ),
-            Text(
-              "Stomach coverage: ${widget.item.coverage!.stomachCoverage}",
+            PdaText(
+              "Stomach coverage: {0}", values: [widget.item.coverage!.stomachCoverage],
               style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 10),
             ),
-            Text(
-              "Chest coverage: ${widget.item.coverage!.chestCoverage}",
+            PdaText(
+              "Chest coverage: {0}", values: [widget.item.coverage!.chestCoverage],
               style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 10),
             ),
-            Text(
-              "Groin coverage: ${widget.item.coverage!.groinCoverage}",
+            PdaText(
+              "Groin coverage: {0}", values: [widget.item.coverage!.groinCoverage],
               style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 10),
             ),
           ],
@@ -372,7 +373,7 @@ class ItemCardState extends State<ItemCard> {
         ),
       );
 
-      Widget marketColumn = Text(
+      Widget marketColumn = PdaText(
         "Nothing found",
         style: TextStyle(
           fontSize: 10,
@@ -420,7 +421,7 @@ class ItemCardState extends State<ItemCard> {
               ],
             )
           else if (!_isTradeable)
-            const Text(
+            const PdaText(
               "non-tradeable",
               style: TextStyle(fontSize: 10, fontStyle: FontStyle.italic),
             ),
@@ -436,7 +437,7 @@ class ItemCardState extends State<ItemCard> {
     return Center(
       child: Column(
         children: [
-          Text(
+          PdaText(
             "ERROR: could not contact API to retrieve details!",
             style: TextStyle(
               fontSize: 10,

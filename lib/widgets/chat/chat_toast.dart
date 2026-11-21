@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:bot_toast/bot_toast.dart';
@@ -87,7 +88,7 @@ class ChatToastBox extends StatelessWidget {
                 Semantics(
                   container: true,
                   child: IconButton(
-                    tooltip: 'Dismiss',
+                    tooltip: context.interfaceText('Dismiss'),
                     color: Colors.white,
                     icon: const Icon(Icons.close_rounded, size: 20),
                     onPressed: close,

@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:math';
 import 'package:fl_chart/fl_chart.dart';
@@ -136,7 +137,7 @@ class _StatsChartState extends State<StatsChart> {
           builder: (context, settingsProvider, _) {
             final hidden = statSeriesFromHiddenKeys(settingsProvider.tornStatsChartHiddenStats);
             return AlertDialog(
-              title: const Text('Chart stats', style: TextStyle(fontSize: 16)),
+              title: const PdaText('Chart stats', style: TextStyle(fontSize: 16)),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -160,7 +161,7 @@ class _StatsChartState extends State<StatsChart> {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(dialogContext).pop(),
-                  child: const Text('Close'),
+                  child: const PdaText('Close'),
                 ),
               ],
             );
@@ -210,7 +211,7 @@ class _StatsChartState extends State<StatsChart> {
           children: [
             Icon(Icons.warning, size: 12, color: Colors.orange[800]),
             const SizedBox(width: 5),
-            Text(
+            PdaText(
               "TS sent data older than 1 month",
               style: TextStyle(
                 fontSize: 10,
@@ -229,7 +230,7 @@ class _StatsChartState extends State<StatsChart> {
           children: [
             Icon(Icons.warning, size: 12, color: Colors.orange[800]),
             const SizedBox(width: 5),
-            Text(
+            PdaText(
               "Displaying old cached data (> 5 days)",
               style: TextStyle(
                 fontSize: 10,
@@ -294,7 +295,7 @@ class _StatsChartState extends State<StatsChart> {
             children: [
               Image.asset('images/icons/tornstats_logo.png', width: 12),
               const SizedBox(width: 5),
-              const Text('STATS', style: TextStyle(fontSize: 8)),
+              const PdaText('STATS', style: TextStyle(fontSize: 8)),
               const SizedBox(width: 5),
               _statsUpdating
                   ? const SizedBox(width: 14, height: 14, child: CircularProgressIndicator(strokeWidth: 2))
@@ -356,7 +357,7 @@ class _StatsChartState extends State<StatsChart> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            const PdaText(
                               'Stats update report',
                               style: TextStyle(
                                 color: Colors.white,
@@ -384,7 +385,7 @@ class _StatsChartState extends State<StatsChart> {
                                             browserTapType: BrowserTapType.short,
                                           );
                                     },
-                                    child: const Text(
+                                    child: const PdaText(
                                       'Open Torn Stats',
                                       style: TextStyle(
                                         color: Colors.white,
@@ -431,7 +432,7 @@ class _StatsChartState extends State<StatsChart> {
                                                     child: Column(
                                                       crossAxisAlignment: CrossAxisAlignment.start,
                                                       children: [
-                                                        Text(
+                                                        PdaText(
                                                           'Copied to clipboard!',
                                                           style: TextStyle(
                                                             color: Colors.white,

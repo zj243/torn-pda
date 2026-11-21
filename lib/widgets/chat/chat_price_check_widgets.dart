@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -426,7 +427,7 @@ class _ChatItemSheetState extends State<_ChatItemSheet> {
                     children: [
                       Text(widget.item.name, style: theme.textTheme.titleLarge),
                       const SizedBox(height: 4),
-                      Text('Market value: \$${ChatPriceCheck.short(widget.item.market)}', style: style),
+                      PdaText("Market value: \${0}", values: [ChatPriceCheck.short(widget.item.market)], style: style),
                       const SizedBox(height: 4),
                       if (_lowest == null)
                         const SizedBox(width: 80, child: LinearProgressIndicator(minHeight: 2))
@@ -434,7 +435,7 @@ class _ChatItemSheetState extends State<_ChatItemSheet> {
                         Text(_lowest!, style: style),
                       if (_have case final owned?) ...[
                         const SizedBox(height: 4),
-                        Text('You have ${owned == 0 ? 'none' : chatCount(owned)}', style: style),
+                        PdaText("You have {0}", values: [owned == 0 ? 'none' : chatCount(owned)], style: style),
                       ],
                     ],
                   ),

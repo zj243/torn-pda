@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -78,7 +79,7 @@ class RaceStartAheadOptionsState extends State<RaceStartAheadOptions> {
                         children: <Widget>[
                           const Padding(
                             padding: EdgeInsets.all(20.0),
-                            child: Text('Here you can specify your preferred notification '
+                            child: PdaText('Here you can specify your preferred notification '
                                 'trigger time before a races starts'),
                           ),
                           _rowsWithTypes(),
@@ -104,7 +105,7 @@ class RaceStartAheadOptionsState extends State<RaceStartAheadOptions> {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
-      title: const Text("Race start notification", style: TextStyle(color: Colors.white)),
+      title: const PdaText("Race start notification", style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
@@ -123,7 +124,7 @@ class RaceStartAheadOptionsState extends State<RaceStartAheadOptions> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               const Flexible(
-                child: Text('Notification'),
+                child: PdaText('Notification'),
               ),
               const Padding(
                 padding: EdgeInsets.only(left: 20),
@@ -141,7 +142,7 @@ class RaceStartAheadOptionsState extends State<RaceStartAheadOptions> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Flexible(
-                  child: Text('Alarm'),
+                  child: PdaText('Alarm'),
                 ),
                 const Padding(
                   padding: EdgeInsets.only(left: 20),
@@ -162,7 +163,7 @@ class RaceStartAheadOptionsState extends State<RaceStartAheadOptions> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Flexible(
-                            child: Text(
+                            child: PdaText(
                               "(alarms are set on the minute)",
                               style: TextStyle(
                                 fontStyle: FontStyle.italic,
@@ -185,7 +186,7 @@ class RaceStartAheadOptionsState extends State<RaceStartAheadOptions> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 const Flexible(
-                  child: Text('Timer'),
+                  child: PdaText('Timer'),
                 ),
                 const Padding(
                   padding: EdgeInsets.only(left: 20),
@@ -208,7 +209,7 @@ class RaceStartAheadOptionsState extends State<RaceStartAheadOptions> {
           value: 60,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "1 minute",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -221,7 +222,7 @@ class RaceStartAheadOptionsState extends State<RaceStartAheadOptions> {
           value: 600,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "10 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -234,7 +235,7 @@ class RaceStartAheadOptionsState extends State<RaceStartAheadOptions> {
           value: 1800,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "30 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -247,7 +248,7 @@ class RaceStartAheadOptionsState extends State<RaceStartAheadOptions> {
           value: 3600,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "1 hour",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -260,7 +261,7 @@ class RaceStartAheadOptionsState extends State<RaceStartAheadOptions> {
           value: 21600,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "6 hours",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -287,7 +288,7 @@ class RaceStartAheadOptionsState extends State<RaceStartAheadOptions> {
           value: 1,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "1 minute",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -300,7 +301,7 @@ class RaceStartAheadOptionsState extends State<RaceStartAheadOptions> {
           value: 10,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "10 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -313,7 +314,7 @@ class RaceStartAheadOptionsState extends State<RaceStartAheadOptions> {
           value: 30,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "30 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -326,7 +327,7 @@ class RaceStartAheadOptionsState extends State<RaceStartAheadOptions> {
           value: 60,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "1 hour",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -339,7 +340,7 @@ class RaceStartAheadOptionsState extends State<RaceStartAheadOptions> {
           value: 360,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "6 hours",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -366,7 +367,7 @@ class RaceStartAheadOptionsState extends State<RaceStartAheadOptions> {
           value: 60,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "1 minute",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -379,7 +380,7 @@ class RaceStartAheadOptionsState extends State<RaceStartAheadOptions> {
           value: 600,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "10 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -392,7 +393,7 @@ class RaceStartAheadOptionsState extends State<RaceStartAheadOptions> {
           value: 1800,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "30 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -405,7 +406,7 @@ class RaceStartAheadOptionsState extends State<RaceStartAheadOptions> {
           value: 3600,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "1 hour",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -418,7 +419,7 @@ class RaceStartAheadOptionsState extends State<RaceStartAheadOptions> {
           value: 21600,
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "6 hours",
               textAlign: TextAlign.right,
               style: TextStyle(

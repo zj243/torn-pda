@@ -1,5 +1,6 @@
 // Flutter imports:
 // Package imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:bot_toast/bot_toast.dart';
@@ -113,8 +114,7 @@ class MemberDetailsPageState extends State<MemberDetailsPage> {
                                         onPressed: () {
                                           Clipboard.setData(ClipboardData(text: _member!.playerId.toString()));
                                           BotToast.showText(
-                                            text: "Your target's ID [${_member!.playerId}] has been "
-                                                "copied to the clipboard!",
+                                            text: context.interfaceText("Your target's ID [{0}] has been copied to the clipboard!", [_member!.playerId]),
                                             textStyle: const TextStyle(
                                               fontSize: 14,
                                               color: Colors.white,
@@ -131,9 +131,9 @@ class MemberDetailsPageState extends State<MemberDetailsPage> {
                               ),
                               Text('${_member!.rank}'),
                               const SizedBox(height: 20),
-                              Text('Level: ${_member!.level}'),
-                              Text('Gender: ${_member!.gender}'),
-                              Text('Age: ${_member!.age} days'),
+                              PdaText("Level: {0}", values: [_member!.level]),
+                              PdaText("Gender: {0}", values: [_member!.gender]),
+                              PdaText("Age: {0} days", values: [_member!.age]),
                               const SizedBox(height: 20),
                               _returnLife(),
                               const SizedBox(height: 5),
@@ -141,12 +141,10 @@ class MemberDetailsPageState extends State<MemberDetailsPage> {
                               const SizedBox(height: 5),
                               _returnStatus(),
                               const SizedBox(height: 20),
-                              Text('Awards: ${_member!.awards} '
-                                  '(you have ${UserHelper.awards})'),
+                              PdaText("Awards: {0} (you have {1})", values: [_member!.awards, UserHelper.awards]),
                               const SizedBox(height: 20),
-                              Text('Donator: ${_member!.donator == 0 ? 'NO' : 'YES'}'),
-                              Text('Friends/Enemies: ${_member!.friends}'
-                                  '/${_member!.enemies}'),
+                              PdaText("Donator: {0}", values: [_member!.donator == 0 ? 'NO' : 'YES']),
+                              PdaText("Friends/Enemies: {0}/{1}", values: [_member!.friends, _member!.enemies]),
                               const SizedBox(height: 20),
                               _returnFaction(),
                               _returnJob(),
@@ -167,7 +165,7 @@ class MemberDetailsPageState extends State<MemberDetailsPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 SizedBox(height: 50),
-                Text(
+                PdaText(
                   'OOPS!',
                   style: TextStyle(color: Colors.red, fontSize: 20, fontWeight: FontWeight.bold),
                 ),
@@ -175,7 +173,7 @@ class MemberDetailsPageState extends State<MemberDetailsPage> {
                   padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
                   child: Column(
                     children: [
-                      Text(
+                      PdaText(
                         "There was a problem getting this member's profile, please try again later!",
                         textAlign: TextAlign.center,
                       ),
@@ -206,7 +204,7 @@ class MemberDetailsPageState extends State<MemberDetailsPage> {
       actions: [
         if (NativeChat.canShare && _member != null)
           IconButton(
-            tooltip: 'Share to chat',
+            tooltip: context.interfaceText('Share to chat'),
             icon: const Icon(Icons.forum_outlined),
             onPressed: () => ChatShareIn.shareText(
               ChatShareOut.player(
@@ -230,7 +228,7 @@ class MemberDetailsPageState extends State<MemberDetailsPage> {
       children: <Widget>[
         const SizedBox(
           width: 35,
-          child: Text('Life'),
+          child: PdaText('Life'),
         ),
         LinearPercentIndicator(
           padding: const EdgeInsets.all(0),
@@ -263,7 +261,7 @@ class MemberDetailsPageState extends State<MemberDetailsPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        const Text(
+        const PdaText(
           'Last action: ',
         ),
         Text(
@@ -318,7 +316,7 @@ class MemberDetailsPageState extends State<MemberDetailsPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text('Status: ${_member!.status!.state}'),
+        PdaText("Status: {0}", values: [_member!.status!.state]),
         stateBall,
       ],
     );
@@ -330,9 +328,9 @@ class MemberDetailsPageState extends State<MemberDetailsPage> {
         padding: const EdgeInsets.only(bottom: 20),
         child: Column(
           children: <Widget>[
-            Text('Faction: ${HtmlParser.fix(_member!.faction!.factionName)}'),
-            Text('Position: ${_member!.faction!.position}'),
-            Text('Joined: ${_member!.faction!.daysInFaction} days ago'),
+            PdaText("Faction: {0}", values: [HtmlParser.fix(_member!.faction!.factionName)]),
+            PdaText("Position: {0}", values: [_member!.faction!.position]),
+            PdaText("Joined: {0} days ago", values: [_member!.faction!.daysInFaction]),
           ],
         ),
       );
@@ -347,8 +345,8 @@ class MemberDetailsPageState extends State<MemberDetailsPage> {
         padding: const EdgeInsets.only(bottom: 20),
         child: Column(
           children: <Widget>[
-            Text('Company: ${HtmlParser.fix(_member!.job!.companyName)}'),
-            Text('Position: ${_member!.job!.job}'),
+            PdaText("Company: {0}", values: [HtmlParser.fix(_member!.job!.companyName)]),
+            PdaText("Position: {0}", values: [_member!.job!.job]),
           ],
         ),
       );
@@ -385,8 +383,7 @@ class MemberDetailsPageState extends State<MemberDetailsPage> {
                 onPressed: () {
                   Clipboard.setData(ClipboardData(text: _member!.discord!.discordId!));
                   BotToast.showText(
-                    text: "Your target's Discord ID (${_member!.discord!.discordId}) has been "
-                        "copied to the clipboard!",
+                    text: context.interfaceText("Your target's Discord ID ({0}) has been copied to the clipboard!", [_member!.discord!.discordId]),
                     textStyle: const TextStyle(
                       fontSize: 14,
                       color: Colors.white,
@@ -414,7 +411,7 @@ class MemberDetailsPageState extends State<MemberDetailsPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          const Text(
+          const PdaText(
             'COMPETITION',
             style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -425,40 +422,40 @@ class MemberDetailsPageState extends State<MemberDetailsPage> {
               '"${_member!.competition!.name}"',
             ),
           if (_member!.competition!.attacks != null)
-            Text(
-              'Attacks: ${_member!.competition!.attacks}',
+            PdaText(
+              "Attacks: {0}", values: [_member!.competition!.attacks],
             ),
           if (_member!.competition!.image != null)
-            Text(
-              'Image: ${_member!.competition!.image}',
+            PdaText(
+              "Image: {0}", values: [_member!.competition!.image],
             ),
           if (_member!.competition!.score != null)
-            Text(
-              'Score: ${_member!.competition!.score!.ceil()}',
+            PdaText(
+              "Score: {0}", values: [_member!.competition!.score!.ceil()],
             ),
           if (_member!.competition!.team != null)
-            Text(
-              'Team: ${_member!.competition!.team}',
+            PdaText(
+              "Team: {0}", values: [_member!.competition!.team],
             ),
           if (_member!.competition!.text != null)
-            Text(
-              'Text: ${_member!.competition!.text}',
+            PdaText(
+              "Text: {0}", values: [_member!.competition!.text],
             ),
           if (_member!.competition!.total != null)
-            Text(
-              'Total (accumulated): ${_member!.competition!.total}',
+            PdaText(
+              "Total (accumulated): {0}", values: [_member!.competition!.total],
             ),
           if (_member!.competition!.treatsCollectedTotal != null)
-            Text(
-              'Treats collected: ${_member!.competition!.treatsCollectedTotal}',
+            PdaText(
+              "Treats collected: {0}", values: [_member!.competition!.treatsCollectedTotal],
             ),
           if (_member!.competition!.votes != null)
-            Text(
-              'Votes: ${_member!.competition!.votes}',
+            PdaText(
+              "Votes: {0}", values: [_member!.competition!.votes],
             ),
           if (_member!.competition!.position != null)
-            Text(
-              'Position: ${_member!.competition!.position}',
+            PdaText(
+              "Position: {0}", values: [_member!.competition!.position],
             ),
         ],
       ),

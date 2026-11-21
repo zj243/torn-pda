@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ class ReviveProviderInfoText extends StatelessWidget {
     final children = <InlineSpan>[];
 
     if (provider.forumUrl != null || provider.discordUrl != null) {
-      children.add(const TextSpan(text: "\n\nCheck out their "));
+      children.add(TextSpan(text: context.interfaceText("\n\nCheck out their ")));
 
       if (provider.forumUrl != null) {
         children.add(
@@ -33,20 +34,20 @@ class ReviveProviderInfoText extends StatelessWidget {
             child: GestureDetector(
               onTap: () => _openForum(context, BrowserTapType.short),
               onLongPress: () => _openForum(context, BrowserTapType.long),
-              child: const Text('forum thread', style: linkStyle),
+              child: const PdaText('forum thread', style: linkStyle),
             ),
           ),
         );
       }
 
       if (provider.forumUrl != null && provider.discordUrl != null) {
-        children.add(const TextSpan(text: ' and '));
+        children.add(TextSpan(text: context.interfaceText(' and ')));
       }
 
       if (provider.discordUrl != null) {
         children.add(
           TextSpan(
-            text: 'Discord server',
+            text: context.interfaceText('Discord server'),
             style: linkStyle,
             recognizer: TapGestureRecognizer()
               ..onTap = () async {
@@ -59,7 +60,7 @@ class ReviveProviderInfoText extends StatelessWidget {
         );
       }
 
-      children.add(const TextSpan(text: ' for more information.'));
+      children.add(TextSpan(text: context.interfaceText(' for more information.')));
     }
 
     children.add(TextSpan(text: "\n\n${provider.priceNote(provider.price(context.read<SettingsProvider>()))}"));

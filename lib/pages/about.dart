@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:io';
 
 import 'package:flutter/gestures.dart';
@@ -76,7 +77,7 @@ class AboutPageState extends State<AboutPage> {
               ),
               const Padding(
                 padding: EdgeInsets.fromLTRB(20, 25, 30, 10),
-                child: Text(
+                child: PdaText(
                   "Torn PDA has been developed as an assistant for "
                   "players of TORN City. It was conceived to enhance the "
                   "experience of playing Torn from a mobile platform.",
@@ -87,7 +88,7 @@ class AboutPageState extends State<AboutPage> {
                 child: Row(
                   children: <Widget>[
                     Flexible(
-                      child: Text(
+                      child: PdaText(
                         "Would you like to collaborate?",
                       ),
                     ),
@@ -112,11 +113,11 @@ class AboutPageState extends State<AboutPage> {
                     Flexible(
                       child: RichText(
                         text: TextSpan(
-                          text: 'Join our ',
+                          text: context.interfaceText('Join our '),
                           style: DefaultTextStyle.of(context).style,
                           children: <TextSpan>[
                             TextSpan(
-                              text: 'Discord channel',
+                              text: context.interfaceText('Discord channel'),
                               style: TextStyle(
                                   decoration: _themeProvider.accesibilityNoTextColors ? TextDecoration.underline : null,
                                   fontWeight: FontWeight.bold,
@@ -129,9 +130,9 @@ class AboutPageState extends State<AboutPage> {
                                   }
                                 },
                             ),
-                            const TextSpan(
-                              text: ' and offer suggestions for new '
-                                  'features or report bugs you find!',
+                            TextSpan(
+                              text: context.interfaceText(' and offer suggestions for new '
+                                  'features or report bugs you find!'),
                             ),
                           ],
                         ),
@@ -151,7 +152,7 @@ class AboutPageState extends State<AboutPage> {
                     Flexible(
                       child: RichText(
                         text: TextSpan(
-                          text: 'Give a thumbs up in the official ',
+                          text: context.interfaceText('Give a thumbs up in the official '),
                           style: DefaultTextStyle.of(context).style,
                           children: <InlineSpan>[
                             WidgetSpan(
@@ -172,7 +173,7 @@ class AboutPageState extends State<AboutPage> {
                                         browserTapType: BrowserTapType.long,
                                       );
                                 },
-                                child: Text(
+                                child: PdaText(
                                   'Torn Forums',
                                   style: TextStyle(
                                       decoration:
@@ -182,9 +183,9 @@ class AboutPageState extends State<AboutPage> {
                                 ),
                               ),
                             ),
-                            const TextSpan(
-                              text: ' and stay updated about the app or '
-                                  'suggest new features.',
+                            TextSpan(
+                              text: context.interfaceText(' and stay updated about the app or '
+                                  'suggest new features.'),
                             ),
                           ],
                         ),
@@ -211,7 +212,7 @@ class AboutPageState extends State<AboutPage> {
                     Flexible(
                       child: RichText(
                         text: TextSpan(
-                          text: 'Help us code new features for the app in ',
+                          text: context.interfaceText('Help us code new features for the app in '),
                           style: DefaultTextStyle.of(context).style,
                           children: <InlineSpan>[
                             WidgetSpan(
@@ -232,7 +233,7 @@ class AboutPageState extends State<AboutPage> {
                                         browserTapType: BrowserTapType.long,
                                       );
                                 },
-                                child: Text(
+                                child: PdaText(
                                   'Github',
                                   style: TextStyle(
                                       decoration:
@@ -242,9 +243,9 @@ class AboutPageState extends State<AboutPage> {
                                 ),
                               ),
                             ),
-                            const TextSpan(
-                              text: '. It is a nice way to practice your '
-                                  'coding skills in Flutter!',
+                            TextSpan(
+                              text: context.interfaceText('. It is a nice way to practice your '
+                                  'coding skills in Flutter!'),
                             ),
                           ],
                         ),
@@ -268,8 +269,8 @@ class AboutPageState extends State<AboutPage> {
                     Flexible(
                       child: RichText(
                         text: TextSpan(
-                          text: "If you'd like to show your appreciation and "
-                              'can afford a ',
+                          text: context.interfaceText("If you'd like to show your appreciation and "
+                              'can afford a '),
                           style: DefaultTextStyle.of(context).style,
                           children: <InlineSpan>[
                             WidgetSpan(
@@ -290,7 +291,7 @@ class AboutPageState extends State<AboutPage> {
                                         browserTapType: BrowserTapType.long,
                                       );
                                 },
-                                child: Text(
+                                child: PdaText(
                                   'donation in game',
                                   style: TextStyle(
                                       decoration:
@@ -300,7 +301,7 @@ class AboutPageState extends State<AboutPage> {
                                 ),
                               ),
                             ),
-                            const TextSpan(text: ' it would be certainly appreciated!'),
+                            TextSpan(text: context.interfaceText(' it would be certainly appreciated!')),
                           ],
                         ),
                       ),
@@ -316,14 +317,14 @@ class AboutPageState extends State<AboutPage> {
                       children: <Widget>[
                         const Flexible(
                           flex: 2,
-                          child: Text(
+                          child: PdaText(
                             "Changelog (major versions): ",
                           ),
                         ),
                         Flexible(
                           child: InkWell(
                             onTap: _showChangeLogDialog,
-                            child: Text(
+                            child: PdaText(
                               "show",
                               style: TextStyle(
                                 decoration: TextDecoration.underline,
@@ -340,8 +341,8 @@ class AboutPageState extends State<AboutPage> {
                         children: <Widget>[
                           Flexible(
                             flex: 2,
-                            child: Text(
-                              "Your version: v$appVersion (${Platform.isAndroid ? androidCompilation : iosCompilation})",
+                            child: PdaText(
+                              "Your version: v{0} ({1})", values: [appVersion, Platform.isAndroid ? androidCompilation : iosCompilation],
                             ),
                           ),
                         ],
@@ -366,7 +367,7 @@ class AboutPageState extends State<AboutPage> {
                         children: <Widget>[
                           Flexible(
                             flex: 2,
-                            child: Text(
+                            child: PdaText(
                               "UID not assigned, please reload your API key in Settings!",
                               style: TextStyle(
                                 color: _themeProvider.getTextColor(Colors.red),
@@ -382,7 +383,7 @@ class AboutPageState extends State<AboutPage> {
                 alignment: Alignment.bottomLeft,
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(20, 15, 30, 0),
-                  child: Text('Contributors:'),
+                  child: PdaText('Contributors:'),
                 ),
               ),
               _contributorLine('Developers: ', [
@@ -398,7 +399,7 @@ class AboutPageState extends State<AboutPage> {
                 _profileLink('Kivou', '2000607'),
                 const TextSpan(text: ' (YATA), '),
                 _profileLink('IceBlueFire', '776'),
-                const TextSpan(text: ' (Torn Stats), '),
+                TextSpan(text: context.interfaceText(' (Torn Stats), ')),
                 WidgetSpan(
                   child: GestureDetector(
                     onTap: () {
@@ -415,7 +416,7 @@ class AboutPageState extends State<AboutPage> {
                             browserTapType: BrowserTapType.long,
                           );
                     },
-                    child: Text(
+                    child: PdaText(
                       'Prometheus',
                       style: TextStyle(
                           decoration: _themeProvider.accesibilityNoTextColors ? TextDecoration.underline : null,
@@ -424,46 +425,46 @@ class AboutPageState extends State<AboutPage> {
                     ),
                   ),
                 ),
-                const TextSpan(text: ' (foreign stocks)'),
+                TextSpan(text: context.interfaceText(' (foreign stocks)')),
               ]),
               _contributorLine('Code contributions:', []),
               _contributorLine('  • ', [
                 _profileLink('bombel', '2362436'),
-                const TextSpan(text: ': Android Live Updates'),
+                TextSpan(text: context.interfaceText(': Android Live Updates')),
               ]),
               _contributorLine('  • ', [
                 _profileLink('Knoxby', '2503189'),
-                const TextSpan(text: ': JS cross-origin API'),
+                TextSpan(text: context.interfaceText(': JS cross-origin API')),
               ]),
               _contributorLine('  • ', [
                 _profileLink('tiksan', '2383326'),
-                const TextSpan(text: ': JS handlers'),
+                TextSpan(text: context.interfaceText(': JS handlers')),
               ]),
               _contributorLine('  • ', [
                 _profileLink('Tenren', '3373820'),
-                const TextSpan(text: ': level calculation fix'),
+                TextSpan(text: context.interfaceText(': level calculation fix')),
               ]),
               _contributorLine('  • ', [
                 _profileLink('TheProgrammer', '2782979'),
-                const TextSpan(text: ': ToS table'),
+                TextSpan(text: context.interfaceText(': ToS table')),
               ]),
               _contributorLine('  • ', [
                 _profileLink('HangingLow', '3128897'),
-                const TextSpan(text: ': flight notifications'),
+                TextSpan(text: context.interfaceText(': flight notifications')),
               ]),
               _contributorLine('  • ', [
                 _profileLink('OneMind', '3608257'),
-                const TextSpan(text: ': config templates & build docs'),
+                TextSpan(text: context.interfaceText(': config templates & build docs')),
               ]),
               _contributorLine('  • ', [
                 _profileLink('xentac', '3354782'),
-                const TextSpan(text: ': userscript storage & recovery'),
+                TextSpan(text: context.interfaceText(': userscript storage & recovery')),
               ]),
               const Align(
                 alignment: Alignment.bottomLeft,
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(30, 0, 30, 10),
-                  child: Text('Thank you to our partners, who chose Torn PDA as their mobile '
+                  child: PdaText('Thank you to our partners, who chose Torn PDA as their mobile '
                       'interface: YATA, FFScouter and many reviving providers.'),
                 ),
               ),
@@ -471,7 +472,7 @@ class AboutPageState extends State<AboutPage> {
                 alignment: Alignment.bottomLeft,
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(30, 0, 30, 10),
-                  child: Text('The Trade Calculator also supports external pricing workflows such as '
+                  child: PdaText('The Trade Calculator also supports external pricing workflows such as '
                       'Torn Exchange and TornW3B.'),
                 ),
               ),
@@ -479,7 +480,7 @@ class AboutPageState extends State<AboutPage> {
                 alignment: Alignment.bottomLeft,
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(30, 0, 30, 10),
-                  child: Text('Some scripts, concepts, and features have been '
+                  child: PdaText('Some scripts, concepts, and features have been '
                       'adapted from preexisting ones in tools like YATA, '
                       'Torn Tools or DocTorn.'),
                 ),
@@ -491,7 +492,7 @@ class AboutPageState extends State<AboutPage> {
                     Flexible(
                       child: RichText(
                         text: TextSpan(
-                          text: "See Torn PDA's ",
+                          text: context.interfaceText("See Torn PDA's "),
                           style: DefaultTextStyle.of(context).style,
                           children: <InlineSpan>[
                             WidgetSpan(
@@ -512,7 +513,7 @@ class AboutPageState extends State<AboutPage> {
                                         browserTapType: BrowserTapType.long,
                                       );
                                 },
-                                child: Text(
+                                child: PdaText(
                                   'privacy policy',
                                   style: TextStyle(
                                     decoration:
@@ -560,7 +561,7 @@ class AboutPageState extends State<AboutPage> {
           if (_webViewProvider.appCanOpenBrowser) const PdaBrowserIcon()
         ],
       ),
-      title: const Text('About', style: TextStyle(color: Colors.white)),
+      title: const PdaText('About', style: TextStyle(color: Colors.white)),
     );
   }
 

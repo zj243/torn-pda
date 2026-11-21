@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
@@ -158,7 +159,7 @@ class _ChatLinkWindowState extends State<ChatLinkWindow> {
             scopesRoute: true,
             namesRoute: true,
             explicitChildNodes: true,
-            label: 'Link preview',
+            label: context.interfaceText('Link preview'),
             onDismiss: NativeChat.closeLinkWindow,
             child: Material(
               color: scheme.surface,
@@ -275,14 +276,14 @@ class _ChatLinkWindowState extends State<ChatLinkWindow> {
                         Expanded(
                           child: TextButton.icon(
                             icon: const Icon(Icons.tab_rounded, size: 18),
-                            label: const Text('Main tab'),
+                            label: const PdaText('Main tab'),
                             onPressed: () => _toBrowser(newTab: false),
                           ),
                         ),
                         Expanded(
                           child: TextButton.icon(
                             icon: const Icon(Icons.add_box_outlined, size: 18),
-                            label: const Text('New tab'),
+                            label: const PdaText('New tab'),
                             onPressed: () => _toBrowser(newTab: true),
                           ),
                         ),

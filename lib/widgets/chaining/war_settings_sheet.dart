@@ -1,5 +1,6 @@
 // ignore_for_file: curly_braces_in_flow_control_structures
 
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -130,7 +131,7 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
             tabs: [
               const Tab(text: "Sorting"),
               const Tab(
-                child: FittedBox(fit: BoxFit.scaleDown, child: Text("Smart Score")),
+                child: FittedBox(fit: BoxFit.scaleDown, child: PdaText("Smart Score")),
               ),
               const Tab(text: "Filters"),
             ],
@@ -168,14 +169,14 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
         padding: const EdgeInsets.all(16),
         children: [
           if (favorites.isNotEmpty) ...[
-            const Text("Favorites", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            const PdaText("Favorites", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             const SizedBox(height: 10),
             ...favorites.map((type) => _buildSortTile(type, theme)),
             const Divider(),
             const SizedBox(height: 10),
-            const Text("All sort criteria", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            const PdaText("All sort criteria", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
           ] else ...[
-            const Text("Main sort criteria", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            const PdaText("Main sort criteria", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
           ],
           const SizedBox(height: 10),
           ...others.map((type) => _buildSortTile(type, theme)),
@@ -238,8 +239,8 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
                   Material(
                     type: MaterialType.transparency,
                     child: SwitchListTile(
-                      title: const Text("Show 'Okay' targets at top", style: TextStyle(fontSize: 14)),
-                      subtitle: Text(
+                      title: const PdaText("Show 'Okay' targets at top", style: TextStyle(fontSize: 14)),
+                      subtitle: PdaText(
                         "Targets not in hospital will appear first.",
                         style: TextStyle(fontSize: 12, color: Colors.grey[600]),
                       ),
@@ -262,7 +263,7 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
                         children: [
                           Row(
                             children: [
-                              const Text("Secondary sort:", style: TextStyle(fontSize: 12)),
+                              const PdaText("Secondary sort:", style: TextStyle(fontSize: 12)),
                               const SizedBox(width: 10),
                               Expanded(
                                 child: DropdownButton<WarSortType>(
@@ -310,7 +311,7 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
                               Icon(Icons.info_outline, size: 12, color: Colors.grey[600]),
                               const SizedBox(width: 4),
                               Expanded(
-                                child: Text(
+                                child: PdaText(
                                   "Used to sort targets that are NOT in hospital when 'Okay at top' is active. "
                                   "If Smart Score is selected, it uses the configured weights even if not active globally.",
                                   style: TextStyle(fontSize: 10, color: Colors.grey[600]),
@@ -369,7 +370,7 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
                         _warController.sortTargets(WarSortType.smartScore);
                       });
                     },
-                    child: const Text("Activate Smart Score sorting"),
+                    child: const PdaText("Activate Smart Score sorting"),
                   ),
                 ],
               ],
@@ -378,14 +379,14 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text("Smart Score weights", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            const PdaText("Smart Score weights", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             IconButton(
               icon: const Icon(Icons.info_outline, color: Colors.blue),
               onPressed: () => _showHelpDialog(context),
             ),
           ],
         ),
-        Text(
+        PdaText(
           "Adjust how important each factor is. Negative values prioritize LOW attributes, "
           "positive values prioritize HIGH attributes.",
           style: TextStyle(color: Colors.grey[600], fontSize: 12),
@@ -410,7 +411,7 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
             child: ExpansionTile(
               title: Row(
                 children: [
-                  const Text("Stats weights", style: TextStyle(fontWeight: FontWeight.bold)),
+                  const PdaText("Stats weights", style: TextStyle(fontWeight: FontWeight.bold)),
                   if (_settings.weightEstimatedStats != 0 ||
                       _settings.weightStats != 0 ||
                       _settings.weightStrength != 0 ||
@@ -426,7 +427,7 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
                           borderRadius: BorderRadius.circular(4),
                           border: Border.all(color: Colors.green),
                         ),
-                        child: const Text(
+                        child: const PdaText(
                           "ACTIVE",
                           style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.green),
                         ),
@@ -615,7 +616,7 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
     }
 
     if (allMembers.isEmpty) {
-      return const Text("No members available for preview.");
+      return const PdaText("No members available for preview.");
     }
 
     // Apply Filters if enabled in Preview
@@ -686,10 +687,10 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text("Preview (Top 20)", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            const PdaText("Preview (Top 20)", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             Row(
               children: [
-                const Text("Also apply filters", style: TextStyle(fontSize: 12)),
+                const PdaText("Also apply filters", style: TextStyle(fontSize: 12)),
                 Switch(
                   value: _applyFiltersInPreview,
                   onChanged: (val) {
@@ -702,7 +703,7 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
             ),
           ],
         ),
-        const Text(
+        const PdaText(
           "Values show score contribution from each factor.",
           style: TextStyle(color: Colors.grey, fontSize: 12),
         ),
@@ -719,7 +720,7 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
                 Icon(Icons.warning_amber_rounded, size: 14, color: Colors.orange[800]),
                 const SizedBox(width: 4),
                 Expanded(
-                  child: Text(
+                  child: PdaText(
                     "List might be modified by 'Okay at top' setting (smart score is used as the secondary sort method). "
                     "Targets in hospital will appear at the bottom.",
                     style: TextStyle(fontSize: 11, color: Colors.orange[800], fontStyle: FontStyle.italic),
@@ -736,7 +737,7 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
                 Icon(Icons.filter_list, size: 14, color: Colors.orange[800]),
                 const SizedBox(width: 4),
                 Expanded(
-                  child: Text(
+                  child: PdaText(
                     "List might be modified by active filters!",
                     style: TextStyle(fontSize: 11, color: Colors.orange[800], fontStyle: FontStyle.italic),
                   ),
@@ -752,7 +753,7 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
           padding: const EdgeInsets.all(8),
           margin: const EdgeInsets.only(bottom: 10),
           decoration: BoxDecoration(color: Colors.grey.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(4)),
-          child: const Text(
+          child: const PdaText(
             "Note: External factors like hidden targets, main page exclusions, or other global settings are not reflected in this preview.",
             style: TextStyle(fontSize: 10, color: Colors.grey),
           ),
@@ -877,8 +878,8 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
                         "#$currentRank ${m.name ?? "Unknown"}",
                         style: TextStyle(color: theme.mainText, fontWeight: FontWeight.bold),
                       ),
-                      Text(
-                        "Score: $scoreText",
+                      PdaText(
+                        "Score: {0}", values: [scoreText],
                         style: TextStyle(color: theme.mainText, fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -970,8 +971,8 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
         Material(
           type: MaterialType.transparency,
           child: SwitchListTile(
-            title: const Text("Enable Filters", style: TextStyle(fontWeight: FontWeight.bold)),
-            subtitle: const Text("Only show targets matching these criteria"),
+            title: const PdaText("Enable Filters", style: TextStyle(fontWeight: FontWeight.bold)),
+            subtitle: const PdaText("Only show targets matching these criteria"),
             value: _settings.filtersEnabled,
             onChanged: (val) {
               setState(() {
@@ -987,7 +988,7 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
           const Padding(
             padding: EdgeInsets.all(20.0),
             child: Center(
-              child: Text(
+              child: PdaText(
                 "Filters are disabled.\nAll targets will be shown.",
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.grey),
@@ -995,8 +996,8 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
             ),
           )
         else ...[
-          const Text("Range Filters", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-          Text("Filter targets based on specific ranges.", style: TextStyle(color: Colors.grey[600], fontSize: 12)),
+          const PdaText("Range Filters", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+          PdaText("Filter targets based on specific ranges.", style: TextStyle(color: Colors.grey[600], fontSize: 12)),
           const SizedBox(height: 20),
           _buildRangeSlider("Level", _settings.levelRange, 1, 100, (val) => _settings.levelRange = val),
           _buildRangeSlider("Life", _settings.lifeRange, 0, 10000, (val) => _settings.lifeRange = val),
@@ -1021,7 +1022,7 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
               child: ExpansionTile(
                 title: Row(
                   children: [
-                    const Text("Stats Filter", style: TextStyle(fontWeight: FontWeight.bold)),
+                    const PdaText("Stats Filter", style: TextStyle(fontWeight: FontWeight.bold)),
                     if (_settings.estimatedStatsRange != null ||
                         (_settings.statsRange != null && _maxStats > 0) ||
                         (_settings.strengthRange != null && _maxStr > 0) ||
@@ -1037,7 +1038,7 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
                             borderRadius: BorderRadius.circular(4),
                             border: Border.all(color: Colors.green),
                           ),
-                          child: const Text(
+                          child: const PdaText(
                             "ACTIVE",
                             style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.green),
                           ),
@@ -1436,12 +1437,12 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
             }
 
             return AlertDialog(
-              title: Text("$label Range"),
+              title: PdaText("{0} Range", values: [label]),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    "Enter values between ${_formatStatValue(min)} and ${_formatStatValue(max)}",
+                  PdaText(
+                    "Enter values between {0} and {1}", values: [_formatStatValue(min), _formatStatValue(max)],
                     style: TextStyle(fontSize: 12, color: Colors.grey[600]),
                   ),
                   const SizedBox(height: 16),
@@ -1449,8 +1450,8 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
                     controller: minController,
                     keyboardType: TextInputType.number,
                     maxLength: maxDigits,
-                    decoration: const InputDecoration(
-                      labelText: "Minimum",
+                    decoration: InputDecoration(
+                      labelText: context.interfaceText("Minimum"),
                       border: OutlineInputBorder(),
                       isDense: true,
                       counterText: '',
@@ -1474,7 +1475,7 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
                     keyboardType: TextInputType.number,
                     maxLength: maxDigits,
                     decoration: InputDecoration(
-                      labelText: "Maximum (max: ${_formatStatValue(max)})",
+                      labelText: context.interfaceText("Maximum (max: {0})", [_formatStatValue(max)]),
                       border: const OutlineInputBorder(),
                       isDense: true,
                       counterText: '',
@@ -1495,7 +1496,7 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
                 ],
               ),
               actions: [
-                TextButton(onPressed: () => Navigator.pop(dialogContext), child: const Text("Cancel")),
+                TextButton(onPressed: () => Navigator.pop(dialogContext), child: const PdaText("Cancel")),
                 TextButton(
                   onPressed: () {
                     double? newMin = double.tryParse(minController.text);
@@ -1516,7 +1517,7 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
                     }
                     Navigator.pop(dialogContext);
                   },
-                  child: const Text("Apply"),
+                  child: const PdaText("Apply"),
                 ),
               ],
             );
@@ -1530,7 +1531,7 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("How Smart Score works"),
+        title: const PdaText("How Smart Score works"),
         content: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -1551,7 +1552,7 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
                 "• Stats/Level (relative): 'low' means the importance goes towards the weakest person in the current list, it's stat-dependent. 'High' means the opposite (importance goes towards the member with the highest stat).\n\n• Hospital (Absolute): 'low' always means 0 minutes. 'high' always means 100 hours. Targets NOT in hospital are ignored (neutral score).",
               ),
               const Divider(height: 60),
-              const Text("Technical details", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+              const PdaText("Technical details", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
               const SizedBox(height: 20),
               _buildHelpSection(
                 "Dynamic relative scoring",
@@ -1580,7 +1581,7 @@ class WarSettingsSheetState extends State<WarSettingsSheet> with SingleTickerPro
             ],
           ),
         ),
-        actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text("Got it"))],
+        actions: [TextButton(onPressed: () => Navigator.pop(context), child: const PdaText("Got it"))],
       ),
     );
   }

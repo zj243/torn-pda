@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -32,14 +33,14 @@ Future<void> confirmChatBlock(BuildContext context, ChatUser user) async {
   final sure = await showDialog<bool>(
     context: context,
     builder: (context) => AlertDialog(
-      title: Text('Block ${user.name}?'),
-      content: const Text(
+      title: PdaText("Block {0}?", values: [user.name]),
+      content: const PdaText(
         'Torn stops their private messages and mail to you, on every device. '
         'To hide them only in Torn PDA, use Ignore instead',
       ),
       actions: [
-        TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancel')),
-        FilledButton(onPressed: () => Navigator.pop(context, true), child: const Text('Block')),
+        TextButton(onPressed: () => Navigator.pop(context, false), child: const PdaText('Cancel')),
+        FilledButton(onPressed: () => Navigator.pop(context, true), child: const PdaText('Block')),
       ],
     ),
   );

@@ -1,4 +1,5 @@
 // ignore: unused_import
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:developer';
 import 'dart:io';
 import 'package:bot_toast/bot_toast.dart';
@@ -376,7 +377,7 @@ class WebViewStackViewState extends State<WebViewStackView> with WidgetsBindingO
                 alignment: Alignment.topRight,
                 child: IconButton(
                   icon: Icon(Icons.close, color: _themeProvider.mainText),
-                  tooltip: "Close this side",
+                  tooltip: context.interfaceText("Close this side"),
                   onPressed: () => _webViewProvider.closeSplitApartGroup(),
                 ),
               ),
@@ -458,10 +459,8 @@ class WebViewStackViewState extends State<WebViewStackView> with WidgetsBindingO
           child: Center(
             child: Padding(
               padding: const EdgeInsets.all(50),
-              child: Text(
-                "There was an error loading the content: $e"
-                "\n\nPlease reset your browser cache in Settings / Advanced Browser Settings and try again"
-                "\n\nIf it reoccurs, you might have to force close the app and relaunch",
+              child: PdaText(
+                "There was an error loading the content: {0}\n\nPlease reset your browser cache in Settings / Advanced Browser Settings and try again\n\nIf it reoccurs, you might have to force close the app and relaunch", values: [e],
                 style: const TextStyle(color: Colors.amber),
               ),
             ),
@@ -541,7 +540,7 @@ class WebViewStackViewState extends State<WebViewStackView> with WidgetsBindingO
   void _closeWithError() {
     BotToast.showText(
       clickClose: true,
-      text: "Something went wrong, please try again.",
+      text: context.interfaceText("Something went wrong, please try again."),
       textStyle: const TextStyle(fontSize: 14, color: Colors.white),
       contentColor: Colors.deepOrangeAccent,
       duration: const Duration(seconds: 6),
@@ -637,7 +636,7 @@ class WebViewStackViewState extends State<WebViewStackView> with WidgetsBindingO
                               child: Column(
                                 children: [
                                   if (_webViewProvider.tabList[0].isChainingBrowser)
-                                    Text(
+                                    PdaText(
                                       "CHAIN",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(fontSize: 8, color: Colors.red[800]),
@@ -752,12 +751,12 @@ class WebViewStackViewState extends State<WebViewStackView> with WidgetsBindingO
       textColor: _themeProvider.mainText,
       tooltipBackgroundColor: _themeProvider.secondBackground,
       key: withMenus ? _showcaseTabsGeneral : _showcaseApartTabs,
-      title: 'New tab...!',
+      title: context.interfaceText('New tab...!'),
       description:
-          "\nYou've opened a new tab!\n\nThere are two important things to remember: a DOUBLE TAP will "
+          context.interfaceText("\nYou've opened a new tab!\n\nThere are two important things to remember: a DOUBLE TAP will "
           "open a menu with a few options (including navigation arrows which might be useful in full screen "
           "mode!), and a TRIPLE TAP will instantly remove a tab (except for the first one, which is persistent)."
-          "\n\nVisit the Tips section for more information!\n",
+          "\n\nVisit the Tips section for more information!\n"),
       descTextStyle: const TextStyle(fontSize: 13),
       tooltipPadding: const EdgeInsets.all(20),
       child: GestureDetector(
@@ -793,12 +792,12 @@ class WebViewStackViewState extends State<WebViewStackView> with WidgetsBindingO
                   if (withMenus)
                     Showcase(
                       key: _showQuickMenuButton,
-                      title: 'Quick menu',
+                      title: context.interfaceText('Quick menu'),
                       description:
-                          '\nTap to show a quick list of quick actions, including shortcuts, '
+                          context.interfaceText('\nTap to show a quick list of quick actions, including shortcuts, '
                           'fullscreen mode and more! Some quick shortcuts are:\n\n'
                           'Double tap to get quick access to shortcuts\n\n'
-                          'When in full screen mode, long-press to revert to windowed mode immediately',
+                          'When in full screen mode, long-press to revert to windowed mode immediately'),
                       targetPadding: const EdgeInsets.all(10),
                       disableMovingAnimation: true,
                       textColor: _themeProvider.mainText,
@@ -1101,10 +1100,10 @@ class WebViewStackViewState extends State<WebViewStackView> with WidgetsBindingO
                   else
                     Showcase(
                       key: _showCaseNewTabButton,
-                      title: 'New tab button',
+                      title: context.interfaceText('New tab button'),
                       description:
-                          '\nTap to add a new tab.'
-                          '\n\nLong-press to change between icons and page titles in your tabs.',
+                          context.interfaceText('\nTap to add a new tab.'
+                          '\n\nLong-press to change between icons and page titles in your tabs.'),
                       targetPadding: const EdgeInsets.all(10),
                       disableMovingAnimation: true,
                       textColor: _themeProvider.mainText,

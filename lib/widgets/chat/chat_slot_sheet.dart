@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:torn_pda/models/chat/chat_item_aliases.dart';
@@ -136,7 +137,7 @@ class _ChatSlotSheetState extends State<ChatSlotSheet> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Reply: ${widget.reply}', style: theme.textTheme.titleSmall),
+              PdaText("Reply: {0}", values: [widget.reply], style: theme.textTheme.titleSmall),
               for (final (i, key) in widget.asks.indexed) ...[
                 const SizedBox(height: 12),
                 TextField(
@@ -187,7 +188,7 @@ class _ChatSlotSheetState extends State<ChatSlotSheet> {
                         if (_percent != 0)
                           ActionChip(
                             label: Text(_percent > 0 ? '+$_percent%' : '$_percent%'),
-                            tooltip: 'Back to 0%',
+                            tooltip: context.interfaceText('Back to 0%'),
                             visualDensity: VisualDensity.compact,
                             onPressed: () => setState(_resetPercent),
                           ),
@@ -225,9 +226,9 @@ class _ChatSlotSheetState extends State<ChatSlotSheet> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+                  TextButton(onPressed: () => Navigator.pop(context), child: const PdaText('Cancel')),
                   const SizedBox(width: 8),
-                  FilledButton(onPressed: _ready ? _insert : null, child: const Text('Insert')),
+                  FilledButton(onPressed: _ready ? _insert : null, child: const PdaText('Insert')),
                 ],
               ),
             ],

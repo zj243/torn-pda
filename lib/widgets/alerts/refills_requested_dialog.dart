@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -26,11 +27,11 @@ class RefillsRequestedDialogState extends State<RefillsRequestedDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text("Choose refills"),
+      title: const PdaText("Choose refills"),
       content: SingleChildScrollView(
         child: Column(
           children: [
-            const Text(
+            const PdaText(
               "Choose which unused refills types you'd "
               "like to be alerted about a couple of hours before the "
               "end of day in Torn",
@@ -43,7 +44,7 @@ class RefillsRequestedDialogState extends State<RefillsRequestedDialog> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("Energy"),
+                  const PdaText("Energy"),
                   Switch(
                     value: _firebaseUserModel!.refillsRequested.contains('energy'),
                     onChanged: (value) {
@@ -66,7 +67,7 @@ class RefillsRequestedDialogState extends State<RefillsRequestedDialog> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("Nerve"),
+                  const PdaText("Nerve"),
                   Switch(
                     value: _firebaseUserModel!.refillsRequested.contains('nerve'),
                     onChanged: (value) {
@@ -89,7 +90,7 @@ class RefillsRequestedDialogState extends State<RefillsRequestedDialog> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("Casino tokens"),
+                  const PdaText("Casino tokens"),
                   Switch(
                     value: _firebaseUserModel!.refillsRequested.contains('token'),
                     onChanged: (value) {
@@ -114,7 +115,7 @@ class RefillsRequestedDialogState extends State<RefillsRequestedDialog> {
         Padding(
           padding: const EdgeInsets.only(right: 15),
           child: TextButton(
-            child: const Text("Close"),
+            child: const PdaText("Close"),
             onPressed: () {
               Navigator.of(context).pop();
             },

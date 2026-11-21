@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -111,11 +112,11 @@ class StockMarketAlertsPageState extends State<StockMarketAlertsPage> {
                           child: Column(
                             children: <Widget>[
                               _optionsCard(),
-                              const Text("Traded Companies"),
+                              const PdaText("Traded Companies"),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text("Value: ", style: TextStyle(fontSize: 10)),
+                                  const PdaText("Value: ", style: TextStyle(fontSize: 10)),
                                   Text(formatProfit(inputDouble: _totalValue), style: const TextStyle(fontSize: 10)),
                                   Text(
                                     " - ${_totalProfit >= 0 ? 'Profit' : 'Loss'}: ",
@@ -142,7 +143,7 @@ class StockMarketAlertsPageState extends State<StockMarketAlertsPage> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text(
+                            PdaText(
                               'OOPS!',
                               style: TextStyle(color: Colors.red, fontSize: 20, fontWeight: FontWeight.bold),
                             ),
@@ -150,7 +151,7 @@ class StockMarketAlertsPageState extends State<StockMarketAlertsPage> {
                               padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
                               child: Column(
                                 children: [
-                                  Text(
+                                  PdaText(
                                     'There was an error retrieving market share or alerts information.'
                                     '\n\nPlease try again in a few minutes!',
                                     textAlign: TextAlign.center,
@@ -180,8 +181,8 @@ class StockMarketAlertsPageState extends State<StockMarketAlertsPage> {
       elevation: _settingsP!.appBarTop ? 2 : 0,
       systemOverlayStyle: SystemUiOverlayStyle.light,
       title: Platform.isWindows
-          ? const Text("Stock market", style: TextStyle(color: Colors.white))
-          : const Text("Stock market alerts", style: TextStyle(color: Colors.white)),
+          ? const PdaText("Stock market", style: TextStyle(color: Colors.white))
+          : const PdaText("Stock market alerts", style: TextStyle(color: Colors.white)),
       leadingWidth: _webViewProvider.appCanOpenBrowser ? 88 : 50,
       leading: Row(
         children: [
@@ -245,7 +246,7 @@ class StockMarketAlertsPageState extends State<StockMarketAlertsPage> {
             tilePadding: const EdgeInsets.symmetric(horizontal: 16),
             childrenPadding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
             leading: const Icon(Icons.settings, size: 20),
-            title: const Text("OPTIONS", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+            title: const PdaText("OPTIONS", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
             subtitle: summary.isEmpty ? null : Text(summary, style: const TextStyle(fontSize: 11)),
             children: [if (showAlerts) _alertActivator(), if (showFilter) _benefitBlockFilter(benefitBlockCount)],
           ),
@@ -260,8 +261,8 @@ class StockMarketAlertsPageState extends State<StockMarketAlertsPage> {
       activeColor: Colors.blueGrey,
       contentPadding: EdgeInsets.zero,
       value: _fbUser!.stockMarketNotification ?? false,
-      title: const Text("Stock Market notification", style: TextStyle(fontSize: 14)),
-      subtitle: const Text(
+      title: const PdaText("Stock Market notification", style: TextStyle(fontSize: 14)),
+      subtitle: const PdaText(
         "Main toggle for the custom price alerts you set up below",
         style: TextStyle(fontSize: 11, fontStyle: FontStyle.italic),
       ),
@@ -280,10 +281,9 @@ class StockMarketAlertsPageState extends State<StockMarketAlertsPage> {
       activeColor: Colors.blueGrey,
       contentPadding: EdgeInsets.zero,
       value: _hideBenefitBlocks,
-      title: const Text("Hide stocks with a benefit block", style: TextStyle(fontSize: 14)),
-      subtitle: Text(
-        "Hides companies in which you already own enough shares for at least one benefit block"
-        "${_hideBenefitBlocks && benefitBlockCount > 0 ? ' ($benefitBlockCount hidden)' : ''}",
+      title: const PdaText("Hide stocks with a benefit block", style: TextStyle(fontSize: 14)),
+      subtitle: PdaText(
+        "Hides companies in which you already own enough shares for at least one benefit block{0}", values: [_hideBenefitBlocks && benefitBlockCount > 0 ? ' ($benefitBlockCount hidden)' : ''],
         style: const TextStyle(fontSize: 11, fontStyle: FontStyle.italic),
       ),
       onChanged: (value) {

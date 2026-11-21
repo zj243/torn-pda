@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 // Flutter imports:
@@ -108,12 +109,12 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
       toolbarHeight: 50,
-      title: const Text('TornTools scripts', style: TextStyle(color: Colors.white)),
+      title: const PdaText('TornTools scripts', style: TextStyle(color: Colors.white)),
       leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: _goBack),
       actions: [
         IconButton(
           icon: Icon(_catalogApiKey.isEmpty ? Icons.vpn_key_outlined : Icons.vpn_key, color: Colors.white),
-          tooltip: "API key for these scripts",
+          tooltip: context.interfaceText("API key for these scripts"),
           onPressed: _catalogKeyPressed,
         ),
       ],
@@ -163,7 +164,7 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
                   child: Center(
-                    child: Text(
+                    child: PdaText(
                       "No scripts match your search",
                       style: TextStyle(color: Colors.grey[600], fontStyle: FontStyle.italic),
                     ),
@@ -222,7 +223,7 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
             ),
             if (showRetry) ...[
               const SizedBox(height: 20),
-              ElevatedButton(onPressed: _loadCatalog, child: const Text("Retry")),
+              ElevatedButton(onPressed: _loadCatalog, child: const PdaText("Retry")),
             ],
           ],
         ),
@@ -241,7 +242,7 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
           Icon(Icons.cloud_off, size: 15, color: amber),
           const SizedBox(width: 8),
           Expanded(
-            child: Text(
+            child: PdaText(
               "Showing a saved copy, it might not include the latest scripts",
               style: TextStyle(fontSize: 11, color: amber),
             ),
@@ -250,7 +251,7 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
           GestureDetector(
             onTap: _loadCatalog,
             behavior: HitTestBehavior.opaque,
-            child: Text(
+            child: PdaText(
               "RETRY",
               style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: amber),
             ),
@@ -311,8 +312,8 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
                             children: [
                               Icon(Icons.update, size: 11, color: _subtleText),
                               const SizedBox(width: 4),
-                              Text(
-                                "${catalog.scripts.length} scripts · updated ${catalog.readableUpdated}",
+                              PdaText(
+                                "{0} scripts · updated {1}", values: [catalog.scripts.length, catalog.readableUpdated],
                                 style: TextStyle(fontSize: 10.5, color: _subtleText),
                               ),
                             ],
@@ -334,7 +335,7 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
                 Icon(Icons.info_outline, size: 13, color: _subtleText),
                 const SizedBox(width: 6),
                 Expanded(
-                  child: Text(
+                  child: PdaText(
                     "Made and maintained by the TornTools team, not by Torn PDA. "
                     "Please report any problem with them through their own channels.",
                     style: TextStyle(fontSize: 11, height: 1.3, color: _subtleText),
@@ -416,7 +417,7 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
             borderSide: BorderSide(color: _accent.withValues(alpha: 0.6)),
           ),
           prefixIcon: Icon(Icons.search, size: 19, color: _subtleText),
-          hintText: "Search scripts",
+          hintText: context.interfaceText("Search scripts"),
           hintStyle: TextStyle(fontSize: 14, color: _subtleText),
           suffixIcon: _search.isEmpty
               ? null
@@ -558,7 +559,7 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
                               children: [
                                 Icon(Icons.open_in_new, size: 12, color: _subtleText),
                                 const SizedBox(width: 4),
-                                Text("Source", style: TextStyle(fontSize: 11, color: _subtleText)),
+                                PdaText("Source", style: TextStyle(fontSize: 11, color: _subtleText)),
                               ],
                             ),
                           ),
@@ -713,8 +714,8 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "$stateText\n\nYou can manage it from the user scripts list, or use the shortcuts below.",
+                  PdaText(
+                    "{0}\n\nYou can manage it from the user scripts list, or use the shortcuts below.", values: [stateText],
                     style: const TextStyle(fontSize: 13, height: 1.35),
                   ),
                   if (model.source.contains(apiKeyPlaceholder)) ...[
@@ -757,7 +758,7 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
                                 style: const TextStyle(fontSize: 12.5, height: 1.3),
                               ),
                             ),
-                            Text(
+                            PdaText(
                               "CHANGE",
                               style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: _accent),
                             ),
@@ -775,7 +776,7 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
                         color: red.withValues(alpha: 0.12),
                         border: Border.all(color: red.withValues(alpha: 0.4)),
                       ),
-                      child: Text(
+                      child: PdaText(
                         "Delete this script? Anything it has saved will be wiped as well.",
                         style: TextStyle(fontSize: 12.5, height: 1.3, color: red),
                       ),
@@ -788,7 +789,7 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
                   ? [
                       TextButton(
                         onPressed: () => setDialogState(() => confirmingDelete = false),
-                        child: Text("CANCEL", style: TextStyle(color: _subtleText)),
+                        child: PdaText("CANCEL", style: TextStyle(color: _subtleText)),
                       ),
                       TextButton(
                         onPressed: () {
@@ -796,7 +797,7 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
                           Navigator.of(dialogContext).pop();
                           _toast("${script.name} deleted", Colors.red[800]!);
                         },
-                        child: Text(
+                        child: PdaText(
                           "DELETE",
                           style: TextStyle(color: red, fontWeight: FontWeight.w700),
                         ),
@@ -805,7 +806,7 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
                   : [
                       TextButton(
                         onPressed: () => setDialogState(() => confirmingDelete = true),
-                        child: Text("DELETE", style: TextStyle(color: red)),
+                        child: PdaText("DELETE", style: TextStyle(color: red)),
                       ),
                       TextButton(
                         onPressed: () {
@@ -825,7 +826,7 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
                       ),
                       TextButton(
                         onPressed: () => Navigator.of(dialogContext).pop(),
-                        child: Text("CLOSE", style: TextStyle(color: _accent)),
+                        child: PdaText("CLOSE", style: TextStyle(color: _accent)),
                       ),
                     ],
             );
@@ -888,7 +889,7 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    const PdaText(
                       "Some of these scripts call the Torn API. If you leave this empty, they default to use your Torn PDA key."
                       "\n\nYou can provide here an alternative key of their own, so that you can configure different access "
                       "permissions or revoke it without affecting Torn PDA.",
@@ -914,7 +915,7 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
                       ),
                     ] else if (currentKey.isNotEmpty) ...[
                       const SizedBox(height: 8),
-                      Text(
+                      PdaText(
                         "Filled in with the key you set for another script from this catalog.",
                         style: TextStyle(fontSize: 11.5, height: 1.3, color: _subtleText),
                       ),
@@ -928,14 +929,14 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
                       onChanged: (_) => setDialogState(() {}),
                       decoration: InputDecoration(
                         isDense: true,
-                        hintText: "Custom API key",
+                        hintText: context.interfaceText("Custom API key"),
                         hintStyle: TextStyle(fontSize: 13, color: _subtleText),
                         border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
                         suffixIcon: _keyController.text.isEmpty
                             ? null
                             : IconButton(
                                 icon: Icon(Icons.clear, size: 18, color: _subtleText),
-                                tooltip: "Clear",
+                                tooltip: context.interfaceText("Clear"),
                                 onPressed: verifying
                                     ? null
                                     : () => setDialogState(() {
@@ -993,11 +994,11 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text(
+                                    const PdaText(
                                       "Use it for every TornTools script",
                                       style: TextStyle(fontSize: 12.5, height: 1.3),
                                     ),
-                                    Text(
+                                    PdaText(
                                       "Applies to the ones you already have and to anything you install from this "
                                       "catalog later",
                                       style: TextStyle(fontSize: 11, height: 1.25, color: _subtleText),
@@ -1017,7 +1018,7 @@ class ScriptsCatalogPageState extends State<ScriptsCatalogPage> {
               actions: [
                 TextButton(
                   onPressed: verifying ? null : () => Navigator.of(dialogContext).pop(),
-                  child: Text("CANCEL", style: TextStyle(color: _subtleText)),
+                  child: PdaText("CANCEL", style: TextStyle(color: _subtleText)),
                 ),
                 TextButton(
                   onPressed: verifying

@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/widgets/chat/chat_help.dart';
 
@@ -14,7 +15,7 @@ class ChatSettingsText extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final look = _hint ? theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant) : style;
-    return Semantics(container: true, child: Text(text, style: look));
+    return Semantics(container: true, child: PdaText(text, style: look));
   }
 }
 
@@ -27,14 +28,14 @@ class ChatSettingsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final text = subtitle == null ? null : Text(subtitle!);
+    final text = subtitle == null ? null : PdaText(subtitle!);
     if (!chatLargeText(MediaQuery.textScalerOf(context))) {
-      return ListTile(title: Text(title), subtitle: text, trailing: control(false));
+      return ListTile(title: PdaText(title), subtitle: text, trailing: control(false));
     }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ListTile(title: Text(title), subtitle: text),
+        ListTile(title: PdaText(title), subtitle: text),
         Padding(padding: const EdgeInsets.fromLTRB(16, 0, 16, 8), child: control(true)),
       ],
     );

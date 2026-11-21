@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/providers/spies_controller.dart';
 import 'package:torn_pda/providers/theme_provider.dart';
@@ -42,7 +43,7 @@ class SpiesExactDetailsDialog extends StatelessWidget {
 
     Widget strWidget;
     if (spiesPayload.strength == null || spiesPayload.strength == -1) {
-      strWidget = const Text(
+      strWidget = const PdaText(
         "Strength: unknown",
         style: TextStyle(fontSize: 12),
       );
@@ -64,8 +65,8 @@ class SpiesExactDetailsDialog extends StatelessWidget {
       strWidget = Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Strength: ${formatBigNumbers(spiesPayload.strength!)}",
+          PdaText(
+            "Strength: {0}", values: [formatBigNumbers(spiesPayload.strength!)],
             style: const TextStyle(fontSize: 12),
           ),
           Text(
@@ -84,7 +85,7 @@ class SpiesExactDetailsDialog extends StatelessWidget {
 
     Widget spdWidget;
     if (spiesPayload.speed == null || spiesPayload.speed == -1) {
-      spdWidget = const Text(
+      spdWidget = const PdaText(
         "Speed: unknown",
         style: TextStyle(fontSize: 12),
       );
@@ -106,8 +107,8 @@ class SpiesExactDetailsDialog extends StatelessWidget {
       spdWidget = Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Speed: ${formatBigNumbers(spiesPayload.speed!)}",
+          PdaText(
+            "Speed: {0}", values: [formatBigNumbers(spiesPayload.speed!)],
             style: const TextStyle(fontSize: 12),
           ),
           Text(
@@ -126,7 +127,7 @@ class SpiesExactDetailsDialog extends StatelessWidget {
 
     Widget defWidget;
     if (spiesPayload.defense == null || spiesPayload.defense == -1) {
-      defWidget = const Text(
+      defWidget = const PdaText(
         "Defense: unknown",
         style: TextStyle(fontSize: 12),
       );
@@ -148,8 +149,8 @@ class SpiesExactDetailsDialog extends StatelessWidget {
       defWidget = Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Defense: ${formatBigNumbers(spiesPayload.defense!)}",
+          PdaText(
+            "Defense: {0}", values: [formatBigNumbers(spiesPayload.defense!)],
             style: const TextStyle(fontSize: 12),
           ),
           Text(
@@ -168,7 +169,7 @@ class SpiesExactDetailsDialog extends StatelessWidget {
 
     Widget dexWidget;
     if (spiesPayload.dexterity == null || spiesPayload.dexterity == -1) {
-      dexWidget = const Text(
+      dexWidget = const PdaText(
         "Dexterity: unknown",
         style: TextStyle(fontSize: 12),
       );
@@ -190,8 +191,8 @@ class SpiesExactDetailsDialog extends StatelessWidget {
       dexWidget = Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Dexterity: ${formatBigNumbers(spiesPayload.dexterity!)}",
+          PdaText(
+            "Dexterity: {0}", values: [formatBigNumbers(spiesPayload.dexterity!)],
             style: const TextStyle(fontSize: 12),
           ),
           Text(
@@ -210,7 +211,7 @@ class SpiesExactDetailsDialog extends StatelessWidget {
 
     Widget totalWidget;
     if (spiesPayload.total == null || spiesPayload.total == -1) {
-      totalWidget = const Text(
+      totalWidget = const PdaText(
         "TOTAL: unknown",
         style: TextStyle(fontSize: 12),
       );
@@ -232,8 +233,8 @@ class SpiesExactDetailsDialog extends StatelessWidget {
       totalWidget = Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "TOTAL: ${formatBigNumbers(spiesPayload.total!)}",
+          PdaText(
+            "TOTAL: {0}", values: [formatBigNumbers(spiesPayload.total!)],
             style: const TextStyle(fontSize: 12),
           ),
           Text(
@@ -254,7 +255,7 @@ class SpiesExactDetailsDialog extends StatelessWidget {
     if (spiesPayload.spyController.spiesSource != null) {
       sourceWidget = Row(
         children: [
-          const Text(
+          const PdaText(
             "Source: ",
             style: TextStyle(fontSize: 12),
           ),
@@ -268,7 +269,7 @@ class SpiesExactDetailsDialog extends StatelessWidget {
             ),
           ),
           if (spiesPayload.spySource != spiesPayload.spyController.spiesSource)
-            const Text(
+            const PdaText(
               "(mixed source)",
               style: TextStyle(fontSize: 12),
             ),
@@ -287,7 +288,7 @@ class SpiesExactDetailsDialog extends StatelessWidget {
             children: [
               const Padding(
                 padding: EdgeInsets.only(bottom: 20),
-                child: Text(
+                child: PdaText(
                   "SPIED STATS",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
@@ -295,8 +296,8 @@ class SpiesExactDetailsDialog extends StatelessWidget {
               if (faction != "0" && faction.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.all(4),
-                  child: Text(
-                    "Faction: ${spiesPayload.factionName}",
+                  child: PdaText(
+                    "Faction: {0}", values: [spiesPayload.factionName],
                     style: const TextStyle(fontSize: 12),
                   ),
                 ),
@@ -304,7 +305,7 @@ class SpiesExactDetailsDialog extends StatelessWidget {
                 padding: const EdgeInsets.all(4),
                 child: Row(
                   children: [
-                    const Text(
+                    const PdaText(
                       "Last spy: ",
                       style: TextStyle(fontSize: 12),
                     ),

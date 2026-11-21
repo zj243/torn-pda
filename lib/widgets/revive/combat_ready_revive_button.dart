@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/models/profile/own_profile_model.dart';
@@ -41,7 +42,7 @@ class CombatReadyReviveButtonState extends State<CombatReadyReviveButton> {
             child: Image.asset('images/icons/combat_ready_revive.png', width: 24),
           ),
           const SizedBox(width: 10),
-          const Flexible(child: Text("Request a revive (Combat Ready)")),
+          const Flexible(child: PdaText("Request a revive (Combat Ready)")),
         ],
       ),
     );
@@ -91,7 +92,7 @@ Future<void> openCombatReadyReviveDialog(BuildContext ctx, ThemeProvider themePr
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Flexible(
-                              child: Text(
+                              child: PdaText(
                                 "REQUEST A REVIVE FROM COMBAT READY",
                                 style: TextStyle(fontSize: 11, color: themeProvider.mainText),
                               ),
@@ -105,7 +106,7 @@ Future<void> openCombatReadyReviveDialog(BuildContext ctx, ThemeProvider themePr
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
                           TextButton(
-                            child: const Text("Medic!"),
+                            child: const PdaText("Medic!"),
                             onPressed: () async {
                               if (user == null) {
                                 final apiResponse = await ApiCallsV1.getOwnProfileExtended(limit: 3);
@@ -116,8 +117,8 @@ Future<void> openCombatReadyReviveDialog(BuildContext ctx, ThemeProvider themePr
 
                               if (user == null) {
                                 BotToast.showText(
-                                  text: 'There was an error contacting Torn API to get your current status, '
-                                      'please try again after a while!',
+                                  text: context.interfaceText('There was an error contacting Torn API to get your current status, '
+                                      'please try again after a while!'),
                                   textStyle: const TextStyle(
                                     fontSize: 13,
                                     color: Colors.white,
@@ -132,8 +133,8 @@ Future<void> openCombatReadyReviveDialog(BuildContext ctx, ThemeProvider themePr
 
                               if (user!.status!.color != 'red' && user!.status!.state != "Hospital") {
                                 BotToast.showText(
-                                  text: 'According to Torn you are not currently hospitalized, please wait a '
-                                      'few seconds and try again!',
+                                  text: context.interfaceText('According to Torn you are not currently hospitalized, please wait a '
+                                      'few seconds and try again!'),
                                   textStyle: const TextStyle(
                                     fontSize: 13,
                                     color: Colors.white,
@@ -180,7 +181,7 @@ Future<void> openCombatReadyReviveDialog(BuildContext ctx, ThemeProvider themePr
                             },
                           ),
                           TextButton(
-                            child: const Text("Cancel"),
+                            child: const PdaText("Cancel"),
                             onPressed: () {
                               Navigator.of(context).pop();
                             },

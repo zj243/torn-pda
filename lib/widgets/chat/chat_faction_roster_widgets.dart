@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -124,7 +125,7 @@ class _ChatFactionRosterLinesState extends State<ChatFactionRosterLines> {
                           ? const SizedBox.shrink()
                           : Semantics(
                               button: true,
-                              label: 'Faction members: ${counts.map((c) => '${c.count} ${c.label}').join(' - ')}',
+                              label: context.interfaceText("Faction members: {0}", [counts.map((c) => '${c.count} ${c.label}').join(' - ')]),
                               excludeSemantics: true,
                               child: InkWell(
                                 onTap: () => showChatFactionMembers(context, prefs: widget.prefs, roster: _roster),
@@ -163,7 +164,7 @@ class _ChatFactionRosterLinesState extends State<ChatFactionRosterLines> {
                     ChatRetalRadar(prefs: widget.prefs, roomId: widget.roomId),
                     Semantics(
                       button: true,
-                      label: 'Chain options',
+                      label: context.interfaceText('Chain options'),
                       excludeSemantics: true,
                       child: InkWell(
                         borderRadius: BorderRadius.circular(20),

@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -111,7 +112,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
-      title: const Text("Loot options", style: TextStyle(color: Colors.white)),
+      title: const PdaText("Loot options", style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () => _goBack(),
@@ -128,7 +129,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               const Flexible(
-                child: Text('Loot'),
+                child: PdaText('Loot'),
               ),
               const Padding(
                 padding: EdgeInsets.only(left: 20),
@@ -169,7 +170,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Flexible(
-                      child: Text(
+                      child: PdaText(
                         "(alarms are set on the minute)",
                         style: TextStyle(
                           fontStyle: FontStyle.italic,
@@ -206,7 +207,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "0",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "Notification",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -219,7 +220,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "1",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "Alarm",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -232,7 +233,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "2",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "Timer",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -259,7 +260,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "exact",
           child: SizedBox(
             width: 90,
-            child: Text(
+            child: PdaText(
               "On time",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -272,7 +273,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "0",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "30 seconds",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -285,7 +286,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "1",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "1 minute",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -298,7 +299,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "2",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "2 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -311,7 +312,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "3",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "4 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -324,7 +325,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "4",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "5 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -337,7 +338,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "5",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "6 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -350,7 +351,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "6",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "8 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -363,7 +364,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "7",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "10 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -390,7 +391,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "exact",
           child: SizedBox(
             width: 120,
-            child: Text(
+            child: PdaText(
               "On time",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -403,7 +404,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "0",
           child: SizedBox(
             width: 120,
-            child: Text(
+            child: PdaText(
               "Same minute",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -416,7 +417,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "1",
           child: SizedBox(
             width: 120,
-            child: Text(
+            child: PdaText(
               "2 minutes before",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -429,7 +430,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "2",
           child: SizedBox(
             width: 120,
-            child: Text(
+            child: PdaText(
               "4 minutes before",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -442,7 +443,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "3",
           child: SizedBox(
             width: 120,
-            child: Text(
+            child: PdaText(
               "5 minutes before",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -455,7 +456,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "4",
           child: SizedBox(
             width: 120,
-            child: Text(
+            child: PdaText(
               "6 minutes before",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -468,7 +469,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "5",
           child: SizedBox(
             width: 120,
-            child: Text(
+            child: PdaText(
               "8 minutes before",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -481,7 +482,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "6",
           child: SizedBox(
             width: 120,
-            child: Text(
+            child: PdaText(
               "10 minutes before",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -508,7 +509,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "exact",
           child: SizedBox(
             width: 90,
-            child: Text(
+            child: PdaText(
               "On time",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -521,7 +522,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "0",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "30 seconds",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -534,7 +535,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "1",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "1 minute",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -547,7 +548,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "2",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "2 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -560,7 +561,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "3",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "4 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -573,7 +574,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "4",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "5 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -586,7 +587,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "5",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "6 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -599,7 +600,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "6",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "8 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -612,7 +613,7 @@ class LootNotificationsAndroidState extends State<LootNotificationsAndroid> {
           value: "7",
           child: SizedBox(
             width: 80,
-            child: Text(
+            child: PdaText(
               "10 minutes",
               textAlign: TextAlign.right,
               style: TextStyle(

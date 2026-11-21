@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:io';
 
 // Flutter imports:
@@ -68,7 +69,7 @@ class PdaUpdateDialogState extends State<PdaUpdateDialog> {
                     const SizedBox(height: 20),
 
                     // Title
-                    Text(
+                    PdaText(
                       'Update Available!',
                       style: TextStyle(
                         fontSize: 24,
@@ -133,7 +134,7 @@ class PdaUpdateDialogState extends State<PdaUpdateDialog> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            PdaText(
                               "What's New:",
                               style: TextStyle(
                                 fontSize: 16,
@@ -237,7 +238,7 @@ class PdaUpdateDialogState extends State<PdaUpdateDialog> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
+                                  PdaText(
                                     'Create backup before updating',
                                     style: TextStyle(
                                       fontSize: 14,
@@ -248,7 +249,7 @@ class PdaUpdateDialogState extends State<PdaUpdateDialog> {
                                     ),
                                   ),
                                   const SizedBox(height: 4),
-                                  Text(
+                                  PdaText(
                                     'Recommended to preserve your settings',
                                     style: TextStyle(
                                       fontSize: 12,
@@ -285,7 +286,7 @@ class PdaUpdateDialogState extends State<PdaUpdateDialog> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                      child: Text(
+                      child: PdaText(
                         'Later',
                         style: TextStyle(
                           fontSize: 16,

@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:torn_pda/providers/ffscouter_premium_controller.dart';
@@ -75,15 +76,15 @@ class FFScouterPremiumPromo extends StatelessWidget {
               const Icon(Icons.workspace_premium, color: Colors.deepPurple, size: 18),
               const SizedBox(width: 8),
               Expanded(
-                child: Text(
-                  "$featureName is an FFScouter premium feature",
+                child: PdaText(
+                  "{0} is an FFScouter premium feature", values: [featureName],
                   style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                 ),
               ),
             ],
           ),
           const SizedBox(height: 6),
-          Text(
+          PdaText(
             "Premium unlocks individual stat distribution, travel and landing "
             "timers, and activity tracking.",
             style: TextStyle(fontSize: 11, color: Colors.grey[600]),
@@ -99,7 +100,7 @@ class FFScouterPremiumPromo extends StatelessWidget {
                   minimumSize: const Size(0, 32),
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
-                child: const Text("Don't show again", style: TextStyle(fontSize: 11)),
+                child: const PdaText("Don't show again", style: TextStyle(fontSize: 11)),
               ),
               const SizedBox(width: 4),
               ElevatedButton.icon(
@@ -116,7 +117,7 @@ class FFScouterPremiumPromo extends StatelessWidget {
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
                 icon: const Icon(Icons.open_in_new, size: 14),
-                label: const Text("Learn more", style: TextStyle(fontSize: 11)),
+                label: const PdaText("Learn more", style: TextStyle(fontSize: 11)),
               ),
             ],
           ),

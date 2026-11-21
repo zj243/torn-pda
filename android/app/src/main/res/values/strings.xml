@@ -28,4 +28,12 @@
     <string name="racing_live_update_status_waiting">Race queue</string>
     <string name="racing_live_update_status_racing">On track</string>
     <string name="racing_live_update_status_finished">Completed</string>
+    <string name="widget_reload">Reload</string>
+    <string name="widget_last_update">Last update</string>
+    <string name="widget_chaining">CHAINING</string>
+    <string name="widget_war">War</string>
+    <string name="widget_no_ranked_war">No ranked war data</string>
+    <string name="widget_no_shortcuts">No shortcuts configured, add some?</string>
+    <string name="widget_won">Won</string>
+    <string name="widget_lost">Lost</string>
 </resources>

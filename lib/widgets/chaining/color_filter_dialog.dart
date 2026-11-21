@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -25,11 +26,11 @@ class ColorFilterDialogState extends State<ColorFilterDialog> {
   Widget build(BuildContext context) {
     _targetsProvider = Provider.of<TargetsProvider>(context, listen: false);
     return AlertDialog(
-      title: const Text("Filter out colors"),
+      title: const PdaText("Filter out colors"),
       content: SingleChildScrollView(
         child: Column(
           children: [
-            const Text(
+            const PdaText(
               "Choose if you would like to filter OUT targets based on their note color.",
               style: TextStyle(
                 fontSize: 13,
@@ -40,7 +41,7 @@ class ColorFilterDialogState extends State<ColorFilterDialog> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("No color"),
+                  const PdaText("No color"),
                   Switch(
                     value: _targetsProvider.currentColorFilterOut.contains(PlayerNoteColor.none),
                     onChanged: (value) {
@@ -69,7 +70,7 @@ class ColorFilterDialogState extends State<ColorFilterDialog> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("Red"),
+                  const PdaText("Red"),
                   Switch(
                     value: _targetsProvider.currentColorFilterOut.contains('red'),
                     onChanged: (value) {
@@ -98,7 +99,7 @@ class ColorFilterDialogState extends State<ColorFilterDialog> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("Yellow"),
+                  const PdaText("Yellow"),
                   Switch(
                     value: _targetsProvider.currentColorFilterOut.contains('orange'),
                     onChanged: (value) {
@@ -127,7 +128,7 @@ class ColorFilterDialogState extends State<ColorFilterDialog> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("Green"),
+                  const PdaText("Green"),
                   Switch(
                     value: _targetsProvider.currentColorFilterOut.contains('green'),
                     onChanged: (value) {
@@ -158,7 +159,7 @@ class ColorFilterDialogState extends State<ColorFilterDialog> {
         Padding(
           padding: const EdgeInsets.only(right: 15),
           child: TextButton(
-            child: const Text("Close"),
+            child: const PdaText("Close"),
             onPressed: () {
               Navigator.of(context).pop();
             },

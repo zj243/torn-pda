@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -73,7 +74,7 @@ class CityOptionsState extends State<CityOptions> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  const Text("Use city finder"),
+                                  const PdaText("Use city finder"),
                                   Switch(
                                     value: _cityEnabled,
                                     onChanged: (value) {
@@ -90,7 +91,7 @@ class CityOptionsState extends State<CityOptions> {
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 15),
-                              child: Text(
+                              child: PdaText(
                                 'Consider deactivating the city finder if it impacts '
                                 'performance or you just simply would not prefer to use it',
                                 style: TextStyle(
@@ -123,7 +124,7 @@ class CityOptionsState extends State<CityOptions> {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
-      title: const Text("City Finder", style: TextStyle(color: Colors.white)),
+      title: const PdaText("City Finder", style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {

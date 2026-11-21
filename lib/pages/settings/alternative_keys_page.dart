@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -107,7 +108,7 @@ class AlternativeKeysPageState extends State<AlternativeKeysPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("Alternative key enabled"),
+                  const PdaText("Alternative key enabled"),
                   Switch(
                     value: w.alternativeYataKeyEnabled,
                     onChanged: (enabled) {
@@ -127,7 +128,7 @@ class AlternativeKeysPageState extends State<AlternativeKeysPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    const Text("Key"),
+                    const PdaText("Key"),
                     SizedBox(
                       width: 150,
                       child: TextFormField(
@@ -165,7 +166,7 @@ class AlternativeKeysPageState extends State<AlternativeKeysPage> {
             const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                PdaText(
                   'TORN STATS',
                   style: TextStyle(fontSize: 10),
                 ),
@@ -176,7 +177,7 @@ class AlternativeKeysPageState extends State<AlternativeKeysPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("Alternative key enabled"),
+                  const PdaText("Alternative key enabled"),
                   Switch(
                     value: w.alternativeTornStatsKeyEnabled,
                     onChanged: (enabled) {
@@ -196,7 +197,7 @@ class AlternativeKeysPageState extends State<AlternativeKeysPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    const Text("Key"),
+                    const PdaText("Key"),
                     SizedBox(
                       width: 150,
                       child: TextFormField(
@@ -234,7 +235,7 @@ class AlternativeKeysPageState extends State<AlternativeKeysPage> {
             const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                PdaText(
                   'FFSCOUTER',
                   style: TextStyle(fontSize: 10),
                 ),
@@ -245,7 +246,7 @@ class AlternativeKeysPageState extends State<AlternativeKeysPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("Alternative key enabled"),
+                  const PdaText("Alternative key enabled"),
                   Switch(
                     value: w.alternativeFFScouterKeyEnabled,
                     onChanged: (enabled) {
@@ -265,7 +266,7 @@ class AlternativeKeysPageState extends State<AlternativeKeysPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    const Text("Key"),
+                    const PdaText("Key"),
                     SizedBox(
                       width: 150,
                       child: TextFormField(
@@ -291,7 +292,7 @@ class AlternativeKeysPageState extends State<AlternativeKeysPage> {
               ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-              child: Text(
+              child: PdaText(
                 "Tip: You can create and register a dedicated FFScouter key directly from the "
                 "FFScouter info dialog (tap the ⓘ icon in the FFScouter page or stats tab).",
                 style: TextStyle(fontSize: 11, color: Colors.grey[500], fontStyle: FontStyle.italic),
@@ -309,7 +310,7 @@ class AlternativeKeysPageState extends State<AlternativeKeysPage> {
       elevation: _settingsProvider.appBarTop ? 2 : 0,
       systemOverlayStyle: SystemUiOverlayStyle.light,
       toolbarHeight: 50,
-      title: const Text('Alternative API keys', style: TextStyle(color: Colors.white)),
+      title: const PdaText('Alternative API keys', style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {

@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:torn_pda/l10n/app_language.dart';
 import 'package:torn_pda/l10n/generated/app_localizations.dart';
 import 'dart:async';
@@ -1060,7 +1061,7 @@ void logToUser(String? message, {int duration = 3, Color? textColor, Color? back
               margin: const EdgeInsets.all(2),
               child: Column(
                 children: [
-                  Text(
+                  PdaText(
                     "Debug Message\n",
                     style: TextStyle(color: textColor, fontWeight: FontWeight.bold),
                   ),

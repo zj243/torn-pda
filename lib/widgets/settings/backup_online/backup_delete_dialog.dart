@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/models/profile/own_profile_basic.dart';
@@ -48,7 +49,7 @@ class BackupDeleteDialogState extends State<BackupDeleteDialog> {
                 children: [
                   Icon(Icons.delete_outline),
                   SizedBox(width: 10),
-                  Text(
+                  PdaText(
                     "CLEAR BACKUP",
                     style: TextStyle(fontSize: 18),
                   ),
@@ -66,14 +67,14 @@ class BackupDeleteDialogState extends State<BackupDeleteDialog> {
                         if (_serverError.isNotEmpty)
                           Column(
                             children: [
-                              const Text("SERVER ERROR", style: TextStyle(color: Colors.red)),
+                              const PdaText("SERVER ERROR", style: TextStyle(color: Colors.red)),
                               Text(_serverError, style: const TextStyle(color: Colors.red)),
                             ],
                           )
                         else if (_serverPrefs.isNotEmpty)
-                          const Text("This will delete your online backup, are you sure?")
+                          const PdaText("This will delete your online backup, are you sure?")
                         else
-                          const Text("You don't have a backup to delete!"),
+                          const PdaText("You don't have a backup to delete!"),
                       ],
                     ),
                   );
@@ -84,7 +85,7 @@ class BackupDeleteDialogState extends State<BackupDeleteDialog> {
                     child: Column(
                       children: [
                         SizedBox(height: 40),
-                        Text("Fetching server info..."),
+                        PdaText("Fetching server info..."),
                         SizedBox(height: 25),
                         CircularProgressIndicator(),
                         SizedBox(height: 40),
@@ -106,7 +107,7 @@ class BackupDeleteDialogState extends State<BackupDeleteDialog> {
                             height: 20,
                             child: const CircularProgressIndicator(),
                           )
-                        : const Text("Delete", style: TextStyle(color: Colors.red)),
+                        : const PdaText("Delete", style: TextStyle(color: Colors.red)),
                     onPressed: () async {
                       setState(() {
                         _deleteInProgress = true;
@@ -147,7 +148,7 @@ class BackupDeleteDialogState extends State<BackupDeleteDialog> {
                     },
                   ),
                 TextButton(
-                  child: const Text("Close"),
+                  child: const PdaText("Close"),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },

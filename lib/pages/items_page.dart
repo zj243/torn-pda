@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 // Flutter imports:
@@ -157,7 +158,7 @@ class ItemsPageState extends State<ItemsPage> with WidgetsBindingObserver {
                   // FAB
                   floatingActionButton: FloatingActionButton.extended(
                     icon: const Icon(Icons.filter_list),
-                    label: const Text("Filter"),
+                    label: const PdaText("Filter"),
                     elevation: 4,
                     onPressed: () {
                       if (_pc.isPanelAnimating) return;
@@ -210,12 +211,12 @@ class ItemsPageState extends State<ItemsPage> with WidgetsBindingObserver {
           if (_webViewProvider.appCanOpenBrowser) const PdaBrowserIcon(),
         ],
       ),
-      title: const Text('Items', style: TextStyle(color: Colors.white)),
+      title: const PdaText('Items', style: TextStyle(color: Colors.white)),
       actions: [
         if (_itemsSuccess)
           IconButton(
             icon: Icon(MdiIcons.packageVariantClosed, color: _inventoryComplete ? Colors.green : Colors.white),
-            tooltip: "Load inventory",
+            tooltip: context.interfaceText("Load inventory"),
             onPressed: _requestInventory,
           ),
         if (_itemsSuccess)
@@ -267,7 +268,7 @@ class ItemsPageState extends State<ItemsPage> with WidgetsBindingObserver {
           decoration: InputDecoration(
             isDense: true,
             contentPadding: const EdgeInsets.all(8),
-            labelText: "Search name or id",
+            labelText: context.interfaceText("Search name or id"),
             counterText: "",
             prefixIcon: const Icon(Icons.search),
             border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(6.0))),
@@ -346,9 +347,9 @@ class ItemsPageState extends State<ItemsPage> with WidgetsBindingObserver {
                       child: Column(
                         children: [
                           if (_ownedItemsFilter == 1)
-                            const Text("ONLY OWNED ITEMS", style: TextStyle(fontSize: 10))
+                            const PdaText("ONLY OWNED ITEMS", style: TextStyle(fontSize: 10))
                           else if (_ownedItemsFilter == 2)
-                            const Text("ONLY ITEMS NOT OWNED", style: TextStyle(fontSize: 10))
+                            const PdaText("ONLY ITEMS NOT OWNED", style: TextStyle(fontSize: 10))
                           else
                             const SizedBox(height: 12),
                           Padding(
@@ -418,7 +419,7 @@ class ItemsPageState extends State<ItemsPage> with WidgetsBindingObserver {
                           width: 1.5,
                         ),
                         avatar: CircleAvatar(backgroundColor: _hiddenCategories.isEmpty ? Colors.green : Colors.grey),
-                        label: const Text("ALL", style: TextStyle(fontSize: 12)),
+                        label: const PdaText("ALL", style: TextStyle(fontSize: 12)),
                         selectedColor: Colors.transparent,
                         disabledColor: Colors.grey,
                         onSelected: (bool isSelected) {
@@ -643,7 +644,7 @@ class ItemsPageState extends State<ItemsPage> with WidgetsBindingObserver {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         const SizedBox(height: 50),
-        const Text(
+        const PdaText(
           'OOPS!',
           style: TextStyle(color: Colors.red, fontSize: 20, fontWeight: FontWeight.bold),
         ),
@@ -651,9 +652,8 @@ class ItemsPageState extends State<ItemsPage> with WidgetsBindingObserver {
           padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
           child: Column(
             children: [
-              Text(
-                'There was an error: $_errorMessage\n\n'
-                "If you have good Internet connectivity, it might be an issue with Torn's API.",
+              PdaText(
+                "There was an error: {0}\n\nIf you have good Internet connectivity, it might be an issue with Torn's API.", values: [_errorMessage],
                 textAlign: TextAlign.center,
               ),
             ],
@@ -809,7 +809,7 @@ class ItemsPageState extends State<ItemsPage> with WidgetsBindingObserver {
           children: [
             const Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text("PINNED ITEMS", style: TextStyle(fontSize: 12)),
+              child: PdaText("PINNED ITEMS", style: TextStyle(fontSize: 12)),
             ),
             Column(children: pinnedCards),
             const SizedBox(width: 80, child: Divider(thickness: 2)),

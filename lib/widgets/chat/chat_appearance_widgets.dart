@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/models/chat/chat_models.dart';
@@ -94,7 +95,7 @@ class ChatTextSizeSetting extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
             child: ExcludeSemantics(
-              child: Text('Chat text size: ${_percent(prefs.textScale)}', style: theme.textTheme.bodyLarge),
+              child: PdaText("Chat text size: {0}", values: [_percent(prefs.textScale)], style: theme.textTheme.bodyLarge),
             ),
           ),
           ChatNamedSlider(
@@ -141,12 +142,12 @@ class ChatAppearanceSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SwitchListTile(
-          title: const Text('Compact mode'),
-          subtitle: const Text('Messages in rows, without bubbles'),
+          title: const PdaText('Compact mode'),
+          subtitle: const PdaText('Messages in rows, without bubbles'),
           value: prefs.compactMode,
           onChanged: prefs.setCompactMode,
         ),
-        SwitchListTile(title: const Text('Show avatars'), value: prefs.showAvatars, onChanged: prefs.setShowAvatars),
+        SwitchListTile(title: const PdaText('Show avatars'), value: prefs.showAvatars, onChanged: prefs.setShowAvatars),
         ChatSettingsTile(
           title: 'Preview lines',
           subtitle: 'Of the last message in the chat list',
@@ -164,8 +165,8 @@ class ChatAppearanceSettings extends StatelessWidget {
           ),
         ),
         SwitchListTile(
-          title: const Text('Quick reply in the list'),
-          subtitle: const Text(
+          title: const PdaText('Quick reply in the list'),
+          subtitle: const PdaText(
             'Read and answer from the list with the arrow on each chat. Marks it read',
           ),
           value: prefs.listReply,
@@ -173,7 +174,7 @@ class ChatAppearanceSettings extends StatelessWidget {
         ),
         ListTile(
           enabled: prefs.listReply,
-          title: ExcludeSemantics(child: Text('Messages in the quick reply: ${prefs.listReplyCount}')),
+          title: ExcludeSemantics(child: PdaText("Messages in the quick reply: {0}", values: [prefs.listReplyCount])),
           subtitle: const ChatSettingsText('How many of the last messages to show'),
         ),
         ChatNamedSlider(
@@ -188,7 +189,7 @@ class ChatAppearanceSettings extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-          child: ExcludeSemantics(child: Text('List text size: $listPercent', style: theme.textTheme.bodyLarge)),
+          child: ExcludeSemantics(child: PdaText("List text size: {0}", values: [listPercent], style: theme.textTheme.bodyLarge)),
         ),
         ChatNamedSlider(
           name: 'List text size',
@@ -212,7 +213,7 @@ class ChatAppearanceSettings extends StatelessWidget {
         ),
         const ChatTextSizeSetting(),
         Semantics(
-          label: 'Preview',
+          label: context.interfaceText('Preview'),
           container: true,
           child: ExcludeSemantics(
             child: Container(

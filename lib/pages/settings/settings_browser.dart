@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -181,7 +182,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
   Widget _general() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Browser style",
+        label: context.interfaceText("Browser style"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -191,13 +192,13 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Browser style")),
+                  const Flexible(child: PdaText("Browser style")),
                   _browserStyleDropdown(),
                 ],
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 4.0),
-                child: Text(
+                child: PdaText(
                   "There are three browser styles available, all sharing the same functionality. Please have a look at the Tips section for more information, or try them for yourself!",
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 ),
@@ -208,7 +209,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
       ),
       if (_webViewProvider.bottomBarStyleEnabled)
         SearchableRow(
-          label: "Tabs below navigation bar",
+          label: context.interfaceText("Tabs below navigation bar"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -218,7 +219,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Tabs below navigation bar")),
+                    const Flexible(child: PdaText("Tabs below navigation bar")),
                     Switch(
                       value: _webViewProvider.browserBottomBarStylePlaceTabsAtBottom,
                       onChanged: (value) {
@@ -233,7 +234,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 4.0),
-                  child: Text(
+                  child: PdaText(
                     'If enabled, browser tabs will be placed at the very bottom of the browser window (below the "close" button and navigation controls)',
                     style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                   ),
@@ -243,14 +244,14 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
           ),
         ),
       SearchableRow(
-        label: "Show load bar",
+        label: context.interfaceText("Show load bar"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Flexible(child: Text("Show load bar")),
+              const Flexible(child: PdaText("Show load bar")),
               Switch(
                 value: _settingsProvider.loadBarBrowser,
                 onChanged: (value) {
@@ -266,7 +267,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Restore scroll on reload",
+        label: context.interfaceText("Restore scroll on reload"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -276,7 +277,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Restore scroll on reload")),
+                  const Flexible(child: PdaText("Restore scroll on reload")),
                   Switch(
                     value: _settingsProvider.restoreScrollAfterReload,
                     onChanged: (value) {
@@ -291,7 +292,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 4.0),
-                child: Text(
+                child: PdaText(
                   'When reloading a page, the browser will return to the same scroll position it was at before the reload',
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 ),
@@ -301,7 +302,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Refresh method",
+        label: context.interfaceText("Refresh method"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -311,13 +312,13 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Refresh method")),
+                  const Flexible(child: PdaText("Refresh method")),
                   _refreshMethodDropdown(),
                 ],
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 4.0),
-                child: Text(
+                child: PdaText(
                   'The browser has pull to refresh functionality. However, you can get an extra refresh icon if it\'s useful for certain situations (e.g. jail or hospital)',
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 ),
@@ -328,7 +329,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
       ),
       if (_browserStyle == 0)
         SearchableRow(
-          label: "Show navigation arrows",
+          label: context.interfaceText("Show navigation arrows"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -338,13 +339,13 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Show navigation arrows")),
+                    const Flexible(child: PdaText("Show navigation arrows")),
                     _navArrowsDropdown(),
                   ],
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 4.0),
-                  child: Text(
+                  child: PdaText(
                     'When using the default browser style, forward and backward navigation arrows will be shown by default when using a wide enough screen. You can disable them or make them also visible on narrower screens (bear in mind that this might interfere with the space available for page title)',
                     style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                   ),
@@ -354,7 +355,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
           ),
         ),
       SearchableRow(
-        label: "Dismiss keyboard on close",
+        label: context.interfaceText("Dismiss keyboard on close"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -364,7 +365,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Dismiss keyboard on close")),
+                  const Flexible(child: PdaText("Dismiss keyboard on close")),
                   Switch(
                     value: _webViewProvider.dismissKeyboardOnBrowserClose,
                     onChanged: (value) {
@@ -379,7 +380,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 4.0),
-                child: Text(
+                child: PdaText(
                   "Automatically dismiss the keyboard when the browser is sent to the background",
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 ),
@@ -390,13 +391,13 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
       ),
     ];
 
-    return buildSectionWithRows(title: 'GENERAL', rows: rows, searchText: _searchText);
+    return buildSectionWithRows(title: context.interfaceText('GENERAL'), rows: rows, searchText: _searchText);
   }
 
   Widget _userScripts() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Enable custom user scripts",
+        label: context.interfaceText("Enable custom user scripts"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -406,7 +407,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Enable custom user scripts")),
+                  const Flexible(child: PdaText("Enable custom user scripts")),
                   Switch(
                     value: _userScriptsProvider.userScriptsEnabled,
                     onChanged: (value) {
@@ -419,7 +420,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 'You can load custom user scripts in the browser (this feature does not currently work when using the browser for chaining)',
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -429,14 +430,14 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
       ),
       if (_userScriptsProvider.userScriptsEnabled)
         SearchableRow(
-          label: "Notify for Script Updates",
+          label: context.interfaceText("Notify for Script Updates"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Flexible(child: Text("Notify for Script Updates")),
+                const Flexible(child: PdaText("Notify for Script Updates")),
                 Switch(
                   value: _userScriptsProvider.userScriptsNotifyUpdates,
                   onChanged: (value) {
@@ -453,14 +454,14 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       if (_userScriptsProvider.userScriptsEnabled)
         SearchableRow(
-          label: "Manage scripts",
+          label: context.interfaceText("Manage scripts"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Flexible(child: Text("Manage scripts")),
+                const Flexible(child: PdaText("Manage scripts")),
                 IconButton(
                   icon: const Icon(MdiIcons.script),
                   onPressed: () {
@@ -482,32 +483,32 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
     ];
 
-    return buildSectionWithRows(title: 'USER SCRIPTS', rows: rows, searchText: _searchText);
+    return buildSectionWithRows(title: context.interfaceText('USER SCRIPTS'), rows: rows, searchText: _searchText);
   }
 
   Widget _tabs() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Tabs description",
+        label: context.interfaceText("Tabs description"),
         searchText: _searchText,
         filterable: false,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
-          child: Text(
+          child: PdaText(
             'Tabs might increase memory and processor usage; be sure that you get familiar with how tabs work (see the Tips section). It is highly recommended to use tabs to improve your Torn PDA experience.',
             style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
           ),
         ),
       ),
       SearchableRow(
-        label: "Use tabs in browser",
+        label: context.interfaceText("Use tabs in browser"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Flexible(child: Text("Use tabs in browser")),
+              const Flexible(child: PdaText("Use tabs in browser")),
               Switch(
                 value: _settingsProvider.useTabsFullBrowser,
                 onChanged: (value) {
@@ -527,7 +528,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
       ),
       if (_settingsProvider.useTabsFullBrowser)
         SearchableRow(
-          label: "Automatically change to new tab from link",
+          label: context.interfaceText("Automatically change to new tab from link"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -537,7 +538,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Automatically change to new tab from link")),
+                    const Flexible(child: PdaText("Automatically change to new tab from link")),
                     Switch(
                       value: _webViewProvider.automaticChangeToNewTabFromURL,
                       onChanged: (value) {
@@ -550,7 +551,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 4.0),
-                  child: Text(
+                  child: PdaText(
                     "By default, when you open a new tab via the 'open in new tab' option, when long-pressing a link, the browser will change to the newly created tab. If you disable this, the new tab will be created but you will remain in the current page",
                     style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                   ),
@@ -561,7 +562,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       if (_settingsProvider.useTabsFullBrowser)
         SearchableRow(
-          label: "Remove unused tabs",
+          label: context.interfaceText("Remove unused tabs"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -571,7 +572,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Remove unused tabs")),
+                    const Flexible(child: PdaText("Remove unused tabs")),
                     Switch(
                       value: _webViewProvider.removeUnusedTabs,
                       onChanged: (enabled) {
@@ -585,7 +586,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 4.0),
-                  child: Text(
+                  child: PdaText(
                     'Removes unused tabs periodically (checks are performed when the app starts and then once every 24 hours)',
                     style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                   ),
@@ -603,7 +604,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                               child: Row(
                                 children: [
                                   Icon(Icons.keyboard_arrow_right_outlined),
-                                  Flexible(child: Text("Include locked tabs")),
+                                  Flexible(child: PdaText("Include locked tabs")),
                                 ],
                               ),
                             ),
@@ -628,7 +629,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                               child: Row(
                                 children: [
                                   Icon(Icons.keyboard_arrow_right_outlined),
-                                  Flexible(child: Text("Inactive for")),
+                                  Flexible(child: PdaText("Inactive for")),
                                 ],
                               ),
                             ),
@@ -660,7 +661,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       if (_settingsProvider.useTabsFullBrowser)
         SearchableRow(
-          label: "Show tab numbers",
+          label: context.interfaceText("Show tab numbers"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -670,7 +671,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Show tab numbers")),
+                    const Flexible(child: PdaText("Show tab numbers")),
                     DropdownButton<int>(
                       value: WebViewProvider.tabNumbersFromOptions.contains(_webViewProvider.tabNumbersFrom)
                           ? _webViewProvider.tabNumbersFrom
@@ -701,7 +702,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 4.0),
-                  child: Text(
+                  child: PdaText(
                     "Once you have this many tabs open, each tab shows its position number in a corner",
                     style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                   ),
@@ -712,7 +713,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       if (_settingsProvider.useTabsFullBrowser)
         SearchableRow(
-          label: "Allow hiding tabs",
+          label: context.interfaceText("Allow hiding tabs"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -722,7 +723,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Allow hiding tabs")),
+                    const Flexible(child: PdaText("Allow hiding tabs")),
                     Switch(
                       value: _settingsProvider.useTabsHideFeature,
                       onChanged: (value) {
@@ -739,7 +740,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                     ),
                   ],
                 ),
-                Text(
+                PdaText(
                   'Allow to temporarily hide tabs by swiping up/down in the title bar',
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 ),
@@ -749,14 +750,14 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       if (_settingsProvider.useTabsFullBrowser && _settingsProvider.useTabsHideFeature)
         SearchableRow(
-          label: "Select hide bar color",
+          label: context.interfaceText("Select hide bar color"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 0, 35, 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Padding(padding: EdgeInsets.all(8.0), child: Text("Select hide bar color")),
+                const Padding(padding: EdgeInsets.all(8.0), child: PdaText("Select hide bar color")),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(_settingsProvider.tabsHideBarColor).withAlpha(255),
@@ -771,7 +772,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       if (_settingsProvider.useTabsFullBrowser)
         SearchableRow(
-          label: "Tab locks",
+          label: context.interfaceText("Tab locks"),
           searchText: _searchText,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -779,14 +780,14 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               const SizedBox(height: 30),
               const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [Text('TAB LOCKS', style: TextStyle(fontSize: 10))],
+                children: [PdaText('TAB LOCKS', style: TextStyle(fontSize: 10))],
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Show tab lock warnings")),
+                    const Flexible(child: PdaText("Show tab lock warnings")),
                     Switch(
                       value: _settingsProvider.showTabLockWarnings,
                       onChanged: (value) {
@@ -802,7 +803,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 5),
-                child: Text(
+                child: PdaText(
                   'If enabled, a short message with a lock icon will appear whenever the lock status of a tab is changed or when the app is impeding navigation or tab movement due to its lock condition. NOTE: without warning, you will NOT be able to override navigation with full locks!',
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 ),
@@ -812,7 +813,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Full lock navigation opens a new tab")),
+                    const Flexible(child: PdaText("Full lock navigation opens a new tab")),
                     Switch(
                       value: _settingsProvider.fullLockNavigationAttemptOpensNewTab,
                       onChanged: (value) {
@@ -828,7 +829,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 5),
-                child: Text(
+                child: PdaText(
                   'If enabled, a navigation attempt from a tab with a full lock will open a new tab in the background (the tab will be added but the browser will not switch to it automatically)',
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 ),
@@ -838,14 +839,14 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       if (_settingsProvider.useTabsFullBrowser)
         SearchableRow(
-          label: "Navigation exceptions for locked tabs",
+          label: context.interfaceText("Navigation exceptions for locked tabs"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Flexible(child: Text("Navigation exceptions for locked tabs")),
+                const Flexible(child: PdaText("Navigation exceptions for locked tabs")),
                 ElevatedButton(
                   child: const Icon(MdiIcons.lockRemoveOutline),
                   onPressed: () async {
@@ -863,13 +864,13 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
     ];
 
-    return buildSectionWithRows(title: 'TABS', rows: rows, searchText: _searchText);
+    return buildSectionWithRows(title: context.interfaceText('TABS'), rows: rows, searchText: _searchText);
   }
 
   Widget _fab() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Enabled",
+        label: context.interfaceText("Enabled"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -879,7 +880,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Enabled")),
+                  const Flexible(child: PdaText("Enabled")),
                   Switch(
                     value: _webViewProvider.fabEnabled,
                     onChanged: (value) {
@@ -893,7 +894,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "Shows a Floating Action Button while using the browser, which adds several action buttons and gestures to enhance navigation. NOTE: it is highly recommended that you read about how to use this button in the Tips section!",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -903,7 +904,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
       ),
       if (_webViewProvider.fabEnabled)
         SearchableRow(
-          label: "Expand direction",
+          label: context.interfaceText("Expand direction"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -913,13 +914,13 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Expand direction")),
+                    const Flexible(child: PdaText("Expand direction")),
                     _fabDirectionDropdown(),
                   ],
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 5),
-                  child: Text(
+                  child: PdaText(
                     "Dictates where to expand the option buttons when the FAB is tapped",
                     style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                   ),
@@ -930,7 +931,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       if (_webViewProvider.fabEnabled)
         SearchableRow(
-          label: "Only in fullscreen",
+          label: context.interfaceText("Only in fullscreen"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -940,7 +941,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Only in fullscreen")),
+                    const Flexible(child: PdaText("Only in fullscreen")),
                     Switch(
                       value: _webViewProvider.fabOnlyFullScreen,
                       onChanged: (value) {
@@ -951,7 +952,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                     ),
                   ],
                 ),
-                Text(
+                PdaText(
                   "Only show the FAB when in full screen mode",
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 ),
@@ -961,7 +962,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       if (_webViewProvider.fabEnabled)
         SearchableRow(
-          label: "Number of buttons",
+          label: context.interfaceText("Number of buttons"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -971,7 +972,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Number of buttons")),
+                    const Flexible(child: PdaText("Number of buttons")),
                     Row(
                       children: [
                         Text(_webViewProvider.fabButtonCount.toString()),
@@ -991,7 +992,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                     ),
                   ],
                 ),
-                Text(
+                PdaText(
                   "Adjust the number of action buttons displayed when the FAB is expanded.",
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 ),
@@ -1002,14 +1003,14 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
       if (_webViewProvider.fabEnabled)
         ...List.generate(_webViewProvider.fabButtonCount, (index) {
           return SearchableRow(
-            label: "FAB Button ${index + 1} action",
+            label: context.interfaceText("FAB Button {0} action", [index + 1]),
             searchText: _searchText,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Flexible(child: Text('FAB Button ${index + 1} action')),
+                  Flexible(child: PdaText("FAB Button {0} action", values: [index + 1])),
                   DropdownButton<WebviewFabAction>(
                     value: _webViewProvider.fabButtonActions[index],
                     items: FabSettings.actions.map((action) {
@@ -1040,14 +1041,14 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         }),
       if (_webViewProvider.fabEnabled)
         SearchableRow(
-          label: "FAB Double tap action",
+          label: context.interfaceText("FAB Double tap action"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Flexible(child: Text("FAB Double tap action")),
+                const Flexible(child: PdaText("FAB Double tap action")),
                 DropdownButton<WebviewFabAction>(
                   value: _webViewProvider.fabDoubleTapAction,
                   items: FabSettings.actions.map((action) {
@@ -1075,14 +1076,14 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       if (_webViewProvider.fabEnabled)
         SearchableRow(
-          label: "FAB Triple tap action",
+          label: context.interfaceText("FAB Triple tap action"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Flexible(child: Text("FAB Triple tap action")),
+                const Flexible(child: PdaText("FAB Triple tap action")),
                 DropdownButton<WebviewFabAction>(
                   value: _webViewProvider.fabTripleTapAction,
                   items: FabSettings.actions.map((action) {
@@ -1110,13 +1111,13 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
     ];
 
-    return buildSectionWithRows(title: 'FLOATING ACTION BUTON', rows: rows, searchText: _searchText);
+    return buildSectionWithRows(title: context.interfaceText('FLOATING ACTION BUTON'), rows: rows, searchText: _searchText);
   }
 
   Widget _downloads() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Download action",
+        label: context.interfaceText("Download action"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -1126,11 +1127,11 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Download action")),
+                  const Flexible(child: PdaText("Download action")),
                   _downloadsDropdown(),
                 ],
               ),
-              Text(
+              PdaText(
                 "Due to the operating system restrictions, Torn PDA can only download files to your app data folder (this is to avoid requesting unnecesary permissions). As this folder can be difficult to access in certain devices, the app can instead initiate a share request so that you can select whether to save your file locally or share it somewhere else",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -1140,25 +1141,25 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
       ),
     ];
 
-    return buildSectionWithRows(title: 'DOWNLOADS', rows: rows, searchText: _searchText);
+    return buildSectionWithRows(title: context.interfaceText('DOWNLOADS'), rows: rows, searchText: _searchText);
   }
 
   Widget _fullScreen() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Full screen note",
+        label: context.interfaceText("Full screen note"),
         searchText: _searchText,
         filterable: false,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
-          child: Text(
+          child: PdaText(
             'NOTE: full screen mode is only accessible if using tabs and through the quick menu tab!',
             style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
           ),
         ),
       ),
       SearchableRow(
-        label: "Full screen removes widgets",
+        label: context.interfaceText("Full screen removes widgets"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -1168,7 +1169,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Full screen removes widgets")),
+                  const Flexible(child: PdaText("Full screen removes widgets")),
                   Switch(
                     value: _settingsProvider.fullScreenRemovesWidgets,
                     onChanged: (value) {
@@ -1181,7 +1182,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 'Dictates whether full screen mode should also remove all Torn PDA widgets',
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -1190,7 +1191,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Full screen removes chat",
+        label: context.interfaceText("Full screen removes chat"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -1200,7 +1201,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Full screen removes chat")),
+                  const Flexible(child: PdaText("Full screen removes chat")),
                   Switch(
                     value: _settingsProvider.fullScreenRemovesChat,
                     onChanged: (value) {
@@ -1213,7 +1214,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 'Dictates whether full screen mode should also remove all Torn chat bubbles',
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -1222,7 +1223,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Add reload button to tab bar",
+        label: context.interfaceText("Add reload button to tab bar"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -1232,7 +1233,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Add reload button to tab bar")),
+                  const Flexible(child: PdaText("Add reload button to tab bar")),
                   Switch(
                     value: _settingsProvider.fullScreenExtraReloadButton,
                     onChanged: (value) {
@@ -1245,7 +1246,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "When in full screen mode, adds an additional tab with a reload button for quicker access",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -1254,7 +1255,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Add close button to tab bar",
+        label: context.interfaceText("Add close button to tab bar"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -1264,7 +1265,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Add close button to tab bar")),
+                  const Flexible(child: PdaText("Add close button to tab bar")),
                   Switch(
                     value: _settingsProvider.fullScreenExtraCloseButton,
                     onChanged: (value) {
@@ -1277,7 +1278,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "When in full screen mode, replaces the 'X' close button with an additional tab for quicker access",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -1286,7 +1287,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Exit full screen by header double tap",
+        label: context.interfaceText("Exit full screen by header double tap"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -1296,7 +1297,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Exit via header double tap")),
+                  const Flexible(child: PdaText("Exit via header double tap")),
                   Switch(
                     value: _settingsProvider.fullScreenHeaderDoubleTap,
                     onChanged: (value) async {
@@ -1325,7 +1326,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 'Allows exiting full screen mode by double-tapping on Torn\'s top header bar (where the Torn logo is shown). '
                 'Defaults to ON.',
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
@@ -1335,19 +1336,19 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "FULL SCREEN POSITIONING",
+        label: context.interfaceText("FULL SCREEN POSITIONING"),
         searchText: _searchText,
         filterable: false,
         child: const Padding(
           padding: EdgeInsets.fromLTRB(20, 30, 20, 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [Text("FULL SCREEN POSITIONING", style: TextStyle(fontSize: 10))],
+            children: [PdaText("FULL SCREEN POSITIONING", style: TextStyle(fontSize: 10))],
           ),
         ),
       ),
       SearchableRow(
-        label: "Full screen extends to top",
+        label: context.interfaceText("Full screen extends to top"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -1357,7 +1358,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Full screen extends to top")),
+                  const Flexible(child: PdaText("Full screen extends to top")),
                   Switch(
                     value: _settingsProvider.fullScreenOverNotch,
                     onChanged: (value) {
@@ -1370,7 +1371,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 'Determines if full screen mode should extend to the top (including sensor area)',
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -1379,7 +1380,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Full screen extends to bottom",
+        label: context.interfaceText("Full screen extends to bottom"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -1389,7 +1390,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Full screen extends to bottom")),
+                  const Flexible(child: PdaText("Full screen extends to bottom")),
                   Switch(
                     value: _settingsProvider.fullScreenOverBottom,
                     onChanged: (value) {
@@ -1402,7 +1403,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 'Determines if full screen mode should extend to the bottom (might affect accessibility of corner tabs)',
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -1411,7 +1412,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Full screen extends to sides",
+        label: context.interfaceText("Full screen extends to sides"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -1421,7 +1422,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Full screen extends to sides")),
+                  const Flexible(child: PdaText("Full screen extends to sides")),
                   Switch(
                     value: _settingsProvider.fullScreenOverSides,
                     onChanged: (value) {
@@ -1434,7 +1435,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 'Determines if full screen mode should extend to the sides, useful for landscape mode',
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -1443,19 +1444,19 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "FULL SCREEN INTERACTION",
+        label: context.interfaceText("FULL SCREEN INTERACTION"),
         searchText: _searchText,
         filterable: false,
         child: const Padding(
           padding: EdgeInsets.fromLTRB(20, 30, 20, 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [Text("FULL SCREEN INTERACTION", style: TextStyle(fontSize: 10))],
+            children: [PdaText("FULL SCREEN INTERACTION", style: TextStyle(fontSize: 10))],
           ),
         ),
       ),
       SearchableRow(
-        label: "Short tap opens full screen",
+        label: context.interfaceText("Short tap opens full screen"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -1465,7 +1466,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Short tap opens full screen")),
+                  const Flexible(child: PdaText("Short tap opens full screen")),
                   Switch(
                     value: _settingsProvider.fullScreenByShortTap,
                     onChanged: (value) {
@@ -1478,7 +1479,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "Opens full screen mode when an item is short-tapped. Defaults to OFF.",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -1487,7 +1488,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Long tap opens full screen",
+        label: context.interfaceText("Long tap opens full screen"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -1497,7 +1498,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Long tap opens full screen")),
+                  const Flexible(child: PdaText("Long tap opens full screen")),
                   Switch(
                     value: _settingsProvider.fullScreenByLongTap,
                     onChanged: (value) {
@@ -1510,7 +1511,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "Opens full screen mode when an item is long-tapped. Defaults to ON.",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -1519,7 +1520,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Short/long tap affect PDA icon",
+        label: context.interfaceText("Short/long tap affect PDA icon"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -1529,7 +1530,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Short/long tap affect PDA icon")),
+                  const Flexible(child: PdaText("Short/long tap affect PDA icon")),
                   Switch(
                     value: _settingsProvider.fullScreenIncludesPDAButtonTap,
                     onChanged: (value) {
@@ -1542,7 +1543,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "When activated, the PDA icon will toggle the browser mode instead of restoring its previous state. Defaults to OFF.",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -1551,7 +1552,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Notifications open full screen",
+        label: context.interfaceText("Notifications open full screen"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -1561,7 +1562,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Notifications open full screen")),
+                  const Flexible(child: PdaText("Notifications open full screen")),
                   Switch(
                     value: _settingsProvider.fullScreenByNotificationTap,
                     onChanged: (value) {
@@ -1574,7 +1575,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "Opens full screen mode when a notification is tapped",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -1583,7 +1584,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Quick items open full screen",
+        label: context.interfaceText("Quick items open full screen"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -1593,7 +1594,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Quick items open full screen")),
+                  const Flexible(child: PdaText("Quick items open full screen")),
                   Switch(
                     value: _settingsProvider.fullScreenByQuickItemTap,
                     onChanged: (value) {
@@ -1606,7 +1607,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "Opens full screen mode when a quick item is tapped",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -1615,7 +1616,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Short tap opens full screen (Chaining)",
+        label: context.interfaceText("Short tap opens full screen (Chaining)"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -1629,8 +1630,8 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("[CHAINING BROWSER]", style: TextStyle(fontSize: 11)),
-                        Text("Short tap opens full screen"),
+                        PdaText("[CHAINING BROWSER]", style: TextStyle(fontSize: 11)),
+                        PdaText("Short tap opens full screen"),
                       ],
                     ),
                   ),
@@ -1646,7 +1647,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "Opens full screen mode when a target is short-tapped in the Chaining section. Defaults to OFF. You can still access the chaining controls by double tapping the main tab.",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -1655,7 +1656,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Long tap opens full screen (Chaining)",
+        label: context.interfaceText("Long tap opens full screen (Chaining)"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -1669,8 +1670,8 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("[CHAINING BROWSER]", style: TextStyle(fontSize: 11)),
-                        Text("Long tap opens full screen"),
+                        PdaText("[CHAINING BROWSER]", style: TextStyle(fontSize: 11)),
+                        PdaText("Long tap opens full screen"),
                       ],
                     ),
                   ),
@@ -1686,7 +1687,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "Opens full screen mode when a target is long-pressed in the Chaining section. Defaults to OFF. You can still access the chaining controls by double tapping the main tab.",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -1696,13 +1697,13 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
       ),
     ];
 
-    return buildSectionWithRows(title: 'FULL SCREEN BEHAVIOR', rows: rows, searchText: _searchText);
+    return buildSectionWithRows(title: context.interfaceText('FULL SCREEN BEHAVIOR'), rows: rows, searchText: _searchText);
   }
 
   Widget _deepLinks() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Deep links open full screen",
+        label: context.interfaceText("Deep links open full screen"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -1712,7 +1713,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Deep links open full screen")),
+                  const Flexible(child: PdaText("Deep links open full screen")),
                   Switch(
                     value: _settingsProvider.fullScreenByDeepLinkTap,
                     onChanged: (value) {
@@ -1725,7 +1726,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "Opens full screen mode when triggered by a deep link.",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -1734,7 +1735,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Deep links open in new tab",
+        label: context.interfaceText("Deep links open in new tab"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -1744,7 +1745,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Deep links open in new tab")),
+                  const Flexible(child: PdaText("Deep links open in new tab")),
                   Switch(
                     value: _settingsProvider.newTabByDeepLinkTap,
                     onChanged: (value) {
@@ -1757,7 +1758,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "Opens deep links in a new tab instead of the main tab",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -1767,7 +1768,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
       ),
     ];
 
-    return buildSectionWithRows(title: 'DEEP LINKS', rows: rows, searchText: _searchText);
+    return buildSectionWithRows(title: context.interfaceText('DEEP LINKS'), rows: rows, searchText: _searchText);
   }
 
   OverlayEntry? _liveTextOverlay;
@@ -1793,7 +1794,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
   Widget _textScale() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Adjust text size live",
+        label: context.interfaceText("Adjust text size live"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -1803,11 +1804,11 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Adjust text size live")),
-                  ElevatedButton(onPressed: _openLiveTextPanel, child: const Text("Set")),
+                  const Flexible(child: PdaText("Adjust text size live")),
+                  ElevatedButton(onPressed: _openLiveTextPanel, child: const PdaText("Set")),
                 ],
               ),
-              Text(
+              PdaText(
                 "Opens the browser with a panel to adjust the text zoom while you see the result. "
                 "Tap the X in the panel when you are done.",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
@@ -1818,20 +1819,20 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
       ),
     ];
 
-    return buildSectionWithRows(title: 'TEXT SCALE', rows: rows, searchText: _searchText);
+    return buildSectionWithRows(title: context.interfaceText('TEXT SCALE'), rows: rows, searchText: _searchText);
   }
 
   Widget _chat() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Show chat icon in the browser",
+        label: context.interfaceText("Show chat icon in the browser"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Flexible(child: Text("Show chat icon in the browser")),
+              const Flexible(child: PdaText("Show chat icon in the browser")),
               Switch(
                 value: _settingsProvider.chatRemoveEnabled,
                 onChanged: (value) {
@@ -1847,14 +1848,14 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Highlight messages in chat",
+        label: context.interfaceText("Highlight messages in chat"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Flexible(child: Text("Highlight messages in chat")),
+              const Flexible(child: PdaText("Highlight messages in chat")),
               Switch(
                 value: _settingsProvider.highlightChat,
                 onChanged: (value) {
@@ -1871,7 +1872,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
       ),
       if (_highlightChat)
         SearchableRow(
-          label: "Highlight words",
+          label: context.interfaceText("Highlight words"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 5),
@@ -1882,9 +1883,9 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Highlight words"),
+                      const PdaText("Highlight words"),
                       if (NativeChat.compiled)
-                        const Text(
+                        const PdaText(
                           "(TORN CHAT AND PDA CHAT)",
                           style: TextStyle(fontSize: 10, fontStyle: FontStyle.italic),
                         ),
@@ -1901,7 +1902,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       if (_highlightChat)
         SearchableRow(
-          label: "Select highlight color",
+          label: context.interfaceText("Select highlight color"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 5),
@@ -1912,9 +1913,9 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Select highlight color"),
+                      const PdaText("Select highlight color"),
                       if (NativeChat.compiled)
-                        const Text(
+                        const PdaText(
                           "(TORN CHAT AND PDA CHAT)",
                           style: TextStyle(fontSize: 10, fontStyle: FontStyle.italic),
                         ),
@@ -1935,13 +1936,13 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
     ];
 
-    return buildSectionWithRows(title: 'CHAT', rows: rows, searchText: _searchText);
+    return buildSectionWithRows(title: context.interfaceText('CHAT'), rows: rows, searchText: _searchText);
   }
 
   Widget _travel() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Remove airplane",
+        label: context.interfaceText("Remove airplane"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -1951,7 +1952,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Remove airplane")),
+                  const Flexible(child: PdaText("Remove airplane")),
                   Switch(
                     value: _settingsProvider.removeAirplane,
                     onChanged: (value) {
@@ -1964,7 +1965,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 'Removes airplane and cloud animation when traveling',
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -1973,7 +1974,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Remove quick return button",
+        label: context.interfaceText("Remove quick return button"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -1983,7 +1984,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Remove quick return button")),
+                  const Flexible(child: PdaText("Remove quick return button")),
                   Switch(
                     value: _settingsProvider.removeTravelQuickReturnButton,
                     onChanged: (value) {
@@ -1996,7 +1997,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "By default, when abroad, you'll see a home icon button that you can double-tap to initiate your travel back to Torn. You can optionally disable it by using this option",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -2005,7 +2006,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Hide foreign items details",
+        label: context.interfaceText("Hide foreign items details"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -2015,7 +2016,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Hide foreign items details")),
+                  const Flexible(child: PdaText("Hide foreign items details")),
                   Switch(
                     value: _settingsProvider.removeForeignItemsDetails,
                     onChanged: (value) {
@@ -2028,7 +2029,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "This will hide foreign items information (details such as description, value, "
                 "circulation and its picture) when abroad, even if the item is inadvertently tapped, "
                 "so that buying is quicker",
@@ -2039,7 +2040,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Prevent keyboard on basket click",
+        label: context.interfaceText("Prevent keyboard on basket click"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -2049,7 +2050,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Prevent keyboard on basket click")),
+                  const Flexible(child: PdaText("Prevent keyboard on basket click")),
                   Switch(
                     value: _settingsProvider.preventBasketKeyboard,
                     onChanged: (value) {
@@ -2062,7 +2063,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "When enabled, clicking the basket icon in vertical mode will not automatically open the keyboard, "
                 "preventing layout shifts.",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
@@ -2072,13 +2073,13 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
     ];
-    return buildSectionWithRows(title: 'TRAVEL', rows: rows, searchText: _searchText);
+    return buildSectionWithRows(title: context.interfaceText('TRAVEL'), rows: rows, searchText: _searchText);
   }
 
   Widget _shops() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Enable BUY MAX in city shops",
+        label: context.interfaceText("Enable BUY MAX in city shops"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -2088,7 +2089,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Enable BUY MAX in city shops")),
+                  const Flexible(child: PdaText("Enable BUY MAX in city shops")),
                   Switch(
                     value: _settingsProvider.cityShopsBuyMaxEnabled,
                     onChanged: (value) {
@@ -2101,7 +2102,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "When enabled, a BUY MAX button injected next to each item in Torn city shops, "
                 "to fill the quantity field with the max you can buy",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
@@ -2111,7 +2112,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Enable BUY MAX in foreign stocks",
+        label: context.interfaceText("Enable BUY MAX in foreign stocks"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -2121,7 +2122,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Enable BUY MAX in foreign stocks")),
+                  const Flexible(child: PdaText("Enable BUY MAX in foreign stocks")),
                   Switch(
                     value: _settingsProvider.foreignStocksBuyMaxEnabled,
                     onChanged: (value) {
@@ -2134,7 +2135,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "When enabled, a BUY MAX button is injected on foreign stock pages while abroad, filling the "
                 "purchase quantity with the maximum affordable",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
@@ -2144,13 +2145,13 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
     ];
-    return buildSectionWithRows(title: 'SHOPS', rows: rows, searchText: _searchText);
+    return buildSectionWithRows(title: context.interfaceText('SHOPS'), rows: rows, searchText: _searchText);
   }
 
   Widget _energyExpenditureWarning() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Warn about chains",
+        label: context.interfaceText("Warn about chains"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -2160,7 +2161,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Warn about chains")),
+                  const Flexible(child: PdaText("Warn about chains")),
                   Switch(
                     value: _settingsProvider.warnAboutChains,
                     onChanged: (value) {
@@ -2173,7 +2174,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "If active, you'll get a message and a chain icon beside the energy bar to warn you of chaining.",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -2182,7 +2183,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Warn about stacking",
+        label: context.interfaceText("Warn about stacking"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -2192,7 +2193,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Warn about stacking")),
+                  const Flexible(child: PdaText("Warn about stacking")),
                   Switch(
                     value: _settingsProvider.warnAboutExcessEnergy,
                     onChanged: (value) {
@@ -2205,7 +2206,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "If active, you'll be alerted when energy reaches or exceeds your selected threshold.",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -2215,14 +2216,14 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
       ),
       if (_settingsProvider.warnAboutExcessEnergy)
         SearchableRow(
-          label: "Threshold",
+          label: context.interfaceText("Threshold"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text("Threshold", style: TextStyle(fontSize: 12)),
+                const PdaText("Threshold", style: TextStyle(fontSize: 12)),
                 Row(
                   children: [
                     Text(
@@ -2247,7 +2248,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
           ),
         ),
     ];
-    return buildSectionWithRows(title: 'GYM ENERGY EXPENDITURE WARNING', rows: rows, searchText: _searchText);
+    return buildSectionWithRows(title: context.interfaceText('GYM ENERGY EXPENDITURE WARNING'), rows: rows, searchText: _searchText);
   }
 
   Widget _travelExpenditureWarning() {
@@ -2256,7 +2257,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
     final currentLifeMax = UserHelper.basic?.life?.maximum ?? -1;
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Energy excess warning",
+        label: context.interfaceText("Energy excess warning"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -2266,7 +2267,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Energy excess warning"),
+                  const PdaText("Energy excess warning"),
                   Switch(
                     value: _settingsProvider.travelEnergyExcessWarning,
                     onChanged: (value) {
@@ -2279,7 +2280,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "Warns when your Energy Bar is between a set range to avoid waste before boarding.",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -2289,14 +2290,14 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
       ),
       if (_settingsProvider.travelEnergyExcessWarning)
         SearchableRow(
-          label: "Range",
+          label: context.interfaceText("Range"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 25),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text("Range", style: TextStyle(fontSize: 12)),
+                const PdaText("Range", style: TextStyle(fontSize: 12)),
                 Flexible(
                   child: FittedBox(
                     fit: BoxFit.scaleDown,
@@ -2344,7 +2345,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
           ),
         ),
       SearchableRow(
-        label: "Nerve excess warning",
+        label: context.interfaceText("Nerve excess warning"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -2354,7 +2355,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Nerve excess warning"),
+                  const PdaText("Nerve excess warning"),
                   Switch(
                     value: _settingsProvider.travelNerveExcessWarning,
                     onChanged: (value) {
@@ -2367,7 +2368,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "Warns when your Nerve Bar exceeds a certain threshold to avoid waste.",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -2377,14 +2378,14 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
       ),
       if (_settingsProvider.travelNerveExcessWarning)
         SearchableRow(
-          label: "Threshold",
+          label: context.interfaceText("Threshold"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 25),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text("Threshold", style: TextStyle(fontSize: 12)),
+                const PdaText("Threshold", style: TextStyle(fontSize: 12)),
                 Row(
                   children: [
                     Text(
@@ -2416,7 +2417,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
           ),
         ),
       SearchableRow(
-        label: "Life excess warning",
+        label: context.interfaceText("Life excess warning"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -2426,7 +2427,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Life excess warning"),
+                  const PdaText("Life excess warning"),
                   Switch(
                     value: _settingsProvider.travelLifeExcessWarning,
                     onChanged: (value) {
@@ -2439,7 +2440,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "Warns when your Life Bar exceeds a certain threshold to avoid waste.",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -2449,14 +2450,14 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
       ),
       if (_settingsProvider.travelLifeExcessWarning)
         SearchableRow(
-          label: "Threshold",
+          label: context.interfaceText("Threshold"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 25),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text("Threshold", style: TextStyle(fontSize: 12)),
+                const PdaText("Threshold", style: TextStyle(fontSize: 12)),
                 Row(
                   children: [
                     Text(
@@ -2488,14 +2489,14 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
           ),
         ),
       SearchableRow(
-        label: "Low wallet money",
+        label: context.interfaceText("Low wallet money"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text("Low wallet money"),
+              const PdaText("Low wallet money"),
               Switch(
                 value: _settingsProvider.travelWalletMoneyWarning,
                 onChanged: (value) {
@@ -2512,7 +2513,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
       ),
       if (_settingsProvider.travelWalletMoneyWarning)
         SearchableRow(
-          label: "Minimum cash",
+          label: context.interfaceText("Minimum cash"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 50, right: 10, bottom: 15),
@@ -2521,7 +2522,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               child: TextFormField(
                 maxLength: 10,
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(labelText: "Minimum cash", isDense: true, counterText: ''),
+                decoration: InputDecoration(labelText: context.interfaceText("Minimum cash"), isDense: true, counterText: ''),
                 initialValue: _settingsProvider.travelWalletMoneyWarningThreshold.toString(),
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) {
@@ -2550,7 +2551,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
           ),
         ),
       SearchableRow(
-        label: "Organized crime warning",
+        label: context.interfaceText("Organized crime warning"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -2560,7 +2561,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Organized crime warning"),
+                  const PdaText("Organized crime warning"),
                   Switch(
                     value: _settingsProvider.travelOrganizedCrimeWarning,
                     onChanged: (value) {
@@ -2573,7 +2574,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "If enabled, you'll get a warning when you access the Travel Agency if your OC will be ready "
                 "before some round trips are back, with the destinations that make it in time",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
@@ -2583,7 +2584,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Drug cooldown warning",
+        label: context.interfaceText("Drug cooldown warning"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -2593,7 +2594,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Drug cooldown warning"),
+                  const PdaText("Drug cooldown warning"),
                   Switch(
                     value: _settingsProvider.travelDrugCooldownWarning,
                     onChanged: (value) {
@@ -2606,7 +2607,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "If enabled, you'll get a warning when you access the Travel Agency with drug cooldown "
                 "below the threshold. Set to 0h to only warn when there's no cooldown at all",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
@@ -2617,14 +2618,14 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
       ),
       if (_settingsProvider.travelDrugCooldownWarning)
         SearchableRow(
-          label: "Threshold",
+          label: context.interfaceText("Threshold"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 25),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text("Threshold", style: TextStyle(fontSize: 12)),
+                const PdaText("Threshold", style: TextStyle(fontSize: 12)),
                 Row(
                   children: [
                     Text(
@@ -2650,7 +2651,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
           ),
         ),
       SearchableRow(
-        label: "Booster cooldown warning",
+        label: context.interfaceText("Booster cooldown warning"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -2660,7 +2661,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Booster cooldown warning"),
+                  const PdaText("Booster cooldown warning"),
                   Switch(
                     value: _settingsProvider.travelBoosterCooldownWarning,
                     onChanged: (value) {
@@ -2673,7 +2674,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "If enabled, you'll get a warning when you access the Travel Agency with booster cooldown "
                 "below the threshold. Set to 0h to only warn when there's no cooldown at all",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
@@ -2684,14 +2685,14 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
       ),
       if (_settingsProvider.travelBoosterCooldownWarning)
         SearchableRow(
-          label: "Threshold",
+          label: context.interfaceText("Threshold"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.only(left: 25),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text("Threshold", style: TextStyle(fontSize: 12)),
+                const PdaText("Threshold", style: TextStyle(fontSize: 12)),
                 Row(
                   children: [
                     Text(
@@ -2717,13 +2718,13 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
           ),
         ),
     ];
-    return buildSectionWithRows(title: 'TRAVEL EXPENDITURE WARNING', rows: rows, searchText: _searchText);
+    return buildSectionWithRows(title: context.interfaceText('TRAVEL EXPENDITURE WARNING'), rows: rows, searchText: _searchText);
   }
 
   Widget _profile() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Extra player information",
+        label: context.interfaceText("Extra player information"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -2733,7 +2734,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Extra player information")),
+                  const Flexible(child: PdaText("Extra player information")),
                   Switch(
                     value: _settingsProvider.extraPlayerInformation,
                     onChanged: (value) {
@@ -2746,7 +2747,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 'Add additional player information when visiting a profile or attacking someone (e.g. same faction, friendly faction, friends) and estimated stats',
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -2755,7 +2756,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Show also in attacks",
+        label: context.interfaceText("Show also in attacks"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
@@ -2765,7 +2766,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Show also in attacks")),
+                  const Flexible(child: PdaText("Show also in attacks")),
                   Switch(
                     value: _settingsProvider.profileCheckAttackEnabled,
                     onChanged: (value) {
@@ -2778,7 +2779,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 'Shows the extra profile information widget (stats, notes, etc.) in the attack screen '
                 '(you might want to disable this if it\'s causing performance issues)',
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
@@ -2789,7 +2790,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
       ),
       if (_settingsProvider.extraPlayerInformation)
         SearchableRow(
-          label: "Friendly factions",
+          label: context.interfaceText("Friendly factions"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -2799,7 +2800,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Friendly factions")),
+                    const Flexible(child: PdaText("Friendly factions")),
                     IconButton(
                       icon: const Icon(Icons.keyboard_arrow_right_outlined),
                       onPressed: () {
@@ -2810,7 +2811,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                     ),
                   ],
                 ),
-                Text(
+                PdaText(
                   'You will see a note if you are visiting the profile of a friendly faction\'s player, or a warning if you are about to attack',
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 ),
@@ -2820,7 +2821,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       if (_settingsProvider.extraPlayerInformation)
         SearchableRow(
-          label: "Show player notes",
+          label: context.interfaceText("Show player notes"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -2830,7 +2831,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Show player notes")),
+                    const Flexible(child: PdaText("Show player notes")),
                     Switch(
                       value: _settingsProvider.notesWidgetEnabledProfile,
                       onChanged: (value) {
@@ -2843,7 +2844,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                     ),
                   ],
                 ),
-                Text(
+                PdaText(
                   "If enabled, this will show a notes widget in the profile page for those players that you have added notes to (as friends, stakeouts or targets). The notes icon is actionable (tap to change notes)",
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 ),
@@ -2853,7 +2854,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       if (_settingsProvider.extraPlayerInformation && _settingsProvider.notesWidgetEnabledProfile)
         SearchableRow(
-          label: "Show player notes",
+          label: context.interfaceText("Show player notes"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -2868,7 +2869,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Flexible(child: Text("Also if notes are empty")),
+                          const Flexible(child: PdaText("Also if notes are empty")),
                           Switch(
                             value: _settingsProvider.notesWidgetEnabledProfileWhenEmpty,
                             onChanged: (value) {
@@ -2881,7 +2882,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                           ),
                         ],
                       ),
-                      Text(
+                      PdaText(
                         "If enabled, this will show the notebook icon even if there are no notes present, so that you quickly add new ones.",
                         style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                       ),
@@ -2894,7 +2895,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       if (_settingsProvider.extraPlayerInformation)
         SearchableRow(
-          label: "Show networth",
+          label: context.interfaceText("Show networth"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -2904,7 +2905,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Show networth")),
+                    const Flexible(child: PdaText("Show networth")),
                     Switch(
                       value: _settingsProvider.extraPlayerNetworth,
                       onChanged: (value) {
@@ -2917,7 +2918,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                     ),
                   ],
                 ),
-                Text(
+                PdaText(
                   'If enabled, this will show an additional line with the networth of the player you are visiting',
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 ),
@@ -2927,7 +2928,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       if (_settingsProvider.extraPlayerInformation)
         SearchableRow(
-          label: "Show bounty alert",
+          label: context.interfaceText("Show bounty alert"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -2937,7 +2938,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Show bounty alert")),
+                    const Flexible(child: PdaText("Show bounty alert")),
                     Switch(
                       value: _settingsProvider.bountyAlertEnabled,
                       onChanged: (value) {
@@ -2950,7 +2951,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                     ),
                   ],
                 ),
-                Text(
+                PdaText(
                   'If enabled, a bounty indicator will be shown when visiting the profile of a player who has an active bounty',
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 ),
@@ -2959,7 +2960,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
           ),
         ),
       SearchableRow(
-        label: "Mini-profile name tap opens new tab",
+        label: context.interfaceText("Mini-profile name tap opens new tab"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -2969,7 +2970,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Mini-profile name tap opens new tab")),
+                  const Flexible(child: PdaText("Mini-profile name tap opens new tab")),
                   Switch(
                     value: _settingsProvider.hitInMiniProfileOpensNewTab,
                     onChanged: (value) {
@@ -2982,7 +2983,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 'If enabled, tapping a player name in a mini-profile window will open a new tab, instead of loading the profile in the same window',
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -2992,7 +2993,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
       ),
       if (_settingsProvider.hitInMiniProfileOpensNewTab)
         SearchableRow(
-          label: "Automatically change to new tab",
+          label: context.interfaceText("Automatically change to new tab"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(30, 0, 20, 0),
@@ -3007,7 +3008,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                         children: [
                           Icon(Icons.arrow_forward_ios_outlined, size: 16),
                           SizedBox(width: 5),
-                          Flexible(child: Text("Automatically change to new tab")),
+                          Flexible(child: PdaText("Automatically change to new tab")),
                         ],
                       ),
                     ),
@@ -3023,7 +3024,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                     ),
                   ],
                 ),
-                Text(
+                PdaText(
                   'By using this switch you can select if the browser should automatically change to the newly generated tab after tapping a player\'s name in a mini-profile. By setting it to off, you can open several tabs in a row from different mini-profiles.',
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 ),
@@ -3032,13 +3033,13 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
           ),
         ),
     ];
-    return buildSectionWithRows(title: 'PLAYER PROFILES', rows: rows, searchText: _searchText);
+    return buildSectionWithRows(title: context.interfaceText('PLAYER PROFILES'), rows: rows, searchText: _searchText);
   }
 
   Widget _factions() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Collapse faction descriptions",
+        label: context.interfaceText("Collapse faction descriptions"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -3048,11 +3049,11 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Collapse faction descriptions")),
+                  const Flexible(child: PdaText("Collapse faction descriptions")),
                   _factionFoldDropdown(),
                 ],
               ),
-              Text(
+              PdaText(
                 "Fold the description until its header is tapped: large or animated images only, always, or off",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -3061,13 +3062,13 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
     ];
-    return buildSectionWithRows(title: 'FACTIONS', rows: rows, searchText: _searchText);
+    return buildSectionWithRows(title: context.interfaceText('FACTIONS'), rows: rows, searchText: _searchText);
   }
 
   Widget _linkPreview() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Allow links preview",
+        label: context.interfaceText("Allow links preview"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -3077,7 +3078,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Allow links preview"),
+                  const PdaText("Allow links preview"),
                   Switch(
                     value: _settingsProvider.iosAllowLinkPreview,
                     onChanged: (value) {
@@ -3090,7 +3091,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 'Allow browser to open an iOS native preview window when long-pressing a link (only iOS 9+)',
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -3099,13 +3100,13 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
     ];
-    return buildSectionWithRows(title: 'LINKS PREVIEW', rows: rows, searchText: _searchText);
+    return buildSectionWithRows(title: context.interfaceText('LINKS PREVIEW'), rows: rows, searchText: _searchText);
   }
 
   Widget _maintenance() {
     List<SearchableRow> rows = [
       SearchableRow(
-        label: "Cache enabled",
+        label: context.interfaceText("Cache enabled"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -3115,7 +3116,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Cache enabled")),
+                  const Flexible(child: PdaText("Cache enabled")),
                   Switch(
                     value: Platform.isWindows
                         ? true
@@ -3154,21 +3155,21 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Padding(
                 padding: const EdgeInsets.only(top: 4.0),
                 child: Platform.isWindows
-                    ? Text(
+                    ? PdaText(
                         "Cache is enabled from PDA and can't be changed right now",
                         style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                       )
                     : _settingsProvider.webviewCacheEnabledRemoteConfig == "user"
-                    ? Text(
+                    ? PdaText(
                         "Enable webview cache to improve performance (recommended). Disabling this might be useful if you experience issues with Torn's website cache, such as images loading incorrectly, increased app cached data, chat issues, etc. NOTE: this will only take effect after you restart the app.",
                         style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                       )
                     : _settingsProvider.webviewCacheEnabledRemoteConfig == "on"
-                    ? Text(
+                    ? PdaText(
                         "Cache is enabled from PDA and can't be changed right now",
                         style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                       )
-                    : Text(
+                    : PdaText(
                         "Cache is disabled from PDA and can't be changed right now",
                         style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                       ),
@@ -3178,7 +3179,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Browser cache",
+        label: context.interfaceText("Browser cache"),
         searchText: _searchText,
         child: AnimatedContainer(
           key: widget.highlightItem == 'clear-cache' ? _highlightTargetKey : null,
@@ -3197,13 +3198,13 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text("Browser cache"),
+                    const PdaText("Browser cache"),
                     ElevatedButton(
-                      child: const Text("Clear"),
+                      child: const PdaText("Clear"),
                       onPressed: () async {
                         _webViewProvider.clearCacheAndTabs();
                         BotToast.showText(
-                          text: "Browser cache and tabs have been reset!",
+                          text: context.interfaceText("Browser cache and tabs have been reset!"),
                           textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                           contentColor: Colors.grey[600]!,
                           duration: const Duration(seconds: 3),
@@ -3215,7 +3216,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 4.0),
-                  child: Text(
+                  child: PdaText(
                     "Note: this will clear your browser's cache and current tabs. It can be useful in case of errors (sections not loading correctly, etc.). You'll be logged out from Torn and all other sites",
                     style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                   ),
@@ -3226,7 +3227,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Close all tabs",
+        label: context.interfaceText("Close all tabs"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 5),
@@ -3236,28 +3237,28 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Close all tabs"),
+                  const PdaText("Close all tabs"),
                   ElevatedButton(
-                    child: const Text("Close"),
+                    child: const PdaText("Close"),
                     onPressed: () async {
                       final confirm = await showDialog<bool>(
                         context: context,
                         builder: (c) => AlertDialog(
-                          title: const Text("Close all tabs?"),
-                          content: const Text(
+                          title: const PdaText("Close all tabs?"),
+                          content: const PdaText(
                             "Every tab except the main one will be closed, locked tabs included. "
                             "The browser cache and your Torn session are kept.",
                           ),
                           actions: [
-                            TextButton(onPressed: () => Navigator.of(c).pop(false), child: const Text("Cancel")),
-                            TextButton(onPressed: () => Navigator.of(c).pop(true), child: const Text("Close")),
+                            TextButton(onPressed: () => Navigator.of(c).pop(false), child: const PdaText("Cancel")),
+                            TextButton(onPressed: () => Navigator.of(c).pop(true), child: const PdaText("Close")),
                           ],
                         ),
                       );
                       if (confirm != true) return;
                       _webViewProvider.closeAllTabsButMain();
                       BotToast.showText(
-                        text: "All tabs closed except the main one",
+                        text: context.interfaceText("All tabs closed except the main one"),
                         textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                         contentColor: Colors.grey[600]!,
                         duration: const Duration(seconds: 3),
@@ -3269,7 +3270,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 4.0),
-                child: Text(
+                child: PdaText(
                   "Closes every tab except the main one, without clearing the browser cache or logging you out",
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 ),
@@ -3279,7 +3280,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Userscript storage",
+        label: context.interfaceText("Userscript storage"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 5),
@@ -3289,28 +3290,28 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Userscript storage"),
+                  const PdaText("Userscript storage"),
                   ElevatedButton(
-                    child: const Text("Clear"),
+                    child: const PdaText("Clear"),
                     onPressed: () async {
                       final confirm = await showDialog<bool>(
                         context: context,
                         builder: (c) => AlertDialog(
-                          title: const Text("Clear userscript storage?"),
-                          content: const Text(
+                          title: const PdaText("Clear userscript storage?"),
+                          content: const PdaText(
                             "This deletes all data your userscripts saved through Torn PDA's native storage. "
                             "Scripts will rebuild it as needed. It does not touch the scripts themselves.",
                           ),
                           actions: [
-                            TextButton(onPressed: () => Navigator.of(c).pop(false), child: const Text("Cancel")),
-                            TextButton(onPressed: () => Navigator.of(c).pop(true), child: const Text("Clear")),
+                            TextButton(onPressed: () => Navigator.of(c).pop(false), child: const PdaText("Cancel")),
+                            TextButton(onPressed: () => Navigator.of(c).pop(true), child: const PdaText("Clear")),
                           ],
                         ),
                       );
                       if (confirm != true) return;
                       await ScriptStorage.deleteAll();
                       BotToast.showText(
-                        text: "Userscript storage cleared",
+                        text: context.interfaceText("Userscript storage cleared"),
                         textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                         contentColor: Colors.grey[600]!,
                         duration: const Duration(seconds: 3),
@@ -3322,7 +3323,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 4.0),
-                child: Text(
+                child: PdaText(
                   "Deletes data that userscripts saved with Torn PDA's native storage. This is kept separate from the "
                   "browser cache on purpose, so clearing the cache does not remove it. Scripts rebuild it automatically.",
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
@@ -3333,7 +3334,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Restore session cookie",
+        label: context.interfaceText("Restore session cookie"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 5),
@@ -3343,7 +3344,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Restore session cookie"),
+                  const PdaText("Restore session cookie"),
                   Switch(
                     value: _settingsProvider.restoreSessionCookie,
                     onChanged: (value) {
@@ -3358,7 +3359,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 4.0),
-                child: Text(
+                child: PdaText(
                   "Enable this option if you are getting logged out from Torn consistently; Torn PDA will try to reestablish your session ID when the browser opens",
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 ),
@@ -3368,7 +3369,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Do not pause webviews",
+        label: context.interfaceText("Do not pause webviews"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -3378,7 +3379,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Do not pause webviews")),
+                  const Flexible(child: PdaText("Do not pause webviews")),
                   Switch(
                     value: _webViewProvider.browserDoNotPauseWebview,
                     onChanged: (value) {
@@ -3393,7 +3394,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 4.0),
-                child: Text(
+                child: PdaText(
                   "This will prevent the browser from pausing when the app or browser are in the background. NOTE: it is NOT recommended to activate this setting, as it will consume more battery and resources",
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 ),
@@ -3403,7 +3404,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Fast keyboard",
+        label: context.interfaceText("Fast keyboard"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -3413,7 +3414,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Fast keyboard")),
+                  const Flexible(child: PdaText("Fast keyboard")),
                   Switch(
                     value: _settingsProvider.androidFastKeyboard,
                     onChanged: (value) {
@@ -3428,7 +3429,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 4.0),
-                child: Text(
+                child: PdaText(
                   "Prevents the browser from resizing when the keyboard appears, which can improve keyboard speed on some devices. The keyboard will overlay the bottom of the page instead",
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 ),
@@ -3438,7 +3439,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Allow remote debugging",
+        label: context.interfaceText("Allow remote debugging"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -3448,7 +3449,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Allow remote debugging")),
+                  const Flexible(child: PdaText("Allow remote debugging")),
                   Switch(
                     value: _settingsProvider.browserRemoteDebugging,
                     onChanged: (value) {
@@ -3461,7 +3462,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 "Lets you inspect the browser from a computer (chrome://inspect on Android, Safari Web Inspector "
                 "on iOS). While enabled, Google sign-in inside the browser may not work. Restart the app to apply.",
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
@@ -3471,7 +3472,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
     ];
-    return buildSectionWithRows(title: 'MAINTENANCE', rows: rows, searchText: _searchText);
+    return buildSectionWithRows(title: context.interfaceText('MAINTENANCE'), rows: rows, searchText: _searchText);
   }
 
   Widget _memory() {
@@ -3481,7 +3482,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
     List<SearchableRow> rows = [
       if (_settingsProvider.useTabsFullBrowser)
         SearchableRow(
-          label: "Only load tabs when used",
+          label: context.interfaceText("Only load tabs when used"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -3491,7 +3492,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Only load tabs when used")),
+                    const Flexible(child: PdaText("Only load tabs when used")),
                     Switch(
                       value: _webViewProvider.onlyLoadTabsWhenUsed,
                       onChanged: (value) {
@@ -3503,13 +3504,13 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ],
                 ),
                 if (!_webViewProvider.onlyLoadTabsWhenUsed)
-                  const Text(
+                  const PdaText(
                     "Every tab stays loaded in memory. With many tabs open, pages can turn blank or reload on "
                     "their own; turning this on is recommended",
                     style: TextStyle(color: Colors.orange, fontSize: 12, fontStyle: FontStyle.italic),
                   )
                 else
-                  Text(
+                  PdaText(
                     'If active (recommended) not all tabs will load in memory upon browser initialization. Instead, they will retrieve the web content when first used (tapped). This could add a small delay when the tab is pressed the first time, but should improve overall browser performance. Also, tabs that have not been used for a while will be deactivated to reduce memory consumption, and will be reactivated when you switch back to them (you can change how long below).',
                     style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                   ),
@@ -3519,7 +3520,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       if (_settingsProvider.useTabsFullBrowser && _webViewProvider.onlyLoadTabsWhenUsed)
         SearchableRow(
-          label: "Keep locked tabs loaded",
+          label: context.interfaceText("Keep locked tabs loaded"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -3533,7 +3534,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                       child: Row(
                         children: [
                           Icon(Icons.keyboard_arrow_right_outlined),
-                          Flexible(child: Text("Keep locked tabs loaded")),
+                          Flexible(child: PdaText("Keep locked tabs loaded")),
                         ],
                       ),
                     ),
@@ -3547,7 +3548,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                     ),
                   ],
                 ),
-                Text(
+                PdaText(
                   'Locked tabs are loaded as soon as the browser starts and are never put to sleep or rested '
                   'while you are away, so they are always ready when you switch to them. Only the tabs you lock '
                   'are exempt; the rest keep behaving as above. Under memory pressure they can still be '
@@ -3560,7 +3561,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       if (Platform.isAndroid)
         SearchableRow(
-          label: "Rest tabs while you are away",
+          label: context.interfaceText("Rest tabs while you are away"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -3570,21 +3571,21 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Rest tabs while you are away")),
+                    const Flexible(child: PdaText("Rest tabs while you are away")),
                     _parkBackgroundTabsDropdown(enabled: parkingAllowed),
                   ],
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 4.0),
                   child: parkingAllowed
-                      ? Text(
+                      ? PdaText(
                           "When you leave Torn PDA, the tabs you are not using let go of their content "
                           "(chat included) so that the browser stays light while you are away. Tap one and "
                           "it comes straight back to the same page. This helps to avoid finding every tab "
                           "reloading itself when you return",
                           style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                         )
-                      : Text(
+                      : PdaText(
                           "This option is temporarily disabled from Torn PDA and can't be changed right now",
                           style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                         ),
@@ -3595,7 +3596,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       if (_settingsProvider.useTabsFullBrowser)
         SearchableRow(
-          label: "Sleep unused tabs after",
+          label: context.interfaceText("Sleep unused tabs after"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -3605,13 +3606,13 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Sleep unused tabs after")),
+                    const Flexible(child: PdaText("Sleep unused tabs after")),
                     _tabSleepMinutesDropdown(),
                   ],
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 4.0),
-                  child: Text(
+                  child: PdaText(
                     "Tabs you have not opened for this long are put to sleep in the background, and load "
                     "again next time you tap them. Needs \"Only load tabs when used\" to be enabled",
                     style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
@@ -3623,7 +3624,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       if (_settingsProvider.useTabsFullBrowser)
         SearchableRow(
-          label: "Maximum loaded tabs",
+          label: context.interfaceText("Maximum loaded tabs"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -3633,19 +3634,19 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Maximum loaded tabs")),
+                    const Flexible(child: PdaText("Maximum loaded tabs")),
                     _maxLiveTabsDropdown(),
                   ],
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 4.0),
                   child: _webViewProvider.maxLiveTabsActive <= 0
-                      ? const Text(
+                      ? const PdaText(
                           "Every open tab can stay loaded. With many tabs open, pages can turn blank or reload on "
                           "their own",
                           style: TextStyle(color: Colors.orange, fontSize: 12, fontStyle: FontStyle.italic),
                         )
-                      : Text(
+                      : PdaText(
                           "Tabs above this number are put to sleep, starting with the one you have not used for "
                           "the longest, and load again when you tap them. This helps if pages turn blank when many "
                           "tabs are open",
@@ -3658,7 +3659,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       if (Platform.isAndroid)
         SearchableRow(
-          label: "Recover blank pages automatically",
+          label: context.interfaceText("Recover blank pages automatically"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -3668,7 +3669,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Recover blank pages automatically")),
+                    const Flexible(child: PdaText("Recover blank pages automatically")),
                     Switch(
                       value: _webViewProvider.blankRecoveryEnabled,
                       onChanged: (value) {
@@ -3684,12 +3685,12 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 Padding(
                   padding: const EdgeInsets.only(top: 4.0),
                   child: _webViewProvider.blankRecoveryEnabled
-                      ? Text(
+                      ? PdaText(
                           "If the page you are looking at stops drawing (blank areas) because too many tabs are "
                           "using the browser memory, Torn PDA puts the other tabs to sleep and redraws it",
                           style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                         )
-                      : const Text(
+                      : const PdaText(
                           "With many tabs open, pages that stop drawing will stay blank until you reload them or "
                           "close some tabs",
                           style: TextStyle(color: Colors.orange, fontSize: 12, fontStyle: FontStyle.italic),
@@ -3701,7 +3702,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       if (Platform.isAndroid)
         SearchableRow(
-          label: "Show a notice when a tab recovers",
+          label: context.interfaceText("Show a notice when a tab recovers"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -3711,7 +3712,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Show a notice when a tab recovers")),
+                    const Flexible(child: PdaText("Show a notice when a tab recovers")),
                     Switch(
                       value: recoveryNoticeAllowed && _settingsProvider.browserRecoveryOverlayEnabled,
                       onChanged: recoveryNoticeAllowed
@@ -3729,14 +3730,14 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 Padding(
                   padding: const EdgeInsets.only(top: 4.0),
                   child: recoveryNoticeAllowed
-                      ? Text(
+                      ? PdaText(
                           "When Android drops a page to free memory, Torn PDA builds the tab again. "
                           "This keeps the last view on screen with a \"Reloading tab\" notice, and tries "
                           "a few more times if the page does not come back. Turn it off and the tab "
                           "reloads with nothing on top",
                           style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                         )
-                      : Text(
+                      : PdaText(
                           "This option is temporarily disabled from Torn PDA and can't be changed right now",
                           style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                         ),
@@ -3747,7 +3748,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       if (Platform.isAndroid)
         SearchableRow(
-          label: "Page graphics layer",
+          label: context.interfaceText("Page graphics layer"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -3757,7 +3758,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Page graphics layer")),
+                    const Flexible(child: PdaText("Page graphics layer")),
                     _defaultOnOffDropdown(
                       value: _webViewProvider.webViewHardwareLayerForced
                           ? (_webViewProvider.webViewHardwareLayerDefaultRC ? "on" : "off")
@@ -3784,7 +3785,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
           ),
         ),
       SearchableRow(
-        label: "Torn chat cache limit",
+        label: context.interfaceText("Torn chat cache limit"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -3794,7 +3795,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Torn chat cache limit")),
+                  const Flexible(child: PdaText("Torn chat cache limit")),
                   _tornChatCacheLimitDropdown(),
                 ],
               ),
@@ -3826,7 +3827,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
       ),
     ];
     if (rows.isEmpty) return const SizedBox.shrink();
-    return buildSectionWithRows(title: 'MEMORY', rows: rows, searchText: _searchText);
+    return buildSectionWithRows(title: context.interfaceText('MEMORY'), rows: rows, searchText: _searchText);
   }
 
   Widget _parkBackgroundTabsDropdown({required bool enabled}) {
@@ -3907,14 +3908,14 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
           value: "on",
           child: SizedBox(
             width: 90,
-            child: Text("On", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
+            child: PdaText("On", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
           ),
         ),
         const DropdownMenuItem(
           value: "off",
           child: SizedBox(
             width: 90,
-            child: Text("Off", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
+            child: PdaText("Off", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
           ),
         ),
       ],
@@ -3950,8 +3951,8 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
           value: 0,
           child: SizedBox(
             width: 130,
-            child: Text(
-              "Default (${label(_webViewProvider.tabSleepMinutesDefaultRC)})",
+            child: PdaText(
+              "Default ({0})", values: [label(_webViewProvider.tabSleepMinutesDefaultRC)],
               textAlign: TextAlign.right,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(fontSize: 12),
@@ -3996,8 +3997,8 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
           value: 0,
           child: SizedBox(
             width: 130,
-            child: Text(
-              "Default (${label(_webViewProvider.maxLiveTabsDefaultRC)})",
+            child: PdaText(
+              "Default ({0})", values: [label(_webViewProvider.maxLiveTabsDefaultRC)],
               textAlign: TextAlign.right,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(fontSize: 12),
@@ -4031,14 +4032,14 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
     List<SearchableRow> rows = [
       if (Platform.isIOS)
         SearchableRow(
-          label: "Zoom in/out pinch gestures",
+          label: context.interfaceText("Zoom in/out pinch gestures"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Flexible(child: Text("Zoom in/out pinch gestures")),
+                const Flexible(child: PdaText("Zoom in/out pinch gestures")),
                 Switch(
                   value: _settingsProvider.iosBrowserPinch,
                   onChanged: (value) {
@@ -4055,7 +4056,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       if (Platform.isIOS)
         SearchableRow(
-          label: "Disallow overscroll",
+          label: context.interfaceText("Disallow overscroll"),
           searchText: _searchText,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -4065,7 +4066,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(child: Text("Disallow overscroll")),
+                    const Flexible(child: PdaText("Disallow overscroll")),
                     Switch(
                       value: _settingsProvider.iosDisallowOverscroll,
                       onChanged: (value) {
@@ -4078,7 +4079,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                     ),
                   ],
                 ),
-                Text(
+                PdaText(
                   'Certain iOS versions (e.g.: iOS 16) may experience overscroll issues; enabling this may prevent that behavior.',
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 ),
@@ -4087,7 +4088,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
           ),
         ),
       SearchableRow(
-        label: "Reverse navigation swipe",
+        label: context.interfaceText("Reverse navigation swipe"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -4097,7 +4098,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Reverse navigation swipe")),
+                  const Flexible(child: PdaText("Reverse navigation swipe")),
                   Switch(
                     value: _settingsProvider.browserReverseNavitagtionSwipe,
                     onChanged: (value) {
@@ -4110,7 +4111,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                   ),
                 ],
               ),
-              Text(
+              PdaText(
                 'Swiping left-to-right navigates backwards and right-to-left forwards; enable to reverse these actions.',
                 style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
               ),
@@ -4119,7 +4120,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Center text field when editing",
+        label: context.interfaceText("Center text field when editing"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -4129,7 +4130,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Center text field when editing")),
+                  const Flexible(child: PdaText("Center text field when editing")),
                   Switch(
                     value:
                         _settingsProvider.browserCenterEditingTextField &&
@@ -4150,12 +4151,12 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 ],
               ),
               if (_settingsProvider.browserCenterEditingTextFieldRemoteConfigAllowed)
-                Text(
+                PdaText(
                   "Automatically scrolls to keep the text field visible when editing.",
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 )
               else
-                Text(
+                PdaText(
                   "This option is temporarily disabled from Torn PDA and can't be changed right now",
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 ),
@@ -4164,7 +4165,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
       SearchableRow(
-        label: "Extend page height for keyboard",
+        label: context.interfaceText("Extend page height for keyboard"),
         searchText: _searchText,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -4174,7 +4175,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(child: Text("Extend page height for keyboard")),
+                  const Flexible(child: PdaText("Extend page height for keyboard")),
                   Switch(
                     value:
                         _settingsProvider.browserExtendHeightForKeyboard &&
@@ -4195,12 +4196,12 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 ],
               ),
               if (_settingsProvider.browserExtendHeightForKeyboardRemoteConfigAllowed)
-                Text(
+                PdaText(
                   'Adds extra scroll room when pages are shorter than the screen to avoid the keyboard covering inputs.',
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 )
               else
-                Text(
+                PdaText(
                   "This option is temporarily disabled from Torn PDA and can't be changed right now",
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 ),
@@ -4209,7 +4210,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
         ),
       ),
     ];
-    return buildSectionWithRows(title: "GESTURES & SCROLL", rows: rows, searchText: _searchText);
+    return buildSectionWithRows(title: context.interfaceText("GESTURES & SCROLL"), rows: rows, searchText: _searchText);
   }
 
   String _buildSingleLabel(double percentage, int currentMax, String type) {
@@ -4240,7 +4241,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Pick a color!'),
+          title: const PdaText('Pick a color!'),
           content: SingleChildScrollView(
             child: ColorPicker(
               color: Color(_settingsProvider.tabsHideBarColor),
@@ -4255,9 +4256,9 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               spacing: 5,
               runSpacing: 5,
               wheelDiameter: 155,
-              heading: Text('Select color', style: Theme.of(context).textTheme.titleSmall),
-              subheading: Text('Select color shade', style: Theme.of(context).textTheme.titleSmall),
-              wheelSubheading: Text('Selected color and its shades', style: Theme.of(context).textTheme.titleSmall),
+              heading: PdaText('Select color', style: Theme.of(context).textTheme.titleSmall),
+              subheading: PdaText('Select color shade', style: Theme.of(context).textTheme.titleSmall),
+              wheelSubheading: PdaText('Selected color and its shades', style: Theme.of(context).textTheme.titleSmall),
               showMaterialName: true,
               showColorName: true,
               showColorCode: true,
@@ -4277,7 +4278,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Got it'),
+              child: const PdaText('Got it'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -4299,7 +4300,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Pick a color!'),
+          title: const PdaText('Pick a color!'),
           content: SingleChildScrollView(
             child: ColorPicker(
               color: _highlightColor,
@@ -4315,9 +4316,9 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               spacing: 5,
               runSpacing: 5,
               wheelDiameter: 155,
-              heading: Text('Select color', style: Theme.of(context).textTheme.titleSmall),
-              subheading: Text('Select color shade', style: Theme.of(context).textTheme.titleSmall),
-              wheelSubheading: Text('Selected color and its shades', style: Theme.of(context).textTheme.titleSmall),
+              heading: PdaText('Select color', style: Theme.of(context).textTheme.titleSmall),
+              subheading: PdaText('Select color shade', style: Theme.of(context).textTheme.titleSmall),
+              wheelSubheading: PdaText('Selected color and its shades', style: Theme.of(context).textTheme.titleSmall),
               showMaterialName: true,
               showColorName: true,
               showColorCode: true,
@@ -4337,7 +4338,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Got it'),
+              child: const PdaText('Got it'),
               onPressed: () {
                 setState(() => _highlightColor = pickerColor);
                 Navigator.of(context).pop();
@@ -4385,8 +4386,8 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
               child: TextField(
                 controller: _searchController,
                 focusNode: _searchFocusNode,
-                decoration: const InputDecoration(
-                  hintText: 'Search browser settings...',
+                decoration: InputDecoration(
+                  hintText: context.interfaceText('Search browser settings...'),
                   border: InputBorder.none,
                   hintStyle: TextStyle(color: Colors.white70),
                 ),
@@ -4398,7 +4399,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
                 },
               ),
             )
-          : const Text('Browser Settings', style: TextStyle(color: Colors.white)),
+          : const PdaText('Browser Settings', style: TextStyle(color: Colors.white)),
       actions: _isSearching
           ? [
               if (_searchController.text.isNotEmpty)
@@ -4466,21 +4467,21 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
           value: 0,
           child: SizedBox(
             width: 80,
-            child: Text("Default", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
+            child: PdaText("Default", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
           ),
         ),
         DropdownMenuItem(
           value: 1,
           child: SizedBox(
             width: 80,
-            child: Text("Bottom bar", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
+            child: PdaText("Bottom bar", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
           ),
         ),
         DropdownMenuItem(
           value: 2,
           child: SizedBox(
             width: 80,
-            child: Text("Dialog", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
+            child: PdaText("Dialog", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
           ),
         ),
       ],
@@ -4512,21 +4513,21 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
           value: "center",
           child: SizedBox(
             width: 70,
-            child: Text("Top", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
+            child: PdaText("Top", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
           ),
         ),
         DropdownMenuItem(
           value: "left",
           child: SizedBox(
             width: 70,
-            child: Text("Left", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
+            child: PdaText("Left", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
           ),
         ),
         DropdownMenuItem(
           value: "right",
           child: SizedBox(
             width: 70,
-            child: Text("Right", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
+            child: PdaText("Right", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
           ),
         ),
       ],
@@ -4546,14 +4547,14 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
           value: true,
           child: SizedBox(
             width: 70,
-            child: Text("Share", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
+            child: PdaText("Share", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
           ),
         ),
         DropdownMenuItem(
           value: false,
           child: SizedBox(
             width: 70,
-            child: Text("Save", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
+            child: PdaText("Save", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
           ),
         ),
       ],
@@ -4573,21 +4574,21 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
           value: BrowserRefreshSetting.icon,
           child: SizedBox(
             width: 100,
-            child: Text("Icon", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
+            child: PdaText("Icon", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
           ),
         ),
         DropdownMenuItem(
           value: BrowserRefreshSetting.pull,
           child: SizedBox(
             width: 100,
-            child: Text("Pull to refresh", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
+            child: PdaText("Pull to refresh", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
           ),
         ),
         DropdownMenuItem(
           value: BrowserRefreshSetting.both,
           child: SizedBox(
             width: 100,
-            child: Text("Both", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
+            child: PdaText("Both", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
           ),
         ),
       ],
@@ -4609,21 +4610,21 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
           value: "off",
           child: SizedBox(
             width: 120,
-            child: Text("Off", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
+            child: PdaText("Off", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
           ),
         ),
         DropdownMenuItem(
           value: "auto",
           child: SizedBox(
             width: 120,
-            child: Text("Large or animated", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
+            child: PdaText("Large or animated", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
           ),
         ),
         DropdownMenuItem(
           value: "always",
           child: SizedBox(
             width: 120,
-            child: Text("Always", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
+            child: PdaText("Always", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
           ),
         ),
       ],
@@ -4644,21 +4645,21 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
           value: "off",
           child: SizedBox(
             width: 100,
-            child: Text("Off", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
+            child: PdaText("Off", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
           ),
         ),
         DropdownMenuItem(
           value: "narrow",
           child: SizedBox(
             width: 100,
-            child: Text("Always", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
+            child: PdaText("Always", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
           ),
         ),
         DropdownMenuItem(
           value: "wide",
           child: SizedBox(
             width: 100,
-            child: Text("Wide screen", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
+            child: PdaText("Wide screen", textAlign: TextAlign.right, style: TextStyle(fontSize: 12)),
           ),
         ),
       ],
@@ -4674,10 +4675,7 @@ class SettingsBrowserPageState extends State<SettingsBrowserPage> {
             BotToast.showText(
               clickClose: true,
               text:
-                  "Please note that your current screen configuration (${width.round()} DPI) might "
-                  "not be wide enough to display the navigation arrows in all circumstances (e.g. when other "
-                  "icons are present, such as when chaining)."
-                  "\n\nRemember you can always swipe left or right in the page title to navigate.",
+                  context.interfaceText("Please note that your current screen configuration ({0} DPI) might not be wide enough to display the navigation arrows in all circumstances (e.g. when other icons are present, such as when chaining).\n\nRemember you can always swipe left or right in the page title to navigate.", [width.round()]),
               textStyle: const TextStyle(fontSize: 14, color: Colors.white),
               contentColor: Colors.blue[600]!,
               duration: const Duration(seconds: 15),

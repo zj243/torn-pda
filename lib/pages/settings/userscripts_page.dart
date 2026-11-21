@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -279,7 +280,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
               const SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text(
+                child: PdaText(
                   'Preexisting scripts might require modifications to work with Torn PDA. '
                   'Please ensure that you use scripts responsibly and '
                   'understand the hazards. Tap the exclamation mark for more information.',
@@ -332,9 +333,9 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("TornTools scripts", style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+                      const PdaText("TornTools scripts", style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 2),
-                      Text(
+                      PdaText(
                         "Browse and install TornTools features as individual scripts",
                         style: TextStyle(fontSize: 11, color: Colors.grey[light ? 700 : 400]),
                       ),
@@ -381,7 +382,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                 ),
               ),
               TextButton(
-                child: const Text("EXIT", style: TextStyle(fontSize: 12)),
+                child: const PdaText("EXIT", style: TextStyle(fontSize: 12)),
                 onPressed: () {
                   if (mode != null) {
                     _userScriptsProvider.setMode(null);
@@ -416,13 +417,13 @@ class UserScriptsPageState extends State<UserScriptsPage> {
               Icon(MdiIcons.earthPlus, size: 18, color: Colors.green[light ? 800 : 300]),
               const SizedBox(width: 8),
               Expanded(
-                child: Text(
-                  "$count script update${count == 1 ? "" : "s"} available",
+                child: PdaText(
+                  "{0} script update{1} available", values: [count, count == 1 ? "" : "s"],
                   style: const TextStyle(fontSize: 12),
                 ),
               ),
               TextButton(
-                child: const Text("REVIEW", style: TextStyle(fontSize: 12)),
+                child: const PdaText("REVIEW", style: TextStyle(fontSize: 12)),
                 onPressed: () {
                   showDialog(context: context, builder: (_) => const UserScriptsBulkUpdateDialog());
                 },
@@ -468,7 +469,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                 if (!inSource)
                   TextButton.icon(
                     icon: const Icon(Icons.code, size: 16),
-                    label: const Text("Search inside the code too", style: TextStyle(fontSize: 12)),
+                    label: const PdaText("Search inside the code too", style: TextStyle(fontSize: 12)),
                     onPressed: () {
                       _userScriptsProvider.setSearchInSource = true;
                       _onSearchInputChange();
@@ -557,8 +558,8 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                         onTap: () async {
                           BotToast.showText(
                             text:
-                                'This is a custom script without an update URL.\n\n'
-                                'It will not be updated automatically.',
+                                context.interfaceText('This is a custom script without an update URL.\n\n'
+                                'It will not be updated automatically.'),
                             textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                             contentColor: Colors.grey[800]!,
                             contentPadding: const EdgeInsets.all(10),
@@ -579,8 +580,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                         onTap: () async {
                           BotToast.showText(
                             text:
-                                "This is a${script.isExample ? "n example" : ""} script that you have edited, "
-                                "so it will not update. Reset changes to enable updates again.",
+                                context.interfaceText("This is a{0} script that you have edited, so it will not update. Reset changes to enable updates again.", [script.isExample ? "n example" : ""]),
                             textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                             contentColor: Colors.grey[800]!,
                             contentPadding: const EdgeInsets.all(10),
@@ -599,7 +599,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                             : const Icon(MdiIcons.earth, color: Colors.green, size: 20),
                         onTap: () async {
                           BotToast.showText(
-                            text: "This ${script.isExample ? "example " : ""}script is up-to-date (v${script.version})",
+                            text: context.interfaceText("This {0}script is up-to-date (v{1})", [script.isExample ? "example " : "", script.version]),
                             textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                             contentColor: Colors.grey[800]!,
                             contentPadding: const EdgeInsets.all(10),
@@ -615,7 +615,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                         ),
                         onTap: () async {
                           BotToast.showText(
-                            text: "An update is available (currently on v${script.version})",
+                            text: context.interfaceText("An update is available (currently on v{0})", [script.version]),
                             textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                             contentColor: Colors.grey[800]!,
                             contentPadding: const EdgeInsets.all(10),
@@ -635,7 +635,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                         child: const Icon(MdiIcons.earthRemove, color: Colors.red, size: 20),
                         onTap: () async {
                           BotToast.showText(
-                            text: "An error occurred while checking for updates. Please try again later.",
+                            text: context.interfaceText("An error occurred while checking for updates. Please try again later."),
                             textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                             contentColor: Colors.grey[800]!,
                             contentPadding: const EdgeInsets.all(10),
@@ -646,7 +646,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                       GestureDetector(
                         child: const SizedBox(width: 20, height: 20, child: CircularProgressIndicator()),
                         onTap: () async => BotToast.showText(
-                          text: "Checking for updates...",
+                          text: context.interfaceText("Checking for updates..."),
                           textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                           contentColor: Colors.grey[800]!,
                           contentPadding: const EdgeInsets.all(10),
@@ -657,7 +657,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                         child: const Icon(MdiIcons.helpCircle, color: Colors.blue, size: 20),
                         onTap: () async {
                           BotToast.showText(
-                            text: "The update status of this script could not be determined.",
+                            text: context.interfaceText("The update status of this script could not be determined."),
                             textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                             contentColor: Colors.grey[800]!,
                             contentPadding: const EdgeInsets.all(10),
@@ -736,7 +736,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
               ),
               style: const TextStyle(color: Colors.white, fontSize: 16),
             )
-          : const Text('User scripts', style: TextStyle(color: Colors.white)),
+          : const PdaText('User scripts', style: TextStyle(color: Colors.white)),
       leadingWidth: _webViewProvider.appCanOpenBrowser ? 88 : 50,
       leading: Row(
         children: [
@@ -829,7 +829,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                   children: [
                     Icon(Icons.edit_note, color: Colors.grey),
                     SizedBox(width: 10),
-                    Text('Manage modes'),
+                    PdaText('Manage modes'),
                   ],
                 ),
               ),
@@ -840,7 +840,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                   children: [
                     const Icon(MdiIcons.sortAlphabeticalAscending, color: Colors.grey),
                     const SizedBox(width: 10),
-                    Text('Sort by name', style: byName ? selected : null),
+                    PdaText('Sort by name', style: byName ? selected : null),
                   ],
                 ),
               ),
@@ -850,7 +850,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                   children: [
                     const Icon(MdiIcons.sortCalendarDescending, color: Colors.grey),
                     const SizedBox(width: 10),
-                    Text('Sort by install date', style: byName ? null : selected),
+                    PdaText('Sort by install date', style: byName ? null : selected),
                   ],
                 ),
               ),
@@ -863,7 +863,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                       color: Colors.grey,
                     ),
                     const SizedBox(width: 10),
-                    const Text('Pending updates first'),
+                    const PdaText('Pending updates first'),
                   ],
                 ),
               ),
@@ -876,7 +876,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                       color: Colors.grey,
                     ),
                     const SizedBox(width: 10),
-                    const Text('Search inside code'),
+                    const PdaText('Search inside code'),
                   ],
                 ),
               ),
@@ -887,7 +887,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                   children: [
                     Icon(Icons.upload_file, color: Colors.grey),
                     SizedBox(width: 10),
-                    Text('Export to JSON'),
+                    PdaText('Export to JSON'),
                   ],
                 ),
               ),
@@ -897,7 +897,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                   children: [
                     Icon(Icons.javascript, color: Colors.grey),
                     SizedBox(width: 10),
-                    Text('Export to .user.js'),
+                    PdaText('Export to .user.js'),
                   ],
                 ),
               ),
@@ -907,7 +907,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                   children: [
                     Icon(Icons.download, color: Colors.grey),
                     SizedBox(width: 10),
-                    Text('Import from file'),
+                    PdaText('Import from file'),
                   ],
                 ),
               ),
@@ -980,20 +980,20 @@ class UserScriptsPageState extends State<UserScriptsPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Export Scripts"),
-        content: const Text(
+        title: const PdaText("Export Scripts"),
+        content: const PdaText(
           "You can export your scripts to a JSON file to share them or save them manually.\n\n"
           "Note: bear in mind that you can also export through the Share, "
           "Cloud backup and Local backup features in Settings.",
         ),
         actions: [
-          OutlinedButton(onPressed: () => Navigator.of(context).pop(), child: const Text("Cancel")),
+          OutlinedButton(onPressed: () => Navigator.of(context).pop(), child: const PdaText("Cancel")),
           ElevatedButton(
             onPressed: () {
               Navigator.of(context).pop();
               _showExportSelectionDialog();
             },
-            child: const Text("Continue"),
+            child: const PdaText("Continue"),
           ),
         ],
       ),
@@ -1004,21 +1004,21 @@ class UserScriptsPageState extends State<UserScriptsPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Export to .user.js"),
-        content: const Text(
+        title: const PdaText("Export to .user.js"),
+        content: const PdaText(
           "This exports each selected script as a standard .user.js file that you can install in "
           "Tampermonkey/Violentmonkey on a desktop browser (just open the file to trigger the install).\n\n"
           "Note: scripts that rely on Torn PDA's own API key placeholder or PDA-specific features may need "
           "manual adjustments to work on desktop.",
         ),
         actions: [
-          OutlinedButton(onPressed: () => Navigator.of(context).pop(), child: const Text("Cancel")),
+          OutlinedButton(onPressed: () => Navigator.of(context).pop(), child: const PdaText("Cancel")),
           ElevatedButton(
             onPressed: () {
               Navigator.of(context).pop();
               _showExportSelectionDialog(asUserJs: true);
             },
-            child: const Text("Continue"),
+            child: const PdaText("Continue"),
           ),
         ],
       ),
@@ -1035,7 +1035,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
-              title: const Text("Select Scripts to Export"),
+              title: const PdaText("Select Scripts to Export"),
               content: SizedBox(
                 width: double.maxFinite,
                 child: Column(
@@ -1051,7 +1051,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                               selectedScripts.addAll(allScripts);
                             });
                           },
-                          child: const Text("Select All"),
+                          child: const PdaText("Select All"),
                         ),
                         const SizedBox(width: 8),
                         OutlinedButton(
@@ -1060,7 +1060,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                               selectedScripts.clear();
                             });
                           },
-                          child: const Text("Deselect All"),
+                          child: const PdaText("Deselect All"),
                         ),
                       ],
                     ),
@@ -1096,7 +1096,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                 ),
               ),
               actions: [
-                OutlinedButton(onPressed: () => Navigator.of(context).pop(), child: const Text("Cancel")),
+                OutlinedButton(onPressed: () => Navigator.of(context).pop(), child: const PdaText("Cancel")),
                 ElevatedButton(
                   onPressed: selectedScripts.isEmpty
                       ? null
@@ -1104,7 +1104,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                           Navigator.of(context).pop();
                           _performExport(selectedScripts.toList(), asUserJs: asUserJs);
                         },
-                  child: const Text("Share File"),
+                  child: const PdaText("Share File"),
                 ),
               ],
             );
@@ -1156,7 +1156,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
         ),
       );
     } catch (e) {
-      BotToast.showText(text: "Error exporting scripts: $e");
+      BotToast.showText(text: context.interfaceText("Error exporting scripts: {0}", [e]));
     }
   }
 
@@ -1168,8 +1168,8 @@ class UserScriptsPageState extends State<UserScriptsPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Import Scripts"),
-        content: const Text(
+        title: const PdaText("Import Scripts"),
+        content: const PdaText(
           "You can import scripts from:\n\n"
           "- A JSON file (Torn PDA export format), which may contain several scripts.\n"
           "- A single .user.js file (e.g. exported from Tampermonkey/Violentmonkey on desktop).\n\n"
@@ -1177,13 +1177,13 @@ class UserScriptsPageState extends State<UserScriptsPage> {
           "Cloud backup and Local backup features in Settings.",
         ),
         actions: [
-          OutlinedButton(onPressed: () => Navigator.of(context).pop(), child: const Text("Cancel")),
+          OutlinedButton(onPressed: () => Navigator.of(context).pop(), child: const PdaText("Cancel")),
           ElevatedButton(
             onPressed: () {
               Navigator.of(context).pop();
               _pickImportFile();
             },
-            child: const Text("Select File"),
+            child: const PdaText("Select File"),
           ),
         ],
       ),
@@ -1240,7 +1240,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
         _parseAndShowImportSelection(content, fileName: picked.name, isUserJs: isUserJs);
       }
     } catch (e) {
-      BotToast.showText(text: "Error picking file: $e");
+      BotToast.showText(text: context.interfaceText("Error picking file: {0}", [e]));
     }
   }
 
@@ -1263,16 +1263,16 @@ class UserScriptsPageState extends State<UserScriptsPage> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text("Invalid Format"),
-          content: Text("The file could not be parsed as a valid script.\nError: $e"),
-          actions: [TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text("OK"))],
+          title: const PdaText("Invalid Format"),
+          content: PdaText("The file could not be parsed as a valid script.\nError: {0}", values: [e]),
+          actions: [TextButton(onPressed: () => Navigator.of(context).pop(), child: const PdaText("OK"))],
         ),
       );
       return;
     }
 
     if (importedScripts.isEmpty) {
-      BotToast.showText(text: "No scripts found in file.");
+      BotToast.showText(text: context.interfaceText("No scripts found in file."));
       return;
     }
 
@@ -1286,7 +1286,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
-              title: const Text("Import Options"),
+              title: const PdaText("Import Options"),
               content: SizedBox(
                 width: double.maxFinite,
                 child: Column(
@@ -1294,7 +1294,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                   children: [
                     Row(
                       children: [
-                        const Text("Mode: "),
+                        const PdaText("Mode: "),
                         const Spacer(),
                         Text(
                           overwriteMode ? "Overwrite" : "Append",
@@ -1317,7 +1317,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                     if (overwriteMode)
                       const Padding(
                         padding: EdgeInsets.only(bottom: 10),
-                        child: Text(
+                        child: PdaText(
                           "Scripts with the same name will be replaced, keeping their saved data. "
                           "Your other scripts are not affected",
                           style: TextStyle(color: Colors.red, fontSize: 12, fontWeight: FontWeight.bold),
@@ -1334,7 +1334,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                               selectedScripts.addAll(importedScripts);
                             });
                           },
-                          child: const Text("Select All"),
+                          child: const PdaText("Select All"),
                         ),
                         const SizedBox(width: 8),
                         OutlinedButton(
@@ -1343,7 +1343,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                               selectedScripts.clear();
                             });
                           },
-                          child: const Text("Deselect All"),
+                          child: const PdaText("Deselect All"),
                         ),
                       ],
                     ),
@@ -1390,7 +1390,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                 ),
               ),
               actions: [
-                OutlinedButton(onPressed: () => Navigator.of(context).pop(), child: const Text("Cancel")),
+                OutlinedButton(onPressed: () => Navigator.of(context).pop(), child: const PdaText("Cancel")),
                 ElevatedButton(
                   style: overwriteMode
                       ? ElevatedButton.styleFrom(backgroundColor: Colors.red, foregroundColor: Colors.white)
@@ -1414,9 +1414,9 @@ class UserScriptsPageState extends State<UserScriptsPage> {
   Future<void> _performImport(List<UserScriptModel> scripts, bool overwrite) async {
     try {
       await _userScriptsProvider.importScriptsFromList(scriptsToImport: scripts, overwrite: overwrite);
-      BotToast.showText(text: "Scripts imported successfully!");
+      BotToast.showText(text: context.interfaceText("Scripts imported successfully!"));
     } catch (e) {
-      BotToast.showText(text: "Error importing scripts: $e");
+      BotToast.showText(text: context.interfaceText("Error importing scripts: {0}", [e]));
     }
   }
 
@@ -1426,26 +1426,26 @@ class UserScriptsPageState extends State<UserScriptsPage> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Temporarily disable all scripts and remember state?'),
+          title: const PdaText('Temporarily disable all scripts and remember state?'),
           content: const SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text(
+                PdaText(
                   'This feature allows you to temporarily disable all scripts, while remembering '
                   'their current enabled/disabled state.',
                 ),
                 SizedBox(height: 10),
-                Text(
+                PdaText(
                   'This might be useful, for example, to quickly disable the additional features '
                   'they provide or to test if any of them is causing issues in the browser.',
                 ),
                 SizedBox(height: 10),
-                Text(
+                PdaText(
                   'If you proceed, all scripts will be disabled but you will be able to restore '
                   'their previous state by tapping this button again.',
                 ),
                 SizedBox(height: 10),
-                Text(
+                PdaText(
                   'IMPORTANT: if you perform any action on the script list, such as '
                   'manually enabling/disabling, editing, adding or removing any script while '
                   'this mode is active, the "restore" functionality will be disabled.',
@@ -1455,13 +1455,13 @@ class UserScriptsPageState extends State<UserScriptsPage> {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Cancel'),
+              child: const PdaText('Cancel'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: const Text('Proceed'),
+              child: const PdaText('Proceed'),
               onPressed: () {
                 _userScriptsProvider.toggleGlobalDisable();
                 Navigator.of(context).pop();
@@ -1498,32 +1498,32 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                       mainAxisSize: MainAxisSize.min, // To make the card compact
                       children: <Widget>[
                         const Flexible(
-                          child: Text("CAUTION", style: TextStyle(fontSize: 13, color: Colors.red)),
+                          child: PdaText("CAUTION", style: TextStyle(fontSize: 13, color: Colors.red)),
                         ),
                         const SizedBox(height: 10),
                         Flexible(
-                          child: Text(
+                          child: PdaText(
                             "This will remove all user scripts!",
                             style: TextStyle(fontSize: 12, color: _themeProvider.mainText),
                           ),
                         ),
                         const SizedBox(height: 10),
                         Flexible(
-                          child: Text("Are you sure?", style: TextStyle(fontSize: 12, color: _themeProvider.mainText)),
+                          child: PdaText("Are you sure?", style: TextStyle(fontSize: 12, color: _themeProvider.mainText)),
                         ),
                         const SizedBox(height: 8),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             TextButton(
-                              child: const Text("Do it!"),
+                              child: const PdaText("Do it!"),
                               onPressed: () {
                                 _userScriptsProvider.wipe();
                                 Navigator.of(context).pop();
                               },
                             ),
                             TextButton(
-                              child: const Text("Oh no!"),
+                              child: const PdaText("Oh no!"),
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
@@ -1580,8 +1580,8 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                       mainAxisSize: MainAxisSize.min, // To make the card compact
                       children: <Widget>[
                         Flexible(
-                          child: Text(
-                            "Remove ${script.name}?",
+                          child: PdaText(
+                            "Remove {0}?", values: [script.name],
                             style: TextStyle(fontSize: 12, color: _themeProvider.mainText),
                           ),
                         ),
@@ -1590,14 +1590,14 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             TextButton(
-                              child: const Text("Do it!"),
+                              child: const PdaText("Do it!"),
                               onPressed: () {
                                 _userScriptsProvider.removeUserScript(script);
                                 Navigator.of(context).pop();
                               },
                             ),
                             TextButton(
-                              child: const Text("Oh no!"),
+                              child: const PdaText("Oh no!"),
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
@@ -1651,13 +1651,13 @@ class UserScriptsPageState extends State<UserScriptsPage> {
 
   AlertDialog _disclaimerDialog() {
     return AlertDialog(
-      title: const Text("DISCLAIMER"),
+      title: const PdaText("DISCLAIMER"),
       content: const SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
+            PdaText(
               "User scripts are small programs written in JavaScript that enhance the browser's "
               "functionalities. Be careful when using them and ensure that you understand the code "
               "and what the script accomplishes; otherwise, ensure they come from a reliable "
@@ -1667,7 +1667,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
               style: TextStyle(fontSize: 13),
             ),
             SizedBox(height: 15),
-            Text(
+            PdaText(
               "Remote scripts can be updated by their author at any time. Even though a script may "
               "have been safe previously, malicious updates can be added. Ensure you verify all "
               "changes before you install any update. If you are unsure, please reach out in the "
@@ -1675,7 +1675,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 15),
-            Text(
+            PdaText(
               "Everything else about user scripts, such as how they are injected, how to write them, "
               "native storage, the app handlers and troubleshooting, is explained in the docs section.",
               style: TextStyle(fontSize: 13),
@@ -1687,7 +1687,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
         Padding(
           padding: const EdgeInsets.only(right: 8),
           child: TextButton(
-            child: const Text("Understood"),
+            child: const PdaText("Understood"),
             onPressed: () {
               Navigator.of(context).pop('exit');
             },
@@ -1702,12 +1702,12 @@ class UserScriptsPageState extends State<UserScriptsPage> {
     return PopScope(
       canPop: false,
       child: AlertDialog(
-        title: const Text("CAUTION"),
+        title: const PdaText("CAUTION"),
         content: const SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              PdaText(
                 "Be careful when using user scripts and ensure that you understand the code "
                 "and what it accomplishes; otherwise, ensure they come from a reliable "
                 "source and have been checked by someone you trust.\n\n"
@@ -1716,7 +1716,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                 style: TextStyle(fontSize: 13),
               ),
               SizedBox(height: 10),
-              Text(
+              PdaText(
                 "Torn PDA has recently added support for remote scripts. Even though these scripts "
                 "may have been safe previously, malicious updates can be added. Ensure you verify all changes "
                 "before you install any updates from scripts. If you are unsure, please reach out in the "
@@ -1724,13 +1724,13 @@ class UserScriptsPageState extends State<UserScriptsPage> {
                 style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 10),
-              Text(
+              PdaText(
                 "Please, read the disclaimer by pressing the warning icon in the app bar for "
                 "more information.",
                 style: TextStyle(fontSize: 13),
               ),
               SizedBox(height: 10),
-              Text("Do you understand the risk?", style: TextStyle(fontSize: 13)),
+              PdaText("Do you understand the risk?", style: TextStyle(fontSize: 13)),
             ],
           ),
         ),
@@ -1738,7 +1738,7 @@ class UserScriptsPageState extends State<UserScriptsPage> {
           Padding(
             padding: const EdgeInsets.only(right: 8),
             child: TextButton(
-              child: const Text("Yes, I promise!"),
+              child: const PdaText("Yes, I promise!"),
               onPressed: () {
                 _userScriptsProvider.changeScriptsFirstTime = false;
                 // Fire and forget: load defaults now that the user accepted
@@ -1752,11 +1752,11 @@ class UserScriptsPageState extends State<UserScriptsPage> {
           Padding(
             padding: const EdgeInsets.only(right: 8),
             child: TextButton(
-              child: const Text("What?!"),
+              child: const PdaText("What?!"),
               onPressed: () {
                 _firstTimeNotAccepted = true;
                 BotToast.showText(
-                  text: 'Returning...!',
+                  text: context.interfaceText('Returning...!'),
                   textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                   contentColor: Colors.orange[800]!,
                   contentPadding: const EdgeInsets.all(10),

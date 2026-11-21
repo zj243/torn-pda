@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -49,7 +50,7 @@ class MarketDialog extends StatelessWidget {
                 children: [
                   const Icon(MdiIcons.basketOutline, size: 22),
                   const SizedBox(width: 6),
-                  const Text("MARKET"),
+                  const PdaText("MARKET"),
                   const SizedBox(width: 6),
                   GestureDetector(
                     child: const Icon(MdiIcons.openInApp, size: 18),
@@ -81,7 +82,7 @@ class MarketDialog extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Total value \$${formatProfit(inputInt: money)}", style: const TextStyle(fontSize: 13)),
+                PdaText("Total value \${0}", values: [formatProfit(inputInt: money)], style: const TextStyle(fontSize: 13)),
               ],
             ),
             const SizedBox(height: 20),
@@ -97,7 +98,7 @@ class MarketDialog extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                    child: const Text("Close"),
+                    child: const PdaText("Close"),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },

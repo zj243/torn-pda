@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -229,9 +230,9 @@ class _ChatPlayerCardViewState extends State<ChatPlayerCardView> {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('Discord linked', style: muted),
+                PdaText('Discord linked', style: muted),
                 IconButton(
-                  tooltip: 'Copy Discord id',
+                  tooltip: context.interfaceText('Copy Discord id'),
                   visualDensity: VisualDensity.compact,
                   iconSize: 16,
                   icon: const Icon(Icons.copy_rounded),
@@ -256,12 +257,12 @@ class _ChatPlayerCardViewState extends State<ChatPlayerCardView> {
                     ),
                   if (targeted)
                     Tooltip(
-                      message: 'In your targets',
+                      message: context.interfaceText('In your targets'),
                       child: Icon(Icons.gps_fixed_rounded, size: 16, color: theme.colorScheme.onSurfaceVariant),
                     ),
                   if (watched)
                     Tooltip(
-                      message: 'In your stakeouts',
+                      message: context.interfaceText('In your stakeouts'),
                       child: Icon(Icons.visibility_rounded, size: 16, color: theme.colorScheme.onSurfaceVariant),
                     ),
                 ],
@@ -279,7 +280,7 @@ class _Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Semantics(
-      label: 'Loading player details',
+      label: context.interfaceText('Loading player details'),
       child: const Padding(
         padding: EdgeInsets.fromLTRB(72, 0, 16, 8),
         child: Align(

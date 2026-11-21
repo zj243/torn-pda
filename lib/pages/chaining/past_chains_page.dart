@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -46,7 +47,7 @@ class _Problem extends StatelessWidget {
               ),
             ],
             const SizedBox(height: 16),
-            OutlinedButton(onPressed: onRetry, child: const Text('Retry')),
+            OutlinedButton(onPressed: onRetry, child: const PdaText('Retry')),
           ],
         ),
       ),
@@ -80,7 +81,7 @@ class _PastChainsPageState extends State<PastChainsPage> {
           ListenableBuilder(
             listenable: _chains,
             builder: (context, _) => IconButton(
-              tooltip: 'Refresh',
+              tooltip: context.interfaceText('Refresh'),
               icon: const Icon(Icons.refresh),
               onPressed: _chains.loading ? null : _chains.refresh,
             ),
@@ -108,7 +109,7 @@ class _PastChainsPageState extends State<PastChainsPage> {
           child: _Problem(title: problem, detail: _chains.problemDetail, onRetry: _chains.refresh),
         );
       }
-      return const Center(child: Text('No finished chains yet'));
+      return const Center(child: PdaText('No finished chains yet'));
     }
     return ListView(
       children: [
@@ -120,7 +121,7 @@ class _PastChainsPageState extends State<PastChainsPage> {
             child: Center(
               child: _chains.loadingMore
                   ? const CircularProgressIndicator(semanticsLabel: 'Loading more chains')
-                  : OutlinedButton(onPressed: _chains.loadMore, child: const Text('Load more')),
+                  : OutlinedButton(onPressed: _chains.loadMore, child: const PdaText('Load more')),
             ),
           ),
       ],
@@ -157,8 +158,8 @@ class _ChainRow extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 12),
-            Text(
-              '${chatRespect(chain.respect)} respect',
+            PdaText(
+              "{0} respect", values: [chatRespect(chain.respect)],
               style: theme.textTheme.bodyMedium?.copyWith(fontFeatures: const [FontFeature.tabularFigures()]),
             ),
             Icon(Icons.chevron_right_rounded, color: muted),

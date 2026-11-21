@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -57,14 +58,14 @@ class YataTargetsDistributionState extends State<YataTargetsDistribution> {
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 children: <Widget>[
-                  const Text(
+                  const PdaText(
                     'TARGETS ONLY IN YATA',
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Text(
+                  const PdaText(
                     '(CAN BE IMPORTED)',
                     style: TextStyle(
                       fontSize: 11,
@@ -77,14 +78,14 @@ class YataTargetsDistributionState extends State<YataTargetsDistribution> {
                   const SizedBox(height: 10),
                   const Divider(),
                   const SizedBox(height: 10),
-                  const Text(
+                  const PdaText(
                     'COMMON TARGETS',
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Text(
+                  const PdaText(
                     '(ONLY NOTES UPDATED)',
                     style: TextStyle(
                       fontSize: 11,
@@ -97,14 +98,14 @@ class YataTargetsDistributionState extends State<YataTargetsDistribution> {
                   const SizedBox(height: 10),
                   const Divider(),
                   const SizedBox(height: 10),
-                  const Text(
+                  const PdaText(
                     'TARGETS ONLY IN TORN PDA',
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Text(
+                  const PdaText(
                     '(CAN BE EXPORTED)',
                     style: TextStyle(
                       fontSize: 11,
@@ -129,7 +130,7 @@ class YataTargetsDistributionState extends State<YataTargetsDistribution> {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
-      title: const Text('YATA targets', style: TextStyle(color: Colors.white)),
+      title: const PdaText('YATA targets', style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
@@ -144,7 +145,7 @@ class YataTargetsDistributionState extends State<YataTargetsDistribution> {
 
     if (widget.onlyYata.isEmpty) {
       itemList.add(
-        const Text(
+        const PdaText(
           "none",
           style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
         ),
@@ -168,7 +169,7 @@ class YataTargetsDistributionState extends State<YataTargetsDistribution> {
 
     if (widget.bothSides.isEmpty) {
       itemList.add(
-        const Text(
+        const PdaText(
           "none",
           style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
         ),
@@ -192,7 +193,7 @@ class YataTargetsDistributionState extends State<YataTargetsDistribution> {
 
     if (widget.onlyLocal.isEmpty) {
       itemList.add(
-        const Text(
+        const PdaText(
           "none",
           style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
         ),

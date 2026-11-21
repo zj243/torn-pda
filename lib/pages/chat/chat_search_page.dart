@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -66,8 +67,8 @@ class _ChatSearchPageState extends State<ChatSearchPage> {
           onChanged: _onChanged,
           style: const TextStyle(color: Colors.white),
           cursorColor: Colors.white,
-          decoration: const InputDecoration(
-            hintText: 'Search players and messages',
+          decoration: InputDecoration(
+            hintText: context.interfaceText('Search players and messages'),
             hintStyle: TextStyle(color: Colors.white70),
             border: InputBorder.none,
           ),
@@ -75,7 +76,7 @@ class _ChatSearchPageState extends State<ChatSearchPage> {
         actions: [
           if (_text.text.isNotEmpty)
             IconButton(
-              tooltip: 'Clear',
+              tooltip: context.interfaceText('Clear'),
               icon: const Icon(Icons.close_rounded),
               onPressed: () {
                 _text.clear();
@@ -131,7 +132,7 @@ class _ChatSearchPageState extends State<ChatSearchPage> {
             title: Text(user.name, maxLines: 1, overflow: TextOverflow.ellipsis),
             subtitle: Text(room.isDm ? 'Private chat' : 'Seen in ${room.name}', maxLines: 1),
             trailing: IconButton(
-              tooltip: 'Player actions',
+              tooltip: context.interfaceText('Player actions'),
               icon: const Icon(Icons.more_vert_rounded),
               onPressed: () => showChatPlayerActions(context, user),
             ),
@@ -180,7 +181,7 @@ class _ChatSearchPageState extends State<ChatSearchPage> {
                 padding: const EdgeInsets.only(left: 56),
                 child: TextButton(
                   onPressed: () => setState(() => _expanded.add(room.id)),
-                  child: Text('Show ${hits.length - _collapsed} more'),
+                  child: PdaText("Show {0} more", values: [hits.length - _collapsed]),
                 ),
               ),
             ),
@@ -207,7 +208,7 @@ class _ChatSearchPageState extends State<ChatSearchPage> {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
-              child: Text('Saved messages', style: Theme.of(context).textTheme.titleSmall),
+              child: PdaText('Saved messages', style: Theme.of(context).textTheme.titleSmall),
             ),
             for (final s in saved) _savedTile(chat, s),
           ],
@@ -225,7 +226,7 @@ class _ChatSearchPageState extends State<ChatSearchPage> {
       at: s.createdAt,
       onTap: () => widget.onOpen(s.roomId, messageId: s.messageId, at: s.createdAt),
       trailing: IconButton(
-        tooltip: 'Remove from saved',
+        tooltip: context.interfaceText('Remove from saved'),
         icon: const Icon(Icons.bookmark_remove_outlined),
         onPressed: () => NativeChat.prefs.removeSaved(s.messageId),
       ),

@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -73,7 +74,7 @@ class JobPointsDialogState extends State<JobPointsDialog> {
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Column(
                     children: <Widget>[
-                      const Text(
+                      const PdaText(
                         'JOB POINTS',
                         style: TextStyle(
                           fontSize: 12,
@@ -86,7 +87,7 @@ class JobPointsDialogState extends State<JobPointsDialog> {
                       _companyPoints(),
                       const Divider(),
                       TextButton(
-                        child: const Text(
+                        child: const PdaText(
                           "Close",
                           style: TextStyle(
                             fontSize: 13,
@@ -129,7 +130,7 @@ class JobPointsDialogState extends State<JobPointsDialog> {
 
   Widget _currentPoints() {
     if (widget.unemployed) {
-      return const Text(
+      return const PdaText(
         'You are unemployed!',
         style: TextStyle(
           fontWeight: FontWeight.bold,
@@ -150,8 +151,8 @@ class JobPointsDialogState extends State<JobPointsDialog> {
                 fontSize: 12,
               ),
             ),
-            Text(
-              '${widget.currentPoints} points',
+            PdaText(
+              "{0} points", values: [widget.currentPoints],
               style: const TextStyle(
                 fontSize: 12,
               ),
@@ -164,7 +165,7 @@ class JobPointsDialogState extends State<JobPointsDialog> {
 
   Widget _jopPoints() {
     if (widget.jobpoints!.jobs == null) {
-      return const Text(
+      return const PdaText(
         'No starter-job points found!',
         style: TextStyle(
           fontSize: 12,
@@ -174,38 +175,38 @@ class JobPointsDialogState extends State<JobPointsDialog> {
 
     return Column(
       children: [
-        Text(
-          'Army: ${widget.jobpoints!.jobs!.army ?? '0'}',
+        PdaText(
+          "Army: {0}", values: [widget.jobpoints!.jobs!.army ?? '0'],
           style: const TextStyle(
             fontSize: 12,
           ),
         ),
-        Text(
-          'Casino: ${widget.jobpoints!.jobs!.casino ?? '0'}',
+        PdaText(
+          "Casino: {0}", values: [widget.jobpoints!.jobs!.casino ?? '0'],
           style: const TextStyle(
             fontSize: 12,
           ),
         ),
-        Text(
-          'Education: ${widget.jobpoints!.jobs!.education ?? '0'}',
+        PdaText(
+          "Education: {0}", values: [widget.jobpoints!.jobs!.education ?? '0'],
           style: const TextStyle(
             fontSize: 12,
           ),
         ),
-        Text(
-          'Grocer: ${widget.jobpoints!.jobs!.grocer ?? '0'}',
+        PdaText(
+          "Grocer: {0}", values: [widget.jobpoints!.jobs!.grocer ?? '0'],
           style: const TextStyle(
             fontSize: 12,
           ),
         ),
-        Text(
-          'Law: ${widget.jobpoints!.jobs!.law ?? '0'}',
+        PdaText(
+          "Law: {0}", values: [widget.jobpoints!.jobs!.law ?? '0'],
           style: const TextStyle(
             fontSize: 12,
           ),
         ),
-        Text(
-          'Medical: ${widget.jobpoints!.jobs!.medical ?? '0'}',
+        PdaText(
+          "Medical: {0}", values: [widget.jobpoints!.jobs!.medical ?? '0'],
           style: const TextStyle(
             fontSize: 12,
           ),

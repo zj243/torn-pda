@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -44,7 +45,7 @@ class ChatColorPreview extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (!mine)
-              Text(
+              PdaText(
                 'Leslie',
                 style: theme.textTheme.labelLarge?.copyWith(
                   fontWeight: FontWeight.w700,
@@ -58,7 +59,7 @@ class ChatColorPreview extends StatelessWidget {
     );
     return Semantics(
       container: true,
-      label: 'Preview',
+      label: context.interfaceText('Preview'),
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.fromLTRB(10, 4, 10, 10),
@@ -140,9 +141,9 @@ class _ChatColorSettingsState extends State<ChatColorSettings> {
                 spacing: 4,
                 runSpacing: 4,
                 wheelDiameter: 180,
-                heading: Text('Color', style: theme.textTheme.titleSmall),
-                subheading: Text('Shade', style: theme.textTheme.titleSmall),
-                wheelSubheading: Text('Selected color and its shades', style: theme.textTheme.titleSmall),
+                heading: PdaText('Color', style: theme.textTheme.titleSmall),
+                subheading: PdaText('Shade', style: theme.textTheme.titleSmall),
+                wheelSubheading: PdaText('Selected color and its shades', style: theme.textTheme.titleSmall),
                 showColorCode: true,
                 colorCodeTextStyle: theme.textTheme.bodySmall,
                 copyPasteBehavior: const ColorPickerCopyPasteBehavior(longPressMenu: true),
@@ -157,7 +158,7 @@ class _ChatColorSettingsState extends State<ChatColorSettings> {
               ),
               Align(
                 alignment: Alignment.centerRight,
-                child: FilledButton.tonal(onPressed: () => Navigator.of(context).pop(), child: const Text('Done')),
+                child: FilledButton.tonal(onPressed: () => Navigator.of(context).pop(), child: const PdaText('Done')),
               ),
             ],
           ),
@@ -191,9 +192,9 @@ class _ChatColorSettingsState extends State<ChatColorSettings> {
               child: SegmentedButton<AppTheme>(
                 showSelectedIcon: false,
                 segments: const [
-                  ButtonSegment(value: AppTheme.light, label: Text('Light')),
-                  ButtonSegment(value: AppTheme.dark, label: Text('Dark')),
-                  ButtonSegment(value: AppTheme.extraDark, label: Text('Extra dark')),
+                  ButtonSegment(value: AppTheme.light, label: PdaText('Light')),
+                  ButtonSegment(value: AppTheme.dark, label: PdaText('Dark')),
+                  ButtonSegment(value: AppTheme.extraDark, label: PdaText('Extra dark')),
                 ],
                 selected: {_theme},
                 onSelectionChanged: (picked) => setState(() => _theme = picked.first),
@@ -204,7 +205,7 @@ class _ChatColorSettingsState extends State<ChatColorSettings> {
               child: ChatColorPreview(palette: palette),
             ),
             ExpansionTile(
-              title: const Text('Custom colors'),
+              title: const PdaText('Custom colors'),
               shape: const Border(),
               collapsedShape: const Border(),
               children: [
@@ -237,7 +238,7 @@ class _ChatColorSettingsState extends State<ChatColorSettings> {
                         ),
                         trailing: set
                             ? IconButton(
-                                tooltip: 'Reset ${_labels[slot]!.toLowerCase()}',
+                                tooltip: context.interfaceText("Reset {0}", [_labels[slot]!.toLowerCase()]),
                                 icon: const Icon(Icons.restart_alt_rounded),
                                 onPressed: () => _set(slot, null),
                               )
@@ -254,9 +255,8 @@ class _ChatColorSettingsState extends State<ChatColorSettings> {
                       liveRegion: true,
                       child: ListTile(
                         leading: Icon(Icons.warning_amber_rounded, color: theme.colorScheme.error),
-                        title: Text(
-                          '$label is hard to read (${ChatPlayerColor.contrast(bubble, text).toStringAsFixed(1)}:1, '
-                          'aim for 4.5:1)',
+                        title: PdaText(
+                          "{0} is hard to read ({1}:1, aim for 4.5:1)", values: [label, ChatPlayerColor.contrast(bubble, text).toStringAsFixed(1)],
                         ),
                         trailing: TextButton(
                           onPressed: () => _set(slot, ChatPlayerColor.blackOrWhite(bubble)),
@@ -267,7 +267,7 @@ class _ChatColorSettingsState extends State<ChatColorSettings> {
                 if (faint)
                   ListTile(
                     leading: Icon(Icons.warning_amber_rounded, color: theme.colorScheme.error),
-                    title: const Text('Dates and notices may be hard to read on this background'),
+                    title: const PdaText('Dates and notices may be hard to read on this background'),
                   ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
@@ -276,7 +276,7 @@ class _ChatColorSettingsState extends State<ChatColorSettings> {
                     child: TextButton.icon(
                       onPressed: custom.isEmpty ? null : () => prefs.setChatColors(_theme.name, const ChatColors()),
                       icon: const Icon(Icons.restart_alt_rounded),
-                      label: const Text('Reset'),
+                      label: const PdaText('Reset'),
                     ),
                   ),
                 ),

@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ class DiscreetInfoState extends State<DiscreetInfo> {
     }
 
     return AlertDialog(
-      title: const Text("Discreet notifications"),
+      title: const PdaText("Discreet notifications"),
       content: Scrollbar(
         controller: _scrollController,
         thumbVisibility: true,
@@ -60,7 +61,7 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                       style: const TextStyle(fontSize: 13),
                     ),
                     const SizedBox(height: 20),
-                    const Text(
+                    const PdaText(
                       "Examples notification titles and bodies if discreet notifications are enabled:",
                       style: TextStyle(fontSize: 13),
                     ),
@@ -71,15 +72,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                   children: [
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "Travel",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: T",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "(blank body)",
                           style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
                         ),
@@ -88,15 +89,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                     SizedBox(height: 20),
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "Flight departure",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: Scheduled",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "Body: Departure",
                           style: TextStyle(fontSize: 13),
                         ),
@@ -105,15 +106,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                     SizedBox(height: 20),
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "Energy",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: E",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "Body: Full",
                           style: TextStyle(fontSize: 13),
                         ),
@@ -122,15 +123,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                     SizedBox(height: 20),
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "Nerve",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: N",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "Body: Full",
                           style: TextStyle(fontSize: 13),
                         ),
@@ -139,15 +140,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                     SizedBox(height: 20),
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "Life",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: Lf",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "Body: Full",
                           style: TextStyle(fontSize: 13),
                         ),
@@ -156,15 +157,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                     SizedBox(height: 20),
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "Hospital admission",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: H",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "Body: Adm",
                           style: TextStyle(fontSize: 13),
                         ),
@@ -173,15 +174,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                     SizedBox(height: 20),
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "Hospital release (approaching)",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: H",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "Body: App",
                           style: TextStyle(fontSize: 13),
                         ),
@@ -190,15 +191,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                     SizedBox(height: 20),
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "Hospital release (out)",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: H",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "Body: Out",
                           style: TextStyle(fontSize: 13),
                         ),
@@ -207,15 +208,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                     SizedBox(height: 20),
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "Drug cooldown",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: D",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "Body: Exp",
                           style: TextStyle(fontSize: 13),
                         ),
@@ -224,15 +225,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                     SizedBox(height: 20),
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "Booster cooldown",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: B",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "Body: Exp",
                           style: TextStyle(fontSize: 13),
                         ),
@@ -241,15 +242,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                     SizedBox(height: 20),
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "Medical cooldown",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: Med",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "Body: Exp",
                           style: TextStyle(fontSize: 13),
                         ),
@@ -258,15 +259,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                     SizedBox(height: 20),
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "Race start",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: R",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "Body: Start",
                           style: TextStyle(fontSize: 13),
                         ),
@@ -275,15 +276,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                     SizedBox(height: 20),
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "Race ending",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: R",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "Body: End",
                           style: TextStyle(fontSize: 13),
                         ),
@@ -292,15 +293,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                     SizedBox(height: 20),
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "Message",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: M",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "Body: Manuito",
                           style: TextStyle(fontSize: 13),
                         ),
@@ -309,15 +310,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                     SizedBox(height: 20),
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "Event",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: Event",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "(blank body)",
                           style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
                         ),
@@ -326,15 +327,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                     SizedBox(height: 20),
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "Trade",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: Trade",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "(blank body)",
                           style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
                         )
@@ -343,15 +344,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                     SizedBox(height: 20),
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "Foreign stock",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: Stock",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "(blank body)",
                           style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
                         ),
@@ -360,15 +361,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                     SizedBox(height: 20),
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "Refills",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: Refills",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "(blank body)",
                           style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
                         ),
@@ -377,15 +378,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                     SizedBox(height: 20),
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "Retaliation",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: Retal",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "(blank body)",
                           style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
                         ),
@@ -394,15 +395,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                     SizedBox(height: 20),
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "Loot",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: L",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "Body: Duke - 4",
                           style: TextStyle(fontSize: 13),
                         ),
@@ -410,15 +411,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                     ),
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "Loot Rangers",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: LR",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "(blank body)",
                           style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
                         ),
@@ -427,15 +428,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                     SizedBox(height: 20),
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "Assist",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: Assist",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "Level 20 - 200 days old",
                           style: TextStyle(fontSize: 13),
                         ),
@@ -444,15 +445,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                     SizedBox(height: 20),
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "Stock market",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: Shares",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "(blank body)",
                           style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
                         ),
@@ -461,15 +462,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                     SizedBox(height: 20),
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "Ranked War",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: W",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "App",
                           style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
                         ),
@@ -478,15 +479,15 @@ class DiscreetInfoState extends State<DiscreetInfo> {
                     SizedBox(height: 20),
                     Column(
                       children: [
-                        Text(
+                        PdaText(
                           "War target notification",
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        PdaText(
                           "Title: WT",
                           style: TextStyle(fontSize: 13),
                         ),
-                        Text(
+                        PdaText(
                           "(blank body)",
                           style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
                         ),
@@ -502,7 +503,7 @@ class DiscreetInfoState extends State<DiscreetInfo> {
       ),
       actions: [
         TextButton(
-          child: const Text("Quiet!"),
+          child: const PdaText("Quiet!"),
           onPressed: () {
             Navigator.of(context).pop();
           },

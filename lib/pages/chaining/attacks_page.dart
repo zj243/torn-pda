@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 // Package imports:
@@ -33,7 +34,7 @@ class AttacksPageState extends State<AttacksPage> {
   late WebViewProvider _webViewProvider;
 
   Color? _filterTypeColor;
-  Text _filterText = const Text('');
+  Widget _filterText = const Text('');
 
   final _popupChoices = <AttackSort>[
     AttackSort(type: AttackSortType.levelDes),
@@ -96,9 +97,9 @@ class AttacksPageState extends State<AttacksPage> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: TextField(
                                       controller: _searchController,
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         isDense: true,
-                                        labelText: "Search",
+                                        labelText: context.interfaceText("Search"),
                                         prefixIcon: Icon(Icons.search),
                                         border: OutlineInputBorder(
                                           borderRadius: BorderRadius.all(
@@ -147,7 +148,7 @@ class AttacksPageState extends State<AttacksPage> {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
-      title: const Text('Attacks', style: TextStyle(color: Colors.white)),
+      title: const PdaText('Attacks', style: TextStyle(color: Colors.white)),
       leadingWidth: _webViewProvider.appCanOpenBrowser ? 88 : 50,
       leading: Row(
         children: [
@@ -178,7 +179,7 @@ class AttacksPageState extends State<AttacksPage> {
             _attacksProvider.initializeAttacks();
 
             BotToast.showText(
-              text: 'Updated with latest attacks!',
+              text: context.interfaceText('Updated with latest attacks!'),
               textStyle: const TextStyle(
                 fontSize: 14,
                 color: Colors.white,
@@ -201,7 +202,7 @@ class AttacksPageState extends State<AttacksPage> {
               });
 
               BotToast.showText(
-                text: 'Hiding people already added to the target list!',
+                text: context.interfaceText('Hiding people already added to the target list!'),
                 textStyle: const TextStyle(
                   fontSize: 14,
                   color: Colors.white,
@@ -217,7 +218,7 @@ class AttacksPageState extends State<AttacksPage> {
               });
 
               BotToast.showText(
-                text: 'Showing all recent attacks!',
+                text: context.interfaceText('Showing all recent attacks!'),
                 textStyle: const TextStyle(
                   fontSize: 14,
                   color: Colors.white,
@@ -283,10 +284,10 @@ class AttacksPageState extends State<AttacksPage> {
   void _changeFilterColorAndText() {
     if (_attacksProvider.currentTypeFilter == AttackTypeFilter.all) {
       _filterTypeColor = Colors.white;
-      _filterText = const Text('Showing all recent attacks and targets');
+      _filterText = const PdaText('Showing all recent attacks and targets');
     } else {
       _filterTypeColor = Colors.orange[200];
-      _filterText = Text(
+      _filterText = PdaText(
         'Filtering out existing targets',
         style: TextStyle(color: Colors.orange[400]),
       );

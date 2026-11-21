@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 import 'package:bot_toast/bot_toast.dart';
@@ -89,19 +90,19 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
                       child: Column(
                         children: <Widget>[
                           const SizedBox(height: 15),
-                          const Text("GENERAL SETTINGS", style: TextStyle(fontSize: 11)),
+                          const PdaText("GENERAL SETTINGS", style: TextStyle(fontSize: 11)),
                           _generalSettings(chainP),
                           const Divider(),
                           const SizedBox(height: 5),
-                          const Text("PANIC MODE", style: TextStyle(fontSize: 11)),
+                          const PdaText("PANIC MODE", style: TextStyle(fontSize: 11)),
                           _panicMode(chainP),
                           const Divider(),
                           const SizedBox(height: 5),
-                          const Text("API FAILURE", style: TextStyle(fontSize: 11)),
+                          const PdaText("API FAILURE", style: TextStyle(fontSize: 11)),
                           _apiFailure(chainP),
                           const Divider(),
                           const SizedBox(height: 5),
-                          const Text("ALERT LEVELS", style: TextStyle(fontSize: 11)),
+                          const PdaText("ALERT LEVELS", style: TextStyle(fontSize: 11)),
                           _greenLevel2(chainP),
                           const Padding(padding: EdgeInsets.symmetric(horizontal: 100), child: Divider()),
                           _orangeLevel1(chainP),
@@ -129,7 +130,7 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
-      title: const Text("Chain Watcher", style: TextStyle(color: Colors.white)),
+      title: const PdaText("Chain Watcher", style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
@@ -153,7 +154,7 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            const Text("Sound alerts"),
+            const PdaText("Sound alerts"),
             Switch(
               value: chainP.soundEnabled,
               onChanged: (value) {
@@ -167,7 +168,7 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            const Text("Vibration"),
+            const PdaText("Vibration"),
             Switch(
               value: chainP.vibrationEnabled,
               onChanged: (value) {
@@ -181,7 +182,7 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            const Text("Notification"),
+            const PdaText("Notification"),
             Switch(
               value: chainP.notificationsEnabled,
               onChanged: (value) {
@@ -204,7 +205,7 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
           children: <Widget>[
             Row(
               children: [
-                const Text("Enable Panic Mode"),
+                const PdaText("Enable Panic Mode"),
                 IconButton(
                   icon: const Icon(Icons.info_outline, size: 20),
                   onPressed: () {
@@ -259,7 +260,7 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
                         color: _themeProvider!.mainText,
                       ),
                       const SizedBox(width: 10),
-                      const Text("Targets"),
+                      const PdaText("Targets"),
                     ],
                   ),
                   IconButton(
@@ -280,7 +281,7 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
                 child: Row(
                   children: [
                     Flexible(
-                      child: Text(
+                      child: PdaText(
                         "You can also add targets to this list by swiping a target's card left in the Targets or "
                         "War sections.",
                         style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
@@ -303,7 +304,7 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
           children: <Widget>[
             Row(
               children: [
-                const Text("API failure check"),
+                const PdaText("API failure check"),
                 const SizedBox(width: 10),
                 GestureDetector(
                   child: Icon(
@@ -332,7 +333,7 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
           child: Row(
             children: [
               Flexible(
-                child: Text(
+                child: PdaText(
                   "In case that Torn API fails and the watcher is active, an alert will trigger",
                   style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                 ),
@@ -346,7 +347,7 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("Trigger panic attack"),
+                  const PdaText("Trigger panic attack"),
                   Switch(
                     value: chainP.apiFailurePanic,
                     onChanged: (value) {
@@ -362,7 +363,7 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
                 child: Row(
                   children: [
                     Flexible(
-                      child: Text(
+                      child: PdaText(
                         "If panic mode is active, dictates if an API failure should trigger an inmediate attack",
                         style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic),
                       ),
@@ -382,7 +383,7 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Text("Green pulse", style: TextStyle(color: chainP.green2Enabled ? _themeProvider!.mainText : Colors.grey)),
+            PdaText("Green pulse", style: TextStyle(color: chainP.green2Enabled ? _themeProvider!.mainText : Colors.grey)),
             Switch(
               value: chainP.green2Enabled,
               onChanged: (value) {
@@ -442,7 +443,7 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
               children: <Widget>[
                 Row(
                   children: [
-                    Text(
+                    PdaText(
                       "Orange pulse + ",
                       style: TextStyle(color: chainP.orange1Enabled ? _themeProvider!.mainText : Colors.grey),
                     ),
@@ -462,7 +463,7 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
                       " + ",
                       style: TextStyle(color: chainP.orange1Enabled ? _themeProvider!.mainText : Colors.grey),
                     ),
-                    Text(
+                    PdaText(
                       " caution ",
                       style: TextStyle(
                         color: chainP.orange1Enabled && chainP.soundEnabled ? _themeProvider!.mainText : Colors.grey,
@@ -544,7 +545,7 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
           children: <Widget>[
             Row(
               children: [
-                Text(
+                PdaText(
                   "Orange pulse + ",
                   style: TextStyle(color: chainP.orange2Enabled ? _themeProvider!.mainText : Colors.grey),
                 ),
@@ -561,7 +562,7 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
                   },
                 ),
                 Text(" + ", style: TextStyle(color: chainP.orange2Enabled ? _themeProvider!.mainText : Colors.grey)),
-                Text(
+                PdaText(
                   " warning ",
                   style: TextStyle(
                     color: chainP.orange2Enabled && chainP.soundEnabled ? _themeProvider!.mainText : Colors.grey,
@@ -641,7 +642,7 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
           children: <Widget>[
             Row(
               children: [
-                Text(
+                PdaText(
                   "Red pulse + ",
                   style: TextStyle(color: chainP.red1Enabled ? _themeProvider!.mainText : Colors.grey),
                 ),
@@ -656,7 +657,7 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
                   },
                 ),
                 Text(" + ", style: TextStyle(color: chainP.red1Enabled ? _themeProvider!.mainText : Colors.grey)),
-                Text(
+                PdaText(
                   " caution ",
                   style: TextStyle(
                     color: chainP.red1Enabled && chainP.soundEnabled ? _themeProvider!.mainText : Colors.grey,
@@ -730,7 +731,7 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
           children: <Widget>[
             Row(
               children: [
-                Text(
+                PdaText(
                   "Red pulse + ",
                   style: TextStyle(color: chainP.red2Enabled ? _themeProvider!.mainText : Colors.grey),
                 ),
@@ -745,7 +746,7 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
                   },
                 ),
                 Text(" + ", style: TextStyle(color: chainP.red2Enabled ? _themeProvider!.mainText : Colors.grey)),
-                Text(
+                PdaText(
                   " warning ",
                   style: TextStyle(
                     color: chainP.red2Enabled && chainP.soundEnabled ? _themeProvider!.mainText : Colors.grey,
@@ -828,7 +829,7 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
   void _errorReset(ChainStatusController chainP) {
     chainP.resetAllDefcon();
     BotToast.showText(
-      text: "Oops! Error encountered, all warning levels have been reset!",
+      text: context.interfaceText("Oops! Error encountered, all warning levels have been reset!"),
       textStyle: const TextStyle(fontSize: 13, color: Colors.white),
       contentColor: Colors.red[800]!,
       duration: const Duration(seconds: 5),
@@ -860,11 +861,11 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
                       mainAxisSize: MainAxisSize.min, // To make the card compact
                       children: <Widget>[
                         Flexible(
-                          child: Text("Reset", style: TextStyle(fontSize: 13, color: _themeProvider!.mainText)),
+                          child: PdaText("Reset", style: TextStyle(fontSize: 13, color: _themeProvider!.mainText)),
                         ),
                         const SizedBox(height: 8),
                         Flexible(
-                          child: Text(
+                          child: PdaText(
                             "This will reactivate and reset all warning levels to their default values.",
                             style: TextStyle(fontSize: 12, color: _themeProvider!.mainText),
                           ),
@@ -874,14 +875,14 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             TextButton(
-                              child: const Text("Reset"),
+                              child: const PdaText("Reset"),
                               onPressed: () {
                                 chainP.resetAllDefcon();
                                 Navigator.of(context).pop();
                               },
                             ),
                             TextButton(
-                              child: const Text("Close"),
+                              child: const PdaText("Close"),
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
@@ -937,11 +938,11 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
                       mainAxisSize: MainAxisSize.min, // To make the card compact
                       children: <Widget>[
                         Flexible(
-                          child: Text("Panic Mode", style: TextStyle(fontSize: 13, color: _themeProvider!.mainText)),
+                          child: PdaText("Panic Mode", style: TextStyle(fontSize: 13, color: _themeProvider!.mainText)),
                         ),
                         const SizedBox(height: 8),
                         Flexible(
-                          child: Text(
+                          child: PdaText(
                             "By enabling Panic Mode, a new 'P' icon will appear in the chain widget, which in turn will "
                             "allow you to toggle the Panic Mode on/off when you desire.\n\n"
                             "When Panic Mode is active, regardless of your alerts' configuration below, only the panic "
@@ -960,7 +961,7 @@ class ChainWidgetOptionsState extends State<ChainWidgetOptions> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             TextButton(
-                              child: const Text("Panic!"),
+                              child: const PdaText("Panic!"),
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
@@ -1034,7 +1035,7 @@ class AddChainTargetDialogState extends State<AddChainTargetDialog> {
               child: Column(
                 mainAxisSize: MainAxisSize.min, // To make the card compact
                 children: <Widget>[
-                  const Text("Panic Mode Targets", style: TextStyle(fontSize: 15)),
+                  const PdaText("Panic Mode Targets", style: TextStyle(fontSize: 15)),
                   const SizedBox(height: 20),
                   Row(
                     children: [
@@ -1046,11 +1047,11 @@ class AddChainTargetDialogState extends State<AddChainTargetDialog> {
                           minLines: 1,
                           maxLines: 2,
                           keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             isDense: true,
                             counterText: "",
                             border: OutlineInputBorder(),
-                            labelText: 'Insert user ID',
+                            labelText: context.interfaceText('Insert user ID'),
                           ),
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -1081,7 +1082,7 @@ class AddChainTargetDialogState extends State<AddChainTargetDialog> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       TextButton(
-                        child: const Text("Add"),
+                        child: const PdaText("Add"),
                         onPressed: () async {
                           if (_addFormKey.currentState!.validate()) {
                             final FocusScopeNode currentFocus = FocusScope.of(context);
@@ -1124,7 +1125,7 @@ class AddChainTargetDialogState extends State<AddChainTargetDialog> {
                         },
                       ),
                       TextButton(
-                        child: const Text("Close"),
+                        child: const PdaText("Close"),
                         onPressed: () {
                           Navigator.of(context).pop();
                           _addIdController.text = '';

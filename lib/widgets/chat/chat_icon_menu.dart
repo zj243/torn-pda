@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:torn_pda/pages/chat/chat_settings_page.dart';
@@ -86,7 +87,7 @@ class ChatIconButton extends StatelessWidget {
                   ? 'open the full chat'
                   : (NativeChat.bigWindowShown ? 'close the chat window' : 'open the chat window')),
         onLongPress: () => _showChatIconMenu(context, this),
-        onLongPressHint: 'open the chat menu',
+        onLongPressHint: context.interfaceText('open the chat menu'),
         customSemanticsActions: {
           CustomSemanticsAction(
             label: hiddenInTab ? 'Show Torn\'s chat in this tab' : 'Hide Torn\'s chat in this tab',
@@ -220,7 +221,7 @@ class ChatLaunchMenu extends StatelessWidget {
             ListTile(
               dense: dense,
               leading: const Icon(Icons.web_asset_rounded),
-              title: const Text('Window'),
+              title: const PdaText('Window'),
               onTap: () {
                 onPick();
                 StatsController.chat.count('open_big_window');
@@ -230,7 +231,7 @@ class ChatLaunchMenu extends StatelessWidget {
             ListTile(
               dense: dense,
               leading: const Icon(Icons.open_in_new_rounded),
-              title: const Text('Full chat'),
+              title: const PdaText('Full chat'),
               onTap: () {
                 onPick();
                 NativeChat.open(navigator);
@@ -240,7 +241,7 @@ class ChatLaunchMenu extends StatelessWidget {
           ListTile(
             dense: dense,
             leading: const Icon(Icons.tune_rounded),
-            title: const Text('Chat settings'),
+            title: const PdaText('Chat settings'),
             onTap: () {
               onPick();
               NativeChat.minimizeBigWindow();
@@ -269,15 +270,15 @@ Future<void> _showChatIconMenu(BuildContext context, ChatIconButton icon) {
             if (!inApp)
               const SwitchListTile(
                 secondary: Icon(Icons.forum_rounded),
-                title: Text('In-app chat'),
-                subtitle: Text('Off, only Torn\'s own chat is used'),
+                title: PdaText('In-app chat'),
+                subtitle: PdaText('Off, only Torn\'s own chat is used'),
                 value: false,
                 onChanged: NativeChat.setEnabled,
               ),
             const Divider(),
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-              child: Text('Torn\'s chat', style: theme.textTheme.titleSmall),
+              child: PdaText('Torn\'s chat', style: theme.textTheme.titleSmall),
             ),
             ListTile(
               leading: Icon(icon.hiddenInTab ? Icons.visibility_rounded : Icons.visibility_off_rounded),
@@ -290,7 +291,7 @@ Future<void> _showChatIconMenu(BuildContext context, ChatIconButton icon) {
             ListTile(
               leading: Icon(icon.hiddenEverywhere ? Icons.layers_rounded : Icons.layers_clear_rounded),
               title: Text(icon.hiddenEverywhere ? 'Show chat in every tab' : 'Hide chat in every tab'),
-              subtitle: const Text('Torn\'s chat is not loaded at all while hidden'),
+              subtitle: const PdaText('Torn\'s chat is not loaded at all while hidden'),
               onTap: () {
                 Navigator.pop(context);
                 icon.onHideEverywhere(!icon.hiddenEverywhere);
@@ -330,7 +331,7 @@ class _GestureLegend extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Chat icon gestures', style: theme.textTheme.titleSmall),
+          PdaText('Chat icon gestures', style: theme.textTheme.titleSmall),
           const SizedBox(height: 6),
           for (final (gesture, action) in gestures)
             Padding(

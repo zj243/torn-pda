@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:math';
 
@@ -395,7 +396,7 @@ class RetalCardState extends State<RetalCard> {
 
     if (respect == -1) {
       respectResult = TextSpan(
-        text: 'unk',
+        text: context.interfaceText('unk'),
         style: TextStyle(
           color: _themeProvider.mainText,
           fontSize: 12,
@@ -404,15 +405,15 @@ class RetalCardState extends State<RetalCard> {
     } else if (respect == 0) {
       if (_retal!.userWonOrDefended!) {
         respectResult = TextSpan(
-          text: '0 (def)',
+          text: context.interfaceText('0 (def)'),
           style: TextStyle(
             color: _themeProvider.mainText,
             fontSize: 12,
           ),
         );
       } else {
-        respectResult = const TextSpan(
-          text: 'Lost',
+        respectResult = TextSpan(
+          text: context.interfaceText('Lost'),
           style: TextStyle(
             color: Colors.red,
             fontWeight: FontWeight.bold,
@@ -433,7 +434,7 @@ class RetalCardState extends State<RetalCard> {
 
     if (fairFight == -1) {
       fairFightResult = TextSpan(
-        text: 'unk',
+        text: context.interfaceText('unk'),
         style: TextStyle(
           color: _themeProvider.mainText,
           fontSize: 12,
@@ -484,7 +485,7 @@ class RetalCardState extends State<RetalCard> {
                 text: TextSpan(
                   children: <TextSpan>[
                     TextSpan(
-                      text: ' / FF: ',
+                      text: context.interfaceText(' / FF: '),
                       style: TextStyle(
                         color: _themeProvider.mainText,
                         fontSize: 12,
@@ -594,7 +595,7 @@ class RetalCardState extends State<RetalCard> {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        const Text(
+        const PdaText(
           'Life ',
           style: TextStyle(fontSize: 13),
         ),
@@ -837,7 +838,7 @@ class RetalCardState extends State<RetalCard> {
                   ),
                   const SizedBox(width: 3),
                   Tooltip(
-                    message: "Spy is $ageMonths month${ageMonths == 1 ? '' : 's'} old",
+                    message: context.interfaceText("Spy is {0} month{1} old", [ageMonths, ageMonths == 1 ? '' : 's']),
                     child: Icon(Icons.history, size: 14, color: ffsColor),
                   ),
                   const SizedBox(width: 3),
@@ -1069,7 +1070,7 @@ class RetalCardState extends State<RetalCard> {
             ],
           );
         }
-        return const Text(
+        return const PdaText(
           "unk stats",
           style: TextStyle(
             fontSize: 12,
@@ -1205,7 +1206,7 @@ class RetalCardState extends State<RetalCard> {
           ],
         );
       }
-      return const Text(
+      return const PdaText(
         "unk stats",
         style: TextStyle(
           fontSize: 12,
@@ -1304,7 +1305,7 @@ class RetalCardState extends State<RetalCard> {
         else
           const Padding(
             padding: EdgeInsets.only(left: 2),
-            child: Text(
+            child: PdaText(
               "Online",
               style: TextStyle(
                 fontSize: 11,

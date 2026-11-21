@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -135,7 +136,7 @@ class ShareAttackDialogState extends State<ShareAttackDialog> {
       padding: const EdgeInsets.symmetric(vertical: 4),
     );
     return AlertDialog(
-      title: const Text('Share attack details'),
+      title: const PdaText('Share attack details'),
       backgroundColor: _themeProvider.canvas,
       content: _isLoading
           ? const Column(
@@ -154,19 +155,19 @@ class ShareAttackDialogState extends State<ShareAttackDialog> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  const PdaText(
                     'Select what to include in the message:',
                     style: TextStyle(fontStyle: FontStyle.italic, fontSize: 12),
                   ),
                   const SizedBox(height: 16),
                   const Divider(),
-                  Text(
-                    'Target: ${widget.member.name} [${widget.member.memberId}]',
+                  PdaText(
+                    "Target: {0} [{1}]", values: [widget.member.name, widget.member.memberId],
                     style: const TextStyle(fontSize: 14),
                   ),
                   const SizedBox(height: 16),
                   if ((_estStats.isEmpty || _estStats == "unk") && _spiedText == null && _ffScouterDetails == null)
-                    Text(
+                    PdaText(
                       "There's no estimated stats, nor spied stats, nor FFScouter stats available. "
                       "You will only be able to share the player name, ID and attack URL.",
                       style: TextStyle(
@@ -178,7 +179,7 @@ class ShareAttackDialogState extends State<ShareAttackDialog> {
                   if (_estStats.isEmpty && (_spiedText != null || _ffScouterDetails != null))
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8),
-                      child: Text(
+                      child: PdaText(
                         "Estimated stats not yet calculated. Perform a full update on this target to obtain them.",
                         style: TextStyle(
                           fontSize: 12,
@@ -195,8 +196,8 @@ class ShareAttackDialogState extends State<ShareAttackDialog> {
                             color: Colors.grey[200],
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'Estimated: $_estStats',
+                              child: PdaText(
+                                "Estimated: {0}", values: [_estStats],
                                 style: const TextStyle(fontSize: 14, color: Colors.black),
                               ),
                             ),
@@ -278,7 +279,7 @@ class ShareAttackDialogState extends State<ShareAttackDialog> {
                       ],
                     ),
                   const SizedBox(height: 16),
-                  const Text(
+                  const PdaText(
                     '+ Attack URL',
                     style: TextStyle(fontSize: 14),
                   ),
@@ -293,7 +294,7 @@ class ShareAttackDialogState extends State<ShareAttackDialog> {
           children: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Cancel'),
+              child: const PdaText('Cancel'),
             ),
             Flexible(
               child: Wrap(

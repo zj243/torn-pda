@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
@@ -127,7 +128,7 @@ class _WarMemberNoteSection extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 5),
-                  const Text('Notes: ', style: TextStyle(fontSize: 12)),
+                  const PdaText('Notes: ', style: TextStyle(fontSize: 12)),
                   if (shown != null && fits)
                     Flexible(
                       child: Text(shown.text, style: style, maxLines: 1, overflow: TextOverflow.ellipsis),
@@ -502,18 +503,18 @@ class WarCardState extends State<WarCard> {
 
     if (respect == -1) {
       respectResult = TextSpan(
-        text: 'unk',
+        text: context.interfaceText('unk'),
         style: TextStyle(color: _themeProvider.mainText, fontSize: 12),
       );
     } else if (respect == 0) {
       if (_member.userWonOrDefended!) {
         respectResult = TextSpan(
-          text: '0 (def)',
+          text: context.interfaceText('0 (def)'),
           style: TextStyle(color: _themeProvider.mainText, fontSize: 12),
         );
       } else {
-        respectResult = const TextSpan(
-          text: 'Lost',
+        respectResult = TextSpan(
+          text: context.interfaceText('Lost'),
           style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 12),
         );
       }
@@ -526,7 +527,7 @@ class WarCardState extends State<WarCard> {
 
     if (fairFight == -1) {
       fairFightResult = TextSpan(
-        text: 'unk',
+        text: context.interfaceText('unk'),
         style: TextStyle(color: _themeProvider.mainText, fontSize: 12),
       );
     } else {
@@ -567,7 +568,7 @@ class WarCardState extends State<WarCard> {
                 text: TextSpan(
                   children: <TextSpan>[
                     TextSpan(
-                      text: ' / FF: ',
+                      text: context.interfaceText(' / FF: '),
                       style: TextStyle(color: _themeProvider.mainText, fontSize: 12),
                     ),
                     fairFightResult,
@@ -735,7 +736,7 @@ class WarCardState extends State<WarCard> {
       }
       return Row(
         children: [
-          const Text("unk stats", style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic)),
+          const PdaText("unk stats", style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic)),
           // If stats are not available, show a refresh button to get the user profile and be able to perform the
           // stats comparison and then give option to open the stats dialog
           const SizedBox(width: 8),
@@ -859,7 +860,7 @@ class WarCardState extends State<WarCard> {
                   Text("~${ffsCheck.displayText}", style: TextStyle(fontSize: 11, color: ffsColor)),
                   const SizedBox(width: 3),
                   Tooltip(
-                    message: "Spy is $ageMonths month${ageMonths == 1 ? '' : 's'} old",
+                    message: context.interfaceText("Spy is {0} month{1} old", [ageMonths, ageMonths == 1 ? '' : 's']),
                     child: Icon(Icons.history, size: 14, color: ffsColor),
                   ),
                   const SizedBox(width: 3),
@@ -1133,7 +1134,7 @@ class WarCardState extends State<WarCard> {
           ],
         );
       }
-      return const Text("unk stats", style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic));
+      return const PdaText("unk stats", style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic));
     }
   }
 
@@ -1336,7 +1337,7 @@ class CombinedHealthBarsState extends State<CombinedHealthBars> {
                 currentPending.removeWhere((element) => element.payload!.contains("300-${widget.member.memberId}"));
                 widget.warController.pendingNotifications = List<PendingNotificationRequest>.from(currentPending);
                 BotToast.showText(
-                  text: "Notification cancelled",
+                  text: context.interfaceText("Notification cancelled"),
                   textStyle: const TextStyle(fontSize: 14, color: Colors.white),
                   contentColor: Colors.blue,
                   duration: const Duration(seconds: 1),

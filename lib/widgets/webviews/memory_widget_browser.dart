@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -57,7 +58,7 @@ class MemoryWidgetBrowserState extends State<MemoryWidgetBrowser> {
     if (_hasError) {
       return const Padding(
         padding: EdgeInsets.symmetric(horizontal: 8.0),
-        child: Text('MemErr', style: TextStyle(fontSize: 12, color: Colors.red)),
+        child: PdaText('MemErr', style: TextStyle(fontSize: 12, color: Colors.red)),
       );
     }
     if (_appMem == null || _devMem == null) {

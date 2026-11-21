@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/models/chat/chat_away.dart';
 
@@ -21,7 +22,7 @@ class ChatAwayCard extends StatelessWidget {
     final dark = theme.brightness == Brightness.dark;
     return Semantics(
       container: true,
-      label: 'While you were away, ${away.totalLabel} in ${ChatAway.span(away.away)}',
+      label: context.interfaceText("While you were away, {0} in {1}", [away.totalLabel, ChatAway.span(away.away)]),
       child: Container(
         margin: const EdgeInsets.fromLTRB(12, 8, 12, 4),
         padding: const EdgeInsets.all(12),
@@ -38,7 +39,7 @@ class ChatAwayCard extends StatelessWidget {
                 Icon(Icons.history_rounded, size: 18, color: scheme.primary),
                 const SizedBox(width: 8),
                 Expanded(
-                  child: Text(
+                  child: PdaText(
                     'While you were away',
                     style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700),
                   ),
@@ -46,8 +47,8 @@ class ChatAwayCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 2),
-            Text(
-              '${away.totalLabel} in ${ChatAway.span(away.away)}',
+            PdaText(
+              "{0} in {1}", values: [away.totalLabel, ChatAway.span(away.away)],
               style: theme.textTheme.bodyMedium?.copyWith(color: scheme.onSurfaceVariant),
             ),
             const SizedBox(height: 8),
@@ -59,7 +60,7 @@ class ChatAwayCard extends StatelessWidget {
                   Semantics(
                     button: true,
                     excludeSemantics: true,
-                    label: '${ChatAway.chipLabel(kind, away.counts[kind]!)}, jump to the first',
+                    label: context.interfaceText("{0}, jump to the first", [ChatAway.chipLabel(kind, away.counts[kind]!)]),
                     onTap: () => onJump(away.firsts[kind]!),
                     child: Material(
                       color: _tone(kind).withValues(alpha: dark ? 0.24 : 0.18),
@@ -89,7 +90,7 @@ class ChatAwayCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            Text(
+            PdaText(
               'Tap one to jump to it. Only you see this',
               style: theme.textTheme.labelSmall?.copyWith(color: scheme.onSurfaceVariant),
             ),

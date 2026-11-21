@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -122,15 +123,15 @@ class _TargetsSortSheetState extends State<TargetsSortSheet> with SingleTickerPr
         padding: const EdgeInsets.all(16),
         children: [
           if (favorites.isNotEmpty) ...[
-            const Text('Favorites', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            const PdaText('Favorites', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             const SizedBox(height: 10),
             ...favorites.map((type) => _buildSortTile(type, provider, themeProvider)),
             const Divider(),
             const SizedBox(height: 10),
-            const Text('All sort criteria', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            const PdaText('All sort criteria', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             const SizedBox(height: 10),
           ] else ...[
-            const Text('Main sort criteria', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            const PdaText('Main sort criteria', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             const SizedBox(height: 10),
           ],
           ...others.map((type) => _buildSortTile(type, provider, themeProvider)),
@@ -188,8 +189,8 @@ class _TargetsSortSheetState extends State<TargetsSortSheet> with SingleTickerPr
             Material(
               type: MaterialType.transparency,
               child: SwitchListTile(
-                title: const Text("Show non-hospital at top", style: TextStyle(fontSize: 14)),
-                subtitle: const Text("Okay targets appear first when sorting by hospital.",
+                title: const PdaText("Show non-hospital at top", style: TextStyle(fontSize: 14)),
+                subtitle: const PdaText("Okay targets appear first when sorting by hospital.",
                     style: TextStyle(fontSize: 12, color: Colors.grey)),
                 value: provider.hospitalOkayAtTop,
                 onChanged: (val) {
@@ -205,7 +206,7 @@ class _TargetsSortSheetState extends State<TargetsSortSheet> with SingleTickerPr
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text("Secondary sort for non-hospital", style: TextStyle(fontSize: 12)),
+                    const PdaText("Secondary sort for non-hospital", style: TextStyle(fontSize: 12)),
                     const SizedBox(height: 6),
                     DropdownButton<TargetSortType>(
                       value: provider.secondarySortForOkay,
@@ -227,7 +228,7 @@ class _TargetsSortSheetState extends State<TargetsSortSheet> with SingleTickerPr
                         Icon(Icons.info_outline, size: 12, color: Colors.grey[600]),
                         const SizedBox(width: 4),
                         Expanded(
-                          child: Text(
+                          child: PdaText(
                             "Used to sort targets that are NOT in hospital when 'Okay at top' is active.",
                             style: TextStyle(fontSize: 10, color: Colors.grey[600]),
                           ),
@@ -271,8 +272,8 @@ class _TargetsSortSheetState extends State<TargetsSortSheet> with SingleTickerPr
             Material(
               type: MaterialType.transparency,
               child: SwitchListTile(
-                title: const Text('Enable Filters', style: TextStyle(fontWeight: FontWeight.bold)),
-                subtitle: const Text('Only show targets matching these criteria'),
+                title: const PdaText('Enable Filters', style: TextStyle(fontWeight: FontWeight.bold)),
+                subtitle: const PdaText('Only show targets matching these criteria'),
                 value: local.enabled,
                 onChanged: (val) {
                   setStateSB(() {
@@ -287,7 +288,7 @@ class _TargetsSortSheetState extends State<TargetsSortSheet> with SingleTickerPr
               const Padding(
                 padding: EdgeInsets.all(20.0),
                 child: Center(
-                  child: Text(
+                  child: PdaText(
                     'Filters are disabled.\nAll targets will be shown.',
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.grey),
@@ -295,8 +296,8 @@ class _TargetsSortSheetState extends State<TargetsSortSheet> with SingleTickerPr
                 ),
               )
             else ...[
-              const Text('Range Filters', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-              Text('Filter targets based on specific ranges.', style: TextStyle(color: Colors.grey[600], fontSize: 12)),
+              const PdaText('Range Filters', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+              PdaText('Filter targets based on specific ranges.', style: TextStyle(color: Colors.grey[600], fontSize: 12)),
               const SizedBox(height: 20),
               _rangeSlider(
                 context,

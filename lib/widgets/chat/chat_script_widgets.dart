@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:torn_pda/models/chat/chat_links.dart';
@@ -44,7 +45,7 @@ class ChatScriptCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(
+                          PdaText(
                             'USERSCRIPT',
                             style: theme.textTheme.labelSmall?.copyWith(
                               color: color.withValues(alpha: 0.65),
@@ -58,8 +59,8 @@ class ChatScriptCard extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             style: theme.textTheme.bodyMedium?.copyWith(color: color, fontWeight: FontWeight.w600),
                           ),
-                          Text(
-                            'From ${script.host}',
+                          PdaText(
+                            "From {0}", values: [script.host],
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: theme.textTheme.bodyMedium?.copyWith(color: color, fontWeight: FontWeight.w700),
@@ -78,7 +79,7 @@ class ChatScriptCard extends StatelessWidget {
                         const Icon(Icons.warning_amber_rounded, size: 18, color: Colors.orange),
                         const SizedBox(width: 6),
                         Expanded(
-                          child: Text(
+                          child: PdaText(
                             'Scripts can read your account. Only install from people you trust',
                             style: theme.textTheme.bodySmall?.copyWith(
                               color: Colors.orange,
@@ -98,7 +99,7 @@ class ChatScriptCard extends StatelessWidget {
                           children: [
                             Icon(Icons.check_circle_outline_rounded, size: 18, color: color.withValues(alpha: 0.8)),
                             const SizedBox(width: 4),
-                            Text('Installed', style: theme.textTheme.bodyMedium?.copyWith(color: color)),
+                            PdaText('Installed', style: theme.textTheme.bodyMedium?.copyWith(color: color)),
                           ],
                         )
                       : FilledButton.tonal(
@@ -111,7 +112,7 @@ class ChatScriptCard extends StatelessWidget {
                               defaultPage: 1,
                             ),
                           ),
-                          child: const Text('Install in PDA'),
+                          child: const PdaText('Install in PDA'),
                         ),
                 ),
               ],

@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -64,7 +65,7 @@ class WebviewShortcutsDialogState extends State<WebviewShortcutsDialog> {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      PdaText(
                         'No shortcuts configured, add some!',
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -73,7 +74,7 @@ class WebviewShortcutsDialogState extends State<WebviewShortcutsDialog> {
                           fontSize: 13,
                         ),
                       ),
-                      Text(
+                      PdaText(
                         'Tap the icon to configure',
                         style: TextStyle(
                           color: Colors.orange[900],
@@ -109,7 +110,7 @@ class WebviewShortcutsDialogState extends State<WebviewShortcutsDialog> {
               children: [
                 const Padding(
                   padding: EdgeInsets.only(left: 5.0),
-                  child: Text(
+                  child: PdaText(
                     "TAP: load in current tab\nLONG PRESS: open a new tab",
                     style: TextStyle(
                       fontSize: 10,
@@ -133,7 +134,7 @@ class WebviewShortcutsDialogState extends State<WebviewShortcutsDialog> {
             ),
       actions: [
         TextButton(
-          child: const Text("Close"),
+          child: const PdaText("Close"),
           onPressed: () {
             Navigator.of(context).pop();
           },

@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:animations/animations.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +78,7 @@ class _TargetsSyncDialogState extends State<TargetsSyncDialog> {
             child: const Icon(Icons.sync_alt, size: 20),
           ),
           const SizedBox(width: 12),
-          Text(
+          PdaText(
             'Sync targets',
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: theme.mainText),
           ),
@@ -163,7 +164,7 @@ class _TargetsSyncDialogState extends State<TargetsSyncDialog> {
           alignment: Alignment.centerRight,
           child: TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Close'),
+            child: const PdaText('Close'),
           ),
         ),
       ],
@@ -176,15 +177,15 @@ class _TargetsSyncDialogState extends State<TargetsSyncDialog> {
         key: const ValueKey('torn-loading'),
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('Importing from Torn...', style: TextStyle(fontSize: 13, color: theme.mainText)),
+          PdaText('Importing from Torn...', style: TextStyle(fontSize: 13, color: theme.mainText)),
           const SizedBox(height: 12),
           const CircularProgressIndicator(),
           const SizedBox(height: 8),
-          Text('Fetched $_fetched targets', style: const TextStyle(fontSize: 12)),
+          PdaText("Fetched {0} targets", values: [_fetched], style: const TextStyle(fontSize: 12)),
           const SizedBox(height: 8),
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cancel'),
+            child: const PdaText('Cancel'),
           ),
         ],
       );
@@ -195,13 +196,13 @@ class _TargetsSyncDialogState extends State<TargetsSyncDialog> {
         key: const ValueKey('torn-success'),
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('Import complete', style: TextStyle(fontSize: 13, color: theme.mainText)),
+          PdaText('Import complete', style: TextStyle(fontSize: 13, color: theme.mainText)),
           const SizedBox(height: 8),
-          Text('Added ${_result!.imported} targets from Torn.', style: const TextStyle(fontSize: 12)),
+          PdaText("Added {0} targets from Torn.", values: [_result!.imported], style: const TextStyle(fontSize: 12)),
           const SizedBox(height: 12),
           TextButton(
             onPressed: () => Navigator.of(context).pop(TargetsSyncAction.tornImported),
-            child: const Text('Done'),
+            child: const PdaText('Done'),
           ),
         ],
       );
@@ -211,13 +212,13 @@ class _TargetsSyncDialogState extends State<TargetsSyncDialog> {
       key: const ValueKey('torn-error'),
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text('Import failed', style: TextStyle(fontSize: 13, color: theme.mainText)),
+        PdaText('Import failed', style: TextStyle(fontSize: 13, color: theme.mainText)),
         const SizedBox(height: 8),
         Text(_error ?? 'Unknown error', style: const TextStyle(fontSize: 12)),
         const SizedBox(height: 12),
         TextButton(
           onPressed: () => Navigator.of(context).pop(TargetsSyncAction.tornFailed),
-          child: const Text('Close'),
+          child: const PdaText('Close'),
         ),
       ],
     );
@@ -229,13 +230,13 @@ class _TargetsSyncDialogState extends State<TargetsSyncDialog> {
         key: const ValueKey('yata-loading'),
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('Connecting to YATA...', style: TextStyle(fontSize: 13, color: theme.mainText)),
+          PdaText('Connecting to YATA...', style: TextStyle(fontSize: 13, color: theme.mainText)),
           const SizedBox(height: 12),
           const CircularProgressIndicator(),
           const SizedBox(height: 8),
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cancel'),
+            child: const PdaText('Cancel'),
           ),
         ],
       );
@@ -246,7 +247,7 @@ class _TargetsSyncDialogState extends State<TargetsSyncDialog> {
         key: const ValueKey('yata-error'),
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('Could not contact YATA', style: TextStyle(fontSize: 13, color: theme.mainText)),
+          PdaText('Could not contact YATA', style: TextStyle(fontSize: 13, color: theme.mainText)),
           const SizedBox(height: 8),
           Text(_yataError!, style: const TextStyle(fontSize: 12)),
           const SizedBox(height: 12),
@@ -261,11 +262,11 @@ class _TargetsSyncDialogState extends State<TargetsSyncDialog> {
                     _yataLoading = false;
                   });
                 },
-                child: const Text('Back'),
+                child: const PdaText('Back'),
               ),
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child: const Text('Close'),
+                child: const PdaText('Close'),
               ),
             ],
           ),
@@ -278,7 +279,7 @@ class _TargetsSyncDialogState extends State<TargetsSyncDialog> {
         key: const ValueKey('yata-importing'),
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('Importing targets from YATA', style: TextStyle(fontSize: 13, color: theme.mainText)),
+          PdaText('Importing targets from YATA', style: TextStyle(fontSize: 13, color: theme.mainText)),
           const SizedBox(height: 14),
           LinearProgressIndicator(value: _yataImportPercentage),
           const SizedBox(height: 8),
@@ -294,11 +295,11 @@ class _TargetsSyncDialogState extends State<TargetsSyncDialog> {
               children: [
                 TextButton(
                   onPressed: _cancelYataImport,
-                  child: const Text('Cancel import'),
+                  child: const PdaText('Cancel import'),
                 ),
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  child: const Text('Close'),
+                  child: const PdaText('Close'),
                 ),
               ],
             ),
@@ -356,10 +357,10 @@ class _TargetsSyncDialogState extends State<TargetsSyncDialog> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Targets distribution',
+                  PdaText('Targets distribution',
                       style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: theme.mainText)),
                   const SizedBox(height: 4),
-                  Text('Review what is in YATA vs local before syncing.',
+                  PdaText('Review what is in YATA vs local before syncing.',
                       style: TextStyle(fontSize: 12, color: theme.getTextColor(theme.mainText.withValues(alpha: 0.7)))),
                 ],
               ),
@@ -400,7 +401,7 @@ class _TargetsSyncDialogState extends State<TargetsSyncDialog> {
                   children: [
                     const Icon(Icons.cloud_download, size: 16),
                     const SizedBox(width: 6),
-                    Text('${_onlyYata.length} only in YATA', style: TextStyle(fontSize: 12, color: theme.mainText)),
+                    PdaText("{0} only in YATA", values: [_onlyYata.length], style: TextStyle(fontSize: 12, color: theme.mainText)),
                   ],
                 ),
                 const SizedBox(height: 4),
@@ -408,7 +409,7 @@ class _TargetsSyncDialogState extends State<TargetsSyncDialog> {
                   children: [
                     const Icon(Icons.link, size: 16),
                     const SizedBox(width: 6),
-                    Text('${_bothSides.length} in both', style: TextStyle(fontSize: 12, color: theme.mainText)),
+                    PdaText("{0} in both", values: [_bothSides.length], style: TextStyle(fontSize: 12, color: theme.mainText)),
                   ],
                 ),
                 const SizedBox(height: 4),
@@ -416,7 +417,7 @@ class _TargetsSyncDialogState extends State<TargetsSyncDialog> {
                   children: [
                     const Icon(Icons.phone_iphone, size: 16),
                     const SizedBox(width: 6),
-                    Text('${_onlyLocal.length} only in Torn PDA',
+                    PdaText("{0} only in Torn PDA", values: [_onlyLocal.length],
                         style: TextStyle(fontSize: 12, color: theme.mainText)),
                   ],
                 ),
@@ -430,13 +431,13 @@ class _TargetsSyncDialogState extends State<TargetsSyncDialog> {
         ElevatedButton.icon(
           onPressed: importAvailable ? _startYataImport : null,
           icon: const Icon(Icons.download_rounded, size: 18),
-          label: const Text('Import from YATA'),
+          label: const PdaText('Import from YATA'),
         ),
         const SizedBox(height: 10),
         ElevatedButton.icon(
           onPressed: exportAvailable ? _exportToYata : null,
           icon: const Icon(Icons.upload_rounded, size: 18),
-          label: const Text('Export to YATA'),
+          label: const PdaText('Export to YATA'),
         ),
         const SizedBox(height: 10),
         Align(
@@ -451,11 +452,11 @@ class _TargetsSyncDialogState extends State<TargetsSyncDialog> {
                   _onlyLocal = [];
                   _bothSides = [];
                 }),
-                child: const Text('Back'),
+                child: const PdaText('Back'),
               ),
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child: const Text('Close'),
+                child: const PdaText('Close'),
               ),
             ],
           ),
@@ -696,7 +697,7 @@ class _TargetsSyncDialogState extends State<TargetsSyncDialog> {
       }
     } catch (e) {
       BotToast.showText(
-        text: 'There was an error importing from YATA.\n\n$e',
+        text: context.interfaceText("There was an error importing from YATA.\n\n{0}", [e]),
         textStyle: const TextStyle(fontSize: 13, color: Colors.white),
         contentColor: Colors.red,
         duration: const Duration(seconds: 5),
@@ -719,7 +720,7 @@ class _TargetsSyncDialogState extends State<TargetsSyncDialog> {
 
       if (exportResult == '') {
         BotToast.showText(
-          text: 'There was an error exporting!',
+          text: context.interfaceText('There was an error exporting!'),
           textStyle: const TextStyle(fontSize: 13, color: Colors.white),
           contentColor: Colors.red,
           duration: const Duration(seconds: 5),
@@ -736,7 +737,7 @@ class _TargetsSyncDialogState extends State<TargetsSyncDialog> {
       }
     } catch (e) {
       BotToast.showText(
-        text: 'There was an error exporting!\n\n$e',
+        text: context.interfaceText("There was an error exporting!\n\n{0}", [e]),
         textStyle: const TextStyle(fontSize: 13, color: Colors.white),
         contentColor: Colors.red,
         duration: const Duration(seconds: 5),

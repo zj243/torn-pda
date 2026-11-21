@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:math' as math;
 
@@ -400,8 +401,8 @@ class _ChatOverlayState extends State<ChatOverlay> with TickerProviderStateMixin
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('Chat paused', style: style.titleSmall?.copyWith(fontWeight: FontWeight.w700)),
-                      Text(
+                      PdaText('Chat paused', style: style.titleSmall?.copyWith(fontWeight: FontWeight.w700)),
+                      PdaText(
                         'Back on a Torn tab to keep chatting',
                         style: style.bodySmall?.copyWith(color: scheme.onSurfaceVariant),
                       ),
@@ -418,7 +419,7 @@ class _ChatOverlayState extends State<ChatOverlay> with TickerProviderStateMixin
                 Semantics(
                   container: true,
                   child: IconButton(
-                    tooltip: 'Close chat windows',
+                    tooltip: context.interfaceText('Close chat windows'),
                     icon: const Icon(Icons.close_rounded),
                     onPressed: () {
                       NativeChat.closeQuickWindow();
@@ -1310,7 +1311,7 @@ class _ChatOverlayState extends State<ChatOverlay> with TickerProviderStateMixin
                           leading: ChatRoomAvatar(room: chat.roomById(m.roomId), size: 30),
                           title: Text(chat.roomById(m.roomId).name, maxLines: 1, overflow: TextOverflow.ellipsis),
                           trailing: IconButton(
-                            tooltip: 'Dismiss',
+                            tooltip: context.interfaceText('Dismiss'),
                             icon: const Icon(Icons.close_rounded, size: 18),
                             onPressed: () => NativeChat.dropMinimized(m.roomId),
                           ),
@@ -1368,7 +1369,7 @@ class _ChatOverlayState extends State<ChatOverlay> with TickerProviderStateMixin
                     padding: EdgeInsets.symmetric(horizontal: 14),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
-                      children: [Icon(Icons.close_rounded, size: 18), SizedBox(width: 6), Text('Dismiss')],
+                      children: [Icon(Icons.close_rounded, size: 18), SizedBox(width: 6), PdaText('Dismiss')],
                     ),
                   ),
                 ),

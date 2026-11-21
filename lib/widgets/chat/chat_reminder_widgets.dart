@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ Future<void> showChatReminderSheet(BuildContext context, ChatMessage message, St
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text('Remind me', style: theme.textTheme.titleMedium),
+              child: PdaText('Remind me', style: theme.textTheme.titleMedium),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 2, 16, 8),
@@ -67,7 +68,7 @@ Future<void> showChatReminderSheet(BuildContext context, ChatMessage message, St
             ListTile(
               minTileHeight: 48,
               leading: const Icon(Icons.schedule_rounded),
-              title: const Text('Custom time'),
+              title: const PdaText('Custom time'),
               onTap: () async {
                 final time = await showChatTimePicker(
                   sheet,
@@ -126,12 +127,12 @@ Future<void> showChatRemindersList(BuildContext context) => showModalBottomSheet
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Text('Reminders', style: theme.textTheme.titleMedium),
+                child: PdaText('Reminders', style: theme.textTheme.titleMedium),
               ),
               if (pending.isEmpty)
                 Padding(
                   padding: const EdgeInsets.all(16),
-                  child: Text(
+                  child: PdaText(
                     'No pending reminders. Long press a message and pick Remind me in its menu',
                     style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
                   ),
@@ -139,9 +140,9 @@ Future<void> showChatRemindersList(BuildContext context) => showModalBottomSheet
               for (final r in pending)
                 ListTile(
                   title: Text(r.excerpt, maxLines: 2, overflow: TextOverflow.ellipsis),
-                  subtitle: Text('${r.author} in ${r.roomName} - ${chatClockOf(sheet).stamp(r.at)} (${r.label})'),
+                  subtitle: PdaText("{0} in {1} - {2} ({3})", values: [r.author, r.roomName, chatClockOf(sheet).stamp(r.at), r.label]),
                   trailing: IconButton(
-                    tooltip: 'Delete reminder',
+                    tooltip: context.interfaceText('Delete reminder'),
                     style: IconButton.styleFrom(minimumSize: const Size(48, 48)),
                     icon: const Icon(Icons.delete_outline_rounded),
                     onPressed: () async {

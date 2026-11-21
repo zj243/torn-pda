@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 // Flutter imports:
@@ -95,13 +96,13 @@ class ScriptsDocsPageState extends State<ScriptsDocsPage> {
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
       toolbarHeight: 50,
-      title: const Text('User scripts docs', style: TextStyle(color: Colors.white)),
+      title: const PdaText('User scripts docs', style: TextStyle(color: Colors.white)),
       leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: _goBack),
       actions: [
         if (_disclaimerRead)
           IconButton(
             icon: Icon(Icons.warning_amber_rounded, color: Colors.orange[300]),
-            tooltip: "Show the disclaimer reminder again",
+            tooltip: context.interfaceText("Show the disclaimer reminder again"),
             onPressed: _restoreDisclaimer,
           ),
       ],
@@ -147,7 +148,7 @@ class ScriptsDocsPageState extends State<ScriptsDocsPage> {
                     color: green.withValues(alpha: _light ? 0.10 : 0.16),
                     border: Border.all(color: green.withValues(alpha: 0.45)),
                   ),
-                  child: Text(
+                  child: PdaText(
                     "> DEV DOCS",
                     style: TextStyle(
                       fontFamily: "monospace",
@@ -163,7 +164,7 @@ class ScriptsDocsPageState extends State<ScriptsDocsPage> {
             ],
           ),
           const SizedBox(height: 12),
-          Text(
+          PdaText(
             "Everything below is written for script developers. It all lives in the Torn PDA repository, "
             "in the docs folder, and is shown here straight from there.",
             style: TextStyle(fontSize: 11.5, height: 1.4, color: _subtleText),
@@ -178,7 +179,7 @@ class ScriptsDocsPageState extends State<ScriptsDocsPage> {
                 children: [
                   Icon(Icons.open_in_new, size: 13, color: green),
                   const SizedBox(width: 6),
-                  Text(
+                  PdaText(
                     "See them on GitHub",
                     style: TextStyle(
                       fontFamily: "monospace",
@@ -220,7 +221,7 @@ class ScriptsDocsPageState extends State<ScriptsDocsPage> {
                 Icon(Icons.warning_amber_rounded, size: 19, color: amber),
                 const SizedBox(width: 8),
                 Expanded(
-                  child: Text(
+                  child: PdaText(
                     "Read the disclaimer",
                     style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: amber),
                   ),
@@ -228,7 +229,7 @@ class ScriptsDocsPageState extends State<ScriptsDocsPage> {
               ],
             ),
             const SizedBox(height: 6),
-            Text(
+            PdaText(
               "If you have not read it yet, please do so before installing any script. "
               "It explains what a user script can do to your account.",
               style: TextStyle(fontSize: 12.5, height: 1.35, color: _subtleText),
@@ -238,14 +239,14 @@ class ScriptsDocsPageState extends State<ScriptsDocsPage> {
               children: [
                 TextButton(
                   onPressed: _markDisclaimerRead,
-                  child: Text("DISMISS", style: TextStyle(fontSize: 12, color: _subtleText)),
+                  child: PdaText("DISMISS", style: TextStyle(fontSize: 12, color: _subtleText)),
                 ),
                 TextButton(
                   onPressed: () async {
                     await widget.onOpenDisclaimer();
                     await _markDisclaimerRead();
                   },
-                  child: Text(
+                  child: PdaText(
                     "READ IT",
                     style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: amber),
                   ),
@@ -269,7 +270,7 @@ class ScriptsDocsPageState extends State<ScriptsDocsPage> {
     setState(() => _disclaimerRead = false);
     _scrollController.animateTo(0, duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
     BotToast.showText(
-      text: "Disclaimer reminder restored",
+      text: context.interfaceText("Disclaimer reminder restored"),
       textStyle: const TextStyle(fontSize: 14, color: Colors.white),
       contentColor: Colors.grey[800]!,
       contentPadding: const EdgeInsets.all(10),

@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:provider/provider.dart';
@@ -83,14 +84,14 @@ class BrowserZoomLivePanelState extends State<BrowserZoomLivePanel> {
                 children: [
                   Icon(Icons.zoom_in, size: 18, color: _themeProvider.mainText),
                   const SizedBox(width: 8),
-                  Text(
+                  PdaText(
                     "Browser zoom",
                     style: TextStyle(color: _themeProvider.mainText, fontWeight: FontWeight.bold),
                   ),
                   const Spacer(),
                   TextButton(
                     onPressed: _settingsProvider.androidBrowserScale == 0 ? null : () => _apply(0),
-                    child: const Text("Reset"),
+                    child: const PdaText("Reset"),
                   ),
                   IconButton(
                     icon: const Icon(Icons.close, size: 20),

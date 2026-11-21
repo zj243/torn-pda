@@ -1,5 +1,6 @@
 // Flutter imports:
 // Package imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -158,7 +159,7 @@ class AttackCardState extends State<AttackCard> {
                   Flexible(
                     child: Row(
                       children: [
-                        const Text('Last results: '),
+                        const PdaText('Last results: '),
                         Flexible(child: _returnLastResults()),
                       ],
                     ),
@@ -269,9 +270,9 @@ class AttackCardState extends State<AttackCard> {
   Widget _returnTargetLevel() {
     if (_attack.attackInitiated) {
       if (_attack.attackWon) {
-        return Text('Level ${_attack.targetLevel}');
+        return PdaText("Level {0}", values: [_attack.targetLevel]);
       } else {
-        return const Text(
+        return const PdaText(
           '[lost]',
           style: TextStyle(
             fontSize: 13,
@@ -281,7 +282,7 @@ class AttackCardState extends State<AttackCard> {
       }
     } else {
       if (_attack.attackWon) {
-        return const Text(
+        return const PdaText(
           '[lost]',
           style: TextStyle(
             fontSize: 13,
@@ -289,7 +290,7 @@ class AttackCardState extends State<AttackCard> {
           ),
         );
       } else {
-        return const Text(
+        return const PdaText(
           '[defended]',
           style: TextStyle(fontSize: 13),
         );
@@ -354,7 +355,7 @@ class AttackCardState extends State<AttackCard> {
       text: TextSpan(
         children: <TextSpan>[
           TextSpan(
-            text: 'Respect: ',
+            text: context.interfaceText('Respect: '),
             style: TextStyle(
               color: _themeProvider.mainText,
             ),
@@ -391,7 +392,7 @@ class AttackCardState extends State<AttackCard> {
       text: TextSpan(
         children: <TextSpan>[
           TextSpan(
-            text: 'Fair Fight: ',
+            text: context.interfaceText('Fair Fight: '),
             style: TextStyle(
               color: _themeProvider.mainText,
             ),

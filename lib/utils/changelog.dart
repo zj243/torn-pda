@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
@@ -1183,11 +1184,11 @@ class ChangeLogState extends State<ChangeLog> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            PdaText(
                               "Travel Live Update",
                               style: TextStyle(fontStyle: FontStyle.italic, fontWeight: FontWeight.bold),
                             ),
-                            Text("(disabled by default)", style: TextStyle(fontStyle: FontStyle.italic)),
+                            PdaText("(disabled by default)", style: TextStyle(fontStyle: FontStyle.italic)),
                           ],
                         ),
                       ),
@@ -1416,7 +1417,7 @@ class ChangeLogState extends State<ChangeLog> {
                     const Flexible(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [Text("(disabled by default)")],
+                        children: [PdaText("(disabled by default)")],
                       ),
                     ),
                     Switch(
@@ -1518,11 +1519,11 @@ class ChangeLogState extends State<ChangeLog> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            PdaText(
                               "Travel Live Activities",
                               style: TextStyle(fontStyle: FontStyle.italic, fontWeight: FontWeight.bold),
                             ),
-                            Text("(enabled by default)", style: TextStyle(fontStyle: FontStyle.italic)),
+                            PdaText("(enabled by default)", style: TextStyle(fontStyle: FontStyle.italic)),
                           ],
                         ),
                       ),
@@ -3845,18 +3846,18 @@ class ChangeLogState extends State<ChangeLog> {
         await showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text("Battery Optimization Detected"),
-            content: const Text(
+            title: const PdaText("Battery Optimization Detected"),
+            content: const PdaText(
               "To ensure Live Updates work correctly in the background, please disable battery optimization for Torn PDA.",
             ),
             actions: [
-              TextButton(onPressed: () => Navigator.pop(context), child: const Text("Cancel")),
+              TextButton(onPressed: () => Navigator.pop(context), child: const PdaText("Cancel")),
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                   channel.invokeMethod('openBatterySettings');
                 },
-                child: const Text("Open Settings"),
+                child: const PdaText("Open Settings"),
               ),
             ],
           ),
@@ -4016,7 +4017,7 @@ class ChangeLogState extends State<ChangeLog> {
                 children: <Widget>[
                   const Icon(Icons.local_fire_department, color: Colors.orange, size: 20),
                   const Padding(padding: EdgeInsets.only(right: 12)),
-                  Flexible(child: Text(hotfix)),
+                  Flexible(child: PdaText(hotfix)),
                 ],
               ),
             ),
@@ -4043,7 +4044,7 @@ class ChangeLogState extends State<ChangeLog> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Flexible(child: Text(featDescription)),
+                        Flexible(child: PdaText(featDescription)),
                         if (feat is ComplexFeature && feat.explanation != null) _complexFeatureToast(feat),
                       ],
                     ),
@@ -4074,7 +4075,7 @@ class ChangeLogState extends State<ChangeLog> {
                     _showAllChanges = true;
                   });
                 },
-                child: const Text('Show earlier changes...', style: TextStyle(color: Colors.blue, fontSize: 15)),
+                child: const PdaText('Show earlier changes...', style: TextStyle(color: Colors.blue, fontSize: 15)),
               ),
             ],
           ),
@@ -4094,7 +4095,7 @@ class ChangeLogState extends State<ChangeLog> {
           toastification.show(
             closeOnClick: true,
             alignment: Alignment.center,
-            title: Padding(padding: const EdgeInsets.all(8.0), child: Text(feat.explanation!, maxLines: 100)),
+            title: Padding(padding: const EdgeInsets.all(8.0), child: PdaText(feat.explanation!, maxLines: 100)),
             autoCloseDuration: feat.secondsToShow == null ? null : Duration(seconds: feat.secondsToShow!),
             animationDuration: const Duration(milliseconds: 200),
             showProgressBar: false,
@@ -4167,7 +4168,7 @@ class _ModernVersionCard extends StatelessWidget {
                   child: Icon(Icons.local_fire_department, color: Colors.orange, size: 20),
                 ),
                 const SizedBox(width: 10),
-                Expanded(child: Text(hotfix, style: const TextStyle(fontSize: 15, height: 1.4))),
+                Expanded(child: PdaText(hotfix, style: const TextStyle(fontSize: 15, height: 1.4))),
               ],
             ),
           ),
@@ -4206,7 +4207,7 @@ class _ModernSectionTile extends StatelessWidget {
           ),
           child: Icon(section.icon, size: 19, color: accent),
         ),
-        title: Text(
+        title: PdaText(
           section.title,
           style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: accent),
         ),
@@ -4220,7 +4221,7 @@ class _ModernSectionTile extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         _AuthorDot(author: item.author, contributors: contributors),
-                        Expanded(child: Text(item.description, style: const TextStyle(fontSize: 15, height: 1.4))),
+                        Expanded(child: PdaText(item.description, style: const TextStyle(fontSize: 15, height: 1.4))),
                       ],
                     )
                   : _FlipItem(item: item, contributors: contributors, accent: accent),
@@ -4295,7 +4296,7 @@ class _FlipItemState extends State<_FlipItem> with SingleTickerProviderStateMixi
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _AuthorDot(author: widget.item.author, contributors: widget.contributors),
-        Expanded(child: Text(widget.item.description, style: const TextStyle(fontSize: 15, height: 1.4))),
+        Expanded(child: PdaText(widget.item.description, style: const TextStyle(fontSize: 15, height: 1.4))),
         if (!pinned)
           GestureDetector(
             behavior: HitTestBehavior.opaque,
@@ -4328,7 +4329,7 @@ class _FlipItemState extends State<_FlipItem> with SingleTickerProviderStateMixi
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(widget.item.detail!, style: const TextStyle(fontSize: 14, height: 1.4)),
+                  PdaText(widget.item.detail!, style: const TextStyle(fontSize: 14, height: 1.4)),
                   if (widget.item.docUrl != null) ...[
                     const SizedBox(height: 12),
                     GestureDetector(
@@ -4343,7 +4344,7 @@ class _FlipItemState extends State<_FlipItem> with SingleTickerProviderStateMixi
                         children: [
                           Icon(Icons.menu_book_outlined, size: 16, color: widget.accent),
                           const SizedBox(width: 6),
-                          Text(
+                          PdaText(
                             "Read the documentation",
                             style: TextStyle(
                               fontSize: 13,
@@ -4493,7 +4494,7 @@ class _ContributorsFooter extends StatelessWidget {
             children: [
               Icon(Icons.favorite, size: 15, color: labelColor),
               const SizedBox(width: 7),
-              Text(
+              PdaText(
                 'Contributors',
                 style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: labelColor, letterSpacing: 0.5),
               ),
@@ -4599,7 +4600,7 @@ class _AnimatedChangelogWordmarkState extends State<_AnimatedChangelogWordmark> 
   Widget build(BuildContext context) {
     final theme = context.watch<ThemeProvider>();
     if (theme.accesibilityNoTextColors) {
-      return Text('CHANGELOG', style: _style.copyWith(color: theme.mainText));
+      return PdaText('CHANGELOG', style: _style.copyWith(color: theme.mainText));
     }
 
     return AnimatedBuilder(
@@ -4613,7 +4614,7 @@ class _AnimatedChangelogWordmarkState extends State<_AnimatedChangelogWordmark> 
         );
         return ShaderMask(shaderCallback: (bounds) => gradient.createShader(bounds), child: child);
       },
-      child: const Text('CHANGELOG', style: _style),
+      child: const PdaText('CHANGELOG', style: _style),
     );
   }
 }

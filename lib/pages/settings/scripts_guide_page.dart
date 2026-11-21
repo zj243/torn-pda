@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 // Flutter imports:
@@ -77,7 +78,7 @@ class ScriptsGuidePageState extends State<ScriptsGuidePage> {
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
       toolbarHeight: 50,
-      title: const Text('Using scripts', style: TextStyle(color: Colors.white)),
+      title: const PdaText('Using scripts', style: TextStyle(color: Colors.white)),
       leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: _goBack),
       actions: [
         IconButton(
@@ -100,14 +101,14 @@ class ScriptsGuidePageState extends State<ScriptsGuidePage> {
       controller: _scrollController,
       padding: const EdgeInsets.fromLTRB(14, 14, 14, 40),
       children: [
-        Text(
+        PdaText(
           "User scripts are small programs written in JavaScript that add features to the browser. "
           "Torn PDA can run them on any Torn page, the same way extensions like Tampermonkey or "
           "Violentmonkey do on a desktop browser.",
           style: TextStyle(fontSize: 13, height: 1.4, color: _themeProvider.mainText),
         ),
         const SizedBox(height: 8),
-        Text(
+        PdaText(
           "This page covers how scripts behave inside Torn PDA. Storage, GM compatibility and the "
           "handlers that let a script talk to the app have their own pages in the docs section.",
           style: TextStyle(fontSize: 12, height: 1.4, fontStyle: FontStyle.italic, color: _subtleText),
@@ -272,14 +273,14 @@ class ScriptsGuidePageState extends State<ScriptsGuidePage> {
               children: [
                 Icon(Icons.help_outline, size: 17, color: _accent),
                 const SizedBox(width: 10),
-                Text(
+                PdaText(
                   "Getting help",
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: _accent),
                 ),
               ],
             ),
             const SizedBox(height: 10),
-            Text(
+            PdaText(
               "Join our Discord server if you need help, or if you want to contribute ideas or working code. "
               "There is also a list of tested user scripts in our GitHub repository.",
               style: TextStyle(fontSize: 12.5, height: 1.4, color: _themeProvider.mainText),
@@ -326,12 +327,12 @@ class ScriptsGuidePageState extends State<ScriptsGuidePage> {
         ),
         const SizedBox(height: 4),
         _rich([
-          const TextSpan(text: "When you browse to a URL that serves a script with the "),
+          TextSpan(text: context.interfaceText("When you browse to a URL that serves a script with the ")),
           _mono("text/javascript"),
-          const TextSpan(
+          TextSpan(
             text:
-                " content type, Torn PDA offers to install it automatically. Some hosts, such as raw GitHub "
-                "links, do not send that content type; in those cases copy the URL and add the script by hand.",
+                context.interfaceText(" content type, Torn PDA offers to install it automatically. Some hosts, such as raw GitHub "
+                "links, do not send that content type; in those cases copy the URL and add the script by hand."),
           ),
         ]),
       ],
@@ -365,10 +366,10 @@ class ScriptsGuidePageState extends State<ScriptsGuidePage> {
           "once, keeping their on/off state and their custom API keys.",
         ),
         _rich([
-          const TextSpan(text: "Updates that ask for "),
+          TextSpan(text: context.interfaceText("Updates that ask for ")),
           _bold("new permissions"),
-          const TextSpan(
-            text: " are flagged, and you have to expand them and look at the code before you can select them.",
+          TextSpan(
+            text: context.interfaceText(" are flagged, and you have to expand them and look at the code before you can select them."),
           ),
         ]),
         _p(
@@ -425,14 +426,14 @@ class ScriptsGuidePageState extends State<ScriptsGuidePage> {
         ),
         _rich([
           _mono("@match"),
-          const TextSpan(text: " decides which pages the script runs on, "),
+          TextSpan(text: context.interfaceText(" decides which pages the script runs on, ")),
           _mono("@version"),
-          const TextSpan(text: " drives updates, and "),
+          TextSpan(text: context.interfaceText(" drives updates, and ")),
           _mono("@updateURL"),
-          const TextSpan(
+          TextSpan(
             text:
-                " lets Torn PDA check for a new version by downloading just the header instead of the "
-                "whole script.",
+                context.interfaceText(" lets Torn PDA check for a new version by downloading just the header instead of the "
+                "whole script."),
           ),
         ]),
         _p(
@@ -452,23 +453,23 @@ class ScriptsGuidePageState extends State<ScriptsGuidePage> {
         ),
         _rich([
           _bold("START"),
-          const TextSpan(
+          TextSpan(
             text:
-                ", before the HTML document loads. You can catch resources loading and ajax calls, but the "
+                context.interfaceText(", before the HTML document loads. You can catch resources loading and ajax calls, but the "
                 "script runs before the document or jQuery exist, so you have to check for them yourself, "
-                "with intervals or with properties such as ",
+                "with intervals or with properties such as "),
           ),
           _mono("Document.readyState"),
-          const TextSpan(text: " and checks like "),
+          TextSpan(text: context.interfaceText(" and checks like ")),
           _mono("typeof window.jQuery"),
           const TextSpan(text: "."),
         ]),
         _rich([
           _bold("END"),
-          const TextSpan(
+          TextSpan(
             text:
-                ", after the document has loaded. Safer, but parts of the page are still loaded dynamically "
-                "(items lists, jail, hospital), so you may still need to wait for the elements you want.",
+                context.interfaceText(", after the document has loaded. Safer, but parts of the page are still loaded dynamically "
+                "(items lists, jail, hospital), so you may still need to wait for the elements you want."),
           ),
         ]),
       ],
@@ -499,13 +500,13 @@ class ScriptsGuidePageState extends State<ScriptsGuidePage> {
       icon: Icons.key_outlined,
       body: [
         _rich([
-          const TextSpan(text: "Write "),
+          TextSpan(text: context.interfaceText("Write ")),
           _mono("###PDA-APIKEY###"),
-          const TextSpan(
+          TextSpan(
             text:
-                " in a script instead of your real API key and Torn PDA replaces it at runtime. That way you "
+                context.interfaceText(" in a script instead of your real API key and Torn PDA replaces it at runtime. That way you "
                 "can share the script without leaking your key. A script can also be given its own key from "
-                "its details screen.",
+                "its details screen."),
           ),
         ]),
       ],
@@ -529,21 +530,21 @@ class ScriptsGuidePageState extends State<ScriptsGuidePage> {
         _p("Try resetting the browser cache from the advanced browser settings."),
         _subTitle("Scripts do not run in a new window (iOS)"),
         _rich([
-          const TextSpan(text: "On iOS, injection at "),
+          TextSpan(text: context.interfaceText("On iOS, injection at ")),
           _bold("START"),
-          const TextSpan(
+          TextSpan(
             text:
-                " is not supported when a tab was opened as a new window: long pressing a link and choosing "
+                context.interfaceText(" is not supported when a tab was opened as a new window: long pressing a link and choosing "
                 "to open it in a new window, a pop-up, or a tab opened automatically by the page. A warning "
-                "appears in the Terminal when this happens.",
+                "appears in the Terminal when this happens."),
           ),
         ]),
         _rich([
-          const TextSpan(
-            text: "The workaround is to open those pages as standard tabs by adding them manually. Injection at ",
+          TextSpan(
+            text: context.interfaceText("The workaround is to open those pages as standard tabs by adding them manually. Injection at "),
           ),
           _bold("END"),
-          const TextSpan(text: " works normally."),
+          TextSpan(text: context.interfaceText(" works normally.")),
         ]),
       ],
     ),

@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/models/profile/own_profile_model.dart';
@@ -41,7 +42,7 @@ class NukeReviveButtonState extends State<NukeReviveButton> {
             child: Image.asset('images/icons/nuke-revive.png', width: 24),
           ),
           const SizedBox(width: 10),
-          const Flexible(child: Text("Request a revive (Nuke)")),
+          const Flexible(child: PdaText("Request a revive (Nuke)")),
         ],
       ),
     );
@@ -78,7 +79,7 @@ Future<void> openNukeReviveDialog(BuildContext ctx, ThemeProvider themeProvider,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Flexible(
-                              child: Text(
+                              child: PdaText(
                                 "REQUEST A REVIVE FROM NUKE",
                                 style: TextStyle(fontSize: 11, color: themeProvider.mainText),
                               ),
@@ -92,7 +93,7 @@ Future<void> openNukeReviveDialog(BuildContext ctx, ThemeProvider themeProvider,
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
                           TextButton(
-                            child: const Text("Medic!"),
+                            child: const PdaText("Medic!"),
                             onPressed: () async {
                               // User can be null if we are not accessing from the Profile page
                               if (user == null) {
@@ -105,8 +106,8 @@ Future<void> openNukeReviveDialog(BuildContext ctx, ThemeProvider themeProvider,
                               if (user == null) {
                                 BotToast.showText(
                                   text:
-                                      'There was an error contacting Torn API to get your current status, '
-                                      'please try again after a while!',
+                                      context.interfaceText('There was an error contacting Torn API to get your current status, '
+                                      'please try again after a while!'),
                                   textStyle: const TextStyle(fontSize: 13, color: Colors.white),
                                   contentColor: Colors.red[800]!,
                                   duration: const Duration(seconds: 5),
@@ -119,8 +120,8 @@ Future<void> openNukeReviveDialog(BuildContext ctx, ThemeProvider themeProvider,
                               if (user!.status!.color != 'red' && user!.status!.state != "Hospital") {
                                 BotToast.showText(
                                   text:
-                                      'According to Torn you are not currently hospitalized, please wait a '
-                                      'few seconds and try again!',
+                                      context.interfaceText('According to Torn you are not currently hospitalized, please wait a '
+                                      'few seconds and try again!'),
                                   textStyle: const TextStyle(fontSize: 13, color: Colors.white),
                                   contentColor: Colors.red[800]!,
                                   duration: const Duration(seconds: 5),
@@ -160,7 +161,7 @@ Future<void> openNukeReviveDialog(BuildContext ctx, ThemeProvider themeProvider,
                             },
                           ),
                           TextButton(
-                            child: const Text("Cancel"),
+                            child: const PdaText("Cancel"),
                             onPressed: () {
                               Navigator.of(context).pop();
                             },

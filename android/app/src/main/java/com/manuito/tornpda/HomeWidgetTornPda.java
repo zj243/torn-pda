@@ -745,7 +745,7 @@ public class HomeWidgetTornPda extends HomeWidgetProvider {
     private void setupShortcutsSection(RemoteViews view, Context context, SharedPreferences prefs) {
         int shortcutsNumber = prefs.getInt("shortcuts_number", 0);
         if (shortcutsNumber == 0) {
-            view.setTextViewText(R.id.widget_shortcuts_empty_text, "No shortcuts configured, add some?");
+            view.setTextViewText(R.id.widget_shortcuts_empty_text, context.getString(R.string.widget_no_shortcuts));
             view.setViewVisibility(R.id.widget_shortcuts_empty_box, View.VISIBLE);
         } else {
             view.setViewVisibility(R.id.widget_shortcuts_empty_box, View.GONE);

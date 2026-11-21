@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -45,16 +46,14 @@ class _FFScouterStatsHistoryChartState extends State<FFScouterStatsHistoryChart>
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            PdaText(
               "ESTIMATE HISTORY",
               style: TextStyle(fontWeight: FontWeight.bold, color: Colors.pink[700], fontSize: 16),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20, top: 6),
-              child: Text(
-                "${first.bsEstimateHuman ?? formatBigNumbers(first.bsEstimate!)} ($firstDate) to "
-                "${last.bsEstimateHuman ?? formatBigNumbers(last.bsEstimate!)} ($lastDate), "
-                "${change >= 0 ? "+" : ""}${change.toStringAsFixed(0)}%",
+              child: PdaText(
+                "{0} ({1}) to {2} ({3}), {4}{5}%", values: [first.bsEstimateHuman ?? formatBigNumbers(first.bsEstimate!), firstDate, last.bsEstimateHuman ?? formatBigNumbers(last.bsEstimate!), lastDate, change >= 0 ? "+" : "", change.toStringAsFixed(0)],
                 style: TextStyle(fontSize: 12, color: Colors.grey[600]),
               ),
             ),

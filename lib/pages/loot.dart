@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 import 'dart:convert';
 // ignore: unused_import
@@ -206,7 +207,7 @@ class LootPageState extends State<LootPage> {
                         if (activeNpcsFiltered())
                           Padding(
                             padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
-                            child: Text(
+                            child: PdaText(
                               "Some NPCs are filtered out",
                               style: TextStyle(
                                 color: Colors.orange[900],
@@ -219,8 +220,8 @@ class LootPageState extends State<LootPage> {
                         if (_lootRangersIdOrder.isNotEmpty && _dbLootRangersEnabled!)
                           Padding(
                             padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
-                            child: Text(
-                              "NPCs sorted by ${_lootRangersTime == 0 ? 'previous ' : ''}Loot Rangers' attack order",
+                            child: PdaText(
+                              "NPCs sorted by {0}Loot Rangers' attack order", values: [_lootRangersTime == 0 ? 'previous ' : ''],
                               style: const TextStyle(
                                 fontSize: 12,
                               ),
@@ -256,7 +257,7 @@ class LootPageState extends State<LootPage> {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
-      title: const Text('Loot', style: TextStyle(color: Colors.white)),
+      title: const PdaText('Loot', style: TextStyle(color: Colors.white)),
       leadingWidth: _webViewProvider.appCanOpenBrowser ? 88 : 50,
       leading: Row(
         children: [
@@ -376,12 +377,12 @@ class LootPageState extends State<LootPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
+          PdaText(
             'There was an error contacting the database, please try again later!',
             style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 20),
-          Text('If this problem reoccurs, please let us know!'),
+          PdaText('If this problem reoccurs, please let us know!'),
         ],
       ),
     );
@@ -550,8 +551,7 @@ class LootPageState extends State<LootPage> {
 
                         BotToast.showText(
                           clickClose: true,
-                          text: 'Loot level $levelNumber'
-                              ' $typeString set for ${npcDetails.name}!',
+                          text: context.interfaceText("Loot level {0} {1} set for {2}!", [levelNumber, typeString, npcDetails.name]),
                           textStyle: const TextStyle(
                             fontSize: 14,
                             color: Colors.white,
@@ -572,7 +572,7 @@ class LootPageState extends State<LootPage> {
                         await _refreshAlarmKitActiveIOS();
                         BotToast.showText(
                           clickClose: true,
-                          text: 'Loot level $levelNumber alarm cancelled for ${npcDetails.name}!',
+                          text: context.interfaceText("Loot level {0} alarm cancelled for {1}!", [levelNumber, npcDetails.name]),
                           textStyle: const TextStyle(
                             fontSize: 14,
                             color: Colors.white,
@@ -607,8 +607,7 @@ class LootPageState extends State<LootPage> {
                           });
                           BotToast.showText(
                             clickClose: true,
-                            text: 'Loot level $levelNumber'
-                                ' $typeString set for ${npcDetails.name}!',
+                            text: context.interfaceText("Loot level {0} {1} set for {2}!", [levelNumber, typeString, npcDetails.name]),
                             textStyle: const TextStyle(
                               fontSize: 14,
                               color: Colors.white,
@@ -620,7 +619,7 @@ class LootPageState extends State<LootPage> {
                         } catch (e) {
                           BotToast.showText(
                             clickClose: true,
-                            text: 'Error setting alarm: $e',
+                            text: context.interfaceText("Error setting alarm: {0}", [e]),
                             textStyle: const TextStyle(
                               fontSize: 14,
                               color: Colors.white,
@@ -639,7 +638,7 @@ class LootPageState extends State<LootPage> {
                       );
                       BotToast.showText(
                         clickClose: true,
-                        text: 'Loot level $levelNumber timer set for ${npcDetails.name}!',
+                        text: context.interfaceText("Loot level {0} timer set for {1}!", [levelNumber, npcDetails.name]),
                         textStyle: const TextStyle(
                           fontSize: 14,
                           color: Colors.white,
@@ -677,7 +676,7 @@ class LootPageState extends State<LootPage> {
 
           Widget hospitalized;
           if (npcDetails.status == "hospitalized") {
-            hospitalized = Text(
+            hospitalized = PdaText(
               '[HOSPITALIZED]',
               style: TextStyle(
                 fontSize: 12,
@@ -938,7 +937,7 @@ class LootPageState extends State<LootPage> {
 
               BotToast.showText(
                 clickClose: true,
-                text: 'Loot Rangers $typeString set!',
+                text: context.interfaceText("Loot Rangers {0} set!", [typeString]),
                 textStyle: const TextStyle(
                   fontSize: 14,
                   color: Colors.white,
@@ -958,7 +957,7 @@ class LootPageState extends State<LootPage> {
               await _refreshAlarmKitActiveIOS();
               BotToast.showText(
                 clickClose: true,
-                text: 'Loot Rangers alarm cancelled!',
+                text: context.interfaceText('Loot Rangers alarm cancelled!'),
                 textStyle: const TextStyle(
                   fontSize: 14,
                   color: Colors.white,
@@ -994,7 +993,7 @@ class LootPageState extends State<LootPage> {
                 });
                 BotToast.showText(
                   clickClose: true,
-                  text: 'Loot Rangers $typeString set!',
+                  text: context.interfaceText("Loot Rangers {0} set!", [typeString]),
                   textStyle: const TextStyle(
                     fontSize: 14,
                     color: Colors.white,
@@ -1006,7 +1005,7 @@ class LootPageState extends State<LootPage> {
               } catch (e) {
                 BotToast.showText(
                   clickClose: true,
-                  text: 'Error setting alarm: $e',
+                  text: context.interfaceText("Error setting alarm: {0}", [e]),
                   textStyle: const TextStyle(
                     fontSize: 14,
                     color: Colors.white,
@@ -1024,7 +1023,7 @@ class LootPageState extends State<LootPage> {
             );
             BotToast.showText(
               clickClose: true,
-              text: 'Loot Rangers $typeString set!',
+              text: context.interfaceText("Loot Rangers {0} set!", [typeString]),
               textStyle: const TextStyle(
                 fontSize: 14,
                 color: Colors.white,
@@ -1048,7 +1047,7 @@ class LootPageState extends State<LootPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text("Loot Rangers", style: TextStyle(fontWeight: FontWeight.bold)),
+              const PdaText("Loot Rangers", style: TextStyle(fontWeight: FontWeight.bold)),
               const SizedBox(width: 5),
               GestureDetector(
                 onTap: () async {
@@ -1072,21 +1071,21 @@ class LootPageState extends State<LootPage> {
           if (_lootRangersTime == 0 && !_lootRangersAttackOngoing)
             Column(
               children: [
-                Text("Next attack not set!", style: TextStyle(color: _themeProvider!.getTextColor(Colors.orange[700]))),
+                PdaText("Next attack not set!", style: TextStyle(color: _themeProvider!.getTextColor(Colors.orange[700]))),
                 if (_lootRangersClearAtZeroReason.isNotEmpty)
-                  Text(
-                    "Looting will resume after $_lootRangersClearAtZeroReason",
+                  PdaText(
+                    "Looting will resume after {0}", values: [_lootRangersClearAtZeroReason],
                     style: TextStyle(color: _themeProvider!.getTextColor(Colors.orange[700])),
                   ),
               ],
             )
           else if (_lootRangersTime == 0 && _lootRangersAttackOngoing)
-            Text("ATTACK ONGOING NOW",
+            PdaText("ATTACK ONGOING NOW",
                 style: TextStyle(color: _themeProvider!.getTextColor(Colors.red[700]), fontWeight: FontWeight.bold))
           else
-            Text("Next attack $timeString"),
+            PdaText("Next attack {0}", values: [timeString]),
           if (_lootRangersTime > 0 || (_lootRangersTime == 0 && _lootRangersAttackOngoing))
-            Text("Order: ${_lootRangersNameOrder.join(", ")}"),
+            PdaText("Order: {0}", values: [_lootRangersNameOrder.join(", ")]),
           if (_lootRangersTime > 0 || (_lootRangersTime == 0 && _lootRangersAttackOngoing))
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

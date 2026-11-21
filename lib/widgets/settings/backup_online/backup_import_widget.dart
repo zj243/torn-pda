@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:torn_pda/models/profile/own_profile_basic.dart';
@@ -49,7 +50,7 @@ class BackupImportWidgeState extends State<BackupImportWidget> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const Text("Available parameters"),
+          const PdaText("Available parameters"),
           if (BackupPrefsGroups.assessIncoming(widget.serverPrefs, BackupPrefs.shortcuts))
             Column(
               children: [
@@ -84,8 +85,8 @@ class BackupImportWidgeState extends State<BackupImportWidget> {
               checkColor: Colors.white,
               activeColor: Colors.blueGrey,
               value: _selectedItems.contains("shortcuts"),
-              title: const Text("Shorcuts"),
-              subtitle: const Text("Shortcuts list and settings", style: TextStyle(fontSize: 12)),
+              title: const PdaText("Shorcuts"),
+              subtitle: const PdaText("Shortcuts list and settings", style: TextStyle(fontSize: 12)),
               onChanged: (value) {
                 final bool shouldEnable = !_selectedItems.contains("shortcuts");
                 setState(() {
@@ -104,9 +105,9 @@ class BackupImportWidgeState extends State<BackupImportWidget> {
                   child: const Icon(Icons.info_outline),
                   onTap: () {
                     BotToast.showText(
-                      text: "If enabled, your shorcuts will be erased and a new list will be built "
+                      text: context.interfaceText("If enabled, your shorcuts will be erased and a new list will be built "
                           "from the server\n\nIf disabled, incoming shorcuts will be added to the "
-                          "existing ones when possible (avoiding repetitions)",
+                          "existing ones when possible (avoiding repetitions)"),
                       clickClose: true,
                       contentColor: Colors.blue,
                       textStyle: const TextStyle(
@@ -120,7 +121,7 @@ class BackupImportWidgeState extends State<BackupImportWidget> {
                 ),
                 const SizedBox(width: 15),
                 const Flexible(
-                  child: Text(
+                  child: PdaText(
                     "Overwrite existing",
                   ),
                 ),
@@ -152,13 +153,13 @@ class BackupImportWidgeState extends State<BackupImportWidget> {
             checkColor: Colors.white,
             activeColor: Colors.blueGrey,
             value: _selectedItems.contains("userscripts"),
-            title: const Text("User scripts"),
-            subtitle: const Text("Scripts list", style: TextStyle(fontSize: 12)),
+            title: const PdaText("User scripts"),
+            subtitle: const PdaText("Scripts list", style: TextStyle(fontSize: 12)),
             onChanged: (value) {
               if (widget.fromShareDialog && value == true) {
                 BotToast.showText(
-                  text: "Plase ensure that you carefully review incoming user scripts and ensure that you trust the "
-                      "source.\n\nBy default, user scripts from other players will be imported as disabled",
+                  text: context.interfaceText("Plase ensure that you carefully review incoming user scripts and ensure that you trust the "
+                      "source.\n\nBy default, user scripts from other players will be imported as disabled"),
                   clickClose: true,
                   contentColor: Colors.orange[800]!,
                   textStyle: const TextStyle(
@@ -187,9 +188,9 @@ class BackupImportWidgeState extends State<BackupImportWidget> {
                   child: const Icon(Icons.info_outline),
                   onTap: () {
                     BotToast.showText(
-                      text: "If enabled, your user scripts will be erased and a new list will be built "
+                      text: context.interfaceText("If enabled, your user scripts will be erased and a new list will be built "
                           "from the server\n\nIf disabled, incoming user scripts will be added to the "
-                          "existing ones when possible (avoiding repetitions)",
+                          "existing ones when possible (avoiding repetitions)"),
                       clickClose: true,
                       contentColor: Colors.blue,
                       textStyle: const TextStyle(
@@ -203,7 +204,7 @@ class BackupImportWidgeState extends State<BackupImportWidget> {
                 ),
                 const SizedBox(width: 15),
                 const Flexible(
-                  child: Text(
+                  child: PdaText(
                     "Overwrite existing",
                   ),
                 ),
@@ -235,8 +236,8 @@ class BackupImportWidgeState extends State<BackupImportWidget> {
             checkColor: Colors.white,
             activeColor: Colors.blueGrey,
             value: _selectedItems.contains("targets"),
-            title: const Text("Targets"),
-            subtitle: const Text("Targets list and notes", style: TextStyle(fontSize: 12)),
+            title: const PdaText("Targets"),
+            subtitle: const PdaText("Targets list and notes", style: TextStyle(fontSize: 12)),
             onChanged: (value) {
               final bool shouldEnable = !_selectedItems.contains("targets");
               setState(() {
@@ -256,9 +257,9 @@ class BackupImportWidgeState extends State<BackupImportWidget> {
                   child: const Icon(Icons.info_outline),
                   onTap: () {
                     BotToast.showText(
-                      text: "If enabled, your targets will be erased and a new list will be built "
+                      text: context.interfaceText("If enabled, your targets will be erased and a new list will be built "
                           "from the server\n\nIf disabled, incoming targets will be added to the "
-                          "existing ones when possible (avoiding repetitions)",
+                          "existing ones when possible (avoiding repetitions)"),
                       clickClose: true,
                       contentColor: Colors.blue,
                       textStyle: const TextStyle(
@@ -272,7 +273,7 @@ class BackupImportWidgeState extends State<BackupImportWidget> {
                 ),
                 const SizedBox(width: 15),
                 const Flexible(
-                  child: Text(
+                  child: PdaText(
                     "Overwrite existing",
                   ),
                 ),

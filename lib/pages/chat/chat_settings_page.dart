@@ -1,3 +1,4 @@
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:torn_pda/models/chat/chat_time.dart';
@@ -69,8 +70,8 @@ class ChatSettingsPage extends StatelessWidget {
         final prefs = NativeChat.prefs;
         return [
           SwitchListTile(
-            title: const Text('In-app chat'),
-            subtitle: const Text('Read and write Torn chat inside Torn PDA'),
+            title: const PdaText('In-app chat'),
+            subtitle: const PdaText('Read and write Torn chat inside Torn PDA'),
             value: prefs.inAppEnabled,
             onChanged: NativeChat.setEnabled,
           ),
@@ -132,20 +133,20 @@ class ChatSettingsPage extends StatelessWidget {
           const ChatSettingsHeading('More'),
           ListTile(
             leading: const Icon(Icons.lightbulb_outline_rounded),
-            title: const Text('How the chat works'),
-            subtitle: const Text('The bubble, the chat icon and where things are'),
+            title: const PdaText('How the chat works'),
+            subtitle: const PdaText('The bubble, the chat icon and where things are'),
             onTap: () => showChatIntro(context, always: true),
           ),
           ListTile(
             leading: const Icon(Icons.alarm_rounded),
-            title: const Text('Reminders'),
-            subtitle: Text('${prefs.pendingReminders.length} pending'),
+            title: const PdaText('Reminders'),
+            subtitle: PdaText("{0} pending", values: [prefs.pendingReminders.length]),
             onTap: () => showChatRemindersList(context),
           ),
           ListTile(
             leading: const Icon(Icons.settings_backup_restore_rounded),
-            title: const Text('Back up chat settings'),
-            subtitle: const Text('Move your nicknames, notes, colors and preferences to another device'),
+            title: const PdaText('Back up chat settings'),
+            subtitle: const PdaText('Move your nicknames, notes, colors and preferences to another device'),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -159,7 +160,7 @@ class ChatSettingsPage extends StatelessWidget {
                   copied: 'Chat settings copied',
                 ),
                 IconButton(
-                  tooltip: 'Import chat settings',
+                  tooltip: context.interfaceText('Import chat settings'),
                   icon: const Icon(Icons.download_rounded),
                   onPressed: () => showDialog<void>(
                     context: context,

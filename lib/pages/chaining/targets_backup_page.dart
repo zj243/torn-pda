@@ -1,4 +1,5 @@
 // Dart imports:
+import 'package:torn_pda/l10n/pda_text.dart';
 import 'dart:async';
 
 // Package imports:
@@ -84,7 +85,7 @@ class TargetsBackupPageState extends State<TargetsBackupPage> {
                   children: <Widget>[
                     const Padding(
                       padding: EdgeInsets.fromLTRB(15, 30, 20, 15),
-                      child: Text(
+                      child: PdaText(
                         "HOW TO EXPORT TARGETS",
                         style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                       ),
@@ -105,12 +106,12 @@ class TargetsBackupPageState extends State<TargetsBackupPage> {
                           padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                           child: ElevatedButton.icon(
                             icon: const Icon(Icons.share),
-                            label: const Text("Export"),
+                            label: const PdaText("Export"),
                             onPressed: () async {
                               final export = _targetsProvider.exportTargets();
                               if (export == '') {
                                 BotToast.showText(
-                                  text: "No targets to export!",
+                                  text: context.interfaceText("No targets to export!"),
                                   textStyle: const TextStyle(
                                     fontSize: 14,
                                     color: Colors.white,
@@ -139,12 +140,12 @@ class TargetsBackupPageState extends State<TargetsBackupPage> {
                           padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                           child: ElevatedButton.icon(
                             icon: const Icon(Icons.content_copy),
-                            label: const Text("Clipboard"),
+                            label: const PdaText("Clipboard"),
                             onPressed: () async {
                               final export = _targetsProvider.exportTargets();
                               if (export == '') {
                                 BotToast.showText(
-                                  text: "No targets to export!",
+                                  text: context.interfaceText("No targets to export!"),
                                   textStyle: const TextStyle(
                                     fontSize: 14,
                                     color: Colors.white,
@@ -156,8 +157,7 @@ class TargetsBackupPageState extends State<TargetsBackupPage> {
                               } else {
                                 Clipboard.setData(ClipboardData(text: export));
                                 BotToast.showText(
-                                  text: "${_targetsProvider.getTargetNumber()} "
-                                      "targets copied to clipboard!",
+                                  text: context.interfaceText("{0} targets copied to clipboard!", [_targetsProvider.getTargetNumber()]),
                                   textStyle: const TextStyle(
                                     fontSize: 14,
                                     color: Colors.white,
@@ -178,7 +178,7 @@ class TargetsBackupPageState extends State<TargetsBackupPage> {
                     ),
                     const Padding(
                       padding: EdgeInsets.fromLTRB(15, 0, 20, 15),
-                      child: Text(
+                      child: PdaText(
                         "HOW TO IMPORT TARGETS",
                         style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                       ),
@@ -223,14 +223,14 @@ class TargetsBackupPageState extends State<TargetsBackupPage> {
                               padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                               child: ElevatedButton.icon(
                                 icon: const Icon(Icons.file_download),
-                                label: const Text("Import"),
+                                label: const PdaText("Import"),
                                 onPressed: () {
                                   if (_importFormKey.currentState!.validate()) {
                                     final numberImported = _importChecker();
                                     if (numberImported == 0) {
                                       BotToast.showText(
-                                        text: 'No targets to import! '
-                                            'Is the file structure correct?',
+                                        text: context.interfaceText('No targets to import! '
+                                            'Is the file structure correct?'),
                                         textStyle: const TextStyle(
                                           fontSize: 14,
                                           color: Colors.white,
@@ -266,7 +266,7 @@ class TargetsBackupPageState extends State<TargetsBackupPage> {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: _settingsProvider.appBarTop ? 2 : 0,
-      title: const Text("Import & Export", style: TextStyle(color: Colors.white)),
+      title: const PdaText("Import & Export", style: TextStyle(color: Colors.white)),
     );
   }
 
@@ -360,15 +360,15 @@ class TargetsBackupPageState extends State<TargetsBackupPage> {
                 children: <Widget>[
                   const Padding(
                     padding: EdgeInsets.fromLTRB(15, 30, 20, 15),
-                    child: Text(
+                    child: PdaText(
                       "How would you like to import?",
                       style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(30, 10, 30, 20),
-                    child: Text(
-                      "${_tentativeImportModel.targetBackup!.length} new targets were found, $_importChoiceString",
+                    child: PdaText(
+                      "{0} new targets were found, {1}", values: [_tentativeImportModel.targetBackup!.length, _importChoiceString],
                       style: const TextStyle(
                         fontSize: 12,
                       ),
@@ -378,7 +378,7 @@ class TargetsBackupPageState extends State<TargetsBackupPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       ElevatedButton(
-                        child: const Text("Add"),
+                        child: const PdaText("Add"),
                         onPressed: () async {
                           Navigator.of(context).pop();
                           onImportPressed(replace: false);
@@ -388,7 +388,7 @@ class TargetsBackupPageState extends State<TargetsBackupPage> {
                         padding: EdgeInsets.only(left: 5, right: 5),
                       ),
                       ElevatedButton(
-                        child: const Text("Replace"),
+                        child: const PdaText("Replace"),
                         onPressed: () {
                           Navigator.of(context).pop();
                           onImportPressed(replace: true);
@@ -405,7 +405,7 @@ class TargetsBackupPageState extends State<TargetsBackupPage> {
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: const Text("Cancel import"),
+                          child: const PdaText("Cancel import"),
                         ),
                       ],
                     ),
