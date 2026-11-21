@@ -226,7 +226,7 @@ const messagesChaining = <String, String>{
   "Stats weights": "状态加权数",
   "Status: {0}": "状态：{0}",
   "Sync targets": "同步目标",
-  "TARGETS ONLY IN TORN PDA": "仅限在TORPDA",
+  "TARGETS ONLY IN TORN PDA": "仅在 Torn PDA 中保存的目标",
   "TARGETS ONLY IN YATA": "仅在 YATA 中的目标",
   "Target: {0} [{1}]": "目标: {0} [{1}]",
   "Targets": "目标",

@@ -1524,7 +1524,7 @@ class TipsPageState extends State<TipsPage> with WidgetsBindingObserver {
               children: [
                 TextSpan(
                   text:
-                      context.interfaceText('<a href="intent://tornpda://www.cnn.com#Intent;package=com.manuito.tornpda;scheme=tornpda;end">click</a>'),
+                      context.interfaceText('<a href="intent://tornpda://www.cnn.com#Intent;package=com.zj243.tornpda;scheme=tornpda;end">click</a>'),
                   style: TextStyle(
                     fontStyle: FontStyle.italic,
                   ),

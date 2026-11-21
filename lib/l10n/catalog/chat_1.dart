@@ -207,7 +207,7 @@ const messagesChat1 = <String, String>{
   "Market value: \${0}": "市值:+美元{0}",
   "Members ({0})": "成员({0})",
   "Mentions": "提及",
-  "Mentions and highlight words": "提及和突出字词",
+  "Mentions and highlight words": "提及和高亮关键词",
   "Message {0}": "消息 {0}",
   "Messages in rows, without bubbles": "以行为信息,无泡沫",
   "Messages in the quick reply: {0}": "快速回复中的邮件: {0}",

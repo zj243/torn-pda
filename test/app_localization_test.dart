@@ -1,12 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:torn_pda/l10n/app_language.dart';
+import 'package:torn_pda/l10n/catalog/catalog.dart';
 import 'package:torn_pda/l10n/generated/app_localizations.dart';
 import 'package:torn_pda/models/drawer_section.dart';
 import 'package:torn_pda/l10n/pda_text.dart';
 
 /// ZJ：验证切换语言后显示文本、后台通知默认值和未知状态的回退行为。
 void main() {
+  test('中文帮助中的网址和可复制的聊天指令保持有效', () {
+    // ZJ：网页链接必须保留原地址，帮派聊天只识别原样发送的英文指令。
+    final links = RegExp(r'''(?:https?://|tornpda://|www\.)[^\s"'()<>]+''');
+    final commands = RegExp(r'"(\[PDA\][^"]+)"');
+    for (final entry in chineseInterfaceMessages.entries) {
+      final originalTokens = [
+        for (final link in links.allMatches(entry.key))
+          link.group(0)!.replaceFirst(RegExp(r'[.,]+$'), ''),
+        for (final command in commands.allMatches(entry.key)) command.group(1)!,
+      ];
+      for (final token in originalTokens) {
+        expect(entry.value, contains(token), reason: entry.key);
+      }
+    }
+  });
+
   testWidgets('切换语言刷新侧栏并保留 Torn 状态值', (tester) async {
     for (final language in ['en', 'zh']) {
       await tester.pumpWidget(MaterialApp(
