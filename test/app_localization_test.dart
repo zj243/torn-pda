@@ -32,7 +32,8 @@ void main() {
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         home: Builder(builder: (context) {
           final strings = context.l10n;
-          return Column(children: [
+          // ZJ：让各条测试文本沿用正文样式，较小的测试视窗也能完整布局。
+          return Scaffold(body: SingleChildScrollView(child: Column(children: [
             Text(DrawerSection.travel.localizedTitle(strings)),
             Text(strings.playerState('Hospital')),
             Text(strings.playerState('Unknown state')),
@@ -43,7 +44,7 @@ void main() {
             Text(strings.travelNotificationBody),
             const PdaText('Level: {0}', values: [42]),
             const PdaText('Untranslated {0}', values: ['player {0}']),
-          ]);
+          ])));
         }),
       ));
       await tester.pumpAndSettle();
