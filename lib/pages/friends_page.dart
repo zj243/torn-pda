@@ -242,7 +242,7 @@ class FriendsPageState extends State<FriendsPage> {
           onSelected: _selectSortPopup,
           itemBuilder: (BuildContext context) {
             return _popupChoices.map((FriendSort choice) {
-              return PopupMenuItem<FriendSort>(value: choice, child: Text(choice.description));
+              return PopupMenuItem<FriendSort>(value: choice, child: PdaText(choice.description));
             }).toList();
           },
         ),

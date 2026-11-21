@@ -382,5 +382,11 @@
   "boardingScheduled": "已安排",
   "boardingDeparture": "出发",
   "boardingTitleUnknown": "你的航班可以登机了。",
-  "boardingBodyUnknown": "记得带上进口文件。"
+  "boardingBodyUnknown": "记得带上进口文件。",
+  "offlineSince": "已离线 {elapsed}\n\n（{time}）",
+  "idleSince": "已暂离 {elapsed}\n\n（{time}）",
+  "onlineNow": "当前在线",
+  "unreadEvents": "{count, plural, =0{没有未读事件} other{{count} 条未读事件}}",
+  "recentUnreadMessages": "{count, plural, =0{近期没有未读消息} other{近期有 {count} 条未读消息}}",
+  "unreadMessagesSince": "{count, plural, =0{没有未读消息} other{有 {count} 条未读消息}}（自 {time} 起）"
 }

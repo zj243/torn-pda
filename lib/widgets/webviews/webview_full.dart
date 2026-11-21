@@ -4420,7 +4420,7 @@ class WebViewFullState extends State<WebViewFull>
           return _popupOptionsChoices.map((VaultsOptions choice) {
             return PopupMenuItem<VaultsOptions>(
               value: choice,
-              child: Row(children: [Text(choice.description!)]),
+              child: Row(children: [PdaText(choice.description!)]),
             );
           }).toList();
         },
@@ -7089,7 +7089,7 @@ class WebViewFullState extends State<WebViewFull>
         onSelected: openHealingPage,
         itemBuilder: (BuildContext context) {
           return chainingAidPopupChoices.map((HealingPages choice) {
-            return PopupMenuItem<HealingPages>(value: choice, child: Text(choice.description!));
+            return PopupMenuItem<HealingPages>(value: choice, child: PdaText(choice.description!));
           }).toList();
         },
       ),

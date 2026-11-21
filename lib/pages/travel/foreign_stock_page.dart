@@ -387,7 +387,7 @@ class ForeignStockPageState extends State<ForeignStockPage> {
             return _popupChoices.where(_isSortAvailable).map((StockSort choice) {
               return PopupMenuItem<StockSort>(
                 value: choice,
-                child: Text(
+                child: PdaText(
                   choice.description!,
                   style: TextStyle(
                     fontSize: 14,

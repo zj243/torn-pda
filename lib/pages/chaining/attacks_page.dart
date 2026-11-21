@@ -242,7 +242,7 @@ class AttacksPageState extends State<AttacksPage> {
             return _popupChoices.map((AttackSort choice) {
               return PopupMenuItem<AttackSort>(
                 value: choice,
-                child: Text(choice.description),
+                child: PdaText(choice.description),
               );
             }).toList();
           },

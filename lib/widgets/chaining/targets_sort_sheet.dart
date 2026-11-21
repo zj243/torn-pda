@@ -152,7 +152,7 @@ class _TargetsSortSheetState extends State<TargetsSortSheet> with SingleTickerPr
           type: MaterialType.transparency,
           child: RadioListTile<TargetSortType>(
             value: type,
-            title: Text(sort.description),
+            title: PdaText(sort.description),
             secondary: IconButton(
               icon: Icon(isFav ? Icons.star : Icons.star_border, color: isFav ? Colors.orange : Colors.grey),
               onPressed: () => provider.toggleFavoriteSort(type),

@@ -403,5 +403,55 @@
     }
   },
   "boardingTitleUnknown": "Your flight is ready for boarding!",
-  "boardingBodyUnknown": "Remember to bring your import papers!"
+  "boardingBodyUnknown": "Remember to bring your import papers!",
+  "offlineSince": "Offline for {elapsed}\n\n({time})",
+  "@offlineSince": {
+    "placeholders": {
+      "elapsed": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "idleSince": "Idle for {elapsed}\n\n({time})",
+  "@idleSince": {
+    "placeholders": {
+      "elapsed": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "onlineNow": "Online now",
+  "unreadEvents": "{count, plural, =0{No unread events} =1{1 unread event} other{{count} unread events}}",
+  "@unreadEvents": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "recentUnreadMessages": "{count, plural, =0{No unread messages (recent)} =1{1 unread message (recent)} other{{count} unread messages (recent)}}",
+  "@recentUnreadMessages": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "unreadMessagesSince": "{count, plural, =0{No unread messages} =1{1 unread message} other{{count} unread messages}} (since {time})",
+  "@unreadMessagesSince": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  }
 }

@@ -230,7 +230,7 @@ class ItemsPageState extends State<ItemsPage> with WidgetsBindingObserver {
               return _popupSortChoices.map((ItemsSort choice) {
                 return PopupMenuItem<ItemsSort>(
                   value: choice,
-                  child: Text(choice.description, style: const TextStyle(fontSize: 13)),
+                  child: PdaText(choice.description, style: const TextStyle(fontSize: 13)),
                 );
               }).toList();
             },

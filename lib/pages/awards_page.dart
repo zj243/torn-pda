@@ -436,7 +436,7 @@ class AwardsPageState extends State<AwardsPage> {
               return _popupSortChoices.map((AwardsSort choice) {
                 return PopupMenuItem<AwardsSort>(
                   value: choice,
-                  child: Text(choice.description, style: const TextStyle(fontSize: 13)),
+                  child: PdaText(choice.description, style: const TextStyle(fontSize: 13)),
                 );
               }).toList();
             },

@@ -702,7 +702,7 @@ class WebViewStackViewState extends State<WebViewStackView> with WidgetsBindingO
                     },
                     itemBuilder: (BuildContext context) {
                       return chainingAidPopupChoices.map((HealingPages choice) {
-                        return PopupMenuItem<HealingPages>(value: choice, child: Text(choice.description!));
+                        return PopupMenuItem<HealingPages>(value: choice, child: PdaText(choice.description!));
                       }).toList();
                     },
                   ),

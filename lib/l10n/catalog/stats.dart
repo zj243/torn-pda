@@ -52,7 +52,7 @@ const messagesStats = <String, String>{
   "Prefer FFScouter battle score": "优先显示 FFScouter 战力评分",
   "Recommended: Custom key with selections: basic, battlestats, attacks, hof, personalstats.": "建议创建 Custom 密钥，并选择 basic、battlestats、attacks、hof 和 personalstats。",
   "Register Key with FFScouter": "向 FFScouter 注册密钥",
-  "Review": "审查审查审查",
+  "Review": "查看",
   "SPIED STATS": "侦察所得属性",
   "STAT DISTRIBUTION": "属性分布",
   "Save as FFScouter Alternative Key": "存为 FFScouter 备用密钥",

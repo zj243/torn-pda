@@ -355,7 +355,7 @@ class RetalsPageState extends State<RetalsPage> {
                   children: [
                     Icon(choice.iconData, size: 20, color: _themeProvider.mainText),
                     const SizedBox(width: 10),
-                    Text(choice.description!),
+                    PdaText(choice.description!),
                   ],
                 ),
               );

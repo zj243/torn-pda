@@ -139,7 +139,7 @@ const messagesWebviews = <String, String>{
   "Timing Breakdown": "时间细目",
   "Torn Home": "破旧家园",
   "Torn PDA Script Storage": "撕Torn PDA 脚本存储",
-  "Torn PDA is a third-party application, and is not developed by Torn.": "被撕破的PDA是第三方申请,不是由Torn开发的。",
+  "Torn PDA is a third-party application, and is not developed by Torn.": "Torn PDA 是独立开发的第三方应用。",
   "Trading options!": "交易选项!",
   "Trying to log back into Torn\n\nPlease wait...!": "试图重新登录到 Torrn\n\n请等待!",
   "URL copied to clipboard": "URL 复制到剪贴板",

@@ -523,7 +523,7 @@ class TargetsPageState extends State<TargetsPage> {
                   children: [
                     Icon(choice.iconData, size: 20, color: _themeProvider.mainText),
                     const SizedBox(width: 10),
-                    Text(choice.description!),
+                    PdaText(choice.description!),
                   ],
                 ),
               );

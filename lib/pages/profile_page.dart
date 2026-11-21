@@ -607,15 +607,15 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                       final String detailedTimeDiff = timeFormatter.formatTimeAgo;
 
                       if (_user!.lastAction!.status == 'Offline') {
-                        status = 'Offline for $detailedTimeDiff\n\n($formattedTime)';
+                        status = context.l10n.offlineSince(detailedTimeDiff, formattedTime);
                         backgroundColor = Colors.grey[700]!;
                         statusIcon = Icons.remove_circle;
                       } else if (_user!.lastAction!.status == 'Online') {
-                        status = 'Online now';
+                        status = context.l10n.onlineNow;
                         backgroundColor = const Color(0xFF2E7D32);
                         statusIcon = Icons.circle;
                       } else {
-                        status = 'Idle for $detailedTimeDiff\n\n($formattedTime)';
+                        status = context.l10n.idleSince(detailedTimeDiff, formattedTime);
                         backgroundColor = Colors.orange[600]!;
                         statusIcon = Icons.adjust;
                       }
@@ -3343,14 +3343,7 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
       ),
     );
 
-    var unreadString = '';
-    if (unreadCount == 0) {
-      unreadString = 'No unread events';
-    } else if (unreadCount == 1) {
-      unreadString = "1 unread event";
-    } else {
-      unreadString = '$unreadCount unread events';
-    }
+    final unreadString = context.l10n.unreadEvents(unreadCount ?? 0);
 
     return Card(
       child: ExpandablePanel(
@@ -3594,30 +3587,9 @@ class ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
       ),
     );
 
-    var unreadRecentString = '';
-    if (unreadRecentCount == 0) {
-      unreadRecentString = 'No unread messages (recent)';
-    } else if (unreadRecentCount == 1) {
-      unreadRecentString = "1 unread message (recent)";
-    } else {
-      unreadRecentString = '$unreadRecentCount unread messages (recent)';
-    }
-
-    var unreadTotalString = '';
+    final unreadRecentString = context.l10n.recentUnreadMessages(unreadRecentCount);
     final lastMessageDate = DateTime.fromMillisecondsSinceEpoch(messages.values.last.timestamp * 1000);
-    if (unreadTotalCount == 0) {
-      unreadTotalString =
-          'No unread messages '
-          '(since ${_occurrenceTimeFormatted(lastMessageDate)})';
-    } else if (unreadTotalCount == 1) {
-      unreadTotalString =
-          '1 unread message '
-          '(since ${_occurrenceTimeFormatted(lastMessageDate)})';
-    } else {
-      unreadTotalString =
-          '$unreadTotalCount unread messages '
-          '(since ${_occurrenceTimeFormatted(lastMessageDate)})';
-    }
+    final unreadTotalString = context.l10n.unreadMessagesSince(unreadTotalCount, _occurrenceTimeFormatted(lastMessageDate));
 
     return Card(
       child: ExpandablePanel(

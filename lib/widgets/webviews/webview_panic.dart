@@ -762,7 +762,7 @@ class WebViewPanicState extends State<WebViewPanic> {
           return _popupChoices.map((HealingPages choice) {
             return PopupMenuItem<HealingPages>(
               value: choice,
-              child: Text(choice.description!),
+              child: PdaText(choice.description!),
             );
           }).toList();
         },

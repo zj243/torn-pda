@@ -131,7 +131,7 @@ const messagesAlerts = <String, String>{
   "Title: W": "标题:W",
   "Title: WT": "标题:WT",
   "To start with, please tap the following button to send yourself a test notification:": "首先,请按下以下按钮发送测试通知:",
-  "Trade": "贸易贸易贸易",
+  "Trade": "交易",
   "Traded Companies": "贸易公司",
   "Trades": "交易",
   "Travel": "旅行",
